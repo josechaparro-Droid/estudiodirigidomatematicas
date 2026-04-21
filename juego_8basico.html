@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>💥 ESCAPE ROOM: ENTEROS AL PODER · 8° GRADO 💥</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Neue', 'Segoe UI', 'Poppins', cursive;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fdf8e7 0%, #fce9c4 100%);
+            min-height: 100vh;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        body::before {
+            content: "💥 ⚡ 🦸 💥";
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 70px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .escape-container {
+            max-width: 1200px;
+            width: 100%;
+            background: #fff6e8dd;
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            border: 4px solid #ff4444;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2), 0 0 0 6px #ffddbb, 0 0 0 10px #ff6666;
+            overflow: hidden;
+            padding: 1.5rem 2rem 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 1rem;
+            border-bottom: 4px dashed #ff4444;
+            padding-bottom: 0.6rem;
+        }
+        h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #ff4444, #ff8844);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 3px 3px 0px #ffdd99;
+            font-family: 'Comic Neue', 'Impact', sans-serif;
+            letter-spacing: 2px;
+        }
+        .sub {
+            font-size: 0.75rem;
+            background: #ffeedd;
+            display: inline-block;
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            color: #cc3333;
+            font-weight: bold;
+            border: 2px solid #ff6666;
+        }
+
+        .objetivo-box {
+            background: #ffefdd;
+            border-left: 8px solid #ff4444;
+            border-radius: 1rem;
+            padding: 0.7rem 1.2rem;
+            margin: 0.5rem 0 1.2rem 0;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.05);
+        }
+        .objetivo-box h3 {
+            font-size: 1rem;
+            color: #cc3333;
+        }
+        .objetivo-texto {
+            font-size: 0.85rem;
+            color: #8b5a2b;
+            background: #fffaf0;
+            padding: 0.5rem 0.8rem;
+            border-radius: 0.8rem;
+        }
+
+        .status-panel {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: #ffefdd;
+            padding: 0.5rem 1.2rem;
+            border-radius: 3rem;
+            margin-bottom: 1.5rem;
+            align-items: center;
+            border: 2px solid #ff6666;
+        }
+        .sellos {
+            font-weight: bold;
+            background: #ffddbb;
+            padding: 0.2rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            color: #cc3333;
+            font-family: monospace;
+        }
+        .energy-bar {
+            flex: 1;
+            max-width: 250px;
+            height: 12px;
+            background: #ffddbb;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #ff6666;
+        }
+        .energy-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff6666, #ff4444);
+            border-radius: 20px;
+            transition: width 0.4s ease;
+        }
+        .fase-actual {
+            background: #ffddbb;
+            padding: 0.2rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: #cc3333;
+            border: 1px solid #ff6666;
+        }
+
+        .phases-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .phase-card {
+            background: #fffaf2;
+            border-radius: 1.2rem;
+            border: 2px solid #ff6666;
+            overflow: hidden;
+        }
+        .phase-header {
+            background: #ffefdd;
+            padding: 0.5rem 1.2rem;
+            font-size: 1rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid #ff6666;
+            color: #cc3333;
+        }
+        .grade {
+            font-size: 0.65rem;
+            background: #ffddbb;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            color: #cc3333;
+        }
+        .phase-content {
+            padding: 1rem;
+        }
+        .exercise-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+        .exercise-item {
+            background: #fff7ed;
+            padding: 0.7rem;
+            border-radius: 1rem;
+            border-left: 6px solid #ff6666;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .problem-text {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #5a3a1a;
+            flex: 2;
+            min-width: 200px;
+        }
+        .answer-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+            flex: 1;
+            justify-content: flex-end;
+        }
+        .answer-select {
+            background: #fff;
+            border: 2px solid #ff6666;
+            padding: 0.4rem 0.6rem;
+            border-radius: 2rem;
+            color: #5a3a1a;
+            font-size: 0.8rem;
+            width: 140px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-submit {
+            background: #ff6666;
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.75rem;
+            box-shadow: 2px 2px 0px #cc4444;
+        }
+        .btn-submit:hover {
+            background: #ff4444;
+            transform: scale(1.02);
+            box-shadow: 1px 1px 0px #cc4444;
+        }
+        .feedback {
+            font-size: 0.7rem;
+            font-weight: bold;
+            min-width: 80px;
+        }
+        .locked {
+            opacity: 0.6;
+            pointer-events: none;
+            position: relative;
+        }
+        .locked::after {
+            content: "🔒 BLOQUEADO · COMPLETA LA FASE ANTERIOR 🔒";
+            position: absolute;
+            top: 45%;
+            left: 20%;
+            background: #ffeeddcc;
+            padding: 0.2rem 0.8rem;
+            border-radius: 2rem;
+            font-size: 0.6rem;
+            font-weight: bold;
+            color: #cc3333;
+            pointer-events: none;
+            white-space: nowrap;
+            border: 1px solid #ff6666;
+        }
+        .final-message {
+            text-align: center;
+            background: #ffefdd;
+            padding: 1rem;
+            border-radius: 1.5rem;
+            margin-top: 1rem;
+            border: 3px solid #ff6666;
+            color: #cc3333;
+        }
+        .success-feedback { color: #44aa44; }
+        .fail-feedback { color: #dd6644; }
+        @media (max-width: 700px) {
+            .escape-container { padding: 1rem; }
+            .locked::after { white-space: normal; font-size: 0.55rem; left: 10%; right:10%; top: 35%; text-align: center; }
+            .exercise-item { flex-direction: column; align-items: stretch; }
+            .answer-area { justify-content: flex-start; }
+            .answer-select { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+<div class="escape-container" id="app">
+    <div class="header">
+        <h1>💥 ESCAPE ROOM: ENTEROS AL PODER 💥</h1>
+        <div class="sub">✦ MULTIPLICACIÓN Y DIVISIÓN DE NÚMEROS ENTEROS · 8° GRADO ✦</div>
+    </div>
+
+    <div class="objetivo-box">
+        <h3>🎯 OBJETIVO DE LA MISIÓN</h3>
+        <div class="objetivo-texto">
+            Aplicar las reglas de multiplicación y división de números enteros para resolver cálculos y problemas contextualizados, consolidando el manejo de cantidades positivas y negativas.
+        </div>
+    </div>
+
+    <div class="status-panel">
+        <div class="sellos">💥 PODERES: <span id="sellos-count">0</span> / <span id="total-ejercicios">20</span></div>
+        <div class="energy-bar"><div class="energy-fill" id="energy-fill"></div></div>
+        <div class="fase-actual" id="fase-actual-txt">💥 FASE 1 · ENTRENAMIENTO</div>
+    </div>
+
+    <div class="phases-grid" id="phases-container"></div>
+</div>
+
+<script>
+    // ============================================================
+    // GUÍA: Multiplicación y división de números enteros (8° grado) - 20 preguntas
+    // Respuestas según pauta de corrección (clave: 1B,2A,3B,4B,5D,6A,7C,8A,9D,10A,11B,12B,13A,14A,15A,16B,17B,18B,19A,20A)
+    // Temática: Cómic americano / colores cálidos
+    // ============================================================
+    const phasesData = [
+        {
+            name: "💥 FASE 1: MULTIPLICACIÓN ÉPICA",
+            grade: "Multiplicación de enteros",
+            exercises: [
+                { id: 1, text: "1) ¿Cuál es el producto de −7 y 8?", options: ["56", "−56", "−1", "1"], answer: "−56", answerLetter: "B" },
+                { id: 2, text: "2) ¿Cuál es el resultado de dividir −42 entre 6?", options: ["−7", "7", "−36", "36"], answer: "−7", answerLetter: "A" },
+                { id: 3, text: "3) ¿Qué número falta para que la igualdad sea verdadera? (−3) × ? = 21", options: ["−7", "7", "−18", "18"], answer: "−7", answerLetter: "B" },
+                { id: 4, text: "4) ¿Cuál es el valor de (−5) × (−4) × 2?", options: ["−40", "40", "−10", "10"], answer: "40", answerLetter: "B" },
+                { id: 5, text: "5) Si a = −9 y b = 3, ¿Cuál es a × b?", options: ["9", "−9", "27", "−27"], answer: "−27", answerLetter: "D" }
+            ]
+        },
+        {
+            name: "💥 FASE 2: DIVISIÓN Y REGLAS",
+            grade: "División y análisis de signos",
+            exercises: [
+                { id: 6, text: "6) ¿Cuál es el resultado de −100 ÷ 25?", options: ["−4", "4", "−75", "75"], answer: "−4", answerLetter: "A" },
+                { id: 7, text: "7) Al multiplicar dos enteros obtienes un número negativo. ¿Qué puedes afirmar sobre los signos de los factores?", options: ["Ambos son positivos", "Ambos son negativos", "Uno es positivo y el otro negativo", "No se puede saber"], answer: "Uno es positivo y el otro negativo", answerLetter: "C" },
+                { id: 8, text: "8) ¿Cuál es el valor de (−12) ÷ 3 × (−2) usando el orden correcto de operaciones (multiplicación y división de izquierda a derecha)?", options: ["8", "−8", "−24", "24"], answer: "8", answerLetter: "A" },
+                { id: 9, text: "9) ¿Qué número es el inverso multiplicativo de −4 (es decir, el número que multiplicado por −4 da 1)?", options: ["4", "−4", "1", "−1/4"], answer: "−1/4", answerLetter: "D" },
+                { id: 10, text: "10) ¿Cuál es el resultado de (−3) × 0 × 7?", options: ["0", "−21", "21", "−3"], answer: "0", answerLetter: "A" }
+            ]
+        },
+        {
+            name: "💥 FASE 3: PROBLEMAS Y CONTEXTO",
+            grade: "Situaciones cotidianas",
+            exercises: [
+                { id: 11, text: "11) Una tienda tiene una pérdida de 15 pesos cada hora durante 4 horas. ¿Cuál es la ganancia total (o pérdida) después de 4 horas?", options: ["60 pesos", "−60 pesos", "15 pesos", "−15 pesos"], answer: "−60 pesos", answerLetter: "B" },
+                { id: 12, text: "12) ¿Cuál de las siguientes afirmaciones es correcta?", options: ["Un número negativo dividido por un número negativo es negativo.", "Un número negativo dividido por un número positivo es positivo.", "Un número positivo dividido por un número negativo es positivo.", "El producto de dos números negativos siempre es negativo."], answer: "Un número negativo dividido por un número negativo es negativo.", answerLetter: "B" },
+                { id: 13, text: "13) Calcula: (−2)³ × 5 (recuerda que (−2)³ significa (−2) × (−2) × (−2)).", options: ["−40", "40", "−10", "10"], answer: "−40", answerLetter: "A" },
+                { id: 14, text: "14) Si −56 ÷ x = 7, ¿Cuál es el valor de x?", options: ["−8", "8", "−63", "63"], answer: "−8", answerLetter: "A" },
+                { id: 15, text: "15) ¿Cuál es el resultado de multiplicar −0.5 por 6?", options: ["−3", "3", "−0.03", "0.03"], answer: "−3", answerLetter: "A" }
+            ]
+        },
+        {
+            name: "💥 FASE 4: DESAFÍO FINAL",
+            grade: "Operaciones avanzadas",
+            exercises: [
+                { id: 16, text: "16) Un estanque pierde 4 litros cada minuto. ¿Cuántos litros perderá en 15 minutos?", options: ["60 litros", "−60 litros", "−11 litros", "11 litros"], answer: "−60 litros", answerLetter: "B" },
+                { id: 17, text: "17) ¿Cuál es el producto de (−1) × 23 × (−2)?", options: ["−46", "46", "−25", "25"], answer: "46", answerLetter: "B" },
+                { id: 18, text: "18) Si multiplicas dos enteros y el resultado es positivo, ¿Qué puede decirse sobre la paridad del número de factores negativos?", options: ["Hay un número impar de factores negativos", "Hay un número par de factores negativos", "No hay factores negativos", "Siempre hay exactamente dos factores negativos"], answer: "Hay un número par de factores negativos", answerLetter: "B" },
+                { id: 19, text: "19) Evalúa: (−81) ÷ 9 ÷ (−3) (realiza la división de izquierda a derecha).", options: ["3", "−3", "9", "−9"], answer: "3", answerLetter: "A" },
+                { id: 20, text: "20) Una ecuación: (−6) × n = −48. ¿Cuál es el valor de n?", options: ["8", "−8", "−42", "42"], answer: "8", answerLetter: "A" }
+            ]
+        }
+    ];
+
+    let gameState = { phases: [] };
+
+    function initState() {
+        for (let i = 0; i < phasesData.length; i++) {
+            gameState.phases.push({
+                unlocked: i === 0,
+                exerciseStatus: new Array(phasesData[i].exercises.length).fill(false)
+            });
+        }
+        document.getElementById("total-ejercicios").innerText = 20;
+    }
+
+    function computeProgress() {
+        let completed = 0;
+        for (let i = 0; i < gameState.phases.length; i++) {
+            for (let j = 0; j < gameState.phases[i].exerciseStatus.length; j++) {
+                if (gameState.phases[i].exerciseStatus[j]) completed++;
+            }
+        }
+        return { completed, total: 20 };
+    }
+
+    function mostrarMensaje(msg, colorHex = "#ff6666") {
+        const toast = document.createElement("div");
+        toast.innerText = msg;
+        toast.style.position = "fixed";
+        toast.style.bottom = "20px";
+        toast.style.left = "50%";
+        toast.style.transform = "translateX(-50%)";
+        toast.style.backgroundColor = "#ffefdd";
+        toast.style.color = "#cc3333";
+        toast.style.padding = "0.5rem 1rem";
+        toast.style.borderRadius = "2rem";
+        toast.style.border = `2px solid ${colorHex}`;
+        toast.style.zIndex = "999";
+        toast.style.fontWeight = "bold";
+        toast.style.fontSize = "0.75rem";
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2500);
+    }
+
+    function updateProgressAndUnlock() {
+        const { completed, total } = computeProgress();
+        document.getElementById("sellos-count").innerText = completed;
+        const percent = (completed / total) * 100;
+        document.getElementById("energy-fill").style.width = percent + "%";
+
+        for (let i = 0; i < gameState.phases.length; i++) {
+            const allDone = gameState.phases[i].exerciseStatus.every(v => v === true);
+            if (allDone && i + 1 < gameState.phases.length && !gameState.phases[i + 1].unlocked) {
+                gameState.phases[i + 1].unlocked = true;
+                mostrarMensaje(`💥 ¡FASE ${i+1} SUPERADA! Desbloqueas: ${phasesData[i+1].name} 💥`, "#88aa55");
+            }
+        }
+
+        let currentIdx = 0;
+        for (let i = 0; i < gameState.phases.length; i++) {
+            if (!gameState.phases[i].exerciseStatus.every(v=>v===true)) {
+                currentIdx = i;
+                break;
+            }
+            if (i === gameState.phases.length-1) currentIdx = gameState.phases.length-1;
+        }
+        document.getElementById("fase-actual-txt").innerHTML = `💥 ${phasesData[currentIdx].name}`;
+        renderPhases();
+    }
+
+    function renderPhases() {
+        const container = document.getElementById("phases-container");
+        container.innerHTML = "";
+        for (let idx = 0; idx < phasesData.length; idx++) {
+            const phase = phasesData[idx];
+            const state = gameState.phases[idx];
+            const isUnlocked = state.unlocked;
+            const allCompleted = state.exerciseStatus.every(v => v === true);
+            const phaseCard = document.createElement("div");
+            phaseCard.className = "phase-card";
+            if (!isUnlocked && !allCompleted) phaseCard.classList.add("locked");
+
+            const header = document.createElement("div");
+            header.className = "phase-header";
+            header.innerHTML = `<span>${phase.name}</span><span class="grade">${phase.grade}</span>`;
+            phaseCard.appendChild(header);
+
+            const contentDiv = document.createElement("div");
+            contentDiv.className = "phase-content";
+            const exercisesDiv = document.createElement("div");
+            exercisesDiv.className = "exercise-list";
+
+            phase.exercises.forEach((ex, exIdx) => {
+                const isResolved = state.exerciseStatus[exIdx];
+                const itemDiv = document.createElement("div");
+                itemDiv.className = "exercise-item";
+
+                const problemP = document.createElement("div");
+                problemP.className = "problem-text";
+                problemP.innerHTML = `<span>${ex.text}</span>`;
+                itemDiv.appendChild(problemP);
+
+                const answerDiv = document.createElement("div");
+                answerDiv.className = "answer-area";
+
+                const select = document.createElement("select");
+                select.className = "answer-select";
+                select.disabled = isResolved || !isUnlocked;
+                
+                const defaultOption = document.createElement("option");
+                defaultOption.value = "";
+                defaultOption.textContent = "Selecciona...";
+                defaultOption.disabled = true;
+                defaultOption.selected = true;
+                select.appendChild(defaultOption);
+                
+                ex.options.forEach(opt => {
+                    const option = document.createElement("option");
+                    option.value = opt;
+                    option.textContent = opt;
+                    select.appendChild(option);
+                });
+                
+                if (isResolved) {
+                    select.value = ex.answer;
+                    select.style.borderColor = "#88aa55";
+                }
+
+                const button = document.createElement("button");
+                button.innerText = isResolved ? "✓" : "💥 VALIDAR";
+                button.className = "btn-submit";
+                button.disabled = isResolved || !isUnlocked;
+
+                const feedbackSpan = document.createElement("span");
+                feedbackSpan.className = "feedback";
+                if (isResolved) feedbackSpan.innerHTML = "✨ ¡Entero dominado! ✨";
+
+                if (!isResolved && isUnlocked) {
+                    button.addEventListener("click", () => {
+                        const userValue = select.value;
+                        if (!userValue) {
+                            feedbackSpan.innerHTML = "❌ Selecciona una opción";
+                            feedbackSpan.className = "feedback fail-feedback";
+                            return;
+                        }
+                        const isValid = userValue === ex.answer;
+                        
+                        if (isValid) {
+                            state.exerciseStatus[exIdx] = true;
+                            feedbackSpan.innerHTML = "✅ ¡Correcto! +1 poder";
+                            feedbackSpan.className = "feedback success-feedback";
+                            select.disabled = true;
+                            button.disabled = true;
+                            select.style.borderColor = "#88aa55";
+                            updateProgressAndUnlock();
+                            mostrarMensaje("💥 ¡Excelente! Has dominado esta operación con enteros.", "#88aa55");
+                        } else {
+                            feedbackSpan.innerHTML = `❌ Incorrecto. La respuesta es: ${ex.answer}`;
+                            feedbackSpan.className = "feedback fail-feedback";
+                            select.style.borderColor = "#dd6644";
+                            setTimeout(() => {
+                                if (!state.exerciseStatus[exIdx]) feedbackSpan.innerHTML = "";
+                                select.style.borderColor = "";
+                            }, 2000);
+                        }
+                    });
+                } else if (!isUnlocked) {
+                    button.disabled = true;
+                    button.innerText = "🔒";
+                    feedbackSpan.innerHTML = "Completa fase anterior";
+                }
+
+                answerDiv.appendChild(select);
+                answerDiv.appendChild(button);
+                answerDiv.appendChild(feedbackSpan);
+                itemDiv.appendChild(answerDiv);
+                exercisesDiv.appendChild(itemDiv);
+            });
+
+            contentDiv.appendChild(exercisesDiv);
+            if (allCompleted && isUnlocked) {
+                const badge = document.createElement("div");
+                badge.style.marginTop = "10px";
+                badge.style.textAlign = "center";
+                badge.innerHTML = "🏆 ¡FASE COMPLETADA! Continúa tu misión 🏆";
+                badge.style.color = "#cc3333";
+                badge.style.fontWeight = "bold";
+                badge.style.background = "#ffefdd";
+                badge.style.padding = "4px";
+                badge.style.borderRadius = "30px";
+                badge.style.fontSize = "0.7rem";
+                contentDiv.appendChild(badge);
+            }
+            phaseCard.appendChild(contentDiv);
+            container.appendChild(phaseCard);
+        }
+
+        const { completed, total } = computeProgress();
+        if (completed === total && total > 0) {
+            let finalDiv = document.getElementById("victoryComic");
+            if (!finalDiv) {
+                const victory = document.createElement("div");
+                victory.id = "victoryComic";
+                victory.className = "final-message";
+                victory.innerHTML = `<h2>💥 ¡MISIÓN CUMPLIDA! 💥</h2>
+                <p>✨ ¡Felicidades! Has dominado la multiplicación y división de números enteros ✨<br>
+                💥 Has completado los 20 desafíos de la liga de los enteros.<br>
+                🦸 Eres un superhéroe de las matemáticas. ¡Buen trabajo!</p>`;
+                container.appendChild(victory);
+            }
+        } else {
+            const exist = document.getElementById("victoryComic");
+            if (exist) exist.remove();
+        }
+    }
+
+    initState();
+    renderPhases();
+    updateProgressAndUnlock();
+</script>
+</body>
+</html>

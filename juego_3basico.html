@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🎮 HUB DE APRENDIZAJE · Escape Rooms Matemáticos 3° a 8° Básico</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Neue', 'Segoe UI', 'Poppins', cursive;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fdf8e7 0%, #fce9c4 100%);
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Contenedor principal estilo cómic */
+        .hub-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: #fff6e8dd;
+            backdrop-filter: blur(4px);
+            border-radius: 3rem;
+            border: 5px solid #ff8844;
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.2), 0 0 0 8px #ffddbb, 0 0 0 14px #ffaa66;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 5px dashed #ff8844;
+            padding-bottom: 1rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #ff6644, #ffaa44);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 4px 4px 0px #ffdd99;
+            font-family: 'Comic Neue', 'Impact', sans-serif;
+            letter-spacing: 2px;
+        }
+        .sub {
+            font-size: 1rem;
+            background: #ffeedd;
+            display: inline-block;
+            padding: 0.3rem 1.5rem;
+            border-radius: 40px;
+            color: #cc6633;
+            font-weight: bold;
+            border: 2px solid #ffaa66;
+            margin-top: 0.5rem;
+        }
+
+        .objetivo-box {
+            background: #ffefdd;
+            border-left: 10px solid #ff8844;
+            border-radius: 1.5rem;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.05);
+        }
+        .objetivo-box h2 {
+            font-size: 1.3rem;
+            color: #cc6633;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .objetivo-box p {
+            font-size: 0.95rem;
+            color: #8b5a2b;
+            margin-top: 0.5rem;
+        }
+
+        /* Grid de tarjetas */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1rem;
+        }
+        .card {
+            background: #fffaf2;
+            border-radius: 1.8rem;
+            border: 3px solid #ffaa66;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            box-shadow: 5px 5px 0px #ffddbb;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 8px 8px 0px #ffcc99;
+        }
+        .card-header {
+            background: #ffefdd;
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 3px solid #ffaa66;
+        }
+        .card-header .nivel {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #cc6633;
+            font-family: monospace;
+        }
+        .card-header .titulo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #cc6633;
+            margin-top: 0.3rem;
+        }
+        .card-body {
+            padding: 1.2rem;
+            text-align: center;
+        }
+        .card-body p {
+            color: #5a3a1a;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .btn-jugar {
+            background: #ffaa66;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: bold;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 3px 3px 0px #cc8844;
+            font-family: inherit;
+        }
+        .btn-jugar:hover {
+            background: #ff8844;
+            transform: scale(1.02);
+            box-shadow: 2px 2px 0px #cc8844;
+        }
+        .badge {
+            display: inline-block;
+            background: #ffddbb;
+            padding: 0.2rem 0.8rem;
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: #cc6633;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding-top: 1rem;
+            border-top: 2px dashed #ffaa66;
+            color: #b87a3a;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 700px) {
+            .hub-container { padding: 1rem; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="hub-container">
+    <div class="header">
+        <h1>🎮 ESCAPE ROOMS MATEMÁTICOS 🎮</h1>
+        <div class="sub">✦ De 3° a 8° Básico · Aprende jugando ✦</div>
+    </div>
+
+    <div class="objetivo-box">
+        <h2>🎯 ¿Qué encontrarás aquí?</h2>
+        <p>Seis experiencias interactivas tipo "Escape Room" para repasar y dominar los contenidos clave de cada nivel, desde la resta con canje hasta la multiplicación y división de números enteros. Cada juego respeta fielmente las guías oficiales y está diseñado con temática de cómic, superhéroes y colores cálidos para proyectar en sala de clases.</p>
+    </div>
+
+    <div class="cards-grid">
+        <!-- 3° Básico -->
+        <div class="card" onclick="abrirJuego('juego_3basico.html')">
+            <div class="card-header">
+                <div class="nivel">🦸 3° BÁSICO</div>
+                <div class="titulo">Resta con canje hasta la decena</div>
+            </div>
+            <div class="card-body">
+                <p>Domina las restas con canje usando números hasta 20. ¡Conviértete en un superhéroe de las matemáticas!</p>
+                <div class="badge">🎯 15 preguntas · Batman</div>
+                <button class="btn-jugar">🚀 JUGAR AHORA</button>
+            </div>
+        </div>
+
+        <!-- 4° Básico -->
+        <div class="card" onclick="abrirJuego('juego_4basico.html')">
+            <div class="card-header">
+                <div class="nivel">🦸 4° BÁSICO</div>
+                <div class="titulo">Resta con canje hasta la centena</div>
+            </div>
+            <div class="card-body">
+                <p>Resuelve restas de hasta 1000 con reagrupación. ¡El Caballero Oscuro te guiará!</p>
+                <div class="badge">🎯 15 problemas · Batman</div>
+                <button class="btn-jugar">🚀 JUGAR AHORA</button>
+            </div>
+        </div>
+
+        <!-- 5° Básico -->
+        <div class="card" onclick="abrirJuego('juego_5basico.html')">
+            <div class="card-header">
+                <div class="nivel">🦸 5° BÁSICO</div>
+                <div class="titulo">Estimación de productos</div>
+            </div>
+            <div class="card-body">
+                <p>Aprende a estimar multiplicaciones redondeando factores. ¡Superhéroes de la estimación!</p>
+                <div class="badge">🎯 15 preguntas · Superhéroes</div>
+                <button class="btn-jugar">🚀 JUGAR AHORA</button>
+            </div>
+        </div>
+
+        <!-- 6° Básico -->
+        <div class="card" onclick="abrirJuego('juego_6basico.html')">
+            <div class="card-header">
+                <div class="nivel">🦸 6° BÁSICO</div>
+                <div class="titulo">Operatoria básica hasta la decena de mil</div>
+            </div>
+            <div class="card-body">
+                <p>Multiplicaciones, divisiones, sumas y restas con números grandes. ¡Estilo cómic!</p>
+                <div class="badge">🎯 20 problemas · Cómic</div>
+                <button class="btn-jugar">🚀 JUGAR AHORA</button>
+            </div>
+        </div>
+
+        <!-- 7° Básico -->
+        <div class="card" onclick="abrirJuego('juego_7basico.html')">
+            <div class="card-header">
+                <div class="nivel">🦸 7° BÁSICO</div>
+                <div class="titulo">Multiplicación y división de fracciones</div>
+            </div>
+            <div class="card-body">
+                <p>Domina el producto y cociente de fracciones con un toque de acción y humor.</p>
+                <div class="badge">🎯 20 preguntas · Cómic americano</div>
+                <button class="btn-jugar">🚀 JUGAR AHORA</button>
+            </div>
+        </div>
+
+        <!-- 8° Básico -->
+        <div class="card" onclick="abrirJuego('juego_8basico.html')">
+            <div class="card-header">
+                <div class="nivel">🦸 8° BÁSICO</div>
+                <div class="titulo">Multiplicación y división de números enteros</div>
+            </div>
+            <div class="card-body">
+                <p>Practica las reglas de los signos con situaciones cotidianas y desafíos épicos.</p>
+                <div class="badge">🎯 20 ejercicios · Cómic americano</div>
+                <button class="btn-jugar">🚀 JUGAR AHORA</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        💡 Sugerencia: Guarda cada juego como archivo HTML independiente en la misma carpeta que este index.<br>
+        📁 Nombres esperados: <strong>juego_3basico.html</strong>, <strong>juego_4basico.html</strong>, <strong>juego_5basico.html</strong>, <strong>juego_6basico.html</strong>, <strong>juego_7basico.html</strong>, <strong>juego_8basico.html</strong>
+    </footer>
+</div>
+
+<script>
+    function abrirJuego(ruta) {
+        // Intenta abrir el juego en una nueva pestaña
+        window.open(ruta, '_blank');
+    }
+</script>
+</body>
+</html>
