@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>💥 ESCAPE ROOM: MULTIPLICACIÓN Y DIVISIÓN · 5° BÁSICO</title>
+    <!-- Importación de fuentes: Bangers para títulos, Comic Neue para lectura clara -->
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -16,7 +17,6 @@
             --color-bg-soft: #fff5f5;
             --color-success: #2d7a2d;
             --color-error: #b91c1c;
-            --color-ai: #6b21a8; /* Purple for AI elements */
         }
 
         * {
@@ -162,8 +162,9 @@
             min-width: 200px;
         }
 
-        .btn-check, .btn-hint, .btn-ai {
+        .btn-check {
             font-family: 'Bangers', cursive;
+            background: var(--color-deep-blue);
             color: white;
             border: none;
             padding: 0.8rem 1.5rem;
@@ -171,27 +172,10 @@
             font-size: 1.3rem;
             cursor: pointer;
             box-shadow: 3px 3px 0px #000;
-            transition: all 0.2s ease;
         }
 
-        .btn-check {
-            background: var(--color-deep-blue);
-        }
         .btn-check:hover { background: var(--color-purple); }
         .btn-check:disabled { background: #ccc; box-shadow: none; cursor: default; }
-
-        .btn-hint {
-            background: var(--color-ai);
-            font-size: 1.1rem;
-        }
-        .btn-hint:hover { background: #581c87; }
-        .btn-hint:disabled { opacity: 0.7; cursor: not-allowed; }
-
-        .btn-ai {
-            background: linear-gradient(45deg, #d946ef, #8b5cf6);
-            margin-top: 1rem;
-        }
-        .btn-ai:hover { filter: brightness(1.1); transform: scale(1.05); }
 
         /* RETROALIMENTACIÓN */
         .feedback-box {
@@ -206,9 +190,17 @@
 
         .feedback-box.show { display: block; }
         
-        .feedback-correct { background-color: #e6fffa; color: #234e52; border-left-color: var(--color-success); }
-        .feedback-incorrect { background-color: #fff5f5; color: #742a2a; border-left-color: var(--color-error); }
-        .feedback-hint { background-color: #faf5ff; color: #4c1d95; border-left-color: var(--color-ai); border: 2px dashed var(--color-ai); }
+        .feedback-correct {
+            background-color: #e6fffa;
+            color: #234e52;
+            border-left-color: var(--color-success);
+        }
+
+        .feedback-incorrect {
+            background-color: #fff5f5;
+            color: #742a2a;
+            border-left-color: var(--color-error);
+        }
 
         .feedback-title {
             font-weight: 700;
@@ -217,7 +209,7 @@
             display: block;
         }
 
-        /* MENSAJE FINAL Y MISIÓN EXTRA */
+        /* MENSAJE FINAL */
         #victory-screen {
             display: none;
             text-align: center;
@@ -235,57 +227,10 @@
             margin-bottom: 1rem;
         }
 
-        .ai-generator-box {
-            margin-top: 2rem;
-            background: white;
-            border: 4px solid var(--color-ai);
-            border-radius: 1.5rem;
-            padding: 2rem;
-            box-shadow: 6px 6px 0px #d8b4fe;
-        }
-
-        .ai-generator-box h3 {
-            font-family: 'Bangers', cursive;
-            color: var(--color-ai);
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .ai-input {
-            font-family: 'Comic Neue', sans-serif;
-            font-size: 1.2rem;
-            padding: 0.8rem;
-            border: 3px solid var(--color-deep-blue);
-            border-radius: 10px;
-            width: 80%;
-            max-width: 400px;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        #extra-mission-container {
-            margin-top: 2rem;
-            text-align: left;
-        }
-
-        .loading-spinner {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            border: 4px solid rgba(107, 33, 168, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--color-ai);
-            animation: spin 1s ease-in-out infinite;
-            margin-top: 10px;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-
         @media (max-width: 600px) {
             h1 { font-size: 2.2rem; }
             .status-panel { flex-direction: column; border-radius: 20px; }
             .question-text { font-size: 1.1rem; }
-            .interaction-row { flex-direction: column; align-items: stretch; }
         }
     </style>
 </head>
@@ -309,49 +254,11 @@
     <div id="victory-screen">
         <h2>¡CÁLCULO SUPREMO!</h2>
         <p>🏆 Has dominado los 20 desafíos de multiplicación y división. ¡Eres un héroe matemático! 🏆</p>
-        
-        <div class="ai-generator-box">
-            <h3>✨ COMPUTADORA CENTRAL: MISIÓN PERSONALIZADA ✨</h3>
-            <p style="margin-bottom: 1rem; font-weight: bold;">
-                Escribe un tema que te guste (ej: dinosaurios, robots, pizzas) y la IA creará un desafío especial solo para ti.
-            </p>
-            <input type="text" id="ai-theme" class="ai-input" placeholder="Escribe un tema aquí..." />
-            <br>
-            <button class="btn-ai" id="btn-generate-ai" onclick="generateExtraMission()">✨ GENERAR DESAFÍO EXTRA ✨</button>
-            <div id="ai-loading" style="display: none;">
-                <div class="loading-spinner"></div>
-                <p style="color: var(--color-ai); font-weight: bold; margin-top: 5px;">Procesando misión en la matriz...</p>
-            </div>
-            
-            <div id="extra-mission-container"></div>
-        </div>
-
-        <button class="btn-check" style="margin-top:30px" onclick="location.reload()">REINICIAR MISIÓN PRINCIPAL</button>
+        <button class="btn-check" style="margin-top:20px" onclick="location.reload()">REINICIAR MISIÓN</button>
     </div>
 </div>
 
 <script>
-    // Configuración API Gemini
-    const apiKey = ""; // Será provisto por el entorno en tiempo de ejecución
-    const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-
-    // Función de ayuda para peticiones con retardo exponencial (Exponential Backoff)
-    async function fetchWithBackoff(url, options, retries = 5) {
-        const delays = [1000, 2000, 4000, 8000, 16000];
-        for (let i = 0; i < retries; i++) {
-            try {
-                const response = await fetch(url, options);
-                if (!response.ok) {
-                    throw new Error(`Error HTTP: ${response.status}`);
-                }
-                return await response.json();
-            } catch (error) {
-                if (i === retries - 1) throw error;
-                await new Promise(res => setTimeout(res, delays[i]));
-            }
-        }
-    }
-
     // Las 20 preguntas completas del nivel de 5° básico
     const questions = [
         {
@@ -477,7 +384,6 @@
     ];
 
     let score = 0;
-    let customMissionData = null;
 
     function renderQuiz() {
         const container = document.getElementById('quiz-container');
@@ -494,60 +400,15 @@
                         ${q.options.sort(() => Math.random() - 0.5).map(opt => `<option value="${opt}">${opt}</option>`).join('')}
                     </select>
                     <button class="btn-check" id="btn-${index}" onclick="verifyAnswer(${index})">VALIDAR</button>
-                    <button class="btn-hint" id="btn-hint-${index}" onclick="askGeminiHint(${index})">✨ PISTA MÁGICA</button>
                 </div>
                 <div id="feedback-${index}" class="feedback-box"></div>
             </div>
         `).join('');
     }
 
-    // Lógica para pedir pista a Gemini AI
-    async function askGeminiHint(index) {
-        const q = questions[index];
-        const btnHint = document.getElementById(`btn-hint-${index}`);
-        const fb = document.getElementById(`feedback-${index}`);
-
-        btnHint.disabled = true;
-        btnHint.innerText = "⏳ PENSANDO...";
-        
-        fb.className = "feedback-box show feedback-hint";
-        fb.innerHTML = `<span class="feedback-title">✨ INVOCANDO AL SABIO MATEMÁTICO...</span><div class="loading-spinner"></div>`;
-
-        const promptText = `
-            Eres el "Sabio Matemático", un amigable superhéroe tutor para niños de 5° básico (10 años).
-            Un estudiante necesita ayuda con este problema: "${q.text}".
-            IMPORTANTE: NO le des la respuesta final correcta (que es ${q.answer}).
-            Dile solo el primer paso o dale una pista muy clara de qué operación matemática debe usar. Usa un tono motivador, lenguaje de superhéroe y emojis. Máximo 2 párrafos cortos.
-        `;
-
-        const payload = {
-            contents: [{ parts: [{ text: promptText }] }],
-            systemInstruction: { parts: [{ text: "Eres un asistente tutor para niños." }] }
-        };
-
-        try {
-            const result = await fetchWithBackoff(geminiEndpoint, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
-
-            const aiText = result.candidates?.[0]?.content?.parts?.[0]?.text || "Lo siento héroe, mi conexión mágica falló. Intenta multiplicar o dividir con cuidado.";
-            
-            fb.innerHTML = `<span class="feedback-title">✨ PISTA DEL SABIO:</span>${aiText.replace(/\n/g, '<br>')}`;
-            btnHint.innerText = "✨ PISTA RECIBIDA";
-        } catch (error) {
-            console.error(error);
-            fb.innerHTML = `<span class="feedback-title">⚠️ INTERFERENCIA</span>No pudimos contactar al Sabio. ¡Confía en tus instintos matemáticos!`;
-            btnHint.disabled = false;
-            btnHint.innerText = "✨ REINTENTAR PISTA";
-        }
-    }
-
     window.verifyAnswer = function(index) {
         const select = document.getElementById(`select-${index}`);
         const btn = document.getElementById(`btn-${index}`);
-        const btnHint = document.getElementById(`btn-hint-${index}`);
         const fb = document.getElementById(`feedback-${index}`);
         const card = document.getElementById(`card-${index}`);
         const icon = document.getElementById(`status-icon-${index}`);
@@ -557,22 +418,25 @@
 
         if (!userAnswer) return;
 
-        fb.classList.remove('feedback-correct', 'feedback-incorrect', 'feedback-hint', 'show');
+        // Limpiar clases anteriores
+        fb.classList.remove('feedback-correct', 'feedback-incorrect', 'show');
 
         if (userAnswer === q.answer) {
+            // RESPUESTA CORRECTA
             score++;
             fb.innerHTML = `<span class="feedback-title">¡PODER DESBLOQUEADO!</span>${q.fbC}`;
             fb.classList.add('feedback-correct', 'show');
             card.classList.add('correct');
             icon.innerText = "✅";
             
+            // Bloquear controles para evitar cambiar respuesta
             select.disabled = true;
             btn.disabled = true;
             btn.innerText = "COMPLETADO";
-            if(btnHint) btnHint.style.display = 'none'; // Ocultar botón de pista si ya acertó
 
             updateProgress();
         } else {
+            // RESPUESTA INCORRECTA
             fb.innerHTML = `<span class="feedback-title">¡PIENSA COMO HÉROE!</span>${q.fbI}`;
             fb.classList.add('feedback-incorrect', 'show');
             icon.innerText = "❌";
@@ -592,120 +456,6 @@
                 document.getElementById('victory-screen').style.display = 'block';
                 window.scrollTo(0,0);
             }, 1200);
-        }
-    }
-
-    // Generador Dinámico de Misiones usando Gemini (JSON mode)
-    async function generateExtraMission() {
-        const themeInput = document.getElementById('ai-theme').value.trim() || "Cualquier cosa divertida";
-        const btnGen = document.getElementById('btn-generate-ai');
-        const loadingDiv = document.getElementById('ai-loading');
-        const container = document.getElementById('extra-mission-container');
-
-        btnGen.style.display = 'none';
-        loadingDiv.style.display = 'block';
-        container.innerHTML = "";
-
-        const promptText = `
-            Genera un problema matemático de multiplicación o división para nivel 5° básico (niños de 10-11 años).
-            El tema del problema debe ser estrictamente sobre: "${themeInput}".
-            El problema debe ser divertido y usar lenguaje de aventura/superhéroes.
-            Genera 4 opciones de respuesta donde solo 1 es correcta.
-        `;
-
-        const payload = {
-            contents: [{ parts: [{ text: promptText }] }],
-            generationConfig: {
-                responseMimeType: "application/json",
-                responseSchema: {
-                    type: "OBJECT",
-                    properties: {
-                        problema: { type: "STRING", description: "El texto del problema matemático" },
-                        opciones: { type: "ARRAY", items: { type: "STRING" }, description: "4 opciones de respuesta posibles, ej: ['10', '20', '30', '40']" },
-                        respuestaCorrecta: { type: "STRING", description: "La opción correcta exacta" },
-                        explicacion: { type: "STRING", description: "Explicación motivadora de por qué esa es la respuesta" }
-                    },
-                    required: ["problema", "opciones", "respuestaCorrecta", "explicacion"]
-                }
-            }
-        };
-
-        try {
-            const result = await fetchWithBackoff(geminiEndpoint, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
-
-            const jsonStr = result.candidates?.[0]?.content?.parts?.[0]?.text;
-            customMissionData = JSON.parse(jsonStr);
-
-            renderExtraMission(customMissionData);
-        } catch (error) {
-            console.error("Error al generar misión:", error);
-            container.innerHTML = `<p style="color: var(--color-error); font-weight:bold;">¡Vaya! Ocurrió un error en la matriz al generar la misión. Intenta con otro tema.</p>`;
-            btnGen.style.display = 'inline-block';
-            btnGen.innerText = "✨ REINTENTAR GENERACIÓN";
-        } finally {
-            loadingDiv.style.display = 'none';
-        }
-    }
-
-    function renderExtraMission(data) {
-        const container = document.getElementById('extra-mission-container');
-        
-        // Mezclamos las opciones
-        const shuffledOptions = [...data.opciones].sort(() => Math.random() - 0.5);
-
-        container.innerHTML = `
-            <div class="exercise-card" id="custom-card" style="margin-top: 20px; border-color: var(--color-ai);">
-                <div class="problem-header" style="color: var(--color-ai);">
-                    <span>🌟 MISIÓN PERSONALIZADA</span>
-                    <span id="custom-status-icon">🚀</span>
-                </div>
-                <p class="question-text">${data.problema}</p>
-                <div class="interaction-row">
-                    <select id="custom-select">
-                        <option value="" disabled selected>Elige tu respuesta...</option>
-                        ${shuffledOptions.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
-                    </select>
-                    <button class="btn-ai" id="custom-btn" style="margin-top:0;" onclick="verifyCustomMission()">VALIDAR</button>
-                </div>
-                <div id="custom-feedback" class="feedback-box"></div>
-            </div>
-        `;
-    }
-
-    window.verifyCustomMission = function() {
-        const select = document.getElementById('custom-select');
-        const btn = document.getElementById('custom-btn');
-        const fb = document.getElementById('custom-feedback');
-        const card = document.getElementById('custom-card');
-        const icon = document.getElementById('custom-status-icon');
-        
-        const userAnswer = select.value;
-
-        if (!userAnswer) return;
-
-        fb.classList.remove('feedback-correct', 'feedback-incorrect', 'show');
-
-        if (userAnswer === customMissionData.respuestaCorrecta) {
-            fb.innerHTML = `<span class="feedback-title">¡MISIÓN ÉPICA LOGRADA!</span>${customMissionData.explicacion}`;
-            fb.classList.add('feedback-correct', 'show');
-            card.classList.add('correct');
-            icon.innerText = "✅";
-            
-            select.disabled = true;
-            btn.disabled = true;
-            btn.innerText = "COMPLETADO";
-
-            // Mostrar el botón de generar otra vez
-            document.getElementById('btn-generate-ai').style.display = 'inline-block';
-            document.getElementById('btn-generate-ai').innerText = "✨ GENERAR OTRA MISIÓN ✨";
-        } else {
-            fb.innerHTML = `<span class="feedback-title">¡CASI!</span>Revisa tus cálculos e intenta nuevamente.`;
-            fb.classList.add('feedback-incorrect', 'show');
-            icon.innerText = "❌";
         }
     }
 
