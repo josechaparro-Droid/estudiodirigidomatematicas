@@ -3,464 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>💥 ESCAPE ROOM: MULTIPLICACIÓN Y DIVISIÓN · 5° BÁSICO</title>
-    <!-- Importación de fuentes: Bangers para títulos, Comic Neue para lectura clara -->
+    <title>🚀 ESCAPE ROOM: ÉLITE GALÁCTICA · 5° BÁSICO</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-light-pink: #F29191;
-            --color-bright-red: #D93D3D;
-            --color-dark-red: #BA2028;
-            --color-purple: #7A378C;
-            --color-deep-blue: #20308C;
-            --color-white: #ffffff;
-            --color-bg-soft: #fff5f5;
+            --color-primary: #20308C; /* Azul profundo */
+            --color-secondary: #7A378C; /* Púrpura */
+            --color-accent: #D93D3D; /* Rojo brillante */
+            --color-light: #F29191; /* Rosado claro */
             --color-success: #2d7a2d;
             --color-error: #b91c1c;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: linear-gradient(135deg, var(--color-deep-blue) 0%, var(--color-purple) 100%);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
             min-height: 100vh;
             padding: 2rem 1rem;
             font-family: 'Comic Neue', sans-serif;
             color: #333;
         }
 
-        .escape-container {
+        .container {
             max-width: 1000px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.98);
             border-radius: 3rem;
-            border: 6px solid var(--color-dark-red);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 8px 8px 0px var(--color-light-pink);
+            border: 6px solid var(--color-primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 8px 8px 0px var(--color-light);
             padding: 2rem;
         }
 
-        /* CABECERA */
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+        .header { text-align: center; margin-bottom: 2rem; }
 
         h1 {
             font-family: 'Bangers', cursive;
             font-size: 3.5rem;
-            color: var(--color-bright-red);
+            color: var(--color-accent);
             text-transform: uppercase;
             letter-spacing: 3px;
-            text-shadow: 3px 3px 0px var(--color-deep-blue);
-            transform: skew(-2deg);
+            text-shadow: 3px 3px 0px var(--color-primary);
+            transform: skew(-1deg);
             margin-bottom: 0.5rem;
-            line-height: 1.1;
         }
 
-        .sub {
-            font-family: 'Bangers', cursive;
-            font-size: 1.2rem;
-            background: var(--color-deep-blue);
-            color: white;
-            display: inline-block;
-            padding: 0.5rem 2rem;
-            border-radius: 50px;
-            letter-spacing: 1.5px;
-            margin-top: 10px;
+        .objective {
+            font-family: 'Comic Neue', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            background: #f0f4ff;
+            color: var(--color-primary);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            border-left: 5px solid var(--color-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
         }
 
-        /* PANEL DE PROGRESO */
-        .status-panel {
+        .status-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #f0f0f0;
+            background: #eee;
             padding: 1rem 2rem;
-            border-radius: 100px;
-            border: 4px solid var(--color-deep-blue);
+            border-radius: 50px;
+            border: 3px solid var(--color-primary);
             margin-bottom: 2rem;
-            gap: 1rem;
             position: sticky;
             top: 10px;
             z-index: 100;
         }
 
-        .sellos-label {
-            font-family: 'Bangers', cursive;
-            font-size: 1.4rem;
-            color: var(--color-deep-blue);
-        }
+        .progress-label { font-family: 'Bangers', cursive; font-size: 1.2rem; color: var(--color-primary); }
 
-        .energy-bar {
-            flex: 1;
-            height: 24px;
-            background: #ddd;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 2px solid var(--color-deep-blue);
-        }
+        .progress-bg { flex: 1; height: 20px; background: #ccc; border-radius: 10px; margin: 0 15px; overflow: hidden; }
+        .progress-fill { width: 0%; height: 100%; background: var(--color-accent); transition: width 0.5s ease-out; }
 
-        .energy-fill {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, #ff9a9a, var(--color-bright-red));
-            transition: width 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        /* TARJETAS DE EJERCICIO */
-        .exercise-card {
+        .card {
             background: white;
-            border: 3px solid var(--color-deep-blue);
+            border: 3px solid var(--color-primary);
             border-radius: 1.5rem;
             margin-bottom: 1.5rem;
             padding: 1.5rem;
-            box-shadow: 6px 6px 0px var(--color-light-pink);
-            transition: transform 0.2s;
+            box-shadow: 5px 5px 0px var(--color-light);
         }
 
-        .exercise-card.correct {
-            border-color: var(--color-success);
-            background-color: #f0fff4;
-        }
+        .card.done { border-color: var(--color-success); background-color: #f0fff4; opacity: 0.9; }
 
-        .problem-header {
-            font-family: 'Bangers', cursive;
-            font-size: 1.5rem;
-            color: var(--color-dark-red);
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: space-between;
-        }
+        .card-title { font-family: 'Bangers', cursive; font-size: 1.4rem; color: var(--color-secondary); margin-bottom: 0.8rem; }
 
-        .question-text {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.4;
-        }
+        .question { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.2rem; }
 
-        .interaction-row {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+        .actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
         select {
+            flex: 1;
+            padding: 0.8rem;
             font-family: 'Comic Neue', sans-serif;
             font-weight: 700;
-            font-size: 1.1rem;
-            padding: 0.7rem;
-            border: 3px solid var(--color-deep-blue);
-            border-radius: 12px;
-            background: white;
-            flex: 1;
+            border: 2px solid var(--color-primary);
+            border-radius: 10px;
             min-width: 200px;
         }
 
-        .btn-check {
+        .btn {
             font-family: 'Bangers', cursive;
-            background: var(--color-deep-blue);
+            padding: 0.8rem 1.5rem;
+            font-size: 1.2rem;
+            background: var(--color-primary);
             color: white;
             border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 12px;
-            font-size: 1.3rem;
+            border-radius: 10px;
             cursor: pointer;
-            box-shadow: 3px 3px 0px #000;
+            box-shadow: 2px 2px 0px #000;
         }
 
-        .btn-check:hover { background: var(--color-purple); }
-        .btn-check:disabled { background: #ccc; box-shadow: none; cursor: default; }
+        .btn:disabled { background: #999; cursor: not-allowed; box-shadow: none; }
 
-        /* RETROALIMENTACIÓN */
-        .feedback-box {
+        .feedback {
             margin-top: 1rem;
-            padding: 1rem;
-            border-radius: 12px;
-            font-size: 1.1rem;
+            padding: 0.8rem;
+            border-radius: 10px;
             display: none;
-            line-height: 1.4;
-            border-left: 6px solid transparent;
-        }
-
-        .feedback-box.show { display: block; }
-        
-        .feedback-correct {
-            background-color: #e6fffa;
-            color: #234e52;
-            border-left-color: var(--color-success);
-        }
-
-        .feedback-incorrect {
-            background-color: #fff5f5;
-            color: #742a2a;
-            border-left-color: var(--color-error);
-        }
-
-        .feedback-title {
             font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-            display: block;
         }
 
-        /* MENSAJE FINAL */
-        #victory-screen {
+        .feedback.show { display: block; }
+        .correct { background: #d4edda; color: #155724; border-left: 5px solid var(--color-success); }
+        .incorrect { background: #f8d7da; color: #721c24; border-left: 5px solid var(--color-error); }
+
+        #win-msg {
             display: none;
             text-align: center;
             padding: 3rem;
-            background: var(--color-bg-soft);
-            border: 8px dashed var(--color-bright-red);
+            background: #fff;
+            border: 10px double var(--color-accent);
             border-radius: 2rem;
-            margin-top: 2rem;
         }
 
-        #victory-screen h2 {
-            font-family: 'Bangers', cursive;
-            font-size: 4rem;
-            color: var(--color-bright-red);
-            margin-bottom: 1rem;
-        }
+        #win-msg h2 { font-family: 'Bangers', cursive; font-size: 3.5rem; color: var(--color-accent); margin-bottom: 1rem; }
 
         @media (max-width: 600px) {
-            h1 { font-size: 2.2rem; }
-            .status-panel { flex-direction: column; border-radius: 20px; }
-            .question-text { font-size: 1.1rem; }
+            h1 { font-size: 2rem; }
+            .status-bar { flex-direction: column; height: auto; border-radius: 20px; }
+            .progress-bg { width: 100%; margin: 10px 0; }
         }
     </style>
 </head>
 <body>
 
-<div class="escape-container">
+<div class="container">
     <div class="header">
-        <h1>💥 MISIÓN MULTIPLICACIÓN 💥</h1>
-        <div class="sub">✦ 5° BÁSICO: ALGORITMOS AL PODER ✦</div>
+        <h1>🚀 ÉLITE GALÁCTICA: MISIÓN 5° 🚀</h1>
+        <div class="objective">
+            🎯 <strong>Objetivo de la actividad:</strong> Resolver problemas de multiplicación y división en diversos contextos, aplicando algoritmos estándar para fortalecer el cálculo mental, la precisión numérica y la autonomía en la resolución de desafíos matemáticos.
+        </div>
     </div>
 
-    <div class="status-panel">
-        <div class="sellos-label">ENERGÍA MENTAL: <span id="correct-count">0</span> / 20</div>
-        <div class="energy-bar"><div class="energy-fill" id="progress-bar"></div></div>
+    <div class="status-bar">
+        <div class="progress-label">DATOS DESCIFRADOS: <span id="score-text">0</span> / 20</div>
+        <div class="progress-bg"><div class="progress-fill" id="bar"></div></div>
     </div>
 
-    <div id="quiz-container">
-        <!-- Los ejercicios se cargarán aquí -->
-    </div>
+    <div id="game-engine"></div>
 
-    <div id="victory-screen">
-        <h2>¡CÁLCULO SUPREMO!</h2>
-        <p>🏆 Has dominado los 20 desafíos de multiplicación y división. ¡Eres un héroe matemático! 🏆</p>
-        <button class="btn-check" style="margin-top:20px" onclick="location.reload()">REINICIAR MISIÓN</button>
+    <div id="win-msg">
+        <h2>¡MISIÓN COMPLETADA!</h2>
+        <p style="font-size: 1.5rem;">🎉 Eres oficialmente parte de la Élite Galáctica. ¡Has dominado los números! 🎉</p>
+        <button class="btn" style="margin-top: 20px;" onclick="location.reload()">REINICIAR ENTRENAMIENTO</button>
     </div>
 </div>
 
 <script>
-    // Las 20 preguntas completas del nivel de 5° básico
-    const questions = [
-        {
-            id: 1, text: "1. ¿Cuál es el producto de 23 × 15 usando el algoritmo estándar?",
-            options: ["345", "315", "275", "330"], answer: "345",
-            fbC: "¡Excelente! Multiplicaste 23 × 5 = 115, luego 23 × 10 = 230. Al sumarlos: 115 + 230 = 345.",
-            fbI: "Recuerda el orden: primero multiplica 23 por las unidades (5). Luego, multiplica 23 por las decenas (1), ¡sin olvidar el cero o el espacio a la derecha! Al final, suma."
-        },
-        {
-            id: 2, text: "2. Calcula 47 × 12",
-            options: ["564", "424", "584", "514"], answer: "564",
-            fbC: "¡Perfecto! Primero 47 × 2 = 94. Luego 47 × 10 = 470. La suma de 94 + 470 es 564.",
-            fbI: "¡Cuidado con la suma final! Si multiplicas por las unidades obtienes 94, y por las decenas obtienes 470. Súmalos con cuidado."
-        },
-        {
-            id: 3, text: "3. María multiplicó 34 × 26. ¿Cuál desplegó como el valor correcto?",
-            options: ["884", "864", "744", "824"], answer: "884",
-            fbC: "¡Muy bien! 34 × 6 es 204. Luego, 34 × 20 es 680. 204 + 680 = 884.",
-            fbI: "Revisa la multiplicación por la decena (2). Recuerda que es un 20, por lo que el segundo resultado parcial debe terminar en cero."
-        },
-        {
-            id: 4, text: "4. ¿Cuál es el resultado de 68 × 23?",
-            options: ["1 564", "1 5640", "1 464", "1 664"], answer: "1 564",
-            fbC: "¡Correcto! 68 × 3 = 204, y 68 × 20 = 1360. Sumando: 1360 + 204 = 1564.",
-            fbI: "Verifica tus reservas al multiplicar. 8×3 es 24 (reservas 2). Hazlo paso a paso y suma cuidadosamente."
-        },
-        {
-            id: 5, text: "5. Usa el algoritmo: 39 × 17 =",
-            options: ["663", "513", "703", "493"], answer: "663",
-            fbC: "¡Gran trabajo! 39 × 7 = 273. 39 × 10 = 390. Al sumar 273 y 390 obtienes 663.",
-            fbI: "No olvides las reservas cuando multiplicas 9 × 7 (es 63, reservas 6). ¡Suma las reservas al siguiente paso!"
-        },
-        {
-            id: 6, text: "6. Si una fábrica empaqueta 28 cajas con 36 productos en cada caja, ¿cuántos productos hay en total?",
-            options: ["1008", "864", "912", "1144"], answer: "1008",
-            fbC: "¡Exacto! Era una multiplicación: 28 × 36. 28 × 6 = 168 y 28 × 30 = 840. Total = 1008.",
-            fbI: "Para encontrar el total debes multiplicar las cajas por los productos. Realiza 28 × 36 paso a paso."
-        },
-        {
-            id: 7, text: "7. Un vendedor gana $45 por cada venta. Si hace 27 ventas, ¿cuánto ganó en total?",
-            options: ["$1 215", "$1 035", "$1 255", "$1 145"], answer: "$1 215",
-            fbC: "¡Excelente cálculo financiero! $45 × 27 = 1215.",
-            fbI: "El total se obtiene multiplicando 45 × 27. ¡No olvides el salto de posición al multiplicar por el 2!"
-        },
-        {
-            id: 8, text: "8. Un agricultor planta 15 filas de árboles, con 24 árboles en cada fila. ¿Cuántos árboles plantó en total?",
-            options: ["360", "340", "350", "380"], answer: "360",
-            fbC: "¡Excelente! Multiplicaste 15 × 24. 15 × 4 = 60, y 15 × 20 = 300. Al sumarlos da 360.",
-            fbI: "Debes multiplicar el número de filas por los árboles en cada fila (15 × 24). ¡Hazlo paso a paso!"
-        },
-        {
-            id: 9, text: "9. ¿Cuál es el cociente exacto de 450 ÷ 5?",
-            options: ["90", "80", "9", "95"], answer: "90",
-            fbC: "¡Muy bien! 45 ÷ 5 es 9, por lo tanto 450 ÷ 5 es 90. ¡Cálculo mental rápido!",
-            fbI: "Piensa en la tabla del 5. ¿Qué número multiplicado por 5 da 45? Luego solo agrega el cero de las unidades."
-        },
-        {
-            id: 10, text: "10. Si divides 125 entre 4, ¿cuál es el resto (lo que sobra)?",
-            options: ["1", "2", "0", "3"], answer: "1",
-            fbC: "¡Perfecto! 125 ÷ 4 es 31 (porque 31 × 4 = 124) y sobra 1.",
-            fbI: "Realiza la división: toma el 12, 12 ÷ 4 = 3. Luego baja el 5. 5 ÷ 4 = 1 y te sobrará una cantidad. ¿Cuál es?"
-        },
-        {
-            id: 11, text: "11. Resuelve 85 × 14 usando el algoritmo estándar:",
-            options: ["1 190", "1 090", "1 290", "1 180"], answer: "1 190",
-            fbC: "¡Gran trabajo! 85 × 4 = 340, y 85 × 10 = 850. La suma de 340 + 850 es 1190.",
-            fbI: "No olvides multiplicar por la decena. 85 × 4 es 340. Luego 85 × 10 es 850. Súmalos con cuidado."
-        },
-        {
-            id: 12, text: "12. En un teatro hay 320 asientos distribuidos equitativamente en 8 filas. ¿Cuántos asientos hay en cada fila?",
-            options: ["40", "30", "45", "50"], answer: "40",
-            fbC: "¡Genial! 320 ÷ 8 = 40. Te apoyaste en que 32 ÷ 8 = 4.",
-            fbI: "Para repartir debes dividir: 320 ÷ 8. Ignora el cero un momento, ¿cuánto es 32 ÷ 8? Luego devuélvele el cero."
-        },
-        {
-            id: 13, text: "13. Un camión transporta 55 sacos de papas. Si cada saco pesa 20 kg, ¿cuántos kilos transporta en total?",
-            options: ["1 100", "1 050", "1 200", "1 000"], answer: "1 100",
-            fbC: "¡Correcto! 55 × 20 = 1100. Multiplicaste 55 × 2 (que es 110) y agregaste el cero.",
-            fbI: "Multiplica 55 × 20. Un truco es multiplicar 55 × 2 primero, y al resultado le agregas un cero al final."
-        },
-        {
-            id: 14, text: "14. Para envasar 926 caramelos en bolsas de 6 unidades, ¿cuántas bolsas completas obtiene y cuántos caramelos sobran?",
-            options: ["154 bolsas y 2 sobrantes", "153 bolsas y 10 sobrantes", "154 bolsas y 6 sobrantes", "155 bolsas y 2 sobrantes"], answer: "154 bolsas y 2 sobrantes",
-            fbC: "¡Muy bien! Al dividir 926 entre 6, el cociente es 154 y nos queda un resto de 2.",
-            fbI: "Debes realizar la división 926 ÷ 6. Toma el 9, luego baja el 2 para formar 32, y finalmente baja el 6. Fíjate en el resto final."
-        },
-        {
-            id: 15, text: "15. Resuelve: 672 ÷ 8",
-            options: ["84", "96", "74", "86"], answer: "84",
-            fbC: "¡Perfecto! El 8 cabe 8 veces en 67 (8×8=64, sobran 3). Bajas el 2 y formas 32. El 8 cabe 4 veces en 32 (8×4=32).",
-            fbI: "Toma las primeras dos cifras (67). ¿Qué número multiplicado por 8 se acerca a 67 sin pasarse? Es el 8. Luego continúa la división."
-        },
-        {
-            id: 16, text: "16. Si Alba tiene $1 050 y compra paquetes de $25 cada uno, ¿cuántos paquetes puede comprar enteros?",
-            options: ["42", "40", "38", "44"], answer: "42",
-            fbC: "¡Genial! 1000 ÷ 25 son 40 paquetes (porque 100 ÷ 25 = 4). Los $50 restantes alcanzan para 2 paquetes más. Total: 42.",
-            fbI: "Es una división: 1050 ÷ 25. Un truco: piensa en monedas. ¿Cuántas monedas de 25 hay en 100? Hay 4. Usa eso para calcular."
-        },
-        {
-            id: 17, text: "17. Un maestro organiza 789 lápices en cajas con 6 lápices por fila y 5 filas por caja (30 lápices por caja). ¿Cuántas cajas completas puede llenar?",
-            options: ["26", "24", "25", "23"], answer: "26",
-            fbC: "¡Correcto! Primero calculaste que la caja hace 30 lápices. Al dividir 789 ÷ 30, el resultado es 26 y sobran 9 lápices.",
-            fbI: "Primero, debes saber que el divisor es 30 (lápices por caja). Luego divide 789 entre 30 y observa solo el número entero."
-        },
-        {
-            id: 18, text: "18. Resuelve la división: 999 ÷ 3",
-            options: ["333", "332", "336", "323"], answer: "333",
-            fbC: "¡Súper veloz! Como 9 ÷ 3 = 3, repetir esto tres veces nos da 333.",
-            fbI: "Esta es directa. Divide cada dígito entre 3. ¿Cuántas veces cabe el 3 en el 9?"
-        },
-        {
-            id: 19, text: "19. Un terreno de 48 m de largo se divide en secciones de 7 m cada una. ¿Cuántas secciones completas caben y cuánto queda sin dividir?",
-            options: ["6 secciones y 6 m sobrantes", "6 secciones y 0 m sobrantes", "7 secciones completas", "5 secciones y 13 m sobrantes"], answer: "6 secciones y 6 m sobrantes",
-            fbC: "¡Exacto! Piensa en la tabla del 7: 7 × 6 = 42. Para llegar a 48 faltan 6. Por ende, sobran 6 metros.",
-            fbI: "Revisa la tabla del 7. ¿Cuál es el múltiplo de 7 más cercano a 48 sin pasarse? Multiplica y luego resta para hallar lo que sobra."
-        },
-        {
-            id: 20, text: "20. Para fabricar 250 piezas se necesitan 14 tornillos por pieza. ¿Cuántos tornillos se necesitan en total?",
-            options: ["3 500", "3 250", "3 400", "3 600"], answer: "3 500",
-            fbC: "¡Misión Cumplida! 250 × 14 = 3500. También podías calcular 250 × 10 = 2500, luego 250 × 4 = 1000 y sumar ambos.",
-            fbI: "Para encontrar el total debes multiplicar. Trata de multiplicar 25 × 14, y al resultado agrégale un cero al final."
-        }
+    const dataset = [
+        { q: "¿Cuál es el producto de 23 × 15 usando el algoritmo estándar?", opts: ["345", "315", "275", "330"], a: "345", fb: "¡Correcto! 23 x 10 = 230 y 23 x 5 = 115. 230 + 115 = 345." },
+        { q: "Calcula 47 × 12", opts: ["564", "424", "584", "514"], a: "564", fb: "¡Excelente! 47 x 10 = 470 y 47 x 2 = 94. 470 + 94 = 564." },
+        { q: "María multiplicó 34 × 26. ¿Cuál es el valor correcto?", opts: ["884", "864", "744", "824"], a: "884", fb: "¡Bien hecho! El producto de 34 por 26 da exactamente 884." },
+        { q: "¿Cuál es el resultado de 68 × 23?", opts: ["1.564", "15.640", "1.464", "1.544"], a: "1.564", fb: "¡Exacto! El cálculo manual o algorítmico confirma 1.564." },
+        { q: "Usa el algoritmo para resolver: 39 × 17", opts: ["663", "513", "703", "493"], a: "663", fb: "¡Correcto! 39 veces 17 es 663." },
+        { q: "Si una fábrica empaqueta 28 cajas con 36 productos en cada una, ¿cuántos productos hay en total?", opts: ["1.008", "864", "912", "1.144"], a: "1.008", fb: "¡Muy bien! 28 x 36 = 1.008 productos galácticos." },
+        { q: "Un vendedor gana $45 por cada venta. Si hace 27 ventas, ¿cuánto ganó en total?", opts: ["$1.215", "$1.035", "$1.255", "$1.145"], a: "$1.215", fb: "¡Correcto! Multiplicar 45 por 27 resulta en $1.215." },
+        { q: "Calcula el área de un rectángulo que mide 52 cm de largo y 14 cm de ancho.", opts: ["728 cm²", "628 cm²", "718 cm²", "520 cm²"], a: "728 cm²", fb: "¡Excelente! Largo por ancho: 52 x 14 = 728." },
+        { q: "Resuelve: 125 × 4", opts: ["500", "450", "600", "550"], a: "500", fb: "¡Correcto! 4 veces 125 es igual a 500." },
+        { q: "Un camión transporta 15 sacos de papas. Si cada saco pesa 42 kg, ¿cuántos kg lleva en total?", opts: ["630 kg", "600 kg", "420 kg", "615 kg"], a: "630 kg", fb: "¡Bien! 15 x 42 = 630 kg de carga." },
+        { q: "Divide 450 ÷ 9. ¿Cuál es el cociente?", opts: ["50", "45", "55", "60"], a: "50", fb: "¡Exacto! 45 dividido en 9 es 5, así que 450 dividido en 9 es 50." },
+        { q: "Calcula 1.200 ÷ 4", opts: ["300", "400", "250", "350"], a: "300", fb: "¡Correcto! La cuarta parte de 1.200 es 300." },
+        { q: "Si repartes 144 lápices entre 12 estudiantes, ¿cuántos recibe cada uno?", opts: ["12", "14", "10", "11"], a: "12", fb: "¡Muy bien! 12 x 12 es 144, por lo tanto el reparto es de 12." },
+        { q: "Un repartidor tiene 926 caramelos y los pone en bolsas de 6. ¿Cuántas bolsas obtiene y cuántos sobran?", opts: ["154 bolsas y 2 sobran", "153 bolsas y 10 sobran", "154 bolsas y 6 sobran", "152 bolsas y 4 sobran"], a: "154 bolsas y 2 sobran", fb: "¡Excelente! 926 / 6 = 154 y resto 2." },
+        { q: "Resuelve: 672 ÷ 8", opts: ["84", "96", "74", "86"], a: "84", fb: "¡Correcto! 84 veces 8 es igual a 672." },
+        { q: "Si Alba tiene $1.050 y compra paquetes de $25 cada uno, ¿cuántos puede comprar?", opts: ["42", "40", "38", "44"], a: "42", fb: "¡Bien hecho! 1.050 / 25 = 42 paquetes." },
+        { q: "Un maestro organiza 789 lápices en cajas de 30. ¿Cuántas cajas completas puede llenar?", opts: ["26", "24", "25", "23"], a: "26", fb: "¡Correcto! 789 / 30 = 26 y sobran 9. Se llenan 26 cajas completas." },
+        { q: "Resuelve la división: 999 ÷ 3", opts: ["333", "332", "336", "323"], a: "333", fb: "¡Fácil! 999 es el triple de 333." },
+        { q: "Un terreno de 48 m se divide en secciones de 7 m. ¿Cuántas secciones completas caben?", opts: ["6 y sobran 6m", "6 y sobran 0m", "7 y sobran 1m", "5 y sobran 13m"], a: "6 y sobran 6m", fb: "¡Correcto! 7 x 6 = 42. Para llegar a 48 sobran 6." },
+        { q: "Para fabricar 250 piezas se necesitan 14 tornillos por cada una. ¿Cuántos tornillos se usan en total?", opts: ["3.500", "2.500", "3.100", "3.400"], a: "3.500", fb: "¡Misión cumplida! 250 x 14 = 3.500 tornillos." }
     ];
 
-    let score = 0;
+    let currentScore = 0;
 
-    function renderQuiz() {
-        const container = document.getElementById('quiz-container');
-        container.innerHTML = questions.map((q, index) => `
-            <div class="exercise-card" id="card-${index}">
-                <div class="problem-header">
-                    <span>RETO #${index + 1}</span>
-                    <span id="status-icon-${index}">🛡️</span>
-                </div>
-                <p class="question-text">${q.text}</p>
-                <div class="interaction-row">
-                    <select id="select-${index}">
-                        <option value="" disabled selected>Elige tu respuesta...</option>
-                        ${q.options.sort(() => Math.random() - 0.5).map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+    function init() {
+        const engine = document.getElementById('game-engine');
+        engine.innerHTML = dataset.map((item, i) => `
+            <div class="card" id="c-${i}">
+                <div class="card-title">SISTEMA DE SEGURIDAD #${i + 1}</div>
+                <div class="question">${item.q}</div>
+                <div class="actions">
+                    <select id="s-${i}">
+                        <option value="" disabled selected>Selecciona una respuesta...</option>
+                        ${item.opts.sort(() => Math.random() - 0.5).map(o => `<option value="${o}">${o}</option>`).join('')}
                     </select>
-                    <button class="btn-check" id="btn-${index}" onclick="verifyAnswer(${index})">VALIDAR</button>
+                    <button class="btn" id="b-${i}" onclick="check(${i})">DESCIFRAR</button>
                 </div>
-                <div id="feedback-${index}" class="feedback-box"></div>
+                <div class="feedback" id="f-${i}"></div>
             </div>
         `).join('');
     }
 
-    window.verifyAnswer = function(index) {
-        const select = document.getElementById(`select-${index}`);
-        const btn = document.getElementById(`btn-${index}`);
-        const fb = document.getElementById(`feedback-${index}`);
-        const card = document.getElementById(`card-${index}`);
-        const icon = document.getElementById(`status-icon-${index}`);
+    window.check = function(index) {
+        const sel = document.getElementById(`s-${index}`);
+        const feedback = document.getElementById(`f-${index}`);
+        const card = document.getElementById(`c-${index}`);
+        const btn = document.getElementById(`b-${index}`);
         
-        const userAnswer = select.value;
-        const q = questions[index];
-
-        if (!userAnswer) return;
-
-        // Limpiar clases anteriores
-        fb.classList.remove('feedback-correct', 'feedback-incorrect', 'show');
-
-        if (userAnswer === q.answer) {
-            // RESPUESTA CORRECTA
-            score++;
-            fb.innerHTML = `<span class="feedback-title">¡PODER DESBLOQUEADO!</span>${q.fbC}`;
-            fb.classList.add('feedback-correct', 'show');
-            card.classList.add('correct');
-            icon.innerText = "✅";
-            
-            // Bloquear controles para evitar cambiar respuesta
-            select.disabled = true;
+        if (sel.value === dataset[index].a) {
+            currentScore++;
+            feedback.innerHTML = `🌟 ${dataset[index].fb}`;
+            feedback.className = "feedback show correct";
+            card.classList.add('done');
+            sel.disabled = true;
             btn.disabled = true;
-            btn.innerText = "COMPLETADO";
-
-            updateProgress();
+            btn.innerText = "CÓDIGO ACEPTADO";
+            update();
         } else {
-            // RESPUESTA INCORRECTA
-            fb.innerHTML = `<span class="feedback-title">¡PIENSA COMO HÉROE!</span>${q.fbI}`;
-            fb.classList.add('feedback-incorrect', 'show');
-            icon.innerText = "❌";
+            feedback.innerHTML = `⚠️ Error de cálculo. Intenta procesar los datos nuevamente.`;
+            feedback.className = "feedback show incorrect";
         }
     }
 
-    function updateProgress() {
-        const total = questions.length;
-        const percent = (score / total) * 100;
-        
-        document.getElementById('correct-count').innerText = score;
-        document.getElementById('progress-bar').style.width = percent + "%";
+    function update() {
+        const total = dataset.length;
+        const percent = (currentScore / total) * 100;
+        document.getElementById('score-text').innerText = currentScore;
+        document.getElementById('bar').style.width = percent + "%";
 
-        if (score === total) {
+        if (currentScore === total) {
             setTimeout(() => {
-                document.getElementById('quiz-container').style.display = 'none';
-                document.getElementById('victory-screen').style.display = 'block';
+                document.getElementById('game-engine').style.display = 'none';
+                document.getElementById('win-msg').style.display = 'block';
                 window.scrollTo(0,0);
-            }, 1200);
+            }, 1000);
         }
     }
 
-    // Inicializar la interfaz
-    renderQuiz();
+    init();
 </script>
 </body>
 </html>
