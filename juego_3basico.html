@@ -101,13 +101,13 @@
         <header class="mb-8 text-center">
             <div class="inline-block bg-yellow-400 border-4 border-black px-6 py-2 rounded-xl transform -rotate-2 shadow-[6px_6px_0px_0px_#000] mb-6">
                 <h1 class="text-4xl md:text-5xl text-red-600 drop-shadow-md">¡RESCATE MATEMÁTICO!</h1>
-                <h2 class="text-2xl text-purple-900">Misión: El Poder del Canje</h2>
+                <h2 class="text-2xl text-purple-900">Misión: El Poder de la Resta</h2>
             </div>
             
             <div class="comic-panel bg-red-600 text-white p-4 mx-auto max-w-2xl transform rotate-1">
                 <h3 class="text-2xl text-yellow-300 mb-1">🎯 Objetivo de la Misión (3° Básico)</h3>
                 <p class="text-base md:text-lg font-bold">
-                    Aplicar el algoritmo de la sustracción para resolver restas de números hasta 20, identificando cuándo es necesario canjear y calculando correctamente.
+                    Aplicar el algoritmo de la sustracción para resolver restas de números hasta 20, calculando correctamente para derrotar al villano.
                 </p>
             </div>
         </header>
@@ -123,7 +123,7 @@
                 <div class="text-7xl mb-4 animate-bounce">🦹‍♂️🦸‍♀️</div>
                 <h2 class="text-4xl comic-title text-blue-700 mb-4">¡El Villano "Resta-Fácil" ataca!</h2>
                 <p class="text-xl mb-8 font-bold text-gray-700 leading-relaxed">
-                    Resta-Fácil ha bloqueado las bóvedas de la ciudad. Para abrirlas, debes resolver <span class="text-red-600 font-extrabold">20 acertijos de restas con canje</span> (pidiendo prestado a la decena). <br><br>
+                    Resta-Fácil ha bloqueado las bóvedas de la ciudad. Para abrirlas, debes resolver <span class="text-red-600 font-extrabold">20 acertijos de restas hasta el número 20</span> calculando con precisión. <br><br>
                     ¿Estás listo para usar tu superpoder matemático?
                 </p>
                 <button onclick="startGame()" class="comic-button bg-blue-600 text-white text-3xl py-4 px-10 rounded-full border-4 border-black">
@@ -164,7 +164,7 @@
                 <div class="text-8xl mb-4">🏅✨</div>
                 <h2 class="text-5xl comic-title text-yellow-500 drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] mb-6">¡MISIÓN SUPERADA!</h2>
                 <p class="text-2xl mb-8 font-bold text-gray-800">
-                    ¡Increíble! Has aprendido a identificar cuándo hacer canje y derrotado al villano Resta-Fácil. La ciudad está a salvo gracias a tus habilidades matemáticas.
+                    ¡Increíble! Has calculado como un verdadero héroe y derrotado al villano Resta-Fácil. La ciudad está a salvo gracias a tus habilidades matemáticas.
                 </p>
                 <button onclick="location.reload()" class="comic-button bg-green-500 text-white text-3xl py-4 px-10 rounded-full border-4 border-black">
                     JUGAR DE NUEVO
@@ -176,136 +176,136 @@
 
     <script>
         // --- BASE DE DATOS DE PREGUNTAS (20 Retos Progresivos) ---
-        // Foco: Identificar la necesidad de canje y aplicar sustracción hasta 20.
+        // Foco: Resolver correctamente restas de números hasta el 20.
         const questions = [
-            // Fase 1: Identificación (¿Necesito canje?)
+            // Fase 1: Cálculos iniciales (restas directas sin cruzar la decena)
             {
                 icon: "👁️",
-                q: "Misión 1: Mira esta resta: <span class='big-math'>17 - 4</span>. ¿Necesitas hacer canje (pedir prestado)?",
-                a: "No, a 7 le puedo quitar 4.",
-                opts: ["No, a 7 le puedo quitar 4.", "Sí, siempre se pide prestado.", "A 4 le quito 7."]
+                q: "Misión 1: Inicia el calentamiento calculando: <br><span class='big-math'>15 - 4</span>",
+                a: "11",
+                opts: ["11", "10", "12", "9"]
             },
             {
-                icon: "🕵️",
-                q: "Misión 2: Ahora mira esta: <span class='big-math'>13 - 5</span>. ¿Necesitas hacer canje?",
-                a: "Sí, a 3 no le puedo quitar 5.",
-                opts: ["Sí, a 3 no le puedo quitar 5.", "No, solo resto 5 menos 3.", "No, a 13 le sumo 5."]
+                icon: "🎯",
+                q: "Misión 2: Apunta bien y calcula: <br><span class='big-math'>18 - 5</span>",
+                a: "13",
+                opts: ["13", "14", "12", "15"]
             },
             {
                 icon: "🛡️",
-                q: "Misión 3: ¿En cuál de estas restas SÍ necesitas pedir prestado (hacer canje)?",
-                a: "14 - 6",
-                opts: ["14 - 6", "15 - 4", "18 - 2"]
+                q: "Misión 3: Rompe este escudo matemático: <br><span class='big-math'>19 - 7</span>",
+                a: "12",
+                opts: ["12", "11", "13", "10"]
             },
             {
-                icon: "🔍",
-                q: "Misión 4: ¿En cuál de estas restas NO necesitas canje?",
-                a: "17 - 5",
-                opts: ["17 - 5", "12 - 4", "11 - 3"]
+                icon: "⚡",
+                q: "Misión 4: Velocidad de rayo para resolver: <br><span class='big-math'>16 - 2</span>",
+                a: "14",
+                opts: ["14", "13", "15", "12"]
             },
             
-            // Fase 2: Cálculos básicos (Con y sin canje mezclados)
+            // Fase 2: Cruzando la decena
             {
                 icon: "🧮",
-                q: "Misión 5: ¡Calcula sin canje! <span class='big-math'>15 - 3</span>",
-                a: "12",
-                opts: ["12", "13", "8", "18"]
-            },
-            {
-                icon: "🧮",
-                q: "Misión 6: ¡Calcula con canje! <span class='big-math'>12 - 7</span>",
-                a: "5",
-                opts: ["5", "6", "4", "7"]
-            },
-            {
-                icon: "🧮",
-                q: "Misión 7: Resuelve rápidamente: <span class='big-math'>18 - 6</span>",
-                a: "12",
-                opts: ["12", "11", "13", "14"]
-            },
-            {
-                icon: "🧮",
-                q: "Misión 8: Usa tu fuerza matemática: <span class='big-math'>16 - 9</span>",
+                q: "Misión 5: ¡Aumenta la dificultad! Calcula: <br><span class='big-math'>12 - 5</span>",
                 a: "7",
                 opts: ["7", "6", "8", "5"]
             },
             {
                 icon: "🧮",
-                q: "Misión 9: Piensa bien: <span class='big-math'>14 - 8</span>",
-                a: "6",
-                opts: ["6", "7", "8", "5"]
-            },
-
-            // Fase 3: Problemas rutinarios (Aplicación)
-            {
-                icon: "🦸‍♂️",
-                q: "Misión 10: Tienes 16 escudos de energía, pero el villano destruye 4. ¿Cuántos te quedan? (Sin canje)",
-                a: "12 escudos",
-                opts: ["12 escudos", "11 escudos", "13 escudos", "10 escudos"]
-            },
-            {
-                icon: "🔋",
-                q: "Misión 11: 'Chispa' tiene 14 baterías. Usa 7 para salvar un tren. ¿Cuántas le sobran? (Con canje)",
-                a: "7 baterías",
-                opts: ["7 baterías", "8 baterías", "6 baterías", "5 baterías"]
-            },
-            {
-                icon: "🛸",
-                q: "Misión 12: Hay 15 platillos voladores. Tú derribas 9. ¿Cuántos faltan por atrapar?",
-                a: "6 platillos",
-                opts: ["6 platillos", "7 platillos", "5 platillos", "8 platillos"]
-            },
-            {
-                icon: "👕",
-                q: "Misión 13: El equipo necesita 18 súper-trajes. Ya fabricaron 5. ¿Cuántos trajes faltan?",
-                a: "13 trajes",
-                opts: ["13 trajes", "12 trajes", "14 trajes", "15 trajes"]
-            },
-            {
-                icon: "🦸‍♀️",
-                q: "Misión 14: En la base hay 11 héroes. 3 salen en una misión. ¿Cuántos se quedan?",
-                a: "8 héroes",
-                opts: ["8 héroes", "7 héroes", "9 héroes", "6 héroes"]
-            },
-
-            // Fase 4: Entendiendo el mecanismo del canje a fondo
-            {
-                icon: "⚙️",
-                q: "Misión 15: Al restar <span class='big-math'>12 - 5</span>, la unidad (2) le pide 1 decena al vecino. ¿En qué número se convierte el 2?",
-                a: "En 12",
-                opts: ["En 12", "En 3", "En 20"]
-            },
-            {
-                icon: "🧠",
-                q: "Misión 16: Rompe el muro de hielo resolviendo: <span class='big-math'>17 - 9</span>",
+                q: "Misión 6: Usa tu poder mental: <br><span class='big-math'>14 - 6</span>",
                 a: "8",
                 opts: ["8", "7", "9", "6"]
             },
             {
+                icon: "🧮",
+                q: "Misión 7: Resuelve rápidamente: <br><span class='big-math'>15 - 8</span>",
+                a: "7",
+                opts: ["7", "8", "6", "5"]
+            },
+            {
+                icon: "🧮",
+                q: "Misión 8: Usa tu fuerza matemática: <br><span class='big-math'>11 - 4</span>",
+                a: "7",
+                opts: ["7", "6", "8", "5"]
+            },
+            {
+                icon: "🧮",
+                q: "Misión 9: Piensa bien: <br><span class='big-math'>13 - 7</span>",
+                a: "6",
+                opts: ["6", "7", "5", "8"]
+            },
+
+            // Fase 3: Agilidad mental y números cercanos a 20
+            {
                 icon: "🧠",
-                q: "Misión 17: ¡Cuidado, esta no tiene canje! <span class='big-math'>19 - 7</span>",
-                a: "12",
-                opts: ["12", "11", "13", "2"]
+                q: "Misión 10: ¡Calcula desde el límite! <br><span class='big-math'>20 - 9</span>",
+                a: "11",
+                opts: ["11", "10", "12", "9"]
             },
             {
                 icon: "🧠",
-                q: "Misión 18: Calcula rápido con canje: <span class='big-math'>13 - 8</span>",
-                a: "5",
-                opts: ["5", "6", "4", "7"]
+                q: "Misión 11: Destruye el campo de fuerza: <br><span class='big-math'>17 - 8</span>",
+                a: "9",
+                opts: ["9", "8", "10", "7"]
+            },
+            {
+                icon: "🧠",
+                q: "Misión 12: No dejes que el villano escape: <br><span class='big-math'>16 - 9</span>",
+                a: "7",
+                opts: ["7", "6", "8", "9"]
+            },
+            {
+                icon: "🧠",
+                q: "Misión 13: Sigue calculando: <br><span class='big-math'>18 - 9</span>",
+                a: "9",
+                opts: ["9", "8", "10", "7"]
+            },
+            {
+                icon: "🧠",
+                q: "Misión 14: Fuerza de concentración: <br><span class='big-math'>14 - 5</span>",
+                a: "9",
+                opts: ["9", "8", "10", "11"]
+            },
+
+            // Fase 4: Problemas rutinarios (Aplicación)
+            {
+                icon: "🦸‍♂️",
+                q: "Misión 15: Tienes 15 láseres y disparas 6 contra los robots del villano. ¿Cuántos láseres te quedan?",
+                a: "9 láseres",
+                opts: ["9 láseres", "8 láseres", "10 láseres", "7 láseres"]
+            },
+            {
+                icon: "🛸",
+                q: "Misión 16: Hay 18 villanos en la nave, logramos capturar a 7. ¿Cuántos faltan por atrapar?",
+                a: "11 villanos",
+                opts: ["11 villanos", "12 villanos", "10 villanos", "9 villanos"]
+            },
+            {
+                icon: "🔋",
+                q: "Misión 17: La superheroína 'Chispa' necesita 20 baterías para volar, pero solo tiene 12. ¿Cuántas baterías le faltan?",
+                a: "8 baterías",
+                opts: ["8 baterías", "7 baterías", "9 baterías", "10 baterías"]
+            },
+            {
+                icon: "👕",
+                q: "Misión 18: En la base hay 17 capas de súper-vuelo, pero se rompen 8 en una misión. ¿Cuántas capas quedan sirviendo?",
+                a: "9 capas",
+                opts: ["9 capas", "8 capas", "10 capas", "7 capas"]
             },
 
             // Fase 5: Jefes Finales
             {
                 icon: "☠️",
-                q: "Misión 19 (Sub-Jefe): Tienes 20 monedas y gastas 5. ¿Cuántas monedas te sobran?",
-                a: "15 monedas",
-                opts: ["15 monedas", "10 monedas", "5 monedas", "25 monedas"]
+                q: "Misión 19 (Sub-Jefe): ¡Cuidado! Un portal mágico absorbe 9 de tus 19 escudos de energía. ¿Cuántos escudos te quedan?",
+                a: "10 escudos",
+                opts: ["10 escudos", "9 escudos", "11 escudos", "8 escudos"]
             },
             {
                 icon: "👑",
-                q: "Misión 20 (Jefe Final): ¡El ataque definitivo de Resta-Fácil! ¿Cuál es el resultado de <span class='big-math'>15 - 6</span>?",
-                a: "9",
-                opts: ["9", "8", "11", "7"]
+                q: "Misión 20 (Jefe Final): ¡El ataque definitivo para vencer a Resta-Fácil! ¿Cuál es el resultado exacto de <br><span class='big-math'>20 - 13</span>?",
+                a: "7",
+                opts: ["7", "8", "6", "13"]
             }
         ];
 
