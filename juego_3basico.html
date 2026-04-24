@@ -2,569 +2,432 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>🦇 ESCAPE ROOM: BATMAN · RESTA CON CANJE 🦇</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Escape Room: Rescate Matemático!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Poppins', 'Comic Neue', system-ui, sans-serif;
-        }
-
         body {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            font-family: 'Comic Neue', cursive;
+            background-color: #2e0b1a;
+            /* Patrón de puntos estilo cómic clásico (Halftone) */
+            background-image: radial-gradient(#9d4edd 15%, transparent 16%), radial-gradient(#9d4edd 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            overflow-x: hidden;
             min-height: 100vh;
-            padding: 1.5rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
         }
 
-        /* Efecto murciélago */
-        body::before {
-            content: "🦇";
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            font-size: 80px;
-            opacity: 0.08;
-            pointer-events: none;
-        }
-
-        .escape-container {
-            max-width: 1100px;
-            width: 100%;
-            background: #0f0f1add;
-            backdrop-filter: blur(4px);
-            border-radius: 2rem;
-            border: 2px solid #f5c518;
-            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5), 0 0 0 4px #2a2a2a, 0 0 0 8px #f5c51855;
-            overflow: hidden;
-            padding: 1.5rem 2rem 2rem;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #f5c518;
-            padding-bottom: 0.6rem;
-        }
-        h1 {
-            font-size: 1.8rem;
-            background: linear-gradient(135deg, #f5c518, #ffdd66);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 10px #f5c51880;
-            font-family: 'Impact', 'Segoe UI', sans-serif;
+        h1, h2, h3, .comic-title {
+            font-family: 'Bangers', display;
             letter-spacing: 2px;
         }
-        .sub {
-            font-size: 0.7rem;
-            background: #2a2a3a;
-            display: inline-block;
-            padding: 0.2rem 1.2rem;
-            border-radius: 40px;
-            color: #f5c518;
-            font-weight: bold;
-            border: 1px solid #f5c518;
-        }
 
-        .objetivo-box {
-            background: #1a1a2ecc;
-            border-left: 6px solid #f5c518;
-            border-radius: 1rem;
-            padding: 0.7rem 1.2rem;
-            margin: 0.5rem 0 1.2rem 0;
-        }
-        .objetivo-box h3 {
-            font-size: 0.95rem;
-            color: #f5c518;
-        }
-        .objetivo-texto {
-            font-size: 0.8rem;
-            color: #ccccdd;
-            background: #0a0a15;
-            padding: 0.5rem 0.8rem;
-            border-radius: 0.8rem;
-        }
-
-        .status-panel {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-            background: #1a1a2e;
-            padding: 0.5rem 1.2rem;
-            border-radius: 3rem;
-            margin-bottom: 1.5rem;
-            align-items: center;
-            border: 1px solid #f5c518;
-        }
-        .sellos {
-            font-weight: bold;
-            background: #2a2a3a;
-            padding: 0.2rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.9rem;
-            color: #f5c518;
-            font-family: monospace;
-        }
-        .energy-bar {
-            flex: 1;
-            max-width: 250px;
-            height: 10px;
-            background: #2a2a3a;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid #f5c518;
-        }
-        .energy-fill {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, #f5c518, #ffdd66);
-            border-radius: 20px;
-            transition: width 0.4s ease;
-        }
-        .fase-actual {
-            background: #2a2a3a;
-            padding: 0.2rem 1rem;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.75rem;
-            color: #f5c518;
-            border: 1px solid #f5c518;
-        }
-
-        .phases-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-        .phase-card {
-            background: #0f0f1fdd;
-            border-radius: 1.2rem;
-            border: 1px solid #f5c518;
-            overflow: hidden;
-        }
-        .phase-header {
-            background: #1a1a2f;
-            padding: 0.5rem 1.2rem;
-            font-size: 1rem;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 2px solid #f5c518;
-            color: #ffdd88;
-        }
-        .grade {
-            font-size: 0.65rem;
-            background: #2a2a3a;
-            padding: 0.2rem 0.6rem;
-            border-radius: 30px;
-            color: #f5c518;
-        }
-        .phase-content {
-            padding: 1rem;
-        }
-        .exercise-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.7rem;
-        }
-        .exercise-item {
-            background: #0a0a18aa;
-            padding: 0.7rem;
-            border-radius: 1rem;
-            border-left: 4px solid #f5c518;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .problem-text {
-            font-weight: 500;
-            font-size: 0.9rem;
-            color: #e0e0ff;
-            flex: 2;
-            min-width: 160px;
-        }
-        .answer-area {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            align-items: center;
-            flex: 1;
-            justify-content: flex-end;
-        }
-        .answer-select {
-            background: #1a1a2a;
-            border: 2px solid #f5c518;
-            padding: 0.4rem 0.6rem;
-            border-radius: 2rem;
-            color: #ffdd99;
-            font-size: 0.8rem;
-            width: 100px;
-            text-align: center;
-            cursor: pointer;
-        }
-        .btn-submit {
-            background: #f5c518;
-            border: none;
-            padding: 0.4rem 1rem;
-            border-radius: 2rem;
-            font-weight: bold;
-            color: #1a1a2a;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 0.7rem;
-        }
-        .btn-submit:hover {
-            background: #ffdd66;
-            transform: scale(1.02);
-        }
-        .feedback {
-            font-size: 0.7rem;
-            font-weight: bold;
-            min-width: 70px;
-        }
-        .locked {
-            opacity: 0.6;
-            pointer-events: none;
+        .comic-panel {
+            background-color: #ffffff;
+            border: 4px solid #000;
+            box-shadow: 8px 8px 0px 0px #000;
+            border-radius: 10px;
             position: relative;
         }
-        .locked::after {
-            content: "🔒 BLOQUEADO · COMPLETA LA FASE ANTERIOR 🔒";
+
+        .comic-button {
+            font-family: 'Chewy', display;
+            letter-spacing: 1px;
+            transition: all 0.15s ease;
+            box-shadow: 4px 4px 0px 0px #000;
+        }
+
+        .comic-button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px 0px #000;
+        }
+
+        .comic-button:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px 0px #000;
+        }
+
+        /* Efectos Visuales (¡POW!, ¡BAM!) */
+        .pow-effect {
             position: absolute;
-            top: 45%;
-            left: 20%;
-            background: #000000cc;
-            padding: 0.2rem 0.8rem;
-            border-radius: 2rem;
-            font-size: 0.6rem;
-            font-weight: bold;
-            color: #f5c518;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: #ffea00;
+            color: #d90429;
+            padding: 2rem 4rem;
+            font-size: 4.5rem;
+            font-family: 'Bangers', display;
+            border: 5px solid #000;
+            border-radius: 50%;
+            box-shadow: 0 0 0 8px #ff0000, 0 0 0 13px #000;
+            z-index: 50;
+            opacity: 0;
             pointer-events: none;
-            white-space: nowrap;
-            border: 1px solid #f5c518;
-        }
-        .final-message {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
             text-align: center;
-            background: #1a1a2e;
-            padding: 1rem;
-            border-radius: 1.5rem;
-            margin-top: 1rem;
-            border: 2px solid #f5c518;
-            color: #ffdd99;
         }
-        .success-feedback { color: #88ff88; }
-        .fail-feedback { color: #ff8888; }
-        @media (max-width: 700px) {
-            .escape-container { padding: 1rem; }
-            .locked::after { white-space: normal; font-size: 0.55rem; left: 10%; right:10%; top: 35%; text-align: center; }
-            .exercise-item { flex-direction: column; align-items: stretch; }
-            .answer-area { justify-content: flex-start; }
-            .answer-select { width: 100%; }
+
+        .pow-effect.active {
+            transform: translate(-50%, -50%) scale(1) rotate(-10deg);
+            opacity: 1;
+        }
+
+        /* Estilo personalizado para el Menú Desplegable */
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.5rem top 50%;
+            background-size: 1rem auto;
+        }
+
+        /* Resaltar números grandes */
+        .big-math {
+            font-family: 'Bangers', display;
+            font-size: 2.5rem;
+            color: #d90429;
+            text-shadow: 2px 2px 0px #000;
+            letter-spacing: 4px;
         }
     </style>
 </head>
-<body>
-<div class="escape-container" id="app">
-    <div class="header">
-        <h1>🦇 ESCAPE ROOM: BATMAN · RESTA CON CANJE 🦇</h1>
-        <div class="sub">✦ DOMINA LAS SUSTRACCIONES HASTA LA DECENA · 3° BÁSICO ✦</div>
+<body class="text-gray-900 flex flex-col items-center justify-center p-4">
+
+    <div class="max-w-3xl w-full mt-4">
+        
+        <!-- Cabecera y Objetivo de Aprendizaje -->
+        <header class="mb-8 text-center">
+            <div class="inline-block bg-yellow-400 border-4 border-black px-6 py-2 rounded-xl transform -rotate-2 shadow-[6px_6px_0px_0px_#000] mb-6">
+                <h1 class="text-4xl md:text-5xl text-red-600 drop-shadow-md">¡RESCATE MATEMÁTICO!</h1>
+                <h2 class="text-2xl text-purple-900">Misión: El Poder del Canje</h2>
+            </div>
+            
+            <div class="comic-panel bg-red-600 text-white p-4 mx-auto max-w-2xl transform rotate-1">
+                <h3 class="text-2xl text-yellow-300 mb-1">🎯 Objetivo de la Misión (3° Básico)</h3>
+                <p class="text-base md:text-lg font-bold">
+                    Aplicar el algoritmo de la sustracción (resta) con canje para resolver operaciones hasta el número 20. ¡Identifica cuándo necesitas pedir prestado a la decena y calcula como un héroe!
+                </p>
+            </div>
+        </header>
+
+        <!-- Contenedor Principal del Juego -->
+        <main id="game-container" class="comic-panel bg-white p-6 md:p-8 mb-10 relative">
+            
+            <!-- Efecto de feedback visual estilo cómic -->
+            <div id="pow-message" class="pow-effect">¡ZAP!</div>
+
+            <!-- Pantalla de Inicio -->
+            <div id="start-screen" class="text-center">
+                <div class="text-7xl mb-4 animate-bounce">🦹‍♂️🦸‍♀️</div>
+                <h2 class="text-4xl comic-title text-blue-700 mb-4">¡El Villano "Resta-Fácil" ataca!</h2>
+                <p class="text-xl mb-8 font-bold text-gray-700 leading-relaxed">
+                    Resta-Fácil ha bloqueado las bóvedas de la ciudad. Para abrirlas, debes resolver <span class="text-red-600 font-extrabold">20 acertijos de restas con canje</span> (pidiendo prestado a la decena). <br><br>
+                    ¿Estás listo para usar tu superpoder matemático?
+                </p>
+                <button onclick="startGame()" class="comic-button bg-blue-600 text-white text-3xl py-4 px-10 rounded-full border-4 border-black">
+                    ¡COMENZAR EL RESCATE!
+                </button>
+            </div>
+
+            <!-- Pantalla del Juego -->
+            <div id="quiz-screen" class="hidden">
+                <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-3">
+                    <span class="comic-title text-2xl text-purple-700" id="level-indicator">Nivel: 1/20</span>
+                    <div class="w-full sm:w-1/2 bg-gray-200 border-4 border-black rounded-full h-6 relative overflow-hidden shadow-inner">
+                        <div id="progress-bar" class="bg-gradient-to-r from-yellow-400 to-red-500 h-full w-0 transition-all duration-500"></div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 border-4 border-blue-500 rounded-xl p-6 mb-8 transform shadow-inner relative">
+                    <div id="category-icon" class="absolute -top-5 -left-5 text-4xl bg-white rounded-full p-2 border-4 border-black shadow-[4px_4px_0px_0px_#000]">🤔</div>
+                    <p id="question-text" class="text-2xl md:text-3xl font-bold text-center text-gray-800 leading-snug"></p>
+                </div>
+
+                <div class="flex flex-col items-center w-full max-w-lg mx-auto">
+                    <label for="answer-select" class="comic-title text-2xl text-red-600 mb-2 block w-full text-left">Elige tu respuesta heroica:</label>
+                    <select id="answer-select" class="w-full border-4 border-black text-2xl font-bold rounded-xl p-4 bg-yellow-100 focus:outline-none focus:ring-4 focus:ring-purple-400 mb-6 cursor-pointer text-gray-800 shadow-[4px_4px_0px_0px_#000]">
+                        <option value="" disabled selected>Abre las opciones...</option>
+                        <!-- Las opciones se generarán dinámicamente -->
+                    </select>
+
+                    <button id="submit-btn" onclick="checkAnswer()" class="comic-button bg-purple-600 text-white text-3xl py-3 px-8 rounded-xl border-4 border-black w-full text-center">
+                        ¡USAR PODER! ⚡
+                    </button>
+                    <p id="error-msg" class="text-red-600 font-bold text-xl mt-4 hidden bg-red-100 p-2 rounded border-2 border-red-500">¡Ups! Debes seleccionar una respuesta primero.</p>
+                </div>
+            </div>
+
+            <!-- Pantalla Final -->
+            <div id="end-screen" class="hidden text-center">
+                <div class="text-8xl mb-4">🏅✨</div>
+                <h2 class="text-5xl comic-title text-yellow-500 drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] mb-6">¡MISIÓN SUPERADA!</h2>
+                <p class="text-2xl mb-8 font-bold text-gray-800">
+                    ¡Increíble! Has dominado el poder del canje y derrotado al villano Resta-Fácil. La ciudad está a salvo gracias a tus habilidades matemáticas.
+                </p>
+                <button onclick="location.reload()" class="comic-button bg-green-500 text-white text-3xl py-4 px-10 rounded-full border-4 border-black">
+                    JUGAR DE NUEVO
+                </button>
+            </div>
+            
+        </main>
     </div>
 
-    <div class="objetivo-box">
-        <h3>🎯 OBJETIVO DE LA MISIÓN</h3>
-        <div class="objetivo-texto">
-            Aplicar el algoritmo de la sustracción con canje para resolver restas de números hasta 20, identificando cuándo es necesario canjear y calculando correctamente.
-        </div>
-    </div>
+    <script>
+        // --- BASE DE DATOS DE PREGUNTAS (20 Retos Progresivos) ---
+        // Foco: Identificar la necesidad de canje y aplicar sustracción hasta 20.
+        const questions = [
+            // Fase 1: Identificación (¿Necesito canje?)
+            {
+                icon: "👁️",
+                q: "Misión 1: Mira esta resta: <span class='big-math'>18 - 5</span>. El 8 es mayor que el 5. ¿Necesitas hacer canje (pedir prestado)?",
+                a: "No, porque a 8 sí le puedo quitar 5.",
+                opts: ["No, porque a 8 sí le puedo quitar 5.", "Sí, siempre hay que pedir prestado.", "No se puede resolver."]
+            },
+            {
+                icon: "🕵️",
+                q: "Misión 2: Ahora mira esta: <span class='big-math'>13 - 6</span>. A 3 no le puedo quitar 6. ¿Necesitas hacer canje?",
+                a: "Sí, la unidad le pide a la decena.",
+                opts: ["Sí, la unidad le pide a la decena.", "No, solo resto 6 menos 3.", "No, el 3 se queda igual."]
+            },
+            {
+                icon: "🔍",
+                q: "Misión 3: En la resta <span class='big-math'>15 - 8</span>, ¿por qué necesitamos hacer canje?",
+                a: "Porque 5 es menor que 8.",
+                opts: ["Porque 5 es menor que 8.", "Porque el 15 es muy grande.", "Porque el 8 es par."]
+            },
+            {
+                icon: "🛡️",
+                q: "Misión 4: ¿Cuál de estas restas SÍ necesita canje para resolverse?",
+                a: "12 - 5",
+                opts: ["12 - 5", "16 - 4", "19 - 8"]
+            },
+            
+            // Fase 2: Aplicando el algoritmo (Cálculos directos)
+            {
+                icon: "🧮",
+                q: "Misión 5: ¡Aplica tu poder! Resuelve: <span class='big-math'>11 - 4</span>",
+                a: "7",
+                opts: ["7", "8", "6", "5"]
+            },
+            {
+                icon: "🧮",
+                q: "Misión 6: El canje te ayuda. Resuelve: <span class='big-math'>12 - 7</span>",
+                a: "5",
+                opts: ["5", "6", "4", "7"]
+            },
+            {
+                icon: "🧮",
+                q: "Misión 7: Usa tu mente rápida: <span class='big-math'>14 - 6</span>",
+                a: "8",
+                opts: ["8", "7", "9", "6"]
+            },
+            {
+                icon: "🧮",
+                q: "Misión 8: ¡Fuerza matemática! Resuelve: <span class='big-math'>16 - 9</span>",
+                a: "7",
+                opts: ["7", "6", "8", "9"]
+            },
+            {
+                icon: "🧮",
+                q: "Misión 9: No te rindas: <span class='big-math'>15 - 7</span>",
+                a: "8",
+                opts: ["8", "7", "6", "9"]
+            },
 
-    <div class="status-panel">
-        <div class="sellos">🦇 SELLOS BAT: <span id="sellos-count">0</span> / <span id="total-ejercicios">15</span></div>
-        <div class="energy-bar"><div class="energy-fill" id="energy-fill"></div></div>
-        <div class="fase-actual" id="fase-actual-txt">🦇 FASE 1 · ENTRENAMIENTO</div>
-    </div>
+            // Fase 3: Problemas rutinarios (Aplicación)
+            {
+                icon: "🦸‍♂️",
+                q: "Misión 10: Tienes 13 escudos de energía, pero el villano destruye 5. ¿Cuántos te quedan? (Pista: 13 - 5)",
+                a: "8 escudos",
+                opts: ["8 escudos", "7 escudos", "9 escudos", "6 escudos"]
+            },
+            {
+                icon: "🔋",
+                q: "Misión 11: La superheroína 'Chispa' tiene 11 baterías. Usa 8 para salvar un tren. ¿Cuántas le sobran?",
+                a: "3 baterías",
+                opts: ["3 baterías", "4 baterías", "2 baterías", "5 baterías"]
+            },
+            {
+                icon: "🛸",
+                q: "Misión 12: Hay 15 platillos voladores. Tú derribas 6. ¿Cuántos faltan por atrapar?",
+                a: "9 platillos",
+                opts: ["9 platillos", "8 platillos", "7 platillos", "10 platillos"]
+            },
+            {
+                icon: "👕",
+                q: "Misión 13: El equipo necesita 14 súper-trajes. Solo hay 8 en el armario. ¿Cuántos trajes faltan por fabricar?",
+                a: "6 trajes",
+                opts: ["6 trajes", "5 trajes", "7 trajes", "8 trajes"]
+            },
+            {
+                icon: "🦸‍♀️",
+                q: "Misión 14: En la base secreta hay 12 héroes. 4 salen en una misión. ¿Cuántos se quedan en la base?",
+                a: "8 héroes",
+                opts: ["8 héroes", "7 héroes", "9 héroes", "6 héroes"]
+            },
 
-    <div class="phases-grid" id="phases-container"></div>
-</div>
+            // Fase 4: Entendiendo el mecanismo del canje
+            {
+                icon: "⚙️",
+                q: "Misión 15: Al restar <span class='big-math'>13 - 6</span>, el 3 le pide prestada 1 decena (10) al vecino. ¿En qué número se convierte el 3?",
+                a: "En 13",
+                opts: ["En 13", "En 4", "En 30"]
+            },
+            {
+                icon: "⚙️",
+                q: "Misión 16: Al restar <span class='big-math'>15 - 8</span>, la decena prestó su valor. ¿Cuántas decenas quedan en la columna de las decenas?",
+                a: "Quedan 0 decenas",
+                opts: ["Quedan 0 decenas", "Quedan 2 decenas", "Queda 1 decena"]
+            },
+            {
+                icon: "🧠",
+                q: "Misión 17: Piensa en el canje y resuelve: <span class='big-math'>18 - 9</span>",
+                a: "9",
+                opts: ["9", "8", "7", "10"]
+            },
+            {
+                icon: "🧠",
+                q: "Misión 18: Rompe el candado resolviendo: <span class='big-math'>17 - 8</span>",
+                a: "9",
+                opts: ["9", "8", "10", "7"]
+            },
 
-<script>
-    // ============================================================
-    // GUÍA: Resta con canje (3° básico) - 15 preguntas
-    // Respuestas según pauta de corrección (clave)
-    // Temática: Batman
-    // ============================================================
-    const phasesData = [
-        {
-            name: "🦇 FASE 1: EL ACERTIJO DEL GUASÓN",
-            grade: "Restas básicas",
-            exercises: [
-                { id: 1, text: "1) ¿Cuál es el resultado de 14 - 6?", options: ["7", "8", "9", "6"], answer: "8", answerLetter: "B" },
-                { id: 2, text: "2) Calcula 13 - 9 usando canje si es necesario.", options: ["2", "3", "4", "5"], answer: "4", answerLetter: "C" },
-                { id: 3, text: "3) ¿Cuál resta requiere canje?", options: ["20 - 3", "15 - 7", "12 - 2", "10 - 5"], answer: "15 - 7", answerLetter: "B" },
-                { id: 4, text: "4) Resuelve: 17 - 8.", options: ["8", "9", "10", "7"], answer: "9", answerLetter: "B" },
-                { id: 5, text: "5) Si tienes 16 manzanas y regalas 9, ¿cuántas quedan?", options: ["6", "7", "8", "9"], answer: "7", answerLetter: "B" }
-            ]
-        },
-        {
-            name: "🦇 FASE 2: LA BATICUEVA",
-            grade: "Cálculos y problemas",
-            exercises: [
-                { id: 6, text: "6) 11 - 4 = ?", options: ["5", "6", "7", "8"], answer: "7", answerLetter: "C" },
-                { id: 7, text: "7) ¿Qué resta da 5 como resultado?", options: ["14 - 9", "13 - 8", "12 - 7", "11 - 6"], answer: "13 - 8", answerLetter: "B" },
-                { id: 8, text: "8) Resuelve: 18 - 9.", options: ["7", "8", "9", "10"], answer: "9", answerLetter: "C" },
-                { id: 9, text: "9) ¿Cuál es 15 - 6?", options: ["8", "9", "10", "7"], answer: "9", answerLetter: "B" },
-                { id: 10, text: "10) María tenía 12 lápices. Perdió 7. ¿Cuántos le quedan?", options: ["4", "5", "6", "7"], answer: "5", answerLetter: "B" }
-            ]
-        },
-        {
-            name: "🦇 FASE 3: EL CABALLERO OSCURO",
-            grade: "Desafíos finales",
-            exercises: [
-                { id: 11, text: "11) Completa: 19 - ___ = 11", options: ["7", "8", "9", "10"], answer: "8", answerLetter: "B" },
-                { id: 12, text: "12) ¿Cuál resta se puede hacer sin canje?", options: ["14 - 7", "13 - 6", "12 - 5", "10 - 4"], answer: "10 - 4", answerLetter: "D" },
-                { id: 13, text: "13) Resuelve: 20 - 11 (ten en cuenta que trabajamos hasta la decena).", options: ["8", "9", "10", "11"], answer: "9", answerLetter: "C" },
-                { id: 14, text: "14) Juan tenía 17 gomas y dio 8. ¿Cuántas gomas le quedan?", options: ["8", "9", "10", "7"], answer: "9", answerLetter: "B" },
-                { id: 15, text: "15) ¿Cuál es la diferencia de 16 - 7?", options: ["7", "8", "9", "10"], answer: "9", answerLetter: "C" }
-            ]
+            // Fase 5: Jefes Finales
+            {
+                icon: "☠️",
+                q: "Misión 19 (Sub-Jefe): ¡Cuidado! Tienes 14 monedas y gastas 7 en pociones. ¿Cuántas monedas te sobran?",
+                a: "7 monedas",
+                opts: ["7 monedas", "6 monedas", "8 monedas", "9 monedas"]
+            },
+            {
+                icon: "👑",
+                q: "Misión 20 (Jefe Final): ¡El ataque definitivo de Resta-Fácil! ¿Cuál es el resultado de <span class='big-math'>13 - 4</span>?",
+                a: "9",
+                opts: ["9", "8", "10", "7"]
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let isProcessing = false;
+
+        // --- FUNCIONES DEL JUEGO ---
+
+        function startGame() {
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            currentQuestionIndex = 0;
+            loadQuestion();
         }
-    ];
 
-    let gameState = { phases: [] };
+        // Algoritmo Fisher-Yates para barajar las alternativas
+        function shuffleArray(array) {
+            let shuffled = array.slice();
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
 
-    function initState() {
-        for (let i = 0; i < phasesData.length; i++) {
-            gameState.phases.push({
-                unlocked: i === 0,
-                exerciseStatus: new Array(phasesData[i].exercises.length).fill(false)
+        function loadQuestion() {
+            const currentQ = questions[currentQuestionIndex];
+            
+            // Actualizar Interfaz
+            document.getElementById('level-indicator').textContent = `Misión: ${currentQuestionIndex + 1}/20`;
+            document.getElementById('progress-bar').style.width = `${(currentQuestionIndex / questions.length) * 100}%`;
+            
+            document.getElementById('question-text').innerHTML = currentQ.q;
+            document.getElementById('category-icon').textContent = currentQ.icon;
+            
+            document.getElementById('error-msg').classList.add('hidden');
+            
+            const selectElement = document.getElementById('answer-select');
+            selectElement.innerHTML = '<option value="" disabled selected>Abre las opciones...</option>';
+            
+            // Barajar e insertar alternativas
+            const shuffledOptions = shuffleArray(currentQ.opts);
+            shuffledOptions.forEach(opt => {
+                const optionElement = document.createElement('option');
+                optionElement.value = opt;
+                optionElement.textContent = opt;
+                selectElement.appendChild(optionElement);
             });
+            
+            isProcessing = false;
         }
-        updateTotalExercises();
-    }
 
-    function updateTotalExercises() {
-        let total = 0;
-        for (let p of phasesData) total += p.exercises.length;
-        document.getElementById("total-ejercicios").innerText = total;
-    }
+        function showComicEffect(text, bgColor, textColor, rotateDeg) {
+            const effect = document.getElementById('pow-message');
+            effect.textContent = text;
+            effect.style.background = bgColor;
+            effect.style.color = textColor;
+            effect.style.transform = `translate(-50%, -50%) scale(1) rotate(${rotateDeg}deg)`;
+            effect.classList.add('active');
+            
+            setTimeout(() => {
+                effect.classList.remove('active');
+            }, 1200);
+        }
 
-    function getTotalExercises() {
-        let total = 0;
-        for (let p of phasesData) total += p.exercises.length;
-        return total;
-    }
+        function checkAnswer() {
+            if (isProcessing) return; // Previene doble clic
+            
+            const selectElement = document.getElementById('answer-select');
+            const selectedValue = selectElement.value;
+            const errorMsg = document.getElementById('error-msg');
+            const submitBtn = document.getElementById('submit-btn');
 
-    function computeProgress() {
-        let total = getTotalExercises();
-        let completed = 0;
-        for (let i = 0; i < gameState.phases.length; i++) {
-            for (let j = 0; j < gameState.phases[i].exerciseStatus.length; j++) {
-                if (gameState.phases[i].exerciseStatus[j]) completed++;
+            if (!selectedValue) {
+                errorMsg.classList.remove('hidden');
+                return;
             }
-        }
-        return { completed, total };
-    }
+            
+            errorMsg.classList.add('hidden');
+            isProcessing = true;
+            const correctAnswer = questions[currentQuestionIndex].a;
 
-    function mostrarMensaje(msg, colorHex = "#f5c518") {
-        const toast = document.createElement("div");
-        toast.innerText = msg;
-        toast.style.position = "fixed";
-        toast.style.bottom = "20px";
-        toast.style.left = "50%";
-        toast.style.transform = "translateX(-50%)";
-        toast.style.backgroundColor = "#1a1a2e";
-        toast.style.color = "#f5c518";
-        toast.style.padding = "0.5rem 1rem";
-        toast.style.borderRadius = "2rem";
-        toast.style.border = `2px solid ${colorHex}`;
-        toast.style.zIndex = "999";
-        toast.style.fontWeight = "bold";
-        toast.style.fontSize = "0.75rem";
-        document.body.appendChild(toast);
-        setTimeout(() => toast.remove(), 2500);
-    }
-
-    function updateProgressAndUnlock() {
-        const { completed, total } = computeProgress();
-        document.getElementById("sellos-count").innerText = completed;
-        const percent = (completed / total) * 100;
-        document.getElementById("energy-fill").style.width = percent + "%";
-
-        for (let i = 0; i < gameState.phases.length; i++) {
-            const allDone = gameState.phases[i].exerciseStatus.every(v => v === true);
-            if (allDone && i + 1 < gameState.phases.length && !gameState.phases[i + 1].unlocked) {
-                gameState.phases[i + 1].unlocked = true;
-                mostrarMensaje(`🦇 ¡FASE ${i+1} SUPERADA! Desbloqueas: ${phasesData[i+1].name} 🦇`, "#88ff88");
-            }
-        }
-
-        let currentIdx = 0;
-        for (let i = 0; i < gameState.phases.length; i++) {
-            if (!gameState.phases[i].exerciseStatus.every(v=>v===true)) {
-                currentIdx = i;
-                break;
-            }
-            if (i === gameState.phases.length-1) currentIdx = gameState.phases.length-1;
-        }
-        document.getElementById("fase-actual-txt").innerHTML = `🦇 ${phasesData[currentIdx].name}`;
-        renderPhases();
-    }
-
-    function renderPhases() {
-        const container = document.getElementById("phases-container");
-        container.innerHTML = "";
-        for (let idx = 0; idx < phasesData.length; idx++) {
-            const phase = phasesData[idx];
-            const state = gameState.phases[idx];
-            const isUnlocked = state.unlocked;
-            const allCompleted = state.exerciseStatus.every(v => v === true);
-            const phaseCard = document.createElement("div");
-            phaseCard.className = "phase-card";
-            if (!isUnlocked && !allCompleted) phaseCard.classList.add("locked");
-
-            const header = document.createElement("div");
-            header.className = "phase-header";
-            header.innerHTML = `<span>${phase.name}</span><span class="grade">${phase.grade}</span>`;
-            phaseCard.appendChild(header);
-
-            const contentDiv = document.createElement("div");
-            contentDiv.className = "phase-content";
-            const exercisesDiv = document.createElement("div");
-            exercisesDiv.className = "exercise-list";
-
-            phase.exercises.forEach((ex, exIdx) => {
-                const isResolved = state.exerciseStatus[exIdx];
-                const itemDiv = document.createElement("div");
-                itemDiv.className = "exercise-item";
-
-                const problemP = document.createElement("div");
-                problemP.className = "problem-text";
-                problemP.innerHTML = `<span>${ex.text}</span>`;
-                itemDiv.appendChild(problemP);
-
-                const answerDiv = document.createElement("div");
-                answerDiv.className = "answer-area";
-
-                const select = document.createElement("select");
-                select.className = "answer-select";
-                select.disabled = isResolved || !isUnlocked;
+            if (selectedValue === correctAnswer) {
+                // RESPUESTA CORRECTA
+                const successWords = ["¡BAM!", "¡ZAS!", "¡POW!", "¡BOOM!", "¡SÚPER!"];
+                const randomWord = successWords[Math.floor(Math.random() * successWords.length)];
+                const randomRot = Math.floor(Math.random() * 30) - 15; // Rotación aleatoria
                 
-                const defaultOption = document.createElement("option");
-                defaultOption.value = "";
-                defaultOption.textContent = "Selecciona...";
-                defaultOption.disabled = true;
-                defaultOption.selected = true;
-                select.appendChild(defaultOption);
+                showComicEffect(randomWord, "#ffea00", "#d90429", randomRot); // Amarillo/Rojo
                 
-                ex.options.forEach(opt => {
-                    const option = document.createElement("option");
-                    option.value = opt;
-                    option.textContent = opt;
-                    select.appendChild(option);
-                });
+                setTimeout(() => {
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < questions.length) {
+                        loadQuestion();
+                    } else {
+                        finishGame();
+                    }
+                }, 1300);
+
+            } else {
+                // RESPUESTA INCORRECTA
+                showComicEffect("¡OUCH!", "#2b2d42", "#edf2f4", 0); // Oscuro/Blanco
+                selectElement.value = ""; // Limpiar selección para reintento
                 
-                if (isResolved) {
-                    select.value = ex.answer;
-                    select.style.borderColor = "#88ff88";
-                }
-
-                const button = document.createElement("button");
-                button.innerText = isResolved ? "✓" : "🦇 VALIDAR";
-                button.className = "btn-submit";
-                button.disabled = isResolved || !isUnlocked;
-
-                const feedbackSpan = document.createElement("span");
-                feedbackSpan.className = "feedback";
-                if (isResolved) feedbackSpan.innerHTML = "✨ ¡Canje dominado! ✨";
-
-                if (!isResolved && isUnlocked) {
-                    button.addEventListener("click", () => {
-                        const userValue = select.value;
-                        if (!userValue) {
-                            feedbackSpan.innerHTML = "❌ Selecciona una opción";
-                            feedbackSpan.className = "feedback fail-feedback";
-                            return;
-                        }
-                        const isValid = userValue === ex.answer;
-                        
-                        if (isValid) {
-                            state.exerciseStatus[exIdx] = true;
-                            feedbackSpan.innerHTML = "✅ ¡Correcto! +1 sello";
-                            feedbackSpan.className = "feedback success-feedback";
-                            select.disabled = true;
-                            button.disabled = true;
-                            select.style.borderColor = "#88ff88";
-                            updateProgressAndUnlock();
-                            mostrarMensaje("🦇 ¡Excelente! Has dominado esta resta.", "#88ff88");
-                        } else {
-                            feedbackSpan.innerHTML = `❌ Incorrecto. La respuesta es ${ex.answer}`;
-                            feedbackSpan.className = "feedback fail-feedback";
-                            select.style.borderColor = "#ff8888";
-                            setTimeout(() => {
-                                if (!state.exerciseStatus[exIdx]) feedbackSpan.innerHTML = "";
-                                select.style.borderColor = "";
-                            }, 2000);
-                        }
-                    });
-                } else if (!isUnlocked) {
-                    button.disabled = true;
-                    button.innerText = "🔒";
-                    feedbackSpan.innerHTML = "Completa fase anterior";
-                }
-
-                answerDiv.appendChild(select);
-                answerDiv.appendChild(button);
-                answerDiv.appendChild(feedbackSpan);
-                itemDiv.appendChild(answerDiv);
-                exercisesDiv.appendChild(itemDiv);
-            });
-
-            contentDiv.appendChild(exercisesDiv);
-            if (allCompleted && isUnlocked) {
-                const badge = document.createElement("div");
-                badge.style.marginTop = "10px";
-                badge.style.textAlign = "center";
-                badge.innerHTML = "🏆 ¡BAT-FASE COMPLETADA! Continúa tu patrulla 🏆";
-                badge.style.color = "#f5c518";
-                badge.style.fontWeight = "bold";
-                badge.style.background = "#1a1a2e";
-                badge.style.padding = "4px";
-                badge.style.borderRadius = "30px";
-                badge.style.fontSize = "0.7rem";
-                contentDiv.appendChild(badge);
+                submitBtn.classList.remove('bg-purple-600');
+                submitBtn.classList.add('bg-red-600', 'animate-pulse');
+                submitBtn.textContent = "¡CÁLCULO VILLANO! INTENTA DE NUEVO";
+                
+                setTimeout(() => {
+                    submitBtn.classList.remove('bg-red-600', 'animate-pulse');
+                    submitBtn.classList.add('bg-purple-600');
+                    submitBtn.textContent = "¡USAR PODER! ⚡";
+                    isProcessing = false;
+                }, 1500);
             }
-            phaseCard.appendChild(contentDiv);
-            container.appendChild(phaseCard);
         }
 
-        const { completed, total } = computeProgress();
-        if (completed === total && total > 0) {
-            let finalDiv = document.getElementById("victoryBatman");
-            if (!finalDiv) {
-                const victory = document.createElement("div");
-                victory.id = "victoryBatman";
-                victory.className = "final-message";
-                victory.innerHTML = `<h2>🦇 ¡GOTHAM ESTÁ A SALVO! 🦇</h2>
-                <p>✨ ¡Felicidades! Has dominado las restas con canje ✨<br>
-                🚀 Has completado los 15 desafíos del Caballero Oscuro.<br>
-                🦇 El algoritmo de la sustracción con canje ya no tiene secretos para ti. ¡Misión cumplida!</p>`;
-                container.appendChild(victory);
-            }
-        } else {
-            const exist = document.getElementById("victoryBatman");
-            if (exist) exist.remove();
+        function finishGame() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('end-screen').classList.remove('hidden');
+            document.getElementById('progress-bar').style.width = '100%';
         }
-    }
-
-    initState();
-    renderPhases();
-    updateProgressAndUnlock();
-</script>
+    </script>
 </body>
 </html>
