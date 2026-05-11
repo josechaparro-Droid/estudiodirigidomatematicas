@@ -3,430 +3,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Escape Room: Rescate Matemático!</title>
+    <title>Escape Room: El Gatito Chill vs El Dr. Caos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Comic Neue', cursive;
-            background-color: #2e0b1a;
-            /* Patrón de puntos estilo cómic clásico (Halftone) */
-            background-image: radial-gradient(#9d4edd 15%, transparent 16%), radial-gradient(#9d4edd 15%, transparent 16%);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
-            overflow-x: hidden;
+            background-color: #0f172a;
+            background-image: radial-gradient(#3b82f6 10%, transparent 11%), radial-gradient(#3b82f6 10%, transparent 11%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
             min-height: 100vh;
+            color: #1e293b;
         }
 
-        h1, h2, h3, .comic-title {
-            font-family: 'Bangers', display;
-            letter-spacing: 2px;
-        }
+        .comic-title { font-family: 'Bangers', cursive; letter-spacing: 2px; }
+        .chill-font { font-family: 'Chewy', cursive; }
 
         .comic-panel {
-            background-color: #ffffff;
-            border: 4px solid #000;
-            box-shadow: 8px 8px 0px 0px #000;
-            border-radius: 10px;
-            position: relative;
+            background: white;
+            border: 4px solid black;
+            box-shadow: 8px 8px 0px black;
+            transition: transform 0.2s;
         }
 
-        .comic-button {
-            font-family: 'Chewy', display;
+        .btn-action {
+            font-family: 'Bangers', cursive;
             letter-spacing: 1px;
-            transition: all 0.15s ease;
-            box-shadow: 4px 4px 0px 0px #000;
+            border: 3px solid black;
+            box-shadow: 4px 4px 0px black;
+            transition: all 0.1s;
         }
 
-        .comic-button:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px 0px #000;
+        .btn-action:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px black;
         }
 
-        .comic-button:active {
-            transform: translate(4px, 4px);
-            box-shadow: 0px 0px 0px 0px #000;
-        }
-
-        /* Efectos Visuales (¡POW!, ¡BAM!) */
         .pow-effect {
-            position: absolute;
+            position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            background: #ffea00;
-            color: #d90429;
-            padding: 2rem 4rem;
-            font-size: 4.5rem;
-            font-family: 'Bangers', display;
-            border: 5px solid #000;
-            border-radius: 50%;
-            box-shadow: 0 0 0 8px #ff0000, 0 0 0 13px #000;
-            z-index: 50;
-            opacity: 0;
+            z-index: 100;
             pointer-events: none;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
-            text-align: center;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .pow-effect.active {
-            transform: translate(-50%, -50%) scale(1) rotate(-10deg);
-            opacity: 1;
-        }
+        .pow-effect.active { transform: translate(-50%, -50%) scale(1.5); }
 
-        /* Estilo personalizado para el Menú Desplegable */
         select {
             appearance: none;
-            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
-            background-position: right 1.5rem top 50%;
-            background-size: 1rem auto;
-        }
-
-        /* Resaltar números grandes */
-        .big-math {
-            font-family: 'Bangers', display;
-            font-size: 2.5rem;
-            color: #d90429;
-            text-shadow: 2px 2px 0px #000;
-            letter-spacing: 4px;
+            background-position: right 1rem center;
+            background-size: 1.5em;
         }
     </style>
 </head>
-<body class="text-gray-900 flex flex-col items-center justify-center p-4">
+<body class="p-4 md:p-8">
 
-    <div class="max-w-3xl w-full mt-4">
-        
-        <!-- Cabecera y Objetivo de Aprendizaje -->
-        <header class="mb-8 text-center">
-            <div class="inline-block bg-yellow-400 border-4 border-black px-6 py-2 rounded-xl transform -rotate-2 shadow-[6px_6px_0px_0px_#000] mb-6">
-                <h1 class="text-4xl md:text-5xl text-red-600 drop-shadow-md">¡RESCATE MATEMÁTICO!</h1>
-                <h2 class="text-2xl text-purple-900">Misión: El Poder de la Resta</h2>
+    <!-- POPS visuales -->
+    <div id="visual-pop" class="pow-effect comic-title text-6xl text-yellow-400 drop-shadow-[4px_4px_0px_rgba(0,0,0,1)]">¡CHILL!</div>
+
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <div class="inline-block bg-white border-4 border-black p-4 transform -rotate-1 shadow-[8px_8px_0px_#2563eb]">
+                <h1 class="text-4xl md:text-6xl comic-title text-blue-600">GATITO CHILL VS DR. CAOS</h1>
+                <p class="text-xl font-bold mt-2">Misión: Restaurar Ciudad Matemáticas (3° Básico)</p>
             </div>
             
-            <div class="comic-panel bg-red-600 text-white p-4 mx-auto max-w-2xl transform rotate-1">
-                <h3 class="text-2xl text-yellow-300 mb-1">🎯 Objetivo de la Misión (3° Básico)</h3>
-                <p class="text-base md:text-lg font-bold">
-                    Aplicar el algoritmo de la sustracción para resolver restas de números hasta 20, calculando correctamente para derrotar al villano.
-                </p>
+            <div class="mt-6 bg-blue-100 border-2 border-black p-3 rounded-lg max-w-2xl mx-auto">
+                <p class="font-bold text-sm md:text-base">🎯 OBJETIVO: Demostrar comprensión de adición y sustracción hasta el 1.000 usando el poder de la calma.</p>
             </div>
         </header>
 
-        <!-- Contenedor Principal del Juego -->
-        <main id="game-container" class="comic-panel bg-white p-6 md:p-8 mb-10 relative">
-            
-            <!-- Efecto de feedback visual estilo cómic -->
-            <div id="pow-message" class="pow-effect">¡ZAP!</div>
+        <!-- Pantalla de Inicio -->
+        <div id="start-screen" class="comic-panel p-8 text-center space-y-6">
+            <div class="flex justify-center space-x-4 text-6xl mb-4">
+                <span>🐱</span><span>🐢</span><span>🦅</span><span>🐶</span>
+            </div>
+            <h2 class="text-3xl comic-title text-indigo-700">¡ALERTA EN LA TORRE TITÁN!</h2>
+            <p class="text-lg leading-relaxed text-left">
+                El <b>Dr. Caos</b> ha usado su "Rayo Desordenador" y ha bloqueado los suministros de Ciudad Matemáticas. 
+                Los habitantes no pueden comprar pan, los buses no saben cuántos kilómetros recorrer y las cajas fuertes están trabadas.
+            </p>
+            <p class="text-lg leading-relaxed text-left font-bold">
+                El Gatito Chill se ha puesto su hojita de otoño en la cabeza y dice: <span class="text-blue-600">"Todo está chill, amigos. Solo debemos resolver estos 18 acertijos para atrapar al villano en una burbuja de agua".</span>
+            </p>
+            <button onclick="startGame()" class="btn-action bg-yellow-400 hover:bg-yellow-300 text-2xl py-4 px-10 rounded-full w-full md:w-auto">
+                ¡COMENZAR EL RESCATE!
+            </button>
+        </div>
 
-            <!-- Pantalla de Inicio -->
-            <div id="start-screen" class="text-center">
-                <div class="text-7xl mb-4 animate-bounce">🦹‍♂️🦸‍♀️</div>
-                <h2 class="text-4xl comic-title text-blue-700 mb-4">¡El Villano "Resta-Fácil" ataca!</h2>
-                <p class="text-xl mb-8 font-bold text-gray-700 leading-relaxed">
-                    Resta-Fácil ha bloqueado las bóvedas de la ciudad. Para abrirlas, debes resolver <span class="text-red-600 font-extrabold">20 acertijos de restas hasta el número 20</span> calculando con precisión. <br><br>
-                    ¿Estás listo para usar tu superpoder matemático?
-                </p>
-                <button onclick="startGame()" class="comic-button bg-blue-600 text-white text-3xl py-4 px-10 rounded-full border-4 border-black">
-                    ¡COMENZAR EL RESCATE!
-                </button>
+        <!-- Pantalla de Juego -->
+        <div id="game-screen" class="hidden space-y-6">
+            <div class="flex justify-between items-center bg-white border-4 border-black p-4 shadow-[4px_4px_0px_black]">
+                <div class="comic-title text-2xl" id="level-display">RETO: 1 / 18</div>
+                <div class="w-1/2 bg-gray-200 h-6 border-2 border-black rounded-full overflow-hidden">
+                    <div id="progress-bar" class="bg-blue-500 h-full transition-all duration-500" style="width: 0%"></div>
+                </div>
             </div>
 
-            <!-- Pantalla del Juego -->
-            <div id="quiz-screen" class="hidden">
-                <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-3">
-                    <span class="comic-title text-2xl text-purple-700" id="level-indicator">Nivel: 1/20</span>
-                    <div class="w-full sm:w-1/2 bg-gray-200 border-4 border-black rounded-full h-6 relative overflow-hidden shadow-inner">
-                        <div id="progress-bar" class="bg-gradient-to-r from-yellow-400 to-red-500 h-full w-0 transition-all duration-500"></div>
+            <div class="comic-panel p-6 md:p-10 relative overflow-hidden">
+                <div id="character-overlay" class="absolute top-2 right-2 text-5xl opacity-20">🐱</div>
+                
+                <div id="narrative-text" class="italic text-blue-700 font-bold mb-4 border-b-2 border-blue-100 pb-2"></div>
+                
+                <div id="question-content" class="space-y-6">
+                    <h3 id="question-text" class="text-2xl font-bold leading-tight text-gray-800"></h3>
+                    
+                    <div id="math-visual" class="bg-gray-50 p-4 border-2 border-dashed border-gray-400 rounded-lg text-center font-mono text-3xl hidden">
+                        <!-- Espacio para operaciones verticales si fuera necesario -->
                     </div>
-                </div>
 
-                <div class="bg-blue-50 border-4 border-blue-500 rounded-xl p-6 mb-8 transform shadow-inner relative">
-                    <div id="category-icon" class="absolute -top-5 -left-5 text-4xl bg-white rounded-full p-2 border-4 border-black shadow-[4px_4px_0px_0px_#000]">🤔</div>
-                    <p id="question-text" class="text-2xl md:text-3xl font-bold text-center text-gray-800 leading-snug"></p>
-                </div>
+                    <div class="space-y-4">
+                        <label class="block font-bold text-lg text-indigo-900">Tu respuesta titán:</label>
+                        <select id="answer-select" class="w-full p-4 border-4 border-black text-xl font-bold bg-yellow-50 focus:ring-4 focus:ring-blue-400 outline-none">
+                            <option value="" disabled selected>-- Elige con calma --</option>
+                        </select>
+                    </div>
 
-                <div class="flex flex-col items-center w-full max-w-lg mx-auto">
-                    <label for="answer-select" class="comic-title text-2xl text-red-600 mb-2 block w-full text-left">Elige tu respuesta heroica:</label>
-                    <select id="answer-select" class="w-full border-4 border-black text-2xl font-bold rounded-xl p-4 bg-yellow-100 focus:outline-none focus:ring-4 focus:ring-purple-400 mb-6 cursor-pointer text-gray-800 shadow-[4px_4px_0px_0px_#000]">
-                        <option value="" disabled selected>Abre las opciones...</option>
-                        <!-- Las opciones se generarán dinámicamente -->
-                    </select>
-
-                    <button id="submit-btn" onclick="checkAnswer()" class="comic-button bg-purple-600 text-white text-3xl py-3 px-8 rounded-xl border-4 border-black w-full text-center">
-                        ¡USAR PODER! ⚡
+                    <button onclick="checkAnswer()" class="btn-action bg-blue-600 text-white text-2xl py-4 px-8 rounded-lg w-full">
+                        ¡EJECUTAR ACCIÓN! ⚡
                     </button>
-                    <p id="error-msg" class="text-red-600 font-bold text-xl mt-4 hidden bg-red-100 p-2 rounded border-2 border-red-500">¡Ups! Debes seleccionar una respuesta primero.</p>
                 </div>
             </div>
+        </div>
 
-            <!-- Pantalla Final -->
-            <div id="end-screen" class="hidden text-center">
-                <div class="text-8xl mb-4">🏅✨</div>
-                <h2 class="text-5xl comic-title text-yellow-500 drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] mb-6">¡MISIÓN SUPERADA!</h2>
-                <p class="text-2xl mb-8 font-bold text-gray-800">
-                    ¡Increíble! Has calculado como un verdadero héroe y derrotado al villano Resta-Fácil. La ciudad está a salvo gracias a tus habilidades matemáticas.
-                </p>
-                <button onclick="location.reload()" class="comic-button bg-green-500 text-white text-3xl py-4 px-10 rounded-full border-4 border-black">
-                    JUGAR DE NUEVO
-                </button>
+        <!-- Pantalla Final -->
+        <div id="end-screen" class="hidden comic-panel p-10 text-center space-y-6">
+            <h2 class="text-6xl comic-title text-blue-600">¡CIUDAD SALVADA!</h2>
+            <div class="text-9xl">🫧🐱🫧</div>
+            <p class="text-2xl font-bold">
+                El Dr. Caos está atrapado en la burbuja gigante de agua pura del Gatito Chill.
+            </p>
+            <p class="text-xl">
+                —"¡Está bien, estudiaré mis reservas y canjes!" —gritó el villano mientras flotaba hacia la fuente.
+            </p>
+            <div class="bg-yellow-100 p-6 border-4 border-black rounded-xl inline-block">
+                <p class="text-lg">Has demostrado que la calma y las matemáticas son el mejor superpoder.</p>
             </div>
-            
-        </main>
+            <button onclick="location.reload()" class="btn-action bg-green-500 text-white text-2xl py-4 px-10 rounded-full">
+                REINICIAR MISIÓN
+            </button>
+        </div>
     </div>
 
     <script>
-        // --- BASE DE DATOS DE PREGUNTAS (20 Retos Progresivos) ---
-        // Foco: Resolver correctamente restas de números hasta el 20.
-        const questions = [
-            // Fase 1: Cálculos iniciales (restas directas sin cruzar la decena)
+        const gameData = [
             {
-                icon: "👁️",
-                q: "Misión 1: Inicia el calentamiento calculando: <br><span class='big-math'>15 - 4</span>",
-                a: "11",
-                opts: ["11", "10", "12", "9"]
+                n: "Gatito Chill está organizando los nenúfares de la fuente.",
+                q: "¿Cuál es el resultado de la suma: 345 + 123?",
+                a: "468",
+                o: ["468", "462", "478", "568"]
             },
             {
-                icon: "🎯",
-                q: "Misión 2: Apunta bien y calcula: <br><span class='big-math'>18 - 5</span>",
-                a: "13",
-                opts: ["13", "14", "12", "15"]
+                n: "Rayo Veloz necesita saber cuánta energía le queda.",
+                q: "Calcula la diferencia: 876 - 452",
+                a: "424",
+                o: ["424", "420", "414", "1328"]
             },
             {
-                icon: "🛡️",
-                q: "Misión 3: Rompe este escudo matemático: <br><span class='big-math'>19 - 7</span>",
-                a: "12",
-                opts: ["12", "11", "13", "10"]
+                n: "Mente Brillante está desbloqueando un código con reserva.",
+                q: "Resuelve la adición con reserva: 567 + 284",
+                a: "851",
+                o: ["851", "751", "841", "852"]
             },
             {
-                icon: "⚡",
-                q: "Misión 4: Velocidad de rayo para resolver: <br><span class='big-math'>16 - 2</span>",
-                a: "14",
-                opts: ["14", "13", "15", "12"]
-            },
-            
-            // Fase 2: Cruzando la decena
-            {
-                icon: "🧮",
-                q: "Misión 5: ¡Aumenta la dificultad! Calcula: <br><span class='big-math'>12 - 5</span>",
-                a: "7",
-                opts: ["7", "6", "8", "5"]
+                n: "Fuerza Pluma está moviendo cajas pesadas.",
+                q: "Resuelve la sustracción con canje: 432 - 158",
+                a: "274",
+                o: ["274", "374", "284", "326"]
             },
             {
-                icon: "🧮",
-                q: "Misión 6: Usa tu poder mental: <br><span class='big-math'>14 - 6</span>",
-                a: "8",
-                opts: ["8", "7", "9", "6"]
+                n: "El Dr. Caos intentó sumar y falló. Ayuda a la Legión.",
+                q: "¿Cuánto es 709 + 195?",
+                a: "904",
+                o: ["904", "894", "903", "1004"]
             },
             {
-                icon: "🧮",
-                q: "Misión 7: Resuelve rápidamente: <br><span class='big-math'>15 - 8</span>",
-                a: "7",
-                opts: ["7", "8", "6", "5"]
+                n: "Mente Brillante dice: '¡Cuidado con los ceros!'",
+                q: "Resuelve: 600 - 345",
+                a: "255",
+                o: ["255", "355", "265", "345"]
             },
             {
-                icon: "🧮",
-                q: "Misión 8: Usa tu fuerza matemática: <br><span class='big-math'>11 - 4</span>",
-                a: "7",
-                opts: ["7", "6", "8", "5"]
+                n: "Rayo Veloz recorrió un tramo de 234 metros y luego otro de 567 metros.",
+                q: "¿Cuántos metros recorrió en total?",
+                a: "801 m",
+                o: ["801 m", "791 m", "811 m", "701 m"]
             },
             {
-                icon: "🧮",
-                q: "Misión 9: Piensa bien: <br><span class='big-math'>13 - 7</span>",
-                a: "6",
-                opts: ["6", "7", "5", "8"]
-            },
-
-            // Fase 3: Agilidad mental y números cercanos a 20
-            {
-                icon: "🧠",
-                q: "Misión 10: ¡Calcula desde el límite! <br><span class='big-math'>20 - 9</span>",
-                a: "11",
-                opts: ["11", "10", "12", "9"]
+                n: "Fuerza Pluma tenía 900 semillas y regaló 456 a los pájaros de la plaza.",
+                q: "¿Cuántas semillas le quedan?",
+                a: "444",
+                o: ["444", "544", "454", "500"]
             },
             {
-                icon: "🧠",
-                q: "Misión 11: Destruye el campo de fuerza: <br><span class='big-math'>17 - 8</span>",
-                a: "9",
-                opts: ["9", "8", "10", "7"]
+                n: "La escuela de Ciudad Matemáticas recibió 450 libros de cuentos y 380 de ciencias.",
+                q: "¿Cuántos libros recibió en total?",
+                a: "830",
+                o: ["830", "730", "820", "840"]
             },
             {
-                icon: "🧠",
-                q: "Misión 12: No dejes que el villano escape: <br><span class='big-math'>16 - 9</span>",
-                a: "7",
-                opts: ["7", "6", "8", "9"]
+                n: "Mente Brillante está contando los años de las tortugas: Una tiene 125 y la otra 289.",
+                q: "¿Cuál es la suma de sus edades?",
+                a: "414",
+                o: ["414", "404", "314", "415"]
             },
             {
-                icon: "🧠",
-                q: "Misión 13: Sigue calculando: <br><span class='big-math'>18 - 9</span>",
-                a: "9",
-                opts: ["9", "8", "10", "7"]
+                n: "Un bus de la ciudad partió con 850 litros de bencina y gastó 375 en el viaje.",
+                q: "¿Cuánta bencina le queda?",
+                a: "475 litros",
+                o: ["475 litros", "525 litros", "485 litros", "575 litros"]
             },
             {
-                icon: "🧠",
-                q: "Misión 14: Fuerza de concentración: <br><span class='big-math'>14 - 5</span>",
-                a: "9",
-                opts: ["9", "8", "10", "11"]
-            },
-
-            // Fase 4: Problemas rutinarios (Aplicación)
-            {
-                icon: "🦸‍♂️",
-                q: "Misión 15: Tienes 15 láseres y disparas 6 contra los robots del villano. ¿Cuántos láseres te quedan?",
-                a: "9 láseres",
-                opts: ["9 láseres", "8 láseres", "10 láseres", "7 láseres"]
+                n: "Gatito Chill compró un café de $450 y un pan de $280.",
+                q: "¿Cuánto dinero gastó en total?",
+                a: "$730",
+                o: ["$730", "$630", "$720", "$750"]
             },
             {
-                icon: "🛸",
-                q: "Misión 16: Hay 18 villanos en la nave, logramos capturar a 7. ¿Cuántos faltan por atrapar?",
-                a: "11 villanos",
-                opts: ["11 villanos", "12 villanos", "10 villanos", "9 villanos"]
+                n: "Fuerza Pluma compró una manzana a $350 y pagó con $500.",
+                q: "¿Cuánto vuelto recibió?",
+                a: "$150",
+                o: ["$150", "$250", "$100", "$50"]
             },
             {
-                icon: "🔋",
-                q: "Misión 17: La superheroína 'Chispa' necesita 20 baterías para volar, pero solo tiene 12. ¿Cuántas baterías le faltan?",
-                a: "8 baterías",
-                opts: ["8 baterías", "7 baterías", "9 baterías", "10 baterías"]
+                n: "Mente Brillante compró un libro de $399. Si pagó con $850...",
+                q: "¿Cuánto vuelto debe recibir?",
+                a: "$451",
+                o: ["$451", "$551", "$441", "$461"]
             },
             {
-                icon: "👕",
-                q: "Misión 18: En la base hay 17 capas de súper-vuelo, pero se rompen 8 en una misión. ¿Cuántas capas quedan sirviendo?",
-                a: "9 capas",
-                opts: ["9 capas", "8 capas", "10 capas", "7 capas"]
-            },
-
-            // Fase 5: Jefes Finales
-            {
-                icon: "☠️",
-                q: "Misión 19 (Sub-Jefe): ¡Cuidado! Un portal mágico absorbe 9 de tus 19 escudos de energía. ¿Cuántos escudos te quedan?",
-                a: "10 escudos",
-                opts: ["10 escudos", "9 escudos", "11 escudos", "8 escudos"]
+                n: "Rayo Veloz corre una carrera. La meta está a 735 km. Él ya recorrió 198 km.",
+                q: "¿Cuántos kilómetros le faltan para llegar?",
+                a: "537 km",
+                o: ["537 km", "547 km", "637 km", "538 km"]
             },
             {
-                icon: "👑",
-                q: "Misión 20 (Jefe Final): ¡El ataque definitivo para vencer a Resta-Fácil! ¿Cuál es el resultado exacto de <br><span class='big-math'>20 - 13</span>?",
-                a: "7",
-                opts: ["7", "8", "6", "13"]
+                n: "Gatito Chill tenía $950. Compró un helado de $470 y un dulce de $280.",
+                q: "¿Cuánto dinero le sobró después de comprar AMBAS cosas?",
+                a: "$200",
+                o: ["$200", "$480", "$750", "$150"]
+            },
+            {
+                n: "RETO DE EXPLICACIÓN: El Dr. Caos dice que para restar 532 - 198 no se necesita canje.",
+                q: "¿Cuál es el procedimiento correcto?",
+                a: "Hacer canje en las decenas y centenas.",
+                o: ["Hacer canje en las decenas y centenas.", "Restar el mayor menos el menor siempre.", "Sumar los números mejor.", "No se puede restar."]
+            },
+            {
+                n: "ÚLTIMO RETO: El Rayo Desordenador dice que 520 + 490 es igual a 910.",
+                q: "¿Por qué es INCORRECTA esa afirmación?",
+                a: "Porque falta sumar las reservas, el total es 1010.",
+                o: ["Porque falta sumar las reservas, el total es 1010.", "Porque 5+4 es 10.", "Porque el resultado es 900.", "Porque es una resta."]
             }
         ];
 
-        let currentQuestionIndex = 0;
-        let isProcessing = false;
-
-        // --- FUNCIONES DEL JUEGO ---
+        let currentLevel = 0;
 
         function startGame() {
             document.getElementById('start-screen').classList.add('hidden');
-            document.getElementById('quiz-screen').classList.remove('hidden');
-            currentQuestionIndex = 0;
-            loadQuestion();
+            document.getElementById('game-screen').classList.remove('hidden');
+            loadLevel();
         }
 
-        // Algoritmo Fisher-Yates para barajar las alternativas
-        function shuffleArray(array) {
-            let shuffled = array.slice();
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            return shuffled;
+        function shuffle(array) {
+            return array.sort(() => Math.random() - 0.5);
         }
 
-        function loadQuestion() {
-            const currentQ = questions[currentQuestionIndex];
+        function loadLevel() {
+            const data = gameData[currentLevel];
+            document.getElementById('level-display').innerText = `RETO: ${currentLevel + 1} / ${gameData.length}`;
+            document.getElementById('progress-bar').style.width = `${((currentLevel) / gameData.length) * 100}%`;
+            document.getElementById('narrative-text').innerText = data.n;
+            document.getElementById('question-text').innerText = data.q;
             
-            // Actualizar Interfaz
-            document.getElementById('level-indicator').textContent = `Misión: ${currentQuestionIndex + 1}/20`;
-            document.getElementById('progress-bar').style.width = `${(currentQuestionIndex / questions.length) * 100}%`;
+            const select = document.getElementById('answer-select');
+            select.innerHTML = '<option value="" disabled selected>-- Elige con calma --</option>';
             
-            document.getElementById('question-text').innerHTML = currentQ.q;
-            document.getElementById('category-icon').textContent = currentQ.icon;
-            
-            document.getElementById('error-msg').classList.add('hidden');
-            
-            const selectElement = document.getElementById('answer-select');
-            selectElement.innerHTML = '<option value="" disabled selected>Abre las opciones...</option>';
-            
-            // Barajar e insertar alternativas
-            const shuffledOptions = shuffleArray(currentQ.opts);
+            const shuffledOptions = shuffle([...data.o]);
             shuffledOptions.forEach(opt => {
-                const optionElement = document.createElement('option');
-                optionElement.value = opt;
-                optionElement.textContent = opt;
-                selectElement.appendChild(optionElement);
+                const el = document.createElement('option');
+                el.value = opt;
+                el.innerText = opt;
+                select.appendChild(el);
             });
-            
-            isProcessing = false;
-        }
 
-        function showComicEffect(text, bgColor, textColor, rotateDeg) {
-            const effect = document.getElementById('pow-message');
-            effect.textContent = text;
-            effect.style.background = bgColor;
-            effect.style.color = textColor;
-            effect.style.transform = `translate(-50%, -50%) scale(1) rotate(${rotateDeg}deg)`;
-            effect.classList.add('active');
-            
-            setTimeout(() => {
-                effect.classList.remove('active');
-            }, 1200);
+            // Cambiar icono de personaje de fondo
+            const icons = ["🐱", "🐢", "🦅", "🐶", "🫧"];
+            document.getElementById('character-overlay').innerText = icons[currentLevel % icons.length];
         }
 
         function checkAnswer() {
-            if (isProcessing) return; // Previene doble clic
-            
-            const selectElement = document.getElementById('answer-select');
-            const selectedValue = selectElement.value;
-            const errorMsg = document.getElementById('error-msg');
-            const submitBtn = document.getElementById('submit-btn');
+            const select = document.getElementById('answer-select');
+            const userAns = select.value;
+            const pop = document.getElementById('visual-pop');
 
-            if (!selectedValue) {
-                errorMsg.classList.remove('hidden');
-                return;
-            }
-            
-            errorMsg.classList.add('hidden');
-            isProcessing = true;
-            const correctAnswer = questions[currentQuestionIndex].a;
+            if (!userAns) return;
 
-            if (selectedValue === correctAnswer) {
-                // RESPUESTA CORRECTA
-                const successWords = ["¡BAM!", "¡ZAS!", "¡POW!", "¡BOOM!", "¡SÚPER!"];
-                const randomWord = successWords[Math.floor(Math.random() * successWords.length)];
-                const randomRot = Math.floor(Math.random() * 30) - 15; // Rotación aleatoria
-                
-                showComicEffect(randomWord, "#ffea00", "#d90429", randomRot); // Amarillo/Rojo
+            if (userAns === gameData[currentLevel].a) {
+                // Correcto
+                pop.innerText = "¡CHILL!";
+                pop.classList.add('active');
                 
                 setTimeout(() => {
-                    currentQuestionIndex++;
-                    if (currentQuestionIndex < questions.length) {
-                        loadQuestion();
+                    pop.classList.remove('active');
+                    currentLevel++;
+                    if (currentLevel < gameData.length) {
+                        loadLevel();
                     } else {
-                        finishGame();
+                        showEnd();
                     }
-                }, 1300);
-
+                }, 800);
             } else {
-                // RESPUESTA INCORRECTA
-                showComicEffect("¡OUCH!", "#2b2d42", "#edf2f4", 0); // Oscuro/Blanco
-                selectElement.value = ""; // Limpiar selección para reintento
-                
-                submitBtn.classList.remove('bg-purple-600');
-                submitBtn.classList.add('bg-red-600', 'animate-pulse');
-                submitBtn.textContent = "¡CÁLCULO VILLANO! INTENTA DE NUEVO";
+                // Incorrecto
+                pop.innerText = "¡UPS!";
+                pop.style.color = "#ef4444";
+                pop.classList.add('active');
                 
                 setTimeout(() => {
-                    submitBtn.classList.remove('bg-red-600', 'animate-pulse');
-                    submitBtn.classList.add('bg-purple-600');
-                    submitBtn.textContent = "¡USAR PODER! ⚡";
-                    isProcessing = false;
-                }, 1500);
+                    pop.classList.remove('active');
+                    pop.style.color = "#facc15";
+                }, 800);
             }
         }
 
-        function finishGame() {
-            document.getElementById('quiz-screen').classList.add('hidden');
+        function showEnd() {
+            document.getElementById('game-screen').classList.add('hidden');
             document.getElementById('end-screen').classList.remove('hidden');
-            document.getElementById('progress-bar').style.width = '100%';
         }
     </script>
 </body>
