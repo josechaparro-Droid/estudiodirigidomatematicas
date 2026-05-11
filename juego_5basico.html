@@ -3,250 +3,537 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escape Room: División Titán - 5° Básico</title>
+    <title>Operación Zero: Escape Room Matemático</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Comic Neue', cursive;
-            background-color: #1e1b4b;
-            background-image: radial-gradient(#4338ca 15%, transparent 16%), radial-gradient(#4338ca 15%, transparent 16%);
-            background-size: 30px 30px;
-            background-position: 0 0, 15px 15px;
-            min-height: 100vh;
-            color: #1e293b;
-            margin: 0;
-            display: flex;
-            justify-content: center;
+        :root {
+            --primary: #e63946;
+            --secondary: #1d3557;
+            --accent: #f1faee;
+            --comic-yellow: #ffde03;
         }
 
-        .comic-title { font-family: 'Bangers', cursive; letter-spacing: 2px; }
-        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f0f0;
+            background-image: radial-gradient(#ccc 10%, transparent 10%);
+            background-size: 20px 20px; /* Ben-Day dots style */
+        }
+
+        h1, h2, h3, .comic-font {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 2px;
+        }
+
+        .comic-border {
+            border: 4px solid black;
+            box-shadow: 8px 8px 0px black;
+        }
+
         .comic-panel {
             background: white;
-            border: 5px solid black;
-            box-shadow: 12px 12px 0px rgba(0, 0, 0, 1);
+            border: 3px solid black;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .comic-panel::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(rgba(0,0,0,0.05) 15%, transparent 15%);
+            background-size: 4px 4px;
+            pointer-events: none;
         }
 
         .btn-action {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 1px;
+            background-color: var(--primary);
+            color: white;
             border: 3px solid black;
-            box-shadow: 5px 5px 0px black;
-            transition: all 0.1s;
+            transition: all 0.2s;
+            transform: skew(-5deg);
         }
 
-        .btn-action:active {
-            transform: translate(3px, 3px);
-            box-shadow: 0px 0px 0px black;
+        .btn-action:hover {
+            transform: skew(-5deg) scale(1.05);
+            box-shadow: 4px 4px 0px var(--comic-yellow);
         }
 
-        .pow-effect {
-            position: fixed;
-            top: 50%;
+        .speech-bubble {
+            position: relative;
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 20px;
+            padding: 15px;
+        }
+
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
             left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            z-index: 100;
-            pointer-events: none;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 0;
+            height: 0;
+            border: 20px solid transparent;
+            border-top-color: #000;
+            border-bottom: 0;
+            margin-left: -20px;
+            margin-bottom: -20px;
         }
 
-        .pow-effect.active { transform: translate(-50%, -50%) scale(1.8); }
-
-        select {
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 1.5em;
+        .progress-bar {
+            height: 20px;
+            background: #ddd;
+            border: 2px solid black;
+            border-radius: 10px;
+            overflow: hidden;
         }
-        
-        .progress-bar-inner {
-            transition: width 0.5s ease-in-out;
+
+        .progress-fill {
+            height: 100%;
+            background: var(--comic-yellow);
+            transition: width 0.5s ease-out;
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
         }
     </style>
 </head>
 <body class="p-4 md:p-8">
 
-    <div id="visual-pop" class="pow-effect comic-title text-7xl text-purple-600 drop-shadow-[4px_4px_0px_white]">¡REPARTO!</div>
-
-    <div class="max-w-4xl w-full">
+    <div id="game-container" class="max-w-4xl mx-auto">
         <!-- Header -->
-        <header class="text-center mb-8">
-            <div class="inline-block bg-white border-4 border-black p-4 transform rotate-1 shadow-[10px_10px_0px_#7c3aed]">
-                <h1 class="text-4xl md:text-6xl comic-title text-purple-700">DIVISIÓN TITÁN: EL RESCATE</h1>
-                <p class="text-xl font-bold mt-2">Misión: Derrotar al Dr. Caos con el Gatito Chill</p>
+        <header class="mb-8 text-center">
+            <div class="inline-block bg-white comic-border p-4 mb-4">
+                <h1 class="text-5xl text-red-600 uppercase">Operación Zero</h1>
+                <p class="text-xl font-bold text-navy-800">El Despertar de los Algoritmos</p>
             </div>
-            
-            <div class="mt-6 bg-white border-2 border-black p-3 rounded-lg max-w-3xl mx-auto shadow-md">
-                <p class="font-bold text-sm md:text-base text-indigo-900 italic">
-                    🎯 OBJETIVO: Comprender la división de 3 dígitos por 1 dígito aplicando el algoritmo estándar en situaciones de reparto equitativo.
-                </p>
+            <div class="bg-blue-900 text-white p-2 comic-border max-w-2xl mx-auto">
+                <p class="text-sm">OBJETIVO: Aplicar el algoritmo de división (dividendos hasta 4 dígitos) gestionando correctamente el CERO en el cociente.</p>
             </div>
         </header>
 
-        <!-- Main Content -->
-        <main class="relative">
-            <!-- Start Screen -->
-            <div id="start-screen" class="comic-panel p-8 text-center space-y-6">
-                <div class="text-8xl mb-4">🐱🫧</div>
-                <h2 class="text-4xl comic-title text-red-600 uppercase">¡Emergencia en Ciudad Matemáticas!</h2>
-                <div class="text-lg leading-relaxed text-left space-y-4 font-medium">
-                    <p>El <b>Dr. Caos</b> ha desordenado los suministros. La comida de los refugios, las baterías de los robots y las piezas de construcción están en pilas gigantes sin nombre.</p>
-                    <p>Mente Brillante dice: <span class="text-purple-700">"Debemos repartir todo en partes iguales usando el algoritmo DMSBR (Dividir, Multiplicar, Restar, Bajar, Repetir)".</span></p>
-                    <p class="text-blue-600 font-bold">Gatito Chill: "Mantengan la calma, respiren... y dividan. Todo volverá a estar chill".</p>
-                </div>
-                <button onclick="startGame()" class="btn-action bg-red-500 hover:bg-red-400 text-white text-3xl py-4 px-12 rounded-lg w-full md:w-auto mt-4">
-                    ¡INICIAR ALGORITMO! ⚡
-                </button>
-            </div>
-
-            <!-- Game Screen -->
-            <div id="game-screen" class="hidden space-y-6">
-                <div class="flex flex-col md:flex-row justify-between items-center bg-white border-4 border-black p-4 shadow-[6px_6px_0px_black] gap-4">
-                    <div class="comic-title text-2xl text-purple-800" id="level-display">RETO: 1 / 20</div>
-                    <div class="w-full md:w-2/3 bg-gray-200 border-2 border-black rounded-full h-6 overflow-hidden">
-                        <div id="progress-bar" class="progress-bar-inner bg-purple-500 h-full" style="width: 0%"></div>
+        <!-- Intro Screen -->
+        <div id="screen-intro" class="comic-panel p-8 rounded-lg">
+            <div class="flex flex-col md:flex-row items-center gap-6">
+                <div class="w-full md:w-1/3">
+                    <div class="bg-yellow-400 p-4 comic-border text-center">
+                        <span class="text-6xl">🦸‍♂️</span>
+                        <p class="comic-font text-2xl mt-2">CAPITÁN COCIENTE</p>
                     </div>
                 </div>
+                <div class="w-full md:w-2/3">
+                    <div class="speech-bubble mb-6">
+                        <p class="text-lg font-bold">¡Atención, recluta! El malvado Doctor Residuo está robando los ceros de los resultados matemáticos. Si no los recuperamos, ¡el sistema decimal colapsará! Debes resolver estos 20 desafíos de división para restaurar el equilibrio.</p>
+                    </div>
+                    <button onclick="startGame()" class="btn-action w-full py-4 text-2xl comic-font uppercase">¡Aceptar Misión!</button>
+                </div>
+            </div>
+        </div>
 
-                <div class="comic-panel p-6 md:p-10 relative">
-                    <div id="character-sprite" class="absolute top-4 right-4 text-5xl animate-bounce">🐱</div>
-                    
-                    <div id="mission-brief" class="bg-indigo-50 border-l-8 border-indigo-500 p-4 mb-6 italic text-indigo-900 font-bold text-lg"></div>
-                    
-                    <div id="question-box" class="space-y-6">
-                        <h3 id="question-text" class="text-2xl font-bold text-gray-800 border-b-2 border-gray-100 pb-4"></h3>
-                        
-                        <div class="grid grid-cols-1 gap-6">
-                            <div class="space-y-2">
-                                <label class="block font-bold text-xl text-red-600 comic-title">Respuesta del Superhéroe:</label>
-                                <select id="answer-select" class="w-full p-5 border-4 border-black text-xl font-bold bg-white focus:ring-8 focus:ring-purple-200 outline-none cursor-pointer">
-                                    <option value="" disabled selected>-- Selecciona el cociente o respuesta --</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <button onclick="checkAnswer()" class="btn-action bg-purple-600 text-white text-3xl py-5 px-8 rounded-xl w-full uppercase">
-                            ¡Verificar Datos! 💥
-                        </button>
+        <!-- Game Screen -->
+        <div id="screen-game" class="hidden">
+            <div class="flex justify-between items-center mb-4 px-2">
+                <div class="comic-font text-xl">Misión: <span id="current-task">1</span>/20</div>
+                <div class="w-1/2">
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
                     </div>
                 </div>
+                <div id="lives" class="text-xl">❤️ ❤️ ❤️</div>
             </div>
 
-            <!-- End Screen -->
-            <div id="end-screen" class="hidden comic-panel p-12 text-center space-y-8">
-                <h2 class="text-7xl comic-title text-purple-700">¡MISIÓN CUMPLIDA!</h2>
-                <div class="flex justify-center gap-4 text-6xl">
-                    <span>🐢</span><span>🐱</span><span>🐶</span><span>🦅</span>
+            <div id="question-card" class="comic-panel p-6 rounded-xl">
+                <div id="phase-tag" class="inline-block bg-red-600 text-white px-3 py-1 comic-font text-sm mb-4 uppercase">Fase Concreta</div>
+                <h3 id="question-text" class="text-xl font-bold mb-6 min-h-[80px]">Cargando pregunta...</h3>
+                
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Options injected here -->
                 </div>
-                <p class="text-3xl font-bold text-gray-800">Has derrotado al Dr. Caos con la lógica del algoritmo.</p>
-                <div class="bg-yellow-100 border-4 border-dashed border-black p-6 rounded-2xl">
-                    <p class="text-xl">El Gatito Chill ronronea de alegría: <br><b>"Las matemáticas son fáciles cuando mantienes el orden y la calma".</b></p>
+
+                <div id="feedback" class="mt-6 p-4 border-2 border-black hidden rounded">
+                    <p id="feedback-text" class="font-bold"></p>
                 </div>
-                <button onclick="location.reload()" class="btn-action bg-indigo-600 text-white text-3xl py-4 px-12 rounded-full">
-                    REINICIAR ENTRENAMIENTO
-                </button>
+                
+                <div class="mt-8 flex justify-end">
+                    <button id="btn-next" onclick="nextQuestion()" class="hidden btn-action px-8 py-2 text-xl comic-font">Siguiente >></button>
+                </div>
             </div>
-        </main>
+        </div>
+
+        <!-- Final Screen -->
+        <div id="screen-final" class="hidden text-center">
+            <div class="comic-panel p-10 rounded-3xl">
+                <h2 id="final-title" class="text-6xl text-red-600 mb-6">¡Misión Cumplida!</h2>
+                <div class="text-8xl mb-6">🏆</div>
+                <p id="final-message" class="text-2xl font-bold mb-8 italic">Has derrotado al Doctor Residuo y devuelto los ceros al mundo.</p>
+                <button onclick="location.reload()" class="btn-action px-12 py-4 text-2xl comic-font">Jugar de Nuevo</button>
+            </div>
+        </div>
     </div>
 
     <script>
-        const gameData = [
-            { m: "Mente Brillante inicia el escaneo.", q: "¿Cómo se llama el número que representa la cantidad total a repartir?", a: "Dividendo", o: ["Dividendo", "Divisor", "Cociente", "Resto"] },
-            { m: "Rayo Veloz necesita repartir 450 raciones.", q: "En la división 450 ÷ 5, ¿cuál es el cociente?", a: "90", o: ["90", "80", "45", "9"] },
-            { m: "Gatito Chill encuentra piezas de sobra.", q: "Si el resto de una división es 0, ¿cómo se clasifica?", a: "Exacta", o: ["Exacta", "Inexacta", "Nula", "Infinita"] },
-            { m: "Fuerza Pluma reparte 324 bloques en 3 torres.", q: "¿Cuántos bloques tiene cada torre según el algoritmo?", a: "108", o: ["108", "102", "112", "124"] },
-            { m: "Mente Brillante usa el algoritmo DMSBR.", q: "¿Qué significa la 'M' en el algoritmo de la división?", a: "Multiplicar", o: ["Multiplicar", "Mover", "Mirar", "Minuendo"] },
-            { m: "Dr. Caos lanzó 728 obstáculos en 7 calles.", q: "Calcula 728 ÷ 7.", a: "104", o: ["104", "114", "102", "14"] },
-            { m: "Reparto de energía para los robots.", q: "Resuelve 642 ÷ 6.", a: "107", o: ["107", "117", "101", "17"] },
-            { m: "Fuerza Pluma lleva 516 baldosas a 4 casas.", q: "Resuelve la división 516 ÷ 4.", a: "129", o: ["129", "139", "124", "119"] },
-            { m: "Mente Brillante analiza el resto.", q: "Resuelve 835 ÷ 4. ¿Cuál es el resto?", a: "3", o: ["3", "1", "0", "2"] },
-            { m: "Rayo Veloz recorre 945 km en 9 días.", q: "¿Cuántos km recorrió por día en promedio?", a: "105 km", o: ["105 km", "115 km", "100 km", "95 km"] },
-            { m: "Gatito Chill reparte 745 calugas en 9 bolsas.", q: "¿Cuántas calugas sobran después de repartir equitativamente?", a: "7", o: ["7", "82", "5", "0"] },
-            { m: "Mente Brillante detecta un error del Dr. Caos.", q: "El villano dice que 624 ÷ 4 es 146. ¿Cuál es el error?", a: "El resultado correcto es 156.", o: ["El resultado correcto es 156.", "No hay error.", "Olvidó bajar el 4.", "Multiplicó mal por 2."] },
-            { m: "El primer paso del algoritmo.", q: "Para dividir 924 ÷ 3, ¿por qué cifra empezamos?", a: "Por las centenas (9).", o: ["Por las centenas (9).", "Por las unidades (4).", "Por las decenas (2).", "Por cualquier cifra."] },
-            { m: "Misión de Lógica Titán.", q: "En 194 ÷ 2, ¿por qué no podemos empezar dividiendo solo el 1?", a: "Porque 1 es menor que 2.", o: ["Porque 1 es menor que 2.", "Porque es un número impar.", "Porque el 2 es divisor.", "Porque Chill lo dice."] },
-            { m: "Descifrando el paso de las decenas.", q: "En 386 ÷ 2, tras dividir las centenas, ¿qué cifra bajamos?", a: "El 8 (decenas).", o: ["El 8 (decenas).", "El 6 (unidades).", "El 3 (centenas).", "Ninguna."] },
-            { m: "Rayo Veloz comprueba el resultado.", q: "Si multiplicas el cociente por el divisor y sumas el resto, obtienes:", a: "El Dividendo", o: ["El Dividendo", "Otro resto", "Cero", "El algoritmo"] },
-            { m: "Fuerza Pluma reparte 432 litros en 8 tanques.", q: "Resuelve 432 ÷ 8.", a: "54", o: ["54", "44", "64", "52"] },
-            { m: "Mente Brillante asocia la situación.", q: "¿Cuál situación representa 305 ÷ 5?", a: "Repartir 305 dulces entre 5 amigos.", o: ["Repartir 305 dulces entre 5 amigos.", "Quitarle 5 a 305.", "Sumar 5 veces 305.", "Multiplicar 305 por 5."] },
-            { m: "Gatito Chill explica el resto.", q: "Si repartes 25 piezas en 4 grupos y sobran 1, ¿qué es ese 1?", a: "Resto", o: ["Resto", "Cociente", "Dividendo", "Error"] },
-            { m: "RETO FINAL: Creación de Problema.", q: "Si Ciudad Matemáticas tiene 516 baldosas para 6 plazas, ¿cuántas van por plaza?", a: "86", o: ["86", "76", "96", "81"] }
+        const questions = [
+            {
+                phase: "Concreta/Manipulativa",
+                text: "Un curso recolectó 93 chapitas. Si las guardan en 9 bolsas, ¿cuántas quedan en cada bolsa y cuántas sobran?",
+                options: [
+                    "Quedan 10 chapitas y sobran 3",
+                    "Quedan 11 chapitas y sobra 1",
+                    "Quedan 9 chapitas y sobran 3",
+                    "Quedan 10 chapitas y no sobra nada"
+                ],
+                answer: 0,
+                feedback: "¡Correcto! Al dividir 93 por 9, el cociente es 10 y el resto es 3. El cero aparece porque las unidades restantes no alcanzan para otro grupo de 9."
+            },
+            {
+                phase: "Concreta/Manipulativa",
+                text: "Tienes 806 fichas y las divides en 4 grupos iguales. ¿Cuál es el resultado (cociente) y el resto?",
+                options: [
+                    "Cociente: 21, Resto: 2",
+                    "Cociente: 201, Resto: 2",
+                    "Cociente: 200, Resto: 6",
+                    "Cociente: 21, Resto: 0"
+                ],
+                answer: 1,
+                feedback: "¡Bien hecho! 806 ÷ 4 = 201 con resto 2. Bajamos el 0 de las decenas, y como 0 es menor que 4, anotamos 0 en el cociente."
+            },
+            {
+                phase: "Concreta/Manipulativa",
+                text: "Al dividir 703 entre 7, después de dividir las centenas y bajar el 0, ¿por qué anotamos un cero en el cociente?",
+                options: [
+                    "Porque el cero no vale nada y se salta",
+                    "Porque la cantidad a repartir (0 decenas) es menor que el divisor (7)",
+                    "Porque así lo dice la regla sin explicación",
+                    "Porque el 3 es el que manda en la división"
+                ],
+                answer: 1,
+                feedback: "¡Exacto! El cero indica que en esa posición (decenas) no hay suficientes unidades para repartir entre el divisor."
+            },
+            {
+                phase: "Resolver Problemas",
+                text: "Una familia ganó $60.000 y se reparte entre 6 integrantes. ¿Cuánto recibe cada uno?",
+                options: [
+                    "$1.000",
+                    "$6.000",
+                    "$10.000",
+                    "$10.100"
+                ],
+                answer: 2,
+                feedback: "¡Correcto! Al dividir 6 ÷ 6 = 1, y luego bajamos los ceros restantes, agregando un cero al cociente por cada uno."
+            },
+            {
+                phase: "Pictórica",
+                text: "Imagina un modelo de área para (505 ÷ 5). Repartes 5 centenas y 5 unidades. ¿Qué pasa con las decenas?",
+                options: [
+                    "Se ignoran y el resultado es 11",
+                    "Se deja el espacio vacío, representado por un cero intermedio: 101",
+                    "Se suman a las unidades y da 110",
+                    "El modelo de área no sirve para ceros"
+                ],
+                answer: 1,
+                feedback: "¡Así es! 500 ÷ 5 = 100 y 5 ÷ 5 = 1. Sumados dan 101."
+            },
+            {
+                phase: "Pictórica",
+                text: "En la división (900 ÷ 3) representada con bloques multibase, ¿cómo se explica el resultado?",
+                options: [
+                    "Son 3 bloques de 100, por eso el resultado es 3",
+                    "Son 3 grupos de 300, por eso el cociente es 300",
+                    "Son 9 bloques, el resultado es 90",
+                    "Da 30 porque falta un cero"
+                ],
+                answer: 1,
+                feedback: "¡Correcto! 9 centenas repartidas en 3 grupos dan 3 centenas exactas, los ceros completan las posiciones vacías."
+            },
+            {
+                phase: "Modelar",
+                text: "Se tienen 4 centenas y 2 unidades que se agrupan en 4 partes iguales, resultando 1 centena, 0 decenas y 0,5 unidades. ¿Qué división representa?",
+                options: [
+                    "420 ÷ 4",
+                    "400 ÷ 2",
+                    "402 ÷ 4",
+                    "204 ÷ 4"
+                ],
+                answer: 2,
+                feedback: "¡Excelente! 4 centenas (400) y 2 unidades (2) hacen el dividendo 402."
+            },
+            {
+                phase: "Pictórica",
+                text: "Si divides 2.040 por 4, ¿dónde aparecerían ceros en el cociente?",
+                options: [
+                    "Solo al inicio",
+                    "Solo al final (Cero final)",
+                    "Al inicio y al final",
+                    "No lleva ceros el cociente"
+                ],
+                answer: 1,
+                feedback: "¡Bien! 2040 ÷ 4 = 510. El cero aparece al final porque la unidad 0 no se puede repartir."
+            },
+            {
+                phase: "Simbólica",
+                text: "Resuelve: 840 ÷ 8 = ?",
+                options: [
+                    "15",
+                    "105",
+                    "150",
+                    "100"
+                ],
+                answer: 1,
+                feedback: "¡Correcto! 8 ÷ 8 = 1, bajamos el 4 (es menor que 8, ponemos 0), bajamos el 0, 40 ÷ 8 = 5. Total: 105."
+            },
+            {
+                phase: "Simbólica",
+                text: "Resuelve (605 ÷ 3). ¿Cuál es el cociente y el resto?",
+                options: [
+                    "Cociente: 201, Resto: 2",
+                    "Cociente: 21, Resto: 2",
+                    "Cociente: 200, Resto: 5",
+                    "Cociente: 21, Resto: 0"
+                ],
+                answer: 0,
+                feedback: "¡Perfecto! 6 ÷ 3 = 2, bajamos 0 (0), bajamos 5 ÷ 3 = 1 y sobran 2."
+            },
+            {
+                phase: "Simbólica",
+                text: "Resuelve (409 ÷ 4) y dime el resto.",
+                options: [
+                    "Cociente 12, Resto 1",
+                    "Cociente 102, Resto 1",
+                    "Cociente 120, Resto 9",
+                    "Cociente 100, Resto 9"
+                ],
+                answer: 1,
+                feedback: "¡Correcto! 409 ÷ 4 = 102 y sobra 1."
+            },
+            {
+                phase: "Simbólica",
+                text: "Calcula el resultado de: 5.025 ÷ 5",
+                options: [
+                    "105",
+                    "1.005",
+                    "1.050",
+                    "1.25"
+                ],
+                answer: 1,
+                feedback: "¡Muy bien! 5 ÷ 5 = 1, bajamos 0 (0), bajamos 2 (es menor que 5, ponemos 0), bajamos 5, 25 ÷ 5 = 5. Resultado 1.005."
+            },
+            {
+                phase: "Simbólica",
+                text: "Calcula: 9.036 ÷ 9",
+                options: [
+                    "1.004",
+                    "140",
+                    "1.040",
+                    "1.400"
+                ],
+                answer: 0,
+                feedback: "¡Exacto! El cociente es 1.004."
+            },
+            {
+                phase: "Simbólica",
+                text: "Resuelve: 770 ÷ 7",
+                options: [
+                    "11",
+                    "101",
+                    "110",
+                    "111"
+                ],
+                answer: 2,
+                feedback: "¡Bien! 77 ÷ 7 = 11, y bajamos el último 0 poniendo un 0 en el cociente."
+            },
+            {
+                phase: "Simbólica",
+                text: "Al dividir (3.010 ÷ 3), ¿qué tipo de ceros aparecen en el cociente?",
+                options: [
+                    "Un cero final",
+                    "Dos ceros intermedios (Cociente 1.003)",
+                    "Ningún cero",
+                    "Un cero intermedio y uno final"
+                ],
+                answer: 1,
+                feedback: "¡Correcto! El cociente es 1.003 y el resto es 1. Los ceros están al medio."
+            },
+            {
+                phase: "Simbólica",
+                text: "Determina el dividendo si el cociente es 105, el divisor es 6 y el resto es 3.",
+                options: [
+                    "630",
+                    "603",
+                    "633",
+                    "318"
+                ],
+                answer: 2,
+                feedback: "¡Gran cálculo! (105 × 6) + 3 = 630 + 3 = 633."
+            },
+            {
+                phase: "Análisis",
+                text: "Javiera resolvió (6.005 ÷ 5) y obtuvo 121. Matías obtuvo 1.001. ¿Quién tiene la razón?",
+                options: [
+                    "Javiera está en lo correcto",
+                    "Matías tiene la razón",
+                    "Ambos están equivocados (Es 1.201)",
+                    "Ambos están equivocados (Es 1.210)"
+                ],
+                answer: 2,
+                feedback: "¡Ojo aquí! Matías se acercó pero Javiera falló. El cálculo real es: 6÷5=1 (sobra 1), bajamos 0 (formamos 10), 10÷5=2, bajamos 0 (0), bajamos 5÷5=1. Total: 1.201."
+            },
+            {
+                phase: "Análisis",
+                text: "¿Es correcto afirmar que si el dividendo termina en cero, el cociente SIEMPRE debe terminar en cero?",
+                options: [
+                    "Sí, siempre ocurre",
+                    "No, es falso. Ejemplo: 420 ÷ 4 = 105",
+                    "No, solo si el divisor es par",
+                    "Sí, por la regla del cero"
+                ],
+                answer: 1,
+                feedback: "¡Excelente contraejemplo! 420 termina en 0, pero su cociente 105 termina en 5."
+            },
+            {
+                phase: "Aplicación",
+                text: "Don José cosechó 1.800 kilos de manzanas para 9 camiones iguales. ¿Cuántos kilos lleva cada camión?",
+                options: [
+                    "20 kilos",
+                    "200 kilos",
+                    "2.000 kilos",
+                    "180 kilos"
+                ],
+                answer: 1,
+                feedback: "¡Correcto! 18 ÷ 9 = 2, y agregamos los dos ceros: 200."
+            },
+            {
+                phase: "Ticket de Salida",
+                text: "Una empresa traslada 408 pasajeros en buses de capacidad para 4 personas. ¿Cuántos buses se necesitan?",
+                options: [
+                    "12 buses",
+                    "102 buses",
+                    "120 buses",
+                    "100 buses"
+                ],
+                answer: 1,
+                feedback: "¡Misión cumplida! 408 ÷ 4 = 102. ¡Has restaurado todos los ceros!"
+            }
         ];
 
-        let currentLevel = 0;
+        let currentQuestionIndex = 0;
+        let lives = 3;
+        let score = 0;
 
         function startGame() {
-            document.getElementById('start-screen').classList.add('hidden');
-            document.getElementById('game-screen').classList.remove('hidden');
-            loadLevel();
+            document.getElementById('screen-intro').classList.add('hidden');
+            document.getElementById('screen-game').classList.remove('hidden');
+            showQuestion();
         }
 
-        function shuffle(array) {
-            return array.sort(() => Math.random() - 0.5);
-        }
+        function showQuestion() {
+            const q = questions[currentQuestionIndex];
+            document.getElementById('current-task').innerText = currentQuestionIndex + 1;
+            document.getElementById('phase-tag').innerText = "FASE: " + q.phase;
+            document.getElementById('question-text').innerText = q.text;
+            document.getElementById('feedback').classList.add('hidden');
+            document.getElementById('btn-next').classList.add('hidden');
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
 
-        function loadLevel() {
-            const data = gameData[currentLevel];
-            document.getElementById('level-display').innerText = `RETO: ${currentLevel + 1} / ${gameData.length}`;
-            document.getElementById('progress-bar').style.width = `${(currentLevel / gameData.length) * 100}%`;
-            document.getElementById('mission-brief').innerText = `📋 MISIÓN: ${data.m}`;
-            document.getElementById('question-text').innerText = data.q;
-            
-            const select = document.getElementById('answer-select');
-            select.innerHTML = '<option value="" disabled selected>-- Selecciona el cociente o respuesta --</option>';
-            
-            const shuffledOptions = shuffle([...data.o]);
+            // Shuffle options but keep track of original index
+            const shuffledOptions = q.options
+                .map((text, index) => ({ text, index }))
+                .sort(() => Math.random() - 0.5);
+
             shuffledOptions.forEach(opt => {
-                const el = document.createElement('option');
-                el.value = opt;
-                el.innerText = opt;
-                select.appendChild(el);
+                const btn = document.createElement('button');
+                btn.className = "comic-panel p-4 text-left hover:bg-yellow-100 transition-colors font-bold border-2 border-black rounded-lg option-btn";
+                btn.innerText = opt.text;
+                btn.onclick = () => checkAnswer(opt.index, btn);
+                optionsContainer.appendChild(btn);
             });
 
-            // Animación de cambio de personaje
-            const sprites = ["🐱", "🐢", "🦅", "🐶", "🫧", "⚡"];
-            document.getElementById('character-sprite').innerText = sprites[currentLevel % sprites.length];
+            updateProgress();
         }
 
-        function checkAnswer() {
-            const select = document.getElementById('answer-select');
-            const userAns = select.value;
-            const pop = document.getElementById('visual-pop');
+        function checkAnswer(selectedIndex, btnElement) {
+            const q = questions[currentQuestionIndex];
+            const feedback = document.getElementById('feedback');
+            const feedbackText = document.getElementById('feedback-text');
+            const allBtns = document.querySelectorAll('.option-btn');
 
-            if (!userAns) return;
+            allBtns.forEach(btn => btn.disabled = true);
 
-            if (userAns === gameData[currentLevel].a) {
-                // Correcto
-                pop.innerText = "¡REPARTO EXACTO!";
-                pop.style.color = "#22c55e";
-                pop.classList.add('active');
-                
-                setTimeout(() => {
-                    pop.classList.remove('active');
-                    currentLevel++;
-                    if (currentLevel < gameData.length) {
-                        loadLevel();
-                    } else {
-                        showEnd();
-                    }
-                }, 1000);
+            if (selectedIndex === q.answer) {
+                btnElement.classList.add('bg-green-400');
+                feedback.classList.remove('hidden', 'bg-red-100');
+                feedback.classList.add('bg-green-100');
+                feedbackText.innerText = "¡BOOM! " + q.feedback;
+                document.getElementById('btn-next').classList.remove('hidden');
+                score++;
             } else {
-                // Incorrecto
-                pop.innerText = "¡ERROR DE CÁLCULO!";
-                pop.style.color = "#ef4444";
-                pop.classList.add('active');
+                btnElement.classList.add('bg-red-400', 'shake');
+                lives--;
+                updateLives();
+                feedback.classList.remove('hidden', 'bg-green-100');
+                feedback.classList.add('bg-red-100', 'shake');
+                feedbackText.innerText = "¡ZAP! Inténtalo de nuevo. Doctor Residuo gana terreno.";
                 
-                setTimeout(() => {
-                    pop.classList.remove('active');
-                }, 1000);
+                if (lives <= 0) {
+                    setTimeout(() => {
+                        alert("¡OH NO! El Doctor Residuo ha ganado. Reiniciando misión...");
+                        location.reload();
+                    }, 1000);
+                } else {
+                    setTimeout(() => {
+                        allBtns.forEach(btn => btn.disabled = false);
+                        btnElement.classList.remove('bg-red-400', 'shake');
+                        feedback.classList.add('hidden');
+                    }, 1500);
+                }
             }
         }
 
-        function showEnd() {
-            document.getElementById('game-screen').classList.add('hidden');
-            document.getElementById('end-screen').classList.remove('hidden');
+        function updateLives() {
+            const heartIcons = ['🖤', '❤️'];
+            let hearts = "";
+            for(let i=0; i<3; i++) {
+                hearts += (i < lives) ? '❤️ ' : '🖤 ';
+            }
+            document.getElementById('lives').innerText = hearts;
+        }
+
+        function updateProgress() {
+            const progress = (currentQuestionIndex / questions.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + "%";
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                showQuestion();
+            } else {
+                showFinalScreen();
+            }
+        }
+
+        function showFinalScreen() {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-final').classList.remove('hidden');
+            document.getElementById('progress-fill').style.width = "100%";
         }
     </script>
 </body>
