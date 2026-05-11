@@ -3,69 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operación Zero: Escape Room Matemático</title>
+    <title>La Liga de la Razón: Escape Room</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #e63946;
-            --secondary: #1d3557;
-            --accent: #f1faee;
-            --comic-yellow: #ffde03;
+            --comic-red: #e63946;
+            --comic-blue: #1d3557;
+            --comic-purple: #4a148c;
+            --comic-yellow: #ffea00;
         }
 
         body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f3f4f6;
             background-image: radial-gradient(#ccc 10%, transparent 10%);
-            background-size: 20px 20px; /* Ben-Day dots style */
+            background-size: 15px 15px; /* Ben-Day Dots Effect */
         }
 
-        h1, h2, h3, .comic-font {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 2px;
-        }
+        .comic-font { font-family: 'Bangers', cursive; letter-spacing: 1px; }
+        .marker-font { font-family: 'Permanent Marker', cursive; }
 
         .comic-border {
             border: 4px solid black;
-            box-shadow: 8px 8px 0px black;
+            box-shadow: 10px 10px 0px black;
         }
 
-        .comic-panel {
+        .comic-card {
             background: white;
             border: 3px solid black;
             position: relative;
-            overflow: hidden;
         }
 
-        .comic-panel::after {
+        .comic-card::before {
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-image: radial-gradient(rgba(0,0,0,0.05) 15%, transparent 15%);
-            background-size: 4px 4px;
+            background-image: radial-gradient(rgba(0,0,0,0.03) 15%, transparent 15%);
+            background-size: 5px 5px;
             pointer-events: none;
         }
 
-        .btn-action {
-            background-color: var(--primary);
+        .btn-comic {
+            background: var(--comic-red);
             color: white;
             border: 3px solid black;
-            transition: all 0.2s;
+            padding: 10px 20px;
             transform: skew(-5deg);
+            transition: all 0.2s;
         }
 
-        .btn-action:hover {
+        .btn-comic:hover {
             transform: skew(-5deg) scale(1.05);
             box-shadow: 4px 4px 0px var(--comic-yellow);
         }
 
         .speech-bubble {
             position: relative;
-            background: #fff;
-            border: 3px solid #000;
-            border-radius: 20px;
-            padding: 15px;
+            background: #ffffff;
+            border: 3px solid #000000;
+            border-radius: .4em;
+            padding: 20px;
         }
 
         .speech-bubble:after {
@@ -76,15 +74,24 @@
             width: 0;
             height: 0;
             border: 20px solid transparent;
-            border-top-color: #000;
+            border-top-color: #000000;
             border-bottom: 0;
-            margin-left: -20px;
+            border-left: 0;
+            margin-left: -10px;
             margin-bottom: -20px;
+        }
+
+        .shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
         }
 
         .progress-bar {
             height: 20px;
-            background: #ddd;
+            background: #eee;
             border: 2px solid black;
             border-radius: 10px;
             overflow: hidden;
@@ -93,448 +100,343 @@
         .progress-fill {
             height: 100%;
             background: var(--comic-yellow);
-            transition: width 0.5s ease-out;
-        }
-
-        .shake {
-            animation: shake 0.5s;
-        }
-
-        @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            10% { transform: translate(-1px, -2px) rotate(-1deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            30% { transform: translate(3px, 2px) rotate(0deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            50% { transform: translate(-1px, 2px) rotate(-1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            70% { transform: translate(3px, 1px) rotate(-1deg); }
-            80% { transform: translate(-1px, -1px) rotate(1deg); }
-            90% { transform: translate(1px, 2px) rotate(0deg); }
-            100% { transform: translate(1px, -2px) rotate(-1deg); }
+            width: 0%;
+            transition: width 0.3s ease-in-out;
         }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="min-h-screen p-4 flex flex-col items-center">
 
-    <div id="game-container" class="max-w-4xl mx-auto">
+    <div id="game-container" class="w-full max-w-4xl">
+        
         <!-- Header -->
-        <header class="mb-8 text-center">
-            <div class="inline-block bg-white comic-border p-4 mb-4">
-                <h1 class="text-5xl text-red-600 uppercase">Operación Zero</h1>
-                <p class="text-xl font-bold text-navy-800">El Despertar de los Algoritmos</p>
-            </div>
-            <div class="bg-blue-900 text-white p-2 comic-border max-w-2xl mx-auto">
-                <p class="text-sm">OBJETIVO: Aplicar el algoritmo de división (dividendos hasta 4 dígitos) gestionando correctamente el CERO en el cociente.</p>
+        <header class="text-center mb-8">
+            <div class="inline-block bg-white comic-border p-4 transform -rotate-1">
+                <h1 class="comic-font text-5xl md:text-7xl text-red-600 uppercase">La Liga de la Razón</h1>
+                <p class="font-bold text-blue-900 mt-2">Objetivo: Aplicar razones para comparar cantidades en diversos contextos.</p>
             </div>
         </header>
 
-        <!-- Intro Screen -->
-        <div id="screen-intro" class="comic-panel p-8 rounded-lg">
-            <div class="flex flex-col md:flex-row items-center gap-6">
-                <div class="w-full md:w-1/3">
-                    <div class="bg-yellow-400 p-4 comic-border text-center">
-                        <span class="text-6xl">🦸‍♂️</span>
-                        <p class="comic-font text-2xl mt-2">CAPITÁN COCIENTE</p>
-                    </div>
+        <!-- Main Screen -->
+        <main id="main-content">
+            <!-- Screen 1: Intro -->
+            <section id="screen-intro" class="comic-card p-8 rounded-lg flex flex-col md:flex-row items-center gap-8">
+                <div class="w-full md:w-1/3 text-center">
+                    <div class="text-9xl mb-4">🦸‍♂️</div>
+                    <h2 class="comic-font text-3xl">Capitán Comparación</h2>
                 </div>
                 <div class="w-full md:w-2/3">
-                    <div class="speech-bubble mb-6">
-                        <p class="text-lg font-bold">¡Atención, recluta! El malvado Doctor Residuo está robando los ceros de los resultados matemáticos. Si no los recuperamos, ¡el sistema decimal colapsará! Debes resolver estos 20 desafíos de división para restaurar el equilibrio.</p>
+                    <div class="speech-bubble mb-8">
+                        <p class="text-lg font-bold">¡Hola, recluta! El villano "Desproporción" ha desequilibrado las recetas, los mapas y las aulas de nuestra ciudad. Necesitamos tu mente lógica para resolver estos 20 acertijos de razones y restaurar el orden. ¿Estás listo para el desafío?</p>
                     </div>
-                    <button onclick="startGame()" class="btn-action w-full py-4 text-2xl comic-font uppercase">¡Aceptar Misión!</button>
+                    <button onclick="gameState.start()" class="btn-comic w-full text-3xl comic-font uppercase">¡Empezar Misión!</button>
                 </div>
-            </div>
-        </div>
+            </section>
 
-        <!-- Game Screen -->
-        <div id="screen-game" class="hidden">
-            <div class="flex justify-between items-center mb-4 px-2">
-                <div class="comic-font text-xl">Misión: <span id="current-task">1</span>/20</div>
-                <div class="w-1/2">
-                    <div class="progress-bar">
-                        <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+            <!-- Screen 2: Game -->
+            <section id="screen-game" class="hidden">
+                <div class="flex justify-between items-center mb-4 font-bold bg-white p-2 comic-border">
+                    <div class="text-purple-800 uppercase comic-font">Misión: <span id="current-task">1</span>/20</div>
+                    <div class="flex-grow mx-4">
+                        <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+                    </div>
+                    <div class="text-red-600 uppercase comic-font">Energía: <span id="lives">❤️❤️❤️</span></div>
+                </div>
+
+                <div id="question-card" class="comic-card p-6 rounded-xl min-h-[400px] flex flex-col">
+                    <div id="category-tag" class="bg-blue-600 text-white px-3 py-1 inline-block comic-font text-sm uppercase mb-4 self-start">Fase Pictórica</div>
+                    
+                    <div id="question-area" class="flex-grow">
+                        <h3 id="question-text" class="text-2xl font-bold mb-6">Pregunta aquí...</h3>
+                        <div id="visualization" class="mb-6 flex justify-center"></div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="options-grid">
+                            <!-- Options injected by JS -->
+                        </div>
+                    </div>
+
+                    <div id="feedback-area" class="hidden mt-6 p-4 comic-border bg-yellow-50">
+                        <p id="feedback-text" class="font-bold text-center"></p>
+                        <button onclick="gameState.next()" class="btn-comic mt-4 w-full comic-font uppercase text-xl">Siguiente Reto >></button>
                     </div>
                 </div>
-                <div id="lives" class="text-xl">❤️ ❤️ ❤️</div>
-            </div>
+            </section>
 
-            <div id="question-card" class="comic-panel p-6 rounded-xl">
-                <div id="phase-tag" class="inline-block bg-red-600 text-white px-3 py-1 comic-font text-sm mb-4 uppercase">Fase Concreta</div>
-                <h3 id="question-text" class="text-xl font-bold mb-6 min-h-[80px]">Cargando pregunta...</h3>
-                
-                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Options injected here -->
+            <!-- Screen 3: Victory -->
+            <section id="screen-victory" class="hidden text-center">
+                <div class="comic-card p-12 rounded-3xl">
+                    <h2 class="comic-font text-7xl text-red-600 mb-4 uppercase">¡Ciudad Salvada!</h2>
+                    <div class="text-9xl mb-6">🏆</div>
+                    <p class="text-2xl font-bold mb-8">Has dominado el concepto de razón. El Equilibrador ha sido restaurado.</p>
+                    <button onclick="location.reload()" class="btn-comic text-2xl comic-font uppercase">Volver a la Base</button>
                 </div>
-
-                <div id="feedback" class="mt-6 p-4 border-2 border-black hidden rounded">
-                    <p id="feedback-text" class="font-bold"></p>
-                </div>
-                
-                <div class="mt-8 flex justify-end">
-                    <button id="btn-next" onclick="nextQuestion()" class="hidden btn-action px-8 py-2 text-xl comic-font">Siguiente >></button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Final Screen -->
-        <div id="screen-final" class="hidden text-center">
-            <div class="comic-panel p-10 rounded-3xl">
-                <h2 id="final-title" class="text-6xl text-red-600 mb-6">¡Misión Cumplida!</h2>
-                <div class="text-8xl mb-6">🏆</div>
-                <p id="final-message" class="text-2xl font-bold mb-8 italic">Has derrotado al Doctor Residuo y devuelto los ceros al mundo.</p>
-                <button onclick="location.reload()" class="btn-action px-12 py-4 text-2xl comic-font">Jugar de Nuevo</button>
-            </div>
-        </div>
+            </section>
+        </main>
     </div>
 
     <script>
         const questions = [
             {
-                phase: "Concreta/Manipulativa",
-                text: "Un curso recolectó 93 chapitas. Si las guardan en 9 bolsas, ¿cuántas quedan en cada bolsa y cuántas sobran?",
-                options: [
-                    "Quedan 10 chapitas y sobran 3",
-                    "Quedan 11 chapitas y sobra 1",
-                    "Quedan 9 chapitas y sobran 3",
-                    "Quedan 10 chapitas y no sobra nada"
-                ],
-                answer: 0,
-                feedback: "¡Correcto! Al dividir 93 por 9, el cociente es 10 y el resto es 3. El cero aparece porque las unidades restantes no alcanzan para otro grupo de 9."
+                id: 1,
+                category: "Pictórica/Concreta",
+                text: "En un estuche hay 3 lápices azules y 5 lápices rojos. ¿Cuál es la razón de lápices azules respecto a los rojos?",
+                visualization: "🔵🔵🔵 🔴🔴🔴🔴🔴",
+                options: ["3 : 5", "5 : 3", "3 : 8", "5 : 8"],
+                answer: "3 : 5",
+                feedback: "¡Correcto! El antecedente es la cantidad de azules (3) y el consecuente los rojos (5)."
             },
             {
-                phase: "Concreta/Manipulativa",
-                text: "Tienes 806 fichas y las divides en 4 grupos iguales. ¿Cuál es el resultado (cociente) y el resto?",
-                options: [
-                    "Cociente: 21, Resto: 2",
-                    "Cociente: 201, Resto: 2",
-                    "Cociente: 200, Resto: 6",
-                    "Cociente: 21, Resto: 0"
-                ],
-                answer: 1,
-                feedback: "¡Bien hecho! 806 ÷ 4 = 201 con resto 2. Bajamos el 0 de las decenas, y como 0 es menor que 4, anotamos 0 en el cociente."
+                id: 2,
+                category: "Pictórica/Concreta",
+                text: "Basado en el estuche anterior (3 azules, 5 rojos), ¿cuál es la razón de lápices rojos respecto al TOTAL?",
+                visualization: "🔵🔵🔵 🔴🔴🔴🔴🔴",
+                options: ["5 : 8", "3 : 8", "5 : 3", "8 : 5"],
+                answer: "5 : 8",
+                feedback: "¡Exacto! El total es 3 + 5 = 8. Comparamos parte (rojos) con el total."
             },
             {
-                phase: "Concreta/Manipulativa",
-                text: "Al dividir 703 entre 7, después de dividir las centenas y bajar el 0, ¿por qué anotamos un cero en el cociente?",
-                options: [
-                    "Porque el cero no vale nada y se salta",
-                    "Porque la cantidad a repartir (0 decenas) es menor que el divisor (7)",
-                    "Porque así lo dice la regla sin explicación",
-                    "Porque el 3 es el que manda en la división"
-                ],
-                answer: 1,
-                feedback: "¡Exacto! El cero indica que en esa posición (decenas) no hay suficientes unidades para repartir entre el divisor."
+                id: 3,
+                category: "Pictórica",
+                text: "Observa estas banderas: 2 rojas, 1 azul y 1 blanca. ¿Cuál es la razón entre banderas rojas y banderas azules?",
+                visualization: "🚩🚩 🏴 🏳️",
+                options: ["2 : 1", "1 : 2", "2 : 4", "1 : 1"],
+                answer: "2 : 1",
+                feedback: "¡Bien! Hay 2 rojas por cada 1 azul."
             },
             {
-                phase: "Resolver Problemas",
-                text: "Una familia ganó $60.000 y se reparte entre 6 integrantes. ¿Cuánto recibe cada uno?",
-                options: [
-                    "$1.000",
-                    "$6.000",
-                    "$10.000",
-                    "$10.100"
-                ],
-                answer: 2,
-                feedback: "¡Correcto! Al dividir 6 ÷ 6 = 1, y luego bajamos los ceros restantes, agregando un cero al cociente por cada uno."
+                id: 4,
+                category: "Representación",
+                text: "En un kiosco, la razón entre manzanas y peras vendidas es 7:4. Si dibujamos este modelo, ¿cuántos elementos dibujamos en total para representar una unidad de la razón?",
+                visualization: "🍎x7 🍐x4",
+                options: ["11", "7", "4", "3"],
+                answer: "11",
+                feedback: "¡Así es! Sumamos 7 + 4 para ver el total del grupo base."
             },
             {
-                phase: "Pictórica",
-                text: "Imagina un modelo de área para (505 ÷ 5). Repartes 5 centenas y 5 unidades. ¿Qué pasa con las decenas?",
-                options: [
-                    "Se ignoran y el resultado es 11",
-                    "Se deja el espacio vacío, representado por un cero intermedio: 101",
-                    "Se suman a las unidades y da 110",
-                    "El modelo de área no sirve para ceros"
-                ],
-                answer: 1,
-                feedback: "¡Así es! 500 ÷ 5 = 100 y 5 ÷ 5 = 1. Sumados dan 101."
+                id: 5,
+                category: "Simbólica",
+                text: "Un curso tiene 12 mujeres y 8 hombres. ¿Cuál es la razón de mujeres respecto al TOTAL en forma de fracción?",
+                visualization: "👩x12 👨x8",
+                options: ["12/20", "12/8", "8/12", "8/20"],
+                answer: "12/20",
+                feedback: "¡Correcto! 12 mujeres de un total de 20 (12+8)."
             },
             {
-                phase: "Pictórica",
-                text: "En la división (900 ÷ 3) representada con bloques multibase, ¿cómo se explica el resultado?",
-                options: [
-                    "Son 3 bloques de 100, por eso el resultado es 3",
-                    "Son 3 grupos de 300, por eso el cociente es 300",
-                    "Son 9 bloques, el resultado es 90",
-                    "Da 30 porque falta un cero"
-                ],
-                answer: 1,
-                feedback: "¡Correcto! 9 centenas repartidas en 3 grupos dan 3 centenas exactas, los ceros completan las posiciones vacías."
+                id: 6,
+                category: "Resolución de Problemas",
+                text: "Una receta de pan pide harina y agua en razón 5:2. Si uso 10 tazas de harina, ¿cuántas de agua necesito?",
+                visualization: "🍞 Harina: 5 -> 10 | Agua: 2 -> ?",
+                options: ["4 tazas", "5 tazas", "2 tazas", "10 tazas"],
+                answer: "4 tazas",
+                feedback: "¡Excelente! La harina se duplicó (5x2=10), así que el agua también (2x2=4)."
             },
             {
-                phase: "Modelar",
-                text: "Se tienen 4 centenas y 2 unidades que se agrupan en 4 partes iguales, resultando 1 centena, 0 decenas y 0,5 unidades. ¿Qué división representa?",
-                options: [
-                    "420 ÷ 4",
-                    "400 ÷ 2",
-                    "402 ÷ 4",
-                    "204 ÷ 4"
-                ],
-                answer: 2,
-                feedback: "¡Excelente! 4 centenas (400) y 2 unidades (2) hacen el dividendo 402."
+                id: 7,
+                category: "Simbólica",
+                text: "Simplifica la razón 15:25 a su mínima expresión.",
+                visualization: "15 / 25 = ?",
+                options: ["3 : 5", "5 : 3", "1 : 2", "3 : 10"],
+                answer: "3 : 5",
+                feedback: "¡Bien! Dividimos ambos términos por 5."
             },
             {
-                phase: "Pictórica",
-                text: "Si divides 2.040 por 4, ¿dónde aparecerían ceros en el cociente?",
-                options: [
-                    "Solo al inicio",
-                    "Solo al final (Cero final)",
-                    "Al inicio y al final",
-                    "No lleva ceros el cociente"
-                ],
-                answer: 1,
-                feedback: "¡Bien! 2040 ÷ 4 = 510. El cero aparece al final porque la unidad 0 no se puede repartir."
+                id: 8,
+                category: "Simbólica",
+                text: "Simplifica la razón 42/14 a su mínima expresión.",
+                visualization: "42 : 14 = ?",
+                options: ["3 : 1", "2 : 1", "6 : 2", "1 : 3"],
+                answer: "3 : 1",
+                feedback: "¡Correcto! 42 dividido por 14 es exactamente 3."
             },
             {
-                phase: "Simbólica",
-                text: "Resuelve: 840 ÷ 8 = ?",
-                options: [
-                    "15",
-                    "105",
-                    "150",
-                    "100"
-                ],
-                answer: 1,
-                feedback: "¡Correcto! 8 ÷ 8 = 1, bajamos el 4 (es menor que 8, ponemos 0), bajamos el 0, 40 ÷ 8 = 5. Total: 105."
+                id: 9,
+                category: "Argumentación",
+                text: "En una prueba, la razón entre preguntas A (alternativa) y C (completación) es 27:1. Un informe dice: 'Por cada 27 de alternativa, hay 28 en total'. ¿Es esto correcto?",
+                visualization: "📝 A:27 | C:1",
+                options: ["Sí, es correcto", "No, el total es 27", "No, el total es 26", "No, la razón es 27:28"],
+                answer: "Sí, es correcto",
+                feedback: "¡Exacto! El total es la suma de las partes: 27 + 1 = 28."
             },
             {
-                phase: "Simbólica",
-                text: "Resuelve (605 ÷ 3). ¿Cuál es el cociente y el resto?",
-                options: [
-                    "Cociente: 201, Resto: 2",
-                    "Cociente: 21, Resto: 2",
-                    "Cociente: 200, Resto: 5",
-                    "Cociente: 21, Resto: 0"
-                ],
-                answer: 0,
-                feedback: "¡Perfecto! 6 ÷ 3 = 2, bajamos 0 (0), bajamos 5 ÷ 3 = 1 y sobran 2."
+                id: 10,
+                category: "Resolución de Problemas",
+                text: "La razón de perros (Josefa) a gatos (Ricardo) es 4:3. Si Ricardo tiene 9 gatos, ¿cuántos perros tiene Josefa?",
+                visualization: "🐕:4 | 🐈:3 (9 total)",
+                options: ["12 perros", "10 perros", "16 perros", "7 perros"],
+                answer: "12 perros",
+                feedback: "¡Muy bien! Como 3 x 3 = 9 gatos, entonces 4 x 3 = 12 perros."
             },
             {
-                phase: "Simbólica",
-                text: "Resuelve (409 ÷ 4) y dime el resto.",
-                options: [
-                    "Cociente 12, Resto 1",
-                    "Cociente 102, Resto 1",
-                    "Cociente 120, Resto 9",
-                    "Cociente 100, Resto 9"
-                ],
-                answer: 1,
-                feedback: "¡Correcto! 409 ÷ 4 = 102 y sobra 1."
+                id: 11,
+                category: "Modelado",
+                text: "En un mapa escala 1:50.000, 1 cm representa 50.000 cm reales. Si hay 8 cm en el mapa, ¿cuántos metros reales son?",
+                visualization: "🗺️ 1cm = 500m",
+                options: ["4.000 metros", "400.000 metros", "400 metros", "50.000 metros"],
+                answer: "4.000 metros",
+                feedback: "¡Correcto! 8 x 50.000 = 400.000 cm. Al pasar a metros (dividir por 100) da 4.000."
             },
             {
-                phase: "Simbólica",
-                text: "Calcula el resultado de: 5.025 ÷ 5",
-                options: [
-                    "105",
-                    "1.005",
-                    "1.050",
-                    "1.25"
-                ],
-                answer: 1,
-                feedback: "¡Muy bien! 5 ÷ 5 = 1, bajamos 0 (0), bajamos 2 (es menor que 5, ponemos 0), bajamos 5, 25 ÷ 5 = 5. Resultado 1.005."
+                id: 12,
+                category: "Resolución de Problemas",
+                text: "Por cada 5 cuecas hay 7 canciones de folclore (5:7). Si hay 48 canciones en total, ¿cuántas son de folclore?",
+                visualization: "🎶 Total: 48 | Partes: 5+7=12",
+                options: ["28 canciones", "20 canciones", "25 canciones", "35 canciones"],
+                answer: "28 canciones",
+                feedback: "¡Bien! Cada parte vale 4 (48/12). 7 partes de folclore x 4 = 28."
             },
             {
-                phase: "Simbólica",
-                text: "Calcula: 9.036 ÷ 9",
-                options: [
-                    "1.004",
-                    "140",
-                    "1.040",
-                    "1.400"
-                ],
-                answer: 0,
-                feedback: "¡Exacto! El cociente es 1.004."
+                id: 13,
+                category: "Resolución de Problemas",
+                text: "Razón entre sillas desocupadas y ocupadas es 1:5. Si hay 36 sillas en total, ¿cuántas están ocupadas?",
+                visualization: "🪑 Total: 36 | Razón: 1:5",
+                options: ["30 ocupadas", "6 ocupadas", "25 ocupadas", "31 ocupadas"],
+                answer: "30 ocupadas",
+                feedback: "¡Correcto! Total partes = 6. 36/6 = 6. Sillas ocupadas = 5 partes x 6 = 30."
             },
             {
-                phase: "Simbólica",
-                text: "Resuelve: 770 ÷ 7",
-                options: [
-                    "11",
-                    "101",
-                    "110",
-                    "111"
-                ],
-                answer: 2,
-                feedback: "¡Bien! 77 ÷ 7 = 11, y bajamos el último 0 poniendo un 0 en el cociente."
+                id: 14,
+                category: "Modelado",
+                text: "Una caja tiene 10 bolitas negras y 14 blancas. Si queremos una situación equivalente con 15 bolitas negras, ¿cuántas blancas debería haber?",
+                visualization: "⚫:10 ⚪:14 | Nueva ⚫:15",
+                options: ["21 blancas", "20 blancas", "19 blancas", "24 blancas"],
+                answer: "21 blancas",
+                feedback: "¡Excelente! La razón 10:14 simplificada es 5:7. Si 5 x 3 = 15, entonces 7 x 3 = 21."
             },
             {
-                phase: "Simbólica",
-                text: "Al dividir (3.010 ÷ 3), ¿qué tipo de ceros aparecen en el cociente?",
-                options: [
-                    "Un cero final",
-                    "Dos ceros intermedios (Cociente 1.003)",
-                    "Ningún cero",
-                    "Un cero intermedio y uno final"
-                ],
-                answer: 1,
-                feedback: "¡Correcto! El cociente es 1.003 y el resto es 1. Los ceros están al medio."
+                id: 15,
+                category: "Argumentación",
+                text: "Razón días soleados a nublados es 3:7. Si mayo tiene 31 días, ¿podemos aplicar esta razón exactamente con números enteros?",
+                visualization: "☀️:3 ☁️:7 | Total: 31",
+                options: ["No, porque 31 no es múltiplo de 10", "Sí, siempre se puede", "No, porque mayo tiene 30 días", "Sí, daría 10 días soleados"],
+                answer: "No, porque 31 no es múltiplo de 10",
+                feedback: "¡Exacto! La suma de las partes (10) debe dividir exactamente al total para tener cantidades enteras."
             },
             {
-                phase: "Simbólica",
-                text: "Determina el dividendo si el cociente es 105, el divisor es 6 y el resto es 3.",
-                options: [
-                    "630",
-                    "603",
-                    "633",
-                    "318"
-                ],
-                answer: 2,
-                feedback: "¡Gran cálculo! (105 × 6) + 3 = 630 + 3 = 633."
+                id: 16,
+                category: "Resolución de Problemas",
+                text: "Zapatillas rojas a azules en razón 4:5. Si hay 20 estudiantes con zapatillas rojas, ¿cuántos hay con azules?",
+                visualization: "👟 Roja:4 (20) | Azul:5 (?)",
+                options: ["25 estudiantes", "24 estudiantes", "16 estudiantes", "30 estudiantes"],
+                answer: "25 estudiantes",
+                feedback: "¡Bien! 4 x 5 = 20 rojas, entonces 5 x 5 = 25 azules."
             },
             {
-                phase: "Análisis",
-                text: "Javiera resolvió (6.005 ÷ 5) y obtuvo 121. Matías obtuvo 1.001. ¿Quién tiene la razón?",
-                options: [
-                    "Javiera está en lo correcto",
-                    "Matías tiene la razón",
-                    "Ambos están equivocados (Es 1.201)",
-                    "Ambos están equivocados (Es 1.210)"
-                ],
-                answer: 2,
-                feedback: "¡Ojo aquí! Matías se acercó pero Javiera falló. El cálculo real es: 6÷5=1 (sobra 1), bajamos 0 (formamos 10), 10÷5=2, bajamos 0 (0), bajamos 5÷5=1. Total: 1.201."
+                id: 17,
+                category: "Análisis/Porcentaje",
+                text: "En una caja de 50 alfajores, la razón chocolate a manjar es 3:2. ¿Qué porcentaje del total representan los de manjar?",
+                visualization: "🍫:3 🍯:2 | Total: 50",
+                options: ["40%", "20%", "60%", "50%"],
+                answer: "40%",
+                feedback: "¡Correcto! Manjar es 2 partes de 5 (2/5). Eso equivale al 40%."
             },
             {
-                phase: "Análisis",
-                text: "¿Es correcto afirmar que si el dividendo termina en cero, el cociente SIEMPRE debe terminar en cero?",
-                options: [
-                    "Sí, siempre ocurre",
-                    "No, es falso. Ejemplo: 420 ÷ 4 = 105",
-                    "No, solo si el divisor es par",
-                    "Sí, por la regla del cero"
-                ],
-                answer: 1,
-                feedback: "¡Excelente contraejemplo! 420 termina en 0, pero su cociente 105 termina en 5."
+                id: 18,
+                category: "Razón Compuesta",
+                text: "Bicicletas(B) a Skates(S) es 2:1. Skates(S) a Scooters(C) es 3:4. ¿Cuál es la razón compuesta B:S:C?",
+                visualization: "🚲:🛹 = 2:1 | 🛹:🛴 = 3:4",
+                options: ["6 : 3 : 4", "2 : 3 : 4", "6 : 1 : 4", "5 : 3 : 4"],
+                answer: "6 : 3 : 4",
+                feedback: "¡Maestro! Igualamos los Skates multiplicando la primera razón por 3: (2:1) x 3 = 6:3. Así B:S:C = 6:3:4."
             },
             {
-                phase: "Aplicación",
-                text: "Don José cosechó 1.800 kilos de manzanas para 9 camiones iguales. ¿Cuántos kilos lleva cada camión?",
-                options: [
-                    "20 kilos",
-                    "200 kilos",
-                    "2.000 kilos",
-                    "180 kilos"
-                ],
-                answer: 1,
-                feedback: "¡Correcto! 18 ÷ 9 = 2, y agregamos los dos ceros: 200."
+                id: 19,
+                category: "Aplicación",
+                text: "En una mezcla de jugo, la razón concentrado a agua es 1:4. Si tengo 2 litros de concentrado, ¿cuánto jugo TOTAL obtendré?",
+                visualization: "🍹 C:1 (2L) | A:4 | Total: ?",
+                options: ["10 litros", "8 litros", "6 litros", "5 litros"],
+                answer: "10 litros",
+                feedback: "¡Bien! 2L concentrado + 8L agua (4x2) = 10L total."
             },
             {
-                phase: "Ticket de Salida",
-                text: "Una empresa traslada 408 pasajeros en buses de capacidad para 4 personas. ¿Cuántos buses se necesitan?",
-                options: [
-                    "12 buses",
-                    "102 buses",
-                    "120 buses",
-                    "100 buses"
-                ],
-                answer: 1,
-                feedback: "¡Misión cumplida! 408 ÷ 4 = 102. ¡Has restaurado todos los ceros!"
+                id: 20,
+                category: "Consolidación",
+                text: "Si la razón A:B es 2:3 y el valor de la razón es A dividido por B, ¿cuál es el valor decimal de esta razón?",
+                visualization: "2 : 3 = ?",
+                options: ["0,66...", "1,5", "0,6", "0,5"],
+                answer: "0,66...",
+                feedback: "¡Misión Cumplida! 2 dividido en 3 es aproximadamente 0,66. ¡Has restaurado el equilibrio!"
             }
         ];
 
-        let currentQuestionIndex = 0;
-        let lives = 3;
-        let score = 0;
-
-        function startGame() {
-            document.getElementById('screen-intro').classList.add('hidden');
-            document.getElementById('screen-game').classList.remove('hidden');
-            showQuestion();
-        }
-
-        function showQuestion() {
-            const q = questions[currentQuestionIndex];
-            document.getElementById('current-task').innerText = currentQuestionIndex + 1;
-            document.getElementById('phase-tag').innerText = "FASE: " + q.phase;
-            document.getElementById('question-text').innerText = q.text;
-            document.getElementById('feedback').classList.add('hidden');
-            document.getElementById('btn-next').classList.add('hidden');
+        const gameState = {
+            currentIndex: 0,
+            lives: 3,
             
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
+            start() {
+                document.getElementById('screen-intro').classList.add('hidden');
+                document.getElementById('screen-game').classList.remove('hidden');
+                this.renderQuestion();
+            },
 
-            // Shuffle options but keep track of original index
-            const shuffledOptions = q.options
-                .map((text, index) => ({ text, index }))
-                .sort(() => Math.random() - 0.5);
-
-            shuffledOptions.forEach(opt => {
-                const btn = document.createElement('button');
-                btn.className = "comic-panel p-4 text-left hover:bg-yellow-100 transition-colors font-bold border-2 border-black rounded-lg option-btn";
-                btn.innerText = opt.text;
-                btn.onclick = () => checkAnswer(opt.index, btn);
-                optionsContainer.appendChild(btn);
-            });
-
-            updateProgress();
-        }
-
-        function checkAnswer(selectedIndex, btnElement) {
-            const q = questions[currentQuestionIndex];
-            const feedback = document.getElementById('feedback');
-            const feedbackText = document.getElementById('feedback-text');
-            const allBtns = document.querySelectorAll('.option-btn');
-
-            allBtns.forEach(btn => btn.disabled = true);
-
-            if (selectedIndex === q.answer) {
-                btnElement.classList.add('bg-green-400');
-                feedback.classList.remove('hidden', 'bg-red-100');
-                feedback.classList.add('bg-green-100');
-                feedbackText.innerText = "¡BOOM! " + q.feedback;
-                document.getElementById('btn-next').classList.remove('hidden');
-                score++;
-            } else {
-                btnElement.classList.add('bg-red-400', 'shake');
-                lives--;
-                updateLives();
-                feedback.classList.remove('hidden', 'bg-green-100');
-                feedback.classList.add('bg-red-100', 'shake');
-                feedbackText.innerText = "¡ZAP! Inténtalo de nuevo. Doctor Residuo gana terreno.";
+            renderQuestion() {
+                const q = questions[this.currentIndex];
+                document.getElementById('current-task').innerText = this.currentIndex + 1;
+                document.getElementById('category-tag').innerText = q.category;
+                document.getElementById('question-text').innerText = q.text;
+                document.getElementById('visualization').innerHTML = `<div class="marker-font text-3xl bg-yellow-200 p-3 border-2 border-black rotate-1">${q.visualization}</div>`;
                 
-                if (lives <= 0) {
-                    setTimeout(() => {
-                        alert("¡OH NO! El Doctor Residuo ha ganado. Reiniciando misión...");
-                        location.reload();
-                    }, 1000);
+                const optionsGrid = document.getElementById('options-grid');
+                optionsGrid.innerHTML = '';
+                
+                // Shuffle options
+                const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+                
+                shuffled.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.className = "btn-comic text-lg py-3 bg-white text-black hover:bg-blue-100";
+                    btn.innerText = opt;
+                    btn.onclick = () => this.check(opt, btn);
+                    optionsGrid.appendChild(btn);
+                });
+
+                document.getElementById('feedback-area').classList.add('hidden');
+                document.getElementById('progress-fill').style.width = `${(this.currentIndex / questions.length) * 100}%`;
+            },
+
+            check(selected, btn) {
+                const q = questions[this.currentIndex];
+                const feedbackArea = document.getElementById('feedback-area');
+                const feedbackText = document.getElementById('feedback-text');
+                
+                if (selected === q.answer) {
+                    btn.style.background = "#4ade80";
+                    feedbackText.innerText = "💥 " + q.feedback;
+                    feedbackArea.classList.remove('hidden');
+                    document.querySelectorAll('#options-grid button').forEach(b => b.disabled = true);
                 } else {
-                    setTimeout(() => {
-                        allBtns.forEach(btn => btn.disabled = false);
-                        btnElement.classList.remove('bg-red-400', 'shake');
-                        feedback.classList.add('hidden');
-                    }, 1500);
+                    btn.style.background = "#f87171";
+                    btn.classList.add('shake');
+                    this.lives--;
+                    this.updateLives();
+                    if (this.lives <= 0) {
+                        alert("⚠️ ¡ENERGÍA AGOTADA! El Capitán Comparación necesita descansar. Reiniciando misión...");
+                        location.reload();
+                    }
                 }
+            },
+
+            updateLives() {
+                const display = document.getElementById('lives');
+                display.innerText = "❤️".repeat(this.lives) + "🖤".repeat(3 - this.lives);
+            },
+
+            next() {
+                this.currentIndex++;
+                if (this.currentIndex < questions.length) {
+                    this.renderQuestion();
+                } else {
+                    this.victory();
+                }
+            },
+
+            victory() {
+                document.getElementById('screen-game').classList.add('hidden');
+                document.getElementById('screen-victory').classList.remove('hidden');
             }
-        }
+        };
 
-        function updateLives() {
-            const heartIcons = ['🖤', '❤️'];
-            let hearts = "";
-            for(let i=0; i<3; i++) {
-                hearts += (i < lives) ? '❤️ ' : '🖤 ';
-            }
-            document.getElementById('lives').innerText = hearts;
-        }
-
-        function updateProgress() {
-            const progress = (currentQuestionIndex / questions.length) * 100;
-            document.getElementById('progress-fill').style.width = progress + "%";
-        }
-
-        function nextQuestion() {
-            currentQuestionIndex++;
-            if (currentQuestionIndex < questions.length) {
-                showQuestion();
-            } else {
-                showFinalScreen();
-            }
-        }
-
-        function showFinalScreen() {
-            document.getElementById('screen-game').classList.add('hidden');
-            document.getElementById('screen-final').classList.remove('hidden');
-            document.getElementById('progress-fill').style.width = "100%";
-        }
+        // Initialize HUD
+        gameState.updateLives();
     </script>
 </body>
 </html>
