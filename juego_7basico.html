@@ -3,440 +3,422 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Escape Room: Guardianes de las Fracciones!</title>
+    <title>Micro & Macro: Misión Estelar</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --space-purple: #4a148c;
+            --hero-red: #d32f2f;
+            --tech-blue: #1976d2;
+            --neon-yellow: #ffee58;
+        }
+
         body {
-            font-family: 'Comic Neue', cursive;
-            background-color: #0b1a2e; /* Azul cómic oscuro */
-            /* Patrón de puntos estilo cómic (Halftone) */
-            background-image: radial-gradient(#2563eb 15%, transparent 16%), radial-gradient(#2563eb 15%, transparent 16%);
-            background-size: 24px 24px;
-            background-position: 0 0, 12px 12px;
-            overflow-x: hidden;
-            min-height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            background-color: #0b0d17;
+            background-image: radial-gradient(#ffffff22 1px, transparent 1px);
+            background-size: 25px 25px; /* Ben-Day dots style for space */
+            color: #e0e0e0;
         }
 
-        h1, h2, h3, .comic-title {
-            font-family: 'Bangers', display;
-            letter-spacing: 2px;
+        .comic-font { font-family: 'Bangers', cursive; letter-spacing: 1px; }
+        .tech-font { font-family: 'Orbitron', sans-serif; }
+
+        .comic-border {
+            border: 4px solid black;
+            box-shadow: 8px 8px 0px #000;
         }
 
-        .comic-panel {
-            background-color: #ffffff;
-            border: 5px solid #000;
-            box-shadow: 10px 10px 0px 0px #000;
-            border-radius: 12px;
+        .hero-panel {
+            background: white;
+            color: black;
+            border: 4px solid black;
             position: relative;
         }
 
-        .comic-button {
-            font-family: 'Chewy', display;
-            letter-spacing: 1px;
-            transition: all 0.15s ease;
-            box-shadow: 5px 5px 0px 0px #000;
-        }
-
-        .comic-button:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 8px 8px 0px 0px #000;
-        }
-
-        .comic-button:active {
-            transform: translate(5px, 5px);
-            box-shadow: 0px 0px 0px 0px #000;
-        }
-
-        /* Efectos Visuales (¡POW!, ¡BAM!) */
-        .pow-effect {
+        .hero-panel::after {
+            content: "";
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background: #ffea00;
-            color: #d90429;
-            padding: 2.5rem 4.5rem;
-            font-size: 5rem;
-            font-family: 'Bangers', display;
-            border: 6px solid #000;
-            border-radius: 50%;
-            box-shadow: 0 0 0 10px #ff0000, 0 0 0 15px #000;
-            z-index: 50;
-            opacity: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(rgba(0,0,0,0.05) 10%, transparent 10%);
+            background-size: 4px 4px;
             pointer-events: none;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
-            text-align: center;
         }
 
-        .pow-effect.active {
-            transform: translate(-50%, -50%) scale(1) rotate(-15deg);
-            opacity: 1;
+        .btn-action {
+            background: var(--hero-red);
+            color: white;
+            border: 3px solid black;
+            padding: 12px;
+            transform: skew(-3deg);
+            transition: all 0.2s;
         }
 
-        /* Estilo personalizado para el Menú Desplegable */
+        .btn-action:hover {
+            transform: skew(-3deg) scale(1.05);
+            background: var(--tech-blue);
+            box-shadow: 4px 4px 0px var(--neon-yellow);
+        }
+
+        .shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+
         select {
             appearance: none;
-            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1.5rem top 50%;
-            background-size: 1rem auto;
+            background: #eee;
+            border: 2px solid black;
+            padding: 8px;
+            border-radius: 0;
+            font-weight: bold;
         }
 
-        /* Resaltar fracciones en el texto */
-        .big-math {
-            font-family: 'Bangers', display;
-            font-size: 2.8rem;
-            color: #d90429;
-            text-shadow: 2px 2px 0px #000;
-            letter-spacing: 3px;
-            display: inline-block;
-            margin: 0 10px;
+        .progress-container {
+            height: 15px;
+            background: #333;
+            border: 2px solid #000;
+            border-radius: 10px;
+            overflow: hidden;
         }
-        
-        .math-symbol {
-            color: #2563eb;
-            font-size: 2.2rem;
-            text-shadow: 1px 1px 0px #000;
+
+        .progress-bar {
+            height: 100%;
+            background: var(--neon-yellow);
+            width: 0%;
+            transition: width 0.4s ease;
         }
+
+        sup { vertical-align: super; font-size: 0.7em; }
     </style>
 </head>
-<body class="text-gray-900 flex flex-col items-center justify-center p-4">
+<body class="min-h-screen p-4 md:p-8 flex flex-col items-center">
 
-    <div class="max-w-4xl w-full mt-4">
+    <div id="game-container" class="w-full max-w-4xl">
         
-        <!-- Cabecera y Objetivo de Aprendizaje -->
-        <header class="mb-8 text-center">
-            <div class="inline-block bg-yellow-400 border-4 border-black px-8 py-3 rounded-xl transform -rotate-2 shadow-[6px_6px_0px_0px_#000] mb-6">
-                <h1 class="text-4xl md:text-6xl text-red-600 drop-shadow-md">¡ESCAPE ROOM!</h1>
-                <h2 class="text-2xl md:text-3xl text-blue-900">Guardianes de las Fracciones (7° Básico)</h2>
-            </div>
-            
-            <div class="comic-panel bg-purple-700 text-white p-5 mx-auto max-w-3xl transform rotate-1">
-                <h3 class="text-2xl text-yellow-300 mb-2">🎯 Objetivo de la Misión</h3>
-                <p class="text-base md:text-lg font-bold">
-                    Demostrar comprensión de la multiplicación y división de fracciones, resolviendo cálculos y problemas contextualizados de manera precisa para salvar el multiverso.
-                </p>
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <div class="inline-block bg-white comic-border p-4 transform -rotate-1">
+                <h1 class="comic-font text-5xl md:text-7xl text-red-600 uppercase">Micro & Macro</h1>
+                <p class="font-bold text-purple-900 mt-2 text-sm md:text-base">OBJETIVO: Aplicar notación científica y potencias de base 10 para magnitudes extremas.</p>
             </div>
         </header>
 
-        <!-- Contenedor Principal del Juego -->
-        <main id="game-container" class="comic-panel bg-white p-6 md:p-10 mb-10 relative">
-            
-            <!-- Efecto de feedback visual estilo cómic -->
-            <div id="pow-message" class="pow-effect">¡ZAP!</div>
+        <!-- Dynamic Content -->
+        <main id="game-stage">
+            <!-- Screen 1: Story Intro -->
+            <section id="screen-intro" class="hero-panel p-8 rounded-lg flex flex-col md:flex-row items-center gap-8">
+                <div class="w-full md:w-1/3 text-center">
+                    <div class="text-9xl">👩‍🚀</div>
+                    <h2 class="comic-font text-3xl mt-4 text-purple-800">Comandante Mantisa</h2>
+                </div>
+                <div class="w-full md:w-2/3">
+                    <div class="bg-blue-100 p-6 comic-border mb-6 border-dashed">
+                        <p class="text-lg font-bold">¡Recluta! Los sistemas de navegación han sido hackeados por el "Sindicato del Cero Infinito". Han mezclado las medidas de los virus microscópicos con las distancias de las estrellas. Si no restauramos la notación científica, nuestra nave quedará a la deriva. ¡Debes resolver los 20 módulos de calibración!</p>
+                    </div>
+                    <button onclick="app.start()" class="btn-action w-full text-2xl comic-font uppercase">Iniciar Calibración</button>
+                </div>
+            </section>
 
-            <!-- Pantalla de Inicio -->
-            <div id="start-screen" class="text-center">
-                <div class="text-8xl mb-6 animate-pulse">🌌🛸</div>
-                <h2 class="text-4xl md:text-5xl comic-title text-blue-700 mb-4">¡El Villano "Doctor División" ataca!</h2>
-                <p class="text-xl mb-8 font-bold text-gray-700 leading-relaxed max-w-2xl mx-auto">
-                    El malvado Doctor División ha fracturado la realidad usando sus rayos partidores. Para reparar las dimensiones, debes resolver <span class="text-red-600 font-extrabold text-2xl">20 retos de multiplicaciones y divisiones de fracciones</span>. <br><br>
-                    ¿Estás preparado para usar el algoritmo supremo y restaurar el multiverso?
-                </p>
-                <button onclick="startGame()" class="comic-title comic-button bg-red-600 text-white text-3xl py-4 px-12 rounded-full border-4 border-black">
-                    ¡ENTRAR AL MULTIVERSO!
-                </button>
-            </div>
-
-            <!-- Pantalla del Juego -->
-            <div id="quiz-screen" class="hidden">
+            <!-- Screen 2: Gameplay -->
+            <section id="screen-game" class="hidden">
                 <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-                    <span class="comic-title text-3xl text-purple-700" id="level-indicator">Nivel: 1/20</span>
-                    <div class="w-full md:w-1/2 bg-gray-200 border-4 border-black rounded-full h-8 relative overflow-hidden shadow-inner">
-                        <div id="progress-bar" class="bg-gradient-to-r from-blue-400 to-purple-600 h-full w-0 transition-all duration-500"></div>
+                    <div class="tech-font text-yellow-400">MÓDULO: <span id="task-num">1</span>/20</div>
+                    <div class="w-full md:w-1/2">
+                        <div class="progress-container"><div id="bar" class="progress-bar"></div></div>
+                    </div>
+                    <div class="tech-font text-red-500">ESCUDOS: <span id="shield-hp">🛡️🛡️🛡️</span></div>
+                </div>
+
+                <div id="challenge-card" class="hero-panel p-6 rounded-xl flex flex-col min-h-[400px]">
+                    <div id="badge" class="bg-purple-700 text-white px-3 py-1 inline-block comic-font text-sm uppercase mb-4 self-start">Nivel 1: Potencias</div>
+                    
+                    <div id="task-content" class="flex-grow">
+                        <h3 id="question-text" class="text-2xl font-bold mb-6">Pregunta...</h3>
+                        
+                        <div id="visual-aid" class="mb-8 p-4 bg-yellow-50 border-2 border-black border-dotted text-center italic font-bold text-xl">
+                            <!-- Visual data here -->
+                        </div>
+
+                        <div class="flex flex-col gap-4">
+                            <label class="font-bold text-blue-800">Selecciona la calibración correcta:</label>
+                            <select id="answer-select" class="w-full text-lg cursor-pointer">
+                                <option value="" disabled selected>-- Elige una opción --</option>
+                                <!-- Options by JS -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="interaction-area" class="mt-8 flex gap-4">
+                        <button id="btn-check" onclick="app.check()" class="btn-action flex-1 text-xl comic-font uppercase">Validar Sistema</button>
+                        <button id="btn-next" onclick="app.next()" class="hidden btn-action flex-1 bg-green-600 text-xl comic-font uppercase">Próximo Módulo >></button>
                     </div>
                 </div>
+            </section>
 
-                <div class="bg-blue-50 border-4 border-blue-500 rounded-xl p-6 md:p-8 mb-8 transform shadow-inner relative">
-                    <div id="category-icon" class="absolute -top-6 -left-6 text-5xl bg-white rounded-full p-2 border-4 border-black shadow-[4px_4px_0px_0px_#000]">🧮</div>
-                    <p id="question-text" class="text-2xl md:text-3xl font-bold text-center text-gray-800 leading-snug"></p>
+            <!-- Screen 3: Victory -->
+            <section id="screen-victory" class="hidden text-center">
+                <div class="hero-panel p-12 rounded-3xl">
+                    <h2 class="comic-font text-7xl text-blue-600 mb-4 uppercase">¡Galaxia a Salvo!</h2>
+                    <div class="text-9xl mb-6">🚀</div>
+                    <p class="text-2xl font-bold mb-8">Has calibrado todos los sistemas. El Sindicato ha sido derrotado gracias a tu dominio de las potencias y la notación científica.</p>
+                    <button onclick="location.reload()" class="btn-action text-2xl comic-font uppercase px-12">Nueva Misión</button>
                 </div>
-
-                <div class="flex flex-col items-center w-full max-w-xl mx-auto">
-                    <label for="answer-select" class="comic-title text-2xl text-red-600 mb-3 block w-full text-left">Selecciona la fracción correcta:</label>
-                    <select id="answer-select" class="w-full border-4 border-black text-2xl font-bold rounded-xl p-5 bg-yellow-100 focus:outline-none focus:ring-4 focus:ring-purple-400 mb-6 cursor-pointer text-gray-800 shadow-[4px_4px_0px_0px_#000]">
-                        <option value="" disabled selected>Despliega tus opciones...</option>
-                        <!-- Las opciones se generarán dinámicamente -->
-                    </select>
-
-                    <button id="submit-btn" onclick="checkAnswer()" class="comic-button bg-purple-700 text-white text-3xl py-4 px-10 rounded-xl border-4 border-black w-full text-center">
-                        ¡CALCULAR Y ATACAR! ⚡
-                    </button>
-                    <p id="error-msg" class="text-red-600 font-bold text-xl mt-4 hidden bg-red-100 p-2 rounded border-2 border-red-500">¡Alerta! Debes seleccionar un ataque (respuesta) primero.</p>
-                </div>
-            </div>
-
-            <!-- Pantalla Final -->
-            <div id="end-screen" class="hidden text-center">
-                <div class="text-8xl mb-6">🏆🌍</div>
-                <h2 class="text-5xl md:text-6xl comic-title text-yellow-500 drop-shadow-[3px_3px_0px_rgba(0,0,0,1)] mb-6">¡MULTIVERSO SALVADO!</h2>
-                <p class="text-2xl mb-8 font-bold text-gray-800 max-w-2xl mx-auto">
-                    ¡Impresionante! Has dominado los algoritmos de multiplicación y división de fracciones. El Doctor División ha sido derrotado y el universo matemático está en equilibrio otra vez.
-                </p>
-                <button onclick="location.reload()" class="comic-title comic-button bg-green-500 text-white text-3xl py-4 px-12 rounded-full border-4 border-black">
-                    JUGAR DE NUEVO
-                </button>
-            </div>
-            
+            </section>
         </main>
     </div>
 
     <script>
-        // --- BASE DE DATOS DE PREGUNTAS (20 Retos Progresivos - 7° Básico) ---
-        // Foco: Algoritmo de multiplicación, algoritmo de división (invertir), simplificación y problemas de planteo.
-        const questions = [
-            // Fase 1: Algoritmo de Multiplicación (Directo)
+        const database = [
             {
-                icon: "✖️",
-                q: "Misión 1: Para multiplicar fracciones, multiplicamos hacia el lado. Calcula: <br><span class='big-math'>1/2</span> <span class='math-symbol'>x</span> <span class='big-math'>1/3</span>",
-                a: "1/6",
-                opts: ["1/6", "2/5", "1/5", "2/6"]
+                q: "Escribe 1.000 como una potencia de base 10.",
+                aid: "1.000",
+                options: ["10²", "10³", "10⁴", "10¹"],
+                ans: "10³",
+                badge: "Potencias Base 10",
+                feed: "¡Correcto! El exponente 3 indica los tres ceros que acompañan al 1."
             },
             {
-                icon: "✖️",
-                q: "Misión 2: Multiplica y simplifica si es posible: <br><span class='big-math'>2/5</span> <span class='math-symbol'>x</span> <span class='big-math'>3/4</span>",
-                a: "3/10",
-                opts: ["3/10", "6/20", "5/9", "8/15"]
+                q: "Escribe 0,01 como una potencia de base 10.",
+                aid: "0,01",
+                options: ["10⁻¹", "10⁻²", "10⁻³", "10²"],
+                ans: "10⁻²",
+                badge: "Potencias Base 10",
+                feed: "¡Excelente! El exponente negativo indica que es un decimal con dos posiciones."
             },
             {
-                icon: "✖️",
-                q: "Misión 3: Multiplica un número entero por una fracción (recuerda que el 4 es como 4/1): <br><span class='big-math'>4</span> <span class='math-symbol'>x</span> <span class='big-math'>1/5</span>",
-                a: "4/5",
-                opts: ["4/5", "1/20", "5/4", "4/20"]
+                q: "¿Cuál es el valor de 10⁵?",
+                aid: "10 x 10 x 10 x 10 x 10",
+                options: ["50", "10.000", "100.000", "500.000"],
+                ans: "100.000",
+                badge: "Potencias Base 10",
+                feed: "¡ZAS! 10⁵ es un 1 seguido de cinco ceros."
             },
             {
-                icon: "✖️",
-                q: "Misión 4: Multiplica estas fracciones (no olvides simplificar tu resultado final): <br><span class='big-math'>3/7</span> <span class='math-symbol'>x</span> <span class='big-math'>2/3</span>",
-                a: "2/7",
-                opts: ["2/7", "6/21", "5/10", "9/14"]
-            },
-            
-            // Fase 2: Algoritmo de División (Invertir y multiplicar)
-            {
-                icon: "➗",
-                q: "Misión 5: Para dividir, invertimos la segunda fracción y multiplicamos. Resuelve: <br><span class='big-math'>1/2</span> <span class='math-symbol'>÷</span> <span class='big-math'>1/4</span>",
-                a: "2",
-                opts: ["2", "1/8", "4", "1/2"]
+                q: "Expresa 10⁻⁴ en forma decimal.",
+                aid: "10⁻⁴",
+                options: ["0,0001", "0,0004", "0,001", "0,00001"],
+                ans: "0,0001",
+                badge: "Potencias Base 10",
+                feed: "¡Bien! Cuatro lugares después de la coma para el 1."
             },
             {
-                icon: "➗",
-                q: "Misión 6: ¡Aplica el algoritmo de la división! <br><span class='big-math'>2/3</span> <span class='math-symbol'>÷</span> <span class='big-math'>3/5</span>",
-                a: "10/9",
-                opts: ["10/9", "6/15", "5/2", "9/10"]
+                q: "Un número en Notación Científica (a x 10ⁿ) debe cumplir que el coeficiente 'a' sea:",
+                aid: "[a x 10ⁿ]",
+                options: ["Cualquier número", "Entre 0 y 1", "Mayor o igual a 1 y menor que 10", "Exactamente 10"],
+                ans: "Mayor o igual a 1 y menor que 10",
+                badge: "Teoría NC",
+                feed: "¡Correcto! Esa es la regla de oro de la mantisa."
             },
             {
-                icon: "➗",
-                q: "Misión 7: Divide una fracción por un entero (el 2 es igual a 2/1): <br><span class='big-math'>3/4</span> <span class='math-symbol'>÷</span> <span class='big-math'>2</span>",
-                a: "3/8",
-                opts: ["3/8", "6/4", "3/2", "8/3"]
+                q: "Calibra la distancia a la estrella Próxima Centauri: 40.000.000.000.000 km.",
+                aid: "40.000.000.000.000",
+                options: ["4 x 10¹²", "4 x 10¹³", "40 x 10¹²", "4 x 10¹⁴"],
+                ans: "4 x 10¹³",
+                badge: "Representación",
+                feed: "¡BOOM! Moviste la coma 13 espacios a la izquierda."
             },
             {
-                icon: "➗",
-                q: "Misión 8: ¿Qué resulta al dividir una fracción por sí misma? <br><span class='big-math'>4/5</span> <span class='math-symbol'>÷</span> <span class='big-math'>4/5</span>",
-                a: "1",
-                opts: ["1", "16/25", "8/10", "0"]
+                q: "El tamaño de un virus es 0,00000012 metros. ¿Cómo se escribe en NC?",
+                aid: "0,00000012",
+                options: ["1,2 x 10⁻⁶", "1,2 x 10⁻⁷", "12 x 10⁻⁸", "0,12 x 10⁻⁶"],
+                ans: "1,2 x 10⁻⁷",
+                badge: "Representación",
+                feed: "¡Perfecto! Movimos la coma 7 posiciones a la derecha."
             },
             {
-                icon: "➗",
-                q: "Misión 9: Divide con denominadores iguales. <br><span class='big-math'>4/5</span> <span class='math-symbol'>÷</span> <span class='big-math'>2/5</span>",
-                a: "2",
-                opts: ["2", "8/25", "1/2", "4"]
-            },
-
-            // Fase 3: Problemas de Planteo - Multiplicación
-            {
-                icon: "🧪",
-                q: "Misión 10 (Poción): Una receta de súper-suero requiere <b>1/4 de litro</b> de jugo radiactivo. Si queremos hacer <b>3 recetas</b>, ¿cuánto jugo necesitamos en total?",
-                a: "3/4 de litro",
-                opts: ["3/4 de litro", "1/12 de litro", "4/3 de litro", "3/12 de litro"]
+                q: "Transforma 5,8 x 10⁶ a notación estándar.",
+                aid: "5,8 x 10⁶",
+                options: ["580.000", "5.800.000", "58.000.000", "5.000.008"],
+                ans: "5.800.000",
+                badge: "Conversión",
+                feed: "¡Correcto! Desplazaste la coma 6 lugares a la derecha."
             },
             {
-                icon: "🎨",
-                q: "Misión 11 (Armadura): Pintar un panel de armadura requiere <b>2/5 de litro</b> de pintura de titanio. ¿Cuánta pintura necesitas para pintar <b>5 paneles</b>?",
-                a: "2 litros",
-                opts: ["2 litros", "10/25 de litro", "7/5 de litro", "1/2 litro"]
+                q: "Transforma 9,2 x 10⁻³ a notación estándar.",
+                aid: "9,2 x 10⁻³",
+                options: ["0,092", "0,0092", "0,00092", "9.200"],
+                ans: "0,0092",
+                badge: "Conversión",
+                feed: "¡Bien hecho! La coma se movió 3 lugares a la izquierda."
             },
             {
-                icon: "🍕",
-                q: "Misión 12 (Celebración): Después de salvar la ciudad, quedaron <b>3/4 de una pizza</b>. Si decides comerte <b>la mitad (1/2)</b> de lo que sobró, ¿qué fracción de la pizza total te comiste?",
-                a: "3/8",
-                opts: ["3/8", "2/4", "3/2", "4/6"]
-            },
-            
-            // Fase 4: Problemas de Planteo - División
-            {
-                icon: "🪢",
-                q: "Misión 13 (Rescate): Tienes una cuerda láser de <b>3/4 de metro</b>. Si la cortas en trozos pequeños de <b>1/8 de metro</b>, ¿cuántos trozos obtienes?",
-                a: "6 trozos",
-                opts: ["6 trozos", "3 trozos", "8 trozos", "12 trozos"]
+                q: "La población mundial es aprox. 8.000.000.000. Expresa esto en NC.",
+                aid: "8.000.000.000",
+                options: ["8 x 10⁸", "8 x 10⁹", "80 x 10⁸", "8 x 10¹⁰"],
+                ans: "8 x 10⁹",
+                badge: "Modelar",
+                feed: "¡Exacto! 9 ceros equivalen al exponente 9."
             },
             {
-                icon: "💧",
-                q: "Misión 14 (Recarga): Tienes <b>1/2 litro</b> de líquido curativo y quieres envasarlo en pequeños tubos de ensayo de <b>1/8 de litro</b> cada uno. ¿Cuántos tubos puedes llenar?",
-                a: "4 tubos",
-                opts: ["4 tubos", "8 tubos", "2 tubos", "16 tubos"]
+                q: "Multiplica (2 x 10³) x (3 x 10⁴).",
+                aid: "(2 x 10³) • (3 x 10⁴)",
+                options: ["6 x 10⁷", "6 x 10¹²", "5 x 10⁷", "6 x 10¹"],
+                ans: "6 x 10⁷",
+                badge: "Cálculo",
+                feed: "¡POW! 2x3=6 y sumamos exponentes: 3+4=7."
             },
             {
-                icon: "🌍",
-                q: "Misión 15 (Territorio): Un terreno espacial de <b>3/5 de hectárea</b> se divide en partes iguales de <b>1/10 de hectárea</b>. ¿Cuántas partes salen?",
-                a: "6 partes",
-                opts: ["6 partes", "5 partes", "3 partes", "10 partes"]
-            },
-
-            // Fase 5: Combinados, fracciones como operadores y simplificación avanzada
-            {
-                icon: "🧠",
-                q: "Misión 16: Fracción de una fracción. ¿Cuánto es <b>la mitad de 4/5</b>?",
-                a: "2/5",
-                opts: ["2/5", "4/10", "8/5", "4/2.5"]
+                q: "Divide (8 x 10⁶) / (2 x 10²).",
+                aid: "(8 x 10⁶) : (2 x 10²)",
+                options: ["4 x 10³", "4 x 10⁴", "4 x 10⁸", "16 x 10⁴"],
+                ans: "4 x 10⁴",
+                badge: "Cálculo",
+                feed: "¡Correcto! 8/2=4 y restamos exponentes: 6-2=4."
             },
             {
-                icon: "🧠",
-                q: "Misión 17: Operación combinada. Primero multiplica y luego simplifica el resultado: <br><span class='big-math'>5/6</span> <span class='math-symbol'>x</span> <span class='big-math'>4/5</span>",
-                a: "2/3",
-                opts: ["2/3", "20/30", "9/11", "4/6"]
+                q: "Un astronauta dice que 0,005 es 5 x 10³. ¿Qué error cometió?",
+                aid: "Afirmación: 0,005 = 5 x 10³",
+                options: ["Ninguno, está bien", "El exponente debe ser positivo", "El exponente debe ser negativo (-3)", "El coeficiente debe ser 0,5"],
+                ans: "El exponente debe ser negativo (-3)",
+                badge: "Análisis de Error",
+                feed: "¡Bien visto! Para decimales pequeños el exponente es negativo."
             },
             {
-                icon: "☠️",
-                q: "Misión 18 (Sub-Jefe): Si 3/4 de un cristal de poder se reparten <b>en partes iguales entre 3 guardianes</b>, ¿qué fracción del cristal original recibe cada uno? (Pista: 3/4 ÷ 3)",
-                a: "1/4",
-                opts: ["1/4", "3/12", "9/4", "1/3"]
+                q: "La masa de un átomo es 0,00000000000000000000000167 g. ¿Cuál es su exponente en NC?",
+                aid: "Masa Atómica",
+                options: ["-23", "-24", "-22", "24"],
+                ans: "-24",
+                badge: "Magnitudes",
+                feed: "¡Increíble! Es una magnitud extremadamente pequeña."
             },
             {
-                icon: "👑",
-                q: "Misión 19 (Jefe Final - Parte 1): Resuelve este combo de operaciones (resuelve el paréntesis primero): <br><span class='math-symbol'>(</span><span class='big-math'>1/2</span> <span class='math-symbol'>x</span> <span class='big-math'>1/2</span><span class='math-symbol'>)</span> <span class='math-symbol'>÷</span> <span class='big-math'>1/4</span>",
-                a: "1",
-                opts: ["1", "1/16", "1/4", "1/8"]
+                q: "Evalúa: (3,5 x 10²) x 2. Da el resultado en NC.",
+                aid: "(3,5 x 10²) • 2",
+                options: ["7 x 10²", "700", "7 x 10³", "3,5 x 10⁴"],
+                ans: "7 x 10²",
+                badge: "Cálculo",
+                feed: "¡Correcto! 3,5 x 2 = 7. Mantenemos la potencia."
             },
             {
-                icon: "🌟",
-                q: "Misión 20 (Jefe Final - Parte 2): Para fabricar escudos, el robot necesita <b>3/4 de metro</b> de metal especial por escudo. Si tienes <b>6 metros</b> de metal, ¿cuántos escudos puedes fabricar en total?",
-                a: "8 escudos",
-                opts: ["8 escudos", "6 escudos", "18/4 escudos", "24 escudos"]
+                q: "Suma (4 x 10⁵) + (2 x 10⁵).",
+                aid: "Sumar mismas potencias",
+                options: ["6 x 10¹⁰", "6 x 10⁵", "8 x 10⁵", "6 x 10²⁵"],
+                ans: "6 x 10⁵",
+                badge: "Cálculo",
+                feed: "¡ZAP! Al tener igual exponente, solo sumamos los coeficientes."
+            },
+            {
+                q: "Si la densidad poblacional es (8 x 10⁶ hab) / (1,54 x 10⁴ km²), el resultado aprox es:",
+                aid: "Densidad de Población",
+                options: ["5,19 x 10²", "5,19 x 10⁶", "519", "5,19 x 10¹⁰"],
+                ans: "5,19 x 10²",
+                badge: "Problemas",
+                feed: "¡Excelente! Aplicaste la división de notación científica correctamente."
+            },
+            {
+                q: "¿Por qué usamos la NC para la velocidad de la luz (3 x 10⁸ m/s) en vez de 300.000.000?",
+                aid: "Reflexión Técnica",
+                options: ["Para que parezca más difícil", "Para evitar errores de ceros y ahorrar espacio", "Porque los científicos no saben escribir ceros", "No hay diferencia real"],
+                ans: "Para evitar errores de ceros y ahorrar espacio",
+                badge: "Argumentación",
+                feed: "¡Cierto! Facilita la comunicación y el cálculo sin confusiones."
+            },
+            {
+                q: "Resuelve: (2,5 x 10³) x (4 x 10²). Cuidado con el ajuste final.",
+                aid: "(2,5 x 4) = 10",
+                options: ["10 x 10⁵", "1 x 10⁶", "10 x 10⁶", "1 x 10⁵"],
+                ans: "1 x 10⁶",
+                badge: "Cálculo Avanzado",
+                feed: "¡Maestro! 2,5x4=10. Entonces 10x10⁵ = 1x10⁶ para que sea NC correcta."
+            },
+            {
+                q: "Último paso: ¿Cuál es el valor de 10⁰?",
+                aid: "La potencia base de todo",
+                options: ["0", "10", "1", "Infinito"],
+                ans: "1",
+                badge: "Consolidación",
+                feed: "¡SÍ! Todo número elevado a cero (excepto cero) es 1. ¡MISIÓN CUMPLIDA!"
             }
         ];
 
-        let currentQuestionIndex = 0;
-        let isProcessing = false;
+        const app = {
+            index: 0,
+            hp: 3,
+            
+            start() {
+                document.getElementById('screen-intro').classList.add('hidden');
+                document.getElementById('screen-game').classList.remove('hidden');
+                this.load();
+            },
 
-        // --- FUNCIONES DEL JUEGO ---
-
-        function startGame() {
-            document.getElementById('start-screen').classList.add('hidden');
-            document.getElementById('quiz-screen').classList.remove('hidden');
-            currentQuestionIndex = 0;
-            loadQuestion();
-        }
-
-        // Algoritmo Fisher-Yates para barajar las alternativas
-        function shuffleArray(array) {
-            let shuffled = array.slice();
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            return shuffled;
-        }
-
-        function loadQuestion() {
-            const currentQ = questions[currentQuestionIndex];
-            
-            // Actualizar Interfaz
-            document.getElementById('level-indicator').textContent = `Misión: ${currentQuestionIndex + 1}/20`;
-            document.getElementById('progress-bar').style.width = `${(currentQuestionIndex / questions.length) * 100}%`;
-            
-            document.getElementById('question-text').innerHTML = currentQ.q;
-            document.getElementById('category-icon').textContent = currentQ.icon;
-            
-            document.getElementById('error-msg').classList.add('hidden');
-            
-            const selectElement = document.getElementById('answer-select');
-            selectElement.innerHTML = '<option value="" disabled selected>Despliega tus opciones...</option>';
-            
-            // Barajar e insertar alternativas en el menú desplegable
-            const shuffledOptions = shuffleArray(currentQ.opts);
-            shuffledOptions.forEach(opt => {
-                const optionElement = document.createElement('option');
-                optionElement.value = opt;
-                // Si la respuesta incluye "de litro", etc, lo mostramos limpio.
-                optionElement.innerHTML = opt; 
-                selectElement.appendChild(optionElement);
-            });
-            
-            isProcessing = false;
-        }
-
-        function showComicEffect(text, bgColor, textColor, rotateDeg) {
-            const effect = document.getElementById('pow-message');
-            effect.textContent = text;
-            effect.style.background = bgColor;
-            effect.style.color = textColor;
-            effect.style.transform = `translate(-50%, -50%) scale(1) rotate(${rotateDeg}deg)`;
-            effect.classList.add('active');
-            
-            setTimeout(() => {
-                effect.classList.remove('active');
-            }, 1200);
-        }
-
-        function checkAnswer() {
-            if (isProcessing) return; // Previene doble clic rápido
-            
-            const selectElement = document.getElementById('answer-select');
-            const selectedValue = selectElement.value;
-            const errorMsg = document.getElementById('error-msg');
-            const submitBtn = document.getElementById('submit-btn');
-
-            if (!selectedValue) {
-                errorMsg.classList.remove('hidden');
-                return;
-            }
-            
-            errorMsg.classList.add('hidden');
-            isProcessing = true;
-            const correctAnswer = questions[currentQuestionIndex].a;
-
-            if (selectedValue === correctAnswer) {
-                // RESPUESTA CORRECTA
-                const successWords = ["¡BAM!", "¡ZAS!", "¡POW!", "¡CRACK!", "¡EPICO!"];
-                const randomWord = successWords[Math.floor(Math.random() * successWords.length)];
-                const randomRot = Math.floor(Math.random() * 30) - 15; // Rotación aleatoria
+            load() {
+                const item = database[this.index];
+                document.getElementById('task-num').innerText = this.index + 1;
+                document.getElementById('badge').innerText = `Módulo: ${item.badge}`;
+                document.getElementById('question-text').innerText = item.q;
+                document.getElementById('visual-aid').innerHTML = item.aid;
                 
-                showComicEffect(randomWord, "#ffea00", "#d90429", randomRot); // Amarillo/Rojo
+                const sel = document.getElementById('answer-select');
+                sel.innerHTML = '<option value="" disabled selected>-- Elige una opción --</option>';
                 
-                setTimeout(() => {
-                    currentQuestionIndex++;
-                    if (currentQuestionIndex < questions.length) {
-                        loadQuestion();
-                    } else {
-                        finishGame();
+                // Shuffle options
+                const shuffled = [...item.options].sort(() => Math.random() - 0.5);
+                shuffled.forEach(opt => {
+                    const el = document.createElement('option');
+                    el.value = opt;
+                    el.innerText = opt;
+                    sel.appendChild(el);
+                });
+
+                document.getElementById('btn-next').classList.add('hidden');
+                document.getElementById('btn-check').classList.remove('hidden');
+                document.getElementById('challenge-card').classList.remove('shake');
+                this.updateUI();
+            },
+
+            check() {
+                const sel = document.getElementById('answer-select');
+                const val = sel.value;
+                if(!val) return;
+
+                const item = database[this.index];
+                if(val === item.ans) {
+                    this.feedback(item.feed, true);
+                    document.getElementById('btn-check').classList.add('hidden');
+                    document.getElementById('btn-next').classList.remove('hidden');
+                } else {
+                    this.hp--;
+                    this.feedback("⚠️ ¡ERROR DE CALIBRACIÓN! Los escudos bajan...", false);
+                    document.getElementById('challenge-card').classList.add('shake');
+                    setTimeout(() => document.getElementById('challenge-card').classList.remove('shake'), 500);
+                    if(this.hp <= 0) {
+                        alert("🚨 ¡SISTEMAS CRÍTICOS! La nave ha colapsado. Reiniciando secuencia...");
+                        location.reload();
                     }
-                }, 1300);
+                }
+                this.updateUI();
+            },
 
-            } else {
-                // RESPUESTA INCORRECTA
-                showComicEffect("¡ERROR!", "#1e293b", "#f8fafc", 0); // Gris oscuro/Blanco
-                selectElement.value = ""; // Limpiar selección para obligar a reintentar
-                
-                submitBtn.classList.remove('bg-purple-700');
-                submitBtn.classList.add('bg-red-600', 'animate-pulse');
-                submitBtn.textContent = "¡CÁLCULO VILLANO! INTENTA DE NUEVO";
-                
-                setTimeout(() => {
-                    submitBtn.classList.remove('bg-red-600', 'animate-pulse');
-                    submitBtn.classList.add('bg-purple-700');
-                    submitBtn.textContent = "¡CALCULAR Y ATACAR! ⚡";
-                    isProcessing = false;
-                }, 1500);
+            feedback(msg, isPos) {
+                const aid = document.getElementById('visual-aid');
+                aid.innerText = msg;
+                aid.style.background = isPos ? "#c8e6c9" : "#ffcdd2";
+            },
+
+            updateUI() {
+                document.getElementById('bar').style.width = `${(this.index / database.length) * 100}%`;
+                document.getElementById('shield-hp').innerText = "🛡️".repeat(this.hp) + "💀".repeat(3-this.hp);
+            },
+
+            next() {
+                this.index++;
+                if(this.index < database.length) {
+                    this.load();
+                } else {
+                    this.victory();
+                }
+            },
+
+            victory() {
+                document.getElementById('screen-game').classList.add('hidden');
+                document.getElementById('screen-victory').classList.remove('hidden');
             }
-        }
-
-        function finishGame() {
-            document.getElementById('quiz-screen').classList.add('hidden');
-            document.getElementById('end-screen').classList.remove('hidden');
-            document.getElementById('progress-bar').style.width = '100%';
-        }
+        };
     </script>
 </body>
 </html>
