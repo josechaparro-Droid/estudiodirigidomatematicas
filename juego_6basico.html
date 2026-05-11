@@ -2,367 +2,539 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>💥 ESCAPE ROOM: FRACCIONES Y NÚMEROS MIXTOS · 6° BÁSICO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operación Zero: Escape Room Matemático</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-light-pink: #F29191;
-            --color-bright-red: #D93D3D;
-            --color-dark-red: #BA2028;
-            --color-purple: #7A378C;
-            --color-deep-blue: #20308C;
-            --color-white: #ffffff;
-            --color-bg-soft: #fff5f5;
-            --color-success: #2d7a2d;
-            --color-error: #b91c1c;
+            --primary: #e63946;
+            --secondary: #1d3557;
+            --accent: #f1faee;
+            --comic-yellow: #ffde03;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: linear-gradient(135deg, var(--color-deep-blue) 0%, var(--color-purple) 100%);
-            min-height: 100vh;
-            padding: 2rem 1rem;
-            font-family: 'Comic Neue', sans-serif;
-            color: #333;
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f0f0;
+            background-image: radial-gradient(#ccc 10%, transparent 10%);
+            background-size: 20px 20px; /* Ben-Day dots style */
         }
 
-        .escape-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 3rem;
-            border: 6px solid var(--color-dark-red);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 8px 8px 0px var(--color-light-pink);
-            padding: 2rem;
-        }
-
-        .header { text-align: center; margin-bottom: 2rem; }
-
-        h1 {
+        h1, h2, h3, .comic-font {
             font-family: 'Bangers', cursive;
-            font-size: 3.5rem;
-            color: var(--color-bright-red);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 3px 3px 0px var(--color-deep-blue);
-            transform: skew(-2deg);
-            margin-bottom: 0.5rem;
-            line-height: 1.1;
+            letter-spacing: 2px;
         }
 
-        .sub {
-            font-family: 'Bangers', cursive;
-            font-size: 1.1rem;
-            background: var(--color-deep-blue);
-            color: white;
-            display: inline-block;
-            padding: 0.5rem 2rem;
-            border-radius: 50px;
-            letter-spacing: 1px;
-            margin-top: 10px;
-            max-width: 90%;
+        .comic-border {
+            border: 4px solid black;
+            box-shadow: 8px 8px 0px black;
         }
 
-        .status-panel {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f0f0f0;
-            padding: 1rem 2rem;
-            border-radius: 100px;
-            border: 4px solid var(--color-deep-blue);
-            margin-bottom: 2rem;
-            gap: 1rem;
-            position: sticky;
-            top: 10px;
-            z-index: 100;
-        }
-
-        .sellos-label { font-family: 'Bangers', cursive; font-size: 1.4rem; color: var(--color-deep-blue); }
-
-        .energy-bar { flex: 1; height: 24px; background: #ddd; border-radius: 12px; overflow: hidden; border: 2px solid var(--color-deep-blue); }
-
-        .energy-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #ff9a9a, var(--color-bright-red)); transition: width 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-
-        .exercise-card {
+        .comic-panel {
             background: white;
-            border: 3px solid var(--color-deep-blue);
-            border-radius: 1.5rem;
-            margin-bottom: 1.5rem;
-            padding: 1.5rem;
-            box-shadow: 6px 6px 0px var(--color-light-pink);
-            transition: transform 0.2s;
+            border: 3px solid black;
+            position: relative;
+            overflow: hidden;
         }
 
-        .exercise-card.correct { border-color: var(--color-success); background-color: #f0fff4; }
-
-        .problem-header { font-family: 'Bangers', cursive; font-size: 1.5rem; color: var(--color-dark-red); margin-bottom: 1rem; display: flex; justify-content: space-between; }
-
-        .question-text { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.4; }
-
-        .interaction-row { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
-
-        select {
-            font-family: 'Comic Neue', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            padding: 0.7rem;
-            border: 3px solid var(--color-deep-blue);
-            border-radius: 12px;
-            background: white;
-            flex: 1;
-            min-width: 200px;
+        .comic-panel::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(rgba(0,0,0,0.05) 15%, transparent 15%);
+            background-size: 4px 4px;
+            pointer-events: none;
         }
 
-        .btn-check {
-            font-family: 'Bangers', cursive;
-            background: var(--color-deep-blue);
+        .btn-action {
+            background-color: var(--primary);
             color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 12px;
-            font-size: 1.3rem;
-            cursor: pointer;
-            box-shadow: 3px 3px 0px #000;
+            border: 3px solid black;
+            transition: all 0.2s;
+            transform: skew(-5deg);
         }
 
-        .btn-check:hover { background: var(--color-purple); }
-        .btn-check:disabled { background: #ccc; box-shadow: none; cursor: default; }
+        .btn-action:hover {
+            transform: skew(-5deg) scale(1.05);
+            box-shadow: 4px 4px 0px var(--comic-yellow);
+        }
 
-        .feedback-box { margin-top: 1rem; padding: 1rem; border-radius: 12px; font-size: 1.1rem; display: none; line-height: 1.4; border-left: 6px solid transparent; }
-        .feedback-box.show { display: block; }
-        .feedback-correct { background-color: #e6fffa; color: #234e52; border-left-color: var(--color-success); }
-        .feedback-incorrect { background-color: #fff5f5; color: #742a2a; border-left-color: var(--color-error); }
-        .feedback-title { font-weight: 700; text-transform: uppercase; margin-bottom: 4px; display: block; }
+        .speech-bubble {
+            position: relative;
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 20px;
+            padding: 15px;
+        }
 
-        #victory-screen { display: none; text-align: center; padding: 3rem; background: var(--color-bg-soft); border: 8px dashed var(--color-bright-red); border-radius: 2rem; margin-top: 2rem; }
-        #victory-screen h2 { font-family: 'Bangers', cursive; font-size: 4rem; color: var(--color-bright-red); margin-bottom: 1rem; }
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border: 20px solid transparent;
+            border-top-color: #000;
+            border-bottom: 0;
+            margin-left: -20px;
+            margin-bottom: -20px;
+        }
 
-        @media (max-width: 600px) {
-            h1 { font-size: 2.2rem; }
-            .status-panel { flex-direction: column; border-radius: 20px; }
-            .question-text { font-size: 1.1rem; }
+        .progress-bar {
+            height: 20px;
+            background: #ddd;
+            border: 2px solid black;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--comic-yellow);
+            transition: width 0.5s ease-out;
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
         }
     </style>
 </head>
-<body>
+<body class="p-4 md:p-8">
 
-<div class="escape-container">
-    <div class="header">
-        <h1>💥 MISIÓN FRACCIONES 💥</h1>
-        <div class="sub">Objetivo: Resolver problemas de fracciones y números mixtos mediante equivalencias y algoritmos para fortalecer el razonamiento lógico y la autonomía en la toma de decisiones matemáticas.</div>
-    </div>
-
-    <div class="status-panel">
-        <div class="sellos-label">ENERGÍA MIXTA: <span id="correct-count">0</span> / 20</div>
-        <div class="energy-bar"><div class="energy-fill" id="progress-bar"></div></div>
-    </div>
-
-    <div id="quiz-container"></div>
-
-    <div id="victory-screen">
-        <h2>¡MAESTRÍA TOTAL!</h2>
-        <p>🏆 Has desbloqueado el poder de las fracciones y números mixtos. ¡Tu mente es imparable! 🏆</p>
-        <button class="btn-check" style="margin-top:20px" onclick="location.reload()">REINICIAR MISIÓN</button>
-    </div>
-</div>
-
-<script>
-    const questions = [
-        {
-            id: 1, text: "1. ¿Cuál es la fracción impropia equivalente al número mixto 2 3/5?",
-            options: ["13/5", "11/5", "12/5", "10/5"], answer: "13/5",
-            fbC: "¡Correcto! Multiplicaste el entero por el denominador y sumaste el numerador: (2 x 5) + 3 = 13.",
-            fbI: "Recuerda: (Entero × Denominador) + Numerador. En este caso: (2 × 5) + 3."
-        },
-        {
-            id: 2, text: "2. Convierte la fracción impropia 17/4 a número mixto.",
-            options: ["4 1/4", "4 2/4", "3 1/4", "4 3/4"], answer: "4 1/4",
-            fbC: "¡Muy bien! 17 dividido por 4 es 4 con un resto de 1. Eso forma 4 1/4.",
-            fbI: "Divide 17 entre 4. El cociente es el entero, el resto es el numerador y el denominador se mantiene."
-        },
-        {
-            id: 3, text: "3. ¿Cuál de estas fracciones es equivalente a 7/3?",
-            options: ["2 1/3", "3 1/3", "2 2/3", "1 4/3"], answer: "2 1/3",
-            fbC: "¡Excelente! 7/3 = 2 enteros (que son 6/3) y sobra 1/3.",
-            fbI: "¿Cuántas veces cabe el 3 en el 7 de forma completa? Ese es tu número entero."
-        },
-        {
-            id: 4, text: "4. ¿Qué número mixto corresponde a la fracción impropia 9/2?",
-            options: ["4 1/2", "4 2/2", "5 1/2", "3 3/2"], answer: "4 1/2",
-            fbC: "¡Perfecto! 9 dividido en 2 es 4 y sobra 1. Resultado: 4 1/2.",
-            fbI: "Divide 9 entre 2. El 2 cabe 4 veces en el 9 y sobra 1."
-        },
-        {
-            id: 5, text: "5. Suma: 2/3 + 2 3/6. ¿Cuál es el resultado simplificado?",
-            options: ["3 1/6", "4 1/6", "4 1/3", "3 5/6"], answer: "3 1/6",
-            fbC: "¡Genial! 2/3 es 4/6. Entonces 4/6 + 2 3/6 = 2 7/6. Como 7/6 es 1 1/6, el total es 3 1/6.",
-            fbI: "Iguala los denominadores primero. Transforma 2/3 a sextos multiplicando por 2."
-        },
-        {
-            id: 6, text: "6. Resta: 5 1/4 - 2 3/8. ¿Cuál es el resultado correcto?",
-            options: ["2 7/8", "3 1/4", "2 5/8", "3 7/8"], answer: "2 7/8",
-            fbC: "¡Increíble! Convertiste a octavos: 5 2/8 - 2 3/8. Al pedir prestado al entero queda 4 10/8 - 2 3/8 = 2 7/8.",
-            fbI: "Transforma 5 1/4 a octavos (5 2/8). Como no puedes restar 3 a 2, pide prestado un entero."
-        },
-        {
-            id: 7, text: "7. ¿Cuál es el resultado de la expresión 3 2/7 + 1 4/7?",
-            options: ["4 6/7", "4 8/7", "5 1/7", "4 2/7"], answer: "4 6/7",
-            fbC: "¡Muy bien! Sumaste los enteros (3+1=4) y las fracciones (2/7 + 4/7 = 6/7).",
-            fbI: "Suma los enteros por un lado y las fracciones con igual denominador por otro."
-        },
-        {
-            id: 8, text: "8. Si tienes 25/6, ¿cuántos enteros completos hay?",
-            options: ["4", "5", "3", "6"], answer: "4",
-            fbC: "¡Exacto! 24/6 son 4 enteros exactos. Como tenemos 25, hay 4 enteros y sobra 1/6.",
-            fbI: "Busca qué número multiplicado por 6 se acerca más a 25 sin pasarse."
-        },
-        {
-            id: 9, text: "9. En una receta se usan 2 1/2 tazas de harina. Si quieres hacer el doble, ¿cuánta harina necesitas?",
-            options: ["5 tazas", "4 1/2 tazas", "4 tazas", "5 1/2 tazas"], answer: "5 tazas",
-            fbC: "¡Excelente! El doble de 2 es 4 y el doble de 1/2 es 1. 4 + 1 = 5.",
-            fbI: "Multiplica tanto el entero como la fracción por 2."
-        },
-        {
-            id: 10, text: "10. Un corredor recorre 2 4/5 km. ¿Cuál es la fracción impropia equivalente?",
-            options: ["14/5", "9/5", "8/5", "12/5"], answer: "14/5",
-            fbC: "¡Correcto! (2 x 5) + 4 = 14. La fracción es 14/5.",
-            fbI: "Multiplica el entero (2) por el denominador (5) y suma el numerador (4)."
-        },
-        {
-            id: 11, text: "11. Multiplica: 3 × 12/5. ¿Cuál es el resultado?",
-            options: ["7 1/5", "36/5", "4 6/5", "3 2/5"], answer: "7 1/5",
-            fbC: "¡Muy bien! 3 x 12 = 36. 36/5 es igual a 7 1/5.",
-            fbI: "Multiplica el 3 por el 12. Luego divide el resultado por 5 para obtener el número mixto."
-        },
-        {
-            id: 12, text: "12. Divide: 7 1/2 ÷ 3. ¿Cuál es el resultado en número mixto?",
-            options: ["2 1/2", "2 1/6", "2 1/4", "3 1/2"], answer: "2 1/2",
-            fbC: "¡Perfecto! 7 1/2 son 15/2. Al dividir por 3 obtenemos 5/2, que es 2 1/2.",
-            fbI: "Convierte 7 1/2 a fracción impropia (15/2) y luego divídela por 3."
-        },
-        {
-            id: 13, text: "13. ¿Cuál de estas fracciones es equivalente a 2 4/9?",
-            options: ["22/9", "18/9", "24/9", "20/9"], answer: "22/9",
-            fbC: "¡Exacto! (2 x 9) + 4 = 18 + 4 = 22. Resultado 22/9.",
-            fbI: "Aplica la regla: (Entero × Denominador) + Numerador."
-        },
-        {
-            id: 14, text: "14. Si conviertes 5 5/8 a fracción impropia, obtienes:",
-            options: ["45/8", "40/8", "35/8", "48/8"], answer: "45/8",
-            fbC: "¡Bien hecho! 5 x 8 = 40, más 5 son 45. Fracción: 45/8.",
-            fbI: "Multiplica el 5 por el 8 y súmale el 5 del numerador."
-        },
-        {
-            id: 15, text: "15. Completa: 11/3 = ___ número mixto.",
-            options: ["3 2/3", "3 1/3", "4 2/3", "3 3/3"], answer: "3 2/3",
-            fbC: "¡Correcto! El 3 cabe 3 veces en el 11 (9) y sobran 2. Resultado: 3 2/3.",
-            fbI: "Divide 11 entre 3 y mira cuánto sobra."
-        },
-        {
-            id: 16, text: "16. ¿Cuál es la suma de 9/4 + 7/4 expresada en número mixto simplificado?",
-            options: ["4", "4 0/4", "4 1/4", "3 3/4"], answer: "4",
-            fbC: "¡Excelente! 9 + 7 = 16. 16/4 son exactamente 4 enteros.",
-            fbI: "Suma los numeradores y mantén el denominador. Luego divide para ver cuántos enteros son."
-        },
-        {
-            id: 17, text: "17. Un depósito tiene 10 3/4 litros de agua y se sacan 4 1/2 litros. ¿Cuánto queda?",
-            options: ["6 1/4", "6 2/4", "5 3/4", "7 1/4"], answer: "6 1/4",
-            fbC: "¡Muy bien! 10 3/4 - 4 2/4 = 6 1/4.",
-            fbI: "Resta los enteros y luego las fracciones (recuerda que 1/2 es lo mismo que 2/4)."
-        },
-        {
-            id: 18, text: "18. ¿Cuál es el número mixto para 31/10?",
-            options: ["3 1/10", "31 1/10", "3 10/31", "1 3/10"], answer: "3 1/10",
-            fbC: "¡Perfecto! El 10 cabe 3 veces en el 31 y sobra 1.",
-            fbI: "Divide 31 por 10. Es muy sencillo si piensas en decenas."
-        },
-        {
-            id: 19, text: "19. Convierte 1 7/12 a fracción impropia.",
-            options: ["19/12", "17/12", "8/12", "12/7"], answer: "19/12",
-            fbC: "¡Gran trabajo! (1 x 12) + 7 = 19. Fracción 19/12.",
-            fbI: "Multiplica 1 por 12 y súmale 7."
-        },
-        {
-            id: 20, text: "20. Si sumas 1/2 + 1 1/2 + 2, ¿cuál es el total?",
-            options: ["4", "3 1/2", "3", "4 1/2"], answer: "4",
-            fbC: "¡Misión Cumplida! 1/2 + 1 1/2 forman 2 enteros. 2 + 2 = 4.",
-            fbI: "Suma primero las partes fraccionarias: media más una y media son dos. Luego suma el resto."
-        }
-    ];
-
-    let score = 0;
-
-    function renderQuiz() {
-        const container = document.getElementById('quiz-container');
-        container.innerHTML = questions.map((q, index) => `
-            <div class="exercise-card" id="card-${index}">
-                <div class="problem-header">
-                    <span>RETO #${index + 1}</span>
-                    <span id="status-icon-${index}">🛡️</span>
-                </div>
-                <p class="question-text">${q.text}</p>
-                <div class="interaction-row">
-                    <select id="select-${index}">
-                        <option value="" disabled selected>Elige tu respuesta...</option>
-                        ${[...q.options].sort(() => Math.random() - 0.5).map(opt => `<option value="${opt}">${opt}</option>`).join('')}
-                    </select>
-                    <button class="btn-check" id="btn-${index}" onclick="verifyAnswer(${index})">VALIDAR</button>
-                </div>
-                <div id="feedback-${index}" class="feedback-box"></div>
+    <div id="game-container" class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <header class="mb-8 text-center">
+            <div class="inline-block bg-white comic-border p-4 mb-4">
+                <h1 class="text-5xl text-red-600 uppercase">Operación Zero</h1>
+                <p class="text-xl font-bold text-navy-800">El Despertar de los Algoritmos</p>
             </div>
-        `).join('');
-    }
+            <div class="bg-blue-900 text-white p-2 comic-border max-w-2xl mx-auto">
+                <p class="text-sm">OBJETIVO: Aplicar el algoritmo de división (dividendos hasta 4 dígitos) gestionando correctamente el CERO en el cociente.</p>
+            </div>
+        </header>
 
-    window.verifyAnswer = function(index) {
-        const select = document.getElementById(`select-${index}`);
-        const btn = document.getElementById(`btn-${index}`);
-        const fb = document.getElementById(`feedback-${index}`);
-        const card = document.getElementById(`card-${index}`);
-        const icon = document.getElementById(`status-icon-${index}`);
-        
-        const userAnswer = select.value;
-        const q = questions[index];
+        <!-- Intro Screen -->
+        <div id="screen-intro" class="comic-panel p-8 rounded-lg">
+            <div class="flex flex-col md:flex-row items-center gap-6">
+                <div class="w-full md:w-1/3">
+                    <div class="bg-yellow-400 p-4 comic-border text-center">
+                        <span class="text-6xl">🦸‍♂️</span>
+                        <p class="comic-font text-2xl mt-2">CAPITÁN COCIENTE</p>
+                    </div>
+                </div>
+                <div class="w-full md:w-2/3">
+                    <div class="speech-bubble mb-6">
+                        <p class="text-lg font-bold">¡Atención, recluta! El malvado Doctor Residuo está robando los ceros de los resultados matemáticos. Si no los recuperamos, ¡el sistema decimal colapsará! Debes resolver estos 20 desafíos de división para restaurar el equilibrio.</p>
+                    </div>
+                    <button onclick="startGame()" class="btn-action w-full py-4 text-2xl comic-font uppercase">¡Aceptar Misión!</button>
+                </div>
+            </div>
+        </div>
 
-        if (!userAnswer) return;
+        <!-- Game Screen -->
+        <div id="screen-game" class="hidden">
+            <div class="flex justify-between items-center mb-4 px-2">
+                <div class="comic-font text-xl">Misión: <span id="current-task">1</span>/20</div>
+                <div class="w-1/2">
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div id="lives" class="text-xl">❤️ ❤️ ❤️</div>
+            </div>
 
-        fb.classList.remove('feedback-correct', 'feedback-incorrect', 'show');
+            <div id="question-card" class="comic-panel p-6 rounded-xl">
+                <div id="phase-tag" class="inline-block bg-red-600 text-white px-3 py-1 comic-font text-sm mb-4 uppercase">Fase Concreta</div>
+                <h3 id="question-text" class="text-xl font-bold mb-6 min-h-[80px]">Cargando pregunta...</h3>
+                
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Options injected here -->
+                </div>
 
-        if (userAnswer === q.answer) {
-            score++;
-            fb.innerHTML = `<span class="feedback-title">¡PODER DESBLOQUEADO!</span>${q.fbC}`;
-            fb.classList.add('feedback-correct', 'show');
-            card.classList.add('correct');
-            icon.innerText = "✅";
-            select.disabled = true;
-            btn.disabled = true;
-            btn.innerText = "COMPLETADO";
+                <div id="feedback" class="mt-6 p-4 border-2 border-black hidden rounded">
+                    <p id="feedback-text" class="font-bold"></p>
+                </div>
+                
+                <div class="mt-8 flex justify-end">
+                    <button id="btn-next" onclick="nextQuestion()" class="hidden btn-action px-8 py-2 text-xl comic-font">Siguiente >></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Screen -->
+        <div id="screen-final" class="hidden text-center">
+            <div class="comic-panel p-10 rounded-3xl">
+                <h2 id="final-title" class="text-6xl text-red-600 mb-6">¡Misión Cumplida!</h2>
+                <div class="text-8xl mb-6">🏆</div>
+                <p id="final-message" class="text-2xl font-bold mb-8 italic">Has derrotado al Doctor Residuo y devuelto los ceros al mundo.</p>
+                <button onclick="location.reload()" class="btn-action px-12 py-4 text-2xl comic-font">Jugar de Nuevo</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                phase: "Concreta/Manipulativa",
+                text: "Un curso recolectó 93 chapitas. Si las guardan en 9 bolsas, ¿cuántas quedan en cada bolsa y cuántas sobran?",
+                options: [
+                    "Quedan 10 chapitas y sobran 3",
+                    "Quedan 11 chapitas y sobra 1",
+                    "Quedan 9 chapitas y sobran 3",
+                    "Quedan 10 chapitas y no sobra nada"
+                ],
+                answer: 0,
+                feedback: "¡Correcto! Al dividir 93 por 9, el cociente es 10 y el resto es 3. El cero aparece porque las unidades restantes no alcanzan para otro grupo de 9."
+            },
+            {
+                phase: "Concreta/Manipulativa",
+                text: "Tienes 806 fichas y las divides en 4 grupos iguales. ¿Cuál es el resultado (cociente) y el resto?",
+                options: [
+                    "Cociente: 21, Resto: 2",
+                    "Cociente: 201, Resto: 2",
+                    "Cociente: 200, Resto: 6",
+                    "Cociente: 21, Resto: 0"
+                ],
+                answer: 1,
+                feedback: "¡Bien hecho! 806 ÷ 4 = 201 con resto 2. Bajamos el 0 de las decenas, y como 0 es menor que 4, anotamos 0 en el cociente."
+            },
+            {
+                phase: "Concreta/Manipulativa",
+                text: "Al dividir 703 entre 7, después de dividir las centenas y bajar el 0, ¿por qué anotamos un cero en el cociente?",
+                options: [
+                    "Porque el cero no vale nada y se salta",
+                    "Porque la cantidad a repartir (0 decenas) es menor que el divisor (7)",
+                    "Porque así lo dice la regla sin explicación",
+                    "Porque el 3 es el que manda en la división"
+                ],
+                answer: 1,
+                feedback: "¡Exacto! El cero indica que en esa posición (decenas) no hay suficientes unidades para repartir entre el divisor."
+            },
+            {
+                phase: "Resolver Problemas",
+                text: "Una familia ganó $60.000 y se reparte entre 6 integrantes. ¿Cuánto recibe cada uno?",
+                options: [
+                    "$1.000",
+                    "$6.000",
+                    "$10.000",
+                    "$10.100"
+                ],
+                answer: 2,
+                feedback: "¡Correcto! Al dividir 6 ÷ 6 = 1, y luego bajamos los ceros restantes, agregando un cero al cociente por cada uno."
+            },
+            {
+                phase: "Pictórica",
+                text: "Imagina un modelo de área para (505 ÷ 5). Repartes 5 centenas y 5 unidades. ¿Qué pasa con las decenas?",
+                options: [
+                    "Se ignoran y el resultado es 11",
+                    "Se deja el espacio vacío, representado por un cero intermedio: 101",
+                    "Se suman a las unidades y da 110",
+                    "El modelo de área no sirve para ceros"
+                ],
+                answer: 1,
+                feedback: "¡Así es! 500 ÷ 5 = 100 y 5 ÷ 5 = 1. Sumados dan 101."
+            },
+            {
+                phase: "Pictórica",
+                text: "En la división (900 ÷ 3) representada con bloques multibase, ¿cómo se explica el resultado?",
+                options: [
+                    "Son 3 bloques de 100, por eso el resultado es 3",
+                    "Son 3 grupos de 300, por eso el cociente es 300",
+                    "Son 9 bloques, el resultado es 90",
+                    "Da 30 porque falta un cero"
+                ],
+                answer: 1,
+                feedback: "¡Correcto! 9 centenas repartidas en 3 grupos dan 3 centenas exactas, los ceros completan las posiciones vacías."
+            },
+            {
+                phase: "Modelar",
+                text: "Se tienen 4 centenas y 2 unidades que se agrupan en 4 partes iguales, resultando 1 centena, 0 decenas y 0,5 unidades. ¿Qué división representa?",
+                options: [
+                    "420 ÷ 4",
+                    "400 ÷ 2",
+                    "402 ÷ 4",
+                    "204 ÷ 4"
+                ],
+                answer: 2,
+                feedback: "¡Excelente! 4 centenas (400) y 2 unidades (2) hacen el dividendo 402."
+            },
+            {
+                phase: "Pictórica",
+                text: "Si divides 2.040 por 4, ¿dónde aparecerían ceros en el cociente?",
+                options: [
+                    "Solo al inicio",
+                    "Solo al final (Cero final)",
+                    "Al inicio y al final",
+                    "No lleva ceros el cociente"
+                ],
+                answer: 1,
+                feedback: "¡Bien! 2040 ÷ 4 = 510. El cero aparece al final porque la unidad 0 no se puede repartir."
+            },
+            {
+                phase: "Simbólica",
+                text: "Resuelve: 840 ÷ 8 = ?",
+                options: [
+                    "15",
+                    "105",
+                    "150",
+                    "100"
+                ],
+                answer: 1,
+                feedback: "¡Correcto! 8 ÷ 8 = 1, bajamos el 4 (es menor que 8, ponemos 0), bajamos el 0, 40 ÷ 8 = 5. Total: 105."
+            },
+            {
+                phase: "Simbólica",
+                text: "Resuelve (605 ÷ 3). ¿Cuál es el cociente y el resto?",
+                options: [
+                    "Cociente: 201, Resto: 2",
+                    "Cociente: 21, Resto: 2",
+                    "Cociente: 200, Resto: 5",
+                    "Cociente: 21, Resto: 0"
+                ],
+                answer: 0,
+                feedback: "¡Perfecto! 6 ÷ 3 = 2, bajamos 0 (0), bajamos 5 ÷ 3 = 1 y sobran 2."
+            },
+            {
+                phase: "Simbólica",
+                text: "Resuelve (409 ÷ 4) y dime el resto.",
+                options: [
+                    "Cociente 12, Resto 1",
+                    "Cociente 102, Resto 1",
+                    "Cociente 120, Resto 9",
+                    "Cociente 100, Resto 9"
+                ],
+                answer: 1,
+                feedback: "¡Correcto! 409 ÷ 4 = 102 y sobra 1."
+            },
+            {
+                phase: "Simbólica",
+                text: "Calcula el resultado de: 5.025 ÷ 5",
+                options: [
+                    "105",
+                    "1.005",
+                    "1.050",
+                    "1.25"
+                ],
+                answer: 1,
+                feedback: "¡Muy bien! 5 ÷ 5 = 1, bajamos 0 (0), bajamos 2 (es menor que 5, ponemos 0), bajamos 5, 25 ÷ 5 = 5. Resultado 1.005."
+            },
+            {
+                phase: "Simbólica",
+                text: "Calcula: 9.036 ÷ 9",
+                options: [
+                    "1.004",
+                    "140",
+                    "1.040",
+                    "1.400"
+                ],
+                answer: 0,
+                feedback: "¡Exacto! El cociente es 1.004."
+            },
+            {
+                phase: "Simbólica",
+                text: "Resuelve: 770 ÷ 7",
+                options: [
+                    "11",
+                    "101",
+                    "110",
+                    "111"
+                ],
+                answer: 2,
+                feedback: "¡Bien! 77 ÷ 7 = 11, y bajamos el último 0 poniendo un 0 en el cociente."
+            },
+            {
+                phase: "Simbólica",
+                text: "Al dividir (3.010 ÷ 3), ¿qué tipo de ceros aparecen en el cociente?",
+                options: [
+                    "Un cero final",
+                    "Dos ceros intermedios (Cociente 1.003)",
+                    "Ningún cero",
+                    "Un cero intermedio y uno final"
+                ],
+                answer: 1,
+                feedback: "¡Correcto! El cociente es 1.003 y el resto es 1. Los ceros están al medio."
+            },
+            {
+                phase: "Simbólica",
+                text: "Determina el dividendo si el cociente es 105, el divisor es 6 y el resto es 3.",
+                options: [
+                    "630",
+                    "603",
+                    "633",
+                    "318"
+                ],
+                answer: 2,
+                feedback: "¡Gran cálculo! (105 × 6) + 3 = 630 + 3 = 633."
+            },
+            {
+                phase: "Análisis",
+                text: "Javiera resolvió (6.005 ÷ 5) y obtuvo 121. Matías obtuvo 1.001. ¿Quién tiene la razón?",
+                options: [
+                    "Javiera está en lo correcto",
+                    "Matías tiene la razón",
+                    "Ambos están equivocados (Es 1.201)",
+                    "Ambos están equivocados (Es 1.210)"
+                ],
+                answer: 2,
+                feedback: "¡Ojo aquí! Matías se acercó pero Javiera falló. El cálculo real es: 6÷5=1 (sobra 1), bajamos 0 (formamos 10), 10÷5=2, bajamos 0 (0), bajamos 5÷5=1. Total: 1.201."
+            },
+            {
+                phase: "Análisis",
+                text: "¿Es correcto afirmar que si el dividendo termina en cero, el cociente SIEMPRE debe terminar en cero?",
+                options: [
+                    "Sí, siempre ocurre",
+                    "No, es falso. Ejemplo: 420 ÷ 4 = 105",
+                    "No, solo si el divisor es par",
+                    "Sí, por la regla del cero"
+                ],
+                answer: 1,
+                feedback: "¡Excelente contraejemplo! 420 termina en 0, pero su cociente 105 termina en 5."
+            },
+            {
+                phase: "Aplicación",
+                text: "Don José cosechó 1.800 kilos de manzanas para 9 camiones iguales. ¿Cuántos kilos lleva cada camión?",
+                options: [
+                    "20 kilos",
+                    "200 kilos",
+                    "2.000 kilos",
+                    "180 kilos"
+                ],
+                answer: 1,
+                feedback: "¡Correcto! 18 ÷ 9 = 2, y agregamos los dos ceros: 200."
+            },
+            {
+                phase: "Ticket de Salida",
+                text: "Una empresa traslada 408 pasajeros en buses de capacidad para 4 personas. ¿Cuántos buses se necesitan?",
+                options: [
+                    "12 buses",
+                    "102 buses",
+                    "120 buses",
+                    "100 buses"
+                ],
+                answer: 1,
+                feedback: "¡Misión cumplida! 408 ÷ 4 = 102. ¡Has restaurado todos los ceros!"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let lives = 3;
+        let score = 0;
+
+        function startGame() {
+            document.getElementById('screen-intro').classList.add('hidden');
+            document.getElementById('screen-game').classList.remove('hidden');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = questions[currentQuestionIndex];
+            document.getElementById('current-task').innerText = currentQuestionIndex + 1;
+            document.getElementById('phase-tag').innerText = "FASE: " + q.phase;
+            document.getElementById('question-text').innerText = q.text;
+            document.getElementById('feedback').classList.add('hidden');
+            document.getElementById('btn-next').classList.add('hidden');
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            // Shuffle options but keep track of original index
+            const shuffledOptions = q.options
+                .map((text, index) => ({ text, index }))
+                .sort(() => Math.random() - 0.5);
+
+            shuffledOptions.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "comic-panel p-4 text-left hover:bg-yellow-100 transition-colors font-bold border-2 border-black rounded-lg option-btn";
+                btn.innerText = opt.text;
+                btn.onclick = () => checkAnswer(opt.index, btn);
+                optionsContainer.appendChild(btn);
+            });
+
             updateProgress();
-        } else {
-            fb.innerHTML = `<span class="feedback-title">¡PIENSA COMO HÉROE!</span>${q.fbI}`;
-            fb.classList.add('feedback-incorrect', 'show');
-            icon.innerText = "❌";
         }
-    }
 
-    function updateProgress() {
-        const total = questions.length;
-        const percent = (score / total) * 100;
-        document.getElementById('correct-count').innerText = score;
-        document.getElementById('progress-bar').style.width = percent + "%";
+        function checkAnswer(selectedIndex, btnElement) {
+            const q = questions[currentQuestionIndex];
+            const feedback = document.getElementById('feedback');
+            const feedbackText = document.getElementById('feedback-text');
+            const allBtns = document.querySelectorAll('.option-btn');
 
-        if (score === total) {
-            setTimeout(() => {
-                document.getElementById('quiz-container').style.display = 'none';
-                document.getElementById('victory-screen').style.display = 'block';
-                window.scrollTo(0,0);
-            }, 1200);
+            allBtns.forEach(btn => btn.disabled = true);
+
+            if (selectedIndex === q.answer) {
+                btnElement.classList.add('bg-green-400');
+                feedback.classList.remove('hidden', 'bg-red-100');
+                feedback.classList.add('bg-green-100');
+                feedbackText.innerText = "¡BOOM! " + q.feedback;
+                document.getElementById('btn-next').classList.remove('hidden');
+                score++;
+            } else {
+                btnElement.classList.add('bg-red-400', 'shake');
+                lives--;
+                updateLives();
+                feedback.classList.remove('hidden', 'bg-green-100');
+                feedback.classList.add('bg-red-100', 'shake');
+                feedbackText.innerText = "¡ZAP! Inténtalo de nuevo. Doctor Residuo gana terreno.";
+                
+                if (lives <= 0) {
+                    setTimeout(() => {
+                        alert("¡OH NO! El Doctor Residuo ha ganado. Reiniciando misión...");
+                        location.reload();
+                    }, 1000);
+                } else {
+                    setTimeout(() => {
+                        allBtns.forEach(btn => btn.disabled = false);
+                        btnElement.classList.remove('bg-red-400', 'shake');
+                        feedback.classList.add('hidden');
+                    }, 1500);
+                }
+            }
         }
-    }
 
-    renderQuiz();
-</script>
+        function updateLives() {
+            const heartIcons = ['🖤', '❤️'];
+            let hearts = "";
+            for(let i=0; i<3; i++) {
+                hearts += (i < lives) ? '❤️ ' : '🖤 ';
+            }
+            document.getElementById('lives').innerText = hearts;
+        }
+
+        function updateProgress() {
+            const progress = (currentQuestionIndex / questions.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + "%";
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                showQuestion();
+            } else {
+                showFinalScreen();
+            }
+        }
+
+        function showFinalScreen() {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-final').classList.remove('hidden');
+            document.getElementById('progress-fill').style.width = "100%";
+        }
+    </script>
 </body>
 </html>
