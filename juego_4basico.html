@@ -3,445 +3,291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escape Room: ¡La Liga de los Números!</title>
+    <title>Gatito Chill: El Rescate de los Canjes</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --comic-red: #e11d48;
+            --comic-blue: #2563eb;
+            --comic-purple: #7c3aed;
+            --comic-yellow: #facc15;
+        }
+
         body {
             font-family: 'Comic Neue', cursive;
-            background-color: #1a0b2e;
-            /* Halftone pattern / Puntos estilo cómic */
-            background-image: radial-gradient(#6b21a8 15%, transparent 16%), radial-gradient(#6b21a8 15%, transparent 16%);
-            background-size: 24px 24px;
-            background-position: 0 0, 12px 12px;
-            overflow-x: hidden;
-            min-height: 100vh;
+            background-color: #1e1b4b;
+            /* Patrón de puntos Ben-Day */
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 2px, transparent 2px);
+            background-size: 15px 15px;
+            color: #1e293b;
         }
 
-        h1, h2, h3, .comic-title {
-            font-family: 'Bangers', display;
-            letter-spacing: 2px;
-        }
+        .comic-font { font-family: 'Bangers', cursive; letter-spacing: 2px; }
 
         .comic-panel {
-            background-color: #ffffff;
-            border: 5px solid #000;
-            box-shadow: 10px 10px 0px 0px #000;
-            border-radius: 12px;
+            background: white;
+            border: 4px solid black;
+            box-shadow: 10px 10px 0px black;
             position: relative;
         }
 
-        .comic-button {
-            transition: all 0.15s ease;
-            box-shadow: 5px 5px 0px 0px #000;
-            font-family: 'Chewy', display;
-            letter-spacing: 1px;
-        }
-
-        .comic-button:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 8px 8px 0px 0px #000;
-        }
-
-        .comic-button:active {
-            transform: translate(5px, 5px);
-            box-shadow: 0px 0px 0px 0px #000;
-        }
-
-        /* Explosiones y Efectos Visuales (BAM!, POW!) */
-        .pow-effect {
+        .comic-panel::after {
+            content: "";
             position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+            background-size: 4px 4px;
+            pointer-events: none;
+        }
+
+        .btn-action {
+            font-family: 'Bangers', cursive;
+            border: 3px solid black;
+            box-shadow: 4px 4px 0px black;
+            transition: all 0.1s;
+        }
+
+        .btn-action:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px black;
+        }
+
+        .pow-effect {
+            position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            background: #ffea00;
-            color: #d90429;
-            padding: 2rem 4rem;
-            font-size: 5rem;
-            font-family: 'Bangers', display;
-            border: 6px solid #000;
-            border-radius: 50%;
-            box-shadow: 0 0 0 10px #ff0000, 0 0 0 16px #000;
-            z-index: 50;
-            opacity: 0;
+            z-index: 100;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             pointer-events: none;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
         }
 
-        .pow-effect.active {
-            transform: translate(-50%, -50%) scale(1) rotate(-15deg);
-            opacity: 1;
-        }
+        .pow-effect.active { transform: translate(-50%, -50%) scale(1.5); }
 
-        /* Estilo personalizado para el Select */
         select {
             appearance: none;
-            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
-            background-position: right 1.5rem top 50%;
-            background-size: 1rem auto;
+            background-position: right 1rem center;
+            background-size: 1.5em;
         }
 
-        /* Para tablas dentro de las preguntas */
-        .math-table {
-            width: 100%;
-            margin-top: 10px;
-            border-collapse: collapse;
+        .progress-bar {
+            height: 20px;
+            background: #e2e8f0;
+            border: 2px solid black;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--comic-yellow);
+            transition: width 0.4s ease;
+        }
+
+        .speech-bubble {
+            position: relative;
+            background: #fff;
             border: 3px solid #000;
-            background-color: #fff;
+            border-radius: .4em;
+            padding: 15px;
         }
-        .math-table th, .math-table td {
-            border: 2px solid #000;
-            padding: 8px;
-            text-align: center;
-            font-family: 'Comic Neue', cursive;
-            font-weight: bold;
+
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border: 20px solid transparent;
+            border-top-color: #000;
+            border-bottom: 0;
+            border-left: 0;
+            margin-left: -10px;
+            margin-bottom: -20px;
         }
-        .math-table th { background-color: #fde047; }
     </style>
 </head>
-<body class="text-gray-900 flex flex-col items-center justify-center p-4">
+<body class="p-4 md:p-8 flex flex-col items-center">
 
-    <div class="max-w-4xl w-full mt-4">
-        
-        <!-- Cabecera y Objetivo (OAs) -->
-        <header class="mb-8 text-center">
-            <div class="inline-block bg-yellow-400 border-4 border-black px-8 py-3 rounded-xl transform -rotate-2 shadow-[6px_6px_0px_0px_#000] mb-6">
-                <h1 class="text-4xl md:text-6xl text-red-600 drop-shadow-md">¡ESCAPE ROOM!</h1>
-                <h2 class="text-2xl md:text-3xl text-blue-900">La Liga de los Números</h2>
+    <div id="visual-fx" class="pow-effect comic-font text-8xl text-yellow-400 drop-shadow-[5px_5px_0px_rgba(0,0,0,1)]">¡ZAS!</div>
+
+    <div class="max-w-4xl w-full">
+        <!-- HEADER -->
+        <header class="text-center mb-8">
+            <div class="inline-block bg-white border-4 border-black p-4 transform -rotate-1 shadow-[8px_8px_0px_#ef4444]">
+                <h1 class="text-4xl md:text-6xl comic-font text-red-600">GATITO CHILL VS DR. CERO-CAOS</h1>
+                <p class="text-xl font-bold mt-2">Misión: Restaurar las Multiplicaciones</p>
             </div>
-            
-            <div class="comic-panel bg-blue-600 text-white p-5 mx-auto max-w-3xl transform rotate-1">
-                <h3 class="text-2xl text-yellow-300 mb-2">🎯 Misión de Aprendizaje (4° Básico)</h3>
-                <ul class="text-left text-sm md:text-base font-bold list-disc pl-5 space-y-1">
-                    <li><span class="text-yellow-200">OA 3:</span> Comprender y aplicar adición/sustracción hasta 1.000 en problemas rutinarios, monetarios y de más de dos números.</li>
-                    <li><span class="text-yellow-200">OA 13:</span> Identificar, describir patrones numéricos en tablas, descubrir elementos faltantes y corregir secuencias.</li>
-                </ul>
+            <div class="mt-6 bg-blue-100 border-2 border-black p-3 rounded-lg shadow-md max-w-2xl mx-auto">
+                <p class="font-bold text-sm text-indigo-900">🎯 OA 5: Demostrar comprensión de la multiplicación de números de tres dígitos por números de un dígito.</p>
             </div>
         </header>
 
-        <!-- Contenedor Principal del Juego -->
-        <main id="game-container" class="comic-panel bg-white p-6 md:p-10 mb-10 relative">
-            
-            <!-- Efecto de feedback visual -->
-            <div id="pow-message" class="pow-effect">¡POW!</div>
-
-            <!-- Pantalla de Inicio -->
-            <div id="start-screen" class="text-center">
-                <div class="text-8xl mb-4 animate-bounce">🦸‍♀️💥🦸‍♂️</div>
-                <h2 class="text-4xl comic-title text-purple-700 mb-4">¡Alerta en la Ciudad Matemática!</h2>
-                <p class="text-xl mb-8 font-bold text-gray-700 leading-relaxed">
-                    El temible villano <span class="text-red-600">"Doctor Caos"</span> ha desordenado nuestras sumas, robado nuestro dinero y destruido los patrones secretos. <br><br>
-                    ¡Necesitamos tus superpoderes matemáticos! Resuelve estos 20 desafíos para atraparlo y salvar la ciudad.
-                </p>
-                <button onclick="startGame()" class="comic-title comic-button bg-red-600 text-white text-3xl py-4 px-10 rounded-full border-4 border-black">
-                    ¡ACTIVAR PODERES!
+        <main>
+            <!-- INICIO -->
+            <div id="screen-start" class="comic-panel p-8 space-y-6">
+                <div class="flex justify-center text-7xl">🐱🫧</div>
+                <h2 class="text-3xl comic-font text-center text-purple-700">¡EL DR. CERO-CAOS HA ATACADO!</h2>
+                <div class="text-lg leading-relaxed space-y-4 font-medium italic border-l-4 border-purple-500 pl-4">
+                    <p>El malvado Dr. Cero-Caos ha usado su "Borrador Cuántico" para eliminar todos los canjes y reservas de las multiplicaciones de Ciudad Matemáticas.</p>
+                    <p>Gatito Chill dice: <span class="text-blue-600">"Todo está chill, amigos. Solo debemos aplicar el algoritmo correcto para recalcular la ciudad antes de que se desvanezca".</span></p>
+                </div>
+                <button onclick="startGame()" class="btn-action bg-red-500 hover:bg-red-400 text-white text-3xl py-4 w-full rounded-xl">
+                    ¡INICIAR PROTOCOLO MULTIPLICADOR! ⚡
                 </button>
             </div>
 
-            <!-- Pantalla del Juego -->
-            <div id="quiz-screen" class="hidden">
-                <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-                    <span class="comic-title text-3xl text-blue-700" id="level-indicator">Nivel: 1/20</span>
-                    <div class="w-full md:w-1/2 bg-gray-200 border-4 border-black rounded-full h-8 relative overflow-hidden shadow-inner">
-                        <div id="progress-bar" class="bg-gradient-to-r from-green-400 to-green-600 h-full w-0 transition-all duration-500"></div>
+            <!-- JUEGO -->
+            <div id="screen-game" class="hidden space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white border-4 border-black p-4 shadow-[6px_6px_0px_black]">
+                    <div class="comic-font text-2xl text-red-600" id="level-label">MISIÓN: 1 / 20</div>
+                    <div class="w-full md:w-1/2">
+                        <div class="progress-bar">
+                            <div id="progress-fill" class="progress-fill" style="width: 5%"></div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="bg-yellow-50 border-4 border-yellow-400 rounded-xl p-6 md:p-8 mb-8 transform shadow-inner relative">
-                    <!-- Icono de categoría -->
-                    <div id="category-icon" class="absolute -top-6 -left-6 text-5xl bg-white rounded-full p-2 border-4 border-black shadow-[4px_4px_0px_0px_#000]">🧮</div>
-                    
-                    <div id="question-text" class="text-2xl md:text-3xl font-bold text-center text-gray-800 leading-snug"></div>
-                </div>
+                <div class="comic-panel p-6 md:p-10">
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="text-5xl" id="hero-icon">🐱</div>
+                        <div class="speech-bubble w-full font-bold text-indigo-800" id="narrative-text"></div>
+                    </div>
 
-                <div class="flex flex-col items-center w-full max-w-xl mx-auto">
-                    <label for="answer-select" class="comic-title text-2xl text-red-600 mb-3 block w-full text-left">Selecciona tu Super-Respuesta:</label>
-                    <select id="answer-select" class="w-full border-4 border-black text-2xl font-bold rounded-xl p-5 bg-blue-100 focus:outline-none focus:ring-4 focus:ring-purple-500 mb-6 cursor-pointer text-gray-800 shadow-[4px_4px_0px_0px_#000]">
-                        <option value="" disabled selected>Despliega las opciones...</option>
-                        <!-- Options injected by JS -->
-                    </select>
+                    <div class="space-y-8">
+                        <div id="question-container">
+                            <h3 id="question-text" class="text-2xl font-bold text-gray-800 border-b-2 border-gray-100 pb-4"></h3>
+                        </div>
 
-                    <button id="submit-btn" onclick="checkAnswer()" class="comic-button bg-purple-600 text-white text-3xl py-4 px-8 rounded-xl border-4 border-black w-full text-center">
-                        ¡LANZAR RESPUESTA! ⚡
-                    </button>
-                    <p id="error-msg" class="text-red-600 font-bold text-xl mt-4 hidden bg-red-100 p-2 rounded border-2 border-red-500">¡Cuidado héroe! Debes elegir una opción primero.</p>
+                        <div class="grid grid-cols-1 gap-4">
+                            <label class="block font-black text-red-600 uppercase tracking-tighter">Selecciona tu cálculo táctico:</label>
+                            <select id="answer-select" class="w-full p-5 border-4 border-black text-xl font-bold bg-white focus:ring-8 focus:ring-purple-200 outline-none">
+                                <option value="" disabled selected>-- Elige tu respuesta --</option>
+                            </select>
+                        </div>
+
+                        <button onclick="checkAnswer()" class="btn-action bg-purple-600 text-white text-3xl py-5 w-full uppercase">
+                            ¡Lanzar Resultado! 💥
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Pantalla Final -->
-            <div id="end-screen" class="hidden text-center">
-                <div class="text-8xl mb-4">🏆🌟</div>
-                <h2 class="text-5xl md:text-6xl comic-title text-yellow-500 drop-shadow-[3px_3px_0px_rgba(0,0,0,1)] mb-6">¡VICTORIA TOTAL!</h2>
-                <p class="text-2xl mb-8 font-bold text-gray-800">
-                    Has derrotado al Doctor Caos. Demostraste un dominio perfecto en sumas, restas y patrones. ¡La Ciudad Matemática te nombra Héroe Oficial!
-                </p>
-                <button onclick="location.reload()" class="comic-title comic-button bg-green-500 text-white text-3xl py-4 px-10 rounded-full border-4 border-black">
-                    JUGAR OTRA MISIÓN
+            <!-- FINAL -->
+            <div id="screen-end" class="hidden comic-panel p-10 text-center space-y-8">
+                <h2 class="text-7xl comic-font text-purple-700">¡CIUDAD SALVADA!</h2>
+                <div class="text-9xl animate-bounce">🫧🐱🫧</div>
+                <p class="text-2xl font-bold">El Dr. Cero-Caos se ha quedado sin ceros para desordenar.</p>
+                <div class="bg-yellow-100 border-4 border-dashed border-black p-6 rounded-2xl font-bold text-xl">
+                    "Las multiplicaciones son pan comido cuando mantienes el orden. ¡Sigan así, titanes!", ronronea Chill.
+                </div>
+                <button onclick="location.reload()" class="btn-action bg-blue-600 text-white text-3xl py-4 px-12 rounded-full">
+                    REINICIAR ENTRENAMIENTO
                 </button>
             </div>
-            
         </main>
     </div>
 
     <script>
-        // --- BASE DE DATOS EN MEMORIA (20 Retos Progresivos) ---
-        // Se cubren: Problemas rutinarios, de dinero, sumas/restas de >2 números, patrones y secuencias en tablas.
         const questions = [
-            // BLOQUE 1: Adición y Sustracción Básica (Problemas rutinarios)
-            { 
-                icon: "🦸‍♂️",
-                q: "El superhéroe 'Rayo' salvó a 345 personas ayer y 420 hoy. ¿Cuántas personas salvó en total?", 
-                a: "765 personas", 
-                opts: ["765 personas", "755 personas", "665 personas", "865 personas"] 
-            },
-            { 
-                icon: "🔋",
-                q: "La 'Mujer Dinamo' tenía 850 puntos de energía. Usó 235 puntos para volar. ¿Cuánta energía le queda?", 
-                a: "615 puntos", 
-                opts: ["615 puntos", "625 puntos", "515 puntos", "605 puntos"] 
-            },
-            { 
-                icon: "👕",
-                q: "En la base secreta hay 512 trajes azules y 189 trajes rojos. ¿Cuántos trajes hay en total?", 
-                a: "701 trajes", 
-                opts: ["701 trajes", "691 trajes", "711 trajes", "601 trajes"] 
-            },
-            { 
-                icon: "💎",
-                q: "El villano robó 900 diamantes. Recuperamos 456. ¿Cuántos diamantes faltan por recuperar?", 
-                a: "444 diamantes", 
-                opts: ["444 diamantes", "544 diamantes", "454 diamantes", "556 diamantes"] 
-            },
-            
-            // BLOQUE 2: Problemas de más de dos números
-            { 
-                icon: "💪",
-                q: "'Chico Goma' estiró sus brazos 128 cm, luego 245 cm más y finalmente 110 cm más. ¿Cuánto se estiró en total?", 
-                a: "483 cm", 
-                opts: ["483 cm", "473 cm", "383 cm", "583 cm"] 
-            },
-            { 
-                icon: "🚂",
-                q: "Un tren de rescate tiene 3 vagones. El primero lleva 150 kg, el segundo 250 kg y el tercero 320 kg. ¿Cuánto peso total lleva el tren?", 
-                a: "720 kg", 
-                opts: ["720 kg", "620 kg", "820 kg", "750 kg"] 
-            },
-
-            // BLOQUE 3: Problemas Monetarios
-            { 
-                icon: "🛡️",
-                q: "Un escudo de titanio cuesta $850. Tú tienes ahorrados $520. ¿Cuánto dinero te falta para comprarlo?", 
-                a: "$330", 
-                opts: ["$330", "$230", "$430", "$320"] 
-            },
-            { 
-                icon: "🛒",
-                q: "Compraste una súper-capa por $350 y unas botas voladoras por $480. ¿Cuánto gastaste en total?", 
-                a: "$830", 
-                opts: ["$830", "$730", "$930", "$820"] 
-            },
-            { 
-                icon: "💵",
-                q: "Tienes un billete de $1.000. Compras un radar de villanos que cuesta $640. ¿Cuánto vuelto debes recibir?", 
-                a: "$360", 
-                opts: ["$360", "$460", "$260", "$340"] 
-            },
-            { 
-                icon: "💰",
-                q: "El 'Capitán Ahorro' juntó $250 el lunes, $300 el martes y $150 el miércoles. ¿Cuánto dinero tiene en total?", 
-                a: "$700", 
-                opts: ["$700", "$600", "$800", "$650"] 
-            },
-            { 
-                icon: "🎭",
-                q: "Una máscara cuesta $990. Tienes $450 y tu compañero te presta $300. ¿Cuánto dinero te falta AÚN para poder comprarla?", 
-                a: "$240", 
-                opts: ["$240", "$340", "$140", "$250"] 
-            },
-
-            // BLOQUE 4: Patrones Numéricos (Listas y Tablas)
-            { 
-                icon: "🔍",
-                q: "Descubre el número que falta en la secuencia de vuelo: <br> 100, 150, 200, ___, 300.", 
-                a: "250", 
-                opts: ["250", "210", "290", "350"] 
-            },
-            { 
-                icon: "📊",
-                q: "¿Cuál es el patrón o regla de esta tabla de fuerza? <br><table class='math-table'><tr><th>Entrada</th><th>Salida</th></tr><tr><td>10</td><td>30</td></tr><tr><td>20</td><td>40</td></tr><tr><td>50</td><td>70</td></tr></table>", 
-                a: "Sumar 20", 
-                opts: ["Sumar 20", "Sumar 10", "Restar 20", "Sumar 30"] 
-            },
-            { 
-                icon: "📋",
-                q: "Completa la tabla de niveles del héroe (Patrón: Sumar 20): <br><table class='math-table'><tr><th>Nivel 1</th><th>Nivel 2</th><th>Nivel 3</th><th>Nivel 4</th></tr><tr><td>120</td><td>140</td><td>160</td><td>?</td></tr></table>", 
-                a: "180", 
-                opts: ["180", "170", "190", "200"] 
-            },
-            { 
-                icon: "❌",
-                q: "¡Un villano alteró la secuencia! La regla era RESTAR 50. Identifica el número que es un ERROR: <br> 500, 450, 400, 360, 300", 
-                a: "360", 
-                opts: ["360", "450", "400", "300"] 
-            },
-            { 
-                icon: "🔧",
-                q: "En la secuencia anterior (500, 450, 400, 360, 300) descubriste que el 360 es un error. ¿Qué número DEBE ir ahí para que la secuencia esté correcta?", 
-                a: "350", 
-                opts: ["350", "340", "370", "310"] 
-            },
-
-            // BLOQUE 5: Retos Mixtos y Jefes Finales
-            { 
-                icon: "💡",
-                q: "Secuencia de láseres: 105, 205, 305, 405... ¿Cuál es el patrón que sigue esta secuencia?", 
-                a: "Sumar 100", 
-                opts: ["Sumar 100", "Sumar 10", "Sumar 200", "Restar 100"] 
-            },
-            { 
-                icon: "🧾",
-                q: "Tienes $1.000. Compras 3 artefactos: uno de $200, otro de $150 y el último de $350. ¿Cuánto dinero te sobra?", 
-                a: "$300", 
-                opts: ["$300", "$400", "$200", "$350"] 
-            },
-            { 
-                icon: "📈",
-                q: "En la tabla de puntajes de héroes la regla es restar 50 cada vez: <br>Posición 1 = 900 pts <br>Posición 2 = 850 pts <br>Posición 3 = 800 pts. <br>Si sigue así, ¿cuántos puntos tendrá la Posición 5?", 
-                a: "700 pts", 
-                opts: ["700 pts", "750 pts", "650 pts", "600 pts"] 
-            },
-            { 
-                icon: "☠️",
-                q: "¡Jefe Final! El 'Doctor Caos' te propone un acertijo final: <br>Tenías 1.000, le restaste 400, luego ganaste 150 y un láser te quitó 50. ¿Con qué número terminaste?", 
-                a: "700", 
-                opts: ["700", "800", "650", "750"] 
-            }
+            { n: "Mente Brillante inicia el escaneo.", q: "¿Cuál es el primer paso para resolver una multiplicación de tres dígitos por uno de un dígito usando el algoritmo?", a: "Multiplicar el factor de un dígito por las Unidades.", o: ["Multiplicar el factor de un dígito por las Unidades.", "Multiplicar el factor de un dígito por las Centenas.", "Sumar todos los números.", "Dividir los números."] },
+            { n: "Rayo Veloz detecta una reserva.", q: "En la multiplicación 125 x 3, al multiplicar 3 x 5 obtenemos 15. ¿Qué hacemos con el 10?", a: "Realizamos un canje de 1 decena a la siguiente posición.", o: ["Realizamos un canje de 1 decena a la siguiente posición.", "Lo borramos porque no sirve.", "Lo sumamos a las centenas directamente.", "Lo dejamos en las unidades."] },
+            { n: "Gatito Chill analiza una estrategia.", q: "¿Cómo se llama la propiedad donde descomponemos (200 + 40 + 3) x 3?", a: "Propiedad Distributiva.", o: ["Propiedad Distributiva.", "Propiedad Conmutativa.", "Propiedad Asociativa.", "Propiedad del Cero."] },
+            { n: "Fuerza Pluma levanta 4 cajas con 150 piezas cada una.", q: "¿Cuántas piezas hay en total? (Cálculo: 150 x 4)", a: "600", o: ["600", "400", "550", "450"] },
+            { n: "Mente Brillante descifra un código.", q: "Resuelve el producto de 321 x 2.", a: "642", o: ["642", "640", "323", "521"] },
+            { n: "Dr. Cero-Caos intenta confundirnos.", q: "Si multiplicamos 405 x 2, ¿cuál es el resultado correcto?", a: "810", o: ["810", "800", "407", "805"] },
+            { n: "Rayo Veloz corre 125 km cada día por 5 días.", q: "¿Cuántos km recorrió en total?", a: "625 km", o: ["625 km", "525 km", "600 km", "130 km"] },
+            { n: "Gatito Chill encuentra 3 grupos de 215 flores.", q: "¿Cuál es el total de flores rescatadas?", a: "645", o: ["645", "635", "545", "615"] },
+            { n: "Mente Brillante analiza una descomposición.", q: "Si calculamos (100 x 4) + (20 x 4) + (5 x 4), ¿qué multiplicación original estamos resolviendo?", a: "125 x 4", o: ["125 x 4", "120 x 4", "100 x 4", "125 x 5"] },
+            { n: "Fuerza Pluma nota un canje de centenas.", q: "En 250 x 4, al multiplicar 4 x 5 decenas obtenemos 20 decenas. ¿Cuántas centenas canjeamos?", a: "2 centenas.", o: ["2 centenas.", "1 centena.", "20 centenas.", "0 centenas."] },
+            { n: "Dr. Cero-Caos puso una trampa.", q: "Resuelve 500 x 3.", a: "1500", o: ["1500", "503", "1000", "150"] },
+            { n: "Rayo Veloz necesita 6 cables de 145 metros cada uno.", q: "¿Cuántos metros de cable necesita en total?", a: "870 metros.", o: ["870 metros.", "770 metros.", "645 metros.", "900 metros."] },
+            { n: "Gatito Chill ordena 4 estantes con 235 libros cada uno.", q: "¿Cuántos libros hay en total?", a: "940", o: ["940", "840", "920", "835"] },
+            { n: "Mente Brillante revisa una multiplicación con cero.", q: "Resuelve 308 x 3.", a: "924", o: ["924", "904", "908", "624"] },
+            { n: "Fuerza Pluma transporta 7 sacos de 112 kilos.", q: "¿Cuántos kilos lleva en total?", a: "784 kilos.", o: ["784 kilos.", "774 kilos.", "884 kilos.", "119 kilos."] },
+            { n: "Justificación de algoritmo (Vocabulario Técnico).", q: "Al resolver 350 x 4, el resultado es 1400. ¿Cuál es la explicación correcta del canje?", a: "4 x 5 Decenas = 20 Decenas. Dejamos 0 y canjeamos 2 Centenas.", o: ["4 x 5 Decenas = 20 Decenas. Dejamos 0 y canjeamos 2 Centenas.", "Sumamos 4 + 350.", "4 x 5 es 20 y lo escribimos completo.", "No hay canje en esta operación."] },
+            { n: "Duelo de camiones de la Legión.", q: "Camión A: 5 sacos de 205kg. Camión B: 4 sacos de 300kg. ¿Quién lleva más masa?", a: "El Camión B por 175 kg.", o: ["El Camión B por 175 kg.", "El Camión A por 25 kg.", "Llevan lo mismo.", "El Camión B por 1200 kg."] },
+            { n: "Circuito de entrenamiento de Rayo Veloz.", q: "Rayo corre 4 vueltas a un circuito que mide 1148 metros. ¿Cuántos metros corrió?", a: "4592 metros.", o: ["4592 metros.", "4400 metros.", "5000 metros.", "1152 metros."] },
+            { n: "Estimación de Mente Brillante.", q: "Si redondeamos 689 a la centena más cercana y multiplicamos por 4, ¿cuál es la estimación?", a: "2800", o: ["2800", "2400", "2756", "3000"] },
+            { n: "RETO FINAL: La clave del Dr. Cero-Caos.", q: "Multiplica el número de héroes (4) por 243 para obtener el código de la burbuja.", a: "972", o: ["972", "872", "962", "247"] }
         ];
 
-        let currentQuestionIndex = 0;
-        let isProcessing = false;
-
-        // --- FUNCIONES PRINCIPALES ---
+        let currentLevel = 0;
 
         function startGame() {
-            document.getElementById('start-screen').classList.add('hidden');
-            document.getElementById('quiz-screen').classList.remove('hidden');
-            currentQuestionIndex = 0;
-            loadQuestion();
+            document.getElementById('screen-start').classList.add('hidden');
+            document.getElementById('screen-game').classList.remove('hidden');
+            loadLevel();
         }
 
-        // Función para barajar el arreglo de alternativas (Algoritmo Fisher-Yates)
-        function shuffleArray(array) {
-            let shuffled = array.slice();
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            return shuffled;
+        function shuffle(array) {
+            return array.sort(() => Math.random() - 0.5);
         }
 
-        function loadQuestion() {
-            const currentQ = questions[currentQuestionIndex];
+        function loadLevel() {
+            const level = questions[currentLevel];
+            document.getElementById('level-label').innerText = `MISIÓN: ${currentLevel + 1} / ${questions.length}`;
+            document.getElementById('progress-fill').style.width = `${((currentLevel + 1) / questions.length) * 100}%`;
+            document.getElementById('narrative-text').innerText = level.n;
+            document.getElementById('question-text').innerText = level.q;
+
+            const select = document.getElementById('answer-select');
+            select.innerHTML = '<option value="" disabled selected>-- Elige tu respuesta --</option>';
             
-            // Actualizar Interfaz
-            document.getElementById('level-indicator').textContent = `Misión: ${currentQuestionIndex + 1}/20`;
-            document.getElementById('progress-bar').style.width = `${(currentQuestionIndex / questions.length) * 100}%`;
-            
-            // Usamos innerHTML para renderizar correctamente los <br> y <table> de las preguntas
-            document.getElementById('question-text').innerHTML = currentQ.q;
-            document.getElementById('category-icon').textContent = currentQ.icon;
-            
-            document.getElementById('error-msg').classList.add('hidden');
-            
-            const selectElement = document.getElementById('answer-select');
-            selectElement.innerHTML = '<option value="" disabled selected>Despliega las opciones...</option>';
-            
-            // Barajar e insertar alternativas en el select
-            const shuffledOptions = shuffleArray(currentQ.opts);
-            shuffledOptions.forEach(opt => {
-                const optionElement = document.createElement('option');
-                optionElement.value = opt;
-                optionElement.textContent = opt;
-                selectElement.appendChild(optionElement);
+            const shuffled = shuffle([...level.o]);
+            shuffled.forEach(opt => {
+                const el = document.createElement('option');
+                el.value = opt;
+                el.innerText = opt;
+                select.appendChild(el);
             });
-            
-            isProcessing = false;
-        }
 
-        // Efecto visual al estilo Batman (POW, BAM, etc.)
-        function showComicEffect(text, bgColor, textColor, rotateDeg) {
-            const effect = document.getElementById('pow-message');
-            effect.textContent = text;
-            effect.style.background = bgColor;
-            effect.style.color = textColor;
-            effect.style.transform = `translate(-50%, -50%) scale(1) rotate(${rotateDeg}deg)`;
-            effect.classList.add('active');
-            
-            setTimeout(() => {
-                effect.classList.remove('active');
-            }, 1200);
+            // Cambiar icono de héroe
+            const icons = ["🐱", "🐢", "🐶", "🦅"];
+            document.getElementById('hero-icon').innerText = icons[currentLevel % icons.length];
         }
 
         function checkAnswer() {
-            if (isProcessing) return; // Evitar clics múltiples mientras procesa
-            
-            const selectElement = document.getElementById('answer-select');
-            const selectedValue = selectElement.value;
-            const errorMsg = document.getElementById('error-msg');
-            const submitBtn = document.getElementById('submit-btn');
+            const select = document.getElementById('answer-select');
+            const userAns = select.value;
+            const fx = document.getElementById('visual-fx');
 
-            // Validación: Si no selecciona nada
-            if (!selectedValue) {
-                errorMsg.classList.remove('hidden');
-                return;
-            }
-            
-            errorMsg.classList.add('hidden');
-            isProcessing = true;
-            const correctAnswer = questions[currentQuestionIndex].a;
+            if (!userAns) return;
 
-            if (selectedValue === correctAnswer) {
-                // RESPUESTA CORRECTA
-                const successWords = ["¡BAM!", "¡POW!", "¡ZAS!", "¡BOOM!", "¡ÉPICO!"];
-                const randomWord = successWords[Math.floor(Math.random() * successWords.length)];
-                const randomRot = Math.floor(Math.random() * 40) - 20; // Rotación aleatoria entre -20 y 20
-                
-                showComicEffect(randomWord, "#ffea00", "#d90429", randomRot); // Amarillo y rojo
+            if (userAns === questions[currentLevel].a) {
+                // Correcto
+                fx.innerText = "¡ZAS!";
+                fx.style.color = "#facc15";
+                fx.classList.add('active');
                 
                 setTimeout(() => {
-                    currentQuestionIndex++;
-                    if (currentQuestionIndex < questions.length) {
-                        loadQuestion();
+                    fx.classList.remove('active');
+                    currentLevel++;
+                    if (currentLevel < questions.length) {
+                        loadLevel();
                     } else {
-                        finishGame();
+                        showEnd();
                     }
-                }, 1300);
-
+                }, 800);
             } else {
-                // RESPUESTA INCORRECTA
-                showComicEffect("¡OUCH!", "#2b2d42", "#edf2f4", 0); // Gris oscuro y blanco
-                selectElement.value = ""; // Resetear selección para que intente de nuevo
-                
-                // Efecto de error en el botón
-                submitBtn.classList.remove('bg-purple-600');
-                submitBtn.classList.add('bg-red-600', 'animate-bounce');
-                submitBtn.textContent = "¡CÁLCULO ERRÓNEO, INTENTA OTRA VEZ!";
+                // Incorrecto
+                fx.innerText = "¡OOF!";
+                fx.style.color = "#ef4444";
+                fx.classList.add('active');
                 
                 setTimeout(() => {
-                    submitBtn.classList.remove('bg-red-600', 'animate-bounce');
-                    submitBtn.classList.add('bg-purple-600');
-                    submitBtn.textContent = "¡LANZAR RESPUESTA! ⚡";
-                    isProcessing = false;
-                }, 1800);
+                    fx.classList.remove('active');
+                }, 800);
             }
         }
 
-        function finishGame() {
-            document.getElementById('quiz-screen').classList.add('hidden');
-            document.getElementById('end-screen').classList.remove('hidden');
-            // Llenar la barra de progreso completamente
-            document.getElementById('progress-bar').style.width = '100%';
+        function showEnd() {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-end').classList.remove('hidden');
         }
     </script>
 </body>
