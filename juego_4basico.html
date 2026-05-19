@@ -3,67 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gatito Chill: El Rescate de los Canjes</title>
+    <title>Gatito Chill y la Legión Titán contra el Dr. Cero-Caos</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet">
     <style>
         :root {
-            --comic-red: #e11d48;
-            --comic-blue: #2563eb;
-            --comic-purple: #7c3aed;
+            --comic-red: #ef4444;
+            --comic-blue: #3b82f6;
+            --comic-purple: #8b5cf6;
             --comic-yellow: #facc15;
+            --comic-dark: #0f172a;
         }
 
         body {
             font-family: 'Comic Neue', cursive;
-            background-color: #1e1b4b;
-            /* Patrón de puntos Ben-Day */
-            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 2px, transparent 2px);
-            background-size: 15px 15px;
+            background-color: #1e1b4b; /* Fondo índigo oscuro */
+            /* Efecto retro de puntos Ben-Day en el fondo */
+            background-image: radial-gradient(rgba(139, 92, 246, 0.25) 15%, transparent 16%), 
+                              radial-gradient(rgba(139, 92, 246, 0.25) 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            min-height: 100vh;
             color: #1e293b;
         }
 
-        .comic-font { font-family: 'Bangers', cursive; letter-spacing: 2px; }
+        .comic-title {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 2px;
+        }
+
+        .chill-font {
+            font-family: 'Chewy', cursive;
+        }
 
         .comic-panel {
             background: white;
-            border: 4px solid black;
+            border: 5px solid black;
             box-shadow: 10px 10px 0px black;
             position: relative;
         }
 
-        .comic-panel::after {
+        /* Puntos Ben-Day sutiles en los paneles blancos */
+        .comic-panel::before {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
-            background-size: 4px 4px;
+            background-image: radial-gradient(rgba(0,0,0,0.03) 1.2px, transparent 1.2px);
+            background-size: 8px 8px;
             pointer-events: none;
         }
 
-        .btn-action {
+        .btn-comic {
             font-family: 'Bangers', cursive;
+            letter-spacing: 1px;
             border: 3px solid black;
             box-shadow: 4px 4px 0px black;
-            transition: all 0.1s;
+            transition: all 0.1s ease;
+            text-transform: uppercase;
         }
 
-        .btn-action:active {
+        .btn-comic:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px black;
+        }
+
+        .btn-comic:active {
             transform: translate(2px, 2px);
             box-shadow: 0px 0px 0px black;
         }
 
-        .pow-effect {
+        /* Efecto de impacto visual para respuestas */
+        .pow-text {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
             z-index: 100;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             pointer-events: none;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-shadow: 4px 4px 0px black;
         }
 
-        .pow-effect.active { transform: translate(-50%, -50%) scale(1.5); }
+        .pow-text.active {
+            transform: translate(-50%, -50%) scale(1.6);
+        }
 
         select {
             appearance: none;
@@ -73,119 +96,106 @@
             background-size: 1.5em;
         }
 
-        .progress-bar {
-            height: 20px;
+        .progress-bar-container {
             background: #e2e8f0;
-            border: 2px solid black;
-            border-radius: 10px;
+            border: 3px solid black;
+            border-radius: 9999px;
             overflow: hidden;
+            height: 28px;
         }
 
-        .progress-fill {
+        .progress-bar-fill {
+            background: var(--comic-purple);
             height: 100%;
-            background: var(--comic-yellow);
             transition: width 0.4s ease;
-        }
-
-        .speech-bubble {
-            position: relative;
-            background: #fff;
-            border: 3px solid #000;
-            border-radius: .4em;
-            padding: 15px;
-        }
-
-        .speech-bubble:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border: 20px solid transparent;
-            border-top-color: #000;
-            border-bottom: 0;
-            border-left: 0;
-            margin-left: -10px;
-            margin-bottom: -20px;
         }
     </style>
 </head>
-<body class="p-4 md:p-8 flex flex-col items-center">
+<body class="flex items-center justify-center p-4">
 
-    <div id="visual-fx" class="pow-effect comic-font text-8xl text-yellow-400 drop-shadow-[5px_5px_0px_rgba(0,0,0,1)]">¡ZAS!</div>
+    <!-- Capa para onomatopeyas visuales -->
+    <div id="visual-fx" class="pow-text comic-title text-8xl text-yellow-400">¡ZAS!</div>
 
     <div class="max-w-4xl w-full">
-        <!-- HEADER -->
+        <!-- CABECERA -->
         <header class="text-center mb-8">
             <div class="inline-block bg-white border-4 border-black p-4 transform -rotate-1 shadow-[8px_8px_0px_#ef4444]">
-                <h1 class="text-4xl md:text-6xl comic-font text-red-600">GATITO CHILL VS DR. CERO-CAOS</h1>
-                <p class="text-xl font-bold mt-2">Misión: Restaurar las Multiplicaciones</p>
+                <h1 class="text-4xl md:text-6xl comic-title text-red-600">GATITO CHILL VS DR. CERO-CAOS</h1>
+                <p class="text-xl font-bold mt-2">Misión: El Rescate de las Multiplicaciones</p>
             </div>
-            <div class="mt-6 bg-blue-100 border-2 border-black p-3 rounded-lg shadow-md max-w-2xl mx-auto">
-                <p class="font-bold text-sm text-indigo-900">🎯 OA 5: Demostrar comprensión de la multiplicación de números de tres dígitos por números de un dígito.</p>
+            
+            <div class="mt-6 bg-white border-2 border-black p-3 rounded-lg max-w-2xl mx-auto shadow-md">
+                <p class="font-bold text-sm text-indigo-900 italic">
+                    🎯 OBJETIVO: Demostrar comprensión de la multiplicación de números de tres dígitos por números de un dígito, resolviendo problemas rutinarios en contextos reales de Ciudad Matemáticas.
+                </p>
             </div>
         </header>
 
         <main>
-            <!-- INICIO -->
+            <!-- PANTALLA DE BIENVENIDA -->
             <div id="screen-start" class="comic-panel p-8 space-y-6">
-                <div class="flex justify-center text-7xl">🐱🫧</div>
-                <h2 class="text-3xl comic-font text-center text-purple-700">¡EL DR. CERO-CAOS HA ATACADO!</h2>
-                <div class="text-lg leading-relaxed space-y-4 font-medium italic border-l-4 border-purple-500 pl-4">
-                    <p>El malvado Dr. Cero-Caos ha usado su "Borrador Cuántico" para eliminar todos los canjes y reservas de las multiplicaciones de Ciudad Matemáticas.</p>
-                    <p>Gatito Chill dice: <span class="text-blue-600">"Todo está chill, amigos. Solo debemos aplicar el algoritmo correcto para recalcular la ciudad antes de que se desvanezca".</span></p>
+                <div class="flex justify-center gap-4 text-7xl animate-bounce">
+                    <span>🐱</span><span>🛡️</span><span>🤖</span>
                 </div>
-                <button onclick="startGame()" class="btn-action bg-red-500 hover:bg-red-400 text-white text-3xl py-4 w-full rounded-xl">
-                    ¡INICIAR PROTOCOLO MULTIPLICADOR! ⚡
+                <h2 class="text-3xl md:text-4xl comic-title text-center text-purple-700">¡EMERGENCIA MULTIPLICATIVA!</h2>
+                <div class="text-lg leading-relaxed space-y-4 font-medium text-left border-l-4 border-red-500 pl-4">
+                    <p>El malvado <b>Dr. Cero-Caos</b> ha invadido Ciudad Matemáticas con su rayo borrador. Ha eliminado todos los <b>canjes, reservas y algoritmos de multiplicación</b> de tres dígitos.</p>
+                    <p>Las panaderías no saben cuántos panes hornear, las fábricas de juguetes no calculan sus despachos y la Torre Titán está perdiendo energía.</p>
+                    <p>El <b>Gatito Chill</b>, con una hojita de otoño en su cabeza, bosteza relajado y dice: <span class="text-blue-600 font-bold">"Todo está chill, amigos. Si nos concentramos y multiplicamos paso a paso de derecha a izquierda, venceremos al Dr. Cero-Caos con pura lógica."</span></p>
+                </div>
+                <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-3xl py-4 w-full rounded-xl">
+                    ¡ACTIVAR ALGORITMO TITÁN! ⚡
                 </button>
             </div>
 
-            <!-- JUEGO -->
+            <!-- PANTALLA DEL JUEGO -->
             <div id="screen-game" class="hidden space-y-6">
+                <!-- Barra de Progreso -->
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white border-4 border-black p-4 shadow-[6px_6px_0px_black]">
-                    <div class="comic-font text-2xl text-red-600" id="level-label">MISIÓN: 1 / 20</div>
-                    <div class="w-full md:w-1/2">
-                        <div class="progress-bar">
-                            <div id="progress-fill" class="progress-fill" style="width: 5%"></div>
-                        </div>
+                    <div class="comic-title text-2xl text-red-600" id="level-label">MISIÓN: 1 / 20</div>
+                    <div class="w-full md:w-1/2 progress-bar-container">
+                        <div id="progress-fill" class="progress-bar-fill" style="width: 5%"></div>
                     </div>
                 </div>
 
+                <!-- Panel de Pregunta -->
                 <div class="comic-panel p-6 md:p-10">
-                    <div class="flex items-start gap-4 mb-6">
-                        <div class="text-5xl" id="hero-icon">🐱</div>
-                        <div class="speech-bubble w-full font-bold text-indigo-800" id="narrative-text"></div>
+                    <div class="flex items-start gap-4 mb-6 bg-blue-50 border-2 border-black p-4 rounded-lg">
+                        <div class="text-5xl" id="hero-avatar">🐱</div>
+                        <div class="w-full">
+                            <h4 class="font-bold text-red-600 uppercase tracking-wide text-xs">Transmisión de la Legión Titán</h4>
+                            <p class="font-bold text-indigo-900 italic text-lg" id="narrative-text">Cargando transmisión...</p>
+                        </div>
                     </div>
 
-                    <div class="space-y-8">
+                    <div class="space-y-6">
                         <div id="question-container">
-                            <h3 id="question-text" class="text-2xl font-bold text-gray-800 border-b-2 border-gray-100 pb-4"></h3>
+                            <h3 id="question-text" class="text-xl md:text-2xl font-bold text-gray-800 border-b-2 border-gray-100 pb-4"></h3>
                         </div>
 
-                        <div class="grid grid-cols-1 gap-4">
-                            <label class="block font-black text-red-600 uppercase tracking-tighter">Selecciona tu cálculo táctico:</label>
-                            <select id="answer-select" class="w-full p-5 border-4 border-black text-xl font-bold bg-white focus:ring-8 focus:ring-purple-200 outline-none">
-                                <option value="" disabled selected>-- Elige tu respuesta --</option>
+                        <div class="space-y-3">
+                            <label class="block font-black text-purple-700 uppercase tracking-tighter text-sm">Selecciona tu cálculo de contraataque:</label>
+                            <select id="answer-select" class="w-full p-4 border-4 border-black text-lg md:text-xl font-bold bg-yellow-50 focus:ring-8 focus:ring-purple-200 outline-none cursor-pointer">
+                                <option value="" disabled selected>-- Elige con calma --</option>
                             </select>
                         </div>
 
-                        <button onclick="checkAnswer()" class="btn-action bg-purple-600 text-white text-3xl py-5 w-full uppercase">
-                            ¡Lanzar Resultado! 💥
+                        <button onclick="checkAnswer()" class="btn-comic bg-red-600 hover:bg-red-500 text-white text-3xl py-4 w-full">
+                            ¡EJECUTAR CÁLCULO! 💥
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- FINAL -->
+            <!-- PANTALLA FINAL -->
             <div id="screen-end" class="hidden comic-panel p-10 text-center space-y-8">
-                <h2 class="text-7xl comic-font text-purple-700">¡CIUDAD SALVADA!</h2>
-                <div class="text-9xl animate-bounce">🫧🐱🫧</div>
-                <p class="text-2xl font-bold">El Dr. Cero-Caos se ha quedado sin ceros para desordenar.</p>
-                <div class="bg-yellow-100 border-4 border-dashed border-black p-6 rounded-2xl font-bold text-xl">
-                    "Las multiplicaciones son pan comido cuando mantienes el orden. ¡Sigan así, titanes!", ronronea Chill.
+                <h2 class="text-6xl md:text-7xl comic-title text-purple-700">¡MULTIVERSO SALVADO!</h2>
+                <div class="text-9xl animate-bounce my-8">🐱🫧✨</div>
+                <p class="text-2xl font-bold text-indigo-950">¡El Dr. Cero-Caos ha sido atrapado en una burbuja de agua pura!</p>
+                <div class="bg-yellow-100 border-4 border-dashed border-black p-6 rounded-2xl font-bold text-lg max-w-2xl mx-auto">
+                    "Las multiplicaciones son pan comido si mantienes el orden en las unidades, decenas y centenas. ¡La calma siempre triunfa!", ronronea el Gatito Chill.
                 </div>
-                <button onclick="location.reload()" class="btn-action bg-blue-600 text-white text-3xl py-4 px-12 rounded-full">
+                <button onclick="location.reload()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-3xl py-4 px-12 rounded-full">
                     REINICIAR ENTRENAMIENTO
                 </button>
             </div>
@@ -193,76 +203,201 @@
     </div>
 
     <script>
+        // Base de datos exacta con las 20 preguntas basadas en la Guía de Trabajo adjunta de 4° Básico
         const questions = [
-            { n: "Mente Brillante inicia el escaneo.", q: "¿Cuál es el primer paso para resolver una multiplicación de tres dígitos por uno de un dígito usando el algoritmo?", a: "Multiplicar el factor de un dígito por las Unidades.", o: ["Multiplicar el factor de un dígito por las Unidades.", "Multiplicar el factor de un dígito por las Centenas.", "Sumar todos los números.", "Dividir los números."] },
-            { n: "Rayo Veloz detecta una reserva.", q: "En la multiplicación 125 x 3, al multiplicar 3 x 5 obtenemos 15. ¿Qué hacemos con el 10?", a: "Realizamos un canje de 1 decena a la siguiente posición.", o: ["Realizamos un canje de 1 decena a la siguiente posición.", "Lo borramos porque no sirve.", "Lo sumamos a las centenas directamente.", "Lo dejamos en las unidades."] },
-            { n: "Gatito Chill analiza una estrategia.", q: "¿Cómo se llama la propiedad donde descomponemos (200 + 40 + 3) x 3?", a: "Propiedad Distributiva.", o: ["Propiedad Distributiva.", "Propiedad Conmutativa.", "Propiedad Asociativa.", "Propiedad del Cero."] },
-            { n: "Fuerza Pluma levanta 4 cajas con 150 piezas cada una.", q: "¿Cuántas piezas hay en total? (Cálculo: 150 x 4)", a: "600", o: ["600", "400", "550", "450"] },
-            { n: "Mente Brillante descifra un código.", q: "Resuelve el producto de 321 x 2.", a: "642", o: ["642", "640", "323", "521"] },
-            { n: "Dr. Cero-Caos intenta confundirnos.", q: "Si multiplicamos 405 x 2, ¿cuál es el resultado correcto?", a: "810", o: ["810", "800", "407", "805"] },
-            { n: "Rayo Veloz corre 125 km cada día por 5 días.", q: "¿Cuántos km recorrió en total?", a: "625 km", o: ["625 km", "525 km", "600 km", "130 km"] },
-            { n: "Gatito Chill encuentra 3 grupos de 215 flores.", q: "¿Cuál es el total de flores rescatadas?", a: "645", o: ["645", "635", "545", "615"] },
-            { n: "Mente Brillante analiza una descomposición.", q: "Si calculamos (100 x 4) + (20 x 4) + (5 x 4), ¿qué multiplicación original estamos resolviendo?", a: "125 x 4", o: ["125 x 4", "120 x 4", "100 x 4", "125 x 5"] },
-            { n: "Fuerza Pluma nota un canje de centenas.", q: "En 250 x 4, al multiplicar 4 x 5 decenas obtenemos 20 decenas. ¿Cuántas centenas canjeamos?", a: "2 centenas.", o: ["2 centenas.", "1 centena.", "20 centenas.", "0 centenas."] },
-            { n: "Dr. Cero-Caos puso una trampa.", q: "Resuelve 500 x 3.", a: "1500", o: ["1500", "503", "1000", "150"] },
-            { n: "Rayo Veloz necesita 6 cables de 145 metros cada uno.", q: "¿Cuántos metros de cable necesita en total?", a: "870 metros.", o: ["870 metros.", "770 metros.", "645 metros.", "900 metros."] },
-            { n: "Gatito Chill ordena 4 estantes con 235 libros cada uno.", q: "¿Cuántos libros hay en total?", a: "940", o: ["940", "840", "920", "835"] },
-            { n: "Mente Brillante revisa una multiplicación con cero.", q: "Resuelve 308 x 3.", a: "924", o: ["924", "904", "908", "624"] },
-            { n: "Fuerza Pluma transporta 7 sacos de 112 kilos.", q: "¿Cuántos kilos lleva en total?", a: "784 kilos.", o: ["784 kilos.", "774 kilos.", "884 kilos.", "119 kilos."] },
-            { n: "Justificación de algoritmo (Vocabulario Técnico).", q: "Al resolver 350 x 4, el resultado es 1400. ¿Cuál es la explicación correcta del canje?", a: "4 x 5 Decenas = 20 Decenas. Dejamos 0 y canjeamos 2 Centenas.", o: ["4 x 5 Decenas = 20 Decenas. Dejamos 0 y canjeamos 2 Centenas.", "Sumamos 4 + 350.", "4 x 5 es 20 y lo escribimos completo.", "No hay canje en esta operación."] },
-            { n: "Duelo de camiones de la Legión.", q: "Camión A: 5 sacos de 205kg. Camión B: 4 sacos de 300kg. ¿Quién lleva más masa?", a: "El Camión B por 175 kg.", o: ["El Camión B por 175 kg.", "El Camión A por 25 kg.", "Llevan lo mismo.", "El Camión B por 1200 kg."] },
-            { n: "Circuito de entrenamiento de Rayo Veloz.", q: "Rayo corre 4 vueltas a un circuito que mide 1148 metros. ¿Cuántos metros corrió?", a: "4592 metros.", o: ["4592 metros.", "4400 metros.", "5000 metros.", "1152 metros."] },
-            { n: "Estimación de Mente Brillante.", q: "Si redondeamos 689 a la centena más cercana y multiplicamos por 4, ¿cuál es la estimación?", a: "2800", o: ["2800", "2400", "2756", "3000"] },
-            { n: "RETO FINAL: La clave del Dr. Cero-Caos.", q: "Multiplica el número de héroes (4) por 243 para obtener el código de la burbuja.", a: "972", o: ["972", "872", "962", "247"] }
+            { 
+                n: "Mente Brillante está observando el tablero de la Torre Titán.", 
+                q: "¿Cómo se llama la operación matemática que usamos para calcular de manera rápida la suma repetida de un mismo número?", 
+                a: "Multiplicación", 
+                o: ["Multiplicación", "Sustracción", "División", "Adición con canje"] 
+            },
+            { 
+                n: "Rayo Veloz se prepara para el algoritmo.", 
+                q: "Para multiplicar un número de tres dígitos por uno de un dígito, ¿por cuál posición del valor posicional debemos comenzar siempre?", 
+                a: "Las Unidades", 
+                o: ["Las Unidades", "Las Decenas", "Las Centenas", "Cualquiera que elijamos"] 
+            },
+            { 
+                n: "Josefa representa con material de base diez en su taller de collares.", 
+                q: "Josefa tiene un grupo de material multibase con 1 placa de centena, 2 barras de decena y 5 cubos de unidad (125). Si repite este grupo 3 veces en su mesa de trabajo, ¿qué multiplicación está modelando de forma concreta?", 
+                a: "125 x 3", 
+                o: ["125 x 3", "125 + 3", "120 x 5", "300 x 25"] 
+            },
+            { 
+                n: "Mente Brillante quiere usar la descomposición aditiva.", 
+                q: "Si aplicamos la propiedad distributiva para resolver 342 x 3, ¿cuál es el desglose correcto de los productos parciales?", 
+                a: "(300 x 3) + (40 x 3) + (2 x 3)", 
+                o: ["(300 x 3) + (40 x 3) + (2 x 3)", "(300 x 3) + (4 x 3) + (2 x 3)", "(342 x 3) + 3", "(300 + 40 + 2) + 3"] 
+            },
+            { 
+                n: "Fuerza Pluma levanta cajas de provisiones para Ciudad Matemáticas.", 
+                q: "Fuerza Pluma transporta 4 cajas pesadas. Cada caja contiene exactamente 150 piezas de repuesto para los generadores. ¿Cuántas piezas lleva en total? (Calcula 150 x 4)", 
+                a: "600 piezas", 
+                o: ["600 piezas", "450 piezas", "550 piezas", "650 piezas"] 
+            },
+            { 
+                n: "Mente Brillante está desbloqueando el código de un hangar.", 
+                q: "Resuelve el producto simbólico exacto de: 321 x 2", 
+                a: "642", 
+                o: ["642", "624", "524", "600"] 
+            },
+            { 
+                n: "El Dr. Cero-Caos sabotea los propulsores con un resultado falso.", 
+                q: "El villano dice que 405 x 2 es igual a 800. ¿Cuál es el producto correcto después de multiplicar el factor 2 por cada posición?", 
+                a: "810", 
+                o: ["810", "805", "800", "820"] 
+            },
+            { 
+                n: "Rayo Veloz corre para patrullar los perímetros exteriores de la ciudad.", 
+                q: "Rayo Veloz corre 125 kilómetros diarios. Si mantiene este ritmo constante durante 5 días, ¿cuántos kilómetros recorre en total?", 
+                a: "625 km", 
+                o: ["625 km", "525 km", "600 km", "650 km"] 
+            },
+            { 
+                n: "Gatito Chill encuentra un jardín silvestre descuidado.", 
+                q: "Hay 3 macizos de flores en el parque. Cada macizo tiene exactamente 215 flores que necesitan agua. ¿Cuál es el total de flores que el Gatito Chill debe regar?", 
+                a: "645 flores", 
+                o: ["645 flores", "635 flores", "655 flores", "545 flores"] 
+            },
+            { 
+                n: "Mente Brillante analiza una suma de productos descompuestos.", 
+                q: "Si resolvemos la expresión (100 x 4) + (20 x 4) + (5 x 4), ¿cuál es la multiplicación de tres dígitos por un dígito original que estamos modelando?", 
+                a: "125 x 4", 
+                o: ["125 x 4", "104 x 25", "120 x 4", "145 x 4"] 
+            },
+            { 
+                n: "Fuerza Pluma nos advierte sobre el canje de las decenas.", 
+                q: "En el algoritmo estándar para 250 x 4, al multiplicar 4 x 5 decenas obtenemos 20 decenas. ¿Cuántas centenas debemos canjear a la siguiente posición del valor posicional?", 
+                a: "2 centenas", 
+                o: ["2 centenas", "1 centena", "20 centenas", "0 centenas"] 
+            },
+            { 
+                n: "El Dr. Cero-Caos puso una trampa de hielo gigante.", 
+                q: "Para derretir la trampa del Dr. Cero-Caos se necesita un calor de 500 unidades térmicas multiplicado por 3. ¿Cuánto calor total se requiere?", 
+                a: "1500 unidades", 
+                o: ["1500 unidades", "1000 unidades", "503 unidades", "1200 unidades"] 
+            },
+            { 
+                n: "Rayo Veloz ayuda a los electricistas a tender cables de emergencia.", 
+                q: "Se necesitan 6 rollos de cable de alta tensión de 145 metros cada uno para restablecer la luz. ¿Cuántos metros de cable se utilizarán en total?", 
+                a: "870 metros", 
+                o: ["870 metros", "770 metros", "900 metros", "645 metros"] 
+            },
+            { 
+                n: "Gatito Chill organiza la biblioteca escolar en cajas limpias.", 
+                q: "La Legión guarda libros en 4 estantes móviles. Si en cada estante caben exactamente 235 libros, ¿cuántos libros protegieron en total?", 
+                a: "940 libros", 
+                o: ["940 libros", "840 libros", "920 libros", "960 libros"] 
+            },
+            { 
+                n: "Mente Brillante revisa una multiplicación que contiene un cero intermedio.", 
+                q: "Resuelve el algoritmo estándar para la siguiente multiplicación con cero: 308 x 3", 
+                a: "924", 
+                o: ["924", "904", "908", "624"] 
+            },
+            { 
+                n: "Fuerza Pluma ayuda a cargar un cargamento de verduras orgánicas.", 
+                q: "Se cargan 7 sacos de papas en el camión de reparto. Si cada saco tiene una masa de 112 kilos, ¿cuántos kilos se transportan en total?", 
+                a: "784 kilos", 
+                o: ["784 kilos", "774 kilos", "884 kilos", "712 kilos"] 
+            },
+            { 
+                n: "Mente Brillante nos pide justificar un cálculo usando vocabulario técnico.", 
+                q: "Al multiplicar 350 x 4 usando el algoritmo estándar, obtenemos 1400. ¿Cuál es la explicación técnica correcta del proceso de canje?", 
+                a: "4 x 5 Decenas = 20 Decenas, por lo que dejamos 0 Decenas en el resultado y canjeamos 2 Centenas a la columna izquierda.", 
+                o: [
+                    "4 x 5 Decenas = 20 Decenas, por lo que dejamos 0 Decenas en el resultado y canjeamos 2 Centenas a la columna izquierda.",
+                    "Sumamos 4 al 350 y multiplicamos el resto por 0.",
+                    "Escribimos el 20 completo debajo de las decenas y sumamos 4.",
+                    "No se genera ningún canje porque el número termina en cero."
+                ] 
+            },
+            { 
+                n: "Duelo de camiones de carga de la Legión Titán contra el Dr. Cero-Caos.", 
+                q: "El Camión 1 transporta 5 sacos de cemento de 205 kg cada uno. El Camión 2 lleva 4 sacos de 300 kg cada uno. ¿Qué camión transporta una mayor masa de carga y por cuántos kilogramos de diferencia?", 
+                a: "El Camión 2 por 175 kg de diferencia.", 
+                o: [
+                    "El Camión 2 por 175 kg de diferencia.",
+                    "El Camión 1 por 25 kg de diferencia.",
+                    "Ambos camiones transportan la misma cantidad de masa.",
+                    "El Camión 2 por 1200 kg de diferencia."
+                ] 
+            },
+            { 
+                n: "Rayo Veloz entrena corriendo en un circuito cuadrado.", 
+                q: "El circuito de entrenamiento es un cuadrado perfecto que mide 287 metros por cada lado (su perímetro total es de 4 x 287 = 1148 metros). Si Rayo corre 4 vueltas completas alrededor del circuito, ¿cuántos metros recorre en total?", 
+                a: "4592 metros", 
+                o: ["4592 metros", "4400 metros", "1148 metros", "4582 metros"] 
+            },
+            { 
+                n: "Mente Brillante realiza una estimación rápida del cargamento.", 
+                q: "Si redondeamos el número 689 a la centena más cercana (700) y luego lo multiplicamos por 4, ¿cuál es el producto estimado que obtenemos?", 
+                a: "2800", 
+                o: ["2800", "2400", "2756", "3000"] 
+            }
         ];
 
         let currentLevel = 0;
+        let isProcessing = false;
 
         function startGame() {
             document.getElementById('screen-start').classList.add('hidden');
             document.getElementById('screen-game').classList.remove('hidden');
+            currentLevel = 0;
             loadLevel();
         }
 
+        // Algoritmo Fisher-Yates para barajar las opciones
         function shuffle(array) {
-            return array.sort(() => Math.random() - 0.5);
+            let shuffled = array.slice();
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
         }
 
         function loadLevel() {
             const level = questions[currentLevel];
             document.getElementById('level-label').innerText = `MISIÓN: ${currentLevel + 1} / ${questions.length}`;
-            document.getElementById('progress-fill').style.width = `${((currentLevel + 1) / questions.length) * 100}%`;
-            document.getElementById('narrative-text').innerText = level.n;
-            document.getElementById('question-text').innerText = level.q;
+            document.getElementById('progress-fill').style.width = `${((currentLevel) / questions.length) * 100}%`;
+            document.getElementById('narrative-text').innerText = `"${level.n}"`;
+            document.getElementById('question-text').innerHTML = level.q;
 
             const select = document.getElementById('answer-select');
-            select.innerHTML = '<option value="" disabled selected>-- Elige tu respuesta --</option>';
+            select.innerHTML = '<option value="" disabled selected>-- Elige con calma --</option>';
             
-            const shuffled = shuffle([...level.o]);
-            shuffled.forEach(opt => {
+            const shuffledOptions = shuffle([...level.o]);
+            shuffledOptions.forEach(opt => {
                 const el = document.createElement('option');
                 el.value = opt;
                 el.innerText = opt;
                 select.appendChild(el);
             });
 
-            // Cambiar icono de héroe
-            const icons = ["🐱", "🐢", "🐶", "🦅"];
-            document.getElementById('hero-icon').innerText = icons[currentLevel % icons.length];
+            // Avatares de la Legión rotando por nivel para mayor dinamismo
+            const avatars = ["🐱", "🐢", "🐶", "🦅", "🤖"];
+            document.getElementById('hero-avatar').innerText = avatars[currentLevel % avatars.length];
+            
+            isProcessing = false;
         }
 
         function checkAnswer() {
+            if (isProcessing) return;
+
             const select = document.getElementById('answer-select');
             const userAns = select.value;
             const fx = document.getElementById('visual-fx');
 
             if (!userAns) return;
 
+            isProcessing = true;
+
             if (userAns === questions[currentLevel].a) {
-                // Correcto
-                fx.innerText = "¡ZAS!";
-                fx.style.color = "#facc15";
-                fx.classList.add('active');
+                // Correcto: lanza onomatopeya alegre
+                const hits = ["¡CHILL!", "¡ZAS!", "¡POW!", "¡BOOM!", "¡PLOP!"];
+                fx.innerText = hits[Math.floor(Math.random() * hits.length)];
+                fx.className = "pow-text comic-title text-8xl text-yellow-400 active";
                 
                 setTimeout(() => {
                     fx.classList.remove('active');
@@ -272,22 +407,24 @@
                     } else {
                         showEnd();
                     }
-                }, 800);
+                }, 900);
             } else {
-                // Incorrecto
+                // Incorrecto: golpe o falla
                 fx.innerText = "¡OOF!";
-                fx.style.color = "#ef4444";
-                fx.classList.add('active');
+                fx.className = "pow-text comic-title text-8xl text-red-500 active";
                 
                 setTimeout(() => {
                     fx.classList.remove('active');
-                }, 800);
+                    select.value = ""; // Limpiar dropdown para reintento
+                    isProcessing = false;
+                }, 900);
             }
         }
 
         function showEnd() {
             document.getElementById('screen-game').classList.add('hidden');
             document.getElementById('screen-end').classList.remove('hidden');
+            document.getElementById('progress-fill').style.width = "100%";
         }
     </script>
 </body>
