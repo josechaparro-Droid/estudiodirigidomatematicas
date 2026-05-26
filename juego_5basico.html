@@ -1,238 +1,1110 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escape Room: División Titán - 5° Básico</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Comic Neue', cursive;
-            background-color: #1e1b4b;
-            background-image: radial-gradient(#4338ca 15%, transparent 16%), radial-gradient(#4338ca 15%, transparent 16%);
-            background-size: 30px 30px;
-            background-position: 0 0, 15px 15px;
-            min-height: 100vh;
-            color: #1e293b;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
-        .comic-title { font-family: 'Bangers', cursive; letter-spacing: 2px; }
-        .comic-panel {
-            background: white;
-            border: 5px solid black;
-            box-shadow: 12px 12px 0px rgba(0, 0, 0, 1);
-        }
-        .btn-action {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 1px;
-            border: 3px solid black;
-            box-shadow: 5px 5px 0px black;
-            transition: all 0.1s;
-        }
-        .btn-action:active {
-            transform: translate(3px, 3px);
-            box-shadow: 0px 0px 0px black;
-        }
-        .pow-effect {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            z-index: 100;
-            pointer-events: none;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .pow-effect.active { transform: translate(-50%, -50%) scale(1.8); }
-        select {
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 1.5em;
-        }
-        .progress-bar-inner { transition: width 0.5s ease-in-out; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escape Room: ¡Salva la Campana con Gatito Chill!</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts para un estilo cómic y moderno -->
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Chango&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Estilos temáticos de cómic */
+    .font-comic-title {
+      font-family: 'Bangers', cursive;
+      letter-spacing: 0.05em;
+    }
+    .font-comic-fun {
+      font-family: 'Chango', cursive;
+    }
+    .font-comic-body {
+      font-family: 'Comic Neue', sans-serif;
+      font-weight: 700;
+    }
+    
+    /* Efecto de puntos Ben-Day para el fondo */
+    .bg-ben-day {
+      background-color: #1e1b4b; /* Azul oscuro */
+      background-image: radial-gradient(#312e81 20%, transparent 20%),
+                        radial-gradient(#312e81 20%, transparent 20%);
+      background-size: 16px 16px;
+      background-position: 0 0, 8px 8px;
+    }
+
+    /* Sombras duras estilo Pop-Art / Cómic */
+    .comic-box {
+      border: 4px solid #000000;
+      box-shadow: 8px 8px 0px #000000;
+    }
+    
+    .comic-btn-yellow {
+      border: 3px solid #000000;
+      box-shadow: 4px 4px 0px #000000;
+      transition: all 0.1s ease;
+    }
+    .comic-btn-yellow:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px #000000;
+    }
+
+    .comic-btn-red {
+      border: 3px solid #000000;
+      box-shadow: 4px 4px 0px #000000;
+      transition: all 0.1s ease;
+    }
+    .comic-btn-red:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px #000000;
+    }
+
+    /* Globos de diálogo de cómic */
+    .speech-bubble {
+      position: relative;
+      background: #ffffff;
+      border: 3px solid #000000;
+      border-radius: 12px;
+    }
+    .speech-bubble:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      width: 0;
+      height: 0;
+      border: 15px solid transparent;
+      border-top-color: #ffffff;
+      border-bottom: 0;
+      border-left: 0;
+      margin-left: -7.5px;
+      margin-bottom: -15px;
+    }
+    .speech-bubble-border:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      width: 0;
+      height: 0;
+      border: 18px solid transparent;
+      border-top-color: #000000;
+      border-bottom: 0;
+      border-left: 0;
+      margin-left: -9px;
+      margin-bottom: -18px;
+      z-index: -1;
+    }
+
+    /* Animaciones */
+    @keyframes bounce-slow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .animate-bounce-slow {
+      animation: bounce-slow 3s infinite ease-in-out;
+    }
+  </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="bg-ben-day text-slate-900 min-h-screen font-comic-body p-2 md:p-6 flex flex-col justify-between">
 
-    <div id="visual-pop" class="pow-effect comic-title text-7xl text-purple-600 drop-shadow-[4px_4px_0px_white]">¡REPARTO!</div>
+  <!-- Header del Juego -->
+  <header class="max-w-5xl w-full mx-auto comic-box bg-gradient-to-r from-red-600 via-purple-600 to-blue-600 p-4 text-white mb-6 relative overflow-hidden">
+    <div class="absolute -right-8 -top-8 w-24 h-24 bg-yellow-400 rounded-full opacity-20 blur-md"></div>
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-comic-title text-yellow-300 drop-shadow-[2px_2px_0_rgba(0,0,0,1)] tracking-wider">
+          GATITO CHILL VS. PATITO AMARILLITO
+        </h1>
+        <p class="text-xs md:text-sm text-yellow-100 uppercase tracking-widest mt-1">
+          Objetivo (OA 06): Resolver problemas cotidianos aplicando Prioridad de Operaciones (Suma, Resta, Multiplicación, División).
+        </p>
+      </div>
+      <div class="flex items-center gap-3 bg-black/40 px-4 py-2 rounded-lg border-2 border-black">
+        <span class="text-yellow-300 font-comic-title text-xl">SALUD CHILL:</span>
+        <div class="w-24 bg-gray-700 h-4 rounded-full border border-black overflow-hidden flex">
+          <div id="health-bar" class="bg-red-500 h-full w-full transition-all duration-300"></div>
+        </div>
+        <span id="health-text" class="text-sm font-bold">5/5</span>
+      </div>
+    </div>
+  </header>
 
-    <div class="max-w-4xl w-full">
-        <!-- Header -->
-        <header class="text-center mb-8">
-            <div class="inline-block bg-white border-4 border-black p-4 transform rotate-1 shadow-[10px_10px_0px_#7c3aed]">
-                <h1 class="text-4xl md:text-6xl comic-title text-purple-700 uppercase">DIVISIÓN TITÁN: EL RESCATE</h1>
-                <p class="text-xl font-bold mt-2 italic">Basado en la historia del Gatito Chill</p>
-            </div>
-            
-            <div class="mt-6 bg-white border-2 border-black p-3 rounded-lg max-w-3xl mx-auto shadow-md">
-                <p class="font-bold text-sm md:text-base text-indigo-900">
-                    🎯 OBJETIVO: Demostrar comprensión de la división con dividendos de tres dígitos y divisores de un dígito aplicando el algoritmo estándar.
-                </p>
-            </div>
-        </header>
+  <!-- Contenedor Principal de la Aventura -->
+  <main class="max-w-5xl w-full mx-auto flex-grow flex flex-col justify-center items-center">
+    
+    <!-- PANTALLA DE INICIO / INTRODUCCIÓN -->
+    <div id="intro-screen" class="w-full bg-yellow-100 rounded-3xl comic-box p-6 md:p-8 flex flex-col md:flex-row items-center gap-8">
+      <div class="w-full md:w-2/5 flex flex-col items-center">
+        <!-- SVG Gatito Chill animado -->
+        <div class="w-48 h-48 bg-sky-200 border-4 border-black rounded-full flex items-center justify-center relative overflow-hidden animate-bounce-slow">
+          <svg viewBox="0 0 100 100" class="w-40 h-40">
+            <!-- Orejas -->
+            <polygon points="15,40 5,10 35,28" fill="#F4A261" stroke="black" stroke-width="3"/>
+            <polygon points="85,40 95,10 65,28" fill="#F4A261" stroke="black" stroke-width="3"/>
+            <!-- Orejas internas -->
+            <polygon points="18,34 10,16 30,26" fill="#FFB7B2"/>
+            <polygon points="82,34 90,16 70,26" fill="#FFB7B2"/>
+            <!-- Cabeza -->
+            <ellipse cx="50" cy="50" rx="38" ry="32" fill="#E9C46A" stroke="black" stroke-width="3"/>
+            <!-- Lentes de Sol (Chill) -->
+            <rect x="20" y="38" width="24" height="15" rx="6" fill="black"/>
+            <rect x="56" y="38" width="24" height="15" rx="6" fill="black"/>
+            <line x1="44" y1="45" x2="56" y2="45" stroke="black" stroke-width="4"/>
+            <!-- Reflejo lentes -->
+            <line x1="24" y1="42" x2="32" y2="42" stroke="white" stroke-width="2"/>
+            <line x1="60" y1="42" x2="68" y2="42" stroke="white" stroke-width="2"/>
+            <!-- Nariz y Boca -->
+            <polygon points="48,58 52,58 50,61" fill="#FFB7B2" stroke="black" stroke-width="1"/>
+            <path d="M 45,64 Q 50,68 50,64 Q 50,68 55,64" fill="none" stroke="black" stroke-width="3"/>
+            <!-- Bigotes -->
+            <line x1="12" y1="56" x2="2" y2="54" stroke="black" stroke-width="2"/>
+            <line x1="12" y1="62" x2="0" y2="62" stroke="black" stroke-width="2"/>
+            <line x1="88" y1="56" x2="98" y2="54" stroke="black" stroke-width="2"/>
+            <line x1="88" y1="62" x2="100" y2="62" stroke="black" stroke-width="2"/>
+            <!-- Cuerpo patitas arriba -->
+            <ellipse cx="50" cy="95" rx="20" ry="15" fill="#E9C46A" stroke="black" stroke-width="3"/>
+          </svg>
+          <div class="absolute bottom-1 bg-teal-500 text-white text-xs px-2 py-0.5 rounded-full border border-black uppercase font-bold">Gatito Chill</div>
+        </div>
+        
+        <div class="mt-4 text-center">
+          <span class="inline-block bg-purple-600 text-white font-comic-title text-xl px-4 py-2 rotate-2 border-2 border-black shadow-[3px_3px_0_rgba(0,0,0,1)]">
+            ¡HOLA CHILLER!
+          </span>
+        </div>
+      </div>
 
-        <!-- Main Content -->
-        <main class="relative">
-            <!-- Start Screen -->
-            <div id="start-screen" class="comic-panel p-8 text-center space-y-6">
-                <div class="text-8xl mb-4">🐱🫧</div>
-                <h2 class="text-4xl comic-title text-red-600 uppercase">¡Emergencia en Ciudad Matemáticas!</h2>
-                <div class="text-lg leading-relaxed text-left space-y-4 font-medium">
-                    <p>El malvado <b>Dr. Caos</b> ha usado su "Rayo Desordenador" para mezclar todos los suministros de la ciudad. Las raciones de comida y las baterías de emergencia están en un caos total.</p>
-                    <p>Mente Brillante nos advierte: <span class="text-purple-700">"Solo el algoritmo DMSBR puede restaurar el orden. Debemos repartir equitativamente antes de que sea tarde".</span></p>
-                    <p class="text-blue-600 font-bold">Gatito Chill te mira con calma y dice: "Respira profundo, ponle una hojita a tu cabeza y... ¡a dividir!".</p>
-                </div>
-                <button onclick="startGame()" class="btn-action bg-red-500 hover:bg-red-400 text-white text-3xl py-4 px-12 rounded-lg w-full md:w-auto mt-4 uppercase">
-                    ¡INICIAR MISIÓN! ⚡
-                </button>
-            </div>
+      <div class="w-full md:w-3/5 flex flex-col justify-between">
+        <h2 class="text-3xl md:text-4xl font-comic-title text-red-600 uppercase mb-3">
+          ¡Emergencia en el Colegio San Matemático!
+        </h2>
+        <p class="text-base leading-relaxed mb-4">
+          El escurridizo villano <strong>"Patito Amarillito"</strong> ha robado la campana oficial de la escuela. ¡Ha colocado 4 supercandados con contraseñas matemáticas de operatoria combinada para que nunca más toque el recreo! 
+        </p>
+        <p class="text-base leading-relaxed mb-4 bg-white/60 p-3 rounded-lg border-2 border-dashed border-purple-500">
+          <strong>Gatito Chill</strong> está muy relajado tomando un jugo, pero necesita tu astucia para ingresar los códigos correctos. Si fallas, ¡perderá su energía Zen! ¿Podrás resolver las 20 misiones y recuperar la campana?
+        </p>
 
-            <!-- Game Screen -->
-            <div id="game-screen" class="hidden space-y-6">
-                <div class="flex flex-col md:flex-row justify-between items-center bg-white border-4 border-black p-4 shadow-[6px_6px_0px_black] gap-4">
-                    <div class="comic-title text-2xl text-purple-800" id="level-display">RETO: 1 / 20</div>
-                    <div class="w-full md:w-2/3 bg-gray-200 border-2 border-black rounded-full h-6 overflow-hidden">
-                        <div id="progress-bar" class="progress-bar-inner bg-purple-500 h-full" style="width: 0%"></div>
-                    </div>
-                </div>
-
-                <div class="comic-panel p-6 md:p-10 relative">
-                    <div id="character-sprite" class="absolute top-4 right-4 text-5xl animate-bounce">🐱</div>
-                    
-                    <div id="mission-brief" class="bg-indigo-50 border-l-8 border-indigo-500 p-4 mb-6 italic text-indigo-900 font-bold text-lg"></div>
-                    
-                    <div id="question-box" class="space-y-6">
-                        <h3 id="question-text" class="text-2xl font-bold text-gray-800 border-b-2 border-gray-100 pb-4"></h3>
-                        
-                        <div class="space-y-4">
-                            <label class="block font-bold text-xl text-red-600 comic-title">Respuesta del Superhéroe:</label>
-                            <select id="answer-select" class="w-full p-5 border-4 border-black text-xl font-bold bg-white focus:ring-8 focus:ring-purple-200 outline-none cursor-pointer">
-                                <option value="" disabled selected>-- Selecciona la opción correcta --</option>
-                            </select>
-                        </div>
-
-                        <button onclick="checkAnswer()" class="btn-action bg-purple-600 text-white text-3xl py-5 px-8 rounded-xl w-full uppercase">
-                            ¡Verificar Datos! 💥
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- End Screen -->
-            <div id="end-screen" class="hidden comic-panel p-12 text-center space-y-8">
-                <h2 class="text-7xl comic-title text-purple-700 uppercase">¡CIUDAD SALVADA!</h2>
-                <div class="flex justify-center gap-4 text-6xl">
-                    <span>🐢</span><span>🐱</span><span>🐶</span><span>🦅</span>
-                </div>
-                <p class="text-3xl font-bold text-gray-800">Has derrotado al Dr. Caos aplicando el algoritmo de la división.</p>
-                <div class="bg-yellow-100 border-4 border-dashed border-black p-6 rounded-2xl">
-                    <p class="text-xl">El Gatito Chill ronronea de alegría: <br><b>"Todo vuelve a estar chill. Las matemáticas son la llave del orden".</b></p>
-                </div>
-                <button onclick="location.reload()" class="btn-action bg-indigo-600 text-white text-3xl py-4 px-12 rounded-full">
-                    REINICIAR ENTRENAMIENTO
-                </button>
-            </div>
-        </main>
+        <div class="mt-4">
+          <button onclick="startGame()" class="w-full md:w-auto font-comic-title text-2xl px-8 py-4 bg-yellow-400 hover:bg-yellow-300 text-black rounded-xl comic-btn-yellow uppercase tracking-wider">
+            ¡Iniciar Escape Room! 🛎️🐾
+          </button>
+        </div>
+      </div>
     </div>
 
-    <script>
-        const gameData = [
-            { m: "Mente Brillante inicia el escaneo terminológico.", q: "¿Cómo se llama el número que representa la cantidad total a repartir?", a: "Dividendo", o: ["Dividendo", "Divisor", "Cociente", "Resto"] },
-            { m: "Rayo Veloz necesita repartir energía.", q: "En la división 450 ÷ 5, ¿cuál es el cociente?", a: "90", o: ["90", "80", "45", "9"] },
-            { m: "Gatito Chill analiza los restos de materiales.", q: "Si al terminar un reparto el resto es 0, ¿cómo llamamos a esa división?", a: "Exacta", o: ["Exacta", "Inexacta", "Infinita", "Nula"] },
-            { m: "Fuerza Pluma reparte 324 bloques en 3 torres.", q: "Usa el algoritmo para calcular: ¿Cuántos bloques tiene cada torre?", a: "108", o: ["108", "102", "112", "124"] },
-            { m: "Mente Brillante explica el código DMSBR.", q: "¿Qué operación representa la letra 'M' en el algoritmo de la división?", a: "Multiplicar", o: ["Multiplicar", "Mover", "Minimizar", "Medir"] },
-            { m: "Dr. Caos bloqueó 728 suministros en 7 zonas.", q: "Calcula 728 ÷ 7.", a: "104", o: ["104", "114", "102", "14"] },
-            { m: "Reparto de baterías para los robots de Chill.", q: "Resuelve 642 ÷ 6.", a: "107", o: ["107", "117", "101", "17"] },
-            { m: "Fuerza Pluma lleva 516 semillas a 4 invernaderos.", q: "Resuelve la división 516 ÷ 4.", a: "129", o: ["129", "139", "124", "119"] },
-            { m: "Mente Brillante detecta piezas sueltas.", q: "Resuelve 835 ÷ 4 e identifica el Resto.", a: "3", o: ["3", "1", "0", "2"] },
-            { m: "Rayo Veloz recorre 945 metros en 9 segundos.", q: "¿Cuántos metros por segundo recorrió en promedio?", a: "105", o: ["105", "115", "100", "95"] },
-            { m: "Gatito Chill reparte 745 calugas en 9 bolsas.", q: "¿Cuántas calugas sobran después de repartir equitativamente?", a: "7", o: ["7", "82", "5", "0"] },
-            { m: "Mente Brillante detecta una falla en los cálculos del villano.", q: "El Dr. Caos dice que 624 ÷ 4 es 146. ¿Cuál es el cociente correcto?", a: "156", o: ["156", "146", "166", "154"] },
-            { m: "Misión: Iniciar el algoritmo posicional.", q: "Al dividir 924 ÷ 3, ¿por qué posición debemos comenzar según el valor posicional?", a: "Centenas", o: ["Centenas", "Unidades", "Decenas", "Décimas"] },
-            { m: "Lógica de la Legión Titán.", q: "En 194 ÷ 2, ¿por qué no podemos empezar dividiendo solo la primera cifra (1)?", a: "Porque 1 es menor que 2.", o: ["Porque 1 es menor que 2.", "Porque el 2 es par.", "Porque 1 es unidad.", "Porque Chill dice que no."] },
-            { m: "Descifrando el paso intermedio.", q: "En 386 ÷ 2, tras dividir las centenas, ¿qué cifra bajamos para continuar?", a: "El 8 (decenas)", o: ["El 8 (decenas)", "El 6 (unidades)", "El 3 (centenas)", "Ninguna"] },
-            { m: "Rayo Veloz verifica la misión.", q: "Si multiplicamos el Cociente por el Divisor y sumamos el Resto, ¿qué obtenemos?", a: "El Dividendo", o: ["El Dividendo", "El Algoritmo", "La Reserva", "Cero"] },
-            { m: "Fuerza Pluma reparte 432 litros de agua pura.", q: "Divide 432 entre 8 sectores.", a: "54", o: ["54", "44", "64", "52"] },
-            { m: "Mente Brillante asocia la operación al contexto.", q: "¿Qué situación representa mejor la expresión 305 ÷ 5?", a: "Repartir 305 objetos en 5 grupos iguales.", o: ["Repartir 305 objetos en 5 grupos iguales.", "Restar 5 a 305.", "Sumar 5 veces 305.", "Quitarle 305 a 5."] },
-            { m: "Gatito Chill explica lo que sobra.", q: "En un reparto de 25 piezas entre 4 héroes donde toca a 6 cada uno y sobra 1, ¿qué es ese 1?", a: "Resto", o: ["Resto", "Cociente", "Dividendo", "Error"] },
-            { m: "RETO FINAL: Creación de problema.", q: "Si 516 baldosas se reparten en 6 habitaciones, ¿cuántas van en cada una?", a: "86", o: ["86", "76", "96", "81"] }
-        ];
+    <!-- PANTALLA DE JUEGO PRINCIPAL -->
+    <div id="game-screen" class="hidden w-full flex flex-col gap-6">
+      
+      <!-- Fases del Mapa de Escape -->
+      <div class="w-full grid grid-cols-4 gap-2 text-center text-xs md:text-sm font-comic-title text-white">
+        <div id="phase-tab-1" class="comic-box p-2 bg-gray-500 transition-all duration-300">FASE 1: CONCRETO Y MAPA</div>
+        <div id="phase-tab-2" class="comic-box p-2 bg-gray-500 transition-all duration-300">FASE 2: SIMBÓLICO</div>
+        <div id="phase-tab-3" class="comic-box p-2 bg-gray-500 transition-all duration-300">FASE 3: COTIDIANO</div>
+        <div id="phase-tab-4" class="comic-box p-2 bg-gray-500 transition-all duration-300">FASE 4: ARGUMENTAR</div>
+      </div>
 
-        let currentLevel = 0;
-
-        function startGame() {
-            document.getElementById('start-screen').classList.add('hidden');
-            document.getElementById('game-screen').classList.remove('hidden');
-            loadLevel();
-        }
-
-        function shuffle(array) {
-            return array.sort(() => Math.random() - 0.5);
-        }
-
-        function loadLevel() {
-            const data = gameData[currentLevel];
-            document.getElementById('level-display').innerText = `RETO: ${currentLevel + 1} / ${gameData.length}`;
-            document.getElementById('progress-bar').style.width = `${(currentLevel / gameData.length) * 100}%`;
-            document.getElementById('mission-brief').innerText = `📋 MISIÓN: ${data.m}`;
-            document.getElementById('question-text').innerText = data.q;
+      <div class="w-full grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Panel Izquierdo: Estado de los Candados y Diálogo de los Personajes -->
+        <div class="lg:col-span-1 flex flex-col gap-6">
+          
+          <!-- Los 4 Candados del Patito -->
+          <div class="bg-indigo-950 text-white rounded-2xl comic-box p-4 border-4 border-black">
+            <h3 class="font-comic-title text-xl text-yellow-300 mb-3 border-b-2 border-yellow-300 pb-1 text-center">
+              CANDADOS DE SEGURIDAD 🔒
+            </h3>
+            <div class="flex flex-col gap-2">
+              <div id="lock-indicator-1" class="flex justify-between items-center bg-gray-800 p-2 rounded border border-black">
+                <span class="text-xs">🔒 CANDADO 1 (Items 1-5):</span>
+                <span class="font-bold text-red-500" id="lock-state-1">BLOQUEADO</span>
+              </div>
+              <div id="lock-indicator-2" class="flex justify-between items-center bg-gray-800 p-2 rounded border border-black">
+                <span class="text-xs">🔒 CANDADO 2 (Items 6-10):</span>
+                <span class="font-bold text-red-500" id="lock-state-2">BLOQUEADO</span>
+              </div>
+              <div id="lock-indicator-3" class="flex justify-between items-center bg-gray-800 p-2 rounded border border-black">
+                <span class="text-xs">🔒 CANDADO 3 (Items 11-15):</span>
+                <span class="font-bold text-red-500" id="lock-state-3">BLOQUEADO</span>
+              </div>
+              <div id="lock-indicator-4" class="flex justify-between items-center bg-gray-800 p-2 rounded border border-black">
+                <span class="text-xs">🔒 CANDADO 4 (Items 16-20):</span>
+                <span class="font-bold text-red-500" id="lock-state-4">BLOQUEADO</span>
+              </div>
+            </div>
             
-            const select = document.getElementById('answer-select');
-            select.innerHTML = '<option value="" disabled selected>-- Selecciona la opción correcta --</option>';
+            <!-- Barra de Progreso del Candado Actual -->
+            <div class="mt-4">
+              <div class="flex justify-between text-xs text-yellow-400 mb-1">
+                <span>Progreso total:</span>
+                <span id="progress-text">0 / 20 resueltas</span>
+              </div>
+              <div class="w-full bg-gray-800 h-3 rounded-full overflow-hidden border border-black">
+                <div id="global-progress-bar" class="bg-yellow-400 h-full w-0 transition-all duration-300"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Diálogos de Gatito Chill y Patito Amarillito -->
+          <div class="bg-yellow-50 rounded-2xl comic-box p-4 border-4 border-black flex-grow flex flex-col justify-between">
+            <div class="flex items-start gap-3 mb-4">
+              <!-- Avatar Gatito Chill -->
+              <div class="w-16 h-16 bg-sky-200 border-2 border-black rounded-full shrink-0 flex items-center justify-center relative overflow-hidden">
+                <svg viewBox="0 0 100 100" class="w-12 h-12">
+                  <polygon points="15,40 5,10 35,28" fill="#F4A261" stroke="black" stroke-width="3"/>
+                  <polygon points="85,40 95,10 65,28" fill="#F4A261" stroke="black" stroke-width="3"/>
+                  <ellipse cx="50" cy="50" rx="38" ry="32" fill="#E9C46A" stroke="black" stroke-width="3"/>
+                  <rect x="20" y="38" width="24" height="15" rx="6" fill="black"/>
+                  <rect x="56" y="38" width="24" height="15" rx="6" fill="black"/>
+                  <line x1="44" y1="45" x2="56" y2="45" stroke="black" stroke-width="4"/>
+                  <polygon points="48,58 52,58 50,61" fill="#FFB7B2" stroke="black" stroke-width="1"/>
+                  <path d="M 45,64 Q 50,68 50,64 Q 50,68 55,64" fill="none" stroke="black" stroke-width="3"/>
+                </svg>
+              </div>
+              <div class="flex-grow">
+                <div class="text-xs text-blue-600 font-bold uppercase">Gatito Chill dice:</div>
+                <div id="gatito-bubble" class="text-sm bg-white p-2 rounded-lg border-2 border-black shadow-[2px_2px_0_rgba(0,0,0,1)]">
+                  "¡Oye, relájate! Primero respira y luego recuerda la prioridad de operaciones: Paréntesis, luego Multiplicaciones y Divisiones de izquierda a derecha, y al final Sumas y Restas."
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3 justify-end">
+              <div class="flex-grow text-right">
+                <div class="text-xs text-red-600 font-bold uppercase">Patito Amarillito dice:</div>
+                <div id="patito-bubble" class="text-sm bg-red-100 p-2 rounded-lg border-2 border-black shadow-[2px_2px_0_rgba(0,0,0,1)] inline-block">
+                  "¡Cuac, cuac! Jamás resolverán las 20 operaciones combinadas. ¡Los recreos serán míos por siempre!"
+                </div>
+              </div>
+              <!-- Avatar Patito Amarillito -->
+              <div class="w-16 h-16 bg-yellow-300 border-2 border-black rounded-full shrink-0 flex items-center justify-center relative overflow-hidden">
+                <svg viewBox="0 0 100 100" class="w-12 h-12">
+                  <ellipse cx="50" cy="50" rx="35" ry="35" fill="#FFD166" stroke="black" stroke-width="3"/>
+                  <!-- Ojos locos / malvados -->
+                  <circle cx="35" cy="40" r="10" fill="white" stroke="black" stroke-width="2"/>
+                  <circle cx="32" cy="40" r="4" fill="black"/>
+                  <circle cx="65" cy="40" r="10" fill="white" stroke="black" stroke-width="2"/>
+                  <circle cx="62" cy="40" r="4" fill="black"/>
+                  <!-- Cejas malvadas -->
+                  <path d="M 25,28 L 45,35" stroke="black" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M 75,28 L 55,35" stroke="black" stroke-width="3" stroke-linecap="round"/>
+                  <!-- Pico de patito -->
+                  <path d="M 50,48 Q 30,55 50,65 Q 70,55 50,48" fill="#F4A261" stroke="black" stroke-width="2"/>
+                </svg>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Panel Central y Derecho: Pregunta actual, opciones e interactividad -->
+        <div class="lg:col-span-2 flex flex-col gap-6">
+          
+          <!-- Cuadro de la Pregunta Actual -->
+          <div class="bg-white rounded-2xl comic-box p-6 border-4 border-black relative">
+            <!-- Esquina con insignia del item -->
+            <div class="absolute -top-4 -left-4 bg-red-600 text-white font-comic-title text-xl px-4 py-1 rotate-12 border-2 border-black shadow-[3px_3px_0_rgba(0,0,0,1)]">
+              ÍTEM <span id="item-number-badge">1</span>
+            </div>
             
-            const shuffledOptions = shuffle([...data.o]);
-            shuffledOptions.forEach(opt => {
-                const el = document.createElement('option');
-                el.value = opt;
-                el.innerText = opt;
-                select.appendChild(el);
-            });
+            <div class="mt-4">
+              <span id="item-category" class="text-xs bg-purple-200 text-purple-800 px-3 py-1 rounded-full border border-purple-800 uppercase font-bold">
+                Categoría
+              </span>
+              <h4 id="question-text" class="text-xl md:text-2xl font-bold mt-4 mb-4 text-slate-800 leading-snug">
+                Cargando pregunta...
+              </h4>
 
-            const sprites = ["🐱", "🐢", "🦅", "🐶", "🫧", "⚡"];
-            document.getElementById('character-sprite').innerText = sprites[currentLevel % sprites.length];
+              <!-- Espacio para representación visual / interactiva del ítem de forma simplificada -->
+              <div id="visual-representation-box" class="hidden mb-6 p-4 bg-sky-50 rounded-xl border-4 border-dashed border-sky-400">
+                <!-- Se poblará dinámicamente si la pregunta tiene un elemento pictórico/concreto -->
+              </div>
+
+              <!-- Menú de Selección de Respuestas (Alternativas mezcladas) -->
+              <div class="mb-6">
+                <label for="answer-select" class="block text-sm font-bold text-slate-700 mb-2">
+                  Selecciona la opción correcta en base a tus cálculos:
+                </label>
+                <select id="answer-select" class="w-full p-4 bg-yellow-50 border-4 border-black text-lg font-bold rounded-xl focus:outline-none focus:ring-4 focus:ring-purple-500">
+                  <!-- Opciones dinámicas -->
+                </select>
+              </div>
+
+              <!-- Mensaje de Retroalimentación de la pregunta actual -->
+              <div id="feedback-panel" class="hidden p-4 rounded-xl border-4 border-black mb-6">
+                <p id="feedback-text" class="text-base font-bold"></p>
+                <div id="explanation-box" class="mt-2 text-sm text-slate-700 font-semibold italic"></div>
+              </div>
+
+              <!-- Botones de Acción -->
+              <div class="flex gap-4">
+                <button id="submit-btn" onclick="checkCurrentAnswer()" class="flex-grow font-comic-title text-2xl px-6 py-4 bg-green-500 hover:bg-green-400 text-white rounded-xl comic-btn-yellow uppercase tracking-wide">
+                  COMPROBAR CÓDIGO ✔️
+                </button>
+                <button id="next-btn" onclick="goToNextQuestion()" class="hidden flex-grow font-comic-title text-2xl px-6 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl comic-btn-yellow uppercase tracking-wide">
+                  SIGUIENTE RETO 🐾 ➔
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Síntesis Teórica siempre disponible para consulta rápida -->
+          <div class="bg-teal-50 rounded-xl border-4 border-black p-4">
+            <h4 class="font-comic-title text-lg text-teal-800 mb-2 flex items-center gap-2">
+              📖 POCKET CHILL-CHILE BOOK (Prioridad Operatoria):
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+              <div class="bg-white p-2 rounded border-2 border-black">
+                <strong class="text-red-600">P - PARÉNTESIS:</strong> Siempre primero desde adentro hacia afuera.
+              </div>
+              <div class="bg-white p-2 rounded border-2 border-black">
+                <strong class="text-blue-600">MADA - MULTI/DIV:</strong> Multiplicación y división de izquierda a derecha (tienen igual jerarquía).
+              </div>
+              <div class="bg-white p-2 rounded border-2 border-black">
+                <strong class="text-green-600">SUDA - SUM/REST:</strong> Suma y resta de izquierda a derecha (tienen igual jerarquía).
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- PANTALLA DE VICTORIA FINAL -->
+    <div id="victory-screen" class="hidden w-full bg-emerald-100 rounded-3xl comic-box p-6 md:p-8 text-center max-w-3xl mx-auto flex flex-col items-center gap-6">
+      
+      <!-- Icono de Campana Brillante en SVG -->
+      <div class="w-32 h-32 bg-yellow-400 border-4 border-black rounded-full flex items-center justify-center animate-bounce-slow relative">
+        <svg viewBox="0 0 100 100" class="w-24 h-24">
+          <!-- Campana -->
+          <path d="M 50,15 C 35,15 30,35 30,60 L 20,70 L 80,70 L 70,60 C 70,35 65,15 50,15 Z" fill="#FFD166" stroke="black" stroke-width="4"/>
+          <!-- Agarradera -->
+          <circle cx="50" cy="12" r="8" fill="none" stroke="black" stroke-width="4"/>
+          <!-- Badajo -->
+          <circle cx="50" cy="76" r="6" fill="#F4A261" stroke="black" stroke-width="3"/>
+          <line x1="50" y1="70" x2="50" y2="76" stroke="black" stroke-width="4"/>
+        </svg>
+        <div class="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-2 py-1 rounded border-2 border-black font-comic-title rotate-12">RESTAURADA</div>
+      </div>
+
+      <h2 class="text-4xl md:text-5xl font-comic-title text-green-700 tracking-wide">
+        🏆 ¡LO LOGRASTE, CHILLER!
+      </h2>
+      <p class="text-xl text-slate-800 max-w-xl">
+        ¡Has resuelto los 20 problemas utilizando correctamente la prioridad de las operaciones! Los 4 candados han sido destruidos y la campana dorada vuelve a su lugar. El malvado Patito Amarillito ha escapado diciendo: <em>"¡Rayos, saben demasiada operatoria combinada! ¡Volveré con decimales!"</em>.
+      </p>
+
+      <div class="bg-white p-4 rounded-xl border-4 border-black max-w-lg w-full text-left">
+        <h3 class="font-comic-title text-lg text-purple-700 border-b-2 border-purple-200 pb-1 mb-2">
+          REPORTE DE DESEMPEÑO MATEMÁTICO:
+        </h3>
+        <ul class="space-y-2 text-sm">
+          <li>✨ <strong>Fase 1 (Representación):</strong> Completada de forma pictórica y concreta.</li>
+          <li>🎯 <strong>Fase 2 (Simbólica):</strong> Operatoria de precisión pura sin fallos de jerarquía.</li>
+          <li>💡 <strong>Fase 3 (Aplicación):</strong> Resolución de problemas complejos del mundo real.</li>
+          <li>🔥 <strong>Fase 4 (Argumentación):</strong> Capacidad de análisis de errores y modelamiento crítico.</li>
+        </ul>
+      </div>
+
+      <button onclick="restartGame()" class="font-comic-title text-2xl px-8 py-4 bg-yellow-400 hover:bg-yellow-300 text-black rounded-xl comic-btn-yellow uppercase tracking-wider">
+        🔄 Jugar Otra Vez
+      </button>
+    </div>
+
+    <!-- PANTALLA DE JUEGO TERMINADO (SIN ENERGÍA ZEN) -->
+    <div id="gameover-screen" class="hidden w-full bg-red-100 rounded-3xl comic-box p-6 md:p-8 text-center max-w-3xl mx-auto flex flex-col items-center gap-6">
+      
+      <!-- SVG Gatito Enojado / Agotado -->
+      <div class="w-32 h-32 bg-slate-300 border-4 border-black rounded-full flex items-center justify-center animate-pulse relative">
+        <svg viewBox="0 0 100 100" class="w-24 h-24">
+          <polygon points="15,40 5,10 35,28" fill="#5c5c5c" stroke="black" stroke-width="3"/>
+          <polygon points="85,40 95,10 65,28" fill="#5c5c5c" stroke="black" stroke-width="3"/>
+          <ellipse cx="50" cy="50" rx="38" ry="32" fill="#9e9e9e" stroke="black" stroke-width="3"/>
+          <!-- Ojos en X -->
+          <line x1="25" y1="35" x2="40" y2="45" stroke="black" stroke-width="3"/>
+          <line x1="40" y1="35" x2="25" y2="45" stroke="black" stroke-width="3"/>
+          <line x1="60" y1="35" x2="75" y2="45" stroke="black" stroke-width="3"/>
+          <line x1="75" y1="35" x2="60" y2="45" stroke="black" stroke-width="3"/>
+          <!-- Boca de cansancio -->
+          <path d="M 40,65 Q 50,55 60,65" fill="none" stroke="black" stroke-width="3"/>
+        </svg>
+        <div class="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-2 py-1 rounded border-2 border-black font-comic-title rotate-12">SIN ENERGÍA</div>
+      </div>
+
+      <h2 class="text-4xl md:text-5xl font-comic-title text-red-700 tracking-wide">
+        💥 ¡ALERTA ZEN AGOTADA!
+      </h2>
+      <p class="text-lg text-slate-800 max-w-xl">
+        ¡Oh no! Gatito Chill ha perdido toda su energía mental y se ha quedado dormido profundamente por el estrés del Patito Amarillito. Pero no te preocupes, ¡la práctica hace al maestro de las operaciones combinadas!
+      </p>
+
+      <button onclick="restartGame()" class="font-comic-title text-2xl px-8 py-4 bg-red-600 hover:bg-red-500 text-white rounded-xl comic-btn-red uppercase tracking-wider">
+        🛡️ Recuperar Energía y Reintentar
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Footer con Créditos y Referencias -->
+  <footer class="max-w-5xl w-full mx-auto text-center text-white/70 text-xs py-4 mt-6">
+    <p>Guía de Trabajo Interactiva | 5° Año Básico - Eje de Números y Operaciones</p>
+    <p>© 2026 Diseñado con fines instruccionales y lúdicos basados en el currículum de Chile.</p>
+  </footer>
+
+  <script>
+    // BASE DE PREGUNTAS COMPLETA (20 Ítems oficiales de la guía de trabajo adjunta)
+    // Se reformularon descripciones pictóricas o concretas para una interfaz visual interactiva.
+    const questionsDatabase = [
+      {
+        id: 1,
+        phase: 1,
+        category: "Representar y Modelar (La Vega Central)",
+        question: "En un viaje a la Vega Central de Santiago, su tía compró 4 cajas de 12 tomates cada una. Luego, utilizó 15 tomates para hacer ensaladas. ¿Cuál es la representación y la operación combinada correcta para calcular cuántos tomates le quedan?",
+        visualHtml: `
+          <div class="flex flex-col gap-2 items-center">
+            <span class="text-sm font-bold text-sky-800">Visualización de las Cajas:</span>
+            <div class="flex flex-wrap gap-2 justify-center">
+              <div class="bg-orange-200 p-2 rounded border-2 border-orange-400 text-xs text-center font-bold">📦 Caja 1: 12 Tomates</div>
+              <div class="bg-orange-200 p-2 rounded border-2 border-orange-400 text-xs text-center font-bold">📦 Caja 2: 12 Tomates</div>
+              <div class="bg-orange-200 p-2 rounded border-2 border-orange-400 text-xs text-center font-bold">📦 Caja 3: 12 Tomates</div>
+              <div class="bg-orange-200 p-2 rounded border-2 border-orange-400 text-xs text-center font-bold">📦 Caja 4: 12 Tomates</div>
+            </div>
+            <p class="text-xs text-red-600 font-bold mt-2">🍅 -15 tomates para ensalada (quitar)</p>
+          </div>
+        `,
+        options: [
+          { text: "Operación: (4 x 12) - 15. Resultado: Le quedan 33 tomates.", correct: true },
+          { text: "Operación: (4 + 12) - 15. Resultado: Le queda 1 tomate.", correct: false },
+          { text: "Operación: (4 x 12) + 15. Resultado: Le quedan 63 tomates.", correct: false },
+          { text: "Operación: 12 - 4 - 15. Resultado: Expresión con resultado negativo.", correct: false }
+        ],
+        explanation: "La tía tiene 4 grupos de 12 (multiplicación: 4 x 12) y luego gasta o resta 15 tomates. Así la expresión es (4 x 12) - 15 = 48 - 15 = 33."
+      },
+      {
+        id: 2,
+        phase: 1,
+        category: "Representar y Argumentar (Cambio de Monedas)",
+        question: "Un almacén tiene $80000 para cambiar en monedas de $1000 y $500. El dueño desea obtener la misma cantidad de monedas de $1000 que de $500. ¿Qué operación combinada representa correctamente este cambio y cuántas monedas obtendrá de cada denominación?",
+        visualHtml: `
+          <div class="text-center">
+            <p class="text-sm font-bold text-sky-800">Monto total a cambiar: $80.000</p>
+            <p class="text-xs text-slate-600 mt-1">Se junta 1 moneda de $1000 y 1 de $500 para formar un 'grupo de valor': $1500</p>
+          </div>
+        `,
+        options: [
+          { text: "División entre el paquete ($1500): 80000 ÷ (1000 + 500). No da cantidad exacta de monedas (aproximadamente 53 de cada una).", correct: true },
+          { text: "Solo suma: (80000 ÷ 1000) + (80000 ÷ 500). Da 240 monedas totales pero no igual cantidad.", correct: false },
+          { text: "Multiplicar los montos: 80000 ÷ (1000 x 500). Operación inválida en contexto monetario.", correct: false },
+          { text: "Resta: 80000 - 1000 - 500. Representa solo un vuelto individual.", correct: false }
+        ],
+        explanation: "Para tener la misma cantidad, consideramos cada par de monedas ($1000 + $500 = $1500) como un grupo. Dividimos 80.000 ÷ 1500. Esto da 53 conjuntos, por ende 53 monedas de $1000 y 53 de $500 (quedando un saldo de $500 de vuelto)."
+      },
+      {
+        id: 3,
+        phase: 1,
+        category: "Modelar y Resolver Problemas (Equipos)",
+        question: "Un grupo de 32 estudiantes de 5° básico debe dividirse en 4 equipos. Si a cada equipo se le dan 5 tarjetas con problemas, pero 2 tarjetas se pierden en cada equipo, ¿cuántas tarjetas de problemas le quedan en total a cada equipo? Selecciona el modelo correspondiente.",
+        visualHtml: `
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="bg-purple-100 p-2 rounded text-center border border-purple-300">👥 32 Estudiantes ÷ 4 Equipos</div>
+            <div class="bg-purple-100 p-2 rounded text-center border border-purple-300">🃏 Cada equipo recibe: 5 tarjetas y pierde 2</div>
+          </div>
+        `,
+        options: [
+          { text: "Modelo: (32 ÷ 4) x 5 - 2 = 38 tarjetas por equipo.", correct: false },
+          { text: "Modelo: 5 - 2 = 3 tarjetas restantes por equipo. (La división de estudiantes no altera la entrega individual por equipo)", correct: true },
+          { text: "Modelo: (32 x 4) ÷ 5 - 2 = 23.6 tarjetas.", correct: false },
+          { text: "Modelo: (32 ÷ 4) ÷ (5 - 2) = 2.6 tarjetas.", correct: false }
+        ],
+        explanation: "Independiente de la cantidad de personas por equipo, a cada equipo de manera directa se le entregan 5 tarjetas y se le pierden 2, por lo que a cada equipo le quedan: 5 - 2 = 3 tarjetas. *(Nota: La pregunta de la guía original pregunta cuántas le quedan a cada equipo individualmente, por lo que la operación directa es 5 - 2 = 3)*."
+      },
+      {
+        id: 4,
+        phase: 1,
+        category: "Concreto a Simbólico (Análisis de Esquema)",
+        question: "Observa el siguiente esquema que representa una compra combinada: [ (3 x $250) + (2 x $500) ]. ¿Qué situación con palabras describe correctamente este esquema y cuál es el costo total?",
+        visualHtml: `
+          <div class="bg-gray-100 p-2 rounded text-center font-mono border-2 border-black text-sm">
+            [ (3 x $250) + (2 x $500) ]
+          </div>
+        `,
+        options: [
+          { text: "Comprar 3 productos de $250 cada uno y 2 productos de $500 cada uno. El costo total es $1.750.", correct: true },
+          { text: "Comprar 3 productos de $500 cada uno y 2 productos de $250 cada uno. El costo total es $2.000.", correct: false },
+          { text: "Comprar 5 productos a un promedio de $750. El costo total es $3.750.", correct: false },
+          { text: "Dividir $250 en 3 partes y sumarle el doble de $500. El costo es $1.083.", correct: false }
+        ],
+        explanation: "Multiplicar 3 x 250 representa 3 unidades de un bien de $250 ($750). Multiplicar 2 x 500 representa 2 unidades de un bien de $500 ($1000). Sumar ambos montos da un total de $1.750."
+      },
+      {
+        id: 5,
+        phase: 1,
+        category: "Representar (Jerarquía de Operaciones)",
+        question: "Imagina que debes representar la operación (15 ÷ 3 + 4). ¿Qué orden conceptual debes seguir y cuál es el resultado final?",
+        visualHtml: `
+          <div class="flex justify-around items-center text-sm font-bold text-teal-800">
+            <span>¿Primero dividir 15 ÷ 3?</span>
+            <span>o</span>
+            <span>¿Primero sumar 3 + 4?</span>
+          </div>
+        `,
+        options: [
+          { text: "Primero se resuelve la división 15 ÷ 3 (da 5), y luego se suma 4. El resultado es 9.", correct: true },
+          { text: "Primero se suma 3 + 4 (da 7), y luego se divide 15 ÷ 7. El resultado es 2.14.", correct: false },
+          { text: "Se realizan al mismo tiempo de derecha a izquierda. El resultado es 12.", correct: false },
+          { text: "Primero se multiplica por 1 y luego se resta. El resultado es 5.", correct: false }
+        ],
+        explanation: "Por prioridad de operaciones (MADA antes que SUDA), la división (15 ÷ 3 = 5) debe realizarse antes que la adición (+ 4). Así: 5 + 4 = 9."
+      },
+      {
+        id: 6,
+        phase: 2,
+        category: "Simbólico y Procedural (Reto de Operación)",
+        question: "Resuelve y calcula el valor de la siguiente expresión aplicando estrictamente la prioridad de operaciones: 150 - (20 x 3) + 45 ÷ 5",
+        visualHtml: `
+          <div class="bg-purple-100 p-2 rounded text-center font-mono border-2 border-black text-lg font-bold">
+            150 - (20 x 3) + 45 ÷ 5 = ?
+          </div>
+        `,
+        options: [
+          { text: "99", correct: true },
+          { text: "90", correct: false },
+          { text: "27", correct: false },
+          { text: "105", correct: false }
+        ],
+        explanation: "1) Paréntesis primero: (20 x 3) = 60. Expresión queda: 150 - 60 + 45 ÷ 5. 2) División: 45 ÷ 5 = 9. Expresión queda: 150 - 60 + 9. 3) Sumas/Restas de izquierda a derecha: 150 - 60 = 90. Luego 90 + 9 = 99."
+      },
+      {
+        id: 7,
+        phase: 2,
+        category: "Simbólico y Procedural (Multiplicación y División)",
+        question: "Resuelve el siguiente cálculo combinado respetando la regla de izquierda a derecha para operaciones del mismo nivel: 8 x 12 ÷ 4 + 10 x 2",
+        visualHtml: `
+          <div class="bg-purple-100 p-2 rounded text-center font-mono border-2 border-black text-lg font-bold">
+            8 x 12 ÷ 4 + 10 x 2 = ?
+          </div>
+        `,
+        options: [
+          { text: "44", correct: true },
+          { text: "32", correct: false },
+          { text: "11", correct: false },
+          { text: "60", correct: false }
+        ],
+        explanation: "1) Operaciones de multiplicación y división se resuelven de izquierda a derecha: 8 x 12 = 96. Luego 96 ÷ 4 = 24. 2) Multiplicación derecha: 10 x 2 = 20. 3) Sumar resultados: 24 + 20 = 44."
+      },
+      {
+        id: 8,
+        phase: 2,
+        category: "Argumentar y Comunicar (El error de Juan)",
+        question: "Juan resolvió la operación: 50 + 10 x 5 - 2 y obtuvo como resultado 298. ¿Qué error cometió Juan y cuál es el resultado correcto?",
+        visualHtml: `
+          <div class="bg-red-50 p-2 rounded text-xs text-red-800 border border-red-300">
+            <strong>El procedimiento fallido de Juan:</strong><br>
+            Paso 1: Sumó 50 + 10 = 60<br>
+            Paso 2: Multiplicó 60 x 5 = 300<br>
+            Paso 3: Restó 300 - 2 = 298
+          </div>
+        `,
+        options: [
+          { text: "No respetó la prioridad. Sumó primero en vez de multiplicar. El resultado correcto es 98.", correct: true },
+          { text: "No supo restar. El resultado correcto es 302.", correct: false },
+          { text: "Su procedimiento es correcto y el resultado de 298 es válido.", correct: false },
+          { text: "Debió restar antes de multiplicar. El resultado correcto es 80.", correct: false }
+        ],
+        explanation: "Juan cometió el error clásico de resolver de izquierda a derecha sin respetar la jerarquía de las operaciones. Debió resolver primero la multiplicación: 10 x 5 = 50. Luego la suma y resta de izquierda a derecha: 50 + 50 - 2 = 100 - 2 = 98."
+      },
+      {
+        id: 9,
+        phase: 2,
+        category: "Procedimiento (Paréntesis Dobles)",
+        question: "Calcula el resultado de la siguiente expresión matemática con operaciones aisladas por paréntesis: (120 ÷ 6) x 4 - (5 x 8)",
+        visualHtml: `
+          <div class="bg-purple-100 p-2 rounded text-center font-mono border-2 border-black text-lg font-bold">
+            (120 ÷ 6) x 4 - (5 x 8) = ?
+          </div>
+        `,
+        options: [
+          { text: "40", correct: true },
+          { text: "20", correct: false },
+          { text: "0", correct: false },
+          { text: "80", correct: false }
+        ],
+        explanation: "1) Resolver paréntesis 1: (120 ÷ 6) = 20. 2) Resolver paréntesis 2: (5 x 8) = 40. 3) Expresión queda: 20 x 4 - 40. 4) Multiplicación: 20 x 4 = 80. 5) Resta: 80 - 40 = 40."
+      },
+      {
+        id: 10,
+        phase: 2,
+        category: "Sustitución de Variables",
+        question: "Si A = 10, B = 5 y C = 2, encuentra el valor exacto de la expresión aplicando correctamente las variables y jerarquía: 2 x (A + B) - C ÷ B",
+        visualHtml: `
+          <div class="bg-gray-100 p-2 rounded text-xs text-slate-700 font-mono border border-gray-400">
+            Valores: A = 10 | B = 5 | C = 2 <br>
+            Expresión: 2 x (A + B) - C ÷ B
+          </div>
+        `,
+        options: [
+          { text: "29.6", correct: true },
+          { text: "30", correct: false },
+          { text: "28", correct: false },
+          { text: "29.8", correct: false }
+        ],
+        explanation: "Reemplazamos: 2 x (10 + 5) - 2 ÷ 5. 1) Paréntesis: 10 + 5 = 15. Queda: 2 x 15 - 2 ÷ 5. 2) Multiplicación y división: 2 x 15 = 30 y 2 ÷ 5 = 0.4. Queda: 30 - 0.4. 3) Resta: 30 - 0.4 = 29.6."
+      },
+      {
+        id: 11,
+        phase: 3,
+        category: "Aplicación Cotidiana (Vuelto y Viajes)",
+        question: "Un cliente de un almacén pagó una compra de $6.000 con un billete de $10.000. Todo el vuelto que recibió lo gastó completamente en pasajes de micro de $800 cada uno. ¿Qué operación combinada modela el problema y cuántos pasajes pudo comprar?",
+        visualHtml: `
+          <div class="text-center text-sm">
+            💸 Pago: $10.000 | Compra: $6.000 <br>
+            🚌 Costo de cada pasaje: $800
+          </div>
+        `,
+        options: [
+          { text: "Operación: (10000 - 6000) ÷ 800. Pudo comprar 5 pasajes.", correct: true },
+          { text: "Operación: 10000 - 6000 ÷ 800. Pudo comprar 9993 pasajes.", correct: false },
+          { text: "Operación: (10000 + 6000) ÷ 800. Pudo comprar 20 pasajes.", correct: false },
+          { text: "Operación: (6000 ÷ 800) - 10000. Da saldo negativo.", correct: false }
+        ],
+        explanation: "Primero calculamos el vuelto restando el costo de la compra del billete pagado: (10000 - 6000) = 4000. Luego, dividimos ese vuelto entre el costo de cada pasaje: 4000 ÷ 800 = 5 pasajes."
+      },
+      {
+        id: 12,
+        phase: 3,
+        category: "Aplicación Cotidiana (Compra y Reparto)",
+        question: "La tía de Pedro compró 5 bandejas de huevos, cada una con 12 huevos. Luego repartió la mitad del total de los huevos entre sus 3 hijos por partes iguales. ¿Cuántos huevos recibió cada hijo?",
+        visualHtml: `
+          <div class="flex justify-center gap-2 text-xs">
+            <span>🥚 5 bandejas x 12 huevos</span>
+            <span>➔</span>
+            <span>Dividido por la mitad (÷ 2)</span>
+            <span>➔</span>
+            <span>Repartido en 3 hijos (÷ 3)</span>
+          </div>
+        `,
+        options: [
+          { text: "10 huevos para cada hijo.", correct: true },
+          { text: "15 huevos para cada hijo.", correct: false },
+          { text: "30 huevos para cada hijo.", correct: false },
+          { text: "20 huevos para cada hijo.", correct: false }
+        ],
+        explanation: "1) Total de huevos: 5 x 12 = 60 huevos. 2) La mitad del total: 60 ÷ 2 = 30 huevos. 3) Repartidos entre sus 3 hijos: 30 ÷ 3 = 10 huevos para cada uno."
+      },
+      {
+        id: 13,
+        phase: 3,
+        category: "Aplicación Cotidiana (Municipalidad de Valparaíso)",
+        question: "La Municipalidad de Valparaíso compró 7 sacos de cemento a $6.500 cada uno y un total de $15.000 en clavos. Si pagaron con un monto total de $70.000 en efectivo, ¿cuál es la expresión para calcular el vuelto y cuánto dinero recibieron?",
+        visualHtml: `
+          <div class="text-xs text-slate-700 bg-teal-50 p-2 rounded border border-teal-300">
+            🧱 Sacos: 7 x $6.500 | 🔩 Clavos: $15.000 | 💵 Pago: $70.000
+          </div>
+        `,
+        options: [
+          { text: "Expresión: 70000 - ((7 x 6500) + 15000). Vuelto: $9.500.", correct: true },
+          { text: "Expresión: (70000 - 7 x 6500) + 15000. Vuelto: $39.500.", correct: false },
+          { text: "Expresión: 70000 - 7 x 6500 + 15000. Vuelto: $39.500.", correct: false },
+          { text: "Expresión: (7 x 6500) + 15000 - 70000. Resultado negativo.", correct: false }
+        ],
+        explanation: "El costo total de la compra es la suma del cemento y los clavos: (7 x 6500) + 15000 = 45500 + 15000 = 60500. El vuelto es el dinero entregado menos el costo: 70000 - 60500 = $9.500."
+      },
+      {
+        id: 14,
+        phase: 3,
+        category: "Aplicación Cotidiana (Puntaje de Fútbol)",
+        question: "En un partido de fútbol escolar, un equipo anotó 3 goles en el primer tiempo y en el segundo tiempo anotaron 4 goles más. Si cada gol vale 3 puntos para el ranking, pero se les descontaron 5 puntos en total por faltas, ¿cuál es la expresión correcta y cuántos puntos obtuvieron?",
+        visualHtml: `
+          <div class="text-center text-sm font-bold text-sky-800">
+            ⚽ Goles: 3 (T1) + 4 (T2) | 🌟 Valor gol: 3 pts | ⚠️ Penalización: -5 pts
+          </div>
+        `,
+        options: [
+          { text: "Expresión: ((3 + 4) x 3) - 5. Puntos totales: 16.", correct: true },
+          { text: "Expresión: 3 + 4 x 3 - 5. Puntos totales: 10.", correct: false },
+          { text: "Expresión: (3 + 4) x (3 - 5). Resultado inválido (puntos negativos).", correct: false },
+          { text: "Expresión: 3 x 4 x 3 - 5. Puntos totales: 31.", correct: false }
+        ],
+        explanation: "Primero sumamos todos los goles con un paréntesis: (3 + 4) = 7 goles. Luego los multiplicamos por su valor en puntos: 7 x 3 = 21 puntos. Finalmente restamos la penalización por faltas: 21 - 5 = 16 puntos."
+      },
+      {
+        id: 15,
+        phase: 3,
+        category: "Aplicación Cotidiana (Entrenamiento Atleta)",
+        question: "Un atleta entrena corriendo 5 kilómetros diarios durante 6 días a la semana. Si se toma un descanso de 2 días donde no corre nada, y luego repite la rutina de forma idéntica. ¿Qué expresión combinada representa los kilómetros recorridos en un ciclo completo de 14 días?",
+        visualHtml: `
+          <div class="text-xs bg-gray-100 p-2 rounded text-center border border-gray-400">
+            📅 Semana 1: 6 días corriendo (5 km c/u) + 1 día descanso.<br>
+            📅 Semana 2: 6 días corriendo (5 km c/u) + 1 día descanso.<br>
+            (Total 14 días, con 2 días de descanso totales)
+          </div>
+        `,
+        options: [
+          { text: "Expresión: (5 x 6) + (5 x 6). Total: 60 km recorridos.", correct: true },
+          { text: "Expresión: 5 x 14 - 2. Total: 68 km recorridos.", correct: false },
+          { text: "Expresión: (5 x 6) - (5 x 2). Total: 20 km recorridos.", correct: false },
+          { text: "Expresión: 5 x 6 x 2 x 14. Cantidad exagerada.", correct: false }
+        ],
+        explanation: "En 14 días hay exactamente dos semanas. En cada semana corre 6 días a razón de 5 km diarios (5 x 6 = 30 km). Los 2 días de descanso no suman kilómetros. Por lo tanto, el total en las dos semanas es: (5 x 6) + (5 x 6) = 30 + 30 = 60 km."
+      },
+      {
+        id: 16,
+        phase: 4,
+        category: "Análisis Crítico (Uso de Paréntesis)",
+        question: "Un estudiante modeló el siguiente problema: 'Repartir $50.000 entre 5 personas y a cada una darle $2.000 adicionales' con la expresión matemática: ( 50000 ÷ 5 ) + 2000. ¿Es necesario el uso del paréntesis en este caso?",
+        visualHtml: `
+          <div class="text-center text-sm font-mono bg-yellow-50 p-2 rounded border border-black">
+            ¿Es lo mismo <strong>(50000 ÷ 5) + 2000</strong> que <strong>50000 ÷ 5 + 2000</strong>?
+          </div>
+        `,
+        options: [
+          { text: "No es necesario, porque por prioridad operatoria la división siempre se ejecuta antes que la suma, haciendo redundante el paréntesis.", correct: true },
+          { text: "Sí es necesario, porque si se quita el paréntesis primero se realizaría la suma de 5 + 2000.", correct: false },
+          { text: "Sí es obligatorio, ya que toda división en Chile requiere llevar paréntesis.", correct: false },
+          { text: "No es necesario porque se puede simplificar eliminando todos los ceros directamente.", correct: false }
+        ],
+        explanation: "De acuerdo a la prioridad (PAPE MADA SUDA), la división tiene una jerarquía superior a la adición. Por lo tanto, en la expresión 50000 ÷ 5 + 2000, la computadora o calculadora resolverá primero la división, haciendo que el paréntesis sea redundante."
+      },
+      {
+        id: 17,
+        phase: 4,
+        category: "Análisis Crítico (Capacidad de Piscina)",
+        question: "Una piscina contiene inicialmente 5.000 litros de agua. Si se encienden 4 bombas de extracción que sacan 800 litros de agua por hora cada una, ¿cuánta agua quedará en la piscina después de transcurrir exactamente 1 hora?",
+        visualHtml: `
+          <div class="text-xs bg-sky-100 p-2 rounded text-center border border-sky-300">
+            💧 Capacidad inicial: 5.000 Litros <br>
+            🌀 4 Bombas operando por 1 hora (Extraen 800 L c/u)
+          </div>
+        `,
+        options: [
+          { text: "Operación: 5000 - (4 x 800) = 1.800 litros.", correct: true },
+          { text: "Operación: 5000 - 4 - 800 = 4.196 litros.", correct: false },
+          { text: "Operación: (5000 - 800) x 4 = 16.800 litros.", correct: false },
+          { text: "Operación: 5000 ÷ (4 x 800) = 1.56 litros.", correct: false }
+        ],
+        explanation: "Las 4 bombas extraen en conjunto 4 x 800 = 3.200 litros en una hora. Restamos esa cantidad al volumen original de la piscina: 5.000 - 3.200 = 1.800 litros restantes."
+      },
+      {
+        id: 18,
+        phase: 4,
+        category: "Análisis Crítico (Ingresos de Buses)",
+        question: "Una empresa de buses cobra $1.200 por pasaje. En un viaje interurbano, 45 personas pagaron con un billete de $2.000 y 10 personas pagaron con un billete de $5.000. ¿Cuál es el ingreso total recaudado únicamente por concepto de pasajes vendidos?",
+        visualHtml: `
+          <div class="text-xs text-center bg-gray-50 p-2 rounded border border-gray-400">
+            🎟️ Valor del pasaje: $1.200 c/u <br>
+            👥 Pasajeros que viajaron en total: 45 + 10 = 55 personas. <br>
+            ⚠️ (¡Cuidado con los billetes de pago, son distractores para el vuelto!)
+          </div>
+        `,
+        options: [
+          { text: "Ingreso total: (45 + 10) x 1200 = $66.000.", correct: true },
+          { text: "Ingreso total: (45 x 2000) + (10 x 5000) = $140.000 (Este es el dinero recibido, no la venta real).", correct: false },
+          { text: "Ingreso total: 45 x 1200 - 10 x 1200 = $42.000.", correct: false },
+          { text: "Ingreso total: $120.000 exactos.", correct: false }
+        ],
+        explanation: "Independiente de con qué billete pagó cada pasajero, el valor neto del pasaje por persona es de $1.200. El total de pasajeros es 45 + 10 = 55. El ingreso por venta es: 55 x 1200 = $66.000."
+      },
+      {
+        id: 19,
+        phase: 4,
+        category: "Análisis Crítico (Monedas de Almacén)",
+        question: "En un almacén de barrio, la dueña decidió cambiar dos billetes (uno de $5.000 y uno de $2.000) por monedas de $50 exclusivamente para tener sencillo. ¿Qué expresión y qué cantidad de monedas obtuvo?",
+        visualHtml: `
+          <div class="text-center font-mono text-xs">
+            💵 Billetes: $5.000 y $2.000 | 🪙 Monedas deseadas: $50
+          </div>
+        `,
+        options: [
+          { text: "Expresión: (5000 ÷ 50) + (2000 ÷ 50). Obtuvo 140 monedas en total.", correct: true },
+          { text: "Expresión: (5000 + 2000) x 50. Obtuvo 350.000 monedas.", correct: false },
+          { text: "Expresión: 5000 ÷ 50 - 2000 ÷ 50. Obtuvo 60 monedas.", correct: false },
+          { text: "Expresión: (5000 + 2000) ÷ 100. Obtuvo 70 monedas.", correct: false }
+        ],
+        explanation: "Calculamos las monedas por billete o sumamos los billetes antes: (5000 + 2000) ÷ 50 = 7000 ÷ 50 = 140 monedas. O por separado: 100 monedas (por el de $5000) + 40 monedas (por el de $2000) = 140 monedas."
+      },
+      {
+        id: 20,
+        phase: 4,
+        category: "Problema Abierto (Desafío de Creatividad)",
+        question: "Analiza la siguiente expresión combinada: [ 2 x (1500 + 500) - 1000 ]. ¿Cuál de las siguientes historias de la vida cotidiana representa de manera matemáticamente correcta esta operación y su resultado?",
+        visualHtml: `
+          <div class="bg-purple-100 p-2 rounded text-center font-mono border-2 border-black text-sm">
+            [ 2 x (1500 + 500) - 1000 ] = ?
+          </div>
+        `,
+        options: [
+          { text: "Compré 2 combos de comida que incluían una hamburguesa de $1500 y papas de $500. Al pagar, usé un cupón de descuento de $1000. El total pagado fue $3.000.", correct: true },
+          { text: "Tenía $1500, un amigo me regaló $500, luego lo dupliqué en un juego y finalmente le presté $1000 a mi hermana. Resultado: $3.000.", correct: false },
+          { text: "Compré 2 productos de $1500 y le sumé $500 de propina, restando $1000 de vuelto. Resultado: $2.500.", correct: false },
+          { text: "Dividí $1500 en dos partes, le sumé $500 y resté $1000. El resultado es $250.", correct: false }
+        ],
+        explanation: "La expresión tiene un paréntesis (1500 + 500) que se multiplica por 2, lo que modela comprar dos paquetes/combos del mismo precio compuesto. Luego, se restan 1000 (descuento o pérdida). El cálculo es: 2 x 2000 - 1000 = 4000 - 1000 = 3000."
+      }
+    ];
+
+    // Variables de Estado del Juego
+    let currentQuestionIndex = 0;
+    let health = 5;
+    const maxHealth = 5;
+    let questionsList = []; // Lista de preguntas desordenadas
+
+    // Inicializar el juego
+    function startGame() {
+      document.getElementById('intro-screen').classList.add('hidden');
+      document.getElementById('game-screen').classList.remove('hidden');
+      document.getElementById('victory-screen').classList.add('hidden');
+      document.getElementById('gameover-screen').classList.add('hidden');
+      
+      // Reiniciar estado
+      health = maxHealth;
+      currentQuestionIndex = 0;
+      updateHealthBar();
+      
+      // Preparar las preguntas (clonamos para no alterar la base original)
+      questionsList = JSON.parse(JSON.stringify(questionsDatabase));
+      
+      loadQuestion();
+    }
+
+    // Cargar la pregunta actual
+    function loadQuestion() {
+      if (currentQuestionIndex >= questionsList.length) {
+        showVictory();
+        return;
+      }
+
+      const currentItem = questionsList[currentQuestionIndex];
+      
+      // Actualizar interfaz básica
+      document.getElementById('item-number-badge').innerText = currentItem.id;
+      document.getElementById('item-category').innerText = currentItem.category;
+      document.getElementById('question-text').innerText = currentItem.question;
+
+      // Actualizar fase visualmente en los tabs superiores
+      updatePhaseTabs(currentItem.phase);
+
+      // Representación visual adicional si existe
+      const visualBox = document.getElementById('visual-representation-box');
+      if (currentItem.visualHtml) {
+        visualBox.innerHTML = currentItem.visualHtml;
+        visualBox.classList.remove('hidden');
+      } else {
+        visualBox.classList.add('hidden');
+      }
+
+      // Mezclar las alternativas aleatoriamente para cumplir con el requisito
+      const shuffledOptions = shuffleArray([...currentItem.options]);
+      
+      // Poblar el menú desplegable (Select)
+      const selectElement = document.getElementById('answer-select');
+      selectElement.innerHTML = ''; // Limpiar opciones previas
+      
+      // Opción por defecto instructiva
+      const defaultOpt = document.createElement('option');
+      defaultOpt.value = "";
+      defaultOpt.text = "-- Haz tus cálculos y selecciona la clave correcta aquí --";
+      selectElement.appendChild(defaultOpt);
+
+      shuffledOptions.forEach((option, index) => {
+        const opt = document.createElement('option');
+        opt.value = option.correct ? "correct" : `incorrect_${index}`;
+        opt.text = `Opción ${index + 1}: ${option.text}`;
+        selectElement.appendChild(opt);
+      });
+
+      // Resetear paneles de feedback y botones
+      document.getElementById('feedback-panel').classList.add('hidden');
+      document.getElementById('submit-btn').classList.remove('hidden');
+      document.getElementById('next-btn').classList.add('hidden');
+      selectElement.disabled = false;
+
+      // Actualizar Diálogos de personajes para dar dinamismo
+      updateCharacterDialogues(currentItem);
+    }
+
+    // Comprobar la respuesta seleccionada
+    function checkCurrentAnswer() {
+      const selectElement = document.getElementById('answer-select');
+      const selectedValue = selectElement.value;
+
+      if (selectedValue === "") {
+        // Alerta personalizada en vez de alert() del navegador
+        showGatitoDialogue("¡Hey, perezoso! Primero debes seleccionar una alternativa antes de comprobar la clave.");
+        return;
+      }
+
+      const currentItem = questionsList[currentQuestionIndex];
+      const feedbackPanel = document.getElementById('feedback-panel');
+      const feedbackText = document.getElementById('feedback-text');
+      const explanationBox = document.getElementById('explanation-box');
+      const submitBtn = document.getElementById('submit-btn');
+      const nextBtn = document.getElementById('next-btn');
+
+      selectElement.disabled = true;
+      submitBtn.classList.add('hidden');
+      nextBtn.classList.remove('hidden');
+
+      if (selectedValue === "correct") {
+        // RESPUESTA CORRECTA
+        feedbackPanel.className = "p-4 rounded-xl border-4 border-black mb-6 bg-green-100 text-green-950";
+        feedbackText.innerHTML = "🎉 ¡CÓDIGO CORRECTO! ¡El candado tiembla!";
+        explanationBox.innerHTML = `<strong>Explicación:</strong> ${currentItem.explanation}`;
+        
+        // Diálogo del Patito derrotado temporalmente
+        showPatitoDialogue("¡CUAC! ¡No puede ser! ¿Cómo supiste que ese era el orden de las operaciones?");
+        showGatitoDialogue("¡Excelente trabajo! Todo es más fácil con una mente relajada y priorizando bien.");
+      } else {
+        // RESPUESTA INCORRECTA
+        feedbackPanel.className = "p-4 rounded-xl border-4 border-black mb-6 bg-red-100 text-red-950";
+        feedbackText.innerHTML = "❌ ¡ERROR DE PRIORIDAD! Alarma activada.";
+        explanationBox.innerHTML = `<strong>Explicación de Gatito Chill:</strong> ${currentItem.explanation}`;
+        
+        // Quitar un punto de salud
+        health--;
+        updateHealthBar();
+
+        showPatitoDialogue("¡JAJAJA, CUAC! ¡Caíste en mi trampa de jerarquía! ¡La campana se queda conmigo!");
+        showGatitoDialogue("¡Ouch! Eso dolió en mi barrita Zen. Recuerda: ¡La multiplicación y división van antes que la suma!");
+
+        if (health <= 0) {
+          setTimeout(() => {
+            showGameOver();
+          }, 1500);
+          return;
         }
+      }
 
-        function checkAnswer() {
-            const select = document.getElementById('answer-select');
-            const userAns = select.value;
-            const pop = document.getElementById('visual-pop');
+      feedbackPanel.classList.remove('hidden');
+      
+      // Actualizar estado de los Candados Generales basándonos en el avance real
+      updateLocksState();
+    }
 
-            if (!userAns) return;
+    // Ir a la siguiente pregunta de la aventura
+    function goToNextQuestion() {
+      currentQuestionIndex++;
+      loadQuestion();
+    }
 
-            if (userAns === gameData[currentLevel].a) {
-                pop.innerText = "¡REPARTO EXACTO!";
-                pop.style.color = "#22c55e";
-                pop.classList.add('active');
-                
-                setTimeout(() => {
-                    pop.classList.remove('active');
-                    currentLevel++;
-                    if (currentLevel < gameData.length) {
-                        loadLevel();
-                    } else {
-                        showEnd();
-                    }
-                }, 1000);
-            } else {
-                pop.innerText = "¡ERROR DE CÁLCULO!";
-                pop.style.color = "#ef4444";
-                pop.classList.add('active');
-                
-                setTimeout(() => {
-                    pop.classList.remove('active');
-                }, 1000);
-            }
+    // Actualizar barra de vida de Gatito Chill
+    function updateHealthBar() {
+      const healthBar = document.getElementById('health-bar');
+      const healthText = document.getElementById('health-text');
+      
+      const percentage = (health / maxHealth) * 100;
+      healthBar.style.width = `${percentage}%`;
+      healthText.innerText = `${health}/${maxHealth}`;
+
+      if (health <= 2) {
+        healthBar.className = "bg-red-600 h-full transition-all duration-300";
+      } else {
+        healthBar.className = "bg-green-500 h-full transition-all duration-300";
+      }
+    }
+
+    // Cambiar la visualización de los Candados en el panel izquierdo
+    function updateLocksState() {
+      const progressPercent = (currentQuestionIndex / questionsList.length) * 100;
+      document.getElementById('global-progress-bar').style.width = `${progressPercent}%`;
+      document.getElementById('progress-text').innerText = `${currentQuestionIndex} / 20 resueltas`;
+
+      // Candado 1: Preguntas 1 a 5
+      if (currentQuestionIndex >= 5) {
+        document.getElementById('lock-state-1').innerText = "🔓 DESBLOQUEADO";
+        document.getElementById('lock-state-1').className = "font-bold text-green-500 animate-pulse";
+        document.getElementById('lock-indicator-1').className = "flex justify-between items-center bg-green-950/40 p-2 rounded border border-green-500";
+      }
+      // Candado 2: Preguntas 6 a 10
+      if (currentQuestionIndex >= 10) {
+        document.getElementById('lock-state-2').innerText = "🔓 DESBLOQUEADO";
+        document.getElementById('lock-state-2').className = "font-bold text-green-500 animate-pulse";
+        document.getElementById('lock-indicator-2').className = "flex justify-between items-center bg-green-950/40 p-2 rounded border border-green-500";
+      }
+      // Candado 3: Preguntas 11 a 15
+      if (currentQuestionIndex >= 15) {
+        document.getElementById('lock-state-3').innerText = "🔓 DESBLOQUEADO";
+        document.getElementById('lock-state-3').className = "font-bold text-green-500 animate-pulse";
+        document.getElementById('lock-indicator-3').className = "flex justify-between items-center bg-green-950/40 p-2 rounded border border-green-500";
+      }
+      // Candado 4: Preguntas 16 a 20
+      if (currentQuestionIndex >= 20) {
+        document.getElementById('lock-state-4').innerText = "🔓 DESBLOQUEADO";
+        document.getElementById('lock-state-4').className = "font-bold text-green-500 animate-pulse";
+        document.getElementById('lock-indicator-4').className = "flex justify-between items-center bg-green-950/40 p-2 rounded border border-green-500";
+      }
+    }
+
+    // Actualizar visualmente los tabs superiores para reflejar en qué fase del currículum estamos
+    function updatePhaseTabs(activePhase) {
+      for (let i = 1; i <= 4; i++) {
+        const tab = document.getElementById(`phase-tab-${i}`);
+        if (i === activePhase) {
+          tab.className = "comic-box p-2 bg-gradient-to-r from-red-600 to-purple-600 text-white font-bold scale-105 border-yellow-400 border-2";
+        } else {
+          tab.className = "comic-box p-2 bg-slate-700 text-slate-400 opacity-60";
         }
+      }
+    }
 
-        function showEnd() {
-            document.getElementById('game-screen').classList.add('hidden');
-            document.getElementById('end-screen').classList.remove('hidden');
-        }
-    </script>
+    // Modificar diálogos dinámicamente según la fase de la pregunta
+    function updateCharacterDialogues(item) {
+      if (item.phase === 1) {
+        showGatitoDialogue("¡Fase Pictórica! Representar bien el problema usando esquemas o diagramas de barras es la mitad del camino.");
+        showPatitoDialogue("¡Bah! Los diagramas no los salvarán de confundir una suma con una multiplicación. ¡Cuac!");
+      } else if (item.phase === 2) {
+        showGatitoDialogue("Fase de operatoria combinada pura. Cuidado con los paréntesis de esta fase.");
+        showPatitoDialogue("¡Ojo! Aquí es donde más se equivocan. ¡Suman antes de dividir y caen en mi trampa!");
+      } else if (item.phase === 3) {
+        showGatitoDialogue("Problemas reales del día a día, como ir al almacén o calcular puntajes de fútbol. ¡Leamos con atención!");
+        showPatitoDialogue("¡Los problemas de la vida diaria son mi especialidad para confundirlos con datos distractores!");
+      } else if (item.phase === 4) {
+        showGatitoDialogue("¡Último esfuerzo! Aquí debemos argumentar por qué un paréntesis no se necesita o descubrir errores de otros.");
+        showPatitoDialogue("¿Argumentar? ¡No! Las matemáticas son solo números, no palabras... ¡ay, mi cabeza de patito!");
+      }
+    }
+
+    // Helpers para cambiar textos de globos de diálogo rápidamente
+    function showGatitoDialogue(text) {
+      document.getElementById('gatito-bubble').innerText = text;
+    }
+
+    function showPatitoDialogue(text) {
+      document.getElementById('patito-bubble').innerText = text;
+    }
+
+    // Pantalla de Victoria Final
+    function showVictory() {
+      document.getElementById('game-screen').classList.add('hidden');
+      document.getElementById('victory-screen').classList.remove('hidden');
+    }
+
+    // Pantalla de Game Over
+    function showGameOver() {
+      document.getElementById('game-screen').classList.add('hidden');
+      document.getElementById('gameover-screen').classList.remove('hidden');
+    }
+
+    // Reiniciar todo
+    function restartGame() {
+      startGame();
+    }
+
+    // Función utilitaria para desordenar arrays (Algoritmo de Fisher-Yates)
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Iniciar con la pantalla cargada correctamente
+    window.onload = function() {
+      // Todo listo para que el usuario presione iniciar
+    }
+  </script>
 </body>
 </html>
