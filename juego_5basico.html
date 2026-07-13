@@ -2,550 +2,542 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>🔥 Escape Room: 4 Operaciones en Cada Reto 🔥</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Room: Gatito Chill y el Mundo de las Incógnitas</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Comic Neue, Bangers, and Chewy -->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet">
+    
     <style>
-        * { font-family: 'Comic Neue', 'Comic Sans MS', cursive; }
+        :root {
+            --comic-red: #ef4444;
+            --comic-blue: #3b82f6;
+            --comic-purple: #8b5cf6;
+            --comic-yellow: #facc15;
+            --comic-dark: #0f172a;
+        }
+
         body {
-            background: radial-gradient(circle at 10% 20%, #1a0b2e, #0a0518);
+            font-family: 'Comic Neue', cursive;
+            background-color: #1e1b4b; /* Indigo oscuro */
+            /* Puntos Ben-Day estilo cómic retro */
+            background-image: radial-gradient(rgba(139, 92, 246, 0.25) 15%, transparent 16%), 
+                              radial-gradient(rgba(139, 92, 246, 0.25) 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
             min-height: 100vh;
+            color: #1e293b;
         }
-        .benday-bg {
-            background-image: radial-gradient(circle at 20% 35%, rgba(255,215,0,0.3) 2px, transparent 2px),
-                              radial-gradient(circle at 70% 80%, rgba(255,80,120,0.25) 1.8px, transparent 1.8px);
-            background-size: 32px 32px, 26px 26px;
+
+        .comic-title {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 2px;
         }
-        .comic-card {
-            box-shadow: 8px 8px 0px 0px #00000066, 0 12px 28px rgba(0,0,0,0.3);
-            transition: transform 0.15s ease;
-            border-radius: 40px;
+
+        .chill-font {
+            font-family: 'Chewy', cursive;
         }
-        .comic-card:hover { transform: translateY(-4px); }
-        .btn-comic {
-            transition: all 0.1s cubic-bezier(0.2, 0.9, 0.4, 1.2);
-            box-shadow: 4px 4px 0px 0px #00000060;
-        }
-        .btn-comic:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px 0px #00000060; }
-        select {
-            background: #fffaea;
-            border: 3px solid #2d1b4e;
-            border-radius: 60px;
-            font-weight: bold;
-            padding: 12px 20px;
-            cursor: pointer;
-        }
-        select:focus { outline: none; border-color: #f97316; box-shadow: 0 0 0 3px #fed7aa; }
-        .progress-fill { transition: width 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.2); }
-        .speech-bubble {
+
+        .comic-panel {
+            background: white;
+            border: 5px solid black;
+            box-shadow: 10px 10px 0px black;
             position: relative;
-            background: #fffae9;
-            border-radius: 48px 48px 48px 32px;
         }
-        .math-expression {
-            font-family: 'Courier New', monospace;
-            font-size: 1.2rem;
-            font-weight: bold;
-            background: #1e293b;
-            color: #facc15;
-            padding: 12px;
-            border-radius: 16px;
+
+        /* Micro puntos Ben-Day decorativos para los paneles de papel */
+        .comic-panel::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(0,0,0,0.03) 1.2px, transparent 1.2px);
+            background-size: 8px 8px;
+            pointer-events: none;
+        }
+
+        .btn-comic {
+            font-family: 'Bangers', cursive;
             letter-spacing: 1px;
+            border: 3px solid black;
+            box-shadow: 4px 4px 0px black;
+            transition: all 0.1s ease;
+            text-transform: uppercase;
+        }
+
+        .btn-comic:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px black;
+        }
+
+        .btn-comic:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px black;
+        }
+
+        .pow-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 100;
+            pointer-events: none;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-shadow: 4px 4px 0px black;
+        }
+
+        .pow-text.active {
+            transform: translate(-50%, -50%) scale(1.6);
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.5em;
+        }
+
+        .progress-bar-container {
+            background: #e2e8f0;
+            border: 3px solid black;
+            border-radius: 9999px;
+            overflow: hidden;
+            height: 28px;
+        }
+
+        .progress-bar-fill {
+            background: var(--comic-purple);
+            height: 100%;
+            transition: width 0.4s ease;
+        }
+
+        .balance-scale {
+            transition: transform 0.5s ease-in-out;
         }
     </style>
 </head>
-<body class="p-4 md:p-6 flex justify-center items-center">
+<body class="flex items-center justify-center p-4">
 
-<div class="w-full max-w-6xl mx-auto">
-    <!-- CABECERA -->
-    <div class="flex flex-wrap justify-between items-center bg-indigo-950/80 backdrop-blur-md rounded-3xl p-3 benday-bg border-4 border-yellow-400 mb-6">
-        <div class="flex items-center gap-3">
-            <div class="text-5xl drop-shadow">🐱⚡</div>
-            <div>
-                <h1 class="text-2xl md:text-4xl font-black text-yellow-300 tracking-wider">¡ESCAPE ROOM: LAS 4 OPERACIONES!</h1>
-                <p class="text-white text-sm md:text-base bg-black/60 px-3 py-1 rounded-full mt-1">🎯 Objetivo: Resolver problemas de compras/ventas usando <strong>SUMA + RESTA + MULTIPLICACIÓN + DIVISIÓN</strong> en cada reto combinado</p>
-            </div>
-        </div>
-        <div class="text-5xl drop-shadow">🦆💢</div>
-    </div>
+    <!-- Capa para onomatopeyas visuales e impactos cómicos -->
+    <div id="visual-fx" class="pow-text comic-title text-8xl text-yellow-400">¡ZAS!</div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- COLUMNA IZQUIERDA: HISTORIA -->
-        <div class="lg:col-span-1 bg-gradient-to-b from-red-600 to-purple-700 rounded-3xl p-5 benday-bg border-4 border-black shadow-2xl comic-card">
-            <div class="speech-bubble p-4 mb-4">
-                <p class="text-xl font-black text-red-700">📖 ¡RETO SUPREMO!</p>
-                <p class="text-gray-800 font-bold">El Patito Amarillito lanzó un hechizo avanzado: <span class="bg-yellow-300 px-1">cada problema contiene suma, resta, multiplicación Y división</span>. Gatito Chill necesita que combines las 4 operaciones para vencer los 20 niveles. ¡Demuestra tu dominio!</p>
-                <div class="text-xs mt-2 bg-purple-200 rounded-full px-2 py-1 inline-block">🧮 19 retos con + - × ÷</div>
-                <div class="text-xs mt-2 bg-blue-200 rounded-full px-2 py-1 inline-block">📝 Copia la expresión matemática</div>
+    <div class="max-w-4xl w-full">
+        <!-- CABECERA DE LA ACTIVIDAD -->
+        <header class="text-center mb-8">
+            <div class="inline-block bg-white border-4 border-black p-4 transform -rotate-1 shadow-[8px_8px_0px_#ef4444]">
+                <h1 class="text-4xl md:text-6xl comic-title text-red-600">GATITO CHILL Y LAS INCÓGNITAS</h1>
+                <p class="text-xl font-bold mt-2">Misión: Derrotar al Dr. Des-Balanza</p>
             </div>
-            <div class="flex justify-around items-center bg-black/30 rounded-2xl p-3">
-                <div class="text-center"><div class="text-7xl">🐱🧃</div><p class="font-bold text-white bg-black/50 px-2 rounded">Gatito Chill</p></div>
-                <div class="text-5xl animate-pulse">⚔️🧮</div>
-                <div class="text-center"><div class="text-7xl">🦆🎲</div><p class="font-bold text-white bg-black/50 px-2 rounded">Patito Amarillito</p></div>
+            
+            <div class="mt-6 bg-white border-2 border-black p-3 rounded-lg max-w-2xl mx-auto shadow-md">
+                <p class="font-bold text-sm text-indigo-900 italic text-center">
+                    🎯 OBJETIVO (OA 15): Resolver problemas, usando ecuaciones e inecuaciones de un paso, que involucren adiciones y sustracciones, en forma pictórica y simbólica.
+                </p>
             </div>
-            <div class="mt-4 text-center font-black text-white bg-yellow-600 p-2 rounded-full">✨ 20 NIVELES | 4 OPERACIONES POR RETO ✨</div>
-        </div>
+        </header>
 
-        <!-- COLUMNA DERECHA: PANEL DE RETOS -->
-        <div class="lg:col-span-2 bg-gray-100 rounded-3xl shadow-2xl border-4 border-black overflow-hidden comic-card">
-            <div class="bg-gradient-to-r from-indigo-800 to-purple-800 p-3 text-white font-black text-xl flex justify-between items-center">
-                <span>🔓 RETOS MATEMÁTICOS (20/20) 🔓</span>
-                <span class="bg-lime-400 text-black px-4 py-1 rounded-full text-sm">🏆 Progreso: <span id="progressCounter">0</span>/20</span>
-            </div>
-            <div class="w-full bg-gray-700 h-6">
-                <div id="progressBarFill" class="progress-fill h-6 bg-gradient-to-r from-green-500 to-emerald-600 w-0 flex items-center justify-end pr-2 text-xs font-bold text-white"></div>
-            </div>
-
-            <div class="p-6 md:p-8">
-                <div id="gameContent" class="space-y-6"></div>
-                <div class="flex flex-col sm:flex-row justify-between gap-4 mt-8">
-                    <button id="verifyBtn" class="btn-comic bg-blue-600 hover:bg-blue-800 text-white font-extrabold py-3 px-6 rounded-full text-xl transition flex justify-center items-center gap-2">✅ VERIFICAR</button>
-                    <button id="nextBtn" class="btn-comic bg-gray-600 hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-full text-xl transition disabled:opacity-50" disabled>⏩ SIGUIENTE RETO</button>
+        <main>
+            <!-- Pantalla de Bienvenida -->
+            <div id="screen-start" class="comic-panel p-8 space-y-6">
+                <div class="flex justify-center gap-4 text-7xl animate-bounce">
+                    <span>🐱</span><span>⚖️</span><span>🤖</span>
                 </div>
-                <div id="feedbackMsg" class="mt-5 text-center font-bold text-lg p-3 rounded-2xl bg-white border-2 border-dashed border-gray-400"></div>
+                <h2 class="text-3xl md:text-4xl comic-title text-center text-purple-700">¡EQUILIBRIO AMENAZADO EN CIUDAD MATEMÁTICAS!</h2>
+                <div class="text-lg leading-relaxed space-y-4 font-medium text-left border-l-4 border-blue-500 pl-4">
+                    <p>El temible <b>Dr. Des-Balanza</b>, un villano que odia la igualdad y la equidad, ha saboteado las balanzas y reactores de Ciudad de las Incógnitas usando su <i>Rayo Inestabilizador</i>.</p>
+                    <p>Ha bloqueado la fuente de energía de la ciudad bajo un sistema de seguridad cerrado con 20 cerrojos algebraicos de un paso.</p>
+                    <p>El <b>Gatito Chill</b>, acomodándose con toda calma su hojita de otoño en la cabeza, nos regala un ronroneo y dice: <span class="text-blue-600 font-bold">"Todo está chill, amigos. Las incógnitas son solo misterios esperando ser resueltos con un poco de calma. Vamos a equilibrar la balanza, un paso a la vez, y salvaremos la ciudad."</span></p>
+                </div>
+                <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-3xl py-4 w-full rounded-xl">
+                    ¡ACTIVAR CÓDIGO DE EQUILIBRIO! ⚡
+                </button>
             </div>
-        </div>
+
+            <!-- Pantalla del Juego -->
+            <div id="screen-game" class="hidden space-y-6">
+                <!-- Barra de Progreso -->
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white border-4 border-black p-4 shadow-[6px_6px_0px_black]">
+                    <div class="comic-title text-2xl text-red-600" id="level-label">MISIÓN: 1 / 20</div>
+                    <div class="w-full md:w-1/2 progress-bar-container">
+                        <div id="progress-fill" class="progress-bar-fill" style="width: 5%"></div>
+                    </div>
+                </div>
+
+                <!-- Contenedor del Desafío Activo -->
+                <div class="comic-panel p-6 md:p-10">
+                    <div class="flex items-start gap-4 mb-6 bg-blue-50 border-2 border-black p-4 rounded-lg">
+                        <div class="text-5xl" id="hero-avatar">🐱</div>
+                        <div class="w-full">
+                            <h4 class="font-bold text-red-600 uppercase tracking-wide text-xs">Transmisión de la Legión Titán</h4>
+                            <p class="font-bold text-indigo-900 italic text-lg animate-pulse" id="narrative-text">Cargando...</p>
+                        </div>
+                    </div>
+
+                    <!-- Widget visual interactivo de Balanza de Platillos -->
+                    <div id="scale-widget" class="hidden flex flex-col items-center justify-center bg-gray-50 border-2 border-black p-4 rounded-xl mb-6">
+                        <h5 class="font-bold text-sm text-gray-500 uppercase mb-2">Simulador de Equilibrio</h5>
+                        <div class="flex items-center justify-center w-full max-w-sm h-36 relative">
+                            <!-- Left pan -->
+                            <div id="scale-left" class="flex flex-col items-center absolute left-4 bottom-12 transition-all duration-500">
+                                <div class="bg-blue-400 border-2 border-black w-24 h-4 rounded-full relative shadow">
+                                    <div id="left-val" class="absolute -top-10 left-0 right-0 text-center font-bold text-xs text-indigo-950">x + 15</div>
+                                </div>
+                                <div class="w-1 h-12 bg-black"></div>
+                            </div>
+                            <!-- Balance Beam (Fulcrum in center) -->
+                            <div id="scale-beam" class="balance-scale w-full h-2 bg-black rounded relative transform rotate-0">
+                                <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[16px] border-l-transparent border-r-[16px] border-r-transparent border-b-[24px] border-b-black"></div>
+                            </div>
+                            <!-- Right pan -->
+                            <div id="scale-right" class="flex flex-col items-center absolute right-4 bottom-12 transition-all duration-500">
+                                <div class="bg-red-400 border-2 border-black w-24 h-4 rounded-full relative shadow">
+                                    <div id="right-val" class="absolute -top-10 left-0 right-0 text-center font-bold text-xs text-indigo-950">40</div>
+                                </div>
+                                <div class="w-1 h-12 bg-black"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div id="question-container">
+                            <h3 id="question-text" class="text-xl md:text-2xl font-bold text-gray-800 border-b-2 border-gray-100 pb-4"></h3>
+                        </div>
+
+                        <div class="space-y-3">
+                            <label class="block font-black text-purple-700 uppercase tracking-tighter text-sm">Selecciona tu cálculo de contraataque:</label>
+                            <select id="answer-select" class="w-full p-4 border-4 border-black text-lg md:text-xl font-bold bg-yellow-50 focus:ring-8 focus:ring-purple-200 outline-none cursor-pointer">
+                                <option value="" disabled selected>-- Selecciona con calma --</option>
+                            </select>
+                        </div>
+
+                        <button onclick="checkAnswer()" class="btn-comic bg-red-600 hover:bg-red-500 text-white text-3xl py-4 w-full">
+                            ¡ENVIAR RESPUESTA! 💥
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pantalla de Victoria -->
+            <div id="screen-end" class="hidden comic-panel p-10 text-center space-y-8">
+                <h2 class="text-6xl md:text-7xl comic-title text-purple-700">¡EQUILIBRIO RESTAURADO!</h2>
+                <div class="text-9xl animate-bounce my-8">🐱⚖️🏆</div>
+                <p class="text-2xl font-bold text-indigo-950">¡El Dr. Des-Balanza ha sido derrotado y atrapado en una jaula geométrica simétrica!</p>
+                <div class="bg-yellow-100 border-4 border-dashed border-black p-6 rounded-2xl font-bold text-lg max-w-2xl mx-auto space-y-4 text-left">
+                    <p>"Despejar la incógnita es fácil cuando recuerdas hacer lo mismo en ambos platillos de la balanza. ¡La calma y el orden siempre logran resolver el caos!", sonríe el Gatito Chill mientras toma pacíficamente su batido frío.</p>
+                    <p class="text-blue-700 text-center font-black">¡Felicitaciones! Has completado las 20 misiones algebraicas de la Legión Titán.</p>
+                </div>
+                <button onclick="location.reload()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-3xl py-4 px-12 rounded-full">
+                    REINICIAR ENTRENAMIENTO
+                </button>
+            </div>
+        </main>
     </div>
 
-    <!-- MODAL VICTORIA -->
-    <div id="victoryModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden transition-all">
-        <div class="bg-gradient-to-br from-amber-300 to-orange-600 max-w-md w-full mx-4 rounded-3xl p-8 text-center border-8 border-white shadow-2xl">
-            <div class="text-8xl mb-3">🏆🐱🎉🦆💨</div>
-            <h2 class="text-4xl font-black text-purple-900">¡VICTORIA ÉPICA!</h2>
-            <p class="text-xl font-bold mt-2">Gatito Chill dominó las 4 operaciones en cada reto combinado ✨</p>
-            <p class="bg-white/80 rounded p-2 mt-3">Sumaste, restaste, multiplicaste y dividiste en cada problema de compra/venta. ¡Eres un genio matemático!</p>
-            <button id="restartGameBtn" class="mt-6 bg-purple-800 hover:bg-purple-950 text-white font-bold py-3 px-8 rounded-full text-2xl btn-comic">🔄 REINICIAR AVENTURA</button>
-        </div>
-    </div>
-</div>
-
-<script>
-    // ============================================================
-    // 20 RETOS: RETO 1 SIMPLE (multiplicación) - RETOS 2 al 20 contienen SUMA + RESTA + MULTIPLICACIÓN + DIVISIÓN
-    // CADA RETO INCLUYE EXPRESIÓN MATEMÁTICA EN UNA SOLA LÍNEA
-    // ============================================================
-    const RAW_CHALLENGES = [
-        // RETO 1 (SIN MODIFICAR - solo multiplicación)
-        { 
-            text: "🐱 Gatito Chill vendió 7 bolsas de croquetas a $2.300 cada una. ¿Cuánto dinero recibió en total?", 
-            expresion: "7 × 2300",
-            correct: 7 * 2300, 
-            alternatives: [16100, 15100, 17100, 14000], 
-            isCombined: false 
-        },
-        
-        // RETO 2
-        { 
-            text: "🦆 Patito compró 5 paquetes de stickers a $800 cada uno. Pagó con $20.000. Luego vendió 2 paquetes a $1.200 cada uno. ¿Cuánto dinero le queda?",
-            expresion: "(20000 - 5 × 800) + 2 × 1200",
-            correct: (20000 - 5*800) + (2*1200),
-            alternatives: [18400, 17600, 19200, 16800], 
-            isCombined: true 
-        },
-        
-        // RETO 3
-        { 
-            text: "Gatito compró 24 juguetes en $96.000. Le hicieron un descuento de $6.000. Vendió la mitad a $5.500 cada uno. ¿Cuánto obtuvo?",
-            expresion: "((96000 - 6000) ÷ 24) × 12",
-            correct: ((96000 - 6000) / 24) * 12,
-            alternatives: [45000, 46800, 43200, 47400], 
-            isCombined: true 
-        },
-        
-        // RETO 4
-        { 
-            text: "3 lápices valen $4.200. Patito compró 12 lápices, pagó con $20.000, descuento $2.000. Devolvió 4 lápices. ¿Cuánto pagó?",
-            expresion: "(12 × (4200 ÷ 3) - 2000) - 4 × (4200 ÷ 3)",
-            correct: (12 * (4200/3) - 2000) - (4 * (4200/3)),
-            alternatives: [9200, 9600, 8800, 10400], 
-            isCombined: true 
-        },
-        
-        // RETO 5
-        { 
-            text: "Gatito vendió 8 cajas con 6 peluches cada una a $2.500 por peluche. 2 cajas dañadas: devolución del 50%. Bono $4.000. ¿Total?",
-            expresion: "(8 × 6 × 2500) - (2 × 6 × 2500 × 0.5) + 4000",
-            correct: (8*6*2500) - (2*6*2500*0.5) + 4000,
-            alternatives: [109000, 112000, 106000, 115000], 
-            isCombined: true 
-        },
-        
-        // RETO 6
-        { 
-            text: "Patito compró 10 bolsas de 4 chocolates a $1.200 la bolsa. Pagó $15.000, descuento $1.500. Revendió 3 bolsas a $1.800. ¿Dinero final?",
-            expresion: "(15000 - (10 × 1200 - 1500)) + (3 × 1800)",
-            correct: (15000 - (10*1200 - 1500)) + (3*1800),
-            alternatives: [9900, 10200, 9600, 10500], 
-            isCombined: true 
-        },
-        
-        // RETO 7
-        { 
-            text: "Gatito compró 2 docenas de huevos a $350 c/u. 6 rotos. Vendió los restantes en paquetes de 3 a $1.200. ¿Pérdida?",
-            expresion: "(24 × 350) - (((24 - 6) ÷ 3) × 1200)",
-            correct: (24*350) - (((24-6)/3)*1200),
-            alternatives: [1200, 900, 1500, 600], 
-            isCombined: true 
-        },
-        
-        // RETO 8
-        { 
-            text: "4 manzanas por $2.000. Compró 20, pagó $12.000, descuento $1.000. Devolvió 5. ¿Pago real?",
-            expresion: "(20 × (2000 ÷ 4) - 1000) - (5 × (2000 ÷ 4))",
-            correct: (20*(2000/4) - 1000) - (5*(2000/4)),
-            alternatives: [6500, 7000, 6000, 7500], 
-            isCombined: true 
-        },
-        
-        // RETO 9
-        { 
-            text: "Vendió 15 llaveros a $1.800. 3 defectuosos: 60% valor. Comisión $2.000. ¿Neto?",
-            expresion: "(12 × 1800) + (3 × 1800 × 0.6) - 2000",
-            correct: (12*1800) + (3*1800*0.6) - 2000,
-            alternatives: [22840, 23400, 22200, 24000], 
-            isCombined: true 
-        },
-        
-        // RETO 10
-        { 
-            text: "6 cajas con 8 juguetes a $2.200 c/u. Pagó $120.000, descuento $8.000. Vendió 4 cajas a $20.000 c/u. ¿Pérdida?",
-            expresion: "(6 × 8 × 2200 - 8000) - (4 × 20000)",
-            correct: (6*8*2200 - 8000) - (4*20000),
-            alternatives: [17600, 19200, 16800, 18400], 
-            isCombined: true 
-        },
-        
-        // RETO 11
-        { 
-            text: "3 paquetes de 10 libretas a $15.000 c/u. Descuento $3.000. Vendió 15 libretas a $1.800 c/u. ¿Saldo?",
-            expresion: "(3 × 15000 - 3000) - (15 × 1800)",
-            correct: (3*15000 - 3000) - (15*1800),
-            alternatives: [15000, 13500, 12000, 18000], 
-            isCombined: true 
-        },
-        
-        // RETO 12
-        { 
-            text: "5 kilos de naranjas $7.500. Compró 12 kilos, pagó $20.000, le devolvieron $2.000. Regaló 2 kilos. ¿Precio por kilo conservado?",
-            expresion: "(12 × (7500 ÷ 5)) ÷ (12 - 2)",
-            correct: (12 * (7500/5)) / (12-2),
-            alternatives: [1800, 1700, 1900, 1600], 
-            isCombined: true 
-        },
-        
-        // RETO 13
-        { 
-            text: "Vendió 4 docenas de huevos a $500 c/u. 8 rotos: 40% valor. Donó $3.000. ¿Final?",
-            expresion: "((48 - 8) × 500) + (8 × 500 × 0.4) - 3000",
-            correct: ((48-8)*500) + (8*500*0.4) - 3000,
-            alternatives: [18600, 17600, 19600, 16600], 
-            isCombined: true 
-        },
-        
-        // RETO 14
-        { 
-            text: "7 bolsas con 9 jugos a $2.400 c/u. Pagó $25.000, descuento $2.500. Vendió 4 bolsas a $3.200 c/u. ¿Ganancia?",
-            expresion: "(4 × 3200) - (7 × 2400 - 2500)",
-            correct: (4*3200) - (7*2400 - 2500),
-            alternatives: [1500, 2100, 1800, 1200], 
-            isCombined: true 
-        },
-        
-        // RETO 15
-        { 
-            text: "20 peluches a $3.800 c/u. 15% descuento. Vendió 8 a $5.000 c/u. ¿Pérdida?",
-            expresion: "(20 × 3800 × 0.85) - (8 × 5000)",
-            correct: (20*3800*0.85) - (8*5000),
-            alternatives: [24600, 25800, 23400, 26200], 
-            isCombined: true 
-        },
-        
-        // RETO 16
-        { 
-            text: "Máquina: 120 galletas/hora. Usó 3 horas. Cajas de 20 a $4.500 c/u. Electricidad $2.000. ¿Ganancia?",
-            expresion: "((120 × 3) ÷ 20 × 4500) - 2000",
-            correct: ((120*3)/20 * 4500) - 2000,
-            alternatives: [79000, 81000, 77000, 83000], 
-            isCombined: true 
-        },
-        
-        // RETO 17
-        { 
-            text: "5 juegos de 12 cartas a $800 c/u. Pagó $10.000, descuento $1.200. Vendió 30 cartas a $100 c/u. ¿Final?",
-            expresion: "(10000 - (5 × 800 - 1200)) + (30 × 100)",
-            correct: (10000 - (5*800 - 1200)) + (30*100),
-            alternatives: [10200, 9800, 10600, 9400], 
-            isCombined: true 
-        },
-        
-        // RETO 18
-        { 
-            text: "8 paquetes de 6 lápices a $1.500 c/u. 2 paquetes dañados: 75% valor. Bono $2.500. ¿Total?",
-            expresion: "(6 × 1500) + (2 × 1500 × 0.75) + 2500",
-            correct: (6*1500) + (2*1500*0.75) + 2500,
-            alternatives: [13750, 14500, 13000, 14250], 
-            isCombined: true 
-        },
-        
-        // RETO 19
-        { 
-            text: "Oferta: 3 camisetas $24.000. Compró 9, pagó $80.000, descuento $5.000. Devolvió 2. ¿Pago final?",
-            expresion: "(9 × (24000 ÷ 3) - 5000) - (2 × (24000 ÷ 3))",
-            correct: (9*(24000/3) - 5000) - (2*(24000/3)),
-            alternatives: [51000, 49000, 53000, 47000], 
-            isCombined: true 
-        },
-        
-        // RETO 20
-        { 
-            text: "RETO FINAL: 4 cajas con 15 chocolates a $600 c/u. Pagó $40.000, 10% descuento. 20 vencidos. Vendió los buenos en bolsas de 5 a $3.500. Envío $2.000. ¿Pérdida?",
-            expresion: "(4 × 15 × 600 × 0.9) - (((4 × 15 - 20) ÷ 5) × 3500) - 2000",
-            correct: (4*15*600*0.9) - (((4*15-20)/5)*3500) - 2000,
-            alternatives: [6400, 7200, 5600, 6800], 
-            isCombined: true 
-        }
-    ];
-
-    let challenges = [];
-    let currentIndex = 0;
-    let answersSelected = new Array(20).fill(null);
-    let answersCorrect = new Array(20).fill(false);
-    let gameComplete = false;
-
-    const gameContainer = document.getElementById('gameContent');
-    const verifyButton = document.getElementById('verifyBtn');
-    const nextButton = document.getElementById('nextBtn');
-    const feedbackDiv = document.getElementById('feedbackMsg');
-    const progressSpan = document.getElementById('progressCounter');
-    const progressFill = document.getElementById('progressBarFill');
-    const victoryModal = document.getElementById('victoryModal');
-    const restartBtn = document.getElementById('restartGameBtn');
-
-    function shuffleArray(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-    }
-
-    function initChallenges() {
-        challenges = RAW_CHALLENGES.map((ch, idx) => {
-            let shuffledAlts = shuffleArray([...ch.alternatives]);
-            if (!shuffledAlts.includes(ch.correct)) {
-                shuffledAlts[0] = ch.correct;
-                shuffledAlts = shuffleArray(shuffledAlts);
+    <script>
+        const questions = [
+            { 
+                n: "Mente Brillante está analizando el primer cerrojo electrónico.", 
+                q: "<b>Pregunta 1:</b> ¿Cuál es el valor de 'x' en la ecuación de un paso: <span class='font-bold text-purple-700'>x + 15 = 40</span>?", 
+                a: "25", 
+                o: ["15", "25", "55", "65"] 
+            },
+            { 
+                n: "Rayo Veloz detecta un número misterioso que disminuye.", 
+                q: "<b>Pregunta 2:</b> Traduce y resuelve: Si a un número se le restan 8 unidades, el resultado es 20. ¿Qué número es?", 
+                a: "28", 
+                o: ["12", "20", "28", "32"] 
+            },
+            { 
+                n: "Fuerza Pluma sostiene una balanza de platillos en perfecto equilibrio.", 
+                q: "<b>Pregunta 3:</b> Observa los elementos de la balanza en equilibrio. Si cada cilindro pesa 2 kg, ¿cuánto pesa la caja desconocida (x)?<br><br><span class='font-mono font-bold text-blue-600'>[Caja x] + [2 kg] = [2 kg] + [2 kg] + [2 kg]</span>", 
+                a: "4 kg", 
+                o: ["2 kg", "4 kg", "6 kg", "8 kg"] 
+            },
+            { 
+                n: "Mente Brillante ayuda a calcular los gastos de biblioteca de María.", 
+                q: "<b>Pregunta 4:</b> María tenía cierta cantidad de dinero ($x). Gastó $3.500 en un libro, quedándole $1.500. ¿Cuánto dinero tenía al principio?", 
+                a: "5.000", 
+                o: ["2.000", "4.000", "5.000", "6.000"] 
+            },
+            { 
+                n: "Rayo Veloz calcula la aceleración del reactor del enemigo.", 
+                q: "<b>Pregunta 5:</b> ¿Cuál es la solución o conjunto de valores posibles para la inecuación: <span class='font-bold text-purple-700'>x + 10 > 25</span>?", 
+                a: "x > 15", 
+                o: ["x > 10", "x > 15", "x > 25", "x > 35"] 
+            },
+            { 
+                n: "Gatito Chill toma aire y calcula con absoluta calma.", 
+                q: "<b>Pregunta 6:</b> Si la igualdad del sistema de energía es <span class='font-bold text-purple-700'>20 + y = 50</span>, entonces el valor correspondiente de y es:", 
+                a: "30", 
+                o: ["70", "40", "30", "20"] 
+            },
+            { 
+                n: "Mente Brillante traduce las advertencias del Dr. Des-Balanza.", 
+                q: "<b>Pregunta 7:</b> ¿Qué inecuación representa algebraicamente la frase: <i>'La edad de Pedro (x) aumentada en 5 años es mayor que 20 años'</i>?", 
+                a: "x + 5 > 20", 
+                o: ["x + 5 < 20", "x - 5 > 20", "x + 5 > 20", "x - 5 < 20"] 
+            },
+            { 
+                n: "Fuerza Pluma levanta un bloque de piedra marcado con una incógnita.", 
+                q: "<b>Pregunta 8:</b> Plantea y resuelve: ¿Qué número al restarle 12 da como resultado exacto 5?", 
+                a: "17", 
+                o: ["7", "12", "17", "20"] 
+            },
+            { 
+                n: "Rayo Veloz detecta una variable de masa pesada en el radar.", 
+                q: "<b>Pregunta 9:</b> En la ecuación de gran escala <span class='font-bold text-purple-700'>m - 100 = 300</span>, el valor que debe tomar m es:", 
+                a: "400", 
+                o: ["200", "300", "400", "500"] 
+            },
+            { 
+                n: "Mente Brillante calcula las soluciones admisibles de una inecuación.", 
+                q: "<b>Pregunta 10:</b> ¿Cuál es el conjunto solución que satisface la relación: <span class='font-bold text-purple-700'>x - 5 < 10</span>?", 
+                a: "Números menores que 15", 
+                o: ["Números mayores que 5", "Números mayores que 15", "Números menores que 5", "Números menores que 15"] 
+            },
+            { 
+                n: "Gatito Chill cuenta las manzanas que cosechó para el pícnic de la Legión.", 
+                q: "<b>Pregunta 11:</b> Si tengo una cantidad desconocida de manzanas (x) y le agrego 6, obtengo 18. ¿Cómo se escribe matemáticamente este enunciado?", 
+                a: "6 + x = 18", 
+                o: ["6 + x = 18", "x - 6 = 18", "18 - x = 6", "x + 18 = 6"] 
+            },
+            { 
+                n: "Fuerza Pluma equilibra un enorme engranaje con la letra 'w'.", 
+                q: "<b>Pregunta 12:</b> ¿Qué valor numérico de la incógnita 'w' satisface la ecuación: <span class='font-bold text-purple-700'>w - 45 = 10</span>?", 
+                a: "55", 
+                o: ["35", "45", "50", "55"] 
+            },
+            { 
+                n: "Rayo Veloz examina el recorrido del maratón de Ciudad Matemáticas.", 
+                q: "<b>Pregunta 13:</b> Un atleta ha recorrido 12 km de un maratón. Si le faltan exactamente 30 km para terminar, ¿cuántos km en total tiene el maratón completo?", 
+                a: "42 km", 
+                o: ["18 km", "22 km", "42 km", "45 km"] 
+            },
+            { 
+                n: "Mente Brillante investiga contradicciones lógicas en las defensas enemigas.", 
+                q: "<b>Pregunta 14:</b> ¿Cuál es el valor numérico de la opción que hace FALSA la igualdad matemática: <span class='font-bold text-purple-700'>x + 12 = 20</span>?", 
+                a: "10", 
+                o: ["8", "10", "32", "20"] 
+            },
+            { 
+                n: "Gatito Chill nos guía para buscar una opción válida para una desigualdad.", 
+                q: "<b>Pregunta 15:</b> Si se sabe que la inecuación es <span class='font-bold text-purple-700'>x + 8 < 20</span> (lo que implica x < 12), ¿cuál de los siguientes números de la guía puede ser una solución correcta para x?", 
+                a: "11", 
+                o: ["11", "12", "13", "14"] 
+            },
+            { 
+                n: "Fuerza Pluma cuenta sus lápices de dibujo.", 
+                q: "<b>Pregunta 16:</b> Tengo el doble de lápices que tú. Si juntos tenemos 15 lápices, pero tú tienes 5, ¿cuántos lápices tengo yo?", 
+                a: "10", 
+                o: ["5", "10", "15", "20"] 
+            },
+            { 
+                n: "Mente Brillante nos hace una pregunta conceptual muy importante.", 
+                q: "<b>Pregunta 17:</b> ¿Cuál es la operación inversa o contraria que debes aplicar en ambos lados para resolver la ecuación: <span class='font-bold text-purple-700'>x - 25 = 50</span>?", 
+                a: "Sumar 25", 
+                o: ["Sumar 25", "Restar 25", "Sumar 50", "Restar 50"] 
+            },
+            { 
+                n: "Rayo Veloz ve dos incógnitas idénticas sumándose en el radar.", 
+                q: "<b>Pregunta 18:</b> Si la suma de dos números desconocidos iguales es <span class='font-bold text-purple-700'>x + x = 20</span>, ¿cuánto vale x?", 
+                a: "10", 
+                o: ["5", "10", "15", "20"] 
+            },
+            { 
+                n: "Gatito Chill se estira cómodamente y plantea una resta.", 
+                q: "<b>Pregunta 19:</b> Un número disminuido en 40 es igual a 60. ¿Cuál es ese número original?", 
+                a: "100", 
+                o: ["20", "100", "120", "200"] 
+            },
+            { 
+                n: "¡BATALLA FINAL! El Dr. Des-Balanza arroja su último rayo inestabilizador.", 
+                q: "<b>Pregunta 20:</b> Si la inecuación es <span class='font-bold text-purple-700'>50 - x > 20</span> (lo que significa x < 30), ¿cuál de los siguientes números NO es parte de la solución admisible para x?", 
+                a: "30", 
+                o: ["10", "20", "25", "30"] 
             }
-            return {
-                text: ch.text,
-                expresion: ch.expresion,
-                correctAnswer: ch.correct,
-                alternativesValues: shuffledAlts,
-                isCombined: ch.isCombined
-            };
-        });
-    }
+        ];
 
-    function reshuffleCurrentAlternatives(index) {
-        const originalAlts = RAW_CHALLENGES[index].alternatives;
-        let newMix = shuffleArray([...originalAlts]);
-        if (!newMix.includes(RAW_CHALLENGES[index].correct)) {
-            newMix[0] = RAW_CHALLENGES[index].correct;
-            newMix = shuffleArray(newMix);
-        }
-        challenges[index].alternativesValues = newMix;
-    }
+        let currentLevel = 0;
+        let isProcessing = false;
 
-    function renderCurrent() {
-        if (gameComplete) return;
-        const challenge = challenges[currentIndex];
-        if (!challenge) return;
-        reshuffleCurrentAlternatives(currentIndex);
-        const freshAlts = challenges[currentIndex].alternativesValues;
-        
-        const comboBadge = challenge.isCombined ? 
-            '<span class="bg-purple-700 text-white text-xs font-bold px-3 py-1 rounded-full ml-2">🧮 + - × ÷ EN UN SOLO EJERCICIO</span>' : 
-            '<span class="bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full ml-2">✨ OPERACIÓN SIMPLE</span>';
-        
-        const html = `
-            <div class="bg-white rounded-2xl p-5 border-4 border-indigo-500 shadow-xl">
-                <div class="flex items-center gap-3 mb-3 flex-wrap">
-                    <span class="text-5xl">🧠💰</span>
-                    <h2 class="text-2xl md:text-3xl font-black text-purple-800">RETO ${currentIndex+1} / 20 ${comboBadge}</h2>
-                </div>
-                <p class="text-gray-800 text-lg md:text-xl font-extrabold bg-amber-50 p-4 rounded-2xl">${challenge.text}</p>
-                
-                <div class="mt-4 p-4 rounded-xl bg-slate-800 border-2 border-yellow-400 shadow-lg">
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="text-xl">📝</span>
-                        <span class="font-black text-yellow-300">COPIA ESTA EXPRESIÓN EN TU CUADERNO:</span>
-                    </div>
-                    <div class="math-expression text-center text-xl md:text-2xl font-mono font-bold tracking-wide">
-                        ${challenge.expresion}
-                    </div>
-                    <div class="text-xs text-gray-400 mt-2 text-center">✏️ Resuelve paso a paso usando suma, resta, multiplicación y división</div>
-                </div>
-                
-                <div class="mt-5">
-                    <label class="block text-indigo-900 font-black text-lg mb-2">📌 Selecciona la respuesta correcta:</label>
-                    <select id="challengeSelect" class="w-full bg-white text-black text-lg font-bold border-2 border-purple-500">
-                        <option value="" disabled selected>🔻 Elige una opción...</option>
-                        ${freshAlts.map(value => `<option value="${value}">💲 ${value.toLocaleString('es-CL')} pesos chilenos</option>`).join('')}
-                    </select>
-                </div>
-                <div class="mt-3 text-sm bg-blue-50 p-2 rounded-xl">💡 Pista: ${challenge.isCombined ? 'Resuelve respetando la jerarquía de operaciones: primero × y ÷, luego + y −.' : 'Solo multiplica.'}</div>
-            </div>
-        `;
-        gameContainer.innerHTML = html;
-        
-        if (answersSelected[currentIndex] !== null) {
-            const selectEl = document.getElementById('challengeSelect');
-            if (selectEl) {
-                const prevVal = answersSelected[currentIndex];
-                for (let i=0; i<selectEl.options.length; i++) {
-                    if (Number(selectEl.options[i].value) === prevVal) {
-                        selectEl.selectedIndex = i;
-                        break;
-                    }
+        // Función de audio retro auto-generado
+        function playSound(type) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'correct') {
+                    // Tono alegre ascendente
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(440, ctx.currentTime); // A4
+                    osc.frequency.setValueAtTime(554.37, ctx.currentTime + 0.1); // C#5
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.2); // E5
+                    osc.frequency.setValueAtTime(880, ctx.currentTime + 0.3); // A5
+                    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.55);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.55);
+                } else {
+                    // Tono bajo descendente para error
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(150, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(60, ctx.currentTime + 0.3);
+                    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.35);
                 }
+            } catch (e) {
+                console.log("Audio block bypass: ", e);
             }
         }
-        
-        if (answersCorrect[currentIndex]) {
-            const selectEl = document.getElementById('challengeSelect');
-            if (selectEl) selectEl.disabled = true;
-            verifyButton.disabled = true;
-            feedbackDiv.innerHTML = '✅ ¡Reto superado! Sigue al siguiente.';
-            feedbackDiv.classList.add('bg-green-100', 'text-green-800');
-            feedbackDiv.classList.remove('bg-gray-100');
-        } else {
-            const selectEl = document.getElementById('challengeSelect');
-            if (selectEl) selectEl.disabled = false;
-            verifyButton.disabled = false;
-            feedbackDiv.innerHTML = '🛒 Elige una respuesta y haz clic en VERIFICAR.';
-            feedbackDiv.classList.remove('bg-green-100', 'bg-red-100');
-            feedbackDiv.classList.add('bg-gray-100', 'text-gray-700');
-        }
-        updateNextState();
-    }
 
-    function updateNextState() {
-        if (gameComplete) { 
-            nextButton.disabled = true; 
-            return; 
+        function startGame() {
+            document.getElementById('screen-start').classList.add('hidden');
+            document.getElementById('screen-game').classList.remove('hidden');
+            currentLevel = 0;
+            loadLevel();
         }
-        nextButton.disabled = !answersCorrect[currentIndex];
-        const allCorrect = answersCorrect.every(v => v === true);
-        if (allCorrect && !gameComplete) { 
-            gameComplete = true; 
-            showVictory(); 
-        }
-    }
 
-    function verifyHandler() {
-        if (gameComplete) { 
-            feedbackDiv.innerHTML = '🏁 ¡Ya ganaste! Reinicia para jugar.'; 
-            return; 
-        }
-        if (answersCorrect[currentIndex]) { 
-            feedbackDiv.innerHTML = '🌟 Ya superaste este reto. Sigue al siguiente.'; 
-            return; 
-        }
-        
-        const selectEl = document.getElementById('challengeSelect');
-        if (!selectEl || !selectEl.value) {
-            feedbackDiv.innerHTML = '⚠️ ¡Selecciona una opción!';
-            feedbackDiv.classList.add('bg-red-100', 'text-red-700');
-            return;
-        }
-        const selectedVal = Number(selectEl.value);
-        const currentChallenge = challenges[currentIndex];
-        const currentCorrect = currentChallenge.correctAnswer;
-        
-        if (selectedVal === currentCorrect) {
-            answersCorrect[currentIndex] = true;
-            answersSelected[currentIndex] = selectedVal;
-            const msg = currentChallenge.isCombined ? '¡FELICIDADES! Aplicaste suma, resta, multiplicación y división correctamente.' : '¡Correcto!';
-            feedbackDiv.innerHTML = `🎉 ${msg} Presiona "Siguiente reto". 🎉`;
-            feedbackDiv.classList.remove('bg-red-100');
-            feedbackDiv.classList.add('bg-green-200', 'text-green-900', 'font-extrabold');
-            if (selectEl) selectEl.disabled = true;
-            verifyButton.disabled = true;
-            updateProgress();
-            nextButton.disabled = false;
-            if (answersCorrect.every(v => v === true)) { 
-                gameComplete = true; 
-                showVictory(); 
+        // Algoritmo Fisher-Yates para barajar las alternativas
+        function shuffle(array) {
+            let shuffled = array.slice();
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
             }
-        } else {
-            feedbackDiv.innerHTML = `❌ INCORRECTO. Respuesta correcta: $${currentCorrect.toLocaleString('es-CL')}. Revisa la expresión: ${currentChallenge.expresion} ❌`;
-            feedbackDiv.classList.remove('bg-green-200');
-            feedbackDiv.classList.add('bg-red-200', 'text-red-800');
+            return shuffled;
         }
-    }
 
-    function nextHandler() {
-        if (gameComplete) return;
-        if (!answersCorrect[currentIndex]) { 
-            feedbackDiv.innerHTML = '🚫 Verifica y acierta este reto primero.'; 
-            return; 
+        function loadLevel() {
+            const level = questions[currentLevel];
+            document.getElementById('level-label').innerText = `MISIÓN: ${currentLevel + 1} / ${questions.length}`;
+            document.getElementById('progress-fill').style.width = `${((currentLevel) / questions.length) * 100}%`;
+            document.getElementById('narrative-text').innerText = `"${level.n}"`;
+            document.getElementById('question-text').innerHTML = level.q;
+
+            const select = document.getElementById('answer-select');
+            select.innerHTML = '<option value="" disabled selected>-- Selecciona con calma --</option>';
+            
+            const shuffledOptions = shuffle([...level.o]);
+            shuffledOptions.forEach(opt => {
+                const el = document.createElement('option');
+                el.value = opt;
+                el.innerText = opt;
+                select.appendChild(el);
+            });
+
+            // Rotar personajes
+            const avatars = ["🐱", "🐢", "🐶", "🦅", "⚖️"];
+            document.getElementById('hero-avatar').innerText = avatars[currentLevel % avatars.length];
+            
+            // Control de visibilidad del widget de la balanza interactiva
+            const scaleWidget = document.getElementById('scale-widget');
+            const beam = document.getElementById('scale-beam');
+            const scaleLeft = document.getElementById('scale-left');
+            const scaleRight = document.getElementById('scale-right');
+            const leftValLabel = document.getElementById('left-val');
+            const rightValLabel = document.getElementById('right-val');
+
+            if (currentLevel === 0) {
+                // x + 15 = 40
+                scaleWidget.classList.remove('hidden');
+                beam.style.transform = "rotate(0deg)";
+                scaleLeft.style.bottom = "48px";
+                scaleRight.style.bottom = "48px";
+                leftValLabel.innerText = "x + 15";
+                rightValLabel.innerText = "40";
+            } else if (currentLevel === 2) {
+                // x + 2 = 6
+                scaleWidget.classList.remove('hidden');
+                beam.style.transform = "rotate(0deg)";
+                scaleLeft.style.bottom = "48px";
+                scaleRight.style.bottom = "48px";
+                leftValLabel.innerText = "Caja x + 2 kg";
+                rightValLabel.innerText = "2kg + 2kg + 2kg";
+            } else if (currentLevel === 4) {
+                // x + 10 > 25 (Inecuación desbalanceada hacia la izquierda)
+                scaleWidget.classList.remove('hidden');
+                beam.style.transform = "rotate(-10deg)"; // Inclinado
+                scaleLeft.style.bottom = "64px"; // Platillo izquierdo sube (o baja, dependiendo de la inclinación)
+                scaleRight.style.bottom = "32px";
+                leftValLabel.innerText = "x + 10";
+                rightValLabel.innerText = "25";
+            } else if (currentLevel === 9) {
+                // x - 5 < 10 (Inecuación desbalanceada hacia la derecha)
+                scaleWidget.classList.remove('hidden');
+                beam.style.transform = "rotate(10deg)";
+                scaleLeft.style.bottom = "32px";
+                scaleRight.style.bottom = "64px";
+                leftValLabel.innerText = "x - 5";
+                rightValLabel.innerText = "10";
+            } else {
+                scaleWidget.classList.add('hidden');
+            }
+
+            isProcessing = false;
         }
-        if (currentIndex + 1 < 20) {
-            currentIndex++;
-            renderCurrent();
-            feedbackDiv.innerHTML = '📦 Nuevo reto. ¡Copia la expresión y resuélvela!';
-            feedbackDiv.classList.remove('bg-red-200', 'bg-green-200');
-            feedbackDiv.classList.add('bg-gray-100', 'text-gray-700');
-            verifyButton.disabled = false;
-            updateNextState();
-        } else {
-            // Estamos en el último reto y ya está correcto
-            if (answersCorrect.every(v => v === true)) { 
-                gameComplete = true; 
-                showVictory(); 
+
+        function checkAnswer() {
+            if (isProcessing) return;
+
+            const select = document.getElementById('answer-select');
+            const userAns = select.value;
+            const fx = document.getElementById('visual-fx');
+
+            if (!userAns) return;
+
+            isProcessing = true;
+
+            if (userAns === questions[currentLevel].a) {
+                // Correcto: Lanza onomatopeya alegre
+                playSound('correct');
+                const hits = ["¡CHILL!", "¡SÚPER!", "¡BAM!", "¡POW!", "¡SENSACIONAL!", "¡EQUILIBRADO!"];
+                fx.innerText = hits[Math.floor(Math.random() * hits.length)];
+                fx.className = "pow-text comic-title text-8xl text-yellow-400 active";
+                
+                // Animación de la balanza equilibrándose si estaba inclinada
+                const beam = document.getElementById('scale-beam');
+                const scaleLeft = document.getElementById('scale-left');
+                const scaleRight = document.getElementById('scale-right');
+                if (beam) {
+                    beam.style.transform = "rotate(0deg)";
+                    if (scaleLeft) scaleLeft.style.bottom = "48px";
+                    if (scaleRight) scaleRight.style.bottom = "48px";
+                }
+
+                setTimeout(() => {
+                    fx.classList.remove('active');
+                    currentLevel++;
+                    if (currentLevel < questions.length) {
+                        loadLevel();
+                    } else {
+                        showEnd();
+                    }
+                }, 950);
+            } else {
+                // Incorrecto: golpe o falla
+                playSound('wrong');
+                fx.innerText = "¡OOF!";
+                fx.className = "pow-text comic-title text-8xl text-red-500 active";
+                
+                setTimeout(() => {
+                    fx.classList.remove('active');
+                    select.value = ""; // Limpiar dropdown para reintento
+                    isProcessing = false;
+                }, 950);
             }
         }
-    }
 
-    function updateProgress() {
-        const correctCount = answersCorrect.filter(v => v === true).length;
-        progressSpan.innerText = `${correctCount}/20`;
-        const percent = (correctCount / 20) * 100;
-        progressFill.style.width = `${percent}%`;
-        if (percent > 12) progressFill.innerText = `${Math.round(percent)}%`;
-        else progressFill.innerText = '';
-    }
-
-    function showVictory() { 
-        victoryModal.classList.remove('hidden'); 
-        verifyButton.disabled = true; 
-        nextButton.disabled = true; 
-    }
-    
-    function restartGame() {
-        gameComplete = false; 
-        currentIndex = 0;
-        answersSelected = new Array(20).fill(null); 
-        answersCorrect = new Array(20).fill(false);
-        initChallenges(); 
-        victoryModal.classList.add('hidden'); 
-        renderCurrent(); 
-        updateProgress();
-        feedbackDiv.innerHTML = '✨ ¡NUEVA AVENTURA! Copia cada expresión y resuelve. ✨';
-        feedbackDiv.classList.remove('bg-green-200', 'bg-red-200');
-        feedbackDiv.classList.add('bg-gray-100', 'text-gray-700');
-        verifyButton.disabled = false; 
-        nextButton.disabled = true;
-    }
-
-    verifyButton.addEventListener('click', verifyHandler);
-    nextButton.addEventListener('click', nextHandler);
-    restartBtn.addEventListener('click', restartGame);
-
-    initChallenges();
-    renderCurrent();
-    updateProgress();
-</script>
+        function showEnd() {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-end').classList.remove('hidden');
+            document.getElementById('progress-fill').style.width = "100%";
+        }
+    </script>
 </body>
 </html>
