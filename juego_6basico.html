@@ -3,440 +3,493 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Liga de la Razón: Escape Room</title>
+    <title>Gatito Chill y el Rescate de los Patrones - Escape Room Matemático</title>
+    <!-- Tailwind CSS para el diseño rápido y responsivo -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Fuentes Google: Bangers (títulos súper cómic), Comic Neue (textos legibles), Chewy (toques divertidos) -->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --comic-red: #e63946;
-            --comic-blue: #1d3557;
-            --comic-purple: #4a148c;
-            --comic-yellow: #ffea00;
+            --comic-red: #ef4444;
+            --comic-blue: #3b82f6;
+            --comic-purple: #8b5cf6;
+            --comic-yellow: #facc15;
+            --comic-dark: #0f172a;
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f3f4f6;
-            background-image: radial-gradient(#ccc 10%, transparent 10%);
-            background-size: 15px 15px; /* Ben-Day Dots Effect */
+            font-family: 'Comic Neue', cursive;
+            background-color: #1e1b4b; /* Base azul índigo de noche profunda */
+            /* Patrón clásico de puntos Ben-Day retro al estilo cómic de los 60s */
+            background-image: radial-gradient(rgba(139, 92, 246, 0.25) 15%, transparent 16%), 
+                              radial-gradient(rgba(139, 92, 246, 0.25) 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            min-height: 100vh;
+            color: #1e293b;
+            overflow-x: hidden;
         }
 
-        .comic-font { font-family: 'Bangers', cursive; letter-spacing: 1px; }
-        .marker-font { font-family: 'Permanent Marker', cursive; }
-
-        .comic-border {
-            border: 4px solid black;
-            box-shadow: 10px 10px 0px black;
+        .comic-title {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 2px;
         }
 
-        .comic-card {
+        .chill-font {
+            font-family: 'Chewy', cursive;
+        }
+
+        /* Paneles estilizados con trazo de tinta negra gruesa y sombra dura offset */
+        .comic-panel {
             background: white;
-            border: 3px solid black;
+            border: 5px solid black;
+            box-shadow: 10px 10px 0px rgba(0, 0, 0, 1);
             position: relative;
         }
 
-        .comic-card::before {
+        /* Micro puntos sutiles para imitar el papel de diario clásico de cómics */
+        .comic-panel::before {
             content: "";
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: radial-gradient(rgba(0,0,0,0.03) 15%, transparent 15%);
-            background-size: 5px 5px;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(0,0,0,0.03) 1.2px, transparent 1.2px);
+            background-size: 8px 8px;
             pointer-events: none;
+            z-index: 1;
         }
 
         .btn-comic {
-            background: var(--comic-red);
-            color: white;
+            font-family: 'Bangers', cursive;
+            letter-spacing: 1px;
             border: 3px solid black;
-            padding: 10px 20px;
-            transform: skew(-5deg);
-            transition: all 0.2s;
+            box-shadow: 4px 4px 0px black;
+            transition: all 0.1s ease;
+            text-transform: uppercase;
         }
 
         .btn-comic:hover {
-            transform: skew(-5deg) scale(1.05);
-            box-shadow: 4px 4px 0px var(--comic-yellow);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px black;
         }
 
-        .speech-bubble {
-            position: relative;
-            background: #ffffff;
-            border: 3px solid #000000;
-            border-radius: .4em;
-            padding: 20px;
+        .btn-comic:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px black;
         }
 
-        .speech-bubble:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
+        /* Contenedor flotante para onomatopeyas de impacto retro */
+        .pow-text {
+            position: fixed;
+            top: 50%;
             left: 50%;
-            width: 0;
-            height: 0;
-            border: 20px solid transparent;
-            border-top-color: #000000;
-            border-bottom: 0;
-            border-left: 0;
-            margin-left: -10px;
-            margin-bottom: -20px;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 100;
+            pointer-events: none;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-shadow: 4px 4px 0px black;
         }
 
-        .shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
-        @keyframes shake {
-            10%, 90% { transform: translate3d(-1px, 0, 0); }
-            20%, 80% { transform: translate3d(2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-            40%, 60% { transform: translate3d(4px, 0, 0); }
+        .pow-text.active {
+            transform: translate(-50%, -50%) scale(1.6);
         }
 
-        .progress-bar {
-            height: 20px;
-            background: #eee;
-            border: 2px solid black;
-            border-radius: 10px;
+        /* Ajustes de estilo para el menú desplegable select del cómic */
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1.2rem center;
+            background-size: 1.5em;
+        }
+
+        .progress-bar-container {
+            background: #e2e8f0;
+            border: 3px solid black;
+            border-radius: 9999px;
             overflow: hidden;
+            height: 28px;
         }
 
-        .progress-fill {
+        .progress-bar-fill {
+            background: var(--comic-purple);
             height: 100%;
-            background: var(--comic-yellow);
-            width: 0%;
-            transition: width 0.3s ease-in-out;
+            transition: width 0.4s ease;
+        }
+
+        /* Efecto de parpadeo de alerta retro */
+        .alarm-border {
+            animation: redAlert 1.5s infinite alternate;
+        }
+
+        @keyframes redAlert {
+            from { border-color: black; }
+            to { border-color: #ef4444; }
         }
     </style>
 </head>
-<body class="min-h-screen p-4 flex flex-col items-center">
+<body class="flex items-center justify-center p-4">
 
-    <div id="game-container" class="w-full max-w-4xl">
-        
-        <!-- Header -->
+    <!-- Capa de efectos onomatopeyas del Dr. Des-Patrón y Gatito Chill -->
+    <div id="visual-fx" class="pow-text comic-title text-8xl text-yellow-400">¡ZAS!</div>
+
+    <div class="max-w-4xl w-full">
+        <!-- CABECERA PRINCIPAL CON LA INFORMACIÓN DEL OA -->
         <header class="text-center mb-8">
-            <div class="inline-block bg-white comic-border p-4 transform -rotate-1">
-                <h1 class="comic-font text-5xl md:text-7xl text-red-600 uppercase">La Liga de la Razón</h1>
-                <p class="font-bold text-blue-900 mt-2">Objetivo: Aplicar razones para comparar cantidades en diversos contextos.</p>
+            <div class="inline-block bg-white border-4 border-black p-4 transform -rotate-1 shadow-[8px_8px_0px_#ef4444] relative z-10">
+                <h1 class="text-4xl md:text-6xl comic-title text-red-600">GATITO CHILL Y EL CAOS-O-MATIC</h1>
+                <p class="text-xl font-bold mt-2 text-indigo-900">Misión: ¡Salvar las Leyes del Patrón!</p>
+            </div>
+            
+            <div class="mt-6 bg-white border-2 border-black p-3 rounded-lg max-w-2xl mx-auto shadow-md relative z-10">
+                <p class="font-bold text-sm text-indigo-900 italic text-center">
+                    🎯 OBJETIVO (OA 10): Representar generalizaciones de relaciones entre números naturales, usando expresiones con letras y ecuaciones.
+                </p>
             </div>
         </header>
 
-        <!-- Main Screen -->
-        <main id="main-content">
-            <!-- Screen 1: Intro -->
-            <section id="screen-intro" class="comic-card p-8 rounded-lg flex flex-col md:flex-row items-center gap-8">
-                <div class="w-full md:w-1/3 text-center">
-                    <div class="text-9xl mb-4">🦸‍♂️</div>
-                    <h2 class="comic-font text-3xl">Capitán Comparación</h2>
+        <main class="relative z-10">
+            <!-- Pantalla de Bienvenida -->
+            <div id="screen-start" class="comic-panel p-8 space-y-6">
+                <div class="flex justify-center gap-6 text-7xl animate-bounce">
+                    <span>🐱</span><span>🛡️</span><span>🤖</span>
                 </div>
-                <div class="w-full md:w-2/3">
-                    <div class="speech-bubble mb-8">
-                        <p class="text-lg font-bold">¡Hola, recluta! El villano "Desproporción" ha desequilibrado las recetas, los mapas y las aulas de nuestra ciudad. Necesitamos tu mente lógica para resolver estos 20 acertijos de razones y restaurar el orden. ¿Estás listo para el desafío?</p>
-                    </div>
-                    <button onclick="gameState.start()" class="btn-comic w-full text-3xl comic-font uppercase">¡Empezar Misión!</button>
+                <h2 class="text-3xl md:text-4xl comic-title text-center text-purple-700">¡ALERTA MÁXIMA EN CIUDAD INCÓGNITAS!</h2>
+                <div class="text-lg leading-relaxed space-y-4 font-medium text-left border-l-4 border-blue-500 pl-4">
+                    <p>El malvado <b>Dr. Des-Patrón</b>, antiguo científico de la Legión Titán resentido con la simetría y las secuencias, ha construido el destructor <i>Caos-O-Matic</i>.</p>
+                    <p>Su rayo desorganizador está cambiando todas las variables del universo: ¡los días pasan en orden desordenado, las ecuaciones fallan y las escaleras cambian de tamaño al azar!</p>
+                    <p>El <b>Gatito Chill</b>, acomodándose lentamente su hojita de otoño favorita en la cabeza, nos regala un ronroneo sereno y nos aconseja: <span class="text-blue-600 font-bold">"Todo está chill, chicos. El caos es solo un patrón que aún no hemos organizado. Respiren hondo, usen su calma mental y resolvamos los 20 códigos del Dr. Des-Patrón para restaurar el equilibrio."</span></p>
                 </div>
-            </section>
-
-            <!-- Screen 2: Game -->
-            <section id="screen-game" class="hidden">
-                <div class="flex justify-between items-center mb-4 font-bold bg-white p-2 comic-border">
-                    <div class="text-purple-800 uppercase comic-font">Misión: <span id="current-task">1</span>/20</div>
-                    <div class="flex-grow mx-4">
-                        <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
-                    </div>
-                    <div class="text-red-600 uppercase comic-font">Energía: <span id="lives">❤️❤️❤️</span></div>
+                
+                <!-- Configuración del audio opcional para mejorar la inmersión del estudiante -->
+                <div class="flex items-center justify-center gap-2 bg-yellow-50 p-3 border-2 border-dashed border-yellow-300 rounded-lg">
+                    <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer">
+                    <label for="sound-toggle" class="font-bold text-sm text-yellow-800 cursor-pointer select-none">🔊 Activar sintetizador de sonido retro (SFX)</label>
                 </div>
 
-                <div id="question-card" class="comic-card p-6 rounded-xl min-h-[400px] flex flex-col">
-                    <div id="category-tag" class="bg-blue-600 text-white px-3 py-1 inline-block comic-font text-sm uppercase mb-4 self-start">Fase Pictórica</div>
-                    
-                    <div id="question-area" class="flex-grow">
-                        <h3 id="question-text" class="text-2xl font-bold mb-6">Pregunta aquí...</h3>
-                        <div id="visualization" class="mb-6 flex justify-center"></div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="options-grid">
-                            <!-- Options injected by JS -->
+                <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-3xl py-4 w-full rounded-xl">
+                    ¡DESACTIVAR EL CAOS-O-MATIC! ⚡
+                </button>
+            </div>
+
+            <!-- Pantalla del Juego -->
+            <div id="screen-game" class="hidden space-y-6">
+                <!-- Barra de Progreso Comic -->
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white border-4 border-black p-4 shadow-[6px_6px_0px_black]">
+                    <div class="comic-title text-2xl text-red-600" id="level-label">MISIÓN: 1 / 20</div>
+                    <div class="w-full md:w-1/2 progress-bar-container">
+                        <div id="progress-fill" class="progress-bar-fill" style="width: 5%"></div>
+                    </div>
+                </div>
+
+                <!-- Contenedor del Desafío de Ecuación o Patrón -->
+                <div class="comic-panel p-6 md:p-10 alarm-border border-4">
+                    <!-- Cuadro de diálogo del héroe activo en esta ronda -->
+                    <div class="flex items-start gap-4 mb-6 bg-blue-50 border-2 border-black p-4 rounded-lg">
+                        <div class="text-5xl" id="hero-avatar">🐱</div>
+                        <div class="w-full">
+                            <h4 class="font-bold text-red-600 uppercase tracking-wide text-xs" id="hero-title">Legión Titán: Gatito Chill</h4>
+                            <p class="font-bold text-indigo-900 italic text-lg animate-pulse" id="narrative-text">Cargando...</p>
                         </div>
                     </div>
 
-                    <div id="feedback-area" class="hidden mt-6 p-4 comic-border bg-yellow-50">
-                        <p id="feedback-text" class="font-bold text-center"></p>
-                        <button onclick="gameState.next()" class="btn-comic mt-4 w-full comic-font uppercase text-xl">Siguiente Reto >></button>
+                    <!-- Panel de Pregunta Principal -->
+                    <div class="space-y-6 relative z-10">
+                        <div id="question-container">
+                            <h3 id="question-text" class="text-xl md:text-2xl font-bold text-gray-800 border-b-2 border-gray-100 pb-4 leading-relaxed"></h3>
+                        </div>
+
+                        <!-- Menú Desplegable interactivo de alternativas -->
+                        <div class="space-y-3">
+                            <label class="block font-black text-purple-700 uppercase tracking-tighter text-sm">Selecciona tu cálculo de contraataque:</label>
+                            <select id="answer-select" class="w-full p-4 border-4 border-black text-lg md:text-xl font-bold bg-yellow-50 focus:ring-8 focus:ring-purple-200 outline-none cursor-pointer">
+                                <option value="" disabled selected>-- Elige con calma --</option>
+                            </select>
+                        </div>
+
+                        <!-- Botón de acción con estética retro -->
+                        <button onclick="checkAnswer()" class="btn-comic bg-red-600 hover:bg-red-500 text-white text-3xl py-4 w-full">
+                            ¡ENVIAR RESPUESTA! 💥
+                        </button>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- Screen 3: Victory -->
-            <section id="screen-victory" class="hidden text-center">
-                <div class="comic-card p-12 rounded-3xl">
-                    <h2 class="comic-font text-7xl text-red-600 mb-4 uppercase">¡Ciudad Salvada!</h2>
-                    <div class="text-9xl mb-6">🏆</div>
-                    <p class="text-2xl font-bold mb-8">Has dominado el concepto de razón. El Equilibrador ha sido restaurado.</p>
-                    <button onclick="location.reload()" class="btn-comic text-2xl comic-font uppercase">Volver a la Base</button>
+            <!-- Pantalla de Victoria -->
+            <div id="screen-end" class="hidden comic-panel p-10 text-center space-y-8">
+                <h2 class="text-6xl md:text-7xl comic-title text-purple-700">¡EL EQUILIBRIO VOLVIÓ!</h2>
+                <div class="text-9xl animate-bounce my-8">🐱⚖️🏆</div>
+                <p class="text-2xl font-bold text-indigo-950">¡Has completado las 20 misiones y desactivado el Caos-O-Matic!</p>
+                <div class="bg-yellow-100 border-4 border-dashed border-black p-6 rounded-2xl font-bold text-lg max-w-2xl mx-auto space-y-4 text-left">
+                    <p>"¿Ves? Las variables son solo secretos listos para ser resueltos con paciencia y una rica taza de té tibio. Ahora todo está oficialmente súper chill", dice el Gatito Chill mientras bosteza tranquilamente.</p>
+                    <p class="text-blue-700 text-center font-black">¡Felicidades, Héroe de los Patrones! La Legión Titán te ha otorgado la medalla de la constancia matemática.</p>
                 </div>
-            </section>
+                <button onclick="location.reload()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-3xl py-4 px-12 rounded-full">
+                    REINICIAR ENTRENAMIENTO
+                </button>
+            </div>
         </main>
     </div>
 
     <script>
+        // Las 20 preguntas reales de la evaluación, sin inventar ni omitir ninguna.
         const questions = [
-            {
-                id: 1,
-                category: "Pictórica/Concreta",
-                text: "En un estuche hay 3 lápices azules y 5 lápices rojos. ¿Cuál es la razón de lápices azules respecto a los rojos?",
-                visualization: "🔵🔵🔵 🔴🔴🔴🔴🔴",
-                options: ["3 : 5", "5 : 3", "3 : 8", "5 : 8"],
-                answer: "3 : 5",
-                feedback: "¡Correcto! El antecedente es la cantidad de azules (3) y el consecuente los rojos (5)."
+            { 
+                n: "El Caos-O-Matic interfiere en el invernadero de Ciudad Incógnitas.", 
+                q: "<b>Pregunta 1:</b> Si la regla de una secuencia es 'sumar 4', y el primer término es 5, ¿cuál es el cuarto término?", 
+                a: "17", 
+                o: ["13", "17", "21", "9"] 
             },
-            {
-                id: 2,
-                category: "Pictórica/Concreta",
-                text: "Basado en el estuche anterior (3 azules, 5 rojos), ¿cuál es la razón de lápices rojos respecto al TOTAL?",
-                visualization: "🔵🔵🔵 🔴🔴🔴🔴🔴",
-                options: ["5 : 8", "3 : 8", "5 : 3", "8 : 5"],
-                answer: "5 : 8",
-                feedback: "¡Exacto! El total es 3 + 5 = 8. Comparamos parte (rojos) con el total."
+            { 
+                n: "Rayo Veloz detecta un código encriptado del Dr. Des-Patrón.", 
+                q: "<b>Pregunta 2:</b> ¿Qué expresión algebraica representa 'el triple de un número aumentado en 8'?", 
+                a: "3x + 8", 
+                o: ["3(x + 8)", "3x + 8", "x + 3 * 8", "3(8x)"] 
             },
-            {
-                id: 3,
-                category: "Pictórica",
-                text: "Observa estas banderas: 2 rojas, 1 azul y 1 blanca. ¿Cuál es la razón entre banderas rojas y banderas azules?",
-                visualization: "🚩🚩 🏴 🏳️",
-                options: ["2 : 1", "1 : 2", "2 : 4", "1 : 1"],
-                answer: "2 : 1",
-                feedback: "¡Bien! Hay 2 rojas por cada 1 azul."
+            { 
+                n: "Fuerza Pluma sostiene un cristal de energía inestable con valor desconocido.", 
+                q: "<b>Pregunta 3:</b> Si x = 5, ¿cuál es el valor de la expresión 2x + 7?", 
+                a: "17", 
+                o: ["12", "14", "17", "24"] 
             },
-            {
-                id: 4,
-                category: "Representación",
-                text: "En un kiosco, la razón entre manzanas y peras vendidas es 7:4. Si dibujamos este modelo, ¿cuántos elementos dibujamos en total para representar una unidad de la razón?",
-                visualization: "🍎x7 🍐x4",
-                options: ["11", "7", "4", "3"],
-                answer: "11",
-                feedback: "¡Así es! Sumamos 7 + 4 para ver el total del grupo base."
+            { 
+                n: "Mente Brillante está balanceando un contenedor de agua pura.", 
+                q: "<b>Pregunta 4:</b> ¿Cuál es el valor de x en la ecuación: <b>x + 15 = 40</b>?", 
+                a: "25", 
+                o: ["55", "35", "25", "20"] 
             },
-            {
-                id: 5,
-                category: "Simbólica",
-                text: "Un curso tiene 12 mujeres y 8 hombres. ¿Cuál es la razón de mujeres respecto al TOTAL en forma de fracción?",
-                visualization: "👩x12 👨x8",
-                options: ["12/20", "12/8", "8/12", "8/20"],
-                answer: "12/20",
-                feedback: "¡Correcto! 12 mujeres de un total de 20 (12+8)."
+            { 
+                n: "Gatito Chill analiza el flujo de la marea de la bahía.", 
+                q: "<b>Pregunta 5:</b> Observa la tabla:<br><span class='font-mono bg-gray-100 px-2 py-1 rounded border border-gray-300 inline-block my-2'>Entrada (n): 1, 2, 3<br>Salida: 3, 6, 9</span><br>¿Cuál es la regla de transformación de la máquina?", 
+                a: "3n", 
+                o: ["n + 2", "2n", "3n", "n + 3"] 
             },
-            {
-                id: 6,
-                category: "Resolución de Problemas",
-                text: "Una receta de pan pide harina y agua en razón 5:2. Si uso 10 tazas de harina, ¿cuántas de agua necesito?",
-                visualization: "🍞 Harina: 5 -> 10 | Agua: 2 -> ?",
-                options: ["4 tazas", "5 tazas", "2 tazas", "10 tazas"],
-                answer: "4 tazas",
-                feedback: "¡Excelente! La harina se duplicó (5x2=10), así que el agua también (2x2=4)."
+            { 
+                n: "Rayo Veloz ve cuatro engranajes bloqueados por un código multiplicativo.", 
+                q: "<b>Pregunta 6:</b> ¿Qué número debe ir en el cuadro para que se cumpla la igualdad: <b>4 • □ = 36</b>?", 
+                a: "9", 
+                o: ["8", "9", "10", "32"] 
             },
-            {
-                id: 7,
-                category: "Simbólica",
-                text: "Simplifica la razón 15:25 a su mínima expresión.",
-                visualization: "15 / 25 = ?",
-                options: ["3 : 5", "5 : 3", "1 : 2", "3 : 10"],
-                answer: "3 : 5",
-                feedback: "¡Bien! Dividimos ambos términos por 5."
+            { 
+                n: "Mente Brillante introduce un número en una procesadora cuántica.", 
+                q: "<b>Pregunta 7:</b> Si una máquina transforma 'n' en 'n - 5', ¿qué resultado da si entra el número 12?", 
+                a: "7", 
+                o: ["17", "60", "7", "2"] 
             },
-            {
-                id: 8,
-                category: "Simbólica",
-                text: "Simplifica la razón 42/14 a su mínima expresión.",
-                visualization: "42 : 14 = ?",
-                options: ["3 : 1", "2 : 1", "6 : 2", "1 : 3"],
-                answer: "3 : 1",
-                feedback: "¡Correcto! 42 dividido por 14 es exactamente 3."
+            { 
+                n: "Fuerza Pluma intenta duplicar la resistencia del campo de fuerza.", 
+                q: "<b>Pregunta 8:</b> ¿Cuál es la ecuación que representa exactamente la frase: 'El doble de un número es 24'?", 
+                a: "2x = 24", 
+                o: ["x + 2 = 24", "2x = 24", "x / 2 = 24", "2 + x = 24"] 
             },
-            {
-                id: 9,
-                category: "Argumentación",
-                text: "En una prueba, la razón entre preguntas A (alternativa) y C (completación) es 27:1. Un informe dice: 'Por cada 27 de alternativa, hay 28 en total'. ¿Es esto correcto?",
-                visualization: "📝 A:27 | C:1",
-                options: ["Sí, es correcto", "No, el total es 27", "No, el total es 26", "No, la razón es 27:28"],
-                answer: "Sí, es correcto",
-                feedback: "¡Exacto! El total es la suma de las partes: 27 + 1 = 28."
+            { 
+                n: "Gatito Chill sigue el patrón de las huellas en la arena con calma.", 
+                q: "<b>Pregunta 9:</b> En la secuencia: <b>2, 4, 6, 8...</b> ¿qué término sigue si la regla es 2n?", 
+                a: "10", 
+                o: ["9", "10", "12", "14"] 
             },
-            {
-                id: 10,
-                category: "Resolución de Problemas",
-                text: "La razón de perros (Josefa) a gatos (Ricardo) es 4:3. Si Ricardo tiene 9 gatos, ¿cuántos perros tiene Josefa?",
-                visualization: "🐕:4 | 🐈:3 (9 total)",
-                options: ["12 perros", "10 perros", "16 perros", "7 perros"],
-                answer: "12 perros",
-                feedback: "¡Muy bien! Como 3 x 3 = 9 gatos, entonces 4 x 3 = 12 perros."
+            { 
+                n: "Mente Brillante calcula las dimensiones de un refugio solar.", 
+                q: "<b>Pregunta 10:</b> Si el área de un rectángulo es 24 y su ancho es 4, ¿cuál es su largo?<br><span class='italic bg-gray-50 px-2 py-1 border rounded inline-block text-sm my-1'>(Área = largo • ancho)</span>", 
+                a: "6", 
+                o: ["6", "4", "20", "96"] 
             },
-            {
-                id: 11,
-                category: "Modelado",
-                text: "En un mapa escala 1:50.000, 1 cm representa 50.000 cm reales. Si hay 8 cm en el mapa, ¿cuántos metros reales son?",
-                visualization: "🗺️ 1cm = 500m",
-                options: ["4.000 metros", "400.000 metros", "400 metros", "50.000 metros"],
-                answer: "4.000 metros",
-                feedback: "¡Correcto! 8 x 50.000 = 400.000 cm. Al pasar a metros (dividir por 100) da 4.000."
+            { 
+                n: "Fuerza Pluma ejerce tensión para despejar una polea atascada.", 
+                q: "<b>Pregunta 11:</b> ¿Qué valor de 'n' hace verdadera la ecuación: <b>3n - 5 = 10</b>?", 
+                a: "5", 
+                o: ["3", "4", "5", "15"] 
             },
-            {
-                id: 12,
-                category: "Resolución de Problemas",
-                text: "Por cada 5 cuecas hay 7 canciones de folclore (5:7). Si hay 48 canciones en total, ¿cuántas son de folclore?",
-                visualization: "🎶 Total: 48 | Partes: 5+7=12",
-                options: ["28 canciones", "20 canciones", "25 canciones", "35 canciones"],
-                answer: "28 canciones",
-                feedback: "¡Bien! Cada parte vale 4 (48/12). 7 partes de folclore x 4 = 28."
+            { 
+                n: "Rayo Veloz calcula la cantidad de combustible recuperado.", 
+                q: "<b>Pregunta 12:</b> Si a un número se le suma 10 y el resultado es 35, ¿cuál es el número original?", 
+                a: "25", 
+                o: ["45", "25", "3,5", "350"] 
             },
-            {
-                id: 13,
-                category: "Resolución de Problemas",
-                text: "Razón entre sillas desocupadas y ocupadas es 1:5. Si hay 36 sillas en total, ¿cuántas están ocupadas?",
-                visualization: "🪑 Total: 36 | Razón: 1:5",
-                options: ["30 ocupadas", "6 ocupadas", "25 ocupadas", "31 ocupadas"],
-                answer: "30 ocupadas",
-                feedback: "¡Correcto! Total partes = 6. 36/6 = 6. Sillas ocupadas = 5 partes x 6 = 30."
+            { 
+                n: "Gatito Chill dibuja una valla de seguridad alrededor de la base.", 
+                q: "<b>Pregunta 13:</b> ¿Cuál es la expresión que generaliza el perímetro de un cuadrado de lado 'a'?", 
+                a: "4a", 
+                o: ["a + a", "4a", "a • a", "a / 4"] 
             },
-            {
-                id: 14,
-                category: "Modelado",
-                text: "Una caja tiene 10 bolitas negras y 14 blancas. Si queremos una situación equivalente con 15 bolitas negras, ¿cuántas blancas debería haber?",
-                visualization: "⚫:10 ⚪:14 | Nueva ⚫:15",
-                options: ["21 blancas", "20 blancas", "19 blancas", "24 blancas"],
-                answer: "21 blancas",
-                feedback: "¡Excelente! La razón 10:14 simplificada es 5:7. Si 5 x 3 = 15, entonces 7 x 3 = 21."
+            { 
+                n: "Mente Brillante analiza el valor de una variable incrementada.", 
+                q: "<b>Pregunta 14:</b> Si sabemos que 5x = 45, ¿cuánto vale la expresión <b>x + 2</b>?", 
+                a: "11", 
+                o: ["7", "9", "11", "47"] 
             },
-            {
-                id: 15,
-                category: "Argumentación",
-                text: "Razón días soleados a nublados es 3:7. Si mayo tiene 31 días, ¿podemos aplicar esta razón exactamente con números enteros?",
-                visualization: "☀️:3 ☁️:7 | Total: 31",
-                options: ["No, porque 31 no es múltiplo de 10", "Sí, siempre se puede", "No, porque mayo tiene 30 días", "Sí, daría 10 días soleados"],
-                answer: "No, porque 31 no es múltiplo de 10",
-                feedback: "¡Exacto! La suma de las partes (10) debe dividir exactamente al total para tener cantidades enteras."
+            { 
+                n: "Fuerza Pluma equilibra una balanza colocando pesas simétricas.", 
+                q: "<b>Pregunta 15:</b> ¿Qué número multiplicado por 6 da como resultado exacto 42?", 
+                a: "7", 
+                o: ["6", "7", "8", "36"] 
             },
-            {
-                id: 16,
-                category: "Resolución de Problemas",
-                text: "Zapatillas rojas a azules en razón 4:5. Si hay 20 estudiantes con zapatillas rojas, ¿cuántos hay con azules?",
-                visualization: "👟 Roja:4 (20) | Azul:5 (?)",
-                options: ["25 estudiantes", "24 estudiantes", "16 estudiantes", "30 estudiantes"],
-                answer: "25 estudiantes",
-                feedback: "¡Bien! 4 x 5 = 20 rojas, entonces 5 x 5 = 25 azules."
+            { 
+                n: "Gatito Chill cuenta las raciones de manzana antes del picnic.", 
+                q: "<b>Pregunta 16:</b> Si tengo 'y' manzanas y me como 3, me quedan 7. ¿Cuántas manzanas tenía originalmente?", 
+                a: "10", 
+                o: ["4", "10", "21", "7/3"] 
             },
-            {
-                id: 17,
-                category: "Análisis/Porcentaje",
-                text: "En una caja de 50 alfajores, la razón chocolate a manjar es 3:2. ¿Qué porcentaje del total representan los de manjar?",
-                visualization: "🍫:3 🍯:2 | Total: 50",
-                options: ["40%", "20%", "60%", "50%"],
-                answer: "40%",
-                feedback: "¡Correcto! Manjar es 2 partes de 5 (2/5). Eso equivale al 40%."
+            { 
+                n: "Mente Brillante busca un patrón de crecimiento en el reactor.", 
+                q: "<b>Pregunta 17:</b> ¿Qué regla describe la progresión matemática de los números: <b>1, 4, 7, 10...</b>?", 
+                a: "3n - 2", 
+                o: ["n + 1", "n + 3", "3n - 2", "3n + 1"] 
             },
-            {
-                id: 18,
-                category: "Razón Compuesta",
-                text: "Bicicletas(B) a Skates(S) es 2:1. Skates(S) a Scooters(C) es 3:4. ¿Cuál es la razón compuesta B:S:C?",
-                visualization: "🚲:🛹 = 2:1 | 🛹:🛴 = 3:4",
-                options: ["6 : 3 : 4", "2 : 3 : 4", "6 : 1 : 4", "5 : 3 : 4"],
-                answer: "6 : 3 : 4",
-                feedback: "¡Maestro! Igualamos los Skates multiplicando la primera razón por 3: (2:1) x 3 = 6:3. Así B:S:C = 6:3:4."
+            { 
+                n: "Rayo Veloz divide los paquetes de batería de reserva.", 
+                q: "<b>Pregunta 18:</b> Si un número 'n' se divide por 2 y resulta 12, ¿cuál es el valor de ese número?", 
+                a: "24", 
+                o: ["6", "14", "24", "10"] 
             },
-            {
-                id: 19,
-                category: "Aplicación",
-                text: "En una mezcla de jugo, la razón concentrado a agua es 1:4. Si tengo 2 litros de concentrado, ¿cuánto jugo TOTAL obtendré?",
-                visualization: "🍹 C:1 (2L) | A:4 | Total: ?",
-                options: ["10 litros", "8 litros", "6 litros", "5 litros"],
-                answer: "10 litros",
-                feedback: "¡Bien! 2L concentrado + 8L agua (4x2) = 10L total."
+            { 
+                n: "Gatito Chill nos regala calma para resolver el penúltimo cerrojo.", 
+                q: "<b>Pregunta 19:</b> ¿Cuál es la solución de la ecuación de un paso: <b>2x + 10 = 20</b>?", 
+                a: "5", 
+                o: ["5", "10", "2", "15"] 
             },
-            {
-                id: 20,
-                category: "Consolidación",
-                text: "Si la razón A:B es 2:3 y el valor de la razón es A dividido por B, ¿cuál es el valor decimal de esta razón?",
-                visualization: "2 : 3 = ?",
-                options: ["0,66...", "1,5", "0,6", "0,5"],
-                answer: "0,66...",
-                feedback: "¡Misión Cumplida! 2 dividido en 3 es aproximadamente 0,66. ¡Has restaurado el equilibrio!"
+            { 
+                n: "¡ÚLTIMA CONEXIÓN! El Dr. Des-Patrón intenta sobrecargar la máquina.", 
+                q: "<b>Pregunta 20:</b> Si la regla del sistema de energía es <b>5n - 1</b>, ¿cuál es el tercer término (cuando n=3)?", 
+                a: "14", 
+                o: ["4", "9", "14", "15"] 
             }
         ];
 
-        const gameState = {
-            currentIndex: 0,
-            lives: 3,
-            
-            start() {
-                document.getElementById('screen-intro').classList.add('hidden');
-                document.getElementById('screen-game').classList.remove('hidden');
-                this.renderQuestion();
-            },
+        let currentLevel = 0;
+        let isProcessing = false;
 
-            renderQuestion() {
-                const q = questions[this.currentIndex];
-                document.getElementById('current-task').innerText = this.currentIndex + 1;
-                document.getElementById('category-tag').innerText = q.category;
-                document.getElementById('question-text').innerText = q.text;
-                document.getElementById('visualization').innerHTML = `<div class="marker-font text-3xl bg-yellow-200 p-3 border-2 border-black rotate-1">${q.visualization}</div>`;
-                
-                const optionsGrid = document.getElementById('options-grid');
-                optionsGrid.innerHTML = '';
-                
-                // Shuffle options
-                const shuffled = [...q.options].sort(() => Math.random() - 0.5);
-                
-                shuffled.forEach(opt => {
-                    const btn = document.createElement('button');
-                    btn.className = "btn-comic text-lg py-3 bg-white text-black hover:bg-blue-100";
-                    btn.innerText = opt;
-                    btn.onclick = () => this.check(opt, btn);
-                    optionsGrid.appendChild(btn);
-                });
+        function playSound(type) {
+            const toggle = document.getElementById('sound-toggle');
+            if (!toggle || !toggle.checked) return;
 
-                document.getElementById('feedback-area').classList.add('hidden');
-                document.getElementById('progress-fill').style.width = `${(this.currentIndex / questions.length) * 100}%`;
-            },
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
 
-            check(selected, btn) {
-                const q = questions[this.currentIndex];
-                const feedbackArea = document.getElementById('feedback-area');
-                const feedbackText = document.getElementById('feedback-text');
-                
-                if (selected === q.answer) {
-                    btn.style.background = "#4ade80";
-                    feedbackText.innerText = "💥 " + q.feedback;
-                    feedbackArea.classList.remove('hidden');
-                    document.querySelectorAll('#options-grid button').forEach(b => b.disabled = true);
+                if (type === 'correct') {
+                    // Arpegio ascendente triunfal y alegre
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(300, ctx.currentTime);
+                    osc.frequency.setValueAtTime(450, ctx.currentTime + 0.08);
+                    osc.frequency.setValueAtTime(600, ctx.currentTime + 0.16);
+                    osc.frequency.setValueAtTime(900, ctx.currentTime + 0.24);
+                    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.4);
                 } else {
-                    btn.style.background = "#f87171";
-                    btn.classList.add('shake');
-                    this.lives--;
-                    this.updateLives();
-                    if (this.lives <= 0) {
-                        alert("⚠️ ¡ENERGÍA AGOTADA! El Capitán Comparación necesita descansar. Reiniciando misión...");
-                        location.reload();
-                    }
+                    // Caída de tono retro para error o falla de cálculo
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(180, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(60, ctx.currentTime + 0.3);
+                    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.35);
                 }
-            },
-
-            updateLives() {
-                const display = document.getElementById('lives');
-                display.innerText = "❤️".repeat(this.lives) + "🖤".repeat(3 - this.lives);
-            },
-
-            next() {
-                this.currentIndex++;
-                if (this.currentIndex < questions.length) {
-                    this.renderQuestion();
-                } else {
-                    this.victory();
-                }
-            },
-
-            victory() {
-                document.getElementById('screen-game').classList.add('hidden');
-                document.getElementById('screen-victory').classList.remove('hidden');
+            } catch (error) {
+                console.log("Audio contextual inactivo o bloqueado por el navegador.");
             }
-        };
+        }
 
-        // Initialize HUD
-        gameState.updateLives();
+        function startGame() {
+            document.getElementById('screen-start').classList.add('hidden');
+            document.getElementById('screen-game').classList.remove('hidden');
+            currentLevel = 0;
+            loadLevel();
+        }
+
+        // Algoritmo Fisher-Yates para barajar las alternativas dinámicamente
+        function shuffle(array) {
+            let shuffled = array.slice();
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function loadLevel() {
+            const level = questions[currentLevel];
+            document.getElementById('level-label').innerText = `MISIÓN: ${currentLevel + 1} / ${questions.length}`;
+            document.getElementById('progress-fill').style.width = `${((currentLevel) / questions.length) * 100}%`;
+            document.getElementById('narrative-text').innerText = `"${level.n}"`;
+            document.getElementById('question-text').innerHTML = level.q;
+
+            const select = document.getElementById('answer-select');
+            select.innerHTML = '<option value="" disabled selected>-- Selecciona con calma --</option>';
+            
+            // Barajando las opciones reales para que no tengan un orden fijo
+            const shuffledOptions = shuffle([...level.o]);
+            shuffledOptions.forEach(opt => {
+                const el = document.createElement('option');
+                el.value = opt;
+                el.innerText = opt;
+                select.appendChild(el);
+            });
+
+            // Rotación secuencial de personajes de la Legión para mayor dinamismo
+            const avatars = ["🐱", "🐢", "🐶", "🦅", "⚖️"];
+            const names = ["Gatito Chill", "Mente Brillante", "Rayo Veloz", "Fuerza Pluma", "Robot de Secuencia"];
+            const selectedAvatar = avatars[currentLevel % avatars.length];
+            const selectedName = names[currentLevel % names.length];
+
+            document.getElementById('hero-avatar').innerText = selectedAvatar;
+            document.getElementById('hero-title').innerText = `Legión Titán: ${selectedName}`;
+            
+            isProcessing = false;
+        }
+
+        function checkAnswer() {
+            if (isProcessing) return;
+
+            const select = document.getElementById('answer-select');
+            const userAns = select.value;
+            const fx = document.getElementById('visual-fx');
+
+            if (!userAns) return;
+
+            isProcessing = true;
+
+            if (userAns === questions[currentLevel].a) {
+                // Correcto: lanza sonido triunfal y onomatopeya de victoria cómic
+                playSound('correct');
+                const correctSounds = ["¡CHILL!", "¡SÚPER!", "¡BAM!", "¡POW!", "¡SENSACIONAL!", "¡EQUILIBRADO!"];
+                fx.innerText = correctSounds[Math.floor(Math.random() * correctSounds.length)];
+                fx.className = "pow-text comic-title text-8xl text-yellow-400 active";
+                
+                setTimeout(() => {
+                    fx.classList.remove('active');
+                    currentLevel++;
+                    if (currentLevel < questions.length) {
+                        loadLevel();
+                    } else {
+                        showEnd();
+                    }
+                }, 900);
+            } else {
+                // Incorrecto: golpe dramático y onomatopeya de error
+                playSound('wrong');
+                fx.innerText = "¡OOF!";
+                fx.className = "pow-text comic-title text-8xl text-red-500 active";
+                
+                setTimeout(() => {
+                    fx.classList.remove('active');
+                    select.value = ""; // Limpiar menú para el siguiente intento
+                    isProcessing = false;
+                }, 900);
+            }
+        }
+
+        function showEnd() {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-end').classList.remove('hidden');
+            document.getElementById('progress-fill').style.width = "100%";
+        }
     </script>
 </body>
 </html>
