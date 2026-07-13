@@ -2,281 +2,423 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>💥 ESCAPE ROOM: ENTEROS AL PODER · 8° BÁSICO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Room: El Gatito Chill vs El Dr. Mono-Mio</title>
+    <!-- Cargando Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Cargando fuentes de estilo comic y amigables -->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --color-light-pink: #F29191;
-            --color-bright-red: #D93D3D;
-            --color-dark-red: #BA2028;
-            --color-purple: #7A378C;
-            --color-deep-blue: #20308C;
-            --color-white: #ffffff;
-            --color-bg-soft: #fff5f5;
-            --color-success: #2d7a2d;
-            --color-error: #b91c1c;
+            --comic-red: #ef4444;
+            --comic-blue: #3b82f6;
+            --comic-purple: #8b5cf6;
+            --comic-yellow: #facc15;
+            --comic-dark: #0f172a;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: linear-gradient(135deg, var(--color-deep-blue) 0%, var(--color-purple) 100%);
+            font-family: 'Comic Neue', cursive;
+            background-color: #1e1b4b; /* Azul noche oscuro */
+            /* Efecto retro de puntos Ben-Day de fondo usando gradiente radial */
+            background-image: radial-gradient(rgba(139, 92, 246, 0.28) 15%, transparent 16%), 
+                              radial-gradient(rgba(139, 92, 246, 0.28) 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
             min-height: 100vh;
-            padding: 2rem 1rem;
-            font-family: 'Comic Neue', sans-serif;
-            color: #333;
+            color: #1f2937;
         }
 
-        .escape-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 3rem;
-            border: 6px solid var(--color-dark-red);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 8px 8px 0px var(--color-light-pink);
-            padding: 2rem;
-        }
-
-        .header { text-align: center; margin-bottom: 2rem; }
-        h1 {
+        .comic-title {
             font-family: 'Bangers', cursive;
-            font-size: 3.5rem;
-            color: var(--color-bright-red);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 3px 3px 0px var(--color-deep-blue);
-            transform: skew(-2deg);
+            letter-spacing: 2px;
         }
 
-        .sub {
-            font-family: 'Bangers', cursive;
-            font-size: 1.2rem;
-            background: var(--color-deep-blue);
-            color: white;
-            display: inline-block;
-            padding: 0.5rem 2rem;
-            border-radius: 50px;
-            margin-top: 10px;
+        .chill-font {
+            font-family: 'Chewy', cursive;
         }
 
-        .status-panel {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f0f0f0;
-            padding: 1rem 2rem;
-            border-radius: 100px;
-            border: 4px solid var(--color-deep-blue);
-            margin-bottom: 2rem;
-            gap: 1rem;
-            position: sticky;
-            top: 10px;
-            z-index: 100;
-        }
-
-        .sellos-label { font-family: 'Bangers', cursive; font-size: 1.4rem; color: var(--color-deep-blue); }
-        .energy-bar { flex: 1; height: 24px; background: #ddd; border-radius: 12px; overflow: hidden; border: 2px solid var(--color-deep-blue); }
-        .energy-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #ff9a9a, var(--color-bright-red)); transition: width 0.5s ease; }
-
-        .exercise-card {
+        .comic-panel {
             background: white;
-            border: 3px solid var(--color-deep-blue);
-            border-radius: 1.5rem;
-            margin-bottom: 1.5rem;
-            padding: 1.5rem;
-            box-shadow: 6px 6px 0px var(--color-light-pink);
+            border: 5px solid black;
+            box-shadow: 10px 10px 0px black;
+            position: relative;
         }
 
-        .exercise-card.correct { border-color: var(--color-success); background-color: #f0fff4; }
-
-        .problem-header { font-family: 'Bangers', cursive; font-size: 1.5rem; color: var(--color-dark-red); margin-bottom: 1rem; }
-        .question-text { font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; }
-
-        .interaction-row { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
-        select {
-            font-family: 'Comic Neue', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            padding: 0.7rem;
-            border: 3px solid var(--color-deep-blue);
-            border-radius: 12px;
-            flex: 1;
+        /* Puntos Ben-Day sutiles dentro de los paneles de contenido */
+        .comic-panel::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(0,0,0,0.03) 1.2px, transparent 1.2px);
+            background-size: 8px 8px;
+            pointer-events: none;
         }
 
-        .btn-check {
+        .btn-comic {
             font-family: 'Bangers', cursive;
-            background: var(--color-deep-blue);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 12px;
-            font-size: 1.3rem;
-            cursor: pointer;
-            box-shadow: 3px 3px 0px #000;
+            letter-spacing: 1px;
+            border: 3px solid black;
+            box-shadow: 4px 4px 0px black;
+            transition: all 0.1s ease;
+            text-transform: uppercase;
         }
 
-        .btn-check:disabled { background: #ccc; box-shadow: none; }
-
-        .feedback-box {
-            margin-top: 1rem;
-            padding: 1rem;
-            border-radius: 12px;
-            display: none;
-            border-left: 6px solid transparent;
+        .btn-comic:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px black;
         }
-        .feedback-box.show { display: block; }
-        .feedback-correct { background-color: #e6fffa; color: #234e52; border-left-color: var(--color-success); }
-        .feedback-incorrect { background-color: #fff5f5; color: #742a2a; border-left-color: var(--color-error); }
-        .feedback-title { font-weight: 700; text-transform: uppercase; margin-bottom: 4px; display: block; }
 
-        #victory-screen {
-            display: none;
-            text-align: center;
-            padding: 3rem;
-            background: var(--color-bg-soft);
-            border: 8px dashed var(--color-bright-red);
-            border-radius: 2rem;
+        .btn-comic:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px black;
         }
-        #victory-screen h2 { font-family: 'Bangers', cursive; font-size: 4rem; color: var(--color-bright-red); }
+
+        /* Animación para los impactos visuales (POW, ZAP) */
+        .pow-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 100;
+            pointer-events: none;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-shadow: 4px 4px 0px black;
+        }
+
+        .pow-text.active {
+            transform: translate(-50%, -50%) scale(1.6);
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.5em;
+        }
+
+        .progress-bar-container {
+            background: #e2e8f0;
+            border: 3px solid black;
+            border-radius: 9999px;
+            overflow: hidden;
+            height: 28px;
+        }
+
+        .progress-bar-fill {
+            background: var(--comic-purple);
+            height: 100%;
+            transition: width 0.4s ease;
+        }
     </style>
 </head>
-<body>
+<body class="flex items-center justify-center p-4">
 
-<div class="escape-container">
-    <div class="header">
-        <h1>💥 ENTEROS AL PODER 💥</h1>
-        <div class="sub">✦ MISIÓN COMPLETA: 20 DESAFÍOS ✦</div>
-    </div>
+    <!-- Capa para onomatopeyas e impactos visuales -->
+    <div id="visual-fx" class="pow-text comic-title text-8xl text-yellow-400">¡ZAS!</div>
 
-    <div class="status-panel">
-        <div class="sellos-label">PODER: <span id="correct-count">0</span> / 20</div>
-        <div class="energy-bar"><div class="energy-fill" id="progress-bar"></div></div>
-    </div>
+    <div class="max-w-4xl w-full">
+        <header class="text-center mb-8">
+            <div class="inline-block bg-white border-4 border-black p-4 transform -rotate-1 shadow-[8px_8px_0px_#ef4444]">
+                <h1 class="text-4xl md:text-6xl comic-title text-red-600">GATITO CHILL VS DR. MONO-MIO</h1>
+                <p class="text-xl font-bold mt-2">Misión: El Rescate del Lenguaje Algebraico</p>
+            </div>
+            
+            <div class="mt-6 bg-white border-2 border-black p-3 rounded-lg max-w-2xl mx-auto shadow-md">
+                <p class="font-bold text-sm text-indigo-900 italic text-center">
+                    🎯 OBJETIVO: Utilizar el lenguaje algebraico para generalizar relaciones entre números, establecer reglas y reducir expresiones algebraicas reuniendo términos semejantes para equilibrar la ciudad.
+                </p>
+            </div>
+        </header>
 
-    <div id="quiz-container"></div>
+        <main>
+            <div id="screen-start" class="comic-panel p-8 space-y-6">
+                <div class="flex justify-center gap-4 text-7xl animate-bounce">
+                    <span>🐱</span><span>🛡️</span><span>🤖</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl comic-title text-center text-purple-700">¡CIUDAD MATEMÁTICAS EN APRIETOS!</h2>
+                <div class="text-lg leading-relaxed space-y-4 font-medium text-left border-l-4 border-blue-500 pl-4">
+                    <p>El temible <b>Dr. Mono-Mio</b>, un científico obsesionado con simplificar todo a la fuerza, ha disparado su "Rayo Reductor de Expresiones" en Ciudad Matemáticas.</p>
+                    <p>Ha mezclado los términos semejantes, bloqueado las variables en las alcancías de los ciudadanos y desequilibrado el perímetro de los edificios de la zona.</p>
+                    <p>El <b>Gatito Chill</b>, rascándose la oreja con total tranquilidad, se pone su hojita de otoño en la cabeza y dice: <span class="text-blue-600 font-bold">"Todo está chill, amigos. El lenguaje algebraico solo es otra forma de contar historias. Agrupemos las manzanas con manzanas, las peras con peras, ¡y venzamos al villano con pura calma!"</span></p>
+                </div>
+                <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-3xl py-4 w-full rounded-xl">
+                    ¡ACTIVAR CÓDIGO TITÁN! ⚡
+                </button>
+            </div>
 
-    <div id="victory-screen">
-        <h2>¡LEYENDA MATEMÁTICA!</h2>
-        <p>🏆 Has completado los 20 desafíos. ¡Tu dominio de los enteros es absoluto! 🏆</p>
-        <button class="btn-check" style="margin-top:20px" onclick="location.reload()">REINICIAR AVENTURA</button>
-    </div>
-</div>
-
-<script>
-    const questions = [
-        // MULTIPLICACIÓN (1-5)
-        { id: 1, text: "(−7) × 8", options: ["56", "-56", "1", "-1"], answer: "-56", 
-          fbC: "¡Bien! (−) × (+) = (−).", fbI: "Recuerda: signos distintos dan negativo." },
-        { id: 2, text: "(−4) × (−9)", options: ["36", "-36", "13", "-13"], answer: "36", 
-          fbC: "¡Exacto! (−) × (−) = (+).", fbI: "Signos iguales dan positivo." },
-        { id: 3, text: "12 × (−3)", options: ["36", "-36", "9", "-9"], answer: "-36", 
-          fbC: "¡Correcto! (+) × (−) = (−).", fbI: "Positivo por negativo es negativo." },
-        { id: 4, text: "(−5) × (−5)", options: ["25", "-25", "0", "-10"], answer: "25", 
-          fbC: "¡Súper! El cuadrado de un negativo es positivo.", fbI: "Menos por menos es más." },
-        { id: 5, text: "0 × (−15)", options: ["-15", "15", "0", "No existe"], answer: "0", 
-          fbC: "¡Cierto! Todo número multiplicado por 0 es 0.", fbI: "El 0 es el elemento absorbente." },
-        
-        // DIVISIÓN (6-10)
-        { id: 6, text: "(−42) ÷ 6", options: ["7", "-7", "-8", "8"], answer: "-7", 
-          fbC: "¡Muy bien! (−) ÷ (+) = (−).", fbI: "La división sigue la misma ley de signos." },
-        { id: 7, text: "(−100) ÷ (−4)", options: ["25", "-25", "400", "-400"], answer: "25", 
-          fbC: "¡Excelente! Menos dividido por menos es más.", fbI: "Signos iguales = resultado positivo." },
-        { id: 8, text: "50 ÷ (−2)", options: ["25", "-25", "48", "-48"], answer: "-25", 
-          fbC: "¡Bien! (+) ÷ (−) = (−).", fbI: "Más entre menos es menos." },
-        { id: 9, text: "(−81) ÷ (−9)", options: ["9", "-9", "0", "81"], answer: "9", 
-          fbC: "¡Correcto! 9 positivo.", fbI: "9 por 9 es 81, y menos entre menos es más." },
-        { id: 10, text: "0 ÷ (−5)", options: ["0", "-5", "5", "Error"], answer: "0", 
-          fbC: "¡Exacto! 0 dividido por cualquier número es 0.", fbI: "El cero arriba siempre da cero." },
-
-        // MIXTOS Y LEYES (11-15)
-        { id: 11, text: "(−2) × (−3) × (−4)", options: ["24", "-24", "9", "-9"], answer: "-24", 
-          fbC: "¡Logrado! Tres negativos dan negativo.", fbI: "Cuenta los signos: (−)×(−)=(+) y (+)×(−)=(−)." },
-        { id: 12, text: "(−10) × 2 ÷ (−4)", options: ["5", "-5", "20", "-20"], answer: "5", 
-          fbC: "¡Bien! −20 ÷ −4 = 5.", fbI: "Hazlo paso a paso: primero multiplica, luego divide." },
-        { id: 13, text: "¿Qué signo tiene el resultado de 15 números negativos multiplicados?", options: ["Positivo", "Negativo"], answer: "Negativo", 
-          fbC: "¡Cierto! Cantidad impar de negativos = negativo.", fbI: "Si la cantidad de negativos es impar, el resultado es negativo." },
-        { id: 14, text: "(−1) × (−1) × (−1) × (−1)", options: ["1", "-1", "4", "-4"], answer: "1", 
-          fbC: "¡Correcto! Cantidad par de negativos = positivo.", fbI: "Son 4 signos menos, eso da positivo." },
-        { id: 15, text: "−12 ÷ (2 × 3)", options: ["2", "-2", "6", "-6"], answer: "-2", 
-          fbC: "¡Perfecto! Resolvemos el paréntesis primero.", fbI: "Paréntesis: 2×3=6. Luego −12÷6." },
-
-        // DESAFÍOS FINALES (16-20)
-        { id: 16, text: "¿Cuál es el valor de x en: x ÷ (−3) = 10?", options: ["30", "-30", "7", "-7"], answer: "-30", 
-          fbC: "¡Increíble! −30 ÷ −3 = 10.", fbI: "Piensa: ¿Qué número dividido por −3 da 10 positivo?" },
-        { id: 17, text: "(−5) × 4 ÷ (−2) × (−3)", options: ["30", "-30", "10", "-10"], answer: "-30", 
-          fbC: "¡Qué nivel! −20 ÷ −2 = 10, y 10 × −3 = −30.", fbI: "Operaciones de izquierda a derecha." },
-        { id: 18, text: "Si a = −2 y b = −3, calcula a × b × a", options: ["12", "-12", "6", "-6"], answer: "-12", 
-          fbC: "¡Súper! (−2) × (−3) × (−2) = −12.", fbI: "Sustituye: −2 por −3 es 6, luego 6 por −2." },
-        { id: 19, text: "El inverso aditivo de (−4 × 2) es:", options: ["8", "-8", "4", "-4"], answer: "8", 
-          fbC: "¡Bien! −8 tiene como inverso al 8.", fbI: "Primero calcula −4×2 = −8. Su opuesto es 8." },
-        { id: 20, text: "(−100 ÷ 10) × (−10 ÷ 1)", options: ["100", "-100", "1", "-1"], answer: "100", 
-          fbC: "¡MAESTRO! (−10) × (−10) = 100.", fbI: "Paréntesis 1: −10. Paréntesis 2: −10. Multiplicados dan 100." }
-    ];
-
-    let score = 0;
-
-    function renderQuiz() {
-        const container = document.getElementById('quiz-container');
-        container.innerHTML = questions.map((q, index) => `
-            <div class="exercise-card" id="card-${index}">
-                <div class="problem-header">DESAFÍO #${q.id}</div>
-                <div class="problem-body">
-                    <p class="question-text">${q.text}</p>
-                    <div class="interaction-row">
-                        <select id="select-${index}">
-                            <option value="" disabled selected>Respuesta...</option>
-                            ${q.options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
-                        </select>
-                        <button class="btn-check" id="btn-${index}" onclick="verifyAnswer(${index})">VALIDAR</button>
+            <div id="screen-game" class="hidden space-y-6">
+                <!-- Barra de Progreso -->
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white border-4 border-black p-4 shadow-[6px_6px_0px_black]">
+                    <div class="comic-title text-2xl text-red-600" id="level-label">MISIÓN: 1 / 20</div>
+                    <div class="w-full md:w-1/2 progress-bar-container">
+                        <div id="progress-fill" class="progress-bar-fill" style="width: 5%"></div>
                     </div>
-                    <div id="feedback-${index}" class="feedback-box"></div>
+                </div>
+
+                <!-- Contenedor del Desafío Activo -->
+                <div class="comic-panel p-6 md:p-10">
+                    <div class="flex items-start gap-4 mb-6 bg-blue-50 border-2 border-black p-4 rounded-lg">
+                        <div class="text-5xl" id="hero-avatar">🐱</div>
+                        <div class="w-full">
+                            <h4 class="font-bold text-red-600 uppercase tracking-wide text-xs">Mensaje de la Legión Titán</h4>
+                            <p class="font-bold text-indigo-900 italic text-lg" id="narrative-text">Cargando...</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div id="question-container">
+                            <h3 id="question-text" class="text-xl md:text-2xl font-bold text-gray-800 border-b-2 border-gray-100 pb-4"></h3>
+                        </div>
+
+                        <div class="space-y-3">
+                            <label class="block font-black text-purple-700 uppercase tracking-tighter text-sm">Selecciona tu cálculo de contraataque:</label>
+                            <select id="answer-select" class="w-full p-4 border-4 border-black text-lg md:text-xl font-bold bg-yellow-50 focus:ring-8 focus:ring-purple-200 outline-none cursor-pointer">
+                                <option value="" disabled selected>-- Selecciona con calma --</option>
+                            </select>
+                        </div>
+
+                        <button onclick="checkAnswer()" class="btn-comic bg-red-600 hover:bg-red-500 text-white text-3xl py-4 w-full">
+                            ¡ENVIAR RESPUESTA! 💥
+                        </button>
+                    </div>
                 </div>
             </div>
-        `).join('');
-    }
 
-    window.verifyAnswer = function(index) {
-        const select = document.getElementById(`select-${index}`);
-        const btn = document.getElementById(`btn-${index}`);
-        const fb = document.getElementById(`feedback-${index}`);
-        const card = document.getElementById(`card-${index}`);
-        const userAnswer = select.value;
-        const q = questions[index];
+            <div id="screen-end" class="hidden comic-panel p-10 text-center space-y-8">
+                <h2 class="text-6xl md:text-7xl comic-title text-purple-700">¡SISTEMA RESTAURADO!</h2>
+                <div class="text-9xl animate-bounce my-8">🐱🫧🛡️</div>
+                <p class="text-2xl font-bold text-indigo-950">¡El Dr. Mono-Mio ha sido atrapado en una burbuja algebraica perfectamente reducida!</p>
+                <div class="bg-yellow-100 border-4 border-dashed border-black p-6 rounded-2xl font-bold text-lg max-w-2xl mx-auto space-y-4 text-left">
+                    <p>"Reunir los términos semejantes y plantear variables es fácil si mantienes el orden y respiras hondo. ¡La calma siempre vence al caos!", sonríe el Gatito Chill mientras acomoda su tacita de café caliente.</p>
+                    <p class="text-blue-700 text-center font-black">¡Felicidades, has completado las 20 misiones algebraicas de la Legión Titán!</p>
+                </div>
+                <button onclick="location.reload()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-3xl py-4 px-12 rounded-full">
+                    REINICIAR ENTRENAMIENTO
+                </button>
+            </div>
+        </main>
+    </div>
 
-        if (!userAnswer) return;
+    <script>
+        // Base de datos de las 20 preguntas extraídas fielmente de la prueba
+        const questions = [
+            { 
+                n: "Mente Brillante está traduciendo las coordenadas de ataque del villano.", 
+                q: "<b>Pregunta 1:</b> ¿Cuál es la expresión algebraica que representa el enunciado: <i>'el triple de un número, aumentado en cinco'</i>?", 
+                a: "3x + 5", 
+                o: ["3x - 5", "3(x + 5)", "3x + 5", "x^3 + 5"] 
+            },
+            { 
+                n: "Rayo Veloz detecta varios términos idénticos en su radar de velocidad.", 
+                q: "<b>Pregunta 2:</b> Al reducir completamente la siguiente expresión algebraica: <span class='font-mono font-bold text-blue-600'>5x + 3y - 2x + 4y</span>, se obtiene:", 
+                a: "3x + 7y", 
+                o: ["3x + 7y", "7x + 7y", "3x - 1y", "7x - 1y"] 
+            },
+            { 
+                n: "Fuerza Pluma está rodeando un edificio bloqueado por el Dr. Mono-Mio.", 
+                q: "<b>Pregunta 3:</b> Si un rectángulo tiene un largo de <span class='font-mono font-bold text-red-600'>'2x'</span> y un ancho de <span class='font-mono font-bold text-red-600'>'x'</span>, ¿cuál expresión representa su perímetro?", 
+                a: "6x", 
+                o: ["3x", "2x^2", "6x", "4x"] 
+            },
+            { 
+                n: "Mente Brillante está aplicando ingeniería inversa a un escudo del oponente.", 
+                q: "<b>Pregunta 4:</b> Si el resultado final de reducir una expresión misteriosa es <span class='font-mono font-bold text-purple-600'>8a + 2b</span>, ¿cuál podría haber sido la expresión original antes de simplificar?", 
+                a: "Todas las anteriores.", 
+                o: ["4a + b + 4a + b", "10a - 2a + 3b - b", "5a + 3a + 5b - 3b", "Todas las anteriores."] 
+            },
+            { 
+                n: "Fuerza Pluma vuela alrededor de un estandarte triangular de la legión.", 
+                q: "<b>Pregunta 5:</b> ¿Cuál es el perímetro total de un triángulo equilátero cuyos tres lados miden <span class='font-mono font-bold text-green-600'>'a + 3'</span> cada uno?", 
+                a: "3a + 9", 
+                o: ["a + 9", "3a + 9", "3a + 3", "a + 3"] 
+            },
+            { 
+                n: "Rayo Veloz calcula la longitud del cable necesario para rodear un perímetro cuadrado.", 
+                q: "<b>Pregunta 6:</b> Si sabemos que el perímetro de una zona cuadrada es <span class='font-mono font-bold text-indigo-600'>16x - 8</span>, ¿cuánto mide la longitud de cada uno de sus lados?", 
+                a: "4x - 2", 
+                o: ["4x - 2", "16x - 2", "4x - 8", "8x - 4"] 
+            },
+            { 
+                n: "Gatito Chill observa perezosamente cómo se acumulan los globos de agua.", 
+                q: "<b>Pregunta 7:</b> ¿Cuál es el resultado de reducir la suma de agrupaciones repetidas: <span class='font-mono font-bold text-blue-600'>(x + y) + (x + y) + (x + y)</span>?", 
+                a: "3x + 3y", 
+                o: ["x + y^3", "3x + y", "x^3 + y^3", "3x + 3y"] 
+            },
+            { 
+                n: "Mente Brillante busca el valor de la incógnita en el procesador central.", 
+                q: "<b>Pregunta 8:</b> Si la ecuación de la celda de energía es <span class='font-mono font-bold text-red-600'>5x + ___ = 9x + 2</span>, ¿cuál es el término algebraico que falta en el espacio en blanco?", 
+                a: "4x + 2", 
+                o: ["4x + 2", "14x + 2", "4x - 2", "-4x + 2"] 
+            },
+            { 
+                n: "Rayo Veloz necesita evaluar la potencia de su escudo térmico.", 
+                q: "<b>Pregunta 9:</b> Evalúa numéricamente el valor de la expresión <span class='font-mono font-bold text-purple-600'>2x - 3y + 4z</span> si se sabe que las variables equivalen a: <span class='font-mono'>x = 2</span>, <span class='font-mono'>y = 1</span>, <span class='font-mono'>z = 3</span>.", 
+                a: "11", 
+                o: ["9", "11", "12", "13"] 
+            },
+            { 
+                n: "Fuerza Pluma empuja dos bloques con cargas positivas y negativas.", 
+                q: "<b>Pregunta 10:</b> Reduce al máximo los términos de la siguiente expresión con números enteros: <span class='font-mono font-bold text-green-600'>-4m - 2n + 5m - 3n</span>.", 
+                a: "m - 5n", 
+                o: ["m - 5n", "-m + 5n", "9m - 5n", "m - n"] 
+            },
+            { 
+                n: "Mente Brillante descifra la contraparte de una suma de vectores.", 
+                q: "<b>Pregunta 11:</b> ¿Qué expresión algebraica, al ser sumada con <span class='font-mono font-bold text-indigo-600'>3x - 2y</span>, da como resultado exacto <span class='font-mono font-bold text-indigo-600'>5x + 4y</span>?", 
+                a: "2x + 6y", 
+                o: ["2x + 6y", "8x + 2y", "2x - 6y", "-2x + 6y"] 
+            },
+            { 
+                n: "Gatito Chill analiza el ritmo de sus saltos sobre los nenúfares.", 
+                q: "<b>Pregunta 12:</b> El patrón de una secuencia es <i>'sumar 4'</i> en cada paso. Si el primer término de la secuencia se representa como <span class='font-mono font-bold text-pink-600'>'n'</span>, ¿cuál será la expresión para el tercer término?", 
+                a: "n + 8", 
+                o: ["n + 4", "n + 8", "n + 12", "4n"] 
+            },
+            { 
+                n: "Fuerza Pluma sostiene un contenedor cúbico de suministros.", 
+                q: "<b>Pregunta 13:</b> ¿Cuál es el volumen total de una caja de almacenamiento con forma de cubo si la medida de su arista es <span class='font-mono font-bold text-blue-600'>'2y'</span>?", 
+                a: "8y^3", 
+                o: ["2y^3", "6y", "8y^3", "4y^2"] 
+            },
+            { 
+                n: "Rayo Veloz calcula las proporciones de una rampa de aceleración rectangular.", 
+                q: "<b>Pregunta 14:</b> Si el área total de una superficie rectangular es <span class='font-mono font-bold text-red-600'>15xy</span> y se sabe que su largo mide <span class='font-mono font-bold text-red-600'>5x</span>, ¿cuál es la medida de su ancho?", 
+                a: "3y", 
+                o: ["10y", "3y", "3x", "20xy"] 
+            },
+            { 
+                n: "Gatito Chill compra suministros de oficina para la base secreta.", 
+                q: "<b>Pregunta 15:</b> Si compras 3 cuadernos a un valor de <span class='font-mono font-bold text-purple-600'>'$x'</span> cada uno y 2 lápices a un valor de <span class='font-mono font-bold text-purple-600'>'$y'</span> cada uno, ¿cuál es la expresión para el costo total de la compra?", 
+                a: "3x + 2y", 
+                o: ["3x + 2y", "5xy", "3x * 2y", "6xy"] 
+            },
+            { 
+                n: "Mente Brillante estudia la unión de varios módulos cuadrangulares.", 
+                q: "<b>Pregunta 16:</b> Dada una secuencia de figuras formadas por cuadrados unidos en fila: 1 cuadrado (4 lados), 2 cuadrados unidos (7 lados), 3 cuadrados unidos (10 lados)... ¿Cuál es la expresión algebraica para la cantidad de lados si hay <span class='font-mono font-bold'>'n'</span> cuadrados?", 
+                a: "3n + 1", 
+                o: ["4n", "3n + 1", "2n + 2", "6n"] 
+            },
+            { 
+                n: "Fuerza Pluma mide las dimensiones de un sector de la plaza restaurada.", 
+                q: "<b>Pregunta 17:</b> Un terreno rectangular tiene un área representada por <span class='font-mono font-bold text-green-600'>20a^2 + 10ab</span>. Si la medida del ancho es <span class='font-mono font-bold text-green-600'>5a</span>, ¿cuál es la expresión para el largo?", 
+                a: "4a + 2b", 
+                o: ["4a + 2b", "15a + 5b", "4a + 10ab", "5a^2 + 2ab"] 
+            },
+            { 
+                n: "Gatito Chill aclara un concepto básico de potencias a la legión.", 
+                q: "<b>Pregunta 18:</b> ¿Cuál de las siguientes igualdades describe correctamente la relación fundamental entre una potencia y la multiplicación iterada?", 
+                a: "a^3 = a * a * a", 
+                o: ["a^3 = a + a + a", "a^3 = a * a * a", "a^3 = 3 * a", "a^3 = a * 3"] 
+            },
+            { 
+                n: "Mente Brillante simplifica los comandos del control del dirigible del villano.", 
+                q: "<b>Pregunta 19:</b> Al aplicar la propiedad distributiva y reducir completamente la expresión <span class='font-mono font-bold text-indigo-600'>2(a + b) + 3(a - b)</span>, se obtiene:", 
+                a: "5a - b", 
+                o: ["5a - b", "5a + 5b", "5a + b", "2a + 3b"] 
+            },
+            { 
+                n: "¡RETATORIO FINAL! El Dr. Mono-Mio desafía el presupuesto de la reconstrucción.", 
+                q: "<b>Pregunta 20:</b> Si el costo total de comprar <span class='font-mono font-bold'>'x'</span> kilos de pan a un precio unitario de <span class='font-mono font-bold'>$800</span> y <span class='font-mono font-bold'>'y'</span> kilos de queso a <span class='font-mono font-bold'>$5000</span> equivale a un valor total de <span class='font-mono font-bold'>$c</span>, ¿cuál es la ecuación que modela este gasto?", 
+                a: "c = 800x + 5000y", 
+                o: ["c = 800x + 5000y", "c = 5800(x + y)", "c = 800x * 5000y", "c = 800 + 5000 + x + y"] 
+            }
+        ];
 
-        fb.classList.remove('feedback-correct', 'feedback-incorrect', 'show');
+        let currentLevel = 0;
+        let isProcessing = false;
 
-        if (userAnswer === q.answer) {
-            score++;
-            fb.innerHTML = `<span class="feedback-title">¡CORRECTO!</span>${q.fbC}`;
-            fb.classList.add('feedback-correct', 'show');
-            card.classList.add('correct');
-            select.disabled = true;
-            btn.disabled = true;
-            btn.innerText = "✓";
-            updateProgress();
-        } else {
-            fb.innerHTML = `<span class="feedback-title">INTENTA OTRA VEZ</span>${q.fbI}`;
-            fb.classList.add('feedback-incorrect', 'show');
+        function startGame() {
+            document.getElementById('screen-start').classList.add('hidden');
+            document.getElementById('screen-game').classList.remove('hidden');
+            currentLevel = 0;
+            loadLevel();
         }
-    }
 
-    function updateProgress() {
-        const total = questions.length;
-        const percent = (score / total) * 100;
-        document.getElementById('correct-count').innerText = score;
-        document.getElementById('progress-bar').style.width = percent + "%";
-
-        if (score === total) {
-            setTimeout(() => {
-                document.getElementById('quiz-container').style.display = 'none';
-                document.getElementById('victory-screen').style.display = 'block';
-                window.scrollTo(0,0);
-            }, 800);
+        // Algoritmo Fisher-Yates para barajar las opciones en cada nivel
+        function shuffle(array) {
+            let shuffled = array.slice();
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
         }
-    }
+
+        function loadLevel() {
+            const level = questions[currentLevel];
+            document.getElementById('level-label').innerText = `MISIÓN: ${currentLevel + 1} / ${questions.length}`;
+            document.getElementById('progress-fill').style.width = `${((currentLevel) / questions.length) * 100}%`;
+            document.getElementById('narrative-text').innerText = `"${level.n}"`;
+            document.getElementById('question-text').innerHTML = level.q;
+
+            const select = document.getElementById('answer-select');
+            select.innerHTML = '<option value="" disabled selected>-- Elige tu táctica de reducción --</option>';
+            
+            const shuffledOptions = shuffle([...level.o]);
+            shuffledOptions.forEach(opt => {
+                const el = document.createElement('option');
+                el.value = opt;
+                el.innerText = opt;
+                select.appendChild(el);
+            });
+
+            // Rotar avatares de la Legión para mayor inmersión
+            const avatars = ["🐱", "🐢", "🐶", "🦅", "🤖"];
+            document.getElementById('hero-avatar').innerText = avatars[currentLevel % avatars.length];
+            
+            isProcessing = false;
+        }
+
+        function checkAnswer() {
+            if (isProcessing) return;
+
+            const select = document.getElementById('answer-select');
+            const userAns = select.value;
+            const fx = document.getElementById('visual-fx');
+
+            if (!userAns) return;
+
+            isProcessing = true;
+
+            if (userAns === questions[currentLevel].a) {
+                // Correcto: Lanza onomatopeya alegre al estilo comic
+                const hits = ["¡CHILL!", "¡ZAS!", "¡POW!", "¡BOOM!", "¡REDUCIDO!", "¡EQUILIBRADO!"];
+                fx.innerText = hits[Math.floor(Math.random() * hits.length)];
+                fx.className = "pow-text comic-title text-8xl text-yellow-400 active";
+                
+                setTimeout(() => {
+                    fx.classList.remove('active');
+                    currentLevel++;
+                    if (currentLevel < questions.length) {
+                        loadLevel();
+                    } else {
+                        showEnd();
+                    }
+                }, 900);
+            } else {
+                // Incorrecto: lanza sonido de impacto de caída
+                fx.innerText = "¡OOF!";
+                fx.className = "pow-text comic-title text-8xl text-red-500 active";
+                
+                setTimeout(() => {
+                    fx.classList.remove('active');
+                    select.value = ""; // Limpiar dropdown para reintento
+                    isProcessing = false;
+                }, 900);
+            }
+        }
+
+        function showEnd() {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-end').classList.remove('hidden');
+            document.getElementById('progress-fill').style.width = "100%";
+        }
+    </script>
+</body>
+</html>
 
     renderQuiz();
 </script>
