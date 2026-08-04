@@ -1,81 +1,103 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escape Room: El Gatito Chill vs El Dr. Mono-Mio</title>
-    <!-- Cargando Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Cargando fuentes de estilo comic y amigables -->
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet">
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escape Room: Gatito Chill vs Patito Amarillito – Función Afín</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet" />
     <style>
-        :root {
-            --comic-red: #ef4444;
-            --comic-blue: #3b82f6;
-            --comic-purple: #8b5cf6;
-            --comic-yellow: #facc15;
-            --comic-dark: #0f172a;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-
         body {
             font-family: 'Comic Neue', cursive;
-            background-color: #1e1b4b; /* Azul noche oscuro */
-            /* Efecto retro de puntos Ben-Day de fondo usando gradiente radial */
-            background-image: radial-gradient(rgba(139, 92, 246, 0.28) 15%, transparent 16%), 
-                              radial-gradient(rgba(139, 92, 246, 0.28) 15%, transparent 16%);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
+            background-color: #0f172a;
+            background-image: radial-gradient(rgba(239, 68, 68, 0.25) 15%, transparent 16%),
+                radial-gradient(rgba(37, 99, 235, 0.25) 15%, transparent 16%);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
             min-height: 100vh;
-            color: #1f2937;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem;
+            color: #0f172a;
         }
-
-        .comic-title {
+        .comic-font {
             font-family: 'Bangers', cursive;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
         }
-
         .chill-font {
             font-family: 'Chewy', cursive;
         }
-
         .comic-panel {
             background: white;
             border: 5px solid black;
-            box-shadow: 10px 10px 0px black;
+            box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
             position: relative;
         }
-
-        /* Puntos Ben-Day sutiles dentro de los paneles de contenido */
         .comic-panel::before {
             content: "";
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(rgba(0,0,0,0.03) 1.2px, transparent 1.2px);
-            background-size: 8px 8px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+            background-size: 6px 6px;
             pointer-events: none;
+            z-index: 1;
         }
-
         .btn-comic {
             font-family: 'Bangers', cursive;
             letter-spacing: 1px;
-            border: 3px solid black;
-            box-shadow: 4px 4px 0px black;
-            transition: all 0.1s ease;
+            border: 4px solid black;
+            box-shadow: 5px 5px 0px black;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
             text-transform: uppercase;
         }
-
         .btn-comic:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px black;
+            transform: translate(-3px, -3px);
+            box-shadow: 8px 8px 0px black;
         }
-
         .btn-comic:active {
             transform: translate(2px, 2px);
-            box-shadow: 0px 0px 0px black;
+            box-shadow: 1px 1px 0px black;
         }
-
-        /* Animación para los impactos visuales (POW, ZAP) */
+        .tab-btn.active {
+            background-color: #facc15;
+            color: black;
+            border-bottom: 4px solid black;
+        }
+        .progress-bar-container {
+            background: #e2e8f0;
+            border: 4px solid black;
+            border-radius: 9999px;
+            overflow: hidden;
+            height: 28px;
+        }
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #ef4444, #8b5cf6, #3b82f6);
+            height: 100%;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .alarm-border {
+            animation: alertPulse 1.8s infinite alternate;
+        }
+        @keyframes alertPulse {
+            from {
+                border-color: #0f172a;
+                box-shadow: 8px 8px 0px black;
+            }
+            to {
+                border-color: #ef4444;
+                box-shadow: 8px 8px 0px #ef4444;
+            }
+        }
         .pow-text {
             position: fixed;
             top: 50%;
@@ -83,344 +105,851 @@
             transform: translate(-50%, -50%) scale(0);
             z-index: 100;
             pointer-events: none;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-shadow: 4px 4px 0px black;
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-shadow: 6px 6px 0px black;
+            -webkit-text-stroke: 3px black;
         }
-
         .pow-text.active {
-            transform: translate(-50%, -50%) scale(1.6);
+            transform: translate(-50%, -50%) scale(1.5);
         }
-
         select {
             appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 1.5em;
+            background-position: right 1.2rem center;
+            background-size: 1.4em;
         }
-
-        .progress-bar-container {
-            background: #e2e8f0;
+        .hidden {
+            display: none !important;
+        }
+        /* Estilo para las pestañas de extras */
+        .extra-tab-btn {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 0.5px;
             border: 3px solid black;
-            border-radius: 9999px;
-            overflow: hidden;
-            height: 28px;
+            box-shadow: 4px 4px 0px black;
+            transition: all 0.1s ease;
         }
-
-        .progress-bar-fill {
-            background: var(--comic-purple);
-            height: 100%;
-            transition: width 0.4s ease;
+        .extra-tab-btn.active-tab {
+            background-color: #facc15 !important;
+            color: black;
+            border-bottom: 4px solid black;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px black;
+        }
+        .extra-tab-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px black;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #7c3aed;
+        }
+        details summary:hover {
+            color: #4c1d95;
         }
     </style>
 </head>
-<body class="flex items-center justify-center p-4">
+<body>
 
-    <!-- Capa para onomatopeyas e impactos visuales -->
-    <div id="visual-fx" class="pow-text comic-title text-8xl text-yellow-400">¡ZAS!</div>
+    <!-- Onomatopeya FX -->
+    <div id="visual-fx" class="pow-text comic-font text-8xl md:text-9xl text-yellow-300">¡DESPEJADO!</div>
 
     <div class="max-w-4xl w-full">
-        <header class="text-center mb-8">
-            <div class="inline-block bg-white border-4 border-black p-4 transform -rotate-1 shadow-[8px_8px_0px_#ef4444]">
-                <h1 class="text-4xl md:text-6xl comic-title text-red-600">GATITO CHILL VS DR. MONO-MIO</h1>
-                <p class="text-xl font-bold mt-2">Misión: El Rescate del Lenguaje Algebraico</p>
+
+        <!-- CABECERA -->
+        <header class="text-center mb-6">
+            <div class="inline-block bg-white border-4 border-black p-4 md:p-6 transform -rotate-1 shadow-[8px_8px_0px_#2563eb] relative z-10 w-full">
+                <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-black pb-2 mb-3 text-xs md:text-sm font-bold text-gray-700">
+                    <span>📚 NIVEL: 8° BÁSICO</span>
+                    <span>⏱️ TIEMPO MÁXIMO: 90 MIN</span>
+                    <span>🧩 UNIDAD: FUNCIÓN AFÍN (OA 10)</span>
+                </div>
+                <h1 class="text-3xl md:text-5xl comic-font text-blue-700 tracking-wide uppercase">
+                    Gatito Chill vs. Patito Amarillito
+                </h1>
+                <p class="text-lg md:text-2xl chill-font text-purple-900 mt-1">
+                    Escape Room de la Función Afín y el Interés Simple
+                </p>
             </div>
-            
-            <div class="mt-6 bg-white border-2 border-black p-3 rounded-lg max-w-2xl mx-auto shadow-md">
-                <p class="font-bold text-sm text-indigo-900 italic text-center">
-                    🎯 OBJETIVO: Utilizar el lenguaje algebraico para generalizar relaciones entre números, establecer reglas y reducir expresiones algebraicas reuniendo términos semejantes para equilibrar la ciudad.
+            <!-- OA -->
+            <div class="mt-4 bg-yellow-100 border-2 border-black p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
+                <p class="font-bold text-xs md:text-sm text-indigo-950">
+                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 10)</span>: Mostrar que comprenden la función afín, relacionándola con el interés simple y utilizándola para resolver problemas de la vida diaria y de otras asignaturas. Habilidades: resolver problemas, modelar, representar, argumentar y comunicar.
                 </p>
             </div>
         </header>
 
-        <main>
-            <div id="screen-start" class="comic-panel p-8 space-y-6">
-                <div class="flex justify-center gap-4 text-7xl animate-bounce">
-                    <span>🐱</span><span>🛡️</span><span>🤖</span>
+        <main class="relative z-10">
+
+            <!-- PANTALLA 1: INICIO -->
+            <div id="screen-start" class="comic-panel p-6 md:p-8 space-y-6">
+                <div class="flex justify-center items-center gap-4 text-6xl md:text-7xl animate-bounce">
+                    <span>🐱</span><span class="text-3xl font-black">VS</span><span>🐤</span>
                 </div>
-                <h2 class="text-3xl md:text-4xl comic-title text-center text-purple-700">¡CIUDAD MATEMÁTICAS EN APRIETOS!</h2>
-                <div class="text-lg leading-relaxed space-y-4 font-medium text-left border-l-4 border-blue-500 pl-4">
-                    <p>El temible <b>Dr. Mono-Mio</b>, un científico obsesionado con simplificar todo a la fuerza, ha disparado su "Rayo Reductor de Expresiones" en Ciudad Matemáticas.</p>
-                    <p>Ha mezclado los términos semejantes, bloqueado las variables en las alcancías de los ciudadanos y desequilibrado el perímetro de los edificios de la zona.</p>
-                    <p>El <b>Gatito Chill</b>, rascándose la oreja con total tranquilidad, se pone su hojita de otoño en la cabeza y dice: <span class="text-blue-600 font-bold">"Todo está chill, amigos. El lenguaje algebraico solo es otra forma de contar historias. Agrupemos las manzanas con manzanas, las peras con peras, ¡y venzamos al villano con pura calma!"</span></p>
+
+                <div class="text-center">
+                    <h2 class="text-2xl md:text-4xl comic-font text-red-600">¡EL DESORDEN AFÍN HA LLEGADO!</h2>
+                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">Patito Amarillito ha distorsionado todas las funciones de la ciudad...</p>
                 </div>
-                <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-3xl py-4 w-full rounded-xl">
-                    ¡ACTIVAR CÓDIGO TITÁN! ⚡
-                </button>
+
+                <!-- Historia -->
+                <div class="bg-blue-50 border-4 border-black p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
+                    <p class="text-base md:text-lg">
+                        El villano <b>Patito Amarillito</b> lanzó su <i>"Rayo Desordenador"</i> sobre la Ciudad de la Igualdad, alterando todas las funciones afines. Los puentes, los semáforos y hasta las cuentas bancarias están completamente descontrolados. Sin la pendiente y el intercepto correctos, el caos será eterno.
+                    </p>
+                    <p class="text-base md:text-lg">
+                        Con su taza de té siempre a mano, el sereno <b>Gatito Chill</b> nos guía con una sonrisa:
+                    </p>
+                    <blockquote class="bg-yellow-200 border-l-4 border-yellow-600 p-3 rounded font-bold text-indigo-900 italic text-sm md:text-base">
+                        "Tranquilos, amigos... toda función afín es de la forma <span class="font-mono bg-yellow-300 px-1 rounded">f(x)=ax+b</span>. Solo necesitan identificar la pendiente y el intercepto. ¡Chill, que el equilibrio volverá!"
+                    </blockquote>
+                </div>
+
+                <!-- SELECCIÓN DOCENTE -->
+                <div class="bg-purple-100 border-4 border-black p-5 rounded-xl text-left space-y-3 shadow-md">
+                    <label class="block font-black text-purple-900 uppercase text-base md:text-lg comic-font tracking-wide">
+                        ⚙️ Configuración Docente – Selección de Tramo (10 o 20 preguntas):
+                    </label>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
+                            📍 Parte 1 (Preguntas 1 a 10)<br />
+                            <span class="text-xs font-normal normal-case block">Conceptos básicos y gráficos</span>
+                        </button>
+                        <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
+                            📍 Parte 2 (Preguntas 11 a 20)<br />
+                            <span class="text-xs font-normal normal-case block">Aplicaciones y problemas inversos</span>
+                        </button>
+                        <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
+                            🔥 Modo Completo (20 Retos)<br />
+                            <span class="text-xs font-normal normal-case block">Evaluación continua completa</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Opciones -->
+                <div class="flex flex-wrap items-center justify-between gap-3 bg-gray-100 p-3 border-2 border-black rounded-lg">
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
+                        <label for="sound-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">🔊 SFX Retro</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
+                        <label for="hints-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">💡 Permitir pistas</label>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-black text-2xl md:text-3xl py-4 w-full rounded-xl">
+                        ¡RESTAURAR EL ORDEN AFÍN! 🚀
+                    </button>
+                </div>
+
+                <!-- BOTÓN PARA SECCIONES COMPLEMENTARIAS -->
+                <div class="text-center pt-2 border-t-2 border-gray-200">
+                    <button onclick="toggleExtraModules()" class="text-sm font-bold text-blue-700 underline hover:text-blue-900">
+                        📋 Ver Secciones Complementarias (Problemas de 4 pasos, Metacognición y Autoevaluación)
+                    </button>
+                </div>
             </div>
 
+            <!-- PANTALLA 2: JUEGO -->
             <div id="screen-game" class="hidden space-y-6">
-                <!-- Barra de Progreso -->
+                <!-- Barra superior -->
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white border-4 border-black p-4 shadow-[6px_6px_0px_black]">
-                    <div class="comic-title text-2xl text-red-600" id="level-label">MISIÓN: 1 / 20</div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl">🐱</span>
+                        <div>
+                            <div class="comic-font text-2xl text-red-600 leading-tight" id="level-label">DESAFÍO 1 / 10</div>
+                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: CONCEPTOS BÁSICOS</div>
+                        </div>
+                    </div>
                     <div class="w-full md:w-1/2 progress-bar-container">
                         <div id="progress-fill" class="progress-bar-fill" style="width: 5%"></div>
                     </div>
+                    <button onclick="confirmExit()" class="text-xs font-bold bg-gray-200 hover:bg-gray-300 border-2 border-black px-3 py-1 rounded">
+                        ⚙️ Menú
+                    </button>
                 </div>
 
-                <!-- Contenedor del Desafío Activo -->
-                <div class="comic-panel p-6 md:p-10">
-                    <div class="flex items-start gap-4 mb-6 bg-blue-50 border-2 border-black p-4 rounded-lg">
+                <!-- Panel del reto -->
+                <div class="comic-panel p-5 md:p-8 alarm-border border-4">
+                    <div class="flex items-start gap-4 mb-6 bg-blue-50 border-2 border-black p-4 rounded-xl">
                         <div class="text-5xl" id="hero-avatar">🐱</div>
                         <div class="w-full">
-                            <h4 class="font-bold text-red-600 uppercase tracking-wide text-xs">Mensaje de la Legión Titán</h4>
-                            <p class="font-bold text-indigo-900 italic text-lg" id="narrative-text">Cargando...</p>
+                            <div class="flex justify-between items-center">
+                                <h4 class="font-bold text-red-600 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Legión del Despeje: Gatito Chill</h4>
+                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Pendiente</span>
+                            </div>
+                            <p class="font-bold text-indigo-950 italic text-base md:text-lg mt-1" id="narrative-text">Cargando situación...</p>
                         </div>
                     </div>
 
-                    <div class="space-y-6">
-                        <div id="question-container">
-                            <h3 id="question-text" class="text-xl md:text-2xl font-bold text-gray-800 border-b-2 border-gray-100 pb-4"></h3>
+                    <div class="space-y-6 relative z-10">
+                        <div class="bg-gray-50 border-2 border-black p-5 rounded-xl shadow-inner">
+                            <div id="question-number" class="comic-font text-xl text-purple-700 mb-1">PREGUNTA #</div>
+                            <div id="question-text" class="text-xl md:text-2xl font-bold text-gray-900 leading-relaxed font-mono"></div>
                         </div>
 
-                        <div class="space-y-3">
-                            <label class="block font-black text-purple-700 uppercase tracking-tighter text-sm">Selecciona tu cálculo de contraataque:</label>
-                            <select id="answer-select" class="w-full p-4 border-4 border-black text-lg md:text-xl font-bold bg-yellow-50 focus:ring-8 focus:ring-purple-200 outline-none cursor-pointer">
-                                <option value="" disabled selected>-- Selecciona con calma --</option>
+                        <div id="hint-container" class="hidden">
+                            <button onclick="toggleHint()" class="text-sm font-bold text-purple-800 bg-purple-100 border-2 border-purple-400 px-3 py-1.5 rounded-lg flex items-center gap-2 hover:bg-purple-200 transition">
+                                💡 <span>Espacio para el Desarrollo (paso a paso)</span>
+                            </button>
+                            <div id="hint-box" class="hidden mt-2 p-3 bg-yellow-50 border-2 border-yellow-400 rounded-lg text-sm text-yellow-950 leading-relaxed font-medium"></div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block font-black text-indigo-950 uppercase tracking-tight text-sm">
+                                🎯 Selecciona el valor correcto:
+                            </label>
+                            <select id="answer-select" class="w-full p-4 border-4 border-black text-lg md:text-xl font-bold bg-yellow-50 focus:ring-4 focus:ring-purple-300 outline-none cursor-pointer rounded-xl">
+                                <option value="" disabled selected>-- Elige con calma --</option>
                             </select>
                         </div>
 
-                        <button onclick="checkAnswer()" class="btn-comic bg-red-600 hover:bg-red-500 text-white text-3xl py-4 w-full">
+                        <button onclick="checkAnswer()" class="btn-comic bg-red-600 hover:bg-red-500 text-white text-2xl md:text-3xl py-4 w-full rounded-xl">
                             ¡ENVIAR RESPUESTA! 💥
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div id="screen-end" class="hidden comic-panel p-10 text-center space-y-8">
-                <h2 class="text-6xl md:text-7xl comic-title text-purple-700">¡SISTEMA RESTAURADO!</h2>
-                <div class="text-9xl animate-bounce my-8">🐱🫧🛡️</div>
-                <p class="text-2xl font-bold text-indigo-950">¡El Dr. Mono-Mio ha sido atrapado en una burbuja algebraica perfectamente reducida!</p>
-                <div class="bg-yellow-100 border-4 border-dashed border-black p-6 rounded-2xl font-bold text-lg max-w-2xl mx-auto space-y-4 text-left">
-                    <p>"Reunir los términos semejantes y plantear variables es fácil si mantienes el orden y respiras hondo. ¡La calma siempre vence al caos!", sonríe el Gatito Chill mientras acomoda su tacita de café caliente.</p>
-                    <p class="text-blue-700 text-center font-black">¡Felicidades, has completado las 20 misiones algebraicas de la Legión Titán!</p>
+            <!-- PANTALLA 3: VICTORIA -->
+            <div id="screen-end" class="hidden comic-panel p-8 md:p-12 text-center space-y-8">
+                <h2 class="text-5xl md:text-7xl comic-font text-purple-700">¡SISTEMA REESTABLECIDO!</h2>
+                <div class="text-8xl md:text-9xl animate-bounce my-4">🐱⚖️✨</div>
+                <div class="space-y-3">
+                    <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has derrotado a Patito Amarillito!</p>
+                    <p class="text-gray-700 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
+                        Todas las funciones afines han vuelto a su equilibrio. La ciudad respira de nuevo.
+                    </p>
                 </div>
-                <button onclick="location.reload()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-3xl py-4 px-12 rounded-full">
-                    REINICIAR ENTRENAMIENTO
-                </button>
+                <div class="bg-yellow-100 border-4 border-black p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
+                    <p class="text-purple-900">
+                        <b>Gatito Chill te felicita:</b> "¡Excelente! Recuerda que toda función afín es <span class="font-mono bg-yellow-300 px-1 rounded">f(x)=ax+b</span>, donde <b>a</b> es la pendiente y <b>b</b> el intercepto. ¡Mantén la calma y el orden siempre regresa!"
+                    </p>
+                </div>
+                <div class="flex flex-col md:flex-row justify-center gap-4 pt-4">
+                    <button onclick="returnToStart()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-2xl py-4 px-8 rounded-xl">
+                        🔄 VOLVER AL MENÚ
+                    </button>
+                    <button onclick="toggleExtraModules()" class="btn-comic bg-purple-600 hover:bg-purple-500 text-white text-2xl py-4 px-8 rounded-xl">
+                        📝 VER MÓDULOS DE DESARROLLO
+                    </button>
+                </div>
             </div>
+
+            <!-- ========================================================= -->
+            <!-- PANTALLA EXTRAS: SECCIONES COMPLEMENTARIAS (GUÍA)          -->
+            <!-- ========================================================= -->
+            <div id="screen-extras" class="hidden comic-panel p-6 md:p-8 space-y-6 my-6">
+                <div class="flex justify-between items-center border-b-4 border-black pb-4">
+                    <h2 class="text-3xl md:text-4xl comic-font text-indigo-900">SECCIONES DE DESARROLLO Y EVALUACIÓN</h2>
+                    <button onclick="closeExtraModules()" class="btn-comic bg-red-500 text-white px-4 py-1 text-xl rounded">
+                        ✖️ CERRAR
+                    </button>
+                </div>
+
+                <!-- Pestañas de navegación -->
+                <div class="flex flex-wrap gap-2 border-b-2 border-black pb-2">
+                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="extra-tab-btn active-tab py-2 px-3 text-sm bg-yellow-300">II. Problemas (4 Pasos)</button>
+                    <button onclick="switchExtraTab('sec3')" id="tab-sec3" class="extra-tab-btn py-2 px-3 text-sm bg-white">III. Metacognición</button>
+                    <button onclick="switchExtraTab('sec4')" id="tab-sec4" class="extra-tab-btn py-2 px-3 text-sm bg-white">IV. Desafío Extra</button>
+                    <button onclick="switchExtraTab('sec5')" id="tab-sec5" class="extra-tab-btn py-2 px-3 text-sm bg-white">V. Autoevaluación</button>
+                </div>
+
+                <!-- SECCIÓN II: RESOLUCIÓN DE PROBLEMAS (4 PASOS) -->
+                <div id="extra-sec2" class="space-y-6 text-left">
+                    <div class="bg-blue-50 border-2 border-black p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-blue-900">II. Resolución de Problemas (Estrategia de los 4 Pasos)</h3>
+                        <p class="text-xs text-gray-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Revisar.</p>
+                    </div>
+
+                    <!-- Problema 1: Inversión -->
+                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Inversión)</span>
+                        <p class="font-bold text-gray-800">
+                            Un inversionista deposita $500.000 en una cuenta que ofrece un interés simple del 4% anual. ¿Cuánto dinero tendrá después de 5 años?
+                        </p>
+                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
+                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
+                                <p><b>1. Comprender:</b> Capital inicial = $500.000, tasa = 4% anual, tiempo = 5 años. Se busca el capital final.</p>
+                                <p><b>2. Planificar:</b> Interés anual = 500.000 * 0.04 = 20.000. Capital final = 500.000 + 20.000 * 5.</p>
+                                <p><b>3. Resolver:</b> 20.000 * 5 = 100.000. Capital final = 500.000 + 100.000 = 600.000.</p>
+                                <p><b>4. Revisar:</b> 600.000 - 500.000 = 100.000. Efectivamente, el interés total es de $100.000.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Problema 2: Tarifas de taxi -->
+                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Tarifas de servicios)</span>
+                        <p class="font-bold text-gray-800">
+                            Empresa A: $1.200 de bajada + $300/km. Empresa B: $2.000 de bajada + $200/km. ¿A partir de cuántos kilómetros conviene contratar la empresa B?
+                        </p>
+                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
+                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
+                                <p><b>1. Comprender:</b> Se busca el valor de x (km) donde el costo de A es mayor que el de B (conviene B).</p>
+                                <p><b>2. Planificar:</b> Costo A = 1200 + 300x. Costo B = 2000 + 200x. Resolver 1200 + 300x > 2000 + 200x.</p>
+                                <p><b>3. Resolver:</b> 300x - 200x > 2000 - 1200 → 100x > 800 → x > 8. A partir de 8 km conviene B.</p>
+                                <p><b>4. Revisar:</b> En 8 km: A = 1200+2400=3600, B=2000+1600=3600 (igual). En 9 km: A=3900, B=3800 (B más barato).</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Problema 3: Producción -->
+                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Análisis de producción)</span>
+                        <p class="font-bold text-gray-800">
+                            Costo fijo mensual: $100.000. Costo por unidad: $2.000. Precio de venta: $4.500. ¿Cuántas unidades deben vender al mes para obtener una ganancia de al menos $50.000?
+                        </p>
+                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
+                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
+                                <p><b>1. Comprender:</b> Ganancia = Ingreso - Costo. Se busca que ganancia ≥ 50.000.</p>
+                                <p><b>2. Planificar:</b> Ingreso = 4.500x. Costo = 100.000 + 2.000x. Ganancia = 4.500x - (100.000+2.000x) = 2.500x - 100.000.</p>
+                                <p><b>3. Resolver:</b> 2.500x - 100.000 ≥ 50.000 → 2.500x ≥ 150.000 → x ≥ 60.</p>
+                                <p><b>4. Revisar:</b> Con 60 unidades: ingreso=270.000, costo=220.000, ganancia=50.000 exacto. Con 61: ganancia=52.500.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN III: METACOGNICIÓN -->
+                <div id="extra-sec3" class="hidden space-y-4 text-left">
+                    <div class="bg-purple-50 border-2 border-black p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-purple-900">III. Metacognición (Reflexión del Estudiante)</h3>
+                        <p class="text-xs text-gray-700">Analiza tus propios razonamientos durante la resolución:</p>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-white border border-black rounded-lg">
+                            <p class="font-bold text-sm text-gray-800">1. ¿Qué estrategia te resultó más útil para identificar qué operación aplicar en los problemas de desarrollo?</p>
+                        </div>
+                        <div class="p-3 bg-white border border-black rounded-lg">
+                            <p class="font-bold text-sm text-gray-800">2. ¿Hubo algún problema en la sección de selección múltiple donde el "Espacio para el Desarrollo" te ayudó a corregir un error inicial? Explica brevemente.</p>
+                        </div>
+                        <div class="p-3 bg-white border border-black rounded-lg">
+                            <p class="font-bold text-sm text-gray-800">3. Al finalizar esta evaluación, ¿cuánta seguridad sientes al aplicar procedimientos formales para despejar una incógnita? (Escala del 1 al 7).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN IV: DESAFÍO EXTRA (Lógica Inversa) -->
+                <div id="extra-sec4" class="hidden space-y-4 text-left">
+                    <div class="bg-yellow-50 border-2 border-black p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Lógica Inversa)</h3>
+                        <p class="text-sm text-gray-800">
+                            "Un número multiplicado por 5, sumado a 10, y cuyo resultado se divide por 2, da como resultado 25. ¿Cuál es el número?" (Justifica tu respuesta mediante la operación inversa).
+                        </p>
+                    </div>
+                    <div class="p-4 bg-white border-2 border-black rounded-xl space-y-3">
+                        <button onclick="toggleExtraHint()" class="btn-comic bg-yellow-400 text-black text-sm px-4 py-2 rounded">
+                            🧩 Revelar Solución por Reversión de Gatito Chill
+                        </button>
+                        <div id="extra-hint-box" class="hidden text-sm bg-yellow-100 p-3 rounded border border-yellow-300 leading-relaxed">
+                            <p><b>Ecuación planteada:</b> <span class="font-mono">(5x + 10) / 2 = 25</span></p>
+                            <p><b>Paso 1 (revertir división):</b> Multiplico 25 por 2 → 25 * 2 = 50.</p>
+                            <p><b>Paso 2 (revertir suma):</b> Resto 10 → 50 - 10 = 40.</p>
+                            <p><b>Paso 3 (revertir multiplicación):</b> Divido por 5 → 40 / 5 = 8.</p>
+                            <p><b>Resultado:</b> El número es <b>8</b>. (Comprobación: (5·8+10)/2 = (40+10)/2 = 50/2 = 25).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN V: AUTOEVALUACIÓN -->
+                <div id="extra-sec5" class="hidden space-y-4 text-left">
+                    <div class="bg-green-50 border-2 border-black p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-green-900">V. Autoevaluación del Estudiante</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm border-2 border-black bg-white">
+                            <thead class="bg-yellow-300 border-b-2 border-black">
+                                <tr>
+                                    <th class="p-2 text-left border-r border-black">Criterio / Ítem</th>
+                                    <th class="p-2 text-center border-r border-black">Logrado (3)</th>
+                                    <th class="p-2 text-center border-r border-black">En proceso (2)</th>
+                                    <th class="p-2 text-center">Iniciado (1)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-black">
+                                    <td class="p-2 border-r border-black font-medium">1. Comprendo la estructura de la función afín (f(x)=ax+b).</td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1"></td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1"></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto1"></td>
+                                </tr>
+                                <tr class="border-b border-black">
+                                    <td class="p-2 border-r border-black font-medium">2. Aplico el método de los 4 pasos en problemas narrativos.</td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2"></td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2"></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto2"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-r border-black font-medium">3. Mantengo el orden y el rigor en mis procedimientos algebraicos.</td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3"></td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3"></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto3"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- =========== FIN DE EXTRAS =========== -->
+
         </main>
     </div>
 
     <script>
-        // Base de datos de las 20 preguntas extraídas fielmente de la prueba
-        const questions = [
-            { 
-                n: "Mente Brillante está traduciendo las coordenadas de ataque del villano.", 
-                q: "<b>Pregunta 1:</b> ¿Cuál es la expresión algebraica que representa el enunciado: <i>'el triple de un número, aumentado en cinco'</i>?", 
-                a: "3x + 5", 
-                o: ["3x - 5", "3(x + 5)", "3x + 5", "x^3 + 5"] 
+        // ================================================================
+        //  BASE DE DATOS – 20 PREGUNTAS DE LA GUÍA (OA 10, 8° BÁSICO)
+        // ================================================================
+        const allQuestions = [
+            // ---- PARTE 1: Preguntas 1 a 10 ----
+            {
+                id: 1,
+                part: 1,
+                type: "Identificación",
+                narrative: "Patito Amarillito ha mezclado las expresiones. ¡Encuentra la que es una función afín!",
+                q: "¿Cuál es la expresión que representa una función afín?",
+                a: "f(x) = 3x + 4",
+                options: ["f(x) = 5x", "f(x) = 3x + 4", "f(x) = x² + 1", "f(x) = 1/x"],
+                hint: "Una función afín tiene la forma f(x) = ax + b, con a ≠ 0. Busca la que tenga término independiente."
+            }, {
+                id: 2,
+                part: 1,
+                type: "Intercepto",
+                narrative: "El intercepto es la clave para saber dónde la función cruza el eje Y.",
+                q: "En la función f(x) = 2x + 5, ¿cuál es el coeficiente de posición (intercepto con el eje Y)?",
+                a: "5",
+                options: ["1", "2", "5", "7"],
+                hint: "El coeficiente de posición es el término que no está multiplicado por x."
+            }, {
+                id: 3,
+                part: 1,
+                type: "Ecuación",
+                narrative: "Con la pendiente y el intercepto, Gatito Chill puede reconstruir la función.",
+                q: "Si una función afín tiene pendiente m = 3 y corta al eje Y en el punto (0, -2), su ecuación es:",
+                a: "f(x) = 3x - 2",
+                options: ["f(x) = 2x - 3", "f(x) = 3x + 2", "f(x) = 3x - 2", "f(x) = -2x + 3"],
+                hint: "Usa f(x) = ax + b, donde a es pendiente y b es el intercepto."
+            }, {
+                id: 4,
+                part: 1,
+                type: "Modelado",
+                narrative: "El taller de reparaciones cobra una tarifa fija más un costo por hora.",
+                q: "Un técnico cobra una tarifa fija de $15.000 por visita más $5.000 por cada hora de trabajo. ¿Qué función modela el costo total (y) según las horas trabajadas (x)?",
+                a: "y = 5.000x + 15.000",
+                options: ["y = 15.000x + 5.000", "y = 5.000x + 15.000", "y = 20.000x", "y = 5.000x - 15.000"],
+                hint: "El costo fijo es el intercepto (b), y el costo por hora es la pendiente (a)."
+            }, {
+                id: 5,
+                part: 1,
+                type: "Preimagen",
+                narrative: "Patito Amarillito ocultó el valor de x. ¡Descúbrelo!",
+                q: "Dada la función f(x) = 4x - 10, ¿cuál es la preimagen de 6? (¿Qué valor de x hace que f(x) = 6?)",
+                a: "4",
+                options: ["14", "4", "6", "2"],
+                hint: "Resuelve 4x - 10 = 6. Suma 10 a ambos lados y luego divide por 4."
+            }, {
+                id: 6,
+                part: 1,
+                type: "Problema inverso",
+                narrative: "El arriendo de autos tiene un costo fijo y variable. Ayuda a Gatito Chill a calcular los kilómetros.",
+                q: "Una empresa de arriendo de autos cobra $20.000 diarios fijos más $100 por kilómetro. Si un cliente paga $25.000 en un día, ¿cuántos kilómetros recorrió?",
+                a: "50 km",
+                options: ["5 km", "50 km", "45 km", "200 km"],
+                hint: "Resta el costo fijo y luego divide por el costo por kilómetro."
+            }, {
+                id: 7,
+                part: 1,
+                type: "Pendiente",
+                narrative: "La pendiente indica la inclinación de la recta. ¡Encuéntrala!",
+                q: "¿Cuál es la pendiente de la función f(x) = -2x + 8?",
+                a: "-2",
+                options: ["8", "6", "-2", "-8"],
+                hint: "La pendiente es el coeficiente que acompaña a x."
+            }, {
+                id: 8,
+                part: 1,
+                type: "Intercepto",
+                narrative: "Gatito Chill necesita el intercepto para completar la función.",
+                q: "Si una función afín f(x) = ax + b pasa por el punto (1, 5) y tiene pendiente 2, ¿cuál es el valor de b?",
+                a: "3",
+                options: ["3", "5", "7", "2"],
+                hint: "Sustituye x=1, f(x)=5, a=2 en f(x)=ax+b y despeja b."
+            }, {
+                id: 9,
+                part: 1,
+                type: "Gráfico",
+                narrative: "Patito Amarillito alteró la representación gráfica. Elige la correcta.",
+                q: "¿Cuál de las siguientes descripciones corresponde a una función afín con pendiente positiva?",
+                a: "Una línea recta hacia arriba (de izquierda a derecha).",
+                options: [
+                    "Una línea recta hacia abajo (de izquierda a derecha).",
+                    "Una línea recta hacia arriba (de izquierda a derecha).",
+                    "Una línea horizontal.",
+                    "Una parábola."
+                ],
+                hint: "Pendiente positiva significa que al aumentar x, f(x) aumenta."
+            }, {
+                id: 10,
+                part: 1,
+                type: "Interés simple",
+                narrative: "El dinero también sigue una función afín. ¡Calcula el capital final!",
+                q: "Un capital inicial de $100.000 se invierte a un interés simple anual del 5%. ¿Cuál es la función que representa el capital final (y) al cabo de (x) años?",
+                a: "y = 5.000x + 100.000",
+                options: ["y = 5.000x + 100.000", "y = 100.000x + 5.000", "y = 5.000x", "y = 105.000x"],
+                hint: "Interés anual = capital * tasa. El capital final es el inicial más el interés acumulado."
             },
-            { 
-                n: "Rayo Veloz detecta varios términos idénticos en su radar de velocidad.", 
-                q: "<b>Pregunta 2:</b> Al reducir completamente la siguiente expresión algebraica: <span class='font-mono font-bold text-blue-600'>5x + 3y - 2x + 4y</span>, se obtiene:", 
-                a: "3x + 7y", 
-                o: ["3x + 7y", "7x + 7y", "3x - 1y", "7x - 1y"] 
-            },
-            { 
-                n: "Fuerza Pluma está rodeando un edificio bloqueado por el Dr. Mono-Mio.", 
-                q: "<b>Pregunta 3:</b> Si un rectángulo tiene un largo de <span class='font-mono font-bold text-red-600'>'2x'</span> y un ancho de <span class='font-mono font-bold text-red-600'>'x'</span>, ¿cuál expresión representa su perímetro?", 
-                a: "6x", 
-                o: ["3x", "2x^2", "6x", "4x"] 
-            },
-            { 
-                n: "Mente Brillante está aplicando ingeniería inversa a un escudo del oponente.", 
-                q: "<b>Pregunta 4:</b> Si el resultado final de reducir una expresión misteriosa es <span class='font-mono font-bold text-purple-600'>8a + 2b</span>, ¿cuál podría haber sido la expresión original antes de simplificar?", 
-                a: "Todas las anteriores.", 
-                o: ["4a + b + 4a + b", "10a - 2a + 3b - b", "5a + 3a + 5b - 3b", "Todas las anteriores."] 
-            },
-            { 
-                n: "Fuerza Pluma vuela alrededor de un estandarte triangular de la legión.", 
-                q: "<b>Pregunta 5:</b> ¿Cuál es el perímetro total de un triángulo equilátero cuyos tres lados miden <span class='font-mono font-bold text-green-600'>'a + 3'</span> cada uno?", 
-                a: "3a + 9", 
-                o: ["a + 9", "3a + 9", "3a + 3", "a + 3"] 
-            },
-            { 
-                n: "Rayo Veloz calcula la longitud del cable necesario para rodear un perímetro cuadrado.", 
-                q: "<b>Pregunta 6:</b> Si sabemos que el perímetro de una zona cuadrada es <span class='font-mono font-bold text-indigo-600'>16x - 8</span>, ¿cuánto mide la longitud de cada uno de sus lados?", 
-                a: "4x - 2", 
-                o: ["4x - 2", "16x - 2", "4x - 8", "8x - 4"] 
-            },
-            { 
-                n: "Gatito Chill observa perezosamente cómo se acumulan los globos de agua.", 
-                q: "<b>Pregunta 7:</b> ¿Cuál es el resultado de reducir la suma de agrupaciones repetidas: <span class='font-mono font-bold text-blue-600'>(x + y) + (x + y) + (x + y)</span>?", 
-                a: "3x + 3y", 
-                o: ["x + y^3", "3x + y", "x^3 + y^3", "3x + 3y"] 
-            },
-            { 
-                n: "Mente Brillante busca el valor de la incógnita en el procesador central.", 
-                q: "<b>Pregunta 8:</b> Si la ecuación de la celda de energía es <span class='font-mono font-bold text-red-600'>5x + ___ = 9x + 2</span>, ¿cuál es el término algebraico que falta en el espacio en blanco?", 
-                a: "4x + 2", 
-                o: ["4x + 2", "14x + 2", "4x - 2", "-4x + 2"] 
-            },
-            { 
-                n: "Rayo Veloz necesita evaluar la potencia de su escudo térmico.", 
-                q: "<b>Pregunta 9:</b> Evalúa numéricamente el valor de la expresión <span class='font-mono font-bold text-purple-600'>2x - 3y + 4z</span> si se sabe que las variables equivalen a: <span class='font-mono'>x = 2</span>, <span class='font-mono'>y = 1</span>, <span class='font-mono'>z = 3</span>.", 
-                a: "11", 
-                o: ["9", "11", "12", "13"] 
-            },
-            { 
-                n: "Fuerza Pluma empuja dos bloques con cargas positivas y negativas.", 
-                q: "<b>Pregunta 10:</b> Reduce al máximo los términos de la siguiente expresión con números enteros: <span class='font-mono font-bold text-green-600'>-4m - 2n + 5m - 3n</span>.", 
-                a: "m - 5n", 
-                o: ["m - 5n", "-m + 5n", "9m - 5n", "m - n"] 
-            },
-            { 
-                n: "Mente Brillante descifra la contraparte de una suma de vectores.", 
-                q: "<b>Pregunta 11:</b> ¿Qué expresión algebraica, al ser sumada con <span class='font-mono font-bold text-indigo-600'>3x - 2y</span>, da como resultado exacto <span class='font-mono font-bold text-indigo-600'>5x + 4y</span>?", 
-                a: "2x + 6y", 
-                o: ["2x + 6y", "8x + 2y", "2x - 6y", "-2x + 6y"] 
-            },
-            { 
-                n: "Gatito Chill analiza el ritmo de sus saltos sobre los nenúfares.", 
-                q: "<b>Pregunta 12:</b> El patrón de una secuencia es <i>'sumar 4'</i> en cada paso. Si el primer término de la secuencia se representa como <span class='font-mono font-bold text-pink-600'>'n'</span>, ¿cuál será la expresión para el tercer término?", 
-                a: "n + 8", 
-                o: ["n + 4", "n + 8", "n + 12", "4n"] 
-            },
-            { 
-                n: "Fuerza Pluma sostiene un contenedor cúbico de suministros.", 
-                q: "<b>Pregunta 13:</b> ¿Cuál es el volumen total de una caja de almacenamiento con forma de cubo si la medida de su arista es <span class='font-mono font-bold text-blue-600'>'2y'</span>?", 
-                a: "8y^3", 
-                o: ["2y^3", "6y", "8y^3", "4y^2"] 
-            },
-            { 
-                n: "Rayo Veloz calcula las proporciones de una rampa de aceleración rectangular.", 
-                q: "<b>Pregunta 14:</b> Si el área total de una superficie rectangular es <span class='font-mono font-bold text-red-600'>15xy</span> y se sabe que su largo mide <span class='font-mono font-bold text-red-600'>5x</span>, ¿cuál es la medida de su ancho?", 
-                a: "3y", 
-                o: ["10y", "3y", "3x", "20xy"] 
-            },
-            { 
-                n: "Gatito Chill compra suministros de oficina para la base secreta.", 
-                q: "<b>Pregunta 15:</b> Si compras 3 cuadernos a un valor de <span class='font-mono font-bold text-purple-600'>'$x'</span> cada uno y 2 lápices a un valor de <span class='font-mono font-bold text-purple-600'>'$y'</span> cada uno, ¿cuál es la expresión para el costo total de la compra?", 
-                a: "3x + 2y", 
-                o: ["3x + 2y", "5xy", "3x * 2y", "6xy"] 
-            },
-            { 
-                n: "Mente Brillante estudia la unión de varios módulos cuadrangulares.", 
-                q: "<b>Pregunta 16:</b> Dada una secuencia de figuras formadas por cuadrados unidos en fila: 1 cuadrado (4 lados), 2 cuadrados unidos (7 lados), 3 cuadrados unidos (10 lados)... ¿Cuál es la expresión algebraica para la cantidad de lados si hay <span class='font-mono font-bold'>'n'</span> cuadrados?", 
-                a: "3n + 1", 
-                o: ["4n", "3n + 1", "2n + 2", "6n"] 
-            },
-            { 
-                n: "Fuerza Pluma mide las dimensiones de un sector de la plaza restaurada.", 
-                q: "<b>Pregunta 17:</b> Un terreno rectangular tiene un área representada por <span class='font-mono font-bold text-green-600'>20a^2 + 10ab</span>. Si la medida del ancho es <span class='font-mono font-bold text-green-600'>5a</span>, ¿cuál es la expresión para el largo?", 
-                a: "4a + 2b", 
-                o: ["4a + 2b", "15a + 5b", "4a + 10ab", "5a^2 + 2ab"] 
-            },
-            { 
-                n: "Gatito Chill aclara un concepto básico de potencias a la legión.", 
-                q: "<b>Pregunta 18:</b> ¿Cuál de las siguientes igualdades describe correctamente la relación fundamental entre una potencia y la multiplicación iterada?", 
-                a: "a^3 = a * a * a", 
-                o: ["a^3 = a + a + a", "a^3 = a * a * a", "a^3 = 3 * a", "a^3 = a * 3"] 
-            },
-            { 
-                n: "Mente Brillante simplifica los comandos del control del dirigible del villano.", 
-                q: "<b>Pregunta 19:</b> Al aplicar la propiedad distributiva y reducir completamente la expresión <span class='font-mono font-bold text-indigo-600'>2(a + b) + 3(a - b)</span>, se obtiene:", 
-                a: "5a - b", 
-                o: ["5a - b", "5a + 5b", "5a + b", "2a + 3b"] 
-            },
-            { 
-                n: "¡RETATORIO FINAL! El Dr. Mono-Mio desafía el presupuesto de la reconstrucción.", 
-                q: "<b>Pregunta 20:</b> Si el costo total de comprar <span class='font-mono font-bold'>'x'</span> kilos de pan a un precio unitario de <span class='font-mono font-bold'>$800</span> y <span class='font-mono font-bold'>'y'</span> kilos de queso a <span class='font-mono font-bold'>$5000</span> equivale a un valor total de <span class='font-mono font-bold'>$c</span>, ¿cuál es la ecuación que modela este gasto?", 
-                a: "c = 800x + 5000y", 
-                o: ["c = 800x + 5000y", "c = 5800(x + y)", "c = 800x * 5000y", "c = 800 + 5000 + x + y"] 
+
+            // ---- PARTE 2: Preguntas 11 a 20 ----
+            {
+                id: 11,
+                part: 2,
+                type: "Composición",
+                narrative: "Patito Amarillito anidó funciones. ¡Desanídate con Gatito Chill!",
+                q: "Si f(x) = 3x - 7, ¿cuál es el valor de f(f(2))?",
+                a: "-10",
+                options: ["-1", "-10", "3", "-4"],
+                hint: "Primero calcula f(2), luego usa ese resultado como entrada de f."
+            }, {
+                id: 12,
+                part: 2,
+                type: "Traslación",
+                narrative: "Modificar el intercepto mueve la recta. ¿Hacia dónde?",
+                q: "¿Qué sucede con la gráfica de una función afín si aumentamos el valor de 'b' en f(x) = ax + b?",
+                a: "La recta se traslada verticalmente hacia arriba.",
+                options: [
+                    "La pendiente cambia.",
+                    "La recta se traslada verticalmente hacia arriba.",
+                    "La recta se traslada horizontalmente hacia la derecha.",
+                    "La recta se vuelve más inclinada."
+                ],
+                hint: "b es el intercepto, no afecta la pendiente, solo la posición vertical."
+            }, {
+                id: 13,
+                part: 2,
+                type: "Pendiente con dos puntos",
+                narrative: "Dos puntos definen la pendiente. ¡Ayuda a Gatito Chill a calcularla!",
+                q: "Determine la pendiente de la recta que pasa por los puntos (2, 4) y (4, 10).",
+                a: "3",
+                options: ["2", "3", "6", "1/3"],
+                hint: "Pendiente = (y₂ - y₁) / (x₂ - x₁)."
+            }, {
+                id: 14,
+                part: 2,
+                type: "Intercepto",
+                narrative: "El intercepto es el valor de la función cuando x=0.",
+                q: "Si f(x) = mx + n y f(0) = 4, ¿cuál es el valor de n?",
+                a: "4",
+                options: ["0", "4", "1", "No se puede determinar."],
+                hint: "Sustituye x=0 en f(x) = mx + n."
+            }, {
+                id: 15,
+                part: 2,
+                type: "Ganancia",
+                narrative: "Patito Amarillito desordenó las cuentas de la empresa. ¡Recupera la ganancia!",
+                q: "Una función afín modela un costo fijo de $500 y un costo variable de $100 por unidad. Si se vende cada unidad a $200, ¿cuál es la ganancia total? (Ganancia = Ingreso - Costo).",
+                a: "y = 200x - (100x + 500)",
+                options: [
+                    "y = 200x - (100x + 500)",
+                    "y = 100x + 500",
+                    "y = 200x + 100x + 500",
+                    "y = 100x - 500"
+                ],
+                hint: "Ingreso = 200x, Costo = 100x + 500. Resta."
+            }, {
+                id: 16,
+                part: 2,
+                type: "Evaluación",
+                narrative: "El tanque de gasolina se vacía de forma afín. ¿Cuánto queda?",
+                q: "La función f(x) = -2x + 10 representa la cantidad de litros de gasolina (y) en un estanque después de (x) horas de uso. ¿Cuánta gasolina habrá después de 3 horas?",
+                a: "4 litros",
+                options: ["6 litros", "4 litros", "7 litros", "10 litros"],
+                hint: "Sustituye x=3 en f(x)."
+            }, {
+                id: 17,
+                part: 2,
+                type: "Raíz",
+                narrative: "¿Dónde la función cruza el eje X? Gatito Chill necesita el punto exacto.",
+                q: "¿Para qué valor de x la función f(x) = 5x - 15 es igual a 0?",
+                a: "3",
+                options: ["15", "3", "-3", "-15"],
+                hint: "Resuelve 5x - 15 = 0."
+            }, {
+                id: 18,
+                part: 2,
+                type: "Caso especial",
+                narrative: "Si la pendiente es cero, la función se vuelve plana. ¿Cómo se llama?",
+                q: "En la función f(x) = ax + b, si a = 0, ¿qué tipo de función obtenemos?",
+                a: "Función constante",
+                options: ["Función afín", "Función lineal", "Función constante", "Función cuadrática"],
+                hint: "Si a=0, f(x)=b, un valor fijo."
+            }, {
+                id: 19,
+                part: 2,
+                type: "Intersección con eje X",
+                narrative: "El punto donde la recta toca el eje X es crucial para restaurar el equilibrio.",
+                q: "¿Cuál es el punto de intersección de la función f(x) = 2x - 4 con el eje X?",
+                a: "(2, 0)",
+                options: ["(0, -4)", "(2, 0)", "(-4, 0)", "(0, 2)"],
+                hint: "El eje X es donde y=0. Resuelve 2x - 4 = 0."
+            }, {
+                id: 20,
+                part: 2,
+                type: "Problema inverso",
+                narrative: "El último desafío de Patito Amarillito. ¡Gatito Chill confía en ti!",
+                q: "Si el costo de un servicio es $10.000 fijo más $2.000 por hora, y una persona pagó $22.000, ¿cuántas horas utilizó?",
+                a: "6 horas",
+                options: ["4 horas", "6 horas", "12 horas", "8 horas"],
+                hint: "Resta el costo fijo y divide por el costo por hora."
             }
         ];
 
-        let currentLevel = 0;
+        // ================================================================
+        //  ESTADO DE LA APLICACIÓN
+        // ================================================================
+        let selectedPartMode = 'part1'; // 'part1' | 'part2' | 'full'
+        let currentQuestionsList = [];
+        let currentLevelIndex = 0;
         let isProcessing = false;
 
+        // ================================================================
+        //  FUNCIONES DE CONTROL
+        // ================================================================
+        function setPart(mode) {
+            selectedPartMode = mode;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            if (mode === 'part1') document.getElementById('btn-part1').classList.add('active');
+            if (mode === 'part2') document.getElementById('btn-part2').classList.add('active');
+            if (mode === 'full') document.getElementById('btn-full').classList.add('active');
+        }
+
+        function shuffleArray(arr) {
+            const copy = arr.slice();
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        // ================================================================
+        //  AUDIO SFX (Web Audio)
+        // ================================================================
+        function playSFX(type) {
+            const toggle = document.getElementById('sound-toggle');
+            if (!toggle || !toggle.checked) return;
+            try {
+                const ctx = new(window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                if (type === 'correct') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08);
+                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16);
+                    osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.24);
+                    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.4);
+                } else {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(200, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.25);
+                    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.3);
+                }
+            } catch (e) { /* silencio */ }
+        }
+
+        // ================================================================
+        //  INICIO DEL JUEGO
+        // ================================================================
         function startGame() {
+            if (selectedPartMode === 'part1') {
+                currentQuestionsList = allQuestions.filter(q => q.part === 1);
+            } else if (selectedPartMode === 'part2') {
+                currentQuestionsList = allQuestions.filter(q => q.part === 2);
+            } else {
+                currentQuestionsList = [...allQuestions];
+            }
+            currentLevelIndex = 0;
             document.getElementById('screen-start').classList.add('hidden');
             document.getElementById('screen-game').classList.remove('hidden');
-            currentLevel = 0;
-            loadLevel();
+            document.getElementById('screen-end').classList.add('hidden');
+            loadQuestion();
         }
 
-        // Algoritmo Fisher-Yates para barajar las opciones en cada nivel
-        function shuffle(array) {
-            let shuffled = array.slice();
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        function loadQuestion() {
+            const qData = currentQuestionsList[currentLevelIndex];
+            const total = currentQuestionsList.length;
+            const progress = ((currentLevelIndex) / total) * 100;
+
+            document.getElementById('level-label').innerText = `DESAFÍO ${currentLevelIndex + 1} / ${total}`;
+            document.getElementById('progress-fill').style.width = `${Math.max(progress, 5)}%`;
+            document.getElementById('section-badge').innerText =
+                qData.part === 1 ? "PARTE 1: CONCEPTOS BÁSICOS" : "PARTE 2: APLICACIONES Y PROBLEMAS";
+
+            document.getElementById('narrative-text').innerText = `"${qData.narrative}"`;
+            document.getElementById('question-number').innerText = `PREGUNTA #${qData.id}`;
+            document.getElementById('question-text').innerText = qData.q;
+            document.getElementById('question-type-badge').innerText = `Tipo: ${qData.type}`;
+
+            // Pistas
+            const hintsToggle = document.getElementById('hints-toggle').checked;
+            const hintContainer = document.getElementById('hint-container');
+            if (hintsToggle) {
+                hintContainer.classList.remove('hidden');
+                document.getElementById('hint-box').innerHTML = qData.hint;
+                document.getElementById('hint-box').classList.add('hidden');
+            } else {
+                hintContainer.classList.add('hidden');
             }
-            return shuffled;
-        }
 
-        function loadLevel() {
-            const level = questions[currentLevel];
-            document.getElementById('level-label').innerText = `MISIÓN: ${currentLevel + 1} / ${questions.length}`;
-            document.getElementById('progress-fill').style.width = `${((currentLevel) / questions.length) * 100}%`;
-            document.getElementById('narrative-text').innerText = `"${level.n}"`;
-            document.getElementById('question-text').innerHTML = level.q;
-
+            // Opciones aleatorizadas
             const select = document.getElementById('answer-select');
-            select.innerHTML = '<option value="" disabled selected>-- Elige tu táctica de reducción --</option>';
-            
-            const shuffledOptions = shuffle([...level.o]);
-            shuffledOptions.forEach(opt => {
+            select.innerHTML = '<option value="" disabled selected>-- Elige con calma --</option>';
+            const shuffled = shuffleArray(qData.options);
+            shuffled.forEach(opt => {
                 const el = document.createElement('option');
                 el.value = opt;
                 el.innerText = opt;
                 select.appendChild(el);
             });
 
-            // Rotar avatares de la Legión para mayor inmersión
-            const avatars = ["🐱", "🐢", "🐶", "🦅", "🤖"];
-            document.getElementById('hero-avatar').innerText = avatars[currentLevel % avatars.length];
-            
+            // Avatar rotativo
+            const avatars = ["🐱", "🐢", "🦉", "⚖️", "🐶"];
+            const names = ["Gatito Chill", "Mente Inversa", "Búho del Equilibrio", "Robot Balance", "Rayo Despeje"];
+            const idx = currentLevelIndex % avatars.length;
+            document.getElementById('hero-avatar').innerText = avatars[idx];
+            document.getElementById('hero-title').innerText = `Legión del Despeje: ${names[idx]}`;
+
             isProcessing = false;
+        }
+
+        function toggleHint() {
+            document.getElementById('hint-box').classList.toggle('hidden');
         }
 
         function checkAnswer() {
             if (isProcessing) return;
-
             const select = document.getElementById('answer-select');
             const userAns = select.value;
-            const fx = document.getElementById('visual-fx');
-
             if (!userAns) return;
 
             isProcessing = true;
+            const currentQ = currentQuestionsList[currentLevelIndex];
+            const fx = document.getElementById('visual-fx');
 
-            if (userAns === questions[currentLevel].a) {
-                // Correcto: Lanza onomatopeya alegre al estilo comic
-                const hits = ["¡CHILL!", "¡ZAS!", "¡POW!", "¡BOOM!", "¡REDUCIDO!", "¡EQUILIBRADO!"];
-                fx.innerText = hits[Math.floor(Math.random() * hits.length)];
-                fx.className = "pow-text comic-title text-8xl text-yellow-400 active";
-                
+            if (userAns === currentQ.a) {
+                playSFX('correct');
+                const words = ["¡DESPEJADO!", "¡EQUILIBRIO!", "¡CHILL!", "¡PERFECTO!", "¡POW!"];
+                fx.innerText = words[Math.floor(Math.random() * words.length)];
+                fx.className = "pow-text comic-font text-8xl md:text-9xl text-yellow-300 active";
                 setTimeout(() => {
                     fx.classList.remove('active');
-                    currentLevel++;
-                    if (currentLevel < questions.length) {
-                        loadLevel();
+                    currentLevelIndex++;
+                    if (currentLevelIndex < currentQuestionsList.length) {
+                        loadQuestion();
                     } else {
-                        showEnd();
+                        showVictoryScreen();
                     }
-                }, 900);
+                }, 850);
             } else {
-                // Incorrecto: lanza sonido de impacto de caída
-                fx.innerText = "¡OOF!";
-                fx.className = "pow-text comic-title text-8xl text-red-500 active";
-                
+                playSFX('wrong');
+                fx.innerText = "¡DESORDEN!";
+                fx.className = "pow-text comic-font text-8xl md:text-9xl text-red-500 active";
                 setTimeout(() => {
                     fx.classList.remove('active');
-                    select.value = ""; // Limpiar dropdown para reintento
+                    select.value = "";
                     isProcessing = false;
-                }, 900);
+                }, 850);
             }
         }
 
-        function showEnd() {
+        function showVictoryScreen() {
             document.getElementById('screen-game').classList.add('hidden');
             document.getElementById('screen-end').classList.remove('hidden');
             document.getElementById('progress-fill').style.width = "100%";
-        }
-    </script>
-</body>
-</html>
 
-    renderQuiz();
-</script>
+            const mode = selectedPartMode;
+            if (mode === 'part1') {
+                document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 de la Evaluación!";
+                document.getElementById('end-subtitle').innerText =
+                    "Dominaste los conceptos básicos de la función afín. ¡Continúa así!";
+            } else if (mode === 'part2') {
+                document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 de la Evaluación!";
+                document.getElementById('end-subtitle').innerText =
+                    "Aplicaste la función afín a problemas de la vida real. ¡Excelente!";
+            } else {
+                document.getElementById('end-title').innerText = "¡HAS COMPLETADO EL ESCAPE ROOM COMPLETO!";
+                document.getElementById('end-subtitle').innerText =
+                    "Eres un Maestro de la Función Afín. ¡El orden ha sido restaurado!";
+            }
+        }
+
+        function confirmExit() {
+            if (confirm("¿Deseas volver al menú de inicio?")) {
+                returnToStart();
+            }
+        }
+
+        function returnToStart() {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-end').classList.add('hidden');
+            document.getElementById('screen-extras').classList.add('hidden');
+            document.getElementById('screen-start').classList.remove('hidden');
+        }
+
+        // ================================================================
+        //  FUNCIONES PARA SECCIONES COMPLEMENTARIAS (EXTRAS)
+        // ================================================================
+        function toggleExtraModules() {
+            const extras = document.getElementById('screen-extras');
+            extras.classList.remove('hidden');
+            extras.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeExtraModules() {
+            document.getElementById('screen-extras').classList.add('hidden');
+        }
+
+        function switchExtraTab(tabId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('[id^="extra-"]').forEach(el => el.classList.add('hidden'));
+            // Remover clase activa de todos los botones
+            document.querySelectorAll('.extra-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
+
+            // Mostrar la sección seleccionada
+            document.getElementById(`extra-${tabId}`).classList.remove('hidden');
+            // Activar el botón correspondiente
+            document.getElementById(`tab-${tabId}`).classList.add('active-tab');
+        }
+
+        function toggleExtraHint() {
+            const box = document.getElementById('extra-hint-box');
+            box.classList.toggle('hidden');
+        }
+
+        // ================================================================
+        //  INICIALIZACIÓN: parte 1 activa por defecto
+        // ================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            setPart('part1');
+            // Asegurar que la pestaña de extras comience en la sección II
+            switchExtraTab('sec2');
+        });
+    </script>
+
 </body>
 </html>
