@@ -3,58 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gatito Chill y el Rescate de los Patrones - Escape Room Matemático</title>
-    <!-- Tailwind CSS para el diseño rápido y responsivo -->
+    <title>Gatito Chill vs. El Dr. Desequilibrio - Escape Room de Ecuaciones de Un Paso</title>
+    <!-- Tailwind CSS para diseño responsivo Pop-Art -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fuentes Google: Bangers (títulos súper cómic), Comic Neue (textos legibles), Chewy (toques divertidos) -->
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet">
+    <!-- Fuentes Google: Bangers (Cómic Retro), Comic Neue (Lectura clara), Chewy (Estilo Gatito Chill) -->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,400;0,700;1,700&family=Chewy&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --comic-red: #ef4444;
-            --comic-blue: #3b82f6;
-            --comic-purple: #8b5cf6;
+            --comic-blue: #2563eb;
+            --comic-purple: #7c3aed;
             --comic-yellow: #facc15;
+            --comic-green: #10b981;
             --comic-dark: #0f172a;
         }
 
         body {
             font-family: 'Comic Neue', cursive;
-            background-color: #1e1b4b; /* Base azul índigo de noche profunda */
-            /* Patrón clásico de puntos Ben-Day retro al estilo cómic de los 60s */
-            background-image: radial-gradient(rgba(139, 92, 246, 0.25) 15%, transparent 16%), 
-                              radial-gradient(rgba(139, 92, 246, 0.25) 15%, transparent 16%);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
+            background-color: #0f172a;
+            /* Patrón de puntos Ben-Day retro de cómic */
+            background-image: radial-gradient(rgba(239, 68, 68, 0.25) 15%, transparent 16%), 
+                              radial-gradient(rgba(37, 99, 235, 0.25) 15%, transparent 16%);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
             min-height: 100vh;
-            color: #1e293b;
+            color: #0f172a;
             overflow-x: hidden;
         }
 
-        .comic-title {
+        .comic-font {
             font-family: 'Bangers', cursive;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
         }
 
         .chill-font {
             font-family: 'Chewy', cursive;
         }
 
-        /* Paneles estilizados con trazo de tinta negra gruesa y sombra dura offset */
+        /* Paneles con contorno negro e imitación de tinta de historietas */
         .comic-panel {
             background: white;
             border: 5px solid black;
-            box-shadow: 10px 10px 0px rgba(0, 0, 0, 1);
+            box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
             position: relative;
         }
 
-        /* Micro puntos sutiles para imitar el papel de diario clásico de cómics */
+        .comic-panel-yellow {
+            background: #fef08a;
+            border: 5px solid black;
+            box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
+        }
+
+        /* Textura sutil de impresión offset */
         .comic-panel::before {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(rgba(0,0,0,0.03) 1.2px, transparent 1.2px);
-            background-size: 8px 8px;
+            background-image: radial-gradient(rgba(0,0,0,0.02) 1px, transparent 1px);
+            background-size: 6px 6px;
             pointer-events: none;
             z-index: 1;
         }
@@ -62,23 +69,23 @@
         .btn-comic {
             font-family: 'Bangers', cursive;
             letter-spacing: 1px;
-            border: 3px solid black;
-            box-shadow: 4px 4px 0px black;
-            transition: all 0.1s ease;
+            border: 4px solid black;
+            box-shadow: 5px 5px 0px black;
+            transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.2s ease;
             text-transform: uppercase;
         }
 
         .btn-comic:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px black;
+            transform: translate(-3px, -3px);
+            box-shadow: 8px 8px 0px black;
         }
 
         .btn-comic:active {
             transform: translate(2px, 2px);
-            box-shadow: 0px 0px 0px black;
+            box-shadow: 1px 1px 0px black;
         }
 
-        /* Contenedor flotante para onomatopeyas de impacto retro */
+        /* Onomatopeya flotante emergente */
         .pow-text {
             position: fixed;
             top: 50%;
@@ -86,280 +93,641 @@
             transform: translate(-50%, -50%) scale(0);
             z-index: 100;
             pointer-events: none;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-shadow: 4px 4px 0px black;
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-shadow: 6px 6px 0px black;
+            -webkit-text-stroke: 3px black;
         }
 
         .pow-text.active {
-            transform: translate(-50%, -50%) scale(1.6);
+            transform: translate(-50%, -50%) scale(1.5);
         }
 
-        /* Ajustes de estilo para el menú desplegable select del cómic */
+        /* Estilo para los selectores de respuesta */
         select {
             appearance: none;
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: right 1.2rem center;
-            background-size: 1.5em;
+            background-size: 1.4em;
         }
 
         .progress-bar-container {
             background: #e2e8f0;
-            border: 3px solid black;
+            border: 4px solid black;
             border-radius: 9999px;
             overflow: hidden;
             height: 28px;
         }
 
         .progress-bar-fill {
-            background: var(--comic-purple);
+            background: linear-gradient(90deg, #ef4444, #8b5cf6, #3b82f6);
             height: 100%;
-            transition: width 0.4s ease;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Efecto de parpadeo de alerta retro */
         .alarm-border {
-            animation: redAlert 1.5s infinite alternate;
+            animation: alertPulse 1.8s infinite alternate;
         }
 
-        @keyframes redAlert {
-            from { border-color: black; }
-            to { border-color: #ef4444; }
+        @keyframes alertPulse {
+            from { border-color: #0f172a; box-shadow: 8px 8px 0px black; }
+            to { border-color: #ef4444; box-shadow: 8px 8px 0px #ef4444; }
+        }
+
+        .tab-btn.active {
+            background-color: #facc15;
+            color: black;
+            border-bottom: 4px solid black;
         }
     </style>
 </head>
-<body class="flex items-center justify-center p-4">
+<body class="flex items-center justify-center p-3 md:p-6">
 
-    <!-- Capa de efectos onomatopeyas del Dr. Des-Patrón y Gatito Chill -->
-    <div id="visual-fx" class="pow-text comic-title text-8xl text-yellow-400">¡ZAS!</div>
+    <!-- Onomatopeya FX dinámico -->
+    <div id="visual-fx" class="pow-text comic-font text-7xl md:text-9xl text-yellow-300">¡DESPEJADO!</div>
 
     <div class="max-w-4xl w-full">
-        <!-- CABECERA PRINCIPAL CON LA INFORMACIÓN DEL OA -->
-        <header class="text-center mb-8">
-            <div class="inline-block bg-white border-4 border-black p-4 transform -rotate-1 shadow-[8px_8px_0px_#ef4444] relative z-10">
-                <h1 class="text-4xl md:text-6xl comic-title text-red-600">GATITO CHILL Y EL CAOS-O-MATIC</h1>
-                <p class="text-xl font-bold mt-2 text-indigo-900">Misión: ¡Salvar las Leyes del Patrón!</p>
+        <!-- CABECERA DE EVALUACIÓN OFICIAL -->
+        <header class="text-center mb-6">
+            <div class="inline-block bg-white border-4 border-black p-4 md:p-6 transform -rotate-1 shadow-[8px_8px_0px_#2563eb] relative z-10 w-full">
+                <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-black pb-2 mb-3 text-xs md:text-sm font-bold text-gray-700">
+                    <span>📚 NIVEL: 6° BÁSICO</span>
+                    <span>⏱️ TIEMPO MÁXIMO: 90 MIN</span>
+                    <span>🧩 UNIDAD: ÁLGEBRA Y ECUACIONES</span>
+                </div>
+                <h1 class="text-3xl md:text-5xl comic-font text-blue-700 tracking-wide uppercase">
+                    Gatito Chill vs. El Dr. Desequilibrio
+                </h1>
+                <p class="text-lg md:text-2xl chill-font text-purple-900 mt-1">
+                    ¡Escape Room de Ecuaciones de Un Paso y Operaciones Inversas!
+                </p>
             </div>
             
-            <div class="mt-6 bg-white border-2 border-black p-3 rounded-lg max-w-2xl mx-auto shadow-md relative z-10">
-                <p class="font-bold text-sm text-indigo-900 italic text-center">
-                    🎯 OBJETIVO (OA 10): Representar generalizaciones de relaciones entre números naturales, usando expresiones con letras y ecuaciones.
+            <!-- Cuadro de Objetivo de Aprendizaje (OA 11) -->
+            <div class="mt-4 bg-yellow-100 border-2 border-black p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
+                <p class="font-bold text-xs md:text-sm text-indigo-950">
+                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 11)</span>: Resolver ecuaciones de primer grado con una incógnita, utilizando estrategias como procedimientos formales de resolución (despeje mediante operaciones inversas) y verificación de soluciones.
                 </p>
             </div>
         </header>
 
         <main class="relative z-10">
-            <!-- Pantalla de Bienvenida -->
-            <div id="screen-start" class="comic-panel p-8 space-y-6">
-                <div class="flex justify-center gap-6 text-7xl animate-bounce">
-                    <span>🐱</span><span>🛡️</span><span>🤖</span>
-                </div>
-                <h2 class="text-3xl md:text-4xl comic-title text-center text-purple-700">¡ALERTA MÁXIMA EN CIUDAD INCÓGNITAS!</h2>
-                <div class="text-lg leading-relaxed space-y-4 font-medium text-left border-l-4 border-blue-500 pl-4">
-                    <p>El malvado <b>Dr. Des-Patrón</b>, antiguo científico de la Legión Titán resentido con la simetría y las secuencias, ha construido el destructor <i>Caos-O-Matic</i>.</p>
-                    <p>Su rayo desorganizador está cambiando todas las variables del universo: ¡los días pasan en orden desordenado, las ecuaciones fallan y las escaleras cambian de tamaño al azar!</p>
-                    <p>El <b>Gatito Chill</b>, acomodándose lentamente su hojita de otoño favorita en la cabeza, nos regala un ronroneo sereno y nos aconseja: <span class="text-blue-600 font-bold">"Todo está chill, chicos. El caos es solo un patrón que aún no hemos organizado. Respiren hondo, usen su calma mental y resolvamos los 20 códigos del Dr. Des-Patrón para restaurar el equilibrio."</span></p>
-                </div>
-                
-                <!-- Configuración del audio opcional para mejorar la inmersión del estudiante -->
-                <div class="flex items-center justify-center gap-2 bg-yellow-50 p-3 border-2 border-dashed border-yellow-300 rounded-lg">
-                    <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer">
-                    <label for="sound-toggle" class="font-bold text-sm text-yellow-800 cursor-pointer select-none">🔊 Activar sintetizador de sonido retro (SFX)</label>
+            <!-- PANTALLA 1: INICIO Y SELECCIÓN DOCENTE -->
+            <div id="screen-start" class="comic-panel p-6 md:p-8 space-y-6">
+                <div class="flex justify-center items-center gap-4 text-6xl md:text-7xl animate-bounce">
+                    <span>🐱</span><span class="text-3xl font-black">VS</span><span>🦹‍♂️</span>
                 </div>
 
-                <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-3xl py-4 w-full rounded-xl">
-                    ¡DESACTIVAR EL CAOS-O-MATIC! ⚡
-                </button>
+                <div class="text-center">
+                    <h2 class="text-2xl md:text-4xl comic-font text-red-600">¡AMENAZA EN LA CIUDAD DE LA IGUALDAD!</h2>
+                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">Las balanzas del conocimiento han perdido el equilibrio...</p>
+                </div>
+
+                <!-- Historia Gamificada -->
+                <div class="bg-blue-50 border-4 border-black p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
+                    <p class="text-base md:text-lg">
+                        El villano <b>El Dr. Desequilibrio</b> ha lanzado su rayo <i>"Des-Ecuación 3000"</i>, alterando los valores de la incógnita <span class="font-mono bg-yellow-300 px-1 font-bold">x</span> en todos los servidores de la ciudad. Sin el valor exacto de <span class="font-mono bg-yellow-300 px-1 font-bold">x</span>, las puertas automáticas, los puentes y la señal de internet han quedado totalmente bloqueados.
+                    </p>
+                    <p class="text-base md:text-lg">
+                        Acomodándose su hojita de té favorita sobre la cabeza, el sereno <b>Gatito Chill</b> bebe un sorbo relajante y nos aconseja con una sonrisa:
+                    </p>
+                    <blockquote class="bg-yellow-200 border-l-4 border-yellow-600 p-3 rounded font-bold text-indigo-900 italic text-sm md:text-base">
+                        "Chill out, amigos... Despejar la incógnita <span class="font-mono bg-yellow-300 px-1 rounded">x</span> es muy sencillo si recuerdan la regla de oro: ¡Lo que está sumando pasa restando, y lo que está restando pasa sumando! Mantengan la calma, apliquen la operación inversa y el equilibrio volverá solo."
+                    </blockquote>
+                </div>
+
+                <!-- SELECCIÓN DOCENTE / DIVISIÓN EN 2 PARTES DE 10 PREGUNTAS -->
+                <div class="bg-purple-100 border-4 border-black p-5 rounded-xl text-left space-y-3 shadow-md">
+                    <label class="block font-black text-purple-900 uppercase text-base md:text-lg comic-font tracking-wide">
+                        ⚙️ Configuración Docente / Selección de Tramo (10 u 20 preguntas):
+                    </label>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
+                            📍 Parte 1 (Preguntas 1 a 10)<br>
+                            <span class="text-xs font-normal normal-case block">Ecuaciones básicas con suma, resta y decimales</span>
+                        </button>
+                        <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
+                            📍 Parte 2 (Preguntas 11 a 20)<br>
+                            <span class="text-xs font-normal normal-case block">Desafíos combinados, fracciones y equilibrio</span>
+                        </button>
+                        <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
+                            🔥 Modo Completo (20 Retos)<br>
+                            <span class="text-xs font-normal normal-case block">Evaluación continua completa</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Opciones de Configuración Interactiva -->
+                <div class="flex flex-wrap items-center justify-between gap-3 bg-gray-100 p-3 border-2 border-black rounded-lg">
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600">
+                        <label for="sound-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">🔊 Sintetizador Audio Retro (SFX)</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600">
+                        <label for="hints-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">💡 Permitir pistas de desarrollo</label>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-black text-2xl md:text-3xl py-4 w-full rounded-xl">
+                        ¡DESACTIVAR LA MÁQUINA DEL CAOS! 🚀
+                    </button>
+                </div>
+
+                <!-- Enlace rápido a módulos complementarios -->
+                <div class="text-center pt-2 border-t-2 border-gray-200">
+                    <button onclick="toggleExtraModules()" class="text-sm font-bold text-blue-700 underline hover:text-blue-900">
+                        📋 Ver Secciones Complementarias (Problemas de 4 pasos, Metacognición y Autoevaluación)
+                    </button>
+                </div>
             </div>
 
-            <!-- Pantalla del Juego -->
+            <!-- PANTALLA 2: JUEGO / ESCAPE ROOM -->
             <div id="screen-game" class="hidden space-y-6">
-                <!-- Barra de Progreso Comic -->
+                <!-- Barra de Progreso Superior -->
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white border-4 border-black p-4 shadow-[6px_6px_0px_black]">
-                    <div class="comic-title text-2xl text-red-600" id="level-label">MISIÓN: 1 / 20</div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl">🐱</span>
+                        <div>
+                            <div class="comic-font text-2xl text-red-600 leading-tight" id="level-label">DESAFÍO 1 / 10</div>
+                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: ECUACIONES DIRECTAS</div>
+                        </div>
+                    </div>
+
+                    <!-- Progreso -->
                     <div class="w-full md:w-1/2 progress-bar-container">
                         <div id="progress-fill" class="progress-bar-fill" style="width: 5%"></div>
                     </div>
+
+                    <button onclick="confirmExit()" class="text-xs font-bold bg-gray-200 hover:bg-gray-300 border-2 border-black px-3 py-1 rounded">
+                        ⚙️ Menú
+                    </button>
                 </div>
 
-                <!-- Contenedor del Desafío de Ecuación o Patrón -->
-                <div class="comic-panel p-6 md:p-10 alarm-border border-4">
-                    <!-- Cuadro de diálogo del héroe activo en esta ronda -->
-                    <div class="flex items-start gap-4 mb-6 bg-blue-50 border-2 border-black p-4 rounded-lg">
+                <!-- Panel del Reto Matemático -->
+                <div class="comic-panel p-5 md:p-8 alarm-border border-4">
+                    <!-- Avatar Aliado -->
+                    <div class="flex items-start gap-4 mb-6 bg-blue-50 border-2 border-black p-4 rounded-xl">
                         <div class="text-5xl" id="hero-avatar">🐱</div>
                         <div class="w-full">
-                            <h4 class="font-bold text-red-600 uppercase tracking-wide text-xs" id="hero-title">Legión Titán: Gatito Chill</h4>
-                            <p class="font-bold text-indigo-900 italic text-lg animate-pulse" id="narrative-text">Cargando...</p>
+                            <div class="flex justify-between items-center">
+                                <h4 class="font-bold text-red-600 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Legión del Despeje: Gatito Chill</h4>
+                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Suma Inversa</span>
+                            </div>
+                            <p class="font-bold text-indigo-950 italic text-base md:text-lg mt-1" id="narrative-text">Cargando situación...</p>
                         </div>
                     </div>
 
-                    <!-- Panel de Pregunta Principal -->
+                    <!-- Enunciado de la Pregunta -->
                     <div class="space-y-6 relative z-10">
-                        <div id="question-container">
-                            <h3 id="question-text" class="text-xl md:text-2xl font-bold text-gray-800 border-b-2 border-gray-100 pb-4 leading-relaxed"></h3>
+                        <div class="bg-gray-50 border-2 border-black p-5 rounded-xl shadow-inner">
+                            <div id="question-number" class="comic-font text-xl text-purple-700 mb-1">PREGUNTA #</div>
+                            <div id="question-text" class="text-xl md:text-2xl font-bold text-gray-900 leading-relaxed font-mono"></div>
                         </div>
 
-                        <!-- Menú Desplegable interactivo de alternativas -->
-                        <div class="space-y-3">
-                            <label class="block font-black text-purple-700 uppercase tracking-tighter text-sm">Selecciona tu cálculo de contraataque:</label>
-                            <select id="answer-select" class="w-full p-4 border-4 border-black text-lg md:text-xl font-bold bg-yellow-50 focus:ring-8 focus:ring-purple-200 outline-none cursor-pointer">
-                                <option value="" disabled selected>-- Elige con calma --</option>
+                        <!-- Ayuda y Pista de Desarrollo -->
+                        <div id="hint-container" class="hidden">
+                            <button onclick="toggleHint()" class="text-sm font-bold text-purple-800 bg-purple-100 border-2 border-purple-400 px-3 py-1.5 rounded-lg flex items-center gap-2 hover:bg-purple-200 transition">
+                                💡 <span>¿Necesitas ver el Espacio para el Desarrollo? (Ver paso a paso)</span>
+                            </button>
+                            <div id="hint-box" class="hidden mt-2 p-3 bg-yellow-50 border-2 border-yellow-400 rounded-lg text-sm text-yellow-950 leading-relaxed font-medium">
+                                <!-- Pista dinámica -->
+                            </div>
+                        </div>
+
+                        <!-- Menú Desplegable con Alternativas Aleatorizadas -->
+                        <div class="space-y-2">
+                            <label class="block font-black text-indigo-950 uppercase tracking-tight text-sm">
+                                🎯 Selecciona el valor despejado de la incógnita x:
+                            </label>
+                            <select id="answer-select" class="w-full p-4 border-4 border-black text-lg md:text-xl font-bold bg-yellow-50 focus:ring-4 focus:ring-purple-300 outline-none cursor-pointer rounded-xl">
+                                <option value="" disabled selected>-- Selecciona tu solución con tranquilidad --</option>
                             </select>
                         </div>
 
-                        <!-- Botón de acción con estética retro -->
-                        <button onclick="checkAnswer()" class="btn-comic bg-red-600 hover:bg-red-500 text-white text-3xl py-4 w-full">
-                            ¡ENVIAR RESPUESTA! 💥
+                        <!-- Botón de Envío -->
+                        <button onclick="checkAnswer()" class="btn-comic bg-red-600 hover:bg-red-500 text-white text-2xl md:text-3xl py-4 w-full rounded-xl">
+                            ¡ENVIAR CÓDIGO DE EQUILIBRIO! 💥
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Pantalla de Victoria -->
-            <div id="screen-end" class="hidden comic-panel p-10 text-center space-y-8">
-                <h2 class="text-6xl md:text-7xl comic-title text-purple-700">¡EL EQUILIBRIO VOLVIÓ!</h2>
-                <div class="text-9xl animate-bounce my-8">🐱⚖️🏆</div>
-                <p class="text-2xl font-bold text-indigo-950">¡Has completado las 20 misiones y desactivado el Caos-O-Matic!</p>
-                <div class="bg-yellow-100 border-4 border-dashed border-black p-6 rounded-2xl font-bold text-lg max-w-2xl mx-auto space-y-4 text-left">
-                    <p>"¿Ves? Las variables son solo secretos listos para ser resueltos con paciencia y una rica taza de té tibio. Ahora todo está oficialmente súper chill", dice el Gatito Chill mientras bosteza tranquilamente.</p>
-                    <p class="text-blue-700 text-center font-black">¡Felicidades, Héroe de los Patrones! La Legión Titán te ha otorgado la medalla de la constancia matemática.</p>
+            <!-- PANTALLA 3: VICTORIA / FINAL -->
+            <div id="screen-end" class="hidden comic-panel p-8 md:p-12 text-center space-y-8">
+                <h2 class="text-5xl md:text-7xl comic-font text-purple-700">¡SISTEMA REESTABLECIDO!</h2>
+                <div class="text-8xl md:text-9xl animate-bounce my-4">🐱⚖️✨</div>
+                
+                <div class="space-y-3">
+                    <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has derrotado al Dr. Desequilibrio!</p>
+                    <p class="text-gray-700 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
+                        Las ecuaciones de la ciudad han vuelto a estar en perfecta igualdad y todas las incógnitas fueron despejadas.
+                    </p>
                 </div>
-                <button onclick="location.reload()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-3xl py-4 px-12 rounded-full">
-                    REINICIAR ENTRENAMIENTO
-                </button>
+
+                <div class="bg-yellow-100 border-4 border-black p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
+                    <p class="text-purple-900">
+                        <b>Gatito Chill te felicita:</b> "¡Excelente trabajo! Recuerda que para resolver cualquier ecuación de un paso solo debes aplicar la operación inversa a ambos lados de la igualdad. ¡Mantener el equilibrio es la clave de todo!"
+                    </p>
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-center gap-4 pt-4">
+                    <button onclick="returnToStart()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-2xl py-4 px-8 rounded-xl">
+                        🔄 VOLVER AL MENÚ
+                    </button>
+                    <button onclick="toggleExtraModules()" class="btn-comic bg-purple-600 hover:bg-purple-500 text-white text-2xl py-4 px-8 rounded-xl">
+                        📝 VER MÓDULOS DE DESARROLLO
+                    </button>
+                </div>
+            </div>
+
+            <!-- PANTALLA SECUNDARIA: SECCIONES COMPLEMENTARIAS DE LA GUÍA -->
+            <div id="screen-extras" class="hidden comic-panel p-6 md:p-8 space-y-6 my-6">
+                <div class="flex justify-between items-center border-b-4 border-black pb-4">
+                    <h2 class="text-3xl md:text-4xl comic-font text-indigo-900">SECCIONES DE DESARROLLO Y EVALUACIÓN</h2>
+                    <button onclick="closeExtraModules()" class="btn-comic bg-red-500 text-white px-4 py-1 text-xl rounded">
+                        ✖️ CERRAR
+                    </button>
+                </div>
+
+                <!-- Navegación por pestañas de la guía -->
+                <div class="flex flex-wrap gap-2 border-b-2 border-black pb-2">
+                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="btn-comic py-2 px-3 text-sm bg-yellow-300">Sección II: Problemas (4 Pasos)</button>
+                    <button onclick="switchExtraTab('sec3')" id="tab-sec3" class="btn-comic py-2 px-3 text-sm bg-white">Sección III: Metacognición</button>
+                    <button onclick="switchExtraTab('sec4')" id="tab-sec4" class="btn-comic py-2 px-3 text-sm bg-white">Sección IV: Desafío Extra</button>
+                    <button onclick="switchExtraTab('sec5')" id="tab-sec5" class="btn-comic py-2 px-3 text-sm bg-white">Sección V: Autoevaluación</button>
+                </div>
+
+                <!-- SECCIÓN II: RESOLUCIÓN DE PROBLEMAS EN 4 PASOS -->
+                <div id="extra-sec2" class="space-y-6 text-left">
+                    <div class="bg-blue-50 border-2 border-black p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-blue-900">II. Resolución de Problemas (Estrategia de los 4 Pasos)</h3>
+                        <p class="text-xs text-gray-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Revisar.</p>
+                    </div>
+
+                    <!-- Problema 1 -->
+                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Compra y Vuelto)</span>
+                        <p class="font-bold text-gray-800">
+                            Un estudiante compra 3 cuadernos. Si cada cuaderno cuesta $1.200 y al pagar con un billete de $5.000 le dieron $1.400 de vuelto, ¿era correcto el vuelto? Plantea y resuelve una ecuación de un paso para verificarlo.
+                        </p>
+                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
+                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
+                                <p><b>1. Comprender:</b> Costo total cuadernos = 3 · $1.200 = $3.600. Pago = $5.000. Vuelto dado = $1.400.</p>
+                                <p><b>2. Planificar:</b> Sea <span class="font-mono">x</span> la diferencia o vuelto exacto. Ecuación: <span class="font-mono">3.600 + x = 5.000</span>.</p>
+                                <p><b>3. Resolver:</b> <span class="font-mono">x = 5.000 - 3.600 => x = 1.400</span>.</p>
+                                <p><b>4. Revisar:</b> Como <span class="font-mono">x = 1.400</span> coincide exactamente con el vuelto entregado, ¡sí era totalmente correcto!</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Problema 2 -->
+                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Geometría y Área)</span>
+                        <p class="font-bold text-gray-800">
+                            El área de un rectángulo es 48 cm². Si el largo mide 8 cm, ¿cuánto mide el ancho? (Define el ancho como una variable y resuelve mediante una ecuación).
+                        </p>
+                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
+                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
+                                <p><b>1. Comprender:</b> Área = 48 cm², Largo = 8 cm. Se busca el ancho (<span class="font-mono">x</span>).</p>
+                                <p><b>2. Planificar:</b> Área = Largo · Ancho => <span class="font-mono">8 · x = 48</span>.</p>
+                                <p><b>3. Resolver:</b> <span class="font-mono">x = 48 / 8 => x = 6</span> cm.</p>
+                                <p><b>4. Revisar:</b> 8 cm · 6 cm = 48 cm². El ancho mide 6 cm.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Problema 3 -->
+                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Edades)</span>
+                        <p class="font-bold text-gray-800">
+                            La edad de una persona más 15 años es igual a 42 años. ¿Cuántos años tenía hace 5 años? Plantea la ecuación para encontrar la edad actual y luego responde.
+                        </p>
+                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
+                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
+                                <p><b>1. Comprender:</b> Edad actual (<span class="font-mono">x</span>) + 15 = 42. Se pide la edad hace 5 años (<span class="font-mono">x - 5</span>).</p>
+                                <p><b>2. Planificar:</b> Ecuación: <span class="font-mono">x + 15 = 42</span>.</p>
+                                <p><b>3. Resolver:</b> <span class="font-mono">x = 42 - 15 => x = 27</span> años (Edad actual). Edad hace 5 años: <span class="font-mono">27 - 5 = 22</span> años.</p>
+                                <p><b>4. Revisar:</b> 22 + 5 = 27. 27 + 15 = 42. ¡Correcto!</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN III: METACOGNICIÓN -->
+                <div id="extra-sec3" class="hidden space-y-4 text-left">
+                    <div class="bg-purple-50 border-2 border-black p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-purple-900">III. Metacognición (Reflexión del Estudiante)</h3>
+                        <p class="text-xs text-gray-700">Analiza tus propios razonamientos durante la resolución:</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="p-3 bg-white border border-black rounded-lg">
+                            <p class="font-bold text-sm text-gray-800">1. ¿Qué estrategia te resultó más útil para identificar qué operación aplicar en los problemas de desarrollo?</p>
+                        </div>
+                        <div class="p-3 bg-white border border-black rounded-lg">
+                            <p class="font-bold text-sm text-gray-800">2. ¿Hubo algún problema en la sección de selección múltiple donde el "Espacio para el Desarrollo" te ayudó a corregir un error inicial? Explica brevemente.</p>
+                        </div>
+                        <div class="p-3 bg-white border border-black rounded-lg">
+                            <p class="font-bold text-sm text-gray-800">3. Al finalizar esta evaluación, ¿cuánta seguridad sientes al aplicar procedimientos formales para despejar una incógnita? (Escala del 1 al 7).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN IV: DESAFÍO EXTRA (LÓGICA INVERSA) -->
+                <div id="extra-sec4" class="hidden space-y-4 text-left">
+                    <div class="bg-yellow-50 border-2 border-black p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Lógica Inversa)</h3>
+                        <p class="text-sm text-gray-800">
+                            Si al doble de un número le resto 5, obtengo 15. ¿Cuál es el número? (Añade explicaciones de cómo "revertiste" las operaciones).
+                        </p>
+                    </div>
+
+                    <div class="p-4 bg-white border-2 border-black rounded-xl space-y-3">
+                        <button onclick="toggleExtraHint()" class="btn-comic bg-yellow-400 text-black text-sm px-4 py-2 rounded">
+                            🧩 Revelar Solución por Reversión de Gatito Chill
+                        </button>
+                        <div id="extra-hint-box" class="hidden text-sm bg-yellow-100 p-3 rounded border border-yellow-300 leading-relaxed">
+                            <p><b>Ecuación planteada:</b> <span class="font-mono">2x - 5 = 15</span></p>
+                            <p><b>Paso 1 (Revertir la resta):</b> Le sumo 5 al resultado final: <span class="font-mono">15 + 5 = 20</span>.</p>
+                            <p><b>Paso 2 (Revertir el doble):</b> Divido 20 por 2: <span class="font-mono">20 / 2 = 10</span>.</p>
+                            <p><b>Resultado:</b> El número buscado es <b>10</b>. (Comprobación: 2 · 10 - 5 = 20 - 5 = 15).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN V: AUTOEVALUACIÓN -->
+                <div id="extra-sec5" class="hidden space-y-4 text-left">
+                    <div class="bg-green-50 border-2 border-black p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-green-900">V. Autoevaluación del Estudiante</h3>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm border-2 border-black bg-white">
+                            <thead class="bg-yellow-300 border-b-2 border-black">
+                                <tr>
+                                    <th class="p-2 text-left border-r border-black">Criterio / Ítem</th>
+                                    <th class="p-2 text-center border-r border-black">Logrado (3)</th>
+                                    <th class="p-2 text-center border-r border-black">En proceso (2)</th>
+                                    <th class="p-2 text-center">Iniciado (1)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-black">
+                                    <td class="p-2 border-r border-black font-medium">1. Identifico la operación inversa necesaria para resolver ecuaciones.</td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1"></td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1"></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto1"></td>
+                                </tr>
+                                <tr class="border-b border-black">
+                                    <td class="p-2 border-r border-black font-medium">2. Aplico el método de los 4 pasos en problemas narrativos.</td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2"></td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2"></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto2"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-r border-black font-medium">3. Mantengo el orden y el rigor en mis procedimientos algebraicos.</td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3"></td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3"></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto3"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
 
     <script>
-        // Las 20 preguntas reales de la evaluación, sin inventar ni omitir ninguna.
-        const questions = [
-            { 
-                n: "El Caos-O-Matic interfiere en el invernadero de Ciudad Incógnitas.", 
-                q: "<b>Pregunta 1:</b> Si la regla de una secuencia es 'sumar 4', y el primer término es 5, ¿cuál es el cuarto término?", 
-                a: "17", 
-                o: ["13", "17", "21", "9"] 
+        // BASE DE DATOS EXACTA DE LAS 20 PREGUNTAS DE LA GUÍA OFICIAL (OA 11 - 6° BÁSICO)
+        const allQuestions = [
+            // PARTE 1 (Preguntas 1 a 10)
+            {
+                id: 1,
+                part: 1,
+                type: "Suma Inversa",
+                narrative: "El Dr. Desequilibrio bloqueó los escáneres de la puerta principal.",
+                q: "¿Cuál es el valor de x en la ecuación x + 12 = 30?",
+                a: "18",
+                options: ["18", "42", "15", "20"],
+                hint: "Espacio para el Desarrollo: Aplica la operación inversa de la suma (resta). Resta 12 a 30 -> x = 30 - 12 -> x = 18."
             },
-            { 
-                n: "Rayo Veloz detecta un código encriptado del Dr. Des-Patrón.", 
-                q: "<b>Pregunta 2:</b> ¿Qué expresión algebraica representa 'el triple de un número aumentado en 8'?", 
-                a: "3x + 8", 
-                o: ["3(x + 8)", "3x + 8", "x + 3 * 8", "3(8x)"] 
+            {
+                id: 2,
+                part: 1,
+                type: "Resta Inversa",
+                narrative: "El suministro de té de Gatito Chill quedó atrapado tras una caja fuerte.",
+                q: "¿Cuál es el valor de x en la ecuación x - 8 = 12?",
+                a: "20",
+                options: ["20", "16", "4", "10"],
+                hint: "Espacio para el Desarrollo: Aplica la operación inversa de la resta (suma). Suma 8 a 12 -> x = 12 + 8 -> x = 20."
             },
-            { 
-                n: "Fuerza Pluma sostiene un cristal de energía inestable con valor desconocido.", 
-                q: "<b>Pregunta 3:</b> Si x = 5, ¿cuál es el valor de la expresión 2x + 7?", 
-                a: "17", 
-                o: ["12", "14", "17", "24"] 
+            {
+                id: 3,
+                part: 1,
+                type: "Incógnita a la Derecha",
+                narrative: "El rayo desequilibrador invirtió el orden de los miembros de la balanza.",
+                q: "¿Cuál es el valor de x en la ecuación 25 = x + 5?",
+                a: "20",
+                options: ["30", "20", "15", "25"],
+                hint: "Espacio para el Desarrollo: La incógnita x está a la derecha. Resta 5 a 25 -> 25 - 5 = x -> x = 20."
             },
-            { 
-                n: "Mente Brillante está balanceando un contenedor de agua pura.", 
-                q: "<b>Pregunta 4:</b> ¿Cuál es el valor de x en la ecuación: <b>x + 15 = 40</b>?", 
-                a: "25", 
-                o: ["55", "35", "25", "20"] 
+            {
+                id: 4,
+                part: 1,
+                type: "Incógnita a la Derecha",
+                narrative: "Se detecta una perturbación en el radar de la ciudad.",
+                q: "¿Cuál es el valor de x en la ecuación 15 = x - 10?",
+                a: "25",
+                options: ["5", "25", "20", "15"],
+                hint: "Espacio para el Desarrollo: Suma 10 a 15 para despejar x -> 15 + 10 = x -> x = 25."
             },
-            { 
-                n: "Gatito Chill analiza el flujo de la marea de la bahía.", 
-                q: "<b>Pregunta 5:</b> Observa la tabla:<br><span class='font-mono bg-gray-100 px-2 py-1 rounded border border-gray-300 inline-block my-2'>Entrada (n): 1, 2, 3<br>Salida: 3, 6, 9</span><br>¿Cuál es la regla de transformación de la máquina?", 
-                a: "3n", 
-                o: ["n + 2", "2n", "3n", "n + 3"] 
+            {
+                id: 5,
+                part: 1,
+                type: "Centenas",
+                narrative: "El termómetro energético del refugio sobrepasó los límites normales.",
+                q: "Si x + 45 = 100, ¿cuánto vale x?",
+                a: "55",
+                options: ["55", "145", "50", "60"],
+                hint: "Espacio para el Desarrollo: Resta 45 a 100 -> x = 100 - 45 -> x = 55."
             },
-            { 
-                n: "Rayo Veloz ve cuatro engranajes bloqueados por un código multiplicativo.", 
-                q: "<b>Pregunta 6:</b> ¿Qué número debe ir en el cuadro para que se cumpla la igualdad: <b>4 • □ = 36</b>?", 
-                a: "9", 
-                o: ["8", "9", "10", "32"] 
+            {
+                id: 6,
+                part: 1,
+                type: "Resta Inversa",
+                narrative: "Los altavoces de la plaza emiten interferencia de ondas.",
+                q: "Si x - 22 = 18, ¿cuánto vale x?",
+                a: "40",
+                options: ["30", "40", "36", "44"],
+                hint: "Espacio para el Desarrollo: Suma 22 a 18 -> x = 18 + 22 -> x = 40."
             },
-            { 
-                n: "Mente Brillante introduce un número en una procesadora cuántica.", 
-                q: "<b>Pregunta 7:</b> Si una máquina transforma 'n' en 'n - 5', ¿qué resultado da si entra el número 12?", 
-                a: "7", 
-                o: ["17", "60", "7", "2"] 
+            {
+                id: 7,
+                part: 1,
+                type: "Equilibrio",
+                narrative: "Un contrapeso de 50 kg mantiene suspendido el puente levadizo.",
+                q: "Si 50 = x + 25, ¿cuánto vale x?",
+                a: "25",
+                options: ["75", "50", "25", "20"],
+                hint: "Espacio para el Desarrollo: Resta 25 a 50 -> 50 - 25 = x -> x = 25."
             },
-            { 
-                n: "Fuerza Pluma intenta duplicar la resistencia del campo de fuerza.", 
-                q: "<b>Pregunta 8:</b> ¿Cuál es la ecuación que representa exactamente la frase: 'El doble de un número es 24'?", 
-                a: "2x = 24", 
-                o: ["x + 2 = 24", "2x = 24", "x / 2 = 24", "2 + x = 24"] 
+            {
+                id: 8,
+                part: 1,
+                type: "Resta Inversa",
+                narrative: "El reloj digital del ayuntamiento comenzó a correr marcha atrás.",
+                q: "Si 12 = x - 20, ¿cuánto vale x?",
+                a: "32",
+                options: ["8", "30", "10", "32"],
+                hint: "Espacio para el Desarrollo: Suma 20 a 12 -> 12 + 20 = x -> x = 32."
             },
-            { 
-                n: "Gatito Chill sigue el patrón de las huellas en la arena con calma.", 
-                q: "<b>Pregunta 9:</b> En la secuencia: <b>2, 4, 6, 8...</b> ¿qué término sigue si la regla es 2n?", 
-                a: "10", 
-                o: ["9", "10", "12", "14"] 
+            {
+                id: 9,
+                part: 1,
+                type: "Ecuación Decimal",
+                narrative: "El robot limpiador requiere una calibración de precisión decimal.",
+                q: "¿Cuál es el valor de x en x + 1.5 = 5.5?",
+                a: "4",
+                options: ["4", "7", "4.5", "3"],
+                hint: "Espacio para el Desarrollo: Resta 1.5 a 5.5 -> x = 5.5 - 1.5 -> x = 4."
             },
-            { 
-                n: "Mente Brillante calcula las dimensiones de un refugio solar.", 
-                q: "<b>Pregunta 10:</b> Si el área de un rectángulo es 24 y su ancho es 4, ¿cuál es su largo?<br><span class='italic bg-gray-50 px-2 py-1 border rounded inline-block text-sm my-1'>(Área = largo • ancho)</span>", 
-                a: "6", 
-                o: ["6", "4", "20", "96"] 
+            {
+                id: 10,
+                part: 1,
+                type: "Ecuación Decimal",
+                narrative: "Se necesita ajustar la dosis del suero neutralizador.",
+                q: "¿Cuál es el valor de x en x - 0.7 = 1.3?",
+                a: "2",
+                options: ["0.6", "2", "1.6", "1"],
+                hint: "Espacio para el Desarrollo: Suma 0.7 a 1.3 -> x = 1.3 + 0.7 -> x = 2."
             },
-            { 
-                n: "Fuerza Pluma ejerce tensión para despejar una polea atascada.", 
-                q: "<b>Pregunta 11:</b> ¿Qué valor de 'n' hace verdadera la ecuación: <b>3n - 5 = 10</b>?", 
-                a: "5", 
-                o: ["3", "4", "5", "15"] 
+
+            // PARTE 2 (Preguntas 11 a 20)
+            {
+                id: 11,
+                part: 2,
+                type: "Desafío Combinado",
+                narrative: "El Dr. Desequilibrio preparó una trampa de doble candado.",
+                q: "Si x + 10 = 25, ¿cuál es el valor de x - 5?",
+                a: "10",
+                options: ["15", "20", "10", "30"],
+                hint: "Espacio para el Desarrollo: Primero halla x -> x = 25 - 10 = 15. Luego calcula (x - 5) -> 15 - 5 = 10."
             },
-            { 
-                n: "Rayo Veloz calcula la cantidad de combustible recuperado.", 
-                q: "<b>Pregunta 12:</b> Si a un número se le suma 10 y el resultado es 35, ¿cuál es el número original?", 
-                a: "25", 
-                o: ["45", "25", "3,5", "350"] 
+            {
+                id: 12,
+                part: 2,
+                type: "Suma Conmutativa",
+                narrative: "La puerta acorazada requiere orden invertido en sus sumandos.",
+                q: "¿Cuál es el valor de x en 20 + x = 45?",
+                a: "25",
+                options: ["65", "35", "20", "25"],
+                hint: "Espacio para el Desarrollo: Resta 20 a 45 -> x = 45 - 20 -> x = 25."
             },
-            { 
-                n: "Gatito Chill dibuja una valla de seguridad alrededor de la base.", 
-                q: "<b>Pregunta 13:</b> ¿Cuál es la expresión que generaliza el perímetro de un cuadrado de lado 'a'?", 
-                a: "4a", 
-                o: ["a + a", "4a", "a • a", "a / 4"] 
+            {
+                id: 13,
+                part: 2,
+                type: "Resta Simétrica",
+                narrative: "El dron de reconocimiento perdió la mitad de su altitud.",
+                q: "¿Cuál es el valor de x en x - 30 = 30?",
+                a: "60",
+                options: ["60", "0", "30", "90"],
+                hint: "Espacio para el Desarrollo: Suma 30 a 30 -> x = 30 + 30 -> x = 60."
             },
-            { 
-                n: "Mente Brillante analiza el valor de una variable incrementada.", 
-                q: "<b>Pregunta 14:</b> Si sabemos que 5x = 45, ¿cuánto vale la expresión <b>x + 2</b>?", 
-                a: "11", 
-                o: ["7", "9", "11", "47"] 
+            {
+                id: 14,
+                part: 2,
+                type: "Simplificación previa",
+                narrative: "Ambos miembros de la ecuación tienen operaciones compuestas.",
+                q: "¿Cuál es el valor de x en x + 5 = 15 + 5?",
+                a: "15",
+                options: ["5", "15", "25", "10"],
+                hint: "Espacio para el Desarrollo: Simplifica la derecha (15 + 5 = 20) -> x + 5 = 20. Luego resta 5 -> x = 20 - 5 = 15."
             },
-            { 
-                n: "Fuerza Pluma equilibra una balanza colocando pesas simétricas.", 
-                q: "<b>Pregunta 15:</b> ¿Qué número multiplicado por 6 da como resultado exacto 42?", 
-                a: "7", 
-                o: ["6", "7", "8", "36"] 
+            {
+                id: 15,
+                part: 2,
+                type: "Incógnita a la Derecha",
+                narrative: "El panel solar de emergencia necesita restablecer su voltaje.",
+                q: "Si 40 = x + 10, ¿cuánto vale x?",
+                a: "30",
+                options: ["50", "30", "20", "4"],
+                hint: "Espacio para el Desarrollo: Resta 10 a 40 -> 40 - 10 = x -> x = 30."
             },
-            { 
-                n: "Gatito Chill cuenta las raciones de manzana antes del picnic.", 
-                q: "<b>Pregunta 16:</b> Si tengo 'y' manzanas y me como 3, me quedan 7. ¿Cuántas manzanas tenía originalmente?", 
-                a: "10", 
-                o: ["4", "10", "21", "7/3"] 
+            {
+                id: 16,
+                part: 2,
+                type: "Resta Inversa",
+                narrative: "Se detecta un desfase de 12 segundos en la señal satelital.",
+                q: "Si x - 12 = 4, ¿cuánto vale x?",
+                a: "16",
+                options: ["8", "14", "12", "16"],
+                hint: "Espacio para el Desarrollo: Suma 12 a 4 -> x = 4 + 12 -> x = 16."
             },
-            { 
-                n: "Mente Brillante busca un patrón de crecimiento en el reactor.", 
-                q: "<b>Pregunta 17:</b> ¿Qué regla describe la progresión matemática de los números: <b>1, 4, 7, 10...</b>?", 
-                a: "3n - 2", 
-                o: ["n + 1", "n + 3", "3n - 2", "3n + 1"] 
+            {
+                id: 17,
+                part: 2,
+                type: "Ecuación Fraccionaria",
+                narrative: "Un frasco de reactivo está lleno hasta la mitad.",
+                q: "¿Cuál es el valor de x en x + 1/2 = 1?",
+                a: "1/2",
+                options: ["1/2", "3/2", "1", "0"],
+                hint: "Espacio para el Desarrollo: Resta 1/2 a 1 -> x = 1 - 1/2 -> x = 1/2."
             },
-            { 
-                n: "Rayo Veloz divide los paquetes de batería de reserva.", 
-                q: "<b>Pregunta 18:</b> Si un número 'n' se divide por 2 y resulta 12, ¿cuál es el valor de ese número?", 
-                a: "24", 
-                o: ["6", "14", "24", "10"] 
+            {
+                id: 18,
+                part: 2,
+                type: "Ecuación Fraccionaria",
+                narrative: "Tres cuartos de energía han sido restaurados.",
+                q: "¿Cuál es el valor de x en x - 1/4 = 3/4?",
+                a: "1",
+                options: ["1/2", "1", "2/4", "1/4"],
+                hint: "Espacio para el Desarrollo: Suma 1/4 a 3/4 -> x = 3/4 + 1/4 = 4/4 = 1."
             },
-            { 
-                n: "Gatito Chill nos regala calma para resolver el penúltimo cerrojo.", 
-                q: "<b>Pregunta 19:</b> ¿Cuál es la solución de la ecuación de un paso: <b>2x + 10 = 20</b>?", 
-                a: "5", 
-                o: ["5", "10", "2", "15"] 
+            {
+                id: 19,
+                part: 2,
+                type: "Incógnita a la Derecha",
+                narrative: "La cápsula de escape requiere ingresar el código 5.",
+                q: "¿Cuál es el valor de x en 5 = x + 2?",
+                a: "3",
+                options: ["7", "10", "3", "2"],
+                hint: "Espacio para el Desarrollo: Resta 2 a 5 -> 5 - 2 = x -> x = 3."
             },
-            { 
-                n: "¡ÚLTIMA CONEXIÓN! El Dr. Des-Patrón intenta sobrecargar la máquina.", 
-                q: "<b>Pregunta 20:</b> Si la regla del sistema de energía es <b>5n - 1</b>, ¿cuál es el tercer término (cuando n=3)?", 
-                a: "14", 
-                o: ["4", "9", "14", "15"] 
+            {
+                id: 20,
+                part: 2,
+                type: "¡CÓDIGO FINAL!",
+                narrative: "¡Última barrera del Dr. Desequilibrio antes del colapso total!",
+                q: "¿Cuál es el valor de x en x - 15 = 20?",
+                a: "35",
+                options: ["5", "30", "25", "35"],
+                hint: "Espacio para el Desarrollo: Suma 15 a 20 -> x = 20 + 15 -> x = 35."
             }
         ];
 
-        let currentLevel = 0;
+        // ESTADO DE LA APLICACIÓN
+        let selectedPartMode = 'part1'; // 'part1', 'part2', 'full'
+        let currentQuestionsList = [];
+        let currentLevelIndex = 0;
         let isProcessing = false;
 
-        function playSound(type) {
+        // Cambiar tramo por el docente
+        function setPart(mode) {
+            selectedPartMode = mode;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            if (mode === 'part1') document.getElementById('btn-part1').classList.add('active');
+            if (mode === 'part2') document.getElementById('btn-part2').classList.add('active');
+            if (mode === 'full') document.getElementById('btn-full').classList.add('active');
+        }
+
+        // Sintetizador Web Audio API para efectos de sonido retro
+        function playSFX(type) {
             const toggle = document.getElementById('sound-toggle');
             if (!toggle || !toggle.checked) return;
 
@@ -371,40 +739,33 @@
                 gain.connect(ctx.destination);
 
                 if (type === 'correct') {
-                    // Arpegio ascendente triunfal y alegre
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(300, ctx.currentTime);
-                    osc.frequency.setValueAtTime(450, ctx.currentTime + 0.08);
-                    osc.frequency.setValueAtTime(600, ctx.currentTime + 0.16);
-                    osc.frequency.setValueAtTime(900, ctx.currentTime + 0.24);
-                    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                    // Tono victorioso ascendente
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08); // E5
+                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16); // G5
+                    osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.24); // C6
+                    gain.gain.setValueAtTime(0.12, ctx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
                     osc.start();
                     osc.stop(ctx.currentTime + 0.4);
                 } else {
-                    // Caída de tono retro para error o falla de cálculo
+                    // Tono de error grave
                     osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(180, ctx.currentTime);
-                    osc.frequency.exponentialRampToValueAtTime(60, ctx.currentTime + 0.3);
-                    gain.gain.setValueAtTime(0.08, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+                    osc.frequency.setValueAtTime(200, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.25);
+                    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
                     osc.start();
-                    osc.stop(ctx.currentTime + 0.35);
+                    osc.stop(ctx.currentTime + 0.3);
                 }
-            } catch (error) {
-                console.log("Audio contextual inactivo o bloqueado por el navegador.");
+            } catch (e) {
+                // Audio no disponible
             }
         }
 
-        function startGame() {
-            document.getElementById('screen-start').classList.add('hidden');
-            document.getElementById('screen-game').classList.remove('hidden');
-            currentLevel = 0;
-            loadLevel();
-        }
-
-        // Algoritmo Fisher-Yates para barajar las alternativas dinámicamente
-        function shuffle(array) {
+        // Algoritmo Fisher-Yates para barajar las opciones aleatoriamente
+        function shuffleArray(array) {
             let shuffled = array.slice();
             for (let i = shuffled.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -413,35 +774,77 @@
             return shuffled;
         }
 
-        function loadLevel() {
-            const level = questions[currentLevel];
-            document.getElementById('level-label').innerText = `MISIÓN: ${currentLevel + 1} / ${questions.length}`;
-            document.getElementById('progress-fill').style.width = `${((currentLevel) / questions.length) * 100}%`;
-            document.getElementById('narrative-text').innerText = `"${level.n}"`;
-            document.getElementById('question-text').innerHTML = level.q;
+        function startGame() {
+            // Filtrar preguntas según modo docente
+            if (selectedPartMode === 'part1') {
+                currentQuestionsList = allQuestions.filter(q => q.part === 1);
+            } else if (selectedPartMode === 'part2') {
+                currentQuestionsList = allQuestions.filter(q => q.part === 2);
+            } else {
+                currentQuestionsList = [...allQuestions];
+            }
 
-            const select = document.getElementById('answer-select');
-            select.innerHTML = '<option value="" disabled selected>-- Selecciona con calma --</option>';
+            currentLevelIndex = 0;
+            document.getElementById('screen-start').classList.add('hidden');
+            document.getElementById('screen-game').classList.remove('hidden');
+            document.getElementById('screen-end').classList.add('hidden');
             
-            // Barajando las opciones reales para que no tengan un orden fijo
-            const shuffledOptions = shuffle([...level.o]);
-            shuffledOptions.forEach(opt => {
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const qData = currentQuestionsList[currentLevelIndex];
+            
+            // Actualizar HUD
+            document.getElementById('level-label').innerText = `DESAFÍO ${currentLevelIndex + 1} / ${currentQuestionsList.length}`;
+            const total = currentQuestionsList.length;
+            const progress = ((currentLevelIndex) / total) * 100;
+            document.getElementById('progress-fill').style.width = `${Math.max(progress, 5)}%`;
+
+            document.getElementById('section-badge').innerText = qData.part === 1 ? "PARTE 1: OPERACIONES DIRECTAS E INVERSAS I" : "PARTE 2: OPERACIONES DIRECTAS E INVERSAS II";
+            document.getElementById('narrative-text').innerText = `"${qData.narrative}"`;
+            document.getElementById('question-number').innerText = `PREGUNTA EVALUACIÓN #${qData.id}`;
+            document.getElementById('question-text').innerText = qData.q;
+            document.getElementById('question-type-badge').innerText = `Tipo: ${qData.type}`;
+
+            // Pista
+            const hintToggle = document.getElementById('hints-toggle').checked;
+            const hintContainer = document.getElementById('hint-container');
+            if (hintToggle) {
+                hintContainer.classList.remove('hidden');
+                document.getElementById('hint-box').innerHTML = qData.hint;
+                document.getElementById('hint-box').classList.add('hidden');
+            } else {
+                hintContainer.classList.add('hidden');
+            }
+
+            // Cargar opciones aleatorizadas en el desplegable
+            const select = document.getElementById('answer-select');
+            select.innerHTML = '<option value="" disabled selected>-- Selecciona tu solución con tranquilidad --</option>';
+            
+            const shuffled = shuffleArray(qData.options);
+            shuffled.forEach(opt => {
                 const el = document.createElement('option');
                 el.value = opt;
-                el.innerText = opt;
+                el.innerText = `x = ${opt}`;
                 select.appendChild(el);
             });
 
-            // Rotación secuencial de personajes de la Legión para mayor dinamismo
-            const avatars = ["🐱", "🐢", "🐶", "🦅", "⚖️"];
-            const names = ["Gatito Chill", "Mente Brillante", "Rayo Veloz", "Fuerza Pluma", "Robot de Secuencia"];
-            const selectedAvatar = avatars[currentLevel % avatars.length];
-            const selectedName = names[currentLevel % names.length];
+            // Rotación de avatares aliados
+            const avatars = ["🐱", "🐢", "🐶", "🦉", "⚖️"];
+            const names = ["Gatito Chill", "Mente Inversa", "Rayo Despeje", "Búho del Equilibrio", "Robot Balance"];
+            const selectedAvatar = avatars[currentLevelIndex % avatars.length];
+            const selectedName = names[currentLevelIndex % names.length];
 
             document.getElementById('hero-avatar').innerText = selectedAvatar;
-            document.getElementById('hero-title').innerText = `Legión Titán: ${selectedName}`;
-            
+            document.getElementById('hero-title').innerText = `Legión del Despeje: ${selectedName}`;
+
             isProcessing = false;
+        }
+
+        function toggleHint() {
+            const hintBox = document.getElementById('hint-box');
+            hintBox.classList.toggle('hidden');
         }
 
         function checkAnswer() {
@@ -454,41 +857,96 @@
             if (!userAns) return;
 
             isProcessing = true;
+            const currentQ = currentQuestionsList[currentLevelIndex];
 
-            if (userAns === questions[currentLevel].a) {
-                // Correcto: lanza sonido triunfal y onomatopeya de victoria cómic
-                playSound('correct');
-                const correctSounds = ["¡CHILL!", "¡SÚPER!", "¡BAM!", "¡POW!", "¡SENSACIONAL!", "¡EQUILIBRADO!"];
-                fx.innerText = correctSounds[Math.floor(Math.random() * correctSounds.length)];
-                fx.className = "pow-text comic-title text-8xl text-yellow-400 active";
-                
+            if (userAns === currentQ.a) {
+                // Correcto
+                playSFX('correct');
+                const words = ["¡DESPEJADO!", "¡IGUALDAD!", "¡CHILL!", "¡PERFECTO!", "¡EQUILIBRIO!", "¡POW!"];
+                fx.innerText = words[Math.floor(Math.random() * words.length)];
+                fx.className = "pow-text comic-font text-8xl md:text-9xl text-yellow-300 active";
+
                 setTimeout(() => {
                     fx.classList.remove('active');
-                    currentLevel++;
-                    if (currentLevel < questions.length) {
-                        loadLevel();
+                    currentLevelIndex++;
+                    if (currentLevelIndex < currentQuestionsList.length) {
+                        loadQuestion();
                     } else {
-                        showEnd();
+                        showVictoryScreen();
                     }
-                }, 900);
+                }, 850);
             } else {
-                // Incorrecto: golpe dramático y onomatopeya de error
-                playSound('wrong');
-                fx.innerText = "¡OOF!";
-                fx.className = "pow-text comic-title text-8xl text-red-500 active";
-                
+                // Incorrecto
+                playSFX('wrong');
+                fx.innerText = "¡DESEQUILIBRIO!";
+                fx.className = "pow-text comic-font text-8xl md:text-9xl text-red-500 active";
+
                 setTimeout(() => {
                     fx.classList.remove('active');
-                    select.value = ""; // Limpiar menú para el siguiente intento
+                    select.value = "";
                     isProcessing = false;
-                }, 900);
+                }, 850);
             }
         }
 
-        function showEnd() {
+        function showVictoryScreen() {
             document.getElementById('screen-game').classList.add('hidden');
             document.getElementById('screen-end').classList.remove('hidden');
             document.getElementById('progress-fill').style.width = "100%";
+
+            if (selectedPartMode === 'part1') {
+                document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 de la Evaluación!";
+                document.getElementById('end-subtitle').innerText = "Despejaste las primeras 10 incógnitas del Dr. Desequilibrio con éxito.";
+            } else if (selectedPartMode === 'part2') {
+                document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 de la Evaluación!";
+                document.getElementById('end-subtitle').innerText = "Resolviste las 10 preguntas finales sobre operaciones combinadas y fracciones.";
+            } else {
+                document.getElementById('end-title').innerText = "¡HAS CUMPLIDO EL ESCAPE ROOM COMPLETO (20 RETOS)!";
+                document.getElementById('end-subtitle').innerText = "Eres un Maestro Legendario de la Resolución de Ecuaciones de Un Paso.";
+            }
+        }
+
+        function confirmExit() {
+            if (confirm("¿Deseas volver al menú de inicio?")) {
+                returnToStart();
+            }
+        }
+
+        function returnToStart() {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-end').classList.add('hidden');
+            document.getElementById('screen-extras').classList.add('hidden');
+            document.getElementById('screen-start').classList.remove('hidden');
+        }
+
+        function toggleExtraModules() {
+            const extras = document.getElementById('screen-extras');
+            extras.classList.remove('hidden');
+            extras.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeExtraModules() {
+            document.getElementById('screen-extras').classList.add('hidden');
+        }
+
+        function switchExtraTab(tabId) {
+            document.getElementById('extra-sec2').classList.add('hidden');
+            document.getElementById('extra-sec3').classList.add('hidden');
+            document.getElementById('extra-sec4').classList.add('hidden');
+            document.getElementById('extra-sec5').classList.add('hidden');
+
+            document.getElementById('tab-sec2').classList.remove('bg-yellow-300');
+            document.getElementById('tab-sec3').classList.remove('bg-yellow-300');
+            document.getElementById('tab-sec4').classList.remove('bg-yellow-300');
+            document.getElementById('tab-sec5').classList.remove('bg-yellow-300');
+
+            document.getElementById(`extra-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('bg-yellow-300');
+        }
+
+        function toggleExtraHint() {
+            const box = document.getElementById('extra-hint-box');
+            box.classList.toggle('hidden');
         }
     </script>
 </body>
