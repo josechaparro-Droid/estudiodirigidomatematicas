@@ -1,192 +1,940 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misión Gatito Chill: El Rescate de la Campana</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escape Room: Gatito Chill vs Patito Amarillito – 4° Básico</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet" />
     <style>
+        /* (el mismo CSS de antes, sin cambios) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: #1a1a2e;
-            background-image: radial-gradient(#2d3436 10%, transparent 10%);
-            background-size: 20px 20px; /* Puntos Ben-Day */
-            color: #fff;
+            font-family: 'Comic Neue', cursive;
+            background-color: #0f172a;
+            background-image: radial-gradient(rgba(239, 68, 68, 0.25) 15%, transparent 16%),
+                radial-gradient(rgba(37, 99, 235, 0.25) 15%, transparent 16%);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem;
+            color: #0f172a;
         }
-        h1, h2, .comic-font {
+        .comic-font {
             font-family: 'Bangers', cursive;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
         }
-        .comic-border {
-            border: 4px solid #000;
-            box-shadow: 8px 8px 0px #e91e63;
+        .chill-font {
+            font-family: 'Chewy', cursive;
         }
-        .panel {
-            background: #fff;
-            color: #000;
-            border: 3px solid #000;
+        .comic-panel {
+            background: white;
+            border: 5px solid black;
+            box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
             position: relative;
         }
-        .btn-action {
-            background: #f1c40f;
-            color: #000;
-            border: 2px solid #000;
-            transition: all 0.2s;
-            box-shadow: 4px 4px 0px #000;
-        }
-        .btn-action:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px #000;
-            background: #ffeb3b;
-        }
-        .progress-bar {
-            height: 20px;
-            background: #444;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 2px solid #000;
-        }
-        .progress-fill {
+        .comic-panel::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
-            background: #e91e63;
-            width: 0%;
-            transition: width 0.5s;
+            background-image: radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+            background-size: 6px 6px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .btn-comic {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 1px;
+            border: 4px solid black;
+            box-shadow: 5px 5px 0px black;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            text-transform: uppercase;
+        }
+        .btn-comic:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 8px 8px 0px black;
+        }
+        .btn-comic:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px black;
+        }
+        .tab-btn.active {
+            background-color: #facc15;
+            color: black;
+            border-bottom: 4px solid black;
+        }
+        .progress-bar-container {
+            background: #e2e8f0;
+            border: 4px solid black;
+            border-radius: 9999px;
+            overflow: hidden;
+            height: 28px;
+        }
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #ef4444, #8b5cf6, #3b82f6);
+            height: 100%;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .alarm-border {
+            animation: alertPulse 1.8s infinite alternate;
+        }
+        @keyframes alertPulse {
+            from {
+                border-color: #0f172a;
+                box-shadow: 8px 8px 0px black;
+            }
+            to {
+                border-color: #ef4444;
+                box-shadow: 8px 8px 0px #ef4444;
+            }
+        }
+        .pow-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 100;
+            pointer-events: none;
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-shadow: 6px 6px 0px black;
+            -webkit-text-stroke: 3px black;
+        }
+        .pow-text.active {
+            transform: translate(-50%, -50%) scale(1.5);
+        }
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1.2rem center;
+            background-size: 1.4em;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .extra-tab-btn {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 0.5px;
+            border: 3px solid black;
+            box-shadow: 4px 4px 0px black;
+            transition: all 0.1s ease;
+        }
+        .extra-tab-btn.active-tab {
+            background-color: #facc15 !important;
+            color: black;
+            border-bottom: 4px solid black;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px black;
+        }
+        .extra-tab-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px black;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #7c3aed;
+        }
+        details summary:hover {
+            color: #4c1d95;
+        }
+        table td,
+        table th {
+            border: 1px solid #000;
+            padding: 0.5rem;
+            text-align: center;
         }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body>
 
-    <div class="max-w-4xl mx-auto">
-        <header class="mb-8 text-center">
-            <h1 class="text-6xl text-yellow-400 drop-shadow-lg mb-2 italic">¡ESCAPE ROOM MATEMÁTICO!</h1>
-            <div class="bg-blue-600 p-3 comic-border inline-block">
-                <p class="text-lg font-bold">OA 05: Multiplicación de 3 dígitos por 1 dígito en contextos reales.</p>
+    <!-- Onomatopeya FX -->
+    <div id="visual-fx" class="pow-text comic-font text-8xl md:text-9xl text-yellow-300">¡DESPEJADO!</div>
+
+    <div class="max-w-4xl w-full">
+
+        <!-- CABECERA -->
+        <header class="text-center mb-6">
+            <div class="inline-block bg-white border-4 border-black p-4 md:p-6 transform -rotate-1 shadow-[8px_8px_0px_#2563eb] relative z-10 w-full">
+                <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-black pb-2 mb-3 text-xs md:text-sm font-bold text-gray-700">
+                    <span>📚 NIVEL: 4° BÁSICO</span>
+                    <span>⏱️ TIEMPO MÁXIMO: 90 MIN</span>
+                    <span>🧩 UNIDAD: DIVISIÓN (OA 06)</span>
+                </div>
+                <h1 class="text-3xl md:text-5xl comic-font text-blue-700 tracking-wide uppercase">
+                    Gatito Chill vs. Patito Amarillito
+                </h1>
+                <p class="text-lg md:text-2xl chill-font text-purple-900 mt-1">
+                    Escape Room de la División y el Algoritmo
+                </p>
+            </div>
+            <!-- OA -->
+            <div class="mt-4 bg-yellow-100 border-2 border-black p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
+                <p class="font-bold text-xs md:text-sm text-indigo-950">
+                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 06)</span>: Demostrar que comprenden la división con dividendos de tres dígitos y divisores de un dígito, aplicando el algoritmo de la división.
+                </p>
             </div>
         </header>
 
-        <div id="start-screen" class="panel p-6 rounded-lg text-center">
-            <h2 class="text-4xl mb-4 text-blue-800">¡ALERTA EN EL COLEGIO!</h2>
-            <p class="text-xl mb-6">El villano <strong>Patito Amarillito</strong> ha usado su rayo paralizante para robar la <strong>Campana del Colegio</strong>. ¡Nadie puede salir a recreo! <br><br> Solo <strong>Gatito Chill</strong>, con su calma legendaria y tus habilidades matemáticas, puede recuperar la campana superando los 20 desafíos de seguridad del Patito.</p>
-            <button onclick="startGame()" class="btn-action px-8 py-4 text-2xl uppercase">¡Aceptar Misión!</button>
-        </div>
+        <main class="relative z-10">
 
-        <div id="game-screen" class="hidden">
-            <div class="flex justify-between items-center mb-4 bg-purple-700 p-4 comic-border">
-                <div>
-                    <span class="comic-font text-2xl">RETO: <span id="current-index">1</span>/20</span>
+            <!-- PANTALLA 1: INICIO -->
+            <div id="screen-start" class="comic-panel p-6 md:p-8 space-y-6">
+                <div class="flex justify-center items-center gap-4 text-6xl md:text-7xl animate-bounce">
+                    <span>🐱</span><span class="text-3xl font-black">VS</span><span>🐤</span>
                 </div>
-                <div class="w-1/2">
-                    <div class="progress-bar">
-                        <div id="progress-fill" class="progress-fill"></div>
+
+                <div class="text-center">
+                    <h2 class="text-2xl md:text-4xl comic-font text-red-600">¡EL DESORDEN DIVISOR HA LLEGADO!</h2>
+                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">Patito Amarillito ha descompuesto todas las divisiones de la ciudad...</p>
+                </div>
+
+                <!-- Historia -->
+                <div class="bg-blue-50 border-4 border-black p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
+                    <p class="text-base md:text-lg">
+                        El villano <b>Patito Amarillito</b> lanzó su <i>"Rayo Divisor"</i> sobre la Ciudad de los Números, haciendo que los repartos equitativos se volvieran un caos. Los buses no saben cuántos pasajeros llevar, las tiendas no pueden repartir sus productos y hasta los jardineros han perdido la cuenta de sus flores.
+                    </p>
+                    <p class="text-base md:text-lg">
+                        Con su taza de té siempre a mano, el sereno <b>Gatito Chill</b> nos guía con una sonrisa:
+                    </p>
+                    <blockquote class="bg-yellow-200 border-l-4 border-yellow-600 p-3 rounded font-bold text-indigo-900 italic text-sm md:text-base">
+                        "Tranquilos, amigos... para dividir correctamente solo hay que recordar el algoritmo: dividir, multiplicar, restar y bajar. ¡Chill, que el equilibrio volverá!"
+                    </blockquote>
+                </div>
+
+                <!-- SELECCIÓN DOCENTE -->
+                <div class="bg-purple-100 border-4 border-black p-5 rounded-xl text-left space-y-3 shadow-md">
+                    <label class="block font-black text-purple-900 uppercase text-base md:text-lg comic-font tracking-wide">
+                        ⚙️ Configuración Docente – Selección de Tramo (10 o 20 preguntas):
+                    </label>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
+                            📍 Parte 1 (Preguntas 1 a 10)<br />
+                            <span class="text-xs font-normal normal-case block">Divisiones directas y problemas básicos</span>
+                        </button>
+                        <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
+                            📍 Parte 2 (Preguntas 11 a 20)<br />
+                            <span class="text-xs font-normal normal-case block">Divisiones inversas y problemas variados</span>
+                        </button>
+                        <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
+                            🔥 Modo Completo (20 Retos)<br />
+                            <span class="text-xs font-normal normal-case block">Evaluación continua completa</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Opciones -->
+                <div class="flex flex-wrap items-center justify-between gap-3 bg-gray-100 p-3 border-2 border-black rounded-lg">
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
+                        <label for="sound-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">🔊 SFX Retro</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
+                        <label for="hints-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">💡 Permitir pistas</label>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-black text-2xl md:text-3xl py-4 w-full rounded-xl">
+                        ¡RESTAURAR EL EQUILIBRIO DIVISOR! 🚀
+                    </button>
+                </div>
+
+                <!-- BOTÓN PARA SECCIONES COMPLEMENTARIAS -->
+                <div class="text-center pt-2 border-t-2 border-gray-200">
+                    <button onclick="toggleExtraModules()" class="text-sm font-bold text-blue-700 underline hover:text-blue-900">
+                        📋 Ver Secciones Complementarias (Problemas de 4 pasos, Metacognición y Autoevaluación)
+                    </button>
+                </div>
+            </div>
+
+            <!-- PANTALLA 2: JUEGO -->
+            <div id="screen-game" class="hidden space-y-6">
+                <!-- Barra superior -->
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white border-4 border-black p-4 shadow-[6px_6px_0px_black]">
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl">🐱</span>
+                        <div>
+                            <div class="comic-font text-2xl text-red-600 leading-tight" id="level-label">DESAFÍO 1 / 10</div>
+                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: DIVISIONES DIRECTAS</div>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 progress-bar-container">
+                        <div id="progress-fill" class="progress-bar-fill" style="width: 5%"></div>
+                    </div>
+                    <button onclick="confirmExit()" class="text-xs font-bold bg-gray-200 hover:bg-gray-300 border-2 border-black px-3 py-1 rounded">
+                        ⚙️ Menú
+                    </button>
+                </div>
+
+                <!-- Panel del reto -->
+                <div class="comic-panel p-5 md:p-8 alarm-border border-4">
+                    <div class="flex items-start gap-4 mb-6 bg-blue-50 border-2 border-black p-4 rounded-xl">
+                        <div class="text-5xl" id="hero-avatar">🐱</div>
+                        <div class="w-full">
+                            <div class="flex justify-between items-center">
+                                <h4 class="font-bold text-red-600 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Legión del Despeje: Gatito Chill</h4>
+                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">División</span>
+                            </div>
+                            <p class="font-bold text-indigo-950 italic text-base md:text-lg mt-1" id="narrative-text">Cargando situación...</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6 relative z-10">
+                        <div class="bg-gray-50 border-2 border-black p-5 rounded-xl shadow-inner">
+                            <div id="question-number" class="comic-font text-xl text-purple-700 mb-1">PREGUNTA #</div>
+                            <div id="question-text" class="text-xl md:text-2xl font-bold text-gray-900 leading-relaxed font-mono"></div>
+                        </div>
+
+                        <div id="hint-container" class="hidden">
+                            <button onclick="toggleHint()" class="text-sm font-bold text-purple-800 bg-purple-100 border-2 border-purple-400 px-3 py-1.5 rounded-lg flex items-center gap-2 hover:bg-purple-200 transition">
+                                💡 <span>Mostrar pista</span>
+                            </button>
+                            <div id="hint-box" class="hidden mt-2 p-3 bg-yellow-50 border-2 border-yellow-400 rounded-lg text-sm text-yellow-950 leading-relaxed font-medium"></div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block font-black text-indigo-950 uppercase tracking-tight text-sm">
+                                🎯 Selecciona la respuesta correcta:
+                            </label>
+                            <select id="answer-select" class="w-full p-4 border-4 border-black text-lg md:text-xl font-bold bg-yellow-50 focus:ring-4 focus:ring-purple-300 outline-none cursor-pointer rounded-xl">
+                                <option value="" disabled selected>-- Elige con calma --</option>
+                            </select>
+                        </div>
+
+                        <button onclick="checkAnswer()" class="btn-comic bg-red-600 hover:bg-red-500 text-white text-2xl md:text-3xl py-4 w-full rounded-xl">
+                            ¡ENVIAR RESPUESTA! 💥
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <div id="question-container" class="panel p-8 rounded-lg mb-6 min-h-[300px] flex flex-col justify-between">
-                <div>
-                    <h3 id="question-text" class="text-2xl font-bold mb-6">Cargando desafío...</h3>
-                    <div id="options-container" class="grid grid-cols-1 gap-4">
-                        </div>
+            <!-- PANTALLA 3: VICTORIA -->
+            <div id="screen-end" class="hidden comic-panel p-8 md:p-12 text-center space-y-8">
+                <h2 class="text-5xl md:text-7xl comic-font text-purple-700">¡SISTEMA REESTABLECIDO!</h2>
+                <div class="text-8xl md:text-9xl animate-bounce my-4">🐱⚖️✨</div>
+                <div class="space-y-3">
+                    <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has derrotado a Patito Amarillito!</p>
+                    <p class="text-gray-700 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
+                        Todas las divisiones han vuelto a su equilibrio. La ciudad numérica respira de nuevo.
+                    </p>
                 </div>
-                <div id="feedback" class="mt-6 text-center text-xl font-bold hidden italic"></div>
+                <div class="bg-yellow-100 border-4 border-black p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
+                    <p class="text-purple-900">
+                        <b>Gatito Chill te felicita:</b> "¡Excelente! Recuerda que el algoritmo de la división (dividir, multiplicar, restar y bajar) es la herramienta perfecta para repartir equitativamente. ¡Mantén la calma y el orden siempre regresa!"
+                    </p>
+                </div>
+                <div class="flex flex-col md:flex-row justify-center gap-4 pt-4">
+                    <button onclick="returnToStart()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-2xl py-4 px-8 rounded-xl">
+                        🔄 VOLVER AL MENÚ
+                    </button>
+                    <button onclick="toggleExtraModules()" class="btn-comic bg-purple-600 hover:bg-purple-500 text-white text-2xl py-4 px-8 rounded-xl">
+                        📝 VER MÓDULOS DE DESARROLLO
+                    </button>
+                </div>
             </div>
-        </div>
 
-        <div id="end-screen" class="hidden panel p-10 rounded-lg text-center">
-            <h2 class="text-6xl mb-6 text-green-600">¡MISIÓN CUMPLIDA!</h2>
-            <p class="text-2xl mb-6">Gatito Chill ha recuperado la campana. ¡El recreo ha vuelto gracias a ti!</p>
-            <div id="score-report" class="text-xl mb-8"></div>
-            <button onclick="location.reload()" class="btn-action px-8 py-4 text-2xl uppercase">Reiniciar Aventura</button>
-        </div>
+            <!-- ========================================================= -->
+            <!-- PANTALLA EXTRAS: SECCIONES COMPLEMENTARIAS (GUÍA)          -->
+            <!-- ========================================================= -->
+            <div id="screen-extras" class="hidden comic-panel p-6 md:p-8 space-y-6 my-6">
+                <div class="flex justify-between items-center border-b-4 border-black pb-4">
+                    <h2 class="text-3xl md:text-4xl comic-font text-indigo-900">SECCIONES DE DESARROLLO Y EVALUACIÓN</h2>
+                    <button onclick="closeExtraModules()" class="btn-comic bg-red-500 text-white px-4 py-1 text-xl rounded">
+                        ✖️ CERRAR
+                    </button>
+                </div>
+
+                <!-- Pestañas de navegación -->
+                <div class="flex flex-wrap gap-2 border-b-2 border-black pb-2">
+                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="extra-tab-btn active-tab py-2 px-3 text-sm bg-yellow-300">II. Problemas (4 Pasos)</button>
+                    <button onclick="switchExtraTab('sec3')" id="tab-sec3" class="extra-tab-btn py-2 px-3 text-sm bg-white">III. Metacognición</button>
+                    <button onclick="switchExtraTab('sec4')" id="tab-sec4" class="extra-tab-btn py-2 px-3 text-sm bg-white">IV. Desafío Extra</button>
+                    <button onclick="switchExtraTab('sec5')" id="tab-sec5" class="extra-tab-btn py-2 px-3 text-sm bg-white">V. Autoevaluación</button>
+                </div>
+
+                <!-- SECCIÓN II: RESOLUCIÓN DE PROBLEMAS (4 PASOS) -->
+                <div id="extra-sec2" class="space-y-6 text-left">
+                    <div class="bg-blue-50 border-2 border-black p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-blue-900">II. Resolución de Problemas (Estrategia de los 4 Pasos)</h3>
+                        <p class="text-xs text-gray-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Comprobar.</p>
+                    </div>
+
+                    <!-- Problema 1: Paseo -->
+                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Paseo escolar)</span>
+                        <p class="font-bold text-gray-800">
+                            Un colegio organiza un paseo para 384 estudiantes. Si en cada bus pueden viajar 8 estudiantes, ¿cuántos buses se necesitan contratar para que todos puedan ir?
+                        </p>
+                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
+                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
+                                <p><b>1. Comprender:</b> 384 estudiantes, 8 por bus. Pregunta: número de buses.</p>
+                                <p><b>2. Planificar:</b> Dividir 384 entre 8.</p>
+                                <p><b>3. Resolver:</b> 384 ÷ 8 = 48.</p>
+                                <p><b>4. Comprobar:</b> 48 × 8 = 384. Correcto.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Problema 2: Alimento para perros -->
+                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Alimento para mascotas)</span>
+                        <p class="font-bold text-gray-800">
+                            En una tienda de mascotas, se han recibido 657 kg de alimento para perros y deben ser distribuidos equitativamente en 9 sacos grandes. ¿Cuántos kg de alimento tendrá cada saco?
+                        </p>
+                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
+                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
+                                <p><b>1. Comprender:</b> 657 kg en 9 sacos iguales. Pregunta: kg por saco.</p>
+                                <p><b>2. Planificar:</b> Dividir 657 entre 9.</p>
+                                <p><b>3. Resolver:</b> 657 ÷ 9 = 73.</p>
+                                <p><b>4. Comprobar:</b> 73 × 9 = 657. Correcto.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Problema 3: Imprenta -->
+                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Encuadernación)</span>
+                        <p class="font-bold text-gray-800">
+                            Una imprenta tiene que encuadernar 532 cuadernos en 4 días. Si cada día encuaderna la misma cantidad, ¿cuántos cuadernos encuaderna por día?
+                        </p>
+                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
+                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
+                                <p><b>1. Comprender:</b> 532 cuadernos en 4 días iguales. Pregunta: cuadernos por día.</p>
+                                <p><b>2. Planificar:</b> Dividir 532 entre 4.</p>
+                                <p><b>3. Resolver:</b> 532 ÷ 4 = 133.</p>
+                                <p><b>4. Comprobar:</b> 133 × 4 = 532. Correcto.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN III: METACOGNICIÓN -->
+                <div id="extra-sec3" class="hidden space-y-4 text-left">
+                    <div class="bg-purple-50 border-2 border-black p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-purple-900">III. Metacognición (Reflexión del Estudiante)</h3>
+                        <p class="text-xs text-gray-700">Analiza tus propios razonamientos durante la resolución:</p>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-white border border-black rounded-lg">
+                            <p class="font-bold text-sm text-gray-800">1. Al resolver los problemas anteriores, ¿cuál de los 4 pasos (comprender, planificar, resolver o comprobar) te resultó más difícil y por qué?</p>
+                        </div>
+                        <div class="p-3 bg-white border border-black rounded-lg">
+                            <p class="font-bold text-sm text-gray-800">2. ¿Cómo te ayuda el algoritmo de la división a resolver problemas de la vida cotidiana como los del paseo o el alimento para perros?</p>
+                        </div>
+                        <div class="p-3 bg-white border border-black rounded-lg">
+                            <p class="font-bold text-sm text-gray-800">3. Si al comprobar tu resultado en el problema 3, la cifra final no coincidía con el total, ¿qué pasos habrías revisado primero?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN IV: DESAFÍO EXTRA (Lógica Inversa) -->
+                <div id="extra-sec4" class="hidden space-y-4 text-left">
+                    <div class="bg-yellow-50 border-2 border-black p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Pensamiento Lógico)</h3>
+                        <p class="text-sm text-gray-800">
+                            "Si divido un número por 7 obtengo 105. ¿Qué número obtendré si divido ese mismo número original por 3?"
+                        </p>
+                    </div>
+                    <div class="p-4 bg-white border-2 border-black rounded-xl space-y-3">
+                        <button onclick="toggleExtraHint()" class="btn-comic bg-yellow-400 text-black text-sm px-4 py-2 rounded">
+                            🧩 Revelar Solución por Reversión de Gatito Chill
+                        </button>
+                        <div id="extra-hint-box" class="hidden text-sm bg-yellow-100 p-3 rounded border border-yellow-300 leading-relaxed">
+                            <p><b>Paso 1:</b> Si al dividir el número original entre 7 obtenemos 105, entonces el número original es 105 × 7 = 735.</p>
+                            <p><b>Paso 2:</b> Ahora dividimos 735 entre 3: 735 ÷ 3 = 245.</p>
+                            <p><b>Resultado:</b> El número obtenido es <b>245</b>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN V: AUTOEVALUACIÓN -->
+                <div id="extra-sec5" class="hidden space-y-4 text-left">
+                    <div class="bg-green-50 border-2 border-black p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-green-900">V. Autoevaluación del Estudiante</h3>
+                        <p class="text-xs text-gray-700">Marca con una X el nivel que mejor describe tu desempeño en esta evaluación.</p>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm border-2 border-black bg-white">
+                            <thead class="bg-yellow-300 border-b-2 border-black">
+                                <tr>
+                                    <th class="p-2 text-left border-r border-black">Criterio / Ítem</th>
+                                    <th class="p-2 text-center border-r border-black">Logrado (3)</th>
+                                    <th class="p-2 text-center border-r border-black">En proceso (2)</th>
+                                    <th class="p-2 text-center">Iniciando (1)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-black">
+                                    <td class="p-2 border-r border-black font-medium">1. Soy capaz de identificar los datos y la operación necesaria para resolver una división.</td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto1" /></td>
+                                </tr>
+                                <tr class="border-b border-black">
+                                    <td class="p-2 border-r border-black font-medium">2. Puedo aplicar el algoritmo de la división correctamente sin errores.</td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto2" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-r border-black font-medium">3. Puedo revisar mi trabajo para saber si mi respuesta tiene sentido.</td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto3" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- =========== FIN DE EXTRAS =========== -->
+
+        </main>
     </div>
 
     <script>
-        const questions = [
-            { q: "¡Primera trampa! Patito Amarillito bloqueó la entrada con bloques multibase. Si ves 3 grupos de (2 placas, 4 barras y 1 cubo), ¿cuál es el producto total de 241 x 3?", options: ["723", "623", "743", "600"], correct: "723" },
-            { q: "Gatito Chill usa la Estrategia Desagregada. Para calcular 305 x 5, él hace (300 x 5) + (0 x 5) + (5 x 5). ¿Cuál es el resultado final?", options: ["1.525", "1.505", "1.550", "1.825"], correct: "1.525" },
-            { q: "¡Cuidado con el canje! Al multiplicar 189 x 4, multiplicamos 4 x 9 = 36 unidades. ¿Qué sucede con ese 36?", options: ["Dejo el 6 en unidades y paso 3 decenas como reserva", "Dejo el 3 en unidades y paso 6 decenas", "Pongo el 36 completo en las unidades", "No se hace nada, se suma al final"], correct: "Dejo el 6 en unidades y paso 3 decenas como reserva" },
-            { q: "El Patito huye en un bus de 87 pasajeros. Si hay 4 buses iguales, estima (redondeando 87 a la decena más cercana) cuántos alumnos viajan.", options: ["360", "320", "400", "350"], correct: "360" },
-            { q: "Cálculo Rápido: El Patito lanza 436 x 2 rayos láser. ¿Cuántos rayos son en total?", options: ["872", "862", "836", "972"], correct: "872" },
-            { q: "Gatito Chill debe desactivar 109 x 7 micro-chips. ¿Cuál es el producto?", options: ["763", "703", "769", "863"], correct: "763" },
-            { q: "El Patito esconde 521 x 3 plumas amarillas. ¿Cuántas hay?", options: ["1.563", "1.523", "1.663", "1.561"], correct: "1.563" },
-            { q: "Si el Patito multiplica 999 x 1, ¿qué resultado obtiene?", options: ["999", "1.000", "1", "9.991"], correct: "999" },
-            { q: "Gatito Chill verifica: ¿Es lo mismo multiplicar 250 x 4 que sumar 250 + 250 + 250 + 250?", options: ["Sí, ambos dan 1.000", "No, la suma da más", "Sí, ambos dan 800", "No, la multiplicación da 1.200"], correct: "Sí, ambos dan 1.000" },
-            { q: "Acertijo de lógica: En la multiplicación (1□2 x 4 = 568), ¿qué número falta en el cuadrado?", options: ["4", "3", "5", "2"], correct: "4" },
-            { q: "En el Colegio Club Hípico compraron 7 cajas de lápices. Si cada caja tiene 144 lápices, ¿cuántos hay en total?", options: ["1.008", "1.080", "908", "1.044"], correct: "1.008" },
-            { q: "La señora Ana vende colaciones a $450 cada una. Si vendió 5, ¿cuánto dinero recaudó?", options: ["$2.250", "$2.050", "$2.450", "$2.150"], correct: "$2.250" },
-            { q: "Don Juan cosechó 6 sacos de manzanas de 315 kg cada uno. ¿Cuántos kilos cosechó?", options: ["1.890 kg", "1.860 kg", "1.990 kg", "1.830 kg"], correct: "1.890 kg" },
-            { q: "Un tren lleva 9 contenedores de 205 metros cada uno. ¿Cuál es el largo total de la carga?", options: ["1.845 metros", "1.805 metros", "1.945 metros", "1.840 metros"], correct: "1.845 metros" },
-            { q: "Martín dice que 3 x 298 = 894. Javiera estima que es cerca de 900 (3 x 300). ¿Quién tiene razón?", options: ["Ambos tienen razón", "Solo Martín", "Solo Javiera", "Ninguno"], correct: "Ambos tienen razón" },
-            { q: "Una fábrica produce 308 marraquetas por hora. En 8 horas, ¿cuántas marraquetas produce?", options: ["2.464", "2.404", "2.468", "2.564"], correct: "2.464" },
-            { q: "¡Gatito Chill quiere zapatillas! Si cuestan $7.490 y compra 3 pares, ¿cuánto paga?", options: ["$22.470", "$21.470", "$22.270", "$22.490"], correct: "$22.470" },
-            { q: "En una tienda de mascotas chilena hay 5 estantes con 165 juguetes cada uno. ¿Cuántos juguetes hay?", options: ["825", "805", "725", "855"], correct: "825" },
-            { q: "Un estudiante calculó 4 x 625 y obtuvo 2405. ¿Dónde estuvo el error?", options: ["Olvidó sumar el canje de las centenas", "Multiplicó mal 4 x 5", "Sumó mal las unidades", "No hay error"], correct: "Olvidó sumar el canje de las centenas" },
-            { q: "¡Último paso! La biblioteca compró 6 colecciones de 132 libros cada una. ¿Cuántos libros son?", options: ["792", "732", "692", "782"], correct: "792" }
+        // ================================================================
+        //  BASE DE DATOS – 20 PREGUNTAS DE LA GUÍA (OA 06, 4° BÁSICO)
+        // ================================================================
+        const allQuestions = [
+            // ---- PARTE 1: Preguntas 1 a 10 ----
+            {
+                id: 1,
+                part: 1,
+                type: "División directa",
+                narrative: "Patito Amarillito desordenó la división. ¡Ayuda a Gatito Chill a encontrar el cociente!",
+                q: "¿Cuál es el resultado de dividir 846 entre 6?",
+                a: "141",
+                options: ["141", "140", "151", "131"],
+                hint: "Aplica el algoritmo: 846 ÷ 6. ¿Cuántas veces cabe 6 en 846?"
+            }, {
+                id: 2,
+                part: 1,
+                type: "Reparto equitativo",
+                narrative: "Un grupo de amigos necesita repartir láminas. ¡Gatito Chill te guía!",
+                q: "Un grupo de 4 amigos quiere repartir 728 láminas de manera equitativa. ¿Cuántas láminas recibe cada uno?",
+                a: "182",
+                options: ["181", "182", "172", "192"],
+                hint: "Divide 728 entre 4."
+            }, {
+                id: 3,
+                part: 1,
+                type: "División inversa",
+                narrative: "El número desconocido está escondido. ¡Descúbrelo!",
+                q: "Si al dividir un número desconocido entre 3 el resultado es 125, ¿cuál es el número desconocido?",
+                a: "375",
+                options: ["375", "41", "372", "365"],
+                hint: "Para encontrar el número, multiplica 125 × 3."
+            }, {
+                id: 4,
+                part: 1,
+                type: "Reparto equitativo",
+                narrative: "Los libros deben organizarse en estantes iguales. ¡Calcula!",
+                q: "En una biblioteca, se deben organizar 965 libros en 5 estantes con la misma cantidad cada uno. ¿Cuántos libros quedan en cada estante?",
+                a: "193",
+                options: ["191", "183", "193", "195"],
+                hint: "Divide 965 entre 5."
+            }, {
+                id: 5,
+                part: 1,
+                type: "División inversa",
+                narrative: "Patito Amarillito borró el número que multiplica. ¡Encuéntralo!",
+                q: "¿Qué número multiplicado por 7 resulta 651?",
+                a: "93",
+                options: ["92", "93", "83", "94"],
+                hint: "Divide 651 entre 7."
+            }, {
+                id: 6,
+                part: 1,
+                type: "Reparto equitativo",
+                narrative: "Los caramelos deben repartirse en bolsas iguales. ¡Gatito Chill confía en ti!",
+                q: "Se tienen 549 caramelos para repartir en 9 bolsas iguales. ¿Cuántos caramelos contiene cada bolsa?",
+                a: "61",
+                options: ["61", "60", "59", "62"],
+                hint: "Divide 549 entre 9."
+            }, {
+                id: 7,
+                part: 1,
+                type: "División inversa",
+                narrative: "Encuentra el número que fue dividido.",
+                q: "¿Qué número dividido por 4 es igual a 212?",
+                a: "848",
+                options: ["53", "848", "858", "55"],
+                hint: "Multiplica 212 × 4."
+            }, {
+                id: 8,
+                part: 1,
+                type: "Reparto equitativo",
+                narrative: "Los paquetes deben repartirse en camiones iguales. ¡Ayuda!",
+                q: "Una empresa de transporte reparte 432 paquetes en 8 camiones de igual capacidad. ¿Cuántos paquetes lleva cada camión?",
+                a: "54",
+                options: ["53", "54", "44", "56"],
+                hint: "Divide 432 entre 8."
+            }, {
+                id: 9,
+                part: 1,
+                type: "División inversa",
+                narrative: "Patito Amarillito escondió el divisor. ¡Descúbrelo!",
+                q: "¿Cuál es el divisor si el dividendo es 725 y el cociente es 5?",
+                a: "145",
+                options: ["145", "135", "155", "144"],
+                hint: "Divide 725 entre 5."
+            }, {
+                id: 10,
+                part: 1,
+                type: "Reparto equitativo",
+                narrative: "El granjero necesita cajas para sus manzanas. ¡Calcula!",
+                q: "Un granjero cosecha 864 manzanas y las coloca en cajas de 9 unidades cada una. ¿Cuántas cajas necesita?",
+                a: "96",
+                options: ["95", "96", "86", "97"],
+                hint: "Divide 864 entre 9."
+            },
+
+            // ---- PARTE 2: Preguntas 11 a 20 ----
+            {
+                id: 11,
+                part: 2,
+                type: "División directa",
+                narrative: "El cociente de esta división te ayudará a restaurar el orden.",
+                q: "¿Cuál es el cociente de 396 dividido por 4?",
+                a: "99",
+                options: ["98", "89", "99", "97"],
+                hint: "Divide 396 entre 4."
+            }, {
+                id: 12,
+                part: 2,
+                type: "Velocidad constante",
+                narrative: "Un deportista recorre una distancia en minutos. ¿Cuánto avanza por minuto?",
+                q: "Un deportista recorre 684 metros en 6 minutos, manteniendo siempre la misma velocidad. ¿Cuántos metros recorre en un minuto?",
+                a: "114",
+                options: ["114", "104", "124", "112"],
+                hint: "Divide 684 entre 6."
+            }, {
+                id: 13,
+                part: 2,
+                type: "División inversa",
+                narrative: "Encuentra el número que fue dividido.",
+                q: "¿Qué número dividido por 7 es igual a 108?",
+                a: "756",
+                options: ["756", "766", "746", "758"],
+                hint: "Multiplica 108 × 7."
+            }, {
+                id: 14,
+                part: 2,
+                type: "Reparto equitativo",
+                narrative: "Los globos deben repartirse en grupos iguales para decorar.",
+                q: "En una fiesta hay 324 globos que deben repartirse en 6 grupos iguales para decorar. ¿Cuántos globos tiene cada grupo?",
+                a: "54",
+                options: ["55", "54", "44", "56"],
+                hint: "Divide 324 entre 6."
+            }, {
+                id: 15,
+                part: 2,
+                type: "División directa",
+                narrative: "Gatito Chill necesita el cociente exacto.",
+                q: "¿Cuál es el resultado de 525 dividido por 3?",
+                a: "175",
+                options: ["175", "165", "185", "174"],
+                hint: "Divide 525 entre 3."
+            }, {
+                id: 16,
+                part: 2,
+                type: "Reparto equitativo",
+                narrative: "Los lápices deben guardarse en estuches iguales.",
+                q: "Se tienen 752 lápices que deben guardarse en 8 estuches iguales. ¿Cuántos lápices quedan en cada estuche?",
+                a: "94",
+                options: ["94", "93", "84", "95"],
+                hint: "Divide 752 entre 8."
+            }, {
+                id: 17,
+                part: 2,
+                type: "División inversa",
+                narrative: "Patito Amarillito ocultó el dividendo. ¡Recupéralo!",
+                q: "¿Qué número dividido por 2 es igual a 436?",
+                a: "872",
+                options: ["218", "872", "862", "228"],
+                hint: "Multiplica 436 × 2."
+            }, {
+                id: 18,
+                part: 2,
+                type: "Reparto equitativo",
+                narrative: "Las piezas deben empaquetarse en cajas iguales.",
+                q: "Una fábrica produce 918 piezas y las empaca en 9 cajas iguales. ¿Cuántas piezas hay en cada caja?",
+                a: "102",
+                options: ["12", "102", "112", "92"],
+                hint: "Divide 918 entre 9."
+            }, {
+                id: 19,
+                part: 2,
+                type: "División directa",
+                narrative: "Encuentra el cociente de esta división.",
+                q: "¿Cuál es el cociente de 642 dividido por 3?",
+                a: "214",
+                options: ["214", "224", "204", "215"],
+                hint: "Divide 642 entre 3."
+            }, {
+                id: 20,
+                part: 2,
+                type: "Reparto equitativo",
+                narrative: "Las flores deben plantarse en canteros iguales.",
+                q: "En un jardín se plantan 856 flores en 8 canteros. ¿Cuántas flores hay en cada cantero si todos tienen la misma cantidad?",
+                a: "107",
+                options: ["17", "107", "117", "106"],
+                hint: "Divide 856 entre 8."
+            }
         ];
 
-        let currentIndex = 0;
-        let score = 0;
+        // ================================================================
+        //  ESTADO DE LA APLICACIÓN
+        // ================================================================
+        let selectedPartMode = 'part1';
+        let currentQuestionsList = [];
+        let currentLevelIndex = 0;
+        let isProcessing = false;
 
+        // ================================================================
+        //  FUNCIONES DE CONTROL
+        // ================================================================
+        function setPart(mode) {
+            selectedPartMode = mode;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            if (mode === 'part1') document.getElementById('btn-part1').classList.add('active');
+            if (mode === 'part2') document.getElementById('btn-part2').classList.add('active');
+            if (mode === 'full') document.getElementById('btn-full').classList.add('active');
+        }
+
+        function shuffleArray(arr) {
+            const copy = arr.slice();
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        // ================================================================
+        //  AUDIO SFX (Web Audio)
+        // ================================================================
+        function playSFX(type) {
+            const toggle = document.getElementById('sound-toggle');
+            if (!toggle || !toggle.checked) return;
+            try {
+                const ctx = new(window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                if (type === 'correct') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08);
+                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16);
+                    osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.24);
+                    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.4);
+                } else {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(200, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.25);
+                    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.3);
+                }
+            } catch (e) { /* silencio */ }
+        }
+
+        // ================================================================
+        //  INICIO DEL JUEGO
+        // ================================================================
         function startGame() {
-            document.getElementById('start-screen').classList.add('hidden');
-            document.getElementById('game-screen').classList.remove('hidden');
-            showQuestion();
-        }
-
-        function showQuestion() {
-            const q = questions[currentIndex];
-            document.getElementById('current-index').innerText = currentIndex + 1;
-            document.getElementById('question-text').innerText = q.q;
-            
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
-            
-            // Barajar opciones
-            const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
-            
-            shuffledOptions.forEach(opt => {
-                const btn = document.createElement('button');
-                btn.innerText = opt;
-                btn.className = 'btn-action p-4 text-left text-lg font-bold uppercase';
-                btn.onclick = () => checkAnswer(opt);
-                optionsContainer.appendChild(btn);
-            });
-
-            const progress = ((currentIndex) / questions.length) * 100;
-            document.getElementById('progress-fill').style.width = progress + '%';
-        }
-
-        function checkAnswer(selected) {
-            const feedback = document.getElementById('feedback');
-            const correct = questions[currentIndex].correct;
-            
-            feedback.classList.remove('hidden');
-            if (selected === correct) {
-                score++;
-                feedback.innerText = "¡BOOM! ¡Correcto!";
-                feedback.className = "mt-6 text-center text-xl font-bold italic text-green-600";
+            if (selectedPartMode === 'part1') {
+                currentQuestionsList = allQuestions.filter(q => q.part === 1);
+            } else if (selectedPartMode === 'part2') {
+                currentQuestionsList = allQuestions.filter(q => q.part === 2);
             } else {
-                feedback.innerText = "¡ZAP! El Patito te bloqueó. Era: " + correct;
-                feedback.className = "mt-6 text-center text-xl font-bold italic text-red-600";
+                currentQuestionsList = [...allQuestions];
+            }
+            currentLevelIndex = 0;
+            document.getElementById('screen-start').classList.add('hidden');
+            document.getElementById('screen-game').classList.remove('hidden');
+            document.getElementById('screen-end').classList.add('hidden');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const qData = currentQuestionsList[currentLevelIndex];
+            const total = currentQuestionsList.length;
+            const progress = ((currentLevelIndex) / total) * 100;
+
+            document.getElementById('level-label').innerText = `DESAFÍO ${currentLevelIndex + 1} / ${total}`;
+            document.getElementById('progress-fill').style.width = `${Math.max(progress, 5)}%`;
+            document.getElementById('section-badge').innerText =
+                qData.part === 1 ? "PARTE 1: DIVISIONES DIRECTAS Y REPARTOS" : "PARTE 2: DIVISIONES INVERSAS Y PROBLEMAS VARIADOS";
+
+            document.getElementById('narrative-text').innerText = `"${qData.narrative}"`;
+            document.getElementById('question-number').innerText = `PREGUNTA #${qData.id}`;
+            document.getElementById('question-text').innerText = qData.q;
+            document.getElementById('question-type-badge').innerText = `Tipo: ${qData.type}`;
+
+            // Pistas
+            const hintsToggle = document.getElementById('hints-toggle').checked;
+            const hintContainer = document.getElementById('hint-container');
+            if (hintsToggle) {
+                hintContainer.classList.remove('hidden');
+                document.getElementById('hint-box').innerHTML = qData.hint;
+                document.getElementById('hint-box').classList.add('hidden');
+            } else {
+                hintContainer.classList.add('hidden');
             }
 
-            setTimeout(() => {
-                feedback.classList.add('hidden');
-                currentIndex++;
-                if (currentIndex < questions.length) {
-                    showQuestion();
-                } else {
-                    showEndScreen();
-                }
-            }, 1500);
+            // Opciones aleatorizadas
+            const select = document.getElementById('answer-select');
+            select.innerHTML = '<option value="" disabled selected>-- Elige con calma --</option>';
+            const shuffled = shuffleArray(qData.options);
+            shuffled.forEach(opt => {
+                const el = document.createElement('option');
+                el.value = opt;
+                el.innerText = opt;
+                select.appendChild(el);
+            });
+
+            // Avatar rotativo
+            const avatars = ["🐱", "🐢", "🦉", "⚖️", "🐶"];
+            const names = ["Gatito Chill", "Mente Inversa", "Búho del Equilibrio", "Robot Balance", "Rayo Despeje"];
+            const idx = currentLevelIndex % avatars.length;
+            document.getElementById('hero-avatar').innerText = avatars[idx];
+            document.getElementById('hero-title').innerText = `Legión del Despeje: ${names[idx]}`;
+
+            isProcessing = false;
         }
 
-        function showEndScreen() {
-            document.getElementById('game-screen').classList.add('hidden');
-            document.getElementById('end-screen').classList.remove('hidden');
-            document.getElementById('score-report').innerText = `Lograste desactivar ${score} de 20 trampas matemáticas.`;
+        function toggleHint() {
+            document.getElementById('hint-box').classList.toggle('hidden');
         }
+
+        function checkAnswer() {
+            if (isProcessing) return;
+            const select = document.getElementById('answer-select');
+            const userAns = select.value;
+            if (!userAns) return;
+
+            isProcessing = true;
+            const currentQ = currentQuestionsList[currentLevelIndex];
+            const fx = document.getElementById('visual-fx');
+
+            if (userAns === currentQ.a) {
+                playSFX('correct');
+                const words = ["¡DESPEJADO!", "¡EQUILIBRIO!", "¡CHILL!", "¡PERFECTO!", "¡POW!"];
+                fx.innerText = words[Math.floor(Math.random() * words.length)];
+                fx.className = "pow-text comic-font text-8xl md:text-9xl text-yellow-300 active";
+                setTimeout(() => {
+                    fx.classList.remove('active');
+                    currentLevelIndex++;
+                    if (currentLevelIndex < currentQuestionsList.length) {
+                        loadQuestion();
+                    } else {
+                        showVictoryScreen();
+                    }
+                }, 850);
+            } else {
+                playSFX('wrong');
+                fx.innerText = "¡DESORDEN!";
+                fx.className = "pow-text comic-font text-8xl md:text-9xl text-red-500 active";
+                setTimeout(() => {
+                    fx.classList.remove('active');
+                    select.value = "";
+                    isProcessing = false;
+                }, 850);
+            }
+        }
+
+        function showVictoryScreen() {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-end').classList.remove('hidden');
+            document.getElementById('progress-fill').style.width = "100%";
+
+            const mode = selectedPartMode;
+            if (mode === 'part1') {
+                document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 de la Evaluación!";
+                document.getElementById('end-subtitle').innerText =
+                    "Dominaste las divisiones directas y los repartos equitativos. ¡Continúa así!";
+            } else if (mode === 'part2') {
+                document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 de la Evaluación!";
+                document.getElementById('end-subtitle').innerText =
+                    "Aplicaste divisiones inversas y resolviste problemas variados. ¡Excelente!";
+            } else {
+                document.getElementById('end-title').innerText = "¡HAS COMPLETADO EL ESCAPE ROOM COMPLETO!";
+                document.getElementById('end-subtitle').innerText =
+                    "Eres un Maestro de la División. ¡El orden ha sido restaurado!";
+            }
+        }
+
+        function confirmExit() {
+            if (confirm("¿Deseas volver al menú de inicio?")) {
+                returnToStart();
+            }
+        }
+
+        function returnToStart() {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-end').classList.add('hidden');
+            document.getElementById('screen-extras').classList.add('hidden');
+            document.getElementById('screen-start').classList.remove('hidden');
+        }
+
+        // ================================================================
+        //  FUNCIONES PARA SECCIONES COMPLEMENTARIAS (EXTRAS)
+        // ================================================================
+        function toggleExtraModules() {
+            const extras = document.getElementById('screen-extras');
+            extras.classList.remove('hidden');
+            extras.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeExtraModules() {
+            document.getElementById('screen-extras').classList.add('hidden');
+        }
+
+        function switchExtraTab(tabId) {
+            document.querySelectorAll('[id^="extra-"]').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.extra-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
+
+            document.getElementById(`extra-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('active-tab');
+        }
+
+        function toggleExtraHint() {
+            const box = document.getElementById('extra-hint-box');
+            box.classList.toggle('hidden');
+        }
+
+        // ================================================================
+        //  INICIALIZACIÓN
+        // ================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            setPart('part1');
+            switchExtraTab('sec2');
+        });
     </script>
+
 </body>
 </html>
