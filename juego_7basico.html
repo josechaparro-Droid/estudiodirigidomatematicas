@@ -1,97 +1,103 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gatito Chill vs. El Barón Desproporción - Escape Room de Proporcionalidad</title>
-    <!-- Tailwind CSS para el diseño responsivo de alto impacto -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fuentes Google: Bangers (Cómic Retro), Comic Neue (Lectura clara), Chewy (Estilo relajado Gatito Chill) -->
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,400;0,700;1,700&family=Chewy&display=swap" rel="stylesheet">
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escape Room: Gatito Chill vs Patito Amarillito – 7° Básico</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet" />
     <style>
-        :root {
-            --comic-red: #ef4444;
-            --comic-blue: #2563eb;
-            --comic-purple: #7c3aed;
-            --comic-yellow: #facc15;
-            --comic-green: #10b981;
-            --comic-dark: #0f172a;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-
         body {
             font-family: 'Comic Neue', cursive;
             background-color: #0f172a;
-            /* Patrón de puntos Ben-Day retro del cómic */
-            background-image: radial-gradient(rgba(124, 58, 237, 0.3) 15%, transparent 16%), 
-                              radial-gradient(rgba(37, 99, 235, 0.25) 15%, transparent 16%);
+            background-image: radial-gradient(rgba(239, 68, 68, 0.25) 15%, transparent 16%),
+                radial-gradient(rgba(37, 99, 235, 0.25) 15%, transparent 16%);
             background-size: 24px 24px;
             background-position: 0 0, 12px 12px;
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem;
             color: #0f172a;
-            overflow-x: hidden;
         }
-
         .comic-font {
             font-family: 'Bangers', cursive;
             letter-spacing: 1.5px;
         }
-
         .chill-font {
             font-family: 'Chewy', cursive;
         }
-
-        /* Paneles estilizados con trazo de tinta negra e influencia Pop Art */
         .comic-panel {
             background: white;
             border: 5px solid black;
             box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
             position: relative;
         }
-
-        .comic-panel-yellow {
-            background: #fef08a;
-            border: 5px solid black;
-            box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
-        }
-
-        .comic-panel-purple {
-            background: #f3e8ff;
-            border: 5px solid black;
-            box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
-        }
-
-        /* Textura sutil de papel impreso */
         .comic-panel::before {
             content: "";
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(rgba(0,0,0,0.02) 1px, transparent 1px);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px);
             background-size: 6px 6px;
             pointer-events: none;
             z-index: 1;
         }
-
         .btn-comic {
             font-family: 'Bangers', cursive;
             letter-spacing: 1px;
             border: 4px solid black;
             box-shadow: 5px 5px 0px black;
-            transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.2s ease;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
             text-transform: uppercase;
         }
-
         .btn-comic:hover {
             transform: translate(-3px, -3px);
             box-shadow: 8px 8px 0px black;
         }
-
         .btn-comic:active {
             transform: translate(2px, 2px);
             box-shadow: 1px 1px 0px black;
         }
-
-        /* Onomatopeya emergente dinámicas */
+        .tab-btn.active {
+            background-color: #facc15;
+            color: black;
+            border-bottom: 4px solid black;
+        }
+        .progress-bar-container {
+            background: #e2e8f0;
+            border: 4px solid black;
+            border-radius: 9999px;
+            overflow: hidden;
+            height: 28px;
+        }
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #ef4444, #8b5cf6, #3b82f6);
+            height: 100%;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .alarm-border {
+            animation: alertPulse 1.8s infinite alternate;
+        }
+        @keyframes alertPulse {
+            from {
+                border-color: #0f172a;
+                box-shadow: 8px 8px 0px black;
+            }
+            to {
+                border-color: #ef4444;
+                box-shadow: 8px 8px 0px #ef4444;
+            }
+        }
         .pow-text {
             position: fixed;
             top: 50%;
@@ -100,15 +106,12 @@
             z-index: 100;
             pointer-events: none;
             transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-shadow: 5px 5px 0px black;
+            text-shadow: 6px 6px 0px black;
             -webkit-text-stroke: 3px black;
         }
-
         .pow-text.active {
             transform: translate(-50%, -50%) scale(1.5);
         }
-
-        /* Estilos para menús de selección */
         select {
             appearance: none;
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
@@ -116,230 +119,222 @@
             background-position: right 1.2rem center;
             background-size: 1.4em;
         }
-
-        .progress-bar-container {
-            background: #e2e8f0;
-            border: 4px solid black;
-            border-radius: 9999px;
-            overflow: hidden;
-            height: 28px;
+        .hidden {
+            display: none !important;
         }
-
-        .progress-bar-fill {
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
-            height: 100%;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .extra-tab-btn {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 0.5px;
+            border: 3px solid black;
+            box-shadow: 4px 4px 0px black;
+            transition: all 0.1s ease;
         }
-
-        .alarm-border {
-            animation: alertPulse 1.8s infinite alternate;
-        }
-
-        @keyframes alertPulse {
-            from { border-color: #0f172a; box-shadow: 8px 8px 0px black; }
-            to { border-color: #ef4444; box-shadow: 8px 8px 0px #ef4444; }
-        }
-
-        /* Tab Switcher de Docente y Módulos Extra */
-        .tab-btn.active {
-            background-color: #facc15;
+        .extra-tab-btn.active-tab {
+            background-color: #facc15 !important;
             color: black;
             border-bottom: 4px solid black;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px black;
+        }
+        .extra-tab-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px black;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #7c3aed;
+        }
+        details summary:hover {
+            color: #4c1d95;
+        }
+        table td,
+        table th {
+            border: 1px solid #000;
+            padding: 0.5rem;
+            text-align: center;
         }
     </style>
 </head>
-<body class="flex items-center justify-center p-3 md:p-6">
+<body>
 
-    <!-- Onomatopeya flotante para feedback de respuesta -->
-    <div id="visual-fx" class="pow-text comic-font text-7xl md:text-9xl text-yellow-300">¡ZAS!</div>
+    <!-- Onomatopeya FX -->
+    <div id="visual-fx" class="pow-text comic-font text-8xl md:text-9xl text-yellow-300">¡DESPEJADO!</div>
 
     <div class="max-w-4xl w-full">
-        <!-- CABECERA PRINCIPAL CON DATOS CURRICULARES -->
+
+        <!-- CABECERA -->
         <header class="text-center mb-6">
-            <div class="inline-block bg-white border-4 border-black p-4 md:p-6 transform -rotate-1 shadow-[8px_8px_0px_#ef4444] relative z-10 w-full">
+            <div class="inline-block bg-white border-4 border-black p-4 md:p-6 transform -rotate-1 shadow-[8px_8px_0px_#2563eb] relative z-10 w-full">
                 <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-black pb-2 mb-3 text-xs md:text-sm font-bold text-gray-700">
-                    <span>📚 CURSO: 7° BÁSICO</span>
-                    <span>⏱️ TIEMPO RECOMENDADO: 90 MIN</span>
-                    <span>🧩 UNIDAD: PROPORCIONALIDAD</span>
+                    <span>📚 NIVEL: 7° BÁSICO</span>
+                    <span>⏱️ TIEMPO MÁXIMO: 90 MIN</span>
+                    <span>🧩 UNIDAD: PROPORCIONALIDAD DIRECTA E INVERSA (OA 08)</span>
                 </div>
-                <h1 class="text-3xl md:text-5xl comic-font text-red-600 tracking-wide uppercase">
-                    Gatito Chill vs. El Barón Desproporción
+                <h1 class="text-3xl md:text-5xl comic-font text-blue-700 tracking-wide uppercase">
+                    Gatito Chill vs. Patito Amarillito
                 </h1>
                 <p class="text-lg md:text-2xl chill-font text-purple-900 mt-1">
-                    ¡El Escape Room de la Proporcionalidad Directa e Inversa!
+                    Escape Room de la Proporcionalidad
                 </p>
             </div>
-            
-            <!-- Objetivo de Aprendizaje (OA 08) -->
-            <div class="mt-4 bg-yellow-100 border-3 border-black p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left border-2 border-black">
+            <!-- OA -->
+            <div class="mt-4 bg-yellow-100 border-2 border-black p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
                 <p class="font-bold text-xs md:text-sm text-indigo-950">
-                    🎯 <span class="underline">OBJETIVO DE APRENDIZALE (OA 08)</span>: Mostrar que comprenden las proporciones directas e inversas: resolviendo problemas cotidianos, identificando constantes de proporcionalidad, representando tablas/modelos y justificando estrategias.
+                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 08)</span>: Mostrar que comprenden las proporciones directas e inversas resolviendo problemas de la vida diaria y de otras asignaturas.
                 </p>
             </div>
         </header>
 
         <main class="relative z-10">
-            <!-- PANTALLA 1: INICIO Y SELECCIÓN DOCENTE -->
+
+            <!-- PANTALLA 1: INICIO -->
             <div id="screen-start" class="comic-panel p-6 md:p-8 space-y-6">
                 <div class="flex justify-center items-center gap-4 text-6xl md:text-7xl animate-bounce">
-                    <span>🐱</span><span class="text-3xl">VS</span><span>🦹‍♂️</span>
+                    <span>🐱</span><span class="text-3xl font-black">VS</span><span>🐤</span>
                 </div>
 
                 <div class="text-center">
-                    <h2 class="text-2xl md:text-4xl comic-font text-purple-700">¡ALERTA EN LA CIUDAD DE LAS RAZONES!</h2>
-                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">El equilibrio de la proporcionalidad está en riesgo...</p>
+                    <h2 class="text-2xl md:text-4xl comic-font text-red-600">¡EL DESORDEN PROPORCIONAL HA LLEGADO!</h2>
+                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">Patito Amarillito ha desbalanceado todas las proporciones de la ciudad...</p>
                 </div>
 
-                <!-- Historia Gamificada -->
+                <!-- Historia -->
                 <div class="bg-blue-50 border-4 border-black p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
                     <p class="text-base md:text-lg">
-                        El malvado villano <b>El Barón Desproporción</b> ha activado su temible máquina <i>"Des-Escala 3000"</i>. Su objetivo es alterar todas las relaciones proporcionales del mundo: ¡si compras más manzanas te cobrarán menos, si van más obreros a una obra tardarán años, y los mapas cambiarán de tamaño al azar!
+                        El villano <b>Patito Amarillito</b> lanzó su <i>"Rayo Desproporcionado"</i> sobre la Ciudad de las Proporciones, haciendo que las recetas de cocina, los tiempos de construcción y hasta las velocidades de los vehículos se volvieran caóticos. Las relaciones directas se volvieron inversas y viceversa.
                     </p>
                     <p class="text-base md:text-lg">
-                        Acomodándose tranquilamente su hojita de té favorita en la cabeza, el sereno <b>Gatito Chill</b> nos sonríe y nos aconseja con total tranquilidad:
+                        Con su taza de té siempre a mano, el sereno <b>Gatito Chill</b> nos guía con una sonrisa:
                     </p>
                     <blockquote class="bg-yellow-200 border-l-4 border-yellow-600 p-3 rounded font-bold text-indigo-900 italic text-sm md:text-base">
-                        "Relax, amigos... El caos solo ocurre cuando olvidamos si dos variables suben juntas o si una sube mientras la otra baja. Respiren profundo, apliquen la regla de tres o la constante <span class="font-mono bg-yellow-300 px-1 rounded">k</span> con calma, y superemos los retos paso a paso."
+                        "Tranquilos, amigos... si al aumentar una cantidad la otra también aumenta, es directa. Si al aumentar una la otra disminuye, es inversa. ¡Chill, que el equilibrio volverá!"
                     </blockquote>
                 </div>
 
-                <!-- SELECCIÓN PARA EL DOCENTE: DIVISIÓN EN 2 PARTES DE 10 PREGUNTAS -->
+                <!-- SELECCIÓN DOCENTE -->
                 <div class="bg-purple-100 border-4 border-black p-5 rounded-xl text-left space-y-3 shadow-md">
                     <label class="block font-black text-purple-900 uppercase text-base md:text-lg comic-font tracking-wide">
-                        ⚙️ Configuración Docente / Selección de Tramo (10 u 20 preguntas):
+                        ⚙️ Configuración Docente – Selección de Tramo (10 o 20 preguntas):
                     </label>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            📍 Parte 1 (Preguntas 1 a 10)<br>
-                            <span class="text-xs font-normal normal-case block">Compras, Máquinas, Ciclistas, Obreros y Escalas</span>
+                            📍 Parte 1 (Preguntas 1 a 10)<br />
+                            <span class="text-xs font-normal normal-case block">Proporcionalidad directa e inversa (básico)</span>
                         </button>
                         <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            📍 Parte 2 (Preguntas 11 a 20)<br>
-                            <span class="text-xs font-normal normal-case block">Velocidad, Razones, Grifos, Pintores y Modelos</span>
+                            📍 Parte 2 (Preguntas 11 a 20)<br />
+                            <span class="text-xs font-normal normal-case block">Problemas con tablas y conceptos</span>
                         </button>
                         <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            🔥 Modo Completo (20 Retos)<br>
-                            <span class="text-xs font-normal normal-case block">Toda la evaluación continuada</span>
+                            🔥 Modo Completo (20 Retos)<br />
+                            <span class="text-xs font-normal normal-case block">Evaluación continua completa</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Opciones adicionales (Sonido y desarrollo) -->
+                <!-- Opciones -->
                 <div class="flex flex-wrap items-center justify-between gap-3 bg-gray-100 p-3 border-2 border-black rounded-lg">
                     <div class="flex items-center gap-2">
-                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600">
-                        <label for="sound-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">🔊 Sintetizador de audio Retro (SFX)</label>
+                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
+                        <label for="sound-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">🔊 SFX Retro</label>
                     </div>
                     <div class="flex items-center gap-2">
-                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600">
-                        <label for="hints-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">💡 Permitir pistas de desarrollo</label>
+                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
+                        <label for="hints-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">💡 Permitir pistas</label>
                     </div>
                 </div>
 
                 <div class="pt-2">
                     <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-black text-2xl md:text-3xl py-4 w-full rounded-xl">
-                        ¡INICIAR EL ESCAPE ROOM! 🚀
+                        ¡RESTAURAR EL EQUILIBRIO PROPORCIONAL! 🚀
                     </button>
                 </div>
 
-                <!-- Acceso a secciones complementarias de la guía -->
+                <!-- BOTÓN PARA SECCIONES COMPLEMENTARIAS -->
                 <div class="text-center pt-2 border-t-2 border-gray-200">
                     <button onclick="toggleExtraModules()" class="text-sm font-bold text-blue-700 underline hover:text-blue-900">
-                        📋 Ver Secciones Complementarias (Problemas de 4 pasos, Metacognición y Desafío Extra)
+                        📋 Ver Secciones Complementarias (Problemas de 4 pasos, Metacognición y Autoevaluación)
                     </button>
                 </div>
             </div>
 
-            <!-- PANTALLA 2: JUEGO / ESCAPE ROOM -->
+            <!-- PANTALLA 2: JUEGO -->
             <div id="screen-game" class="hidden space-y-6">
-                <!-- Barra Superior de Control y Progreso -->
+                <!-- Barra superior -->
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white border-4 border-black p-4 shadow-[6px_6px_0px_black]">
                     <div class="flex items-center gap-3">
                         <span class="text-3xl">🐱</span>
                         <div>
-                            <div class="comic-font text-2xl text-red-600 leading-tight" id="level-label">MISIÓN 1 / 10</div>
-                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: LAS LEYES DIRECTAS</div>
+                            <div class="comic-font text-2xl text-red-600 leading-tight" id="level-label">DESAFÍO 1 / 10</div>
+                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: PROPORCIONALIDAD BÁSICA</div>
                         </div>
                     </div>
-
-                    <!-- Barra de Progreso -->
                     <div class="w-full md:w-1/2 progress-bar-container">
                         <div id="progress-fill" class="progress-bar-fill" style="width: 5%"></div>
                     </div>
-
-                    <!-- Botón de salir / cambiar parte -->
                     <button onclick="confirmExit()" class="text-xs font-bold bg-gray-200 hover:bg-gray-300 border-2 border-black px-3 py-1 rounded">
                         ⚙️ Menú
                     </button>
                 </div>
 
-                <!-- Panel Principal del Desafío Matelmático -->
+                <!-- Panel del reto -->
                 <div class="comic-panel p-5 md:p-8 alarm-border border-4">
-                    <!-- Cuadro del personaje aliado activo -->
-                    <div class="flex items-start gap-4 mb-6 bg-blue-50 border-3 border-black p-4 rounded-xl border-2 border-black">
+                    <div class="flex items-start gap-4 mb-6 bg-blue-50 border-2 border-black p-4 rounded-xl">
                         <div class="text-5xl" id="hero-avatar">🐱</div>
                         <div class="w-full">
                             <div class="flex justify-between items-center">
-                                <h4 class="font-bold text-red-600 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Legión Proporcional: Gatito Chill</h4>
-                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Proporción Directa</span>
+                                <h4 class="font-bold text-red-600 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Legión del Despeje: Gatito Chill</h4>
+                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Proporcionalidad</span>
                             </div>
-                            <p class="font-bold text-indigo-950 italic text-base md:text-lg mt-1" id="narrative-text">Cargando la situación...</p>
+                            <p class="font-bold text-indigo-950 italic text-base md:text-lg mt-1" id="narrative-text">Cargando situación...</p>
                         </div>
                     </div>
 
-                    <!-- Enunciado de la Pregunta de la Evaluación -->
                     <div class="space-y-6 relative z-10">
-                        <div class="bg-gray-50 border-3 border-black p-5 rounded-xl shadow-inner border-2 border-black">
+                        <div class="bg-gray-50 border-2 border-black p-5 rounded-xl shadow-inner">
                             <div id="question-number" class="comic-font text-xl text-purple-700 mb-1">PREGUNTA #</div>
-                            <div id="question-text" class="text-lg md:text-xl font-bold text-gray-900 leading-relaxed"></div>
+                            <div id="question-text" class="text-xl md:text-2xl font-bold text-gray-900 leading-relaxed font-mono"></div>
                         </div>
 
-                        <!-- Sección de Ayuda / Pista de Desarrollo Explícita -->
                         <div id="hint-container" class="hidden">
                             <button onclick="toggleHint()" class="text-sm font-bold text-purple-800 bg-purple-100 border-2 border-purple-400 px-3 py-1.5 rounded-lg flex items-center gap-2 hover:bg-purple-200 transition">
-                                💡 <span>¿Necesitas ayuda con el desarrollo? (Ver estrategia)</span>
+                                💡 <span>Mostrar pista</span>
                             </button>
-                            <div id="hint-box" class="hidden mt-2 p-3 bg-yellow-50 border-2 border-yellow-400 rounded-lg text-sm text-yellow-950 leading-relaxed font-medium">
-                                <!-- La pista se inserta dinámicamente -->
-                            </div>
+                            <div id="hint-box" class="hidden mt-2 p-3 bg-yellow-50 border-2 border-yellow-400 rounded-lg text-sm text-yellow-950 leading-relaxed font-medium"></div>
                         </div>
 
-                        <!-- Menú Desplegable con Alternativas Aleatorizadas -->
                         <div class="space-y-2">
                             <label class="block font-black text-indigo-950 uppercase tracking-tight text-sm">
-                                🎯 Selecciona tu resultado calculado:
+                                🎯 Selecciona la respuesta correcta:
                             </label>
                             <select id="answer-select" class="w-full p-4 border-4 border-black text-lg md:text-xl font-bold bg-yellow-50 focus:ring-4 focus:ring-purple-300 outline-none cursor-pointer rounded-xl">
-                                <option value="" disabled selected>-- Elige tu respuesta con tranquilidad --</option>
+                                <option value="" disabled selected>-- Elige con calma --</option>
                             </select>
                         </div>
 
-                        <!-- Botón para comprobar -->
                         <button onclick="checkAnswer()" class="btn-comic bg-red-600 hover:bg-red-500 text-white text-2xl md:text-3xl py-4 w-full rounded-xl">
-                            ¡DESACTIVAR CÓDIGO! 💥
+                            ¡ENVIAR RESPUESTA! 💥
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- PANTALLA 3: VICTORIA / FINAL -->
+            <!-- PANTALLA 3: VICTORIA -->
             <div id="screen-end" class="hidden comic-panel p-8 md:p-12 text-center space-y-8">
-                <h2 class="text-5xl md:text-7xl comic-font text-purple-700">¡MISIÓN CUMPLIDA!</h2>
-                <div class="text-8xl md:text-9xl animate-bounce my-4">🐱⚖️🏆</div>
-                
+                <h2 class="text-5xl md:text-7xl comic-font text-purple-700">¡SISTEMA REESTABLECIDO!</h2>
+                <div class="text-8xl md:text-9xl animate-bounce my-4">🐱⚖️✨</div>
                 <div class="space-y-3">
-                    <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has neutralizado la máquina del Barón Desproporción!</p>
+                    <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has derrotado a Patito Amarillito!</p>
                     <p class="text-gray-700 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
-                        Las constantes de proporcionalidad han regresado a su estado perfecto y el mundo vuelve a funcionar con armonía.
+                        Todas las proporciones han vuelto a su equilibrio. Las recetas, construcciones y viajes están en orden.
                     </p>
                 </div>
-
                 <div class="bg-yellow-100 border-4 border-black p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
                     <p class="text-purple-900">
-                        <b>Gatito Chill te dice:</b> "¡Excelente trabajo! Comprobaste que cuando dos variables son directamente proporcionales su cuociente <span class="font-mono bg-yellow-300 px-1 rounded">(y/x = k)</span> es constante, y cuando son inversas su producto <span class="font-mono bg-yellow-300 px-1 rounded">(x · y = k)</span> no cambia. Todo se resuelve con mente fría."
+                        <b>Gatito Chill te felicita:</b> "¡Excelente! Recuerda que en una proporción directa, al multiplicar una cantidad, la otra se multiplica. En la inversa, al multiplicar una, la otra se divide. ¡Mantén la calma y el orden siempre regresa!"
                     </p>
                 </div>
-
                 <div class="flex flex-col md:flex-row justify-center gap-4 pt-4">
                     <button onclick="returnToStart()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-2xl py-4 px-8 rounded-xl">
                         🔄 VOLVER AL MENÚ
@@ -350,7 +345,9 @@
                 </div>
             </div>
 
-            <!-- MODAL / PANTALLA SECUNDARIA: SECCIONES COMPLEMENTARIAS DE LA GUÍA -->
+            <!-- ========================================================= -->
+            <!-- PANTALLA EXTRAS: SECCIONES COMPLEMENTARIAS (GUÍA)          -->
+            <!-- ========================================================= -->
             <div id="screen-extras" class="hidden comic-panel p-6 md:p-8 space-y-6 my-6">
                 <div class="flex justify-between items-center border-b-4 border-black pb-4">
                     <h2 class="text-3xl md:text-4xl comic-font text-indigo-900">SECCIONES DE DESARROLLO Y EVALUACIÓN</h2>
@@ -359,68 +356,68 @@
                     </button>
                 </div>
 
-                <!-- Pestañas internas para navegar las secciones de la guía -->
+                <!-- Pestañas de navegación -->
                 <div class="flex flex-wrap gap-2 border-b-2 border-black pb-2">
-                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="btn-comic py-2 px-3 text-sm bg-yellow-300">Sección II: Problemas (4 Pasos)</button>
-                    <button onclick="switchExtraTab('sec3')" id="tab-sec3" class="btn-comic py-2 px-3 text-sm bg-white">Sección III: Metacognición</button>
-                    <button onclick="switchExtraTab('sec4')" id="tab-sec4" class="btn-comic py-2 px-3 text-sm bg-white">Sección IV: Desafío Extra</button>
-                    <button onclick="switchExtraTab('sec5')" id="tab-sec5" class="btn-comic py-2 px-3 text-sm bg-white">Sección V: Autoevaluación</button>
+                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="extra-tab-btn active-tab py-2 px-3 text-sm bg-yellow-300">II. Problemas (4 Pasos)</button>
+                    <button onclick="switchExtraTab('sec3')" id="tab-sec3" class="extra-tab-btn py-2 px-3 text-sm bg-white">III. Metacognición</button>
+                    <button onclick="switchExtraTab('sec4')" id="tab-sec4" class="extra-tab-btn py-2 px-3 text-sm bg-white">IV. Desafío Extra</button>
+                    <button onclick="switchExtraTab('sec5')" id="tab-sec5" class="extra-tab-btn py-2 px-3 text-sm bg-white">V. Autoevaluación</button>
                 </div>
 
-                <!-- SECCIÓN II: PROBLEMAS DE 4 PASOS -->
+                <!-- SECCIÓN II: RESOLUCIÓN DE PROBLEMAS (4 PASOS) -->
                 <div id="extra-sec2" class="space-y-6 text-left">
                     <div class="bg-blue-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-blue-900">II. Sección de Resolución de Problemas (Estrategia de 4 Pasos)</h3>
-                        <p class="text-xs text-gray-700">Pasos: 1) Comprender el problema | 2) Planificar el modelo | 3) Ejecutar el cálculo | 4) Comprobar y responder.</p>
+                        <h3 class="font-bold text-lg text-blue-900">II. Resolución de Problemas (Estrategia de los 4 Pasos)</h3>
+                        <p class="text-xs text-gray-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Revisar.</p>
                     </div>
 
-                    <!-- Problema 1 -->
-                    <div class="border-3 border-black p-4 rounded-xl bg-white space-y-3 border-2 border-black">
-                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Proporcionalidad Directa)</span>
+                    <!-- Problema 1: Receta -->
+                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (La receta)</span>
                         <p class="font-bold text-gray-800">
-                            Un agricultor necesita 15 kg de fertilizante por cada 200 m². Si tiene un campo rectangular de 40 m de largo y 30 m de ancho, ¿cuántos kg de fertilizante necesita en total?
+                            Una receta para preparar un pastel de chocolate para 6 personas requiere 300 gramos de harina. ¿Cuántos gramos de harina se necesitan para preparar el mismo pastel para 15 personas?
                         </p>
                         <details class="bg-gray-50 p-3 rounded border border-gray-300">
                             <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
                             <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>Paso 1:</b> Área total = 40 m · 30 m = 1.200 m².</p>
-                                <p><b>Paso 2:</b> Es proporción directa: a mayor área, más fertilizante. Razón = 15 kg / 200 m² = 0,075 kg/m².</p>
-                                <p><b>Paso 3:</b> Total = 1.200 m² · 0,075 kg/m² = 90 kg.</p>
-                                <p><b>Paso 4:</b> Comprobación: 1200 es 6 veces 200 m² -> 15 kg · 6 = 90 kg. ¡Correcto!</p>
+                                <p><b>1. Comprender:</b> 6 personas → 300g harina. 15 personas → x gramos. Es una proporción directa.</p>
+                                <p><b>2. Planificar:</b> Usar regla de tres directa: x = (300 × 15) / 6.</p>
+                                <p><b>3. Resolver:</b> 300 × 15 = 4500. 4500 / 6 = 750 gramos.</p>
+                                <p><b>4. Revisar:</b> 750 / 15 = 50g por persona. 300 / 6 = 50g por persona. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <!-- Problema 2 -->
-                    <div class="border-3 border-black p-4 rounded-xl bg-white space-y-3 border-2 border-black">
-                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Proporcionalidad Inversa)</span>
+                    <!-- Problema 2: Construcción -->
+                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (La construcción)</span>
                         <p class="font-bold text-gray-800">
-                            12 voluntarios limpian una playa en 6 horas. Si llegan 4 voluntarios más (16 en total) al mismo ritmo, ¿cuántas horas tardarán?
+                            Un grupo de 12 obreros construye una pared en 15 días. Si la empresa necesita terminar la pared en 9 días, ¿cuántos obreros adicionales deben contratar?
                         </p>
                         <details class="bg-gray-50 p-3 rounded border border-gray-300">
                             <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
                             <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>Paso 1:</b> Variables: Voluntarios (12 a 16) y Horas. Constante k = total horas-persona.</p>
-                                <p><b>Paso 2:</b> Proporción inversa: x · y = k => 12 · 6 = 72 horas-persona necesarias.</p>
-                                <p><b>Paso 3:</b> Con 16 personas: 16 · Horas = 72 => Horas = 72 / 16 = 4,5 horas (4 horas y 30 min).</p>
-                                <p><b>Paso 4:</b> A más personas se tarda menos tiempo. ¡Lógico!</p>
+                                <p><b>1. Comprender:</b> 12 obreros → 15 días. x obreros → 9 días. Es inversa.</p>
+                                <p><b>2. Planificar:</b> Usar regla de tres inversa: 12 × 15 = x × 9.</p>
+                                <p><b>3. Resolver:</b> x = (12 × 15) / 9 = 180 / 9 = 20 obreros. Adicionales = 20 - 12 = 8.</p>
+                                <p><b>4. Revisar:</b> 12 × 15 = 180. 20 × 9 = 180. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <!-- Problema 3 -->
-                    <div class="border-3 border-black p-4 rounded-xl bg-white space-y-3 border-2 border-black">
-                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Escala y Representación)</span>
+                    <!-- Problema 3: Viaje -->
+                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (El viaje)</span>
                         <p class="font-bold text-gray-800">
-                            Una maqueta a escala 1:50 tiene un edificio de 15 cm de alto. ¿Cuántos metros mide el edificio real? Si cambia la escala a 1:25, ¿cuántos cm medirá en la nueva maqueta?
+                            Un automóvil viaja a una velocidad constante de 80 km/h y recorre una distancia en 5 horas. ¿Cuánto tiempo tardará en recorrer la misma distancia si aumenta su velocidad a 100 km/h?
                         </p>
                         <details class="bg-gray-50 p-3 rounded border border-gray-300">
                             <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
                             <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>Paso 1:</b> Escala 1:50 significa que 1 cm en maqueta equivale a 50 cm reales.</p>
-                                <p><b>Paso 2:</b> Edificio real = 15 cm · 50 = 750 cm = 7,5 metros.</p>
-                                <p><b>Paso 3:</b> Nueva escala 1:25 => Tamaño maqueta = 750 cm / 25 = 30 cm.</p>
-                                <p><b>Paso 4:</b> Al reducir la escala a la mitad (1:25), la maqueta duplica su tamaño (de 15 a 30 cm).</p>
+                                <p><b>1. Comprender:</b> 80 km/h → 5 horas. 100 km/h → x horas. Es inversa.</p>
+                                <p><b>2. Planificar:</b> Distancia = 80 × 5 = 400 km. x = 400 / 100.</p>
+                                <p><b>3. Resolver:</b> 400 / 100 = 4 horas.</p>
+                                <p><b>4. Revisar:</b> 80 × 5 = 400. 100 × 4 = 400. Correcto.</p>
                             </div>
                         </details>
                     </div>
@@ -429,43 +426,40 @@
                 <!-- SECCIÓN III: METACOGNICIÓN -->
                 <div id="extra-sec3" class="hidden space-y-4 text-left">
                     <div class="bg-purple-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-purple-900">III. Metacognición (Reflexión del Estudiante)</h3>
-                        <p class="text-xs text-gray-700">Analiza tus procesos de pensamiento durante la resolución:</p>
+                        <h3 class="font-bold text-lg text-purple-900">III. Metacognición (Análisis de los problemas anteriores)</h3>
+                        <p class="text-xs text-gray-700">Responde con honestidad sobre tu trabajo:</p>
                     </div>
-
                     <div class="space-y-3">
                         <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">1. En el Problema 1 del fertilizante, ¿fue más útil calcular el área total primero o buscar la razón por metro cuadrado? ¿Por qué?</p>
+                            <p class="font-bold text-sm text-gray-800">1. ¿Qué información fue la más difícil de identificar al comenzar los problemas? ¿Por qué?</p>
                         </div>
                         <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">2. En el Problema 2 de la playa, ¿qué error común hubieras cometido si hubieras sumado los voluntarios en lugar de comparar la constante inversa de tiempo?</p>
+                            <p class="font-bold text-sm text-gray-800">2. Al planificar la resolución (paso 2), ¿qué estrategia elegiste (regla de tres, constante de proporcionalidad, etc.) y por qué funcionó?</p>
                         </div>
                         <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">3. ¿Cómo te aseguras de que el factor de escala en el Problema 3 fue aplicado correctamente al convertir centímetros a metros?</p>
+                            <p class="font-bold text-sm text-gray-800">3. En el problema de los obreros (N°2), ¿qué error común podrías haber cometido si no hubieras revisado tu resultado al final?</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- SECCIÓN IV: DESAFÍO EXTRA (PATOS Y VACAS) -->
+                <!-- SECCIÓN IV: DESAFÍO EXTRA (Lógica Inversa) -->
                 <div id="extra-sec4" class="hidden space-y-4 text-left">
                     <div class="bg-yellow-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Puntos Especiales)</h3>
+                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Lógica Inversa - 3 puntos)</h3>
                         <p class="text-sm text-gray-800">
-                            En un corral hay patos y vacas. En total hay <b>50 cabezas</b> y <b>140 patas</b>. Mediante razonamiento lógico, ¿cuántos patos y cuántas vacas hay?
+                            Un reloj atrasa 2 minutos cada 3 horas. Si el reloj se puso en hora exactamente a las 12:00 del mediodía del lunes, ¿qué hora marcará el reloj cuando sean las 12:00 del mediodía del martes siguiente?
                         </p>
                     </div>
-
                     <div class="p-4 bg-white border-2 border-black rounded-xl space-y-3">
-                        <button onclick="toggleDucksHint()" class="btn-comic bg-yellow-400 text-black text-sm px-4 py-2 rounded">
-                            🧩 Revelar Pista Lógica de Gatito Chill
+                        <button onclick="toggleExtraHint()" class="btn-comic bg-yellow-400 text-black text-sm px-4 py-2 rounded">
+                            🧩 Revelar Solución por Reversión de Gatito Chill
                         </button>
-                        <div id="ducks-hint-box" class="hidden text-sm bg-yellow-100 p-3 rounded border border-yellow-300 leading-relaxed">
-                            <p><b>Razonamiento por suposición:</b></p>
-                            <p>1. Si los 50 animales fueran patos (2 patas cada uno), habrían 50 · 2 = 100 patas.</p>
-                            <p>2. Pero hay 140 patas en total. Faltan 40 patas (140 - 100 = 40).</p>
-                            <p>3. Cada vaca agrega 2 patas extra respecto a un pato (4 - 2 = 2 patas extra).</p>
-                            <p>4. Dividimos las patas faltantes: 40 / 2 = <b>20 vacas</b>.</p>
-                            <p>5. Por lo tanto, hay 50 - 20 = <b>30 patos</b>.</p>
+                        <div id="extra-hint-box" class="hidden text-sm bg-yellow-100 p-3 rounded border border-yellow-300 leading-relaxed">
+                            <p><b>Paso 1:</b> Del lunes 12:00 al martes siguiente 12:00 hay exactamente 7 días = 168 horas.</p>
+                            <p><b>Paso 2:</b> El reloj atrasa 2 minutos cada 3 horas. ¿Cuántos intervalos de 3 horas hay en 168 horas? 168 ÷ 3 = 56 intervalos.</p>
+                            <p><b>Paso 3:</b> Atraso total = 56 × 2 = 112 minutos = 1 hora y 52 minutos.</p>
+                            <p><b>Paso 4:</b> A las 12:00 del martes siguiente, el reloj marcará 12:00 - 1:52 = <b>10:08 AM</b>.</p>
+                            <p><b>Nota:</b> La guía original indicaba 16 minutos (solo 1 día), pero el problema pide de lunes a martes siguiente (7 días). La respuesta correcta es 10:08 AM.</p>
                         </div>
                     </div>
                 </div>
@@ -474,260 +468,250 @@
                 <div id="extra-sec5" class="hidden space-y-4 text-left">
                     <div class="bg-green-50 border-2 border-black p-4 rounded-lg">
                         <h3 class="font-bold text-lg text-green-900">V. Autoevaluación del Estudiante</h3>
+                        <p class="text-xs text-gray-700">Marca con una X según corresponda a tu desempeño en esta unidad.</p>
                     </div>
-
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm border-2 border-black bg-white">
                             <thead class="bg-yellow-300 border-b-2 border-black">
                                 <tr>
-                                    <th class="p-2 text-left border-r border-black">Criterio / Ítem</th>
-                                    <th class="p-2 text-center border-r border-black">Logrado (3)</th>
-                                    <th class="p-2 text-center border-r border-black">Parcial (2)</th>
-                                    <th class="p-2 text-center">Por mejorar (1)</th>
+                                    <th class="p-2 text-left border-r border-black">Ítem</th>
+                                    <th class="p-2 text-center border-r border-black">3 pts (Logrado)</th>
+                                    <th class="p-2 text-center border-r border-black">2 pts (En proceso)</th>
+                                    <th class="p-2 text-center">1 pt (Inicio)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">Comprendo la diferencia entre proporcionalidad directa e inversa.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1"></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1"></td>
-                                    <td class="p-2 text-center"><input type="radio" name="auto1"></td>
+                                    <td class="p-2 border-r border-black font-medium">Identifico si una situación es directa o inversamente proporcional.</td>
+                                    <td class="p-2 text-center border-r border-black">Siempre lo identifico.<br /><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center border-r border-black">A veces me confundo.<br /><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center">Me cuesta identificarlo.<br /><input type="radio" name="auto1" /></td>
                                 </tr>
                                 <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">Soy capaz de aplicar la estrategia de los 4 pasos en problemas.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2"></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2"></td>
-                                    <td class="p-2 text-center"><input type="radio" name="auto2"></td>
+                                    <td class="p-2 border-r border-black font-medium">Aplico la estrategia de los 4 pasos en problemas.</td>
+                                    <td class="p-2 text-center border-r border-black">Siempre los aplico.<br /><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center border-r border-black">A veces olvido pasos.<br /><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center">No aplico el método.<br /><input type="radio" name="auto2" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2 border-r border-black font-medium">Puedo convertir unidades y escalas con precisión.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3"></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3"></td>
-                                    <td class="p-2 text-center"><input type="radio" name="auto3"></td>
+                                    <td class="p-2 border-r border-black font-medium">Compruebo mis resultados y detecto errores.</td>
+                                    <td class="p-2 text-center border-r border-black">Siempre reviso mis cálculos.<br /><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center border-r border-black">A veces reviso.<br /><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center">No suelo revisar.<br /><input type="radio" name="auto3" /></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+            <!-- =========== FIN DE EXTRAS =========== -->
+
         </main>
     </div>
 
     <script>
-        // BASE DE DATOS EXACTA DE LAS 20 PREGUNTAS DE LA EVALUACIÓN OFICIAL DE PROPORCIONALIDAD
+        // ================================================================
+        //  BASE DE DATOS – 20 PREGUNTAS (OA 08, 7° BÁSICO)
+        // ================================================================
         const allQuestions = [
-            // PARTE 1 (Preguntas 1 a 10)
+            // ---- PARTE 1: Proporcionalidad básica (Preguntas 1 a 10) ----
             {
                 id: 1,
                 part: 1,
                 type: "Directa",
-                narrative: "El Barón Desproporción alteró la balanza del supermercado de la ciudad.",
-                q: "Si 3 kilogramos de manzanas tienen un valor de $3.600, ¿cuánto cuestan 7 kilogramos?",
-                a: "$8.400",
-                options: ["$7.200", "$8.400", "$9.600", "$10.800"],
-                hint: "Es Proporción Directa (a más kg, más precio). Calcula el valor unitario por 1 kg (3.600 / 3 = $1.200) y luego multiplica por 7."
-            },
-            {
+                narrative: "Patito Amarillito confundió la cantidad de pintura. ¡Ayuda a Gatito Chill!",
+                q: "Si para pintar 3 paredes se necesitan 6 litros de pintura, ¿cuántos litros se necesitan para 5 paredes? (Directo)",
+                a: "10 litros",
+                options: ["8 litros", "9 litros", "10 litros", "12 litros"],
+                hint: "Es directa. 6 ÷ 3 = 2 litros por pared. 5 × 2 = 10 litros."
+            }, {
                 id: 2,
                 part: 1,
                 type: "Inversa",
-                narrative: "Las máquinas de empaque del sector industrial se desajustaron.",
-                q: "En un taller, 4 máquinas embalan 1.000 unidades en 5 horas. ¿Cuántas horas tardarán 2 máquinas en embalar la misma cantidad?",
-                a: "10 horas",
-                options: ["2,5 horas", "5 horas", "7,5 horas", "10 horas"],
-                hint: "Es Proporción Inversa (menos máquinas tardan MÁS horas). Aplica x1 · y1 = x2 · y2 => 4 · 5 = 2 · Horas => 20 / 2 = 10 horas."
-            },
-            {
+                narrative: "Gatito Chill necesita calcular el tiempo de viaje.",
+                q: "Un tren recorre una distancia a 120 km/h y demora 3 horas. ¿Cuánto tardaría si fuera a 90 km/h? (Inverso)",
+                a: "4 horas",
+                options: ["2 horas", "3 horas", "4 horas", "5 horas"],
+                hint: "Es inversa. 120 × 3 = 360 km. 360 ÷ 90 = 4 horas."
+            }, {
                 id: 3,
                 part: 1,
                 type: "Directa",
-                narrative: "Rayo Ciclista necesita calcular la distancia constante para interceptar al villano.",
-                q: "Si un ciclista recorre 15 km en 45 minutos manteniendo una velocidad constante, ¿cuántos kilómetros recorrerá en 2 horas (120 minutos)?",
-                a: "40 km",
-                options: ["30 km", "40 km", "45 km", "60 km"],
-                hint: "Proporción Directa: 15 km / 45 min = x km / 120 min. O nota que 15 km en 45 min es 1 km cada 3 min. En 120 min: 120 / 3 = 40 km."
-            },
-            {
+                narrative: "Patito Amarillito mezcló los precios de las galletas.",
+                q: "Si 4 cajas de galletas cuestan $6.000, ¿cuánto cuestan 7 cajas? (Directo)",
+                a: "$10.500",
+                options: ["$10.000", "$10.500", "$11.000", "$12.000"],
+                hint: "6.000 ÷ 4 = 1.500 por caja. 7 × 1.500 = 10.500."
+            }, {
                 id: 4,
                 part: 1,
                 type: "Inversa",
-                narrative: "El refugio de la Legión debe construirse más rápido de lo planificado.",
-                q: "Un proyecto de construcción que debía terminarse en 20 días por 6 obreros, debe finalizarse en 15 días. ¿Cuántos obreros ADICIONALES se necesitan?",
-                a: "2 obreros",
-                options: ["2 obreros", "8 obreros", "10 obreros", "12 obreros"],
-                hint: "Inversa: Total obreros-días = 20 · 6 = 120. Para 15 días: 120 / 15 = 8 obreros totales. Como ya había 6, se necesitan 8 - 6 = 2 adicionales."
-            },
-            {
+                narrative: "Gatito Chill necesita saber cuántas personas se necesitan.",
+                q: "Un grupo de 5 personas puede limpiar un jardín en 8 horas. ¿Cuántas personas se necesitan para limpiarlo en 4 horas? (Inverso)",
+                a: "10 personas",
+                options: ["8 personas", "10 personas", "12 personas", "20 personas"],
+                hint: "Inversa: 5 × 8 = 40. 40 ÷ 4 = 10 personas."
+            }, {
                 id: 5,
                 part: 1,
                 type: "Directa",
-                narrative: "Mente Constante analiza el valor por gramo de los cristales energéticos.",
-                q: "El precio de un artículo es directamente proporcional a su peso. Si 500 gramos cuestan $2.500, ¿cuál es la constante de proporcionalidad (precio / gramo)?",
-                a: "5",
-                options: ["2", "5", "10", "50"],
-                hint: "La constante k = Precio / Gramos => k = 2.500 / 500 = 5."
-            },
-            {
+                narrative: "Patito Amarillito confundió el consumo de combustible.",
+                q: "Un automóvil recorre 150 km con 10 litros de combustible. ¿Cuántos km recorrerá con 25 litros? (Directo)",
+                a: "375 km",
+                options: ["300 km", "350 km", "375 km", "400 km"],
+                hint: "150 ÷ 10 = 15 km/litro. 25 × 15 = 375 km."
+            }, {
                 id: 6,
                 part: 1,
-                type: "Inversa",
-                narrative: "El estanque de reserva de la ciudad pierde agua rápidamente.",
-                q: "Si una llave de agua abierta llena un estanque en 12 minutos, ¿cuánto tardarán 3 llaves iguales funcionando al mismo tiempo en llenar el mismo estanque?",
-                a: "4 minutos",
-                options: ["3 minutos", "4 minutos", "6 minutos", "36 minutos"],
-                hint: "Proporción Inversa (a más llaves, menos tiempo). Tiempo = 12 / 3 = 4 minutos."
-            },
-            {
+                type: "Directa (constante)",
+                narrative: "Gatito Chill necesita calcular el precio de las piezas.",
+                q: "La constante de proporcionalidad entre el número de piezas y el precio de un mueble desarmado es 1.500. Si compras 6 piezas, ¿cuál es el precio? (Directo)",
+                a: "$9.000",
+                options: ["$7.500", "$8.000", "$9.000", "$10.000"],
+                hint: "Precio = 1.500 × 6 = 9.000."
+            }, {
                 id: 7,
                 part: 1,
-                type: "Directa (Escala)",
-                narrative: "Gatito Chill desplegó el mapa holográfico de la región.",
-                q: "Un mapa utiliza una escala donde 2 cm representan 5 km reales. Si dos ciudades están a 8 cm en el mapa, ¿cuál es la distancia real?",
-                a: "20 km",
-                options: ["10 km", "15 km", "20 km", "25 km"],
-                hint: "8 cm es 4 veces 2 cm. Por lo tanto, en la realidad son 5 km · 4 = 20 km."
-            },
-            {
+                type: "Inversa",
+                narrative: "Patito Amarillito cambió la cantidad de pintores.",
+                q: "2 pintores tardan 6 días en pintar una casa. ¿Cuántos días tardarían 3 pintores? (Inverso)",
+                a: "4 días",
+                options: ["3 días", "4 días", "5 días", "9 días"],
+                hint: "2 × 6 = 12. 12 ÷ 3 = 4 días."
+            }, {
                 id: 8,
                 part: 1,
-                type: "Inversa",
-                narrative: "Se detecta una perturbación en el plano de variables x e y.",
-                q: "Si 'x' e 'y' son variables inversamente proporcionales, y cuando x = 4, y = 10. ¿Cuál es el valor de 'y' cuando x = 8?",
-                a: "5",
-                options: ["5", "20", "40", "80"],
-                hint: "La constante del producto es k = x · y = 4 · 10 = 40. Si x = 8, entonces y = 40 / 8 = 5."
-            },
-            {
+                type: "Directa",
+                narrative: "Gatito Chill necesita ajustar la receta para más personas.",
+                q: "Una receta para 4 personas usa 200g de harina. ¿Cuánta harina se necesita para 10 personas? (Directo)",
+                a: "500g",
+                options: ["400g", "450g", "500g", "550g"],
+                hint: "200 ÷ 4 = 50g/persona. 10 × 50 = 500g."
+            }, {
                 id: 9,
                 part: 1,
-                type: "Directa",
-                narrative: "Un mensajero de la ciudad corre a ritmo uniforme.",
-                q: "Una persona camina 4 km en 1 hora. ¿Cuántos metros recorre en 15 minutos (a velocidad constante)?",
-                a: "1.000 m",
-                options: ["1.000 m", "1.500 m", "2.000 m", "2.500 m"],
-                hint: "4 km = 4.000 metros en 60 minutos. 15 minutos es la cuarta parte de 1 hora. 4.000 / 4 = 1.000 metros."
-            },
-            {
+                type: "Concepto (inversa)",
+                narrative: "Patito Amarillito olvidó cómo funciona la proporción inversa.",
+                q: "En una proporción inversa, si el valor de x se triplica, ¿qué le ocurre al valor de y? (Concepto)",
+                a: "Se divide por 3",
+                options: ["Se triplica", "Se divide por 3", "Se mantiene igual", "Aumenta en 3"],
+                hint: "En proporción inversa, al multiplicar una, la otra se divide."
+            }, {
                 id: 10,
                 part: 1,
-                type: "Inversa",
-                narrative: "El refugio de animales recibió una sobrecarga de mascotas rescatadas.",
-                q: "La cantidad de comida para 20 animales dura 12 días. Si se agregan 10 animales más (30 en total), ¿cuántos días durará la comida?",
-                a: "8 días",
-                options: ["4 días", "6 días", "8 días", "18 días"],
-                hint: "Proporción Inversa: Total raciones = 20 · 12 = 240. Con 30 animales: 240 / 30 = 8 días."
+                type: "Directa",
+                narrative: "Gatito Chill necesita el precio de 1 kg de azúcar.",
+                q: "Si 2 kg de azúcar valen $1.800, ¿cuál es el valor de 1 kg? (Directo)",
+                a: "$900",
+                options: ["$700", "$800", "$900", "$950"],
+                hint: "1.800 ÷ 2 = 900."
             },
 
-            // PARTE 2 (Preguntas 11 a 20)
+            // ---- PARTE 2: Problemas con tablas y conceptos (Preguntas 11 a 20) ----
             {
                 id: 11,
                 part: 2,
-                type: "Modelo Directo",
-                narrative: "Mente Constante analiza la ecuación del movimiento del dron enemigo.",
-                q: "La relación entre el tiempo (x) y la distancia (y) de un objeto que se mueve a velocidad constante es y = 5x. ¿Qué representa el número 5?",
-                a: "La velocidad del objeto",
-                options: ["La distancia inicial", "La velocidad del objeto", "El tiempo total", "La aceleración"],
-                hint: "En la ecuación y = k · x de movimiento rectilíneo uniforme, la constante k representa la velocidad (cuántos metros/km recorre por unidad de tiempo)."
-            },
-            {
+                type: "Inversa",
+                narrative: "Patito Amarillito cambió la cantidad de vacas.",
+                q: "Un agricultor tiene alimento para 20 vacas durante 30 días. ¿Cuántos días durará el alimento si vende 5 vacas? (Inverso)",
+                a: "40 días",
+                options: ["35 días", "40 días", "45 días", "50 días"],
+                hint: "20 × 30 = 600. 20 - 5 = 15 vacas. 600 ÷ 15 = 40 días."
+            }, {
                 id: 12,
                 part: 2,
-                type: "Razones",
-                narrative: "El censo escolar de la Ciudad de las Razones arrojó nuevos datos.",
-                q: "En un curso de 40 estudiantes, 10 son zurdos. ¿Qué razón representa a los diestros respecto al total?",
-                a: "3:4",
-                options: ["1:3", "3:4", "1:4", "4:1"],
-                hint: "Diestros = 40 - 10 = 30. La razón Diestros : Total = 30 / 40. Simplificando por 10 queda 3 : 4."
-            },
-            {
+                type: "Concepto (directa)",
+                narrative: "Gatito Chill necesita identificar una tabla de proporción directa.",
+                q: "¿Cuál de las siguientes tablas representa una proporción directa? (Concepto)",
+                a: "(1, 2), (2, 4), (4, 8)",
+                options: ["(1, 2), (2, 4), (4, 8)", "(1, 10), (2, 5), (5, 2)", "(2, 4), (3, 6), (5, 9)", "(1, 2), (2, 3), (3, 4)"],
+                hint: "En proporción directa, la razón y/x es constante. 2/1=2, 4/2=2, 8/4=2."
+            }, {
                 id: 13,
                 part: 2,
-                type: "Directa",
-                narrative: "Un grifo de la plaza principal llena depósitos hidráulicos.",
-                q: "Un grifo llena un balde de 10 litros en 4 minutos. ¿Cuánto tardará en llenar uno de 25 litros?",
-                a: "10 minutos",
-                options: ["8 minutos", "9 minutos", "10 minutos", "12 minutos"],
-                hint: "Directa: 10 L en 4 min => 1 L en 0,4 min. Para 25 L: 25 · 0,4 = 10 minutos."
-            },
-            {
+                type: "Inversa",
+                narrative: "Patito Amarillito cambió el caudal del grifo.",
+                q: "Un grifo llena un estanque en 12 horas con un caudal de 20 litros/min. ¿Qué caudal se necesita para llenarlo en 8 horas? (Inverso)",
+                a: "30 litros/min",
+                options: ["25 litros/min", "30 litros/min", "35 litros/min", "40 litros/min"],
+                hint: "12 × 20 = 240. 240 ÷ 8 = 30 litros/min."
+            }, {
                 id: 14,
                 part: 2,
-                type: "Inversa",
-                narrative: "El mural de la victoria necesita ser pintado con urgencia.",
-                q: "Para pintar una pared, 3 pintores tardan 6 horas. ¿Cuántos pintores se necesitan para pintar la misma pared en solo 2 horas?",
-                a: "9 pintores",
-                options: ["1 pintor", "6 pintores", "9 pintores", "18 pintores"],
-                hint: "Inversa: Total horas-pintor = 3 · 6 = 18. Para terminar en 2 horas: 18 / 2 = 9 pintores."
-            },
-            {
+                type: "Directa",
+                narrative: "Gatito Chill necesita saber cuántos cuadernos puede comprar.",
+                q: "Si el precio de 10 cuadernos es $15.000, ¿cuántos cuadernos compras con $9.000? (Directo)",
+                a: "6",
+                options: ["5", "6", "7", "8"],
+                hint: "15.000 ÷ 10 = 1.500 por cuaderno. 9.000 ÷ 1.500 = 6."
+            }, {
                 id: 15,
                 part: 2,
-                type: "Directa",
-                narrative: "El Barón Desproporción dejó una ecuación incompleta en su terminal.",
-                q: "La constante de proporcionalidad directa entre 'a' y 'b' (a / b) es 0,5. Si b = 20, ¿cuál es el valor de 'a'?",
-                a: "10",
-                options: ["10", "40", "2", "100"],
-                hint: "a / b = 0,5 => a / 20 = 0,5 => a = 20 · 0,5 = 10."
-            },
-            {
+                type: "Directa (escala)",
+                narrative: "Patito Amarillito confundió la escala del mapa.",
+                q: "En un mapa a escala, 2 cm representan 50 km. ¿Cuántos km representan 5 cm? (Directo)",
+                a: "125 km",
+                options: ["100 km", "120 km", "125 km", "150 km"],
+                hint: "50 ÷ 2 = 25 km/cm. 5 × 25 = 125 km."
+            }, {
                 id: 16,
                 part: 2,
-                type: "Modelo Directo",
-                narrative: "La librería de cómics necesita automatizar su caja registradora.",
-                q: "Si 5 libros cuestan $15.000, ¿cuál es la ecuación que modela el precio (p) de 'n' libros?",
-                a: "p = 3.000 * n",
-                options: ["p = 3.000 + n", "p = 15.000 / n", "p = 3.000 * n", "p = 15.000 * n"],
-                hint: "Cada libro cuesta $15.000 / 5 = $3.000. Por lo tanto, el precio total es $3.000 multiplicado por el número de libros 'n'."
-            },
-            {
+                type: "Inversa",
+                narrative: "Gatito Chill necesita calcular la velocidad del ciclista.",
+                q: "Un ciclista viaja a 20 km/h y tarda 4 horas. ¿A qué velocidad debe ir para tardar 2 horas? (Inverso)",
+                a: "40 km/h",
+                options: ["30 km/h", "40 km/h", "50 km/h", "60 km/h"],
+                hint: "20 × 4 = 80 km. 80 ÷ 2 = 40 km/h."
+            }, {
                 id: 17,
                 part: 2,
-                type: "Concepto Inverso",
-                narrative: "Gatito Chill explica las leyes del equilibrio inverso.",
-                q: "Dos variables son inversamente proporcionales. Si al duplicar la primera, la segunda se reduce a la mitad, ¿qué sucede con la segunda si la primera se triplica?",
-                a: "La segunda se reduce a un tercio.",
-                options: ["La segunda se reduce a un tercio.", "La segunda se reduce a la sexta parte.", "La segunda se duplica.", "La segunda aumenta al triple."],
-                hint: "En la proporción inversa, el factor multiplicativo de una variable es el inverso multiplicativo de la otra: si multiplica por 3, la otra se divide por 3 (un tercio)."
-            },
-            {
+                type: "Concepto (inversa)",
+                narrative: "Gatito Chill necesita identificar una tabla de proporción inversa.",
+                q: "¿Qué tabla representa una proporción inversa? (Concepto)",
+                a: "(2, 10), (4, 5)",
+                options: ["(2, 10), (4, 20)", "(2, 10), (4, 5)", "(2, 4), (4, 8)", "(2, 6), (4, 10)"],
+                hint: "En proporción inversa, el producto x·y es constante. 2×10=20, 4×5=20."
+            }, {
                 id: 18,
                 part: 2,
-                type: "Razones",
-                narrative: "Cocinando un pastel de celebración en la base de héroes.",
-                q: "En una receta, la razón entre harina y azúcar es 5 : 2. Si se usan 10 tazas de harina, ¿cuántas tazas de azúcar se necesitan?",
-                a: "4 tazas",
-                options: ["2 tazas", "4 tazas", "5 tazas", "25 tazas"],
-                hint: "Harina / Azúcar = 5 / 2. Si la harina es 10 (se multiplicó 5 por 2), el azúcar debe multiplicarse por 2: 2 · 2 = 4 tazas."
-            },
-            {
+                type: "Inversa",
+                narrative: "Patito Amarillito cambió la cantidad de personas.",
+                q: "Para hacer un trabajo, 10 personas tardan 6 días. ¿Cuántas personas se necesitan para hacerlo en 3 días? (Inverso)",
+                a: "20",
+                options: ["15", "20", "25", "30"],
+                hint: "10 × 6 = 60. 60 ÷ 3 = 20 personas."
+            }, {
                 id: 19,
                 part: 2,
-                type: "Inversa (Geometría)",
-                narrative: "Ajustando el marco perimetral de la pantalla del Caos-O-Matic.",
-                q: "Un rectángulo tiene un área constante de 24 cm². Si el largo es inversamente proporcional al ancho, y el largo es 8 cm, ¿cuánto mide el ancho?",
-                a: "3 cm",
-                options: ["3 cm", "6 cm", "32 cm", "192 cm"],
-                hint: "Área = Largo · Ancho = 24 => 8 · Ancho = 24 => Ancho = 24 / 8 = 3 cm."
-            },
-            {
+                type: "Directa",
+                narrative: "Gatito Chill necesita calcular cuántos kilos de papas puede comprar.",
+                q: "Si 3 kilos de papas cuestan $1.200, ¿cuántos kilos compras con $2.800? (Directo)",
+                a: "7 kg",
+                options: ["6 kg", "7 kg", "8 kg", "9 kg"],
+                hint: "1.200 ÷ 3 = 400 por kilo. 2.800 ÷ 400 = 7 kg."
+            }, {
                 id: 20,
                 part: 2,
                 type: "Directa",
-                narrative: "¡ÚLTIMA DESACTIVACIÓN! La nave de escape va a toda velocidad.",
-                q: "Si la rapidez de un auto es 60 km/h a velocidad constante, ¿qué distancia recorre en 90 minutos (1,5 horas)?",
-                a: "90 km",
-                options: ["54 km", "80 km", "90 km", "120 km"],
-                hint: "Distancia = Rapidez · Tiempo => 60 km/h · 1,5 h = 90 km."
+                narrative: "Patito Amarillito confundió la producción de máquinas.",
+                q: "En una fábrica, 8 máquinas producen 1.600 piezas al día. ¿Cuántas piezas producirían 12 máquinas? (Directo)",
+                a: "2.400",
+                options: ["2.000", "2.400", "2.800", "3.200"],
+                hint: "1.600 ÷ 8 = 200 por máquina. 12 × 200 = 2.400."
             }
         ];
 
-        // ESTADO DE LA APLICACIÓN
-        let selectedPartMode = 'part1'; // 'part1', 'part2', 'full'
+        // ================================================================
+        //  ESTADO DE LA APLICACIÓN
+        // ================================================================
+        let selectedPartMode = 'part1';
         let currentQuestionsList = [];
         let currentLevelIndex = 0;
         let isProcessing = false;
 
-        // Selección de tramo por el docente
+        // ================================================================
+        //  FUNCIONES DE CONTROL
+        // ================================================================
         function setPart(mode) {
             selectedPartMode = mode;
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -736,56 +720,54 @@
             if (mode === 'full') document.getElementById('btn-full').classList.add('active');
         }
 
-        // Sintetizador Web Audio API para efectos sonoros retro
+        function shuffleArray(arr) {
+            const copy = arr.slice();
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        // ================================================================
+        //  AUDIO SFX (Web Audio)
+        // ================================================================
         function playSFX(type) {
             const toggle = document.getElementById('sound-toggle');
             if (!toggle || !toggle.checked) return;
-
             try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const ctx = new(window.AudioContext || window.webkitAudioContext)();
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
                 osc.connect(gain);
                 gain.connect(ctx.destination);
-
+                const volume = 0.25;
                 if (type === 'correct') {
-                    // Arpegio victorioso ascendente
                     osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(440, ctx.currentTime);
-                    osc.frequency.setValueAtTime(554.37, ctx.currentTime + 0.08);
-                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.16);
-                    osc.frequency.setValueAtTime(880, ctx.currentTime + 0.24);
-                    gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08);
+                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16);
+                    osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.24);
+                    gain.gain.setValueAtTime(volume, ctx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
                     osc.start();
                     osc.stop(ctx.currentTime + 0.4);
                 } else {
-                    // Sonido retro de error
                     osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(220, ctx.currentTime);
-                    osc.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.25);
-                    gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                    osc.frequency.setValueAtTime(200, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.25);
+                    gain.gain.setValueAtTime(volume, ctx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
                     osc.start();
                     osc.stop(ctx.currentTime + 0.3);
                 }
-            } catch (e) {
-                // Audio no disponible o no interactuado
-            }
+            } catch (e) { /* silencio */ }
         }
 
-        // Algoritmo Fisher-Yates para barajar las opciones de respuestas
-        function shuffleArray(array) {
-            let shuffled = array.slice();
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            return shuffled;
-        }
-
+        // ================================================================
+        //  INICIO DEL JUEGO
+        // ================================================================
         function startGame() {
-            // Filtrar preguntas según selección docente
             if (selectedPartMode === 'part1') {
                 currentQuestionsList = allQuestions.filter(q => q.part === 1);
             } else if (selectedPartMode === 'part2') {
@@ -793,35 +775,32 @@
             } else {
                 currentQuestionsList = [...allQuestions];
             }
-
             currentLevelIndex = 0;
             document.getElementById('screen-start').classList.add('hidden');
             document.getElementById('screen-game').classList.remove('hidden');
             document.getElementById('screen-end').classList.add('hidden');
-            
             loadQuestion();
         }
 
         function loadQuestion() {
             const qData = currentQuestionsList[currentLevelIndex];
-            
-            // Actualizar etiquetas y barra de progreso
-            document.getElementById('level-label').innerText = `MISIÓN ${currentLevelIndex + 1} / ${currentQuestionsList.length}`;
             const total = currentQuestionsList.length;
             const progress = ((currentLevelIndex) / total) * 100;
-            document.getElementById('progress-fill').style.width = `${Math.max(progress, 5)}%`;
 
-            document.getElementById('section-badge').innerText = qData.part === 1 ? "PARTE 1: LEYES DIRECTAS E INVERSAS I" : "PARTE 2: LEYES DIRECTAS E INVERSAS II";
-            document.getElementById('hero-narrative')
+            document.getElementById('level-label').innerText = `DESAFÍO ${currentLevelIndex + 1} / ${total}`;
+            document.getElementById('progress-fill').style.width = `${Math.max(progress, 5)}%`;
+            document.getElementById('section-badge').innerText =
+                qData.part === 1 ? "PARTE 1: PROPORCIONALIDAD BÁSICA" : "PARTE 2: TABLAS Y CONCEPTOS";
+
             document.getElementById('narrative-text').innerText = `"${qData.narrative}"`;
-            document.getElementById('question-number').innerText = `PREGUNTA EVALUACIÓN #${qData.id}`;
-            document.getElementById('question-text').innerHTML = qData.q;
+            document.getElementById('question-number').innerText = `PREGUNTA #${qData.id}`;
+            document.getElementById('question-text').innerText = qData.q;
             document.getElementById('question-type-badge').innerText = `Tipo: ${qData.type}`;
 
-            // Configurar Pista
-            const hintToggle = document.getElementById('hints-toggle').checked;
+            // Pistas
+            const hintsToggle = document.getElementById('hints-toggle').checked;
             const hintContainer = document.getElementById('hint-container');
-            if (hintToggle) {
+            if (hintsToggle) {
                 hintContainer.classList.remove('hidden');
                 document.getElementById('hint-box').innerHTML = qData.hint;
                 document.getElementById('hint-box').classList.add('hidden');
@@ -829,10 +808,9 @@
                 hintContainer.classList.add('hidden');
             }
 
-            // Cargar y Barajar opciones dinámicamente
+            // Opciones aleatorizadas
             const select = document.getElementById('answer-select');
-            select.innerHTML = '<option value="" disabled selected>-- Elige tu respuesta con tranquilidad --</option>';
-            
+            select.innerHTML = '<option value="" disabled selected>-- Elige con calma --</option>';
             const shuffled = shuffleArray(qData.options);
             shuffled.forEach(opt => {
                 const el = document.createElement('option');
@@ -841,42 +819,35 @@
                 select.appendChild(el);
             });
 
-            // Rotación de Avatares Aliados de Gatito Chill
-            const avatars = ["🐱", "🐢", "🐶", "🦅", "⚖️"];
-            const names = ["Gatito Chill", "Mente Constante", "Rayo Velocidad", "Fuerza Escala", "Robot del Equilibrio"];
-            const selectedAvatar = avatars[currentLevelIndex % avatars.length];
-            const selectedName = names[currentLevelIndex % names.length];
-
-            document.getElementById('hero-avatar').innerText = selectedAvatar;
-            document.getElementById('hero-title').innerText = `Legión Proporcional: ${selectedName}`;
+            // Avatar rotativo
+            const avatars = ["🐱", "🐢", "🦉", "⚖️", "🐶"];
+            const names = ["Gatito Chill", "Mente Inversa", "Búho del Equilibrio", "Robot Balance", "Rayo Despeje"];
+            const idx = currentLevelIndex % avatars.length;
+            document.getElementById('hero-avatar').innerText = avatars[idx];
+            document.getElementById('hero-title').innerText = `Legión del Despeje: ${names[idx]}`;
 
             isProcessing = false;
         }
 
         function toggleHint() {
-            const hintBox = document.getElementById('hint-box');
-            hintBox.classList.toggle('hidden');
+            document.getElementById('hint-box').classList.toggle('hidden');
         }
 
         function checkAnswer() {
             if (isProcessing) return;
-
             const select = document.getElementById('answer-select');
             const userAns = select.value;
-            const fx = document.getElementById('visual-fx');
-
             if (!userAns) return;
 
             isProcessing = true;
             const currentQ = currentQuestionsList[currentLevelIndex];
+            const fx = document.getElementById('visual-fx');
 
             if (userAns === currentQ.a) {
-                // Correcto: FX triunfal y avance
                 playSFX('correct');
-                const words = ["¡CHILL!", "¡PERFECTO!", "¡POW!", "¡SÚPER!", "¡EXACTO!", "¡DESACTIVADO!"];
+                const words = ["¡DESPEJADO!", "¡EQUILIBRIO!", "¡CHILL!", "¡PERFECTO!", "¡POW!"];
                 fx.innerText = words[Math.floor(Math.random() * words.length)];
                 fx.className = "pow-text comic-font text-8xl md:text-9xl text-yellow-300 active";
-
                 setTimeout(() => {
                     fx.classList.remove('active');
                     currentLevelIndex++;
@@ -887,11 +858,9 @@
                     }
                 }, 850);
             } else {
-                // Incorrecto: golpe de fallo y reset de selección
                 playSFX('wrong');
-                fx.innerText = "¡OOF!";
+                fx.innerText = "¡DESORDEN!";
                 fx.className = "pow-text comic-font text-8xl md:text-9xl text-red-500 active";
-
                 setTimeout(() => {
                     fx.classList.remove('active');
                     select.value = "";
@@ -905,20 +874,24 @@
             document.getElementById('screen-end').classList.remove('hidden');
             document.getElementById('progress-fill').style.width = "100%";
 
-            if (selectedPartMode === 'part1') {
+            const mode = selectedPartMode;
+            if (mode === 'part1') {
                 document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 de la Evaluación!";
-                document.getElementById('end-subtitle').innerText = "Desactivaste las primeras 10 trampas del Barón Desproporción con éxito.";
-            } else if (selectedPartMode === 'part2') {
+                document.getElementById('end-subtitle').innerText =
+                    "Dominaste la proporcionalidad directa e inversa básica. ¡Continúa así!";
+            } else if (mode === 'part2') {
                 document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 de la Evaluación!";
-                document.getElementById('end-subtitle').innerText = "Resolviste las 10 preguntas finales sobre modelos y constante k.";
+                document.getElementById('end-subtitle').innerText =
+                    "Aplicaste conceptos de tablas y problemas con escalas. ¡Excelente!";
             } else {
-                document.getElementById('end-title').innerText = "¡HAS COMPLETADO EL ESCAPE ROOM COMPLETO (20 RETOS)!";
-                document.getElementById('end-subtitle').innerText = "Eres un Maestro Legendario de la Proporcionalidad Directa e Inversa.";
+                document.getElementById('end-title').innerText = "¡HAS COMPLETADO EL ESCAPE ROOM COMPLETO!";
+                document.getElementById('end-subtitle').innerText =
+                    "Eres un Maestro de la Proporcionalidad Directa e Inversa. ¡El orden ha sido restaurado!";
             }
         }
 
         function confirmExit() {
-            if (confirm("¿Deseas volver al menú principal de selección docente?")) {
+            if (confirm("¿Deseas volver al menú de inicio?")) {
                 returnToStart();
             }
         }
@@ -930,7 +903,9 @@
             document.getElementById('screen-start').classList.remove('hidden');
         }
 
-        // Módulos adicionales de la guía
+        // ================================================================
+        //  FUNCIONES PARA SECCIONES COMPLEMENTARIAS (EXTRAS)
+        // ================================================================
         function toggleExtraModules() {
             const extras = document.getElementById('screen-extras');
             extras.classList.remove('hidden');
@@ -942,24 +917,26 @@
         }
 
         function switchExtraTab(tabId) {
-            document.getElementById('extra-sec2').classList.add('hidden');
-            document.getElementById('extra-sec3').classList.add('hidden');
-            document.getElementById('extra-sec4').classList.add('hidden');
-            document.getElementById('extra-sec5').classList.add('hidden');
-
-            document.getElementById('tab-sec2').classList.remove('bg-yellow-300');
-            document.getElementById('tab-sec3').classList.remove('bg-yellow-300');
-            document.getElementById('tab-sec4').classList.remove('bg-yellow-300');
-            document.getElementById('tab-sec5').classList.remove('bg-yellow-300');
+            document.querySelectorAll('[id^="extra-"]').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.extra-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
 
             document.getElementById(`extra-${tabId}`).classList.remove('hidden');
-            document.getElementById(`tab-${tabId}`).classList.add('bg-yellow-300');
+            document.getElementById(`tab-${tabId}`).classList.add('active-tab');
         }
 
-        function toggleDucksHint() {
-            const box = document.getElementById('ducks-hint-box');
+        function toggleExtraHint() {
+            const box = document.getElementById('extra-hint-box');
             box.classList.toggle('hidden');
         }
+
+        // ================================================================
+        //  INICIALIZACIÓN
+        // ================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            setPart('part1');
+            switchExtraTab('sec2');
+        });
     </script>
+
 </body>
 </html>
