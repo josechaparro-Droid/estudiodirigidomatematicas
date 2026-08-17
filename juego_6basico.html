@@ -1,91 +1,103 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gatito Chill vs. El Dr. Desequilibrio - Escape Room de Ecuaciones de Un Paso</title>
-    <!-- Tailwind CSS para diseño responsivo Pop-Art -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fuentes Google: Bangers (Cómic Retro), Comic Neue (Lectura clara), Chewy (Estilo Gatito Chill) -->
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,400;0,700;1,700&family=Chewy&display=swap" rel="stylesheet">
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escape Room: Gatito Chill vs Patito Amarillito – 6° Básico</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet" />
     <style>
-        :root {
-            --comic-red: #ef4444;
-            --comic-blue: #2563eb;
-            --comic-purple: #7c3aed;
-            --comic-yellow: #facc15;
-            --comic-green: #10b981;
-            --comic-dark: #0f172a;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-
         body {
             font-family: 'Comic Neue', cursive;
             background-color: #0f172a;
-            /* Patrón de puntos Ben-Day retro de cómic */
-            background-image: radial-gradient(rgba(239, 68, 68, 0.25) 15%, transparent 16%), 
-                              radial-gradient(rgba(37, 99, 235, 0.25) 15%, transparent 16%);
+            background-image: radial-gradient(rgba(239, 68, 68, 0.25) 15%, transparent 16%),
+                radial-gradient(rgba(37, 99, 235, 0.25) 15%, transparent 16%);
             background-size: 24px 24px;
             background-position: 0 0, 12px 12px;
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem;
             color: #0f172a;
-            overflow-x: hidden;
         }
-
         .comic-font {
             font-family: 'Bangers', cursive;
             letter-spacing: 1.5px;
         }
-
         .chill-font {
             font-family: 'Chewy', cursive;
         }
-
-        /* Paneles con contorno negro e imitación de tinta de historietas */
         .comic-panel {
             background: white;
             border: 5px solid black;
             box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
             position: relative;
         }
-
-        .comic-panel-yellow {
-            background: #fef08a;
-            border: 5px solid black;
-            box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
-        }
-
-        /* Textura sutil de impresión offset */
         .comic-panel::before {
             content: "";
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(rgba(0,0,0,0.02) 1px, transparent 1px);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px);
             background-size: 6px 6px;
             pointer-events: none;
             z-index: 1;
         }
-
         .btn-comic {
             font-family: 'Bangers', cursive;
             letter-spacing: 1px;
             border: 4px solid black;
             box-shadow: 5px 5px 0px black;
-            transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.2s ease;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
             text-transform: uppercase;
         }
-
         .btn-comic:hover {
             transform: translate(-3px, -3px);
             box-shadow: 8px 8px 0px black;
         }
-
         .btn-comic:active {
             transform: translate(2px, 2px);
             box-shadow: 1px 1px 0px black;
         }
-
-        /* Onomatopeya flotante emergente */
+        .tab-btn.active {
+            background-color: #facc15;
+            color: black;
+            border-bottom: 4px solid black;
+        }
+        .progress-bar-container {
+            background: #e2e8f0;
+            border: 4px solid black;
+            border-radius: 9999px;
+            overflow: hidden;
+            height: 28px;
+        }
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #ef4444, #8b5cf6, #3b82f6);
+            height: 100%;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .alarm-border {
+            animation: alertPulse 1.8s infinite alternate;
+        }
+        @keyframes alertPulse {
+            from {
+                border-color: #0f172a;
+                box-shadow: 8px 8px 0px black;
+            }
+            to {
+                border-color: #ef4444;
+                box-shadow: 8px 8px 0px #ef4444;
+            }
+        }
         .pow-text {
             position: fixed;
             top: 50%;
@@ -97,12 +109,9 @@
             text-shadow: 6px 6px 0px black;
             -webkit-text-stroke: 3px black;
         }
-
         .pow-text.active {
             transform: translate(-50%, -50%) scale(1.5);
         }
-
-        /* Estilo para los selectores de respuesta */
         select {
             appearance: none;
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
@@ -110,132 +119,139 @@
             background-position: right 1.2rem center;
             background-size: 1.4em;
         }
-
-        .progress-bar-container {
-            background: #e2e8f0;
-            border: 4px solid black;
-            border-radius: 9999px;
-            overflow: hidden;
-            height: 28px;
+        .hidden {
+            display: none !important;
         }
-
-        .progress-bar-fill {
-            background: linear-gradient(90deg, #ef4444, #8b5cf6, #3b82f6);
-            height: 100%;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .extra-tab-btn {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 0.5px;
+            border: 3px solid black;
+            box-shadow: 4px 4px 0px black;
+            transition: all 0.1s ease;
         }
-
-        .alarm-border {
-            animation: alertPulse 1.8s infinite alternate;
-        }
-
-        @keyframes alertPulse {
-            from { border-color: #0f172a; box-shadow: 8px 8px 0px black; }
-            to { border-color: #ef4444; box-shadow: 8px 8px 0px #ef4444; }
-        }
-
-        .tab-btn.active {
-            background-color: #facc15;
+        .extra-tab-btn.active-tab {
+            background-color: #facc15 !important;
             color: black;
             border-bottom: 4px solid black;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px black;
+        }
+        .extra-tab-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px black;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #7c3aed;
+        }
+        details summary:hover {
+            color: #4c1d95;
+        }
+        table td,
+        table th {
+            border: 1px solid #000;
+            padding: 0.5rem;
+            text-align: center;
         }
     </style>
 </head>
-<body class="flex items-center justify-center p-3 md:p-6">
+<body>
 
-    <!-- Onomatopeya FX dinámico -->
-    <div id="visual-fx" class="pow-text comic-font text-7xl md:text-9xl text-yellow-300">¡DESPEJADO!</div>
+    <!-- Onomatopeya FX -->
+    <div id="visual-fx" class="pow-text comic-font text-8xl md:text-9xl text-yellow-300">¡DESPEJADO!</div>
 
     <div class="max-w-4xl w-full">
-        <!-- CABECERA DE EVALUACIÓN OFICIAL -->
+
+        <!-- CABECERA -->
         <header class="text-center mb-6">
             <div class="inline-block bg-white border-4 border-black p-4 md:p-6 transform -rotate-1 shadow-[8px_8px_0px_#2563eb] relative z-10 w-full">
                 <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-black pb-2 mb-3 text-xs md:text-sm font-bold text-gray-700">
                     <span>📚 NIVEL: 6° BÁSICO</span>
                     <span>⏱️ TIEMPO MÁXIMO: 90 MIN</span>
-                    <span>🧩 UNIDAD: ÁLGEBRA Y ECUACIONES</span>
+                    <span>🧩 UNIDAD: ÁNGULOS Y RECTAS INTERSECTANTES (OA 16)</span>
                 </div>
                 <h1 class="text-3xl md:text-5xl comic-font text-blue-700 tracking-wide uppercase">
-                    Gatito Chill vs. El Dr. Desequilibrio
+                    Gatito Chill vs. Patito Amarillito
                 </h1>
                 <p class="text-lg md:text-2xl chill-font text-purple-900 mt-1">
-                    ¡Escape Room de Ecuaciones de Un Paso y Operaciones Inversas!
+                    Escape Room de Ángulos y Rectas Intersectantes
                 </p>
             </div>
-            
-            <!-- Cuadro de Objetivo de Aprendizaje (OA 11) -->
+            <!-- OA -->
             <div class="mt-4 bg-yellow-100 border-2 border-black p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
                 <p class="font-bold text-xs md:text-sm text-indigo-950">
-                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 11)</span>: Resolver ecuaciones de primer grado con una incógnita, utilizando estrategias como procedimientos formales de resolución (despeje mediante operaciones inversas) y verificación de soluciones.
+                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 16)</span>: Identificar los ángulos que se forman entre dos rectas que se cortan (pares de ángulos opuestos por el vértice y pares de ángulos complementarios).
                 </p>
             </div>
         </header>
 
         <main class="relative z-10">
-            <!-- PANTALLA 1: INICIO Y SELECCIÓN DOCENTE -->
+
+            <!-- PANTALLA 1: INICIO -->
             <div id="screen-start" class="comic-panel p-6 md:p-8 space-y-6">
                 <div class="flex justify-center items-center gap-4 text-6xl md:text-7xl animate-bounce">
-                    <span>🐱</span><span class="text-3xl font-black">VS</span><span>🦹‍♂️</span>
+                    <span>🐱</span><span class="text-3xl font-black">VS</span><span>🐤</span>
                 </div>
 
                 <div class="text-center">
-                    <h2 class="text-2xl md:text-4xl comic-font text-red-600">¡AMENAZA EN LA CIUDAD DE LA IGUALDAD!</h2>
-                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">Las balanzas del conocimiento han perdido el equilibrio...</p>
+                    <h2 class="text-2xl md:text-4xl comic-font text-red-600">¡EL DESORDEN ANGULAR HA LLEGADO!</h2>
+                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">Patito Amarillito ha torcido todas las intersecciones de la ciudad...</p>
                 </div>
 
-                <!-- Historia Gamificada -->
+                <!-- Historia -->
                 <div class="bg-blue-50 border-4 border-black p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
                     <p class="text-base md:text-lg">
-                        El villano <b>El Dr. Desequilibrio</b> ha lanzado su rayo <i>"Des-Ecuación 3000"</i>, alterando los valores de la incógnita <span class="font-mono bg-yellow-300 px-1 font-bold">x</span> en todos los servidores de la ciudad. Sin el valor exacto de <span class="font-mono bg-yellow-300 px-1 font-bold">x</span>, las puertas automáticas, los puentes y la señal de internet han quedado totalmente bloqueados.
+                        El villano <b>Patito Amarillito</b> lanzó su <i>"Rayo Torcedor"</i> sobre la Ciudad de los Ángulos, haciendo que las calles, los puentes y hasta las vigas de los edificios se cruzaran de forma caótica. Los ángulos opuestos por el vértice ya no son iguales, y los complementarios han perdido su relación.
                     </p>
                     <p class="text-base md:text-lg">
-                        Acomodándose su hojita de té favorita sobre la cabeza, el sereno <b>Gatito Chill</b> bebe un sorbo relajante y nos aconseja con una sonrisa:
+                        Con su taza de té siempre a mano, el sereno <b>Gatito Chill</b> nos guía con una sonrisa:
                     </p>
                     <blockquote class="bg-yellow-200 border-l-4 border-yellow-600 p-3 rounded font-bold text-indigo-900 italic text-sm md:text-base">
-                        "Chill out, amigos... Despejar la incógnita <span class="font-mono bg-yellow-300 px-1 rounded">x</span> es muy sencillo si recuerdan la regla de oro: ¡Lo que está sumando pasa restando, y lo que está restando pasa sumando! Mantengan la calma, apliquen la operación inversa y el equilibrio volverá solo."
+                        "Tranquilos, amigos... cuando dos rectas se cruzan, los ángulos opuestos por el vértice son iguales. Y dos ángulos son complementarios si suman 90°, o suplementarios si suman 180°. ¡Chill, que el equilibrio volverá!"
                     </blockquote>
                 </div>
 
-                <!-- SELECCIÓN DOCENTE / DIVISIÓN EN 2 PARTES DE 10 PREGUNTAS -->
+                <!-- SELECCIÓN DOCENTE -->
                 <div class="bg-purple-100 border-4 border-black p-5 rounded-xl text-left space-y-3 shadow-md">
                     <label class="block font-black text-purple-900 uppercase text-base md:text-lg comic-font tracking-wide">
-                        ⚙️ Configuración Docente / Selección de Tramo (10 u 20 preguntas):
+                        ⚙️ Configuración Docente – Selección de Tramo (10 o 20 preguntas):
                     </label>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            📍 Parte 1 (Preguntas 1 a 10)<br>
-                            <span class="text-xs font-normal normal-case block">Ecuaciones básicas con suma, resta y decimales</span>
+                            📍 Parte 1 (Preguntas 1 a 10)<br />
+                            <span class="text-xs font-normal normal-case block">Ángulos complementarios, opuestos y suplementarios</span>
                         </button>
                         <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            📍 Parte 2 (Preguntas 11 a 20)<br>
-                            <span class="text-xs font-normal normal-case block">Desafíos combinados, fracciones y equilibrio</span>
+                            📍 Parte 2 (Preguntas 11 a 20)<br />
+                            <span class="text-xs font-normal normal-case block">Problemas con ecuaciones y aplicaciones</span>
                         </button>
                         <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            🔥 Modo Completo (20 Retos)<br>
+                            🔥 Modo Completo (20 Retos)<br />
                             <span class="text-xs font-normal normal-case block">Evaluación continua completa</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Opciones de Configuración Interactiva -->
+                <!-- Opciones -->
                 <div class="flex flex-wrap items-center justify-between gap-3 bg-gray-100 p-3 border-2 border-black rounded-lg">
                     <div class="flex items-center gap-2">
-                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600">
-                        <label for="sound-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">🔊 Sintetizador Audio Retro (SFX)</label>
+                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
+                        <label for="sound-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">🔊 SFX Retro (Volumen alto)</label>
                     </div>
                     <div class="flex items-center gap-2">
-                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600">
-                        <label for="hints-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">💡 Permitir pistas de desarrollo</label>
+                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
+                        <label for="hints-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">💡 Permitir pistas</label>
                     </div>
                 </div>
 
                 <div class="pt-2">
                     <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-black text-2xl md:text-3xl py-4 w-full rounded-xl">
-                        ¡DESACTIVAR LA MÁQUINA DEL CAOS! 🚀
+                        ¡RESTAURAR EL ORDEN ANGULAR! 🚀
                     </button>
                 </div>
 
-                <!-- Enlace rápido a módulos complementarios -->
+                <!-- BOTÓN PARA SECCIONES COMPLEMENTARIAS -->
                 <div class="text-center pt-2 border-t-2 border-gray-200">
                     <button onclick="toggleExtraModules()" class="text-sm font-bold text-blue-700 underline hover:text-blue-900">
                         📋 Ver Secciones Complementarias (Problemas de 4 pasos, Metacognición y Autoevaluación)
@@ -243,95 +259,82 @@
                 </div>
             </div>
 
-            <!-- PANTALLA 2: JUEGO / ESCAPE ROOM -->
+            <!-- PANTALLA 2: JUEGO -->
             <div id="screen-game" class="hidden space-y-6">
-                <!-- Barra de Progreso Superior -->
+                <!-- Barra superior -->
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white border-4 border-black p-4 shadow-[6px_6px_0px_black]">
                     <div class="flex items-center gap-3">
                         <span class="text-3xl">🐱</span>
                         <div>
                             <div class="comic-font text-2xl text-red-600 leading-tight" id="level-label">DESAFÍO 1 / 10</div>
-                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: ECUACIONES DIRECTAS</div>
+                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: ÁNGULOS BÁSICOS</div>
                         </div>
                     </div>
-
-                    <!-- Progreso -->
                     <div class="w-full md:w-1/2 progress-bar-container">
                         <div id="progress-fill" class="progress-bar-fill" style="width: 5%"></div>
                     </div>
-
                     <button onclick="confirmExit()" class="text-xs font-bold bg-gray-200 hover:bg-gray-300 border-2 border-black px-3 py-1 rounded">
                         ⚙️ Menú
                     </button>
                 </div>
 
-                <!-- Panel del Reto Matemático -->
+                <!-- Panel del reto -->
                 <div class="comic-panel p-5 md:p-8 alarm-border border-4">
-                    <!-- Avatar Aliado -->
                     <div class="flex items-start gap-4 mb-6 bg-blue-50 border-2 border-black p-4 rounded-xl">
                         <div class="text-5xl" id="hero-avatar">🐱</div>
                         <div class="w-full">
                             <div class="flex justify-between items-center">
                                 <h4 class="font-bold text-red-600 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Legión del Despeje: Gatito Chill</h4>
-                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Suma Inversa</span>
+                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Ángulos</span>
                             </div>
                             <p class="font-bold text-indigo-950 italic text-base md:text-lg mt-1" id="narrative-text">Cargando situación...</p>
                         </div>
                     </div>
 
-                    <!-- Enunciado de la Pregunta -->
                     <div class="space-y-6 relative z-10">
                         <div class="bg-gray-50 border-2 border-black p-5 rounded-xl shadow-inner">
                             <div id="question-number" class="comic-font text-xl text-purple-700 mb-1">PREGUNTA #</div>
                             <div id="question-text" class="text-xl md:text-2xl font-bold text-gray-900 leading-relaxed font-mono"></div>
                         </div>
 
-                        <!-- Ayuda y Pista de Desarrollo -->
                         <div id="hint-container" class="hidden">
                             <button onclick="toggleHint()" class="text-sm font-bold text-purple-800 bg-purple-100 border-2 border-purple-400 px-3 py-1.5 rounded-lg flex items-center gap-2 hover:bg-purple-200 transition">
-                                💡 <span>¿Necesitas ver el Espacio para el Desarrollo? (Ver paso a paso)</span>
+                                💡 <span>Mostrar pista</span>
                             </button>
-                            <div id="hint-box" class="hidden mt-2 p-3 bg-yellow-50 border-2 border-yellow-400 rounded-lg text-sm text-yellow-950 leading-relaxed font-medium">
-                                <!-- Pista dinámica -->
-                            </div>
+                            <div id="hint-box" class="hidden mt-2 p-3 bg-yellow-50 border-2 border-yellow-400 rounded-lg text-sm text-yellow-950 leading-relaxed font-medium"></div>
                         </div>
 
-                        <!-- Menú Desplegable con Alternativas Aleatorizadas -->
                         <div class="space-y-2">
                             <label class="block font-black text-indigo-950 uppercase tracking-tight text-sm">
-                                🎯 Selecciona el valor despejado de la incógnita x:
+                                🎯 Selecciona la respuesta correcta:
                             </label>
                             <select id="answer-select" class="w-full p-4 border-4 border-black text-lg md:text-xl font-bold bg-yellow-50 focus:ring-4 focus:ring-purple-300 outline-none cursor-pointer rounded-xl">
-                                <option value="" disabled selected>-- Selecciona tu solución con tranquilidad --</option>
+                                <option value="" disabled selected>-- Elige con calma --</option>
                             </select>
                         </div>
 
-                        <!-- Botón de Envío -->
                         <button onclick="checkAnswer()" class="btn-comic bg-red-600 hover:bg-red-500 text-white text-2xl md:text-3xl py-4 w-full rounded-xl">
-                            ¡ENVIAR CÓDIGO DE EQUILIBRIO! 💥
+                            ¡ENVIAR RESPUESTA! 💥
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- PANTALLA 3: VICTORIA / FINAL -->
+            <!-- PANTALLA 3: VICTORIA -->
             <div id="screen-end" class="hidden comic-panel p-8 md:p-12 text-center space-y-8">
                 <h2 class="text-5xl md:text-7xl comic-font text-purple-700">¡SISTEMA REESTABLECIDO!</h2>
                 <div class="text-8xl md:text-9xl animate-bounce my-4">🐱⚖️✨</div>
-                
                 <div class="space-y-3">
-                    <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has derrotado al Dr. Desequilibrio!</p>
+                    <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has derrotado a Patito Amarillito!</p>
                     <p class="text-gray-700 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
-                        Las ecuaciones de la ciudad han vuelto a estar en perfecta igualdad y todas las incógnitas fueron despejadas.
+                        Todos los ángulos han vuelto a su posición correcta. Las calles y estructuras de la ciudad están en equilibrio.
                     </p>
                 </div>
-
                 <div class="bg-yellow-100 border-4 border-black p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
                     <p class="text-purple-900">
-                        <b>Gatito Chill te felicita:</b> "¡Excelente trabajo! Recuerda que para resolver cualquier ecuación de un paso solo debes aplicar la operación inversa a ambos lados de la igualdad. ¡Mantener el equilibrio es la clave de todo!"
+                        <b>Gatito Chill te felicita:</b> "¡Excelente! Recuerda que los ángulos opuestos por el vértice son iguales, los complementarios suman 90° y los suplementarios suman 180°. ¡Mantén la calma y el orden siempre regresa!"
                     </p>
                 </div>
-
                 <div class="flex flex-col md:flex-row justify-center gap-4 pt-4">
                     <button onclick="returnToStart()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-2xl py-4 px-8 rounded-xl">
                         🔄 VOLVER AL MENÚ
@@ -342,7 +345,9 @@
                 </div>
             </div>
 
-            <!-- PANTALLA SECUNDARIA: SECCIONES COMPLEMENTARIAS DE LA GUÍA -->
+            <!-- ========================================================= -->
+            <!-- PANTALLA EXTRAS: SECCIONES COMPLEMENTARIAS (GUÍA)          -->
+            <!-- ========================================================= -->
             <div id="screen-extras" class="hidden comic-panel p-6 md:p-8 space-y-6 my-6">
                 <div class="flex justify-between items-center border-b-4 border-black pb-4">
                     <h2 class="text-3xl md:text-4xl comic-font text-indigo-900">SECCIONES DE DESARROLLO Y EVALUACIÓN</h2>
@@ -351,68 +356,68 @@
                     </button>
                 </div>
 
-                <!-- Navegación por pestañas de la guía -->
+                <!-- Pestañas de navegación -->
                 <div class="flex flex-wrap gap-2 border-b-2 border-black pb-2">
-                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="btn-comic py-2 px-3 text-sm bg-yellow-300">Sección II: Problemas (4 Pasos)</button>
-                    <button onclick="switchExtraTab('sec3')" id="tab-sec3" class="btn-comic py-2 px-3 text-sm bg-white">Sección III: Metacognición</button>
-                    <button onclick="switchExtraTab('sec4')" id="tab-sec4" class="btn-comic py-2 px-3 text-sm bg-white">Sección IV: Desafío Extra</button>
-                    <button onclick="switchExtraTab('sec5')" id="tab-sec5" class="btn-comic py-2 px-3 text-sm bg-white">Sección V: Autoevaluación</button>
+                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="extra-tab-btn active-tab py-2 px-3 text-sm bg-yellow-300">II. Problemas (4 Pasos)</button>
+                    <button onclick="switchExtraTab('sec3')" id="tab-sec3" class="extra-tab-btn py-2 px-3 text-sm bg-white">III. Metacognición</button>
+                    <button onclick="switchExtraTab('sec4')" id="tab-sec4" class="extra-tab-btn py-2 px-3 text-sm bg-white">IV. Desafío Extra</button>
+                    <button onclick="switchExtraTab('sec5')" id="tab-sec5" class="extra-tab-btn py-2 px-3 text-sm bg-white">V. Autoevaluación</button>
                 </div>
 
-                <!-- SECCIÓN II: RESOLUCIÓN DE PROBLEMAS EN 4 PASOS -->
+                <!-- SECCIÓN II: RESOLUCIÓN DE PROBLEMAS (4 PASOS) -->
                 <div id="extra-sec2" class="space-y-6 text-left">
                     <div class="bg-blue-50 border-2 border-black p-4 rounded-lg">
                         <h3 class="font-bold text-lg text-blue-900">II. Resolución de Problemas (Estrategia de los 4 Pasos)</h3>
                         <p class="text-xs text-gray-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Revisar.</p>
                     </div>
 
-                    <!-- Problema 1 -->
+                    <!-- Problema 1: Puente levadizo -->
                     <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Compra y Vuelto)</span>
+                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Puente levadizo)</span>
                         <p class="font-bold text-gray-800">
-                            Un estudiante compra 3 cuadernos. Si cada cuaderno cuesta $1.200 y al pagar con un billete de $5.000 le dieron $1.400 de vuelto, ¿era correcto el vuelto? Plantea y resuelve una ecuación de un paso para verificarlo.
+                            Un puente levadizo se abre formando un ángulo. Cuando está totalmente cerrado forma 0°. Si al abrirse forma un ángulo suplementario al de 150°, ¿en qué ángulo se encuentra abierto el puente?
                         </p>
                         <details class="bg-gray-50 p-3 rounded border border-gray-300">
                             <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
                             <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> Costo total cuadernos = 3 · $1.200 = $3.600. Pago = $5.000. Vuelto dado = $1.400.</p>
-                                <p><b>2. Planificar:</b> Sea <span class="font-mono">x</span> la diferencia o vuelto exacto. Ecuación: <span class="font-mono">3.600 + x = 5.000</span>.</p>
-                                <p><b>3. Resolver:</b> <span class="font-mono">x = 5.000 - 3.600 => x = 1.400</span>.</p>
-                                <p><b>4. Revisar:</b> Como <span class="font-mono">x = 1.400</span> coincide exactamente con el vuelto entregado, ¡sí era totalmente correcto!</p>
+                                <p><b>1. Comprender:</b> El ángulo del puente es suplementario a 150°. Suplementario = 180°.</p>
+                                <p><b>2. Planificar:</b> 180° - 150° = ángulo del puente.</p>
+                                <p><b>3. Resolver:</b> 180° - 150° = 30°.</p>
+                                <p><b>4. Revisar:</b> 30° + 150° = 180°. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <!-- Problema 2 -->
+                    <!-- Problema 2: Intersección de avenidas -->
                     <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Geometría y Área)</span>
+                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Intersección de avenidas)</span>
                         <p class="font-bold text-gray-800">
-                            El área de un rectángulo es 48 cm². Si el largo mide 8 cm, ¿cuánto mide el ancho? (Define el ancho como una variable y resuelve mediante una ecuación).
+                            Dos avenidas principales se cruzan formando cuatro ángulos. Si el ángulo que mira al norte mide 125°, calcula cuánto miden los ángulos que miran al este, al sur y al oeste.
                         </p>
                         <details class="bg-gray-50 p-3 rounded border border-gray-300">
                             <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
                             <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> Área = 48 cm², Largo = 8 cm. Se busca el ancho (<span class="font-mono">x</span>).</p>
-                                <p><b>2. Planificar:</b> Área = Largo · Ancho => <span class="font-mono">8 · x = 48</span>.</p>
-                                <p><b>3. Resolver:</b> <span class="font-mono">x = 48 / 8 => x = 6</span> cm.</p>
-                                <p><b>4. Revisar:</b> 8 cm · 6 cm = 48 cm². El ancho mide 6 cm.</p>
+                                <p><b>1. Comprender:</b> El ángulo norte = 125°. Los opuestos por el vértice son iguales. Los adyacentes son suplementarios (suman 180°).</p>
+                                <p><b>2. Planificar:</b> Sur = Norte = 125°. Este = Oeste = 180° - 125° = 55°.</p>
+                                <p><b>3. Resolver:</b> Este = 55°, Sur = 125°, Oeste = 55°.</p>
+                                <p><b>4. Revisar:</b> 125° + 55° + 125° + 55° = 360°. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <!-- Problema 3 -->
+                    <!-- Problema 3: Diseño arquitectónico -->
                     <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Edades)</span>
+                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Diseño arquitectónico)</span>
                         <p class="font-bold text-gray-800">
-                            La edad de una persona más 15 años es igual a 42 años. ¿Cuántos años tenía hace 5 años? Plantea la ecuación para encontrar la edad actual y luego responde.
+                            Un arquitecto diseña una estructura donde dos vigas se cruzan. La viga A y la viga B forman un ángulo. Se sabe que el complemento del ángulo formado por la intersección es 50°. ¿Cuál es la medida del ángulo de intersección entre las vigas?
                         </p>
                         <details class="bg-gray-50 p-3 rounded border border-gray-300">
                             <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
                             <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> Edad actual (<span class="font-mono">x</span>) + 15 = 42. Se pide la edad hace 5 años (<span class="font-mono">x - 5</span>).</p>
-                                <p><b>2. Planificar:</b> Ecuación: <span class="font-mono">x + 15 = 42</span>.</p>
-                                <p><b>3. Resolver:</b> <span class="font-mono">x = 42 - 15 => x = 27</span> años (Edad actual). Edad hace 5 años: <span class="font-mono">27 - 5 = 22</span> años.</p>
-                                <p><b>4. Revisar:</b> 22 + 5 = 27. 27 + 15 = 42. ¡Correcto!</p>
+                                <p><b>1. Comprender:</b> Complemento del ángulo = 50°. Complementario = 90°.</p>
+                                <p><b>2. Planificar:</b> Ángulo = 90° - 50°.</p>
+                                <p><b>3. Resolver:</b> 90° - 50° = 40°.</p>
+                                <p><b>4. Revisar:</b> 40° + 50° = 90°. Correcto.</p>
                             </div>
                         </details>
                     </div>
@@ -422,40 +427,38 @@
                 <div id="extra-sec3" class="hidden space-y-4 text-left">
                     <div class="bg-purple-50 border-2 border-black p-4 rounded-lg">
                         <h3 class="font-bold text-lg text-purple-900">III. Metacognición (Reflexión del Estudiante)</h3>
-                        <p class="text-xs text-gray-700">Analiza tus propios razonamientos durante la resolución:</p>
+                        <p class="text-xs text-gray-700">Responde con honestidad sobre tu trabajo:</p>
                     </div>
-
                     <div class="space-y-3">
                         <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">1. ¿Qué estrategia te resultó más útil para identificar qué operación aplicar en los problemas de desarrollo?</p>
+                            <p class="font-bold text-sm text-gray-800">1. ¿Qué estrategia de los 4 pasos fue la más difícil de aplicar en los problemas anteriores y por qué?</p>
                         </div>
                         <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">2. ¿Hubo algún problema en la sección de selección múltiple donde el "Espacio para el Desarrollo" te ayudó a corregir un error inicial? Explica brevemente.</p>
+                            <p class="font-bold text-sm text-gray-800">2. Ante un error en la resolución del problema 2, ¿qué procedimiento realizaste para verificar si tu resultado era correcto?</p>
                         </div>
                         <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">3. Al finalizar esta evaluación, ¿cuánta seguridad sientes al aplicar procedimientos formales para despejar una incógnita? (Escala del 1 al 7).</p>
+                            <p class="font-bold text-sm text-gray-800">3. ¿Cómo te ayuda saber la definición de ángulos opuestos por el vértice a resolver problemas de la vida diaria, como los de tránsito o arquitectura?</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- SECCIÓN IV: DESAFÍO EXTRA (LÓGICA INVERSA) -->
+                <!-- SECCIÓN IV: DESAFÍO EXTRA (Lógica Inversa) -->
                 <div id="extra-sec4" class="hidden space-y-4 text-left">
                     <div class="bg-yellow-50 border-2 border-black p-4 rounded-lg">
                         <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Lógica Inversa)</h3>
                         <p class="text-sm text-gray-800">
-                            Si al doble de un número le resto 5, obtengo 15. ¿Cuál es el número? (Añade explicaciones de cómo "revertiste" las operaciones).
+                            Se tienen tres ángulos. El primero es opuesto por el vértice a un ángulo de 40°. El segundo es complementario del primero. El tercero es suplementario del segundo. ¿Cuánto mide el tercer ángulo?
                         </p>
                     </div>
-
                     <div class="p-4 bg-white border-2 border-black rounded-xl space-y-3">
                         <button onclick="toggleExtraHint()" class="btn-comic bg-yellow-400 text-black text-sm px-4 py-2 rounded">
                             🧩 Revelar Solución por Reversión de Gatito Chill
                         </button>
                         <div id="extra-hint-box" class="hidden text-sm bg-yellow-100 p-3 rounded border border-yellow-300 leading-relaxed">
-                            <p><b>Ecuación planteada:</b> <span class="font-mono">2x - 5 = 15</span></p>
-                            <p><b>Paso 1 (Revertir la resta):</b> Le sumo 5 al resultado final: <span class="font-mono">15 + 5 = 20</span>.</p>
-                            <p><b>Paso 2 (Revertir el doble):</b> Divido 20 por 2: <span class="font-mono">20 / 2 = 10</span>.</p>
-                            <p><b>Resultado:</b> El número buscado es <b>10</b>. (Comprobación: 2 · 10 - 5 = 20 - 5 = 15).</p>
+                            <p><b>Paso 1:</b> El primero es opuesto por el vértice a 40°, así que el primero mide 40°.</p>
+                            <p><b>Paso 2:</b> El segundo es complementario del primero: 90° - 40° = 50°.</p>
+                            <p><b>Paso 3:</b> El tercero es suplementario del segundo: 180° - 50° = 130°.</p>
+                            <p><b>Resultado:</b> El tercer ángulo mide <b>130°</b>.</p>
                         </div>
                     </div>
                 </div>
@@ -464,260 +467,250 @@
                 <div id="extra-sec5" class="hidden space-y-4 text-left">
                     <div class="bg-green-50 border-2 border-black p-4 rounded-lg">
                         <h3 class="font-bold text-lg text-green-900">V. Autoevaluación del Estudiante</h3>
+                        <p class="text-xs text-gray-700">Marca con una X el nivel que mejor describe tu desempeño en esta evaluación.</p>
                     </div>
-
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm border-2 border-black bg-white">
                             <thead class="bg-yellow-300 border-b-2 border-black">
                                 <tr>
-                                    <th class="p-2 text-left border-r border-black">Criterio / Ítem</th>
+                                    <th class="p-2 text-left border-r border-black">Ítems</th>
                                     <th class="p-2 text-center border-r border-black">Logrado (3)</th>
                                     <th class="p-2 text-center border-r border-black">En proceso (2)</th>
-                                    <th class="p-2 text-center">Iniciado (1)</th>
+                                    <th class="p-2 text-center">Por lograr (1)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">1. Identifico la operación inversa necesaria para resolver ecuaciones.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1"></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1"></td>
-                                    <td class="p-2 text-center"><input type="radio" name="auto1"></td>
+                                    <td class="p-2 border-r border-black font-medium">Identifico ángulos opuestos por el vértice y complementarios.</td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto1" /></td>
                                 </tr>
                                 <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">2. Aplico el método de los 4 pasos en problemas narrativos.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2"></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2"></td>
-                                    <td class="p-2 text-center"><input type="radio" name="auto2"></td>
+                                    <td class="p-2 border-r border-black font-medium">Puedo calcular ángulos complementarios y suplementarios.</td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto2" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2 border-r border-black font-medium">3. Mantengo el orden y el rigor en mis procedimientos algebraicos.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3"></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3"></td>
-                                    <td class="p-2 text-center"><input type="radio" name="auto3"></td>
+                                    <td class="p-2 border-r border-black font-medium">Apliqué la estrategia de los 4 pasos para resolver los problemas.</td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto3" /></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+            <!-- =========== FIN DE EXTRAS =========== -->
+
         </main>
     </div>
 
     <script>
-        // BASE DE DATOS EXACTA DE LAS 20 PREGUNTAS DE LA GUÍA OFICIAL (OA 11 - 6° BÁSICO)
+        // ================================================================
+        //  BASE DE DATOS – 20 PREGUNTAS (OA 16, 6° BÁSICO)
+        // ================================================================
         const allQuestions = [
-            // PARTE 1 (Preguntas 1 a 10)
+            // ---- PARTE 1: Ángulos básicos (Preguntas 1 a 10) ----
             {
                 id: 1,
                 part: 1,
-                type: "Suma Inversa",
-                narrative: "El Dr. Desequilibrio bloqueó los escáneres de la puerta principal.",
-                q: "¿Cuál es el valor de x en la ecuación x + 12 = 30?",
-                a: "18",
-                options: ["18", "42", "15", "20"],
-                hint: "Espacio para el Desarrollo: Aplica la operación inversa de la suma (resta). Resta 12 a 30 -> x = 30 - 12 -> x = 18."
-            },
-            {
+                type: "Concepto",
+                narrative: "Patito Amarillito confundió los ángulos. ¡Ayuda a Gatito Chill a recordar!",
+                q: "Dos ángulos opuestos por el vértice siempre son:",
+                a: "Iguales",
+                options: ["Complementarios", "Iguales", "Suplementarios", "Obtusos"],
+                hint: "Los ángulos opuestos por el vértice se forman al cruzar dos rectas. Siempre tienen la misma medida."
+            }, {
                 id: 2,
                 part: 1,
-                type: "Resta Inversa",
-                narrative: "El suministro de té de Gatito Chill quedó atrapado tras una caja fuerte.",
-                q: "¿Cuál es el valor de x en la ecuación x - 8 = 12?",
-                a: "20",
-                options: ["20", "16", "4", "10"],
-                hint: "Espacio para el Desarrollo: Aplica la operación inversa de la resta (suma). Suma 8 a 12 -> x = 12 + 8 -> x = 20."
-            },
-            {
+                type: "Complementarios",
+                narrative: "Gatito Chill necesita encontrar el complemento de un ángulo.",
+                q: "Si dos ángulos son complementarios y uno mide 30°, ¿cuánto mide el otro?",
+                a: "60°",
+                options: ["60°", "90°", "150°", "120°"],
+                hint: "Complementario = 90°. Resta 90° - 30° = 60°."
+            }, {
                 id: 3,
                 part: 1,
-                type: "Incógnita a la Derecha",
-                narrative: "El rayo desequilibrador invirtió el orden de los miembros de la balanza.",
-                q: "¿Cuál es el valor de x en la ecuación 25 = x + 5?",
-                a: "20",
-                options: ["30", "20", "15", "25"],
-                hint: "Espacio para el Desarrollo: La incógnita x está a la derecha. Resta 5 a 25 -> 25 - 5 = x -> x = 20."
-            },
-            {
+                type: "Opuestos por el vértice",
+                narrative: "En una intersección, los ángulos opuestos son iguales.",
+                q: "Si dos rectas se cortan y forman un ángulo de 45°, ¿cuánto mide su ángulo opuesto por el vértice?",
+                a: "45°",
+                options: ["135°", "45°", "90°", "180°"],
+                hint: "Los ángulos opuestos por el vértice son iguales. Miden lo mismo."
+            }, {
                 id: 4,
                 part: 1,
-                type: "Incógnita a la Derecha",
-                narrative: "Se detecta una perturbación en el radar de la ciudad.",
-                q: "¿Cuál es el valor de x en la ecuación 15 = x - 10?",
-                a: "25",
-                options: ["5", "25", "20", "15"],
-                hint: "Espacio para el Desarrollo: Suma 10 a 15 para despejar x -> 15 + 10 = x -> x = 25."
-            },
-            {
+                type: "Complementarios",
+                narrative: "Gatito Chill necesita el complemento de 25°.",
+                q: "¿Cuál es el complemento de un ángulo que mide 25°?",
+                a: "65°",
+                options: ["155°", "65°", "75°", "90°"],
+                hint: "Complementario = 90°. 90° - 25° = 65°."
+            }, {
                 id: 5,
                 part: 1,
-                type: "Centenas",
-                narrative: "El termómetro energético del refugio sobrepasó los límites normales.",
-                q: "Si x + 45 = 100, ¿cuánto vale x?",
-                a: "55",
-                options: ["55", "145", "50", "60"],
-                hint: "Espacio para el Desarrollo: Resta 45 a 100 -> x = 100 - 45 -> x = 55."
-            },
-            {
+                type: "Suplementarios",
+                narrative: "Patito Amarillito olvidó cuánto suman los ángulos suplementarios.",
+                q: "Dos ángulos son suplementarios si su suma es igual a:",
+                a: "180°",
+                options: ["180°", "90°", "360°", "45°"],
+                hint: "Suplementario significa que juntos forman un ángulo extendido (línea recta)."
+            }, {
                 id: 6,
                 part: 1,
-                type: "Resta Inversa",
-                narrative: "Los altavoces de la plaza emiten interferencia de ondas.",
-                q: "Si x - 22 = 18, ¿cuánto vale x?",
-                a: "40",
-                options: ["30", "40", "36", "44"],
-                hint: "Espacio para el Desarrollo: Suma 22 a 18 -> x = 18 + 22 -> x = 40."
-            },
-            {
+                type: "Opuestos por el vértice",
+                narrative: "Encuentra el ángulo opuesto en esta intersección.",
+                q: "Si el ángulo opuesto por el vértice a 'x' mide 120°, ¿cuánto mide 'x'?",
+                a: "120°",
+                options: ["60°", "120°", "90°", "180°"],
+                hint: "Los ángulos opuestos por el vértice son iguales. x = 120°."
+            }, {
                 id: 7,
                 part: 1,
-                type: "Equilibrio",
-                narrative: "Un contrapeso de 50 kg mantiene suspendido el puente levadizo.",
-                q: "Si 50 = x + 25, ¿cuánto vale x?",
-                a: "25",
-                options: ["75", "50", "25", "20"],
-                hint: "Espacio para el Desarrollo: Resta 25 a 50 -> 50 - 25 = x -> x = 25."
-            },
-            {
+                type: "Concepto",
+                narrative: "Gatito Chill necesita recordar el nombre de los ángulos que suman 180°.",
+                q: "Dos ángulos cuyas medidas suman 180° se denominan:",
+                a: "Suplementarios",
+                options: ["Complementarios", "Opuestos por el vértice", "Suplementarios", "Adyacentes"],
+                hint: "Suplementarios suman 180°. Complementarios suman 90°."
+            }, {
                 id: 8,
                 part: 1,
-                type: "Resta Inversa",
-                narrative: "El reloj digital del ayuntamiento comenzó a correr marcha atrás.",
-                q: "Si 12 = x - 20, ¿cuánto vale x?",
-                a: "32",
-                options: ["8", "30", "10", "32"],
-                hint: "Espacio para el Desarrollo: Suma 20 a 12 -> 12 + 20 = x -> x = 32."
-            },
-            {
+                type: "Suplementarios",
+                narrative: "Patito Amarillito ocultó el ángulo faltante.",
+                q: "Si un ángulo mide 110°, ¿cuánto le falta para ser suplementario?",
+                a: "70°",
+                options: ["70°", "20°", "80°", "250°"],
+                hint: "Suplementario = 180°. 180° - 110° = 70°."
+            }, {
                 id: 9,
                 part: 1,
-                type: "Ecuación Decimal",
-                narrative: "El robot limpiador requiere una calibración de precisión decimal.",
-                q: "¿Cuál es el valor de x en x + 1.5 = 5.5?",
-                a: "4",
-                options: ["4", "7", "4.5", "3"],
-                hint: "Espacio para el Desarrollo: Resta 1.5 a 5.5 -> x = 5.5 - 1.5 -> x = 4."
-            },
-            {
+                type: "Ángulos adyacentes",
+                narrative: "En una intersección, los ángulos adyacentes son suplementarios.",
+                q: "En una intersección de dos rectas, si un ángulo mide 70°, su adyacente sobre la misma línea mide:",
+                a: "110°",
+                options: ["70°", "20°", "110°", "180°"],
+                hint: "Los ángulos adyacentes en una línea recta suman 180°. 180° - 70° = 110°."
+            }, {
                 id: 10,
                 part: 1,
-                type: "Ecuación Decimal",
-                narrative: "Se necesita ajustar la dosis del suero neutralizador.",
-                q: "¿Cuál es el valor de x en x - 0.7 = 1.3?",
-                a: "2",
-                options: ["0.6", "2", "1.6", "1"],
-                hint: "Espacio para el Desarrollo: Suma 0.7 a 1.3 -> x = 1.3 + 0.7 -> x = 2."
+                type: "Complementarios con doble",
+                narrative: "Gatito Chill necesita resolver un problema con doble de un ángulo.",
+                q: "Si el doble de un ángulo mide 60°, ¿cuál es el complemento de dicho ángulo?",
+                a: "60°",
+                options: ["30°", "60°", "120°", "90°"],
+                hint: "El ángulo mide 30°. Complemento = 90° - 30° = 60°."
             },
 
-            // PARTE 2 (Preguntas 11 a 20)
+            // ---- PARTE 2: Problemas con ecuaciones y aplicaciones (Preguntas 11 a 20) ----
             {
                 id: 11,
                 part: 2,
-                type: "Desafío Combinado",
-                narrative: "El Dr. Desequilibrio preparó una trampa de doble candado.",
-                q: "Si x + 10 = 25, ¿cuál es el valor de x - 5?",
-                a: "10",
-                options: ["15", "20", "10", "30"],
-                hint: "Espacio para el Desarrollo: Primero halla x -> x = 25 - 10 = 15. Luego calcula (x - 5) -> 15 - 5 = 10."
-            },
-            {
+                type: "Concepto",
+                narrative: "Patito Amarillito confundió los nombres de los ángulos.",
+                q: "Al cortar dos rectas, los ángulos que se forman frente a frente se llaman:",
+                a: "Opuestos por el vértice",
+                options: ["Suplementarios", "Complementarios", "Opuestos por el vértice", "Rectos"],
+                hint: "Los que están frente a frente al cruzar dos rectas son opuestos por el vértice."
+            }, {
                 id: 12,
                 part: 2,
-                type: "Suma Conmutativa",
-                narrative: "La puerta acorazada requiere orden invertido en sus sumandos.",
-                q: "¿Cuál es el valor de x en 20 + x = 45?",
-                a: "25",
-                options: ["65", "35", "20", "25"],
-                hint: "Espacio para el Desarrollo: Resta 20 a 45 -> x = 45 - 20 -> x = 25."
-            },
-            {
+                type: "Complementarios con relación",
+                narrative: "Gatito Chill necesita encontrar dos ángulos complementarios donde uno es el doble del otro.",
+                q: "Si dos ángulos son complementarios y uno mide el doble del otro, ¿cuánto miden?",
+                a: "30° y 60°",
+                options: ["20° y 70°", "30° y 60°", "40° y 50°", "10° y 80°"],
+                hint: "Complementario = 90°. Si uno es x y el otro 2x, entonces 3x = 90°, x = 30°."
+            }, {
                 id: 13,
                 part: 2,
-                type: "Resta Simétrica",
-                narrative: "El dron de reconocimiento perdió la mitad de su altitud.",
-                q: "¿Cuál es el valor de x en x - 30 = 30?",
-                a: "60",
-                options: ["60", "0", "30", "90"],
-                hint: "Espacio para el Desarrollo: Suma 30 a 30 -> x = 30 + 30 -> x = 60."
-            },
-            {
+                type: "Aplicación (reloj)",
+                narrative: "El reloj marca las 3:00. ¿Qué ángulo forman las manecillas?",
+                q: "Si el puntero de un reloj marca las 3:00, ¿qué tipo de ángulo forman las manecillas?",
+                a: "Recto",
+                options: ["Recto", "Agudo", "Obtuso", "Extendido"],
+                hint: "A las 3:00, las manecillas forman un ángulo de 90°, que es un ángulo recto."
+            }, {
                 id: 14,
                 part: 2,
-                type: "Simplificación previa",
-                narrative: "Ambos miembros de la ecuación tienen operaciones compuestas.",
-                q: "¿Cuál es el valor de x en x + 5 = 15 + 5?",
-                a: "15",
-                options: ["5", "15", "25", "10"],
-                hint: "Espacio para el Desarrollo: Simplifica la derecha (15 + 5 = 20) -> x + 5 = 20. Luego resta 5 -> x = 20 - 5 = 15."
-            },
-            {
+                type: "Clasificación de ángulos",
+                narrative: "Gatito Chill necesita clasificar un ángulo de 135°.",
+                q: "Si un ángulo mide 135°, ¿qué tipo de ángulo es?",
+                a: "Obtuso",
+                options: ["Agudo", "Obtuso", "Recto", "Extendido"],
+                hint: "Obtuso es mayor a 90° y menor a 180°. 135° es obtuso."
+            }, {
                 id: 15,
                 part: 2,
-                type: "Incógnita a la Derecha",
-                narrative: "El panel solar de emergencia necesita restablecer su voltaje.",
-                q: "Si 40 = x + 10, ¿cuánto vale x?",
-                a: "30",
-                options: ["50", "30", "20", "4"],
-                hint: "Espacio para el Desarrollo: Resta 10 a 40 -> 40 - 10 = x -> x = 30."
-            },
-            {
+                type: "Complemento de un ángulo recto",
+                narrative: "Patito Amarillito confundió el complemento de 90°.",
+                q: "Si un ángulo mide 90°, ¿cuánto debe medir su complemento?",
+                a: "0°",
+                options: ["90°", "180°", "0°", "45°"],
+                hint: "Complementario = 90°. 90° - 90° = 0°."
+            }, {
                 id: 16,
                 part: 2,
-                type: "Resta Inversa",
-                narrative: "Se detecta un desfase de 12 segundos en la señal satelital.",
-                q: "Si x - 12 = 4, ¿cuánto vale x?",
-                a: "16",
-                options: ["8", "14", "12", "16"],
-                hint: "Espacio para el Desarrollo: Suma 12 a 4 -> x = 4 + 12 -> x = 16."
-            },
-            {
+                type: "Ángulos en línea recta",
+                narrative: "La suma de los ángulos en una línea recta es siempre la misma.",
+                q: "La suma de los ángulos que comparten un mismo vértice en una línea recta es:",
+                a: "180°",
+                options: ["90°", "360°", "180°", "270°"],
+                hint: "Los ángulos sobre una línea recta suman 180° (ángulo extendido)."
+            }, {
                 id: 17,
                 part: 2,
-                type: "Ecuación Fraccionaria",
-                narrative: "Un frasco de reactivo está lleno hasta la mitad.",
-                q: "¿Cuál es el valor de x en x + 1/2 = 1?",
-                a: "1/2",
-                options: ["1/2", "3/2", "1", "0"],
-                hint: "Espacio para el Desarrollo: Resta 1/2 a 1 -> x = 1 - 1/2 -> x = 1/2."
-            },
-            {
+                type: "Suplementarios (identificación)",
+                narrative: "Gatito Chill necesita identificar un par de ángulos suplementarios.",
+                q: "¿Cuál de estos pares de ángulos puede ser suplementario?",
+                a: "100° y 80°",
+                options: ["100° y 80°", "50° y 50°", "90° y 100°", "45° y 45°"],
+                hint: "Suplementario = 180°. 100° + 80° = 180°."
+            }, {
                 id: 18,
                 part: 2,
-                type: "Ecuación Fraccionaria",
-                narrative: "Tres cuartos de energía han sido restaurados.",
-                q: "¿Cuál es el valor de x en x - 1/4 = 3/4?",
-                a: "1",
-                options: ["1/2", "1", "2/4", "1/4"],
-                hint: "Espacio para el Desarrollo: Suma 1/4 a 3/4 -> x = 3/4 + 1/4 = 4/4 = 1."
-            },
-            {
+                type: "Suplementario con ecuación",
+                narrative: "Patito Amarillito ocultó el valor de x. ¡Despeja!",
+                q: "Si 3x = 180°, ¿cuál es el suplemento de x?",
+                a: "120°",
+                options: ["60°", "120°", "90°", "30°"],
+                hint: "x = 60°. Suplemento = 180° - 60° = 120°."
+            }, {
                 id: 19,
                 part: 2,
-                type: "Incógnita a la Derecha",
-                narrative: "La cápsula de escape requiere ingresar el código 5.",
-                q: "¿Cuál es el valor de x en 5 = x + 2?",
-                a: "3",
-                options: ["7", "10", "3", "2"],
-                hint: "Espacio para el Desarrollo: Resta 2 a 5 -> 5 - 2 = x -> x = 3."
-            },
-            {
+                type: "Opuestos por el vértice (suma)",
+                narrative: "Dos ángulos opuestos por el vértice suman 100°. ¡Encuentra cada uno!",
+                q: "Si la suma de dos ángulos opuestos por el vértice es 100°, ¿cuánto mide cada uno?",
+                a: "50°",
+                options: ["100°", "80°", "50°", "25°"],
+                hint: "Los opuestos por el vértice son iguales. 100° ÷ 2 = 50°."
+            }, {
                 id: 20,
                 part: 2,
-                type: "¡CÓDIGO FINAL!",
-                narrative: "¡Última barrera del Dr. Desequilibrio antes del colapso total!",
-                q: "¿Cuál es el valor de x en x - 15 = 20?",
-                a: "35",
-                options: ["5", "30", "25", "35"],
-                hint: "Espacio para el Desarrollo: Suma 15 a 20 -> x = 20 + 15 -> x = 35."
+                type: "Aplicación (calles)",
+                narrative: "Dos calles se cruzan formando cuatro ángulos. ¡Encuentra las medidas!",
+                q: "Dos calles que se cruzan forman cuatro ángulos. Si uno mide 110°, ¿cuánto miden los otros tres?",
+                a: "110°, 70°, 70°",
+                options: ["110°, 70°, 70°", "110°, 110°, 70°", "70°, 70°, 70°", "110°, 110°, 110°"],
+                hint: "Opuesto por el vértice = 110°. Los adyacentes son suplementarios: 180° - 110° = 70°."
             }
         ];
 
-        // ESTADO DE LA APLICACIÓN
-        let selectedPartMode = 'part1'; // 'part1', 'part2', 'full'
+        // ================================================================
+        //  ESTADO DE LA APLICACIÓN
+        // ================================================================
+        let selectedPartMode = 'part1';
         let currentQuestionsList = [];
         let currentLevelIndex = 0;
         let isProcessing = false;
 
-        // Cambiar tramo por el docente
+        // ================================================================
+        //  FUNCIONES DE CONTROL
+        // ================================================================
         function setPart(mode) {
             selectedPartMode = mode;
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -726,56 +719,55 @@
             if (mode === 'full') document.getElementById('btn-full').classList.add('active');
         }
 
-        // Sintetizador Web Audio API para efectos de sonido retro
+        function shuffleArray(arr) {
+            const copy = arr.slice();
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        // ================================================================
+        //  AUDIO SFX (Web Audio) – VOLUMEN AUMENTADO
+        // ================================================================
         function playSFX(type) {
             const toggle = document.getElementById('sound-toggle');
             if (!toggle || !toggle.checked) return;
-
             try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const ctx = new(window.AudioContext || window.webkitAudioContext)();
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
                 osc.connect(gain);
                 gain.connect(ctx.destination);
-
+                // Volumen más alto (0.25 en lugar de 0.12)
+                const volume = 0.25;
                 if (type === 'correct') {
-                    // Tono victorioso ascendente
                     osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
-                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08); // E5
-                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16); // G5
-                    osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.24); // C6
-                    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08);
+                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16);
+                    osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.24);
+                    gain.gain.setValueAtTime(volume, ctx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
                     osc.start();
                     osc.stop(ctx.currentTime + 0.4);
                 } else {
-                    // Tono de error grave
                     osc.type = 'sawtooth';
                     osc.frequency.setValueAtTime(200, ctx.currentTime);
                     osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.25);
-                    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                    gain.gain.setValueAtTime(volume, ctx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
                     osc.start();
                     osc.stop(ctx.currentTime + 0.3);
                 }
-            } catch (e) {
-                // Audio no disponible
-            }
+            } catch (e) { /* silencio */ }
         }
 
-        // Algoritmo Fisher-Yates para barajar las opciones aleatoriamente
-        function shuffleArray(array) {
-            let shuffled = array.slice();
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            return shuffled;
-        }
-
+        // ================================================================
+        //  INICIO DEL JUEGO
+        // ================================================================
         function startGame() {
-            // Filtrar preguntas según modo docente
             if (selectedPartMode === 'part1') {
                 currentQuestionsList = allQuestions.filter(q => q.part === 1);
             } else if (selectedPartMode === 'part2') {
@@ -783,34 +775,32 @@
             } else {
                 currentQuestionsList = [...allQuestions];
             }
-
             currentLevelIndex = 0;
             document.getElementById('screen-start').classList.add('hidden');
             document.getElementById('screen-game').classList.remove('hidden');
             document.getElementById('screen-end').classList.add('hidden');
-            
             loadQuestion();
         }
 
         function loadQuestion() {
             const qData = currentQuestionsList[currentLevelIndex];
-            
-            // Actualizar HUD
-            document.getElementById('level-label').innerText = `DESAFÍO ${currentLevelIndex + 1} / ${currentQuestionsList.length}`;
             const total = currentQuestionsList.length;
             const progress = ((currentLevelIndex) / total) * 100;
-            document.getElementById('progress-fill').style.width = `${Math.max(progress, 5)}%`;
 
-            document.getElementById('section-badge').innerText = qData.part === 1 ? "PARTE 1: OPERACIONES DIRECTAS E INVERSAS I" : "PARTE 2: OPERACIONES DIRECTAS E INVERSAS II";
+            document.getElementById('level-label').innerText = `DESAFÍO ${currentLevelIndex + 1} / ${total}`;
+            document.getElementById('progress-fill').style.width = `${Math.max(progress, 5)}%`;
+            document.getElementById('section-badge').innerText =
+                qData.part === 1 ? "PARTE 1: ÁNGULOS BÁSICOS" : "PARTE 2: PROBLEMAS Y APLICACIONES";
+
             document.getElementById('narrative-text').innerText = `"${qData.narrative}"`;
-            document.getElementById('question-number').innerText = `PREGUNTA EVALUACIÓN #${qData.id}`;
+            document.getElementById('question-number').innerText = `PREGUNTA #${qData.id}`;
             document.getElementById('question-text').innerText = qData.q;
             document.getElementById('question-type-badge').innerText = `Tipo: ${qData.type}`;
 
-            // Pista
-            const hintToggle = document.getElementById('hints-toggle').checked;
+            // Pistas
+            const hintsToggle = document.getElementById('hints-toggle').checked;
             const hintContainer = document.getElementById('hint-container');
-            if (hintToggle) {
+            if (hintsToggle) {
                 hintContainer.classList.remove('hidden');
                 document.getElementById('hint-box').innerHTML = qData.hint;
                 document.getElementById('hint-box').classList.add('hidden');
@@ -818,54 +808,46 @@
                 hintContainer.classList.add('hidden');
             }
 
-            // Cargar opciones aleatorizadas en el desplegable
+            // Opciones aleatorizadas
             const select = document.getElementById('answer-select');
-            select.innerHTML = '<option value="" disabled selected>-- Selecciona tu solución con tranquilidad --</option>';
-            
+            select.innerHTML = '<option value="" disabled selected>-- Elige con calma --</option>';
             const shuffled = shuffleArray(qData.options);
             shuffled.forEach(opt => {
                 const el = document.createElement('option');
                 el.value = opt;
-                el.innerText = `x = ${opt}`;
+                el.innerText = opt;
                 select.appendChild(el);
             });
 
-            // Rotación de avatares aliados
-            const avatars = ["🐱", "🐢", "🐶", "🦉", "⚖️"];
-            const names = ["Gatito Chill", "Mente Inversa", "Rayo Despeje", "Búho del Equilibrio", "Robot Balance"];
-            const selectedAvatar = avatars[currentLevelIndex % avatars.length];
-            const selectedName = names[currentLevelIndex % names.length];
-
-            document.getElementById('hero-avatar').innerText = selectedAvatar;
-            document.getElementById('hero-title').innerText = `Legión del Despeje: ${selectedName}`;
+            // Avatar rotativo
+            const avatars = ["🐱", "🐢", "🦉", "⚖️", "🐶"];
+            const names = ["Gatito Chill", "Mente Inversa", "Búho del Equilibrio", "Robot Balance", "Rayo Despeje"];
+            const idx = currentLevelIndex % avatars.length;
+            document.getElementById('hero-avatar').innerText = avatars[idx];
+            document.getElementById('hero-title').innerText = `Legión del Despeje: ${names[idx]}`;
 
             isProcessing = false;
         }
 
         function toggleHint() {
-            const hintBox = document.getElementById('hint-box');
-            hintBox.classList.toggle('hidden');
+            document.getElementById('hint-box').classList.toggle('hidden');
         }
 
         function checkAnswer() {
             if (isProcessing) return;
-
             const select = document.getElementById('answer-select');
             const userAns = select.value;
-            const fx = document.getElementById('visual-fx');
-
             if (!userAns) return;
 
             isProcessing = true;
             const currentQ = currentQuestionsList[currentLevelIndex];
+            const fx = document.getElementById('visual-fx');
 
             if (userAns === currentQ.a) {
-                // Correcto
                 playSFX('correct');
-                const words = ["¡DESPEJADO!", "¡IGUALDAD!", "¡CHILL!", "¡PERFECTO!", "¡EQUILIBRIO!", "¡POW!"];
+                const words = ["¡DESPEJADO!", "¡EQUILIBRIO!", "¡CHILL!", "¡PERFECTO!", "¡POW!"];
                 fx.innerText = words[Math.floor(Math.random() * words.length)];
                 fx.className = "pow-text comic-font text-8xl md:text-9xl text-yellow-300 active";
-
                 setTimeout(() => {
                     fx.classList.remove('active');
                     currentLevelIndex++;
@@ -876,11 +858,9 @@
                     }
                 }, 850);
             } else {
-                // Incorrecto
                 playSFX('wrong');
-                fx.innerText = "¡DESEQUILIBRIO!";
+                fx.innerText = "¡DESORDEN!";
                 fx.className = "pow-text comic-font text-8xl md:text-9xl text-red-500 active";
-
                 setTimeout(() => {
                     fx.classList.remove('active');
                     select.value = "";
@@ -894,15 +874,19 @@
             document.getElementById('screen-end').classList.remove('hidden');
             document.getElementById('progress-fill').style.width = "100%";
 
-            if (selectedPartMode === 'part1') {
+            const mode = selectedPartMode;
+            if (mode === 'part1') {
                 document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 de la Evaluación!";
-                document.getElementById('end-subtitle').innerText = "Despejaste las primeras 10 incógnitas del Dr. Desequilibrio con éxito.";
-            } else if (selectedPartMode === 'part2') {
+                document.getElementById('end-subtitle').innerText =
+                    "Dominaste los conceptos de ángulos complementarios, opuestos y suplementarios. ¡Continúa así!";
+            } else if (mode === 'part2') {
                 document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 de la Evaluación!";
-                document.getElementById('end-subtitle').innerText = "Resolviste las 10 preguntas finales sobre operaciones combinadas y fracciones.";
+                document.getElementById('end-subtitle').innerText =
+                    "Aplicaste los ángulos en problemas con ecuaciones y situaciones reales. ¡Excelente!";
             } else {
-                document.getElementById('end-title').innerText = "¡HAS CUMPLIDO EL ESCAPE ROOM COMPLETO (20 RETOS)!";
-                document.getElementById('end-subtitle').innerText = "Eres un Maestro Legendario de la Resolución de Ecuaciones de Un Paso.";
+                document.getElementById('end-title').innerText = "¡HAS COMPLETADO EL ESCAPE ROOM COMPLETO!";
+                document.getElementById('end-subtitle').innerText =
+                    "Eres un Maestro de los Ángulos y Rectas Intersectantes. ¡El orden ha sido restaurado!";
             }
         }
 
@@ -919,6 +903,9 @@
             document.getElementById('screen-start').classList.remove('hidden');
         }
 
+        // ================================================================
+        //  FUNCIONES PARA SECCIONES COMPLEMENTARIAS (EXTRAS)
+        // ================================================================
         function toggleExtraModules() {
             const extras = document.getElementById('screen-extras');
             extras.classList.remove('hidden');
@@ -930,24 +917,26 @@
         }
 
         function switchExtraTab(tabId) {
-            document.getElementById('extra-sec2').classList.add('hidden');
-            document.getElementById('extra-sec3').classList.add('hidden');
-            document.getElementById('extra-sec4').classList.add('hidden');
-            document.getElementById('extra-sec5').classList.add('hidden');
-
-            document.getElementById('tab-sec2').classList.remove('bg-yellow-300');
-            document.getElementById('tab-sec3').classList.remove('bg-yellow-300');
-            document.getElementById('tab-sec4').classList.remove('bg-yellow-300');
-            document.getElementById('tab-sec5').classList.remove('bg-yellow-300');
+            document.querySelectorAll('[id^="extra-"]').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.extra-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
 
             document.getElementById(`extra-${tabId}`).classList.remove('hidden');
-            document.getElementById(`tab-${tabId}`).classList.add('bg-yellow-300');
+            document.getElementById(`tab-${tabId}`).classList.add('active-tab');
         }
 
         function toggleExtraHint() {
             const box = document.getElementById('extra-hint-box');
             box.classList.toggle('hidden');
         }
+
+        // ================================================================
+        //  INICIALIZACIÓN
+        // ================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            setPart('part1');
+            switchExtraTab('sec2');
+        });
     </script>
+
 </body>
 </html>
