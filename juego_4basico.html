@@ -8,7 +8,6 @@
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet" />
     <style>
-        /* (el mismo CSS de antes, sin cambios) */
         * {
             margin: 0;
             padding: 0;
@@ -170,19 +169,21 @@
                 <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-black pb-2 mb-3 text-xs md:text-sm font-bold text-gray-700">
                     <span>📚 NIVEL: 4° BÁSICO</span>
                     <span>⏱️ TIEMPO MÁXIMO: 90 MIN</span>
-                    <span>🧩 UNIDAD: DIVISIÓN (OA 06)</span>
+                    <span>🧩 UNIDAD: MULTIPLICACIÓN Y DIVISIÓN (OA 05 y OA 06)</span>
                 </div>
                 <h1 class="text-3xl md:text-5xl comic-font text-blue-700 tracking-wide uppercase">
                     Gatito Chill vs. Patito Amarillito
                 </h1>
                 <p class="text-lg md:text-2xl chill-font text-purple-900 mt-1">
-                    Escape Room de la División y el Algoritmo
+                    Escape Room de la Multiplicación y la División
                 </p>
             </div>
             <!-- OA -->
             <div class="mt-4 bg-yellow-100 border-2 border-black p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
                 <p class="font-bold text-xs md:text-sm text-indigo-950">
-                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 06)</span>: Demostrar que comprenden la división con dividendos de tres dígitos y divisores de un dígito, aplicando el algoritmo de la división.
+                    🎯 <span class="underline">OBJETIVOS DE APRENDIZAJE</span>: <br />
+                    <b>OA 05</b> – Demostrar que comprenden la multiplicación de números de tres dígitos por números de un dígito. <br />
+                    <b>OA 06</b> – Demostrar que comprenden la división con dividendos de tres dígitos y divisores de un dígito.
                 </p>
             </div>
         </header>
@@ -196,20 +197,20 @@
                 </div>
 
                 <div class="text-center">
-                    <h2 class="text-2xl md:text-4xl comic-font text-red-600">¡EL DESORDEN DIVISOR HA LLEGADO!</h2>
-                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">Patito Amarillito ha descompuesto todas las divisiones de la ciudad...</p>
+                    <h2 class="text-2xl md:text-4xl comic-font text-red-600">¡EL DESORDEN MULTIPLICATIVO HA LLEGADO!</h2>
+                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">Patito Amarillito ha desordenado todas las multiplicaciones y divisiones de la ciudad...</p>
                 </div>
 
                 <!-- Historia -->
                 <div class="bg-blue-50 border-4 border-black p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
                     <p class="text-base md:text-lg">
-                        El villano <b>Patito Amarillito</b> lanzó su <i>"Rayo Divisor"</i> sobre la Ciudad de los Números, haciendo que los repartos equitativos se volvieran un caos. Los buses no saben cuántos pasajeros llevar, las tiendas no pueden repartir sus productos y hasta los jardineros han perdido la cuenta de sus flores.
+                        El villano <b>Patito Amarillito</b> lanzó su <i>"Rayo Multiplicador Desordenado"</i> sobre la Ciudad de los Números, haciendo que los repartos y las compras se volvieran un caos. Los supermercados no saben cuánto cobrar, los repartidores no pueden organizar sus envíos y hasta los panaderos han perdido la cuenta de sus panes.
                     </p>
                     <p class="text-base md:text-lg">
                         Con su taza de té siempre a mano, el sereno <b>Gatito Chill</b> nos guía con una sonrisa:
                     </p>
                     <blockquote class="bg-yellow-200 border-l-4 border-yellow-600 p-3 rounded font-bold text-indigo-900 italic text-sm md:text-base">
-                        "Tranquilos, amigos... para dividir correctamente solo hay que recordar el algoritmo: dividir, multiplicar, restar y bajar. ¡Chill, que el equilibrio volverá!"
+                        "Tranquilos, amigos... para multiplicar solo hay que sumar varias veces el mismo número. Y para dividir, repartir equitativamente. ¡Chill, que el equilibrio volverá!"
                     </blockquote>
                 </div>
 
@@ -221,11 +222,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
                             📍 Parte 1 (Preguntas 1 a 10)<br />
-                            <span class="text-xs font-normal normal-case block">Divisiones directas y problemas básicos</span>
+                            <span class="text-xs font-normal normal-case block">Multiplicación directa e inversa</span>
                         </button>
                         <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
                             📍 Parte 2 (Preguntas 11 a 20)<br />
-                            <span class="text-xs font-normal normal-case block">Divisiones inversas y problemas variados</span>
+                            <span class="text-xs font-normal normal-case block">División directa e inversa</span>
                         </button>
                         <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
                             🔥 Modo Completo (20 Retos)<br />
@@ -248,7 +249,7 @@
 
                 <div class="pt-2">
                     <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-black text-2xl md:text-3xl py-4 w-full rounded-xl">
-                        ¡RESTAURAR EL EQUILIBRIO DIVISOR! 🚀
+                        ¡RESTAURAR EL ORDEN MULTIPLICATIVO! 🚀
                     </button>
                 </div>
 
@@ -268,7 +269,7 @@
                         <span class="text-3xl">🐱</span>
                         <div>
                             <div class="comic-font text-2xl text-red-600 leading-tight" id="level-label">DESAFÍO 1 / 10</div>
-                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: DIVISIONES DIRECTAS</div>
+                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: MULTIPLICACIÓN</div>
                         </div>
                     </div>
                     <div class="w-full md:w-1/2 progress-bar-container">
@@ -286,7 +287,7 @@
                         <div class="w-full">
                             <div class="flex justify-between items-center">
                                 <h4 class="font-bold text-red-600 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Legión del Despeje: Gatito Chill</h4>
-                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">División</span>
+                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Multiplicación</span>
                             </div>
                             <p class="font-bold text-indigo-950 italic text-base md:text-lg mt-1" id="narrative-text">Cargando situación...</p>
                         </div>
@@ -328,12 +329,12 @@
                 <div class="space-y-3">
                     <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has derrotado a Patito Amarillito!</p>
                     <p class="text-gray-700 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
-                        Todas las divisiones han vuelto a su equilibrio. La ciudad numérica respira de nuevo.
+                        Todas las multiplicaciones y divisiones han vuelto a su equilibrio. La ciudad numérica respira de nuevo.
                     </p>
                 </div>
                 <div class="bg-yellow-100 border-4 border-black p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
                     <p class="text-purple-900">
-                        <b>Gatito Chill te felicita:</b> "¡Excelente! Recuerda que el algoritmo de la división (dividir, multiplicar, restar y bajar) es la herramienta perfecta para repartir equitativamente. ¡Mantén la calma y el orden siempre regresa!"
+                        <b>Gatito Chill te felicita:</b> "¡Excelente! Recuerda que la multiplicación es una suma abreviada y la división es un reparto equitativo. ¡Mantén la calma y el orden siempre regresa!"
                     </p>
                 </div>
                 <div class="flex flex-col md:flex-row justify-center gap-4 pt-4">
@@ -372,53 +373,53 @@
                         <p class="text-xs text-gray-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Comprobar.</p>
                     </div>
 
-                    <!-- Problema 1: Paseo -->
+                    <!-- Problema 1: Hotel -->
                     <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Paseo escolar)</span>
+                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Hotel)</span>
                         <p class="font-bold text-gray-800">
-                            Un colegio organiza un paseo para 384 estudiantes. Si en cada bus pueden viajar 8 estudiantes, ¿cuántos buses se necesitan contratar para que todos puedan ir?
+                            Un hotel tiene 3 pisos. En cada piso hay 142 habitaciones. Si todas las habitaciones están ocupadas, ¿cuántas personas hay en el hotel (considerando 1 persona por habitación)?
                         </p>
                         <details class="bg-gray-50 p-3 rounded border border-gray-300">
                             <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
                             <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> 384 estudiantes, 8 por bus. Pregunta: número de buses.</p>
-                                <p><b>2. Planificar:</b> Dividir 384 entre 8.</p>
-                                <p><b>3. Resolver:</b> 384 ÷ 8 = 48.</p>
-                                <p><b>4. Comprobar:</b> 48 × 8 = 384. Correcto.</p>
+                                <p><b>1. Comprender:</b> 3 pisos, 142 habitaciones por piso. Pregunta: total de personas.</p>
+                                <p><b>2. Planificar:</b> Multiplicar 142 × 3.</p>
+                                <p><b>3. Resolver:</b> 142 × 3 = 426.</p>
+                                <p><b>4. Comprobar:</b> 426 ÷ 3 = 142. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <!-- Problema 2: Alimento para perros -->
+                    <!-- Problema 2: Biblioteca -->
                     <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Alimento para mascotas)</span>
+                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Biblioteca)</span>
                         <p class="font-bold text-gray-800">
-                            En una tienda de mascotas, se han recibido 657 kg de alimento para perros y deben ser distribuidos equitativamente en 9 sacos grandes. ¿Cuántos kg de alimento tendrá cada saco?
+                            En una biblioteca se deben ordenar 96 libros en estantes. Si en cada estante caben 8 libros, ¿cuántos estantes se necesitan en total?
                         </p>
                         <details class="bg-gray-50 p-3 rounded border border-gray-300">
                             <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
                             <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> 657 kg en 9 sacos iguales. Pregunta: kg por saco.</p>
-                                <p><b>2. Planificar:</b> Dividir 657 entre 9.</p>
-                                <p><b>3. Resolver:</b> 657 ÷ 9 = 73.</p>
-                                <p><b>4. Comprobar:</b> 73 × 9 = 657. Correcto.</p>
+                                <p><b>1. Comprender:</b> 96 libros, 8 por estante. Pregunta: número de estantes.</p>
+                                <p><b>2. Planificar:</b> Dividir 96 entre 8.</p>
+                                <p><b>3. Resolver:</b> 96 ÷ 8 = 12.</p>
+                                <p><b>4. Comprobar:</b> 12 × 8 = 96. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <!-- Problema 3: Imprenta -->
+                    <!-- Problema 3: Camión de jugos -->
                     <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Encuadernación)</span>
+                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Camión de jugos)</span>
                         <p class="font-bold text-gray-800">
-                            Una imprenta tiene que encuadernar 532 cuadernos en 4 días. Si cada día encuaderna la misma cantidad, ¿cuántos cuadernos encuaderna por día?
+                            Un camión transporta 4 cajas, y en cada caja vienen 125 jugos. Si el camión reparte todos los jugos en 5 colegios de forma equitativa, ¿cuántos jugos recibe cada colegio?
                         </p>
                         <details class="bg-gray-50 p-3 rounded border border-gray-300">
                             <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
                             <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> 532 cuadernos en 4 días iguales. Pregunta: cuadernos por día.</p>
-                                <p><b>2. Planificar:</b> Dividir 532 entre 4.</p>
-                                <p><b>3. Resolver:</b> 532 ÷ 4 = 133.</p>
-                                <p><b>4. Comprobar:</b> 133 × 4 = 532. Correcto.</p>
+                                <p><b>1. Comprender:</b> 4 cajas, 125 jugos por caja, repartir en 5 colegios.</p>
+                                <p><b>2. Planificar:</b> Multiplicar 4 × 125, luego dividir entre 5.</p>
+                                <p><b>3. Resolver:</b> 4 × 125 = 500. 500 ÷ 5 = 100.</p>
+                                <p><b>4. Comprobar:</b> 100 × 5 = 500. Correcto.</p>
                             </div>
                         </details>
                     </div>
@@ -428,17 +429,17 @@
                 <div id="extra-sec3" class="hidden space-y-4 text-left">
                     <div class="bg-purple-50 border-2 border-black p-4 rounded-lg">
                         <h3 class="font-bold text-lg text-purple-900">III. Metacognición (Reflexión del Estudiante)</h3>
-                        <p class="text-xs text-gray-700">Analiza tus propios razonamientos durante la resolución:</p>
+                        <p class="text-xs text-gray-700">Responde con honestidad sobre tu trabajo:</p>
                     </div>
                     <div class="space-y-3">
                         <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">1. Al resolver los problemas anteriores, ¿cuál de los 4 pasos (comprender, planificar, resolver o comprobar) te resultó más difícil y por qué?</p>
+                            <p class="font-bold text-sm text-gray-800">1. ¿Cuál de los 3 problemas te resultó más difícil y por qué?</p>
                         </div>
                         <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">2. ¿Cómo te ayuda el algoritmo de la división a resolver problemas de la vida cotidiana como los del paseo o el alimento para perros?</p>
+                            <p class="font-bold text-sm text-gray-800">2. ¿Qué estrategia (del método de 4 pasos) te ayudó más a entender lo que debías hacer?</p>
                         </div>
                         <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">3. Si al comprobar tu resultado en el problema 3, la cifra final no coincidía con el total, ¿qué pasos habrías revisado primero?</p>
+                            <p class="font-bold text-sm text-gray-800">3. ¿Hubo algún error que cometiste al principio? ¿Cómo te diste cuenta y cómo lo corregiste?</p>
                         </div>
                     </div>
                 </div>
@@ -446,9 +447,9 @@
                 <!-- SECCIÓN IV: DESAFÍO EXTRA (Lógica Inversa) -->
                 <div id="extra-sec4" class="hidden space-y-4 text-left">
                     <div class="bg-yellow-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Pensamiento Lógico)</h3>
+                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Acertijo Lógico Inverso)</h3>
                         <p class="text-sm text-gray-800">
-                            "Si divido un número por 7 obtengo 105. ¿Qué número obtendré si divido ese mismo número original por 3?"
+                            "Pensé un número. Lo multipliqué por 5, luego le resté 20 y obtuve 80. ¿Qué número pensé?" (Muestra tu razonamiento).
                         </p>
                     </div>
                     <div class="p-4 bg-white border-2 border-black rounded-xl space-y-3">
@@ -456,9 +457,10 @@
                             🧩 Revelar Solución por Reversión de Gatito Chill
                         </button>
                         <div id="extra-hint-box" class="hidden text-sm bg-yellow-100 p-3 rounded border border-yellow-300 leading-relaxed">
-                            <p><b>Paso 1:</b> Si al dividir el número original entre 7 obtenemos 105, entonces el número original es 105 × 7 = 735.</p>
-                            <p><b>Paso 2:</b> Ahora dividimos 735 entre 3: 735 ÷ 3 = 245.</p>
-                            <p><b>Resultado:</b> El número obtenido es <b>245</b>.</p>
+                            <p><b>Ecuación planteada:</b> <span class="font-mono">X × 5 − 20 = 80</span></p>
+                            <p><b>Paso 1 (revertir resta):</b> Sumo 20 a 80 → 80 + 20 = 100.</p>
+                            <p><b>Paso 2 (revertir multiplicación):</b> Divido 100 entre 5 → 100 ÷ 5 = 20.</p>
+                            <p><b>Resultado:</b> El número pensado es <b>20</b>. (Comprobación: 20 × 5 − 20 = 100 − 20 = 80).</p>
                         </div>
                     </div>
                 </div>
@@ -473,30 +475,30 @@
                         <table class="w-full text-sm border-2 border-black bg-white">
                             <thead class="bg-yellow-300 border-b-2 border-black">
                                 <tr>
-                                    <th class="p-2 text-left border-r border-black">Criterio / Ítem</th>
-                                    <th class="p-2 text-center border-r border-black">Logrado (3)</th>
-                                    <th class="p-2 text-center border-r border-black">En proceso (2)</th>
-                                    <th class="p-2 text-center">Iniciando (1)</th>
+                                    <th class="p-2 text-left border-r border-black">Ítem</th>
+                                    <th class="p-2 text-center border-r border-black">Nivel 3 (Logrado)</th>
+                                    <th class="p-2 text-center border-r border-black">Nivel 2 (En proceso)</th>
+                                    <th class="p-2 text-center">Nivel 1 (Inicial)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">1. Soy capaz de identificar los datos y la operación necesaria para resolver una división.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
-                                    <td class="p-2 text-center"><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 border-r border-black font-medium">Comprendo la multiplicación y división de números.</td>
+                                    <td class="p-2 text-center border-r border-black">Aplico algoritmos sin errores.<br /><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center border-r border-black">Aplico algoritmos con errores menores.<br /><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center">Tengo dificultades para aplicar los algoritmos.<br /><input type="radio" name="auto1" /></td>
                                 </tr>
                                 <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">2. Puedo aplicar el algoritmo de la división correctamente sin errores.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
-                                    <td class="p-2 text-center"><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 border-r border-black font-medium">Utilizo el método de los 4 pasos.</td>
+                                    <td class="p-2 text-center border-r border-black">Identifico cada paso claramente.<br /><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center border-r border-black">Identifico algunos pasos, pero me salto otros.<br /><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center">No utilizo un orden para resolver problemas.<br /><input type="radio" name="auto2" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2 border-r border-black font-medium">3. Puedo revisar mi trabajo para saber si mi respuesta tiene sentido.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
-                                    <td class="p-2 text-center"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 border-r border-black font-medium">Reflexiono sobre mis errores.</td>
+                                    <td class="p-2 text-center border-r border-black">Analizo mis errores y los corrijo.<br /><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center border-r border-black">A veces analizo mis errores.<br /><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center">No reviso mis procedimientos.<br /><input type="radio" name="auto3" /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -510,193 +512,193 @@
 
     <script>
         // ================================================================
-        //  BASE DE DATOS – 20 PREGUNTAS DE LA GUÍA (OA 06, 4° BÁSICO)
+        //  BASE DE DATOS – 20 PREGUNTAS (OA 05 y OA 06, 4° BÁSICO)
         // ================================================================
         const allQuestions = [
-            // ---- PARTE 1: Preguntas 1 a 10 ----
+            // ---- PARTE 1: Multiplicación (Preguntas 1 a 10) ----
             {
                 id: 1,
                 part: 1,
-                type: "División directa",
-                narrative: "Patito Amarillito desordenó la división. ¡Ayuda a Gatito Chill a encontrar el cociente!",
-                q: "¿Cuál es el resultado de dividir 846 entre 6?",
-                a: "141",
-                options: ["141", "140", "151", "131"],
-                hint: "Aplica el algoritmo: 846 ÷ 6. ¿Cuántas veces cabe 6 en 846?"
+                type: "Multiplicación directa",
+                narrative: "Patito Amarillito desordenó la multiplicación. ¡Ayuda a Gatito Chill a encontrar el producto!",
+                q: "El colegio compró 3 paquetes de cartulinas. Si cada paquete contiene 245 cartulinas, ¿cuántas cartulinas tienen en total?",
+                a: "735",
+                options: ["635", "735", "725", "745"],
+                hint: "Multiplica 245 × 3. Recuerda sumar las unidades, decenas y centenas."
             }, {
                 id: 2,
                 part: 1,
-                type: "Reparto equitativo",
-                narrative: "Un grupo de amigos necesita repartir láminas. ¡Gatito Chill te guía!",
-                q: "Un grupo de 4 amigos quiere repartir 728 láminas de manera equitativa. ¿Cuántas láminas recibe cada uno?",
-                a: "182",
-                options: ["181", "182", "172", "192"],
-                hint: "Divide 728 entre 4."
+                type: "Multiplicación inversa",
+                narrative: "El número original está escondido. ¡Descúbrelo!",
+                q: "Si al multiplicar un número de tres dígitos por 4 obtienes 824, ¿cuál es el número original?",
+                a: "206",
+                options: ["206", "216", "196", "208"],
+                hint: "Divide 824 entre 4 para encontrar el número original."
             }, {
                 id: 3,
                 part: 1,
-                type: "División inversa",
-                narrative: "El número desconocido está escondido. ¡Descúbrelo!",
-                q: "Si al dividir un número desconocido entre 3 el resultado es 125, ¿cuál es el número desconocido?",
-                a: "375",
-                options: ["375", "41", "372", "365"],
-                hint: "Para encontrar el número, multiplica 125 × 3."
+                type: "Estimación",
+                narrative: "Gatito Chill necesita una estimación rápida. ¡Ayúdale!",
+                q: "¿Cuál es el producto estimado de 498 × 5?",
+                a: "2 500",
+                options: ["2 000", "2 250", "2 500", "2 400"],
+                hint: "Redondea 498 a 500 y luego multiplica por 5."
             }, {
                 id: 4,
                 part: 1,
-                type: "Reparto equitativo",
-                narrative: "Los libros deben organizarse en estantes iguales. ¡Calcula!",
-                q: "En una biblioteca, se deben organizar 965 libros en 5 estantes con la misma cantidad cada uno. ¿Cuántos libros quedan en cada estante?",
-                a: "193",
-                options: ["191", "183", "193", "195"],
-                hint: "Divide 965 entre 5."
+                type: "Multiplicación inversa (dígito faltante)",
+                narrative: "Patito Amarillito borró un dígito. ¡Recupéralo!",
+                q: "¿Qué dígito falta en: 1 _ 2 × 3 = 336?",
+                a: "1",
+                options: ["1", "0", "2", "3"],
+                hint: "Divide 336 entre 3 para obtener el número de tres dígitos. ¿Qué dígito falta en 1_2?"
             }, {
                 id: 5,
                 part: 1,
-                type: "División inversa",
-                narrative: "Patito Amarillito borró el número que multiplica. ¡Encuéntralo!",
-                q: "¿Qué número multiplicado por 7 resulta 651?",
-                a: "93",
-                options: ["92", "93", "83", "94"],
-                hint: "Divide 651 entre 7."
+                type: "Propiedad distributiva",
+                narrative: "Gatito Chill usa la propiedad distributiva para multiplicar más fácil.",
+                q: "Si calculas 120 × 4 usando la propiedad distributiva, ¿cuál expresión es correcta?",
+                a: "(100 × 4) + (20 × 4)",
+                options: ["(100 × 4) + (2 × 4)", "(100 × 4) + 2", "(10 × 4) + (20 × 4)", "100 + (20 × 4)"],
+                hint: "Descompón 120 en 100 + 20 y multiplica cada parte por 4."
             }, {
                 id: 6,
                 part: 1,
-                type: "Reparto equitativo",
-                narrative: "Los caramelos deben repartirse en bolsas iguales. ¡Gatito Chill confía en ti!",
-                q: "Se tienen 549 caramelos para repartir en 9 bolsas iguales. ¿Cuántos caramelos contiene cada bolsa?",
-                a: "61",
-                options: ["61", "60", "59", "62"],
-                hint: "Divide 549 entre 9."
+                type: "Multiplicación directa",
+                narrative: "El agricultor necesita saber cuántos kilos cosecha en una semana.",
+                q: "Un agricultor cosecha 125 kg de tomates diarios. ¿Cuántos kilos cosecha en una semana (7 días)?",
+                a: "875",
+                options: ["775", "875", "825", "745"],
+                hint: "Multiplica 125 × 7."
             }, {
                 id: 7,
                 part: 1,
-                type: "División inversa",
-                narrative: "Encuentra el número que fue dividido.",
-                q: "¿Qué número dividido por 4 es igual a 212?",
-                a: "848",
-                options: ["53", "848", "858", "55"],
-                hint: "Multiplica 212 × 4."
+                type: "Multiplicación directa",
+                narrative: "Gatito Chill necesita el producto exacto.",
+                q: "Calcula: 312 × 3 =",
+                a: "936",
+                options: ["936", "946", "916", "906"],
+                hint: "Multiplica 312 × 3 paso a paso: unidades, decenas, centenas."
             }, {
                 id: 8,
                 part: 1,
-                type: "Reparto equitativo",
-                narrative: "Los paquetes deben repartirse en camiones iguales. ¡Ayuda!",
-                q: "Una empresa de transporte reparte 432 paquetes en 8 camiones de igual capacidad. ¿Cuántos paquetes lleva cada camión?",
-                a: "54",
-                options: ["53", "54", "44", "56"],
-                hint: "Divide 432 entre 8."
+                type: "Multiplicación inversa",
+                narrative: "Patito Amarillito ocultó el multiplicador. ¡Encuéntralo!",
+                q: "¿Por qué número debes multiplicar 105 para obtener 525?",
+                a: "5",
+                options: ["4", "6", "5", "3"],
+                hint: "Divide 525 entre 105."
             }, {
                 id: 9,
                 part: 1,
-                type: "División inversa",
-                narrative: "Patito Amarillito escondió el divisor. ¡Descúbrelo!",
-                q: "¿Cuál es el divisor si el dividendo es 725 y el cociente es 5?",
-                a: "145",
-                options: ["145", "135", "155", "144"],
-                hint: "Divide 725 entre 5."
+                type: "Estimación",
+                narrative: "Gatito Chill necesita una estimación para esta multiplicación.",
+                q: "Si estimas el producto de 303 × 4, el resultado se acerca a:",
+                a: "1 200",
+                options: ["1 500", "1 200", "1 300", "1 400"],
+                hint: "Redondea 303 a 300 y multiplica por 4."
             }, {
                 id: 10,
                 part: 1,
-                type: "Reparto equitativo",
-                narrative: "El granjero necesita cajas para sus manzanas. ¡Calcula!",
-                q: "Un granjero cosecha 864 manzanas y las coloca en cajas de 9 unidades cada una. ¿Cuántas cajas necesita?",
-                a: "96",
-                options: ["95", "96", "86", "97"],
-                hint: "Divide 864 entre 9."
+                type: "Multiplicación directa",
+                narrative: "La librería tiene libros en repisas. ¿Cuántos hay en total?",
+                q: "En una librería hay 5 repisas. Cada repisa tiene 150 libros. ¿Cuántos libros hay en total?",
+                a: "750",
+                options: ["550", "650", "750", "850"],
+                hint: "Multiplica 150 × 5."
             },
 
-            // ---- PARTE 2: Preguntas 11 a 20 ----
+            // ---- PARTE 2: División (Preguntas 11 a 20) ----
             {
                 id: 11,
                 part: 2,
                 type: "División directa",
-                narrative: "El cociente de esta división te ayudará a restaurar el orden.",
-                q: "¿Cuál es el cociente de 396 dividido por 4?",
-                a: "99",
-                options: ["98", "89", "99", "97"],
-                hint: "Divide 396 entre 4."
+                narrative: "Las láminas deben repartirse equitativamente. ¡Ayuda a Gatito Chill!",
+                q: "Si tienes 84 láminas y quieres repartirlas en partes iguales entre 4 amigos, ¿cuántas láminas recibe cada uno?",
+                a: "21",
+                options: ["20", "21", "22", "19"],
+                hint: "Divide 84 entre 4."
             }, {
                 id: 12,
                 part: 2,
-                type: "Velocidad constante",
-                narrative: "Un deportista recorre una distancia en minutos. ¿Cuánto avanza por minuto?",
-                q: "Un deportista recorre 684 metros en 6 minutos, manteniendo siempre la misma velocidad. ¿Cuántos metros recorre en un minuto?",
-                a: "114",
-                options: ["114", "104", "124", "112"],
-                hint: "Divide 684 entre 6."
+                type: "División inversa",
+                narrative: "Patito Amarillito escondió el dividendo. ¡Descúbrelo!",
+                q: "¿Qué número dividido por 3 es igual a 15?",
+                a: "45",
+                options: ["35", "40", "5", "45"],
+                hint: "Multiplica 15 × 3 para encontrar el número."
             }, {
                 id: 13,
                 part: 2,
-                type: "División inversa",
-                narrative: "Encuentra el número que fue dividido.",
-                q: "¿Qué número dividido por 7 es igual a 108?",
-                a: "756",
-                options: ["756", "766", "746", "758"],
-                hint: "Multiplica 108 × 7."
+                type: "Estimación (cociente)",
+                narrative: "Gatito Chill necesita estimar el cociente.",
+                q: "Si estimas el cociente de 78 ÷ 4, ¿cuál es el valor más cercano?",
+                a: "20",
+                options: ["15", "20", "25", "18"],
+                hint: "Redondea 78 a 80 y divide por 4."
             }, {
                 id: 14,
                 part: 2,
-                type: "Reparto equitativo",
-                narrative: "Los globos deben repartirse en grupos iguales para decorar.",
-                q: "En una fiesta hay 324 globos que deben repartirse en 6 grupos iguales para decorar. ¿Cuántos globos tiene cada grupo?",
-                a: "54",
-                options: ["55", "54", "44", "56"],
-                hint: "Divide 324 entre 6."
+                type: "División con resto",
+                narrative: "En esta división sobra algo. ¡Calcula el resto!",
+                q: "Al dividir 59 ÷ 6, ¿cuál es el resto?",
+                a: "5",
+                options: ["3", "4", "5", "2"],
+                hint: "6 × 9 = 54, 59 - 54 = 5."
             }, {
                 id: 15,
                 part: 2,
                 type: "División directa",
-                narrative: "Gatito Chill necesita el cociente exacto.",
-                q: "¿Cuál es el resultado de 525 dividido por 3?",
-                a: "175",
-                options: ["175", "165", "185", "174"],
-                hint: "Divide 525 entre 3."
+                narrative: "Los alumnos deben formar grupos iguales. ¡Calcula!",
+                q: "Un curso tiene 36 alumnos y se deben formar grupos de 4. ¿Cuántos grupos se forman?",
+                a: "9",
+                options: ["8", "7", "9", "6"],
+                hint: "Divide 36 entre 4."
             }, {
                 id: 16,
                 part: 2,
-                type: "Reparto equitativo",
-                narrative: "Los lápices deben guardarse en estuches iguales.",
-                q: "Se tienen 752 lápices que deben guardarse en 8 estuches iguales. ¿Cuántos lápices quedan en cada estuche?",
-                a: "94",
-                options: ["94", "93", "84", "95"],
-                hint: "Divide 752 entre 8."
+                type: "División inversa",
+                narrative: "Patito Amarillito borró el dividendo. ¡Recupéralo!",
+                q: "Si el divisor es 5 y el cociente es 12, ¿cuál es el dividendo (considerando resto 0)?",
+                a: "60",
+                options: ["50", "60", "55", "65"],
+                hint: "Multiplica 5 × 12 = 60."
             }, {
                 id: 17,
                 part: 2,
-                type: "División inversa",
-                narrative: "Patito Amarillito ocultó el dividendo. ¡Recupéralo!",
-                q: "¿Qué número dividido por 2 es igual a 436?",
-                a: "872",
-                options: ["218", "872", "862", "228"],
-                hint: "Multiplica 436 × 2."
+                type: "Descomposición para dividir",
+                narrative: "Gatito Chill usa descomposición para dividir más fácil.",
+                q: "Utilizando descomposición, ¿cómo podrías dividir 48 ÷ 4?",
+                a: "(40 ÷ 4) + (8 ÷ 4)",
+                options: ["(40 ÷ 4) + (8 ÷ 4)", "(48 ÷ 2) + 2", "(40 ÷ 2) + (8 ÷ 2)", "(44 ÷ 4) + 1"],
+                hint: "Descompón 48 en 40 + 8 y divide cada parte por 4."
             }, {
                 id: 18,
                 part: 2,
-                type: "Reparto equitativo",
-                narrative: "Las piezas deben empaquetarse en cajas iguales.",
-                q: "Una fábrica produce 918 piezas y las empaca en 9 cajas iguales. ¿Cuántas piezas hay en cada caja?",
-                a: "102",
-                options: ["12", "102", "112", "92"],
-                hint: "Divide 918 entre 9."
+                type: "División directa",
+                narrative: "El panadero necesita llenar bolsas con sus panes.",
+                q: "Un panadero hace 90 panes y los mete en bolsas de 6. ¿Cuántas bolsas llena?",
+                a: "15",
+                options: ["14", "15", "16", "13"],
+                hint: "Divide 90 entre 6."
             }, {
                 id: 19,
                 part: 2,
-                type: "División directa",
-                narrative: "Encuentra el cociente de esta división.",
-                q: "¿Cuál es el cociente de 642 dividido por 3?",
-                a: "214",
-                options: ["214", "224", "204", "215"],
-                hint: "Divide 642 entre 3."
+                type: "División inversa",
+                narrative: "Patito Amarillito ocultó el divisor. ¡Encuéntralo!",
+                q: "¿Cuál es el divisor si el dividendo es 40 y el cociente es 8?",
+                a: "5",
+                options: ["6", "4", "7", "5"],
+                hint: "Divide 40 entre 8."
             }, {
                 id: 20,
                 part: 2,
-                type: "Reparto equitativo",
-                narrative: "Las flores deben plantarse en canteros iguales.",
-                q: "En un jardín se plantan 856 flores en 8 canteros. ¿Cuántas flores hay en cada cantero si todos tienen la misma cantidad?",
-                a: "107",
-                options: ["17", "107", "117", "106"],
-                hint: "Divide 856 entre 8."
+                type: "División directa",
+                narrative: "Gatito Chill necesita saber cuántos dulces puede comprar.",
+                q: "Si tienes $960 y cada dulce cuesta $8, ¿cuántos dulces puedes comprar?",
+                a: "120",
+                options: ["110", "120", "130", "100"],
+                hint: "Divide 960 entre 8."
             }
         ];
 
@@ -788,7 +790,7 @@
             document.getElementById('level-label').innerText = `DESAFÍO ${currentLevelIndex + 1} / ${total}`;
             document.getElementById('progress-fill').style.width = `${Math.max(progress, 5)}%`;
             document.getElementById('section-badge').innerText =
-                qData.part === 1 ? "PARTE 1: DIVISIONES DIRECTAS Y REPARTOS" : "PARTE 2: DIVISIONES INVERSAS Y PROBLEMAS VARIADOS";
+                qData.part === 1 ? "PARTE 1: MULTIPLICACIÓN" : "PARTE 2: DIVISIÓN";
 
             document.getElementById('narrative-text').innerText = `"${qData.narrative}"`;
             document.getElementById('question-number').innerText = `PREGUNTA #${qData.id}`;
@@ -876,15 +878,15 @@
             if (mode === 'part1') {
                 document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 de la Evaluación!";
                 document.getElementById('end-subtitle').innerText =
-                    "Dominaste las divisiones directas y los repartos equitativos. ¡Continúa así!";
+                    "Dominaste la multiplicación de números de tres dígitos. ¡Continúa así!";
             } else if (mode === 'part2') {
                 document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 de la Evaluación!";
                 document.getElementById('end-subtitle').innerText =
-                    "Aplicaste divisiones inversas y resolviste problemas variados. ¡Excelente!";
+                    "Aplicaste la división con dividendos de tres dígitos. ¡Excelente!";
             } else {
                 document.getElementById('end-title').innerText = "¡HAS COMPLETADO EL ESCAPE ROOM COMPLETO!";
                 document.getElementById('end-subtitle').innerText =
-                    "Eres un Maestro de la División. ¡El orden ha sido restaurado!";
+                    "Eres un Maestro de la Multiplicación y la División. ¡El orden ha sido restaurado!";
             }
         }
 
