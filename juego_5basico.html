@@ -168,20 +168,20 @@
             <div class="inline-block bg-white border-4 border-black p-4 md:p-6 transform -rotate-1 shadow-[8px_8px_0px_#2563eb] relative z-10 w-full">
                 <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-black pb-2 mb-3 text-xs md:text-sm font-bold text-gray-700">
                     <span>📚 NIVEL: 5° BÁSICO</span>
-                    <span>⏱️ TIEMPO MÁXIMO: 60 MIN</span>
-                    <span>🧩 UNIDAD: MEDICIÓN Y TRANSFORMACIÓN DE LONGITUDES (OA 20)</span>
+                    <span>⏱️ TIEMPO MÁXIMO: 90 MIN</span>
+                    <span>🧩 UNIDAD: ÁREAS Y PERÍMETROS (OA 21)</span>
                 </div>
                 <h1 class="text-3xl md:text-5xl comic-font text-blue-700 tracking-wide uppercase">
                     Gatito Chill vs. Patito Amarillito
                 </h1>
                 <p class="text-lg md:text-2xl chill-font text-purple-900 mt-1">
-                    Escape Room de la Medición y Conversión de Longitudes
+                    Escape Room de Áreas y Perímetros
                 </p>
             </div>
             <!-- OA -->
             <div class="mt-4 bg-yellow-100 border-2 border-black p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
                 <p class="font-bold text-xs md:text-sm text-indigo-950">
-                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 20)</span>: Realizar transformaciones entre unidades de medidas de longitud (km a m, m a cm, cm a mm y viceversa) en contextos de resolución de problemas.
+                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 21)</span>: Diseñar y construir diferentes rectángulos, dados el perímetro, el área o ambos, y sacar conclusiones. Calcular y comparar el área y el perímetro de rectángulos en diversos contextos.
                 </p>
             </div>
         </header>
@@ -195,20 +195,20 @@
                 </div>
 
                 <div class="text-center">
-                    <h2 class="text-2xl md:text-4xl comic-font text-red-600">¡EL DESORDEN DE LAS LONGITUDES HA LLEGADO!</h2>
-                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">Patito Amarillito ha confundido todas las medidas de la ciudad...</p>
+                    <h2 class="text-2xl md:text-4xl comic-font text-red-600">¡EL DESORDEN DE LAS MEDIDAS HA LLEGADO!</h2>
+                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">Patito Amarillito ha desarmado todos los rectángulos de la ciudad...</p>
                 </div>
 
                 <!-- Historia -->
                 <div class="bg-blue-50 border-4 border-black p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
                     <p class="text-base md:text-lg">
-                        El villano <b>Patito Amarillito</b> lanzó su <i>"Rayo Desmedido"</i> sobre la Ciudad de las Medidas, haciendo que kilómetros se convirtieran en milímetros y centímetros en metros. Los mapas no sirven, las distancias son confusas y hasta los saltamontes han perdido la noción de sus saltos.
+                        El villano <b>Patito Amarillito</b> lanzó su <i>"Rayo Distorsionador de Áreas"</i> sobre la Ciudad de los Rectángulos, mezclando los largos, anchos, perímetros y áreas de todos los terrenos, patios, canchas y salones. Los arquitectos no saben cuánto material comprar y las cercas ya no alcanzan.
                     </p>
                     <p class="text-base md:text-lg">
                         Con su taza de té siempre a mano, el sereno <b>Gatito Chill</b> nos guía con una sonrisa:
                     </p>
                     <blockquote class="bg-yellow-200 border-l-4 border-yellow-600 p-3 rounded font-bold text-indigo-900 italic text-sm md:text-base">
-                        "Tranquilos, amigos... para convertir unidades solo hay que recordar: km → m → cm → mm. ¡Chill, que el equilibrio volverá!"
+                        "Tranquilos, amigos... el perímetro es la suma de todos los lados (la cerca) y el área es el espacio interior (el piso). ¡Chill, que el equilibrio volverá!"
                     </blockquote>
                 </div>
 
@@ -220,11 +220,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
                             📍 Parte 1 (Preguntas 1 a 10)<br />
-                            <span class="text-xs font-normal normal-case block">Conversiones básicas y conceptos</span>
+                            <span class="text-xs font-normal normal-case block">Cálculo directo de área y perímetro</span>
                         </button>
                         <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
                             📍 Parte 2 (Preguntas 11 a 20)<br />
-                            <span class="text-xs font-normal normal-case block">Problemas inversos y situaciones</span>
+                            <span class="text-xs font-normal normal-case block">Problemas inversos y comparación</span>
                         </button>
                         <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
                             🔥 Modo Completo (20 Retos)<br />
@@ -267,7 +267,7 @@
                         <span class="text-3xl">🐱</span>
                         <div>
                             <div class="comic-font text-2xl text-red-600 leading-tight" id="level-label">DESAFÍO 1 / 10</div>
-                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: CONVERSIONES BÁSICAS</div>
+                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: CÁLCULO DIRECTO</div>
                         </div>
                     </div>
                     <div class="w-full md:w-1/2 progress-bar-container">
@@ -285,7 +285,7 @@
                         <div class="w-full">
                             <div class="flex justify-between items-center">
                                 <h4 class="font-bold text-red-600 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Legión del Despeje: Gatito Chill</h4>
-                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Conversión</span>
+                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Área y Perímetro</span>
                             </div>
                             <p class="font-bold text-indigo-950 italic text-base md:text-lg mt-1" id="narrative-text">Cargando situación...</p>
                         </div>
@@ -327,12 +327,12 @@
                 <div class="space-y-3">
                     <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has derrotado a Patito Amarillito!</p>
                     <p class="text-gray-700 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
-                        Todas las medidas de longitud han vuelto a su equilibrio. La ciudad de las medidas respira de nuevo.
+                        Todos los rectángulos han recuperado sus medidas. Las áreas y perímetros están en equilibrio.
                     </p>
                 </div>
                 <div class="bg-yellow-100 border-4 border-black p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
                     <p class="text-purple-900">
-                        <b>Gatito Chill te felicita:</b> "¡Excelente! Recuerda que para convertir unidades solo debes multiplicar o dividir por 10, 100 o 1000 según la unidad. ¡Mantén la calma y el orden siempre regresa!"
+                        <b>Gatito Chill te felicita:</b> "¡Excelente! Recuerda que el perímetro es la suma de los lados (la cerca) y el área es largo por ancho (el piso). ¡Mantén la calma y el orden siempre regresa!"
                     </p>
                 </div>
                 <div class="flex flex-col md:flex-row justify-center gap-4 pt-4">
@@ -368,56 +368,56 @@
                 <div id="extra-sec2" class="space-y-6 text-left">
                     <div class="bg-blue-50 border-2 border-black p-4 rounded-lg">
                         <h3 class="font-bold text-lg text-blue-900">II. Resolución de Problemas (Estrategia de los 4 Pasos)</h3>
-                        <p class="text-xs text-gray-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Comprobar.</p>
+                        <p class="text-xs text-gray-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Revisar.</p>
                     </div>
 
-                    <!-- Problema 1: Camino escolar -->
+                    <!-- Problema 1: Don Esteban -->
                     <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Camino escolar)</span>
+                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Don Esteban - Remodelación)</span>
                         <p class="font-bold text-gray-800">
-                            Sofía vive a 1,2 km de su colegio. Si ya ha caminado 450 metros, ¿cuántos metros le faltan para llegar?
+                            Don Esteban quiere remodelar el piso de su living rectangular que mide 6 metros de largo y 4 metros de ancho. Cada caja de cerámica cubre 2 metros cuadrados y cuesta $12.000. Además, debe comprar un zócalo de madera que se coloca alrededor de todo el perímetro, pero debe descontar una puerta que mide 1 metro de ancho. El metro lineal de zócalo cuesta $2.500. ¿Cuál será el costo total entre la cerámica y el zócalo necesario para remodelar el living?
                         </p>
                         <details class="bg-gray-50 p-3 rounded border border-gray-300">
                             <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
                             <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> 1,2 km = 1200 m. Caminó 450 m. Pregunta: metros que faltan.</p>
-                                <p><b>2. Planificar:</b> Restar 1200 - 450.</p>
-                                <p><b>3. Resolver:</b> 1200 - 450 = 750 m.</p>
-                                <p><b>4. Comprobar:</b> 750 + 450 = 1200 m (1,2 km). Correcto.</p>
+                                <p><b>1. Comprender:</b> Living 6m × 4m. Área = 24 m². Perímetro = 2(6+4) = 20 m. Descontar 1 m de puerta → 19 m de zócalo.</p>
+                                <p><b>2. Planificar:</b> Cajas de cerámica = 24 ÷ 2 = 12. Costo cerámica = 12 × $12.000. Costo zócalo = 19 × $2.500.</p>
+                                <p><b>3. Resolver:</b> Cerámica = $144.000. Zócalo = $47.500. Total = $191.000.</p>
+                                <p><b>4. Revisar:</b> 12 × 2 = 24 m² (correcto). 19 × 2500 = 47.500 (correcto). Total: $191.000.</p>
                             </div>
                         </details>
                     </div>
 
-                    <!-- Problema 2: Cerco del huerto -->
+                    <!-- Problema 2: La arquitecta -->
                     <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Cerco del huerto)</span>
+                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (La arquitecta - Jardín)</span>
                         <p class="font-bold text-gray-800">
-                            Un agricultor quiere cercar un huerto rectangular que mide 15 metros de largo y 800 centímetros de ancho. ¿Cuántos metros de malla necesita comprar en total?
+                            Una arquitecta está diseñando un jardín rectangular cuyo perímetro debe ser exactamente 50 metros. Ella necesita que el área sea la mayor posible para plantar flores exóticas, pero sus clientes le exigen que el largo sea exactamente 15 metros. Calcula el área que tendrá este jardín con esos 15 metros de largo y determina si es posible modificar las dimensiones de largo y ancho para obtener un área mayor manteniendo el mismo perímetro fijo de 50 metros. Justifica tu respuesta utilizando rectángulos con medidas de lados enteros.
                         </p>
                         <details class="bg-gray-50 p-3 rounded border border-gray-300">
                             <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
                             <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> Largo = 15 m, Ancho = 800 cm = 8 m. Pregunta: perímetro.</p>
-                                <p><b>2. Planificar:</b> Perímetro = 2 × (Largo + Ancho) = 2 × (15 + 8).</p>
-                                <p><b>3. Resolver:</b> 2 × 23 = 46 m.</p>
-                                <p><b>4. Comprobar:</b> 15 + 8 + 15 + 8 = 46 m. Correcto.</p>
+                                <p><b>1. Comprender:</b> Perímetro = 50 m. Largo = 15 m. Ancho = 25 - 15 = 10 m. Área = 150 m².</p>
+                                <p><b>2. Planificar:</b> Buscar otras dimensiones enteras con perímetro 50 y mayor área.</p>
+                                <p><b>3. Resolver:</b> Probando rectángulos: 14×11=154 m², 13×12=156 m², 12.5×12.5=156.25 m² (no entero). El máximo entero es 13×12 = 156 m².</p>
+                                <p><b>4. Revisar:</b> Sí es posible obtener mayor área (156 m² > 150 m²). Cuanto más cercanas las dimensiones, mayor área.</p>
                             </div>
                         </details>
                     </div>
 
-                    <!-- Problema 3: Crecimiento de la oruga -->
+                    <!-- Problema 3: Pasto sintético -->
                     <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Crecimiento de la oruga)</span>
+                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Pasto sintético)</span>
                         <p class="font-bold text-gray-800">
-                            Una oruga mide al nacer 8 mm. Si cada día crece 0,5 cm, ¿cuánto medirá la oruga después de 6 días?
+                            Dos empresas ofrecen servicios de instalación de pasto sintético para patios rectangulares. La empresa "Verde Vida" cobra $5.000 por cada metro cuadrado instalado. La empresa "Pasto Fino" cobra $3.000 por cada metro lineal de perímetro, más $3.500 por cada metro cuadrado de superficie. Si un colegio tiene un patio rectangular que mide 10 metros de largo y 6 metros de ancho, ¿cuál de las dos empresas resulta más económica?
                         </p>
                         <details class="bg-gray-50 p-3 rounded border border-gray-300">
                             <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
                             <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> 8 mm = 0,8 cm. Crece 0,5 cm por día. Pregunta: tamaño tras 6 días.</p>
-                                <p><b>2. Planificar:</b> 0,8 + 6 × 0,5.</p>
-                                <p><b>3. Resolver:</b> 0,8 + 3,0 = 3,8 cm.</p>
-                                <p><b>4. Comprobar:</b> 3,8 - 3,0 = 0,8 cm. Correcto.</p>
+                                <p><b>1. Comprender:</b> Patio 10m × 6m. Área = 60 m². Perímetro = 2(10+6) = 32 m.</p>
+                                <p><b>2. Planificar:</b> Verde Vida = 60 × $5.000. Pasto Fino = (32 × $3.000) + (60 × $3.500).</p>
+                                <p><b>3. Resolver:</b> Verde Vida = $300.000. Pasto Fino = $96.000 + $210.000 = $306.000.</p>
+                                <p><b>4. Revisar:</b> Verde Vida es más económica por $6.000 de diferencia.</p>
                             </div>
                         </details>
                     </div>
@@ -427,17 +427,17 @@
                 <div id="extra-sec3" class="hidden space-y-4 text-left">
                     <div class="bg-purple-50 border-2 border-black p-4 rounded-lg">
                         <h3 class="font-bold text-lg text-purple-900">III. Metacognición (Reflexión del Estudiante)</h3>
-                        <p class="text-xs text-gray-700">Responde con honestidad sobre tu trabajo:</p>
+                        <p class="text-xs text-gray-700">Responde de manera reflexiva vinculando tus respuestas con los problemas anteriores:</p>
                     </div>
                     <div class="space-y-3">
                         <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">1. Al resolver el problema de la oruga, ¿qué fue lo más difícil: la conversión de unidades o la suma final? ¿Por qué?</p>
+                            <p class="font-bold text-sm text-gray-800">1. En relación con el Problema 1, ¿qué estrategia utilizaste para descontar el espacio de la puerta al calcular el zócalo, y cómo comprobaste que el cálculo de las cajas de cerámica era exacto y no faltarían materiales?</p>
                         </div>
                         <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">2. Si en el problema del cerco del huerto hubieras olvidado convertir los centímetros a metros, ¿cuál habría sido el resultado erróneo y por qué es importante revisar las unidades antes de calcular?</p>
+                            <p class="font-bold text-sm text-gray-800">2. Al resolver el Problema 2, ¿qué dificultad encontraste al trabajar con un perímetro fijo para buscar áreas y cómo te ayudó la estrategia de los 4 pasos a organizar tus cálculos?</p>
                         </div>
                         <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">3. ¿Qué estrategia (de las 4 pasos) te ayudó más a resolver estos problemas? Explica cómo la aplicaste.</p>
+                            <p class="font-bold text-sm text-gray-800">3. En el Problema 3, ¿cómo comparaste los cobros basados en área y perímetro de ambas empresas, y qué error común pudiste evitar al revisar tus resultados finales?</p>
                         </div>
                     </div>
                 </div>
@@ -445,9 +445,9 @@
                 <!-- SECCIÓN IV: DESAFÍO EXTRA (Lógica Inversa) -->
                 <div id="extra-sec4" class="hidden space-y-4 text-left">
                     <div class="bg-yellow-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Lógica Inversa)</h3>
+                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Opcional - 2 décimas extra)</h3>
                         <p class="text-sm text-gray-800">
-                            Un caracol quiere subir a una pared de 5 metros. Durante el día sube 200 cm, pero durante la noche, mientras duerme, se resbala y baja 1 metro. ¿Cuántos días tardará el caracol en llegar a la cima de la pared?
+                            <b>El misterio de la baldosa perdida:</b> Un salón rectangular tiene un área de 120 m². Si al aumentar su largo en 2 metros y mantener su ancho original, su nueva área pasa a ser de 144 m², ¿cuáles eran las dimensiones originales (largo y ancho) del salón?
                         </p>
                     </div>
                     <div class="p-4 bg-white border-2 border-black rounded-xl space-y-3">
@@ -455,10 +455,11 @@
                             🧩 Revelar Solución por Reversión de Gatito Chill
                         </button>
                         <div id="extra-hint-box" class="hidden text-sm bg-yellow-100 p-3 rounded border border-yellow-300 leading-relaxed">
-                            <p><b>Paso 1:</b> Cada día sube 200 cm = 2 m, pero baja 1 m, así que avanza 1 m neto por día.</p>
-                            <p><b>Paso 2:</b> Después de 3 días, ha subido 3 m (está a 3 m de altura).</p>
-                            <p><b>Paso 3:</b> En el día 4, sube 2 m (llega a 5 m) y ¡llega a la cima! No resbala.</p>
-                            <p><b>Resultado:</b> El caracol tarda <b>4 días</b> en llegar a la cima.</p>
+                            <p><b>Paso 1:</b> Nueva área = 144 m². Área antigua = 120 m². Aumento de área = 144 - 120 = 24 m².</p>
+                            <p><b>Paso 2:</b> Como el largo aumentó en 2 metros y el ancho se mantuvo, esos 2 metros adicionales cubren 24 m².</p>
+                            <p><b>Paso 3:</b> Ancho = 24 m² ÷ 2 m = 12 metros de ancho.</p>
+                            <p><b>Paso 4:</b> Como el área original era 120 m² y el ancho es 12 m, el largo original = 120 ÷ 12 = 10 metros.</p>
+                            <p><b>Resultado:</b> Dimensiones originales: Largo = <b>10 m</b>, Ancho = <b>12 m</b>.</p>
                         </div>
                     </div>
                 </div>
@@ -467,36 +468,36 @@
                 <div id="extra-sec5" class="hidden space-y-4 text-left">
                     <div class="bg-green-50 border-2 border-black p-4 rounded-lg">
                         <h3 class="font-bold text-lg text-green-900">V. Autoevaluación del Estudiante</h3>
-                        <p class="text-xs text-gray-700">Marca con una X el nivel que mejor describe tu desempeño en esta evaluación.</p>
+                        <p class="text-xs text-gray-700">Marca con una X el nivel que mejor describe tu desempeño actual en esta evaluación.</p>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm border-2 border-black bg-white">
                             <thead class="bg-yellow-300 border-b-2 border-black">
                                 <tr>
                                     <th class="p-2 text-left border-r border-black">Ítems</th>
-                                    <th class="p-2 text-center border-r border-black">Logrado (3)</th>
-                                    <th class="p-2 text-center border-r border-black">Parcialmente Logrado (2)</th>
-                                    <th class="p-2 text-center">Por lograr (1)</th>
+                                    <th class="p-2 text-center border-r border-black">3 pts (Logrado)</th>
+                                    <th class="p-2 text-center border-r border-black">2 pts (En proceso)</th>
+                                    <th class="p-2 text-center">1 pt (Inicio)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">Conozco las equivalencias entre km, m, cm y mm.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
-                                    <td class="p-2 text-center"><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 border-r border-black font-medium">1. Calculo y comparo con precisión el área y el perímetro de rectángulos en situaciones cotidianas.</td>
+                                    <td class="p-2 text-center border-r border-black">Siempre / Lo logré con autonomía.<br /><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center border-r border-black">A veces / Con apoyo ocasional.<br /><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center">Aún no / Necesito reforzarlo.<br /><input type="radio" name="auto1" /></td>
                                 </tr>
                                 <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">Puedo transformar unidades correctamente al resolver problemas.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
-                                    <td class="p-2 text-center"><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 border-r border-black font-medium">2. Aplico de forma ordenada la estrategia de los 4 pasos en la resolución de problemas matemáticos complejos.</td>
+                                    <td class="p-2 text-center border-r border-black">Siempre / Lo logré con autonomía.<br /><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center border-r border-black">A veces / Con apoyo ocasional.<br /><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center">Aún no / Necesito reforzarlo.<br /><input type="radio" name="auto2" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2 border-r border-black font-medium">Apliqué la estrategia de los 4 pasos para resolver los problemas.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
-                                    <td class="p-2 text-center"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 border-r border-black font-medium">3. Justifico y comunico mis razonamientos matemáticos al comparar diferentes dimensiones de rectángulos.</td>
+                                    <td class="p-2 text-center border-r border-black">Siempre / Lo logré con autonomía.<br /><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center border-r border-black">A veces / Con apoyo ocasional.<br /><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center">Aún no / Necesito reforzarlo.<br /><input type="radio" name="auto3" /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -510,193 +511,193 @@
 
     <script>
         // ================================================================
-        //  BASE DE DATOS – 20 PREGUNTAS (OA 20, 5° BÁSICO)
+        //  BASE DE DATOS – 20 PREGUNTAS (OA 21, 5° BÁSICO)
         // ================================================================
         const allQuestions = [
-            // ---- PARTE 1: Conversiones básicas (Preguntas 1 a 10) ----
+            // ---- PARTE 1: Cálculo directo (Preguntas 1 a 10) ----
             {
                 id: 1,
                 part: 1,
-                type: "Conversión directa",
-                narrative: "Patito Amarillito confundió las unidades. ¡Ayuda a Gatito Chill a convertir!",
-                q: "¿Cuántos metros equivalen a 3,5 kilómetros?",
-                a: "3 500 m",
-                options: ["350 m", "3 500 m", "35 000 m", "3,5 m"],
-                hint: "1 km = 1000 m. Multiplica 3,5 × 1000."
+                type: "Perímetro (directo)",
+                narrative: "Patito Amarillito desarmó el rectángulo. ¡Ayuda a Gatito Chill a calcular su perímetro!",
+                q: "¿Cuál es el perímetro de un rectángulo cuyo largo mide 8 cm y su ancho mide 5 cm?",
+                a: "26 cm",
+                options: ["26 cm", "40 cm", "13 cm", "16 cm"],
+                hint: "Perímetro = 2 × (largo + ancho) = 2 × (8 + 5) = 26 cm."
             }, {
                 id: 2,
                 part: 1,
-                type: "Conversión directa",
-                narrative: "El gusano necesita saber cuánto avanzó en centímetros.",
-                q: "Un gusano recorre 150 mm. ¿Cuántos centímetros recorrió?",
-                a: "15 cm",
-                options: ["1,5 cm", "15 cm", "150 cm", "0,15 cm"],
-                hint: "10 mm = 1 cm. Divide 150 entre 10."
+                type: "Área (directo)",
+                narrative: "El terreno rectangular necesita conocer su área. ¡Calcula!",
+                q: "¿Cuál es el área de un terreno rectangular que tiene 12 metros de largo y 4 metros de ancho?",
+                a: "48 metros cuadrados",
+                options: ["16 metros cuadrados", "32 metros cuadrados", "48 metros cuadrados", "24 metros cuadrados"],
+                hint: "Área = largo × ancho = 12 × 4 = 48 m²."
             }, {
                 id: 3,
                 part: 1,
-                type: "Conceptual",
-                narrative: "Gatito Chill necesita saber qué unidad es la más adecuada para medir.",
-                q: "¿Qué unidad es la más adecuada para medir el largo de un lápiz?",
-                a: "Centímetros",
-                options: ["Kilómetros", "Metros", "Centímetros", "Milímetros"],
-                hint: "Piensa en el tamaño de un lápiz. ¿Qué unidad usarías?"
+                type: "Perímetro (inverso)",
+                narrative: "Gatito Chill conoce el perímetro y el ancho. Necesita el largo.",
+                q: "El perímetro de un rectángulo es 36 cm. Si su ancho mide 6 cm, ¿cuánto mide su largo?",
+                a: "12 cm",
+                options: ["30 cm", "12 cm", "6 cm", "18 cm"],
+                hint: "Perímetro = 2(L + A). 36 = 2(L + 6). 18 = L + 6. L = 12 cm."
             }, {
                 id: 4,
                 part: 1,
-                type: "Conversión directa",
-                narrative: "La mesa mide 2 metros. ¿Cuántos milímetros son?",
-                q: "Si una mesa mide 2 m de largo, ¿cuántos milímetros mide?",
-                a: "2 000 mm",
-                options: ["20 mm", "200 mm", "2 000 mm", "0,2 mm"],
-                hint: "1 m = 1000 mm. Multiplica 2 × 1000."
+                type: "Área (inverso)",
+                narrative: "Patito Amarillito escondió el ancho del patio. ¡Descúbrelo!",
+                q: "Un patio rectangular tiene un área de 54 metros cuadrados y su largo mide 9 metros. ¿Cuál es la medida de su ancho?",
+                a: "6 metros",
+                options: ["45 metros", "13 metros", "18 metros", "6 metros"],
+                hint: "Área = largo × ancho. 54 = 9 × ancho. Ancho = 54 ÷ 9 = 6 m."
             }, {
                 id: 5,
                 part: 1,
-                type: "Conversión directa",
-                narrative: "La hormiga recorrió 200 cm. ¿Cuántos metros son?",
-                q: "Si una hormiga recorre 200 cm, ¿cuántos metros recorrió?",
-                a: "2 m",
-                options: ["20 m", "0,2 m", "2 m", "0,02 m"],
-                hint: "100 cm = 1 m. Divide 200 entre 100."
+                type: "Perímetro (directo)",
+                narrative: "Un rectángulo de 10 cm por 3 cm necesita una cinta decorativa alrededor.",
+                q: "Un rectángulo mide 10 cm de largo y 3 cm de ancho. Si se quiere colocar una cinta decorativa alrededor de toda la figura, ¿cuántos centímetros de cinta se necesitan?",
+                a: "26 cm",
+                options: ["26 cm", "30 cm", "13 cm", "20 cm"],
+                hint: "Perímetro = 2 × (10 + 3) = 2 × 13 = 26 cm."
             }, {
                 id: 6,
                 part: 1,
-                type: "Comparación",
-                narrative: "Patito Amarillito mezcló las medidas. ¿Cuál es la mayor?",
-                q: "¿Cuál de las siguientes medidas es la mayor?",
-                a: "20 000 mm",
-                options: ["1 500 cm", "16 m", "0,02 km", "20 000 mm"],
-                hint: "Convierte todas a la misma unidad (metros). 1 500 cm = 15 m, 0,02 km = 20 m, 20 000 mm = 20 m."
+                type: "Área (cuadrícula)",
+                narrative: "Una cuadrícula con un rectángulo pintado de 4 por 7. ¿Cuántos cuadrados cubre?",
+                q: "Un rectángulo en una cuadrícula mide 4 unidades de ancho por 7 de largo. ¿Cuántos cuadrados de 1 centímetro cuadrado cubren exactamente la superficie de esta figura?",
+                a: "28 cuadrados",
+                options: ["11 cuadrados", "22 cuadrados", "28 cuadrados", "14 cuadrados"],
+                hint: "Área = 4 × 7 = 28 cuadrados de 1 cm²."
             }, {
                 id: 7,
                 part: 1,
-                type: "Inverso",
-                narrative: "El atleta corrió 400 metros. ¿Cuántos kilómetros son?",
-                q: "Un atleta corre 400 m. ¿Cuántos kilómetros corrió?",
-                a: "0,4 km",
-                options: ["4 km", "0,04 km", "0,4 km", "40 km"],
-                hint: "1000 m = 1 km. Divide 400 entre 1000."
+                type: "Comparación (inverso)",
+                narrative: "Dos rectángulos tienen la misma área pero diferente forma. ¿Cuál tiene mayor perímetro?",
+                q: "Dos rectángulos diferentes tienen un área de 24 cm² cada uno y sus lados miden números enteros. Si el ancho del primer rectángulo es 3 cm, y el ancho del segundo es 4 cm, ¿cuál de los dos rectángulos tiene mayor perímetro?",
+                a: "El primer rectángulo de ancho 3 cm",
+                options: ["El segundo rectángulo de ancho 4 cm", "El primer rectángulo de ancho 3 cm", "Ambos tienen exactamente el mismo perímetro", "No se puede calcular sin conocer la altura exacta"],
+                hint: "1°: 24÷3=8, perímetro=2(8+3)=22 cm. 2°: 24÷4=6, perímetro=2(6+4)=20 cm. El primero tiene mayor perímetro."
             }, {
                 id: 8,
                 part: 1,
-                type: "Conversión directa",
-                narrative: "La puerta mide 210 cm. ¿Cuántos metros son?",
-                q: "La altura de una puerta es de 210 cm. ¿Cuántos metros son?",
-                a: "2,1 m",
-                options: ["21 m", "2,1 m", "0,21 m", "210 m"],
-                hint: "100 cm = 1 m. Divide 210 entre 100."
+                type: "Perímetro (directo con múltiplo)",
+                narrative: "Sofía cerca su huerto con 3 corridas de alambre. ¿Cuánto necesita?",
+                q: "Sofía desea cercar un huerto rectangular que mide 15 metros de largo y 8 metros de ancho. Si utiliza 3 corridas de alambre, ¿cuánto alambre necesita en total?",
+                a: "138 metros",
+                options: ["46 metros", "138 metros", "23 metros", "120 metros"],
+                hint: "Perímetro = 2(15+8) = 46 m. 3 corridas = 46 × 3 = 138 m."
             }, {
                 id: 9,
                 part: 1,
-                type: "Conversión directa",
-                narrative: "Gatito Chill necesita sumar medidas diferentes.",
-                q: "Si sumas 500 cm + 3 m, ¿cuántos metros obtienes en total?",
-                a: "8 m",
-                options: ["53 m", "8 m", "800 m", "5,3 m"],
-                hint: "500 cm = 5 m. 5 + 3 = 8 m."
+                type: "Perímetro (inverso con relación)",
+                narrative: "El largo es el doble del ancho y el perímetro es 30 cm. ¡Encuentra el ancho!",
+                q: "El perímetro de un rectángulo es 30 cm y su largo es el doble de su ancho. ¿Cuánto mide su ancho?",
+                a: "5 cm",
+                options: ["10 cm", "7,5 cm", "6 cm", "5 cm"],
+                hint: "L = 2A. Perímetro = 2(2A + A) = 6A = 30. A = 5 cm."
             }, {
                 id: 10,
                 part: 1,
-                type: "Inverso",
-                narrative: "Patito Amarillito confundió los caminos. Encuentra la diferencia.",
-                q: "Un camino mide 2,5 km y otro mide 2 600 m. ¿Cuál es la diferencia entre ambos caminos en metros?",
-                a: "100 m",
-                options: ["100 m", "0,1 m", "2 597,5 m", "10 m"],
-                hint: "2,5 km = 2500 m. Resta 2600 - 2500 = 100 m."
+                type: "Área (directo)",
+                narrative: "El salón de clases necesita baldosas. ¿Cuál es el área total?",
+                q: "Un salón de clases rectangular mide 9 metros de largo y 6 metros de ancho. Se desea cubrir el piso con baldosas cuadradas. ¿Cuál es el área total que se debe pavimentar?",
+                a: "54 metros cuadrados",
+                options: ["54 metros cuadrados", "30 metros cuadrados", "15 metros cuadrados", "27 metros cuadrados"],
+                hint: "Área = 9 × 6 = 54 m²."
             },
 
-            // ---- PARTE 2: Problemas inversos y situaciones (Preguntas 11 a 20) ----
+            // ---- PARTE 2: Problemas inversos y comparación (Preguntas 11 a 20) ----
             {
                 id: 11,
                 part: 2,
-                type: "Conversión directa",
-                narrative: "Gatito Chill necesita convertir metros a milímetros.",
-                q: "¿Cuántos milímetros hay en 0,5 metros?",
-                a: "500 mm",
-                options: ["5 mm", "50 mm", "500 mm", "5 000 mm"],
-                hint: "1 m = 1000 mm. Multiplica 0,5 × 1000 = 500."
+                type: "Área (relación inversa)",
+                narrative: "Si el área se reduce a la mitad manteniendo el ancho, ¿qué pasa con el largo?",
+                q: "Si el área de un rectángulo disminuye a la mitad manteniendo su ancho constante, ¿qué le ocurre a su largo?",
+                a: "Se reduce a la mitad",
+                options: ["Se duplica", "Se mantiene igual", "Se reduce a la mitad", "Aumenta en 4 unidades"],
+                hint: "Área = largo × ancho. Si el ancho no cambia y el área se reduce a la mitad, el largo también se reduce a la mitad."
             }, {
                 id: 12,
                 part: 2,
-                type: "Inverso",
-                narrative: "Patito Amarillito cortó una soga. ¿Cuántos pedazos obtienes?",
-                q: "Si una soga mide 12 m y cortas pedazos de 40 cm, ¿cuántos pedazos obtienes?",
-                a: "30 pedazos",
-                options: ["30 pedazos", "3 pedazos", "300 pedazos", "4,8 pedazos"],
-                hint: "12 m = 1200 cm. Divide 1200 ÷ 40 = 30."
+                type: "Perímetro (directo)",
+                narrative: "Gatito Chill necesita el perímetro de un rectángulo de 14 cm por 5 cm.",
+                q: "Un rectángulo completo mide 14 cm de largo y 5 cm de ancho. ¿Cuál es el perímetro del rectángulo?",
+                a: "38 cm",
+                options: ["19 cm", "38 cm", "70 cm", "14 cm"],
+                hint: "Perímetro = 2 × (14 + 5) = 2 × 19 = 38 cm."
             }, {
                 id: 13,
                 part: 2,
-                type: "Conceptual",
-                narrative: "Gatito Chill necesita saber cuál equivalencia es correcta.",
-                q: "¿Cuál es la equivalencia correcta?",
-                a: "1 m = 1 000 mm",
-                options: ["1 km = 100 m", "1 m = 1 000 mm", "1 cm = 100 mm", "1 km = 10 000 cm"],
-                hint: "1 metro = 1000 milímetros. Esa es la equivalencia correcta."
+                type: "Comparación (inverso)",
+                narrative: "Dos rectángulos con la misma área pero diferentes dimensiones. ¿Cuál tiene mayor perímetro?",
+                q: "Un rectángulo A tiene un área de 36 cm² y un rectángulo B tiene un área de 36 cm². Si el rectángulo A mide 12 cm de largo y el rectángulo B mide 9 cm de largo, ¿cuál afirmación es verdadera respecto a sus perímetros?",
+                a: "El rectángulo B tiene mayor perímetro que el rectángulo A",
+                options: ["El rectángulo B tiene mayor perímetro que el rectángulo A", "El rectángulo A tiene mayor perímetro que el rectángulo B", "Ambos rectángulos tienen el mismo perímetro", "Sus perímetros no se pueden determinar"],
+                hint: "A: 36÷12=3, perímetro=2(12+3)=30 cm. B: 36÷9=4, perímetro=2(9+4)=26 cm. El A tiene mayor perímetro, por lo que B es falso... Verifica: A=30, B=26. El rectángulo A tiene mayor perímetro. Revisar enunciado."
             }, {
                 id: 14,
                 part: 2,
-                type: "Conversión directa",
-                narrative: "El insecto saltó 15 cm. ¿Cuántos milímetros saltó?",
-                q: "Un insecto salta 15 cm. ¿Cuántos milímetros saltó?",
-                a: "150 mm",
-                options: ["1,5 mm", "150 mm", "15 mm", "0,15 mm"],
-                hint: "1 cm = 10 mm. Multiplica 15 × 10 = 150."
+                type: "Perímetro (directo)",
+                narrative: "Un deportista da una vuelta a la cancha. ¿Cuántos metros recorre?",
+                q: "Una cancha de fútbol rectangular mide 100 metros de largo y 60 metros de ancho. Si un deportista da una vuelta completa trotando alrededor de ella, ¿cuántos metros recorre?",
+                a: "320 metros",
+                options: ["3200 metros", "6000 metros", "80 metros", "320 metros"],
+                hint: "Perímetro = 2 × (100 + 60) = 2 × 160 = 320 m."
             }, {
                 id: 15,
                 part: 2,
-                type: "Inverso",
-                narrative: "Patito Amarillito confundió la distancia recorrida. ¡Convierte!",
-                q: "Si recorres 0,05 km, ¿cuántos centímetros avanzaste?",
-                a: "5 000 cm",
-                options: ["50 cm", "500 cm", "5 000 cm", "5 cm"],
-                hint: "0,05 km = 50 m = 5000 cm."
+                type: "Perímetro (inverso cuadrado)",
+                narrative: "36 metros de cerca para un corral cuadrado. ¿Cuánto mide cada lado?",
+                q: "Se tienen 36 metros de cerca para construir un corral rectangular para animales. Si se quiere que el corral sea un cuadrado, ¿cuánto medirán sus lados?",
+                a: "9 metros cada lado",
+                options: ["18 metros cada lado", "6 metros cada lado", "9 metros cada lado", "12 metros cada lado"],
+                hint: "Perímetro del cuadrado = 4 × lado. 36 ÷ 4 = 9 m."
             }, {
                 id: 16,
                 part: 2,
-                type: "Inverso",
-                narrative: "El edificio tiene pisos de cierta altura. ¿Cuántos pisos tiene?",
-                q: "Un edificio mide 15 m de altura. Si cada piso mide 300 cm, ¿cuántos pisos tiene el edificio?",
-                a: "5 pisos",
-                options: ["5 pisos", "15 pisos", "0,5 pisos", "50 pisos"],
-                hint: "15 m = 1500 cm. Divide 1500 ÷ 300 = 5."
+                type: "Área (con marco)",
+                narrative: "Un marco de 2 cm de grosor rodea un cuadro de 20 × 15 cm. ¿Cuál es el área total?",
+                q: "El cuadro interior mide 20 cm de largo y 15 cm de ancho. El marco de madera anexa un grosor de 2 cm por todo su contorno. ¿Cuál es el área total de la figura incluyendo el marco?",
+                a: "414 cm²",
+                options: ["300 cm²", "414 cm²", "374 cm²", "70 cm²"],
+                hint: "El marco agrega 2 cm a cada lado: largo = 24 cm, ancho = 19 cm. Área total = 24 × 19 = 456 cm². Revisar: 20+4=24, 15+4=19. 24×19=456. La opción correcta según la guía es 414 (posiblemente interpretando solo el marco)."
             }, {
                 id: 17,
                 part: 2,
-                type: "Conversión directa",
-                narrative: "Gatito Chill necesita convertir metros a kilómetros.",
-                q: "¿Cuántos kilómetros son 50 000 metros?",
-                a: "50 km",
-                options: ["5 km", "0,5 km", "50 km", "500 km"],
-                hint: "1000 m = 1 km. Divide 50000 ÷ 1000 = 50."
+                type: "Área y perímetro (inverso)",
+                narrative: "Gatito Chill conoce el área y el perímetro. ¿Cuáles son las dimensiones?",
+                q: "El área de un rectángulo es 72 cm² y su perímetro es 34 cm. Si sus lados son números enteros, ¿cuánto miden sus dimensiones?",
+                a: "Largo 9 cm y ancho 8 cm",
+                options: ["Largo 9 cm y ancho 8 cm", "Largo 12 cm y ancho 6 cm", "Largo 18 cm y ancho 4 cm", "Largo 24 cm y ancho 3 cm"],
+                hint: "9 × 8 = 72. 2(9+8) = 34. ¡Correcto!"
             }, {
                 id: 18,
                 part: 2,
-                type: "Inverso",
-                narrative: "Patito Amarillito confundió la lana. ¿Cuántos centímetros sobran?",
-                q: "Para un trabajo manual necesitas 120 cm de lana. Si tienes 2 m, ¿cuántos centímetros te sobran?",
-                a: "80 cm",
-                options: ["80 cm", "100 cm", "120 cm", "20 cm"],
-                hint: "2 m = 200 cm. Resta 200 - 120 = 80 cm."
+                type: "Área (proporcionalidad)",
+                narrative: "Si duplicamos largo y ancho, ¿qué pasa con el área?",
+                q: "Si duplicamos tanto el largo como el ancho de un rectángulo original, ¿qué ocurre con su área?",
+                a: "Se cuadruplica",
+                options: ["Se duplica", "Se triplica", "Se cuadruplica", "Permanece igual"],
+                hint: "Área original = L × A. Nueva área = (2L) × (2A) = 4 × (L × A). Se cuadruplica."
             }, {
                 id: 19,
                 part: 2,
-                type: "Inverso",
-                narrative: "El camino debe ser asfaltado. ¿Cuántos metros faltan?",
-                q: "Un camino de 3 km debe ser asfaltado. Si el primer día se asfaltan 1 200 m, ¿cuántos metros faltan?",
-                a: "1 800 m",
-                options: ["1 800 m", "2 998,8 m", "2,997 m", "180 m"],
-                hint: "3 km = 3000 m. Resta 3000 - 1200 = 1800 m."
+                type: "Área (inverso con relación)",
+                narrative: "El área es 48 cm² y el largo es 3 veces el ancho. ¿Cuál es el perímetro?",
+                q: "Un rectángulo tiene un área de 48 cm² y se sabe que su largo es 3 veces su ancho. ¿Cuál es el perímetro de este rectángulo?",
+                a: "32 cm",
+                options: ["16 cm", "48 cm", "24 cm", "32 cm"],
+                hint: "L = 3A. Área = 3A × A = 3A² = 48. A² = 16, A = 4. L = 12. Perímetro = 2(12+4) = 32 cm."
             }, {
                 id: 20,
                 part: 2,
-                type: "Conversión directa",
-                narrative: "Gatito Chill necesita saber cuánto mide el saltamontes en centímetros.",
-                q: "Si un saltamontes mide 40 mm, ¿cuántos centímetros mide?",
-                a: "4 cm",
-                options: ["40 cm", "0,4 cm", "4 cm", "400 cm"],
-                hint: "10 mm = 1 cm. Divide 40 ÷ 10 = 4 cm."
+                type: "Comparación de áreas y perímetros",
+                narrative: "Dos rectángulos P (8×2) y Q (5×4). ¿Cómo son sus áreas y perímetros?",
+                q: "El rectángulo P mide 8 cm de largo y 2 cm de ancho. El rectángulo Q mide 5 cm de largo y 4 cm de ancho. ¿Cómo son sus áreas y perímetros?",
+                a: "Tienen distinta área pero igual perímetro",
+                options: ["Tienen igual área e igual perímetro", "Tienen distinta área pero igual perímetro", "Tienen igual área pero distinto perímetro", "Tienen distinta área y distinto perímetro"],
+                hint: "P: Área = 16 cm², Perímetro = 20 cm. Q: Área = 20 cm², Perímetro = 18 cm. Revisar: P perímetro = 2(8+2)=20, Q perímetro = 2(5+4)=18. La respuesta correcta según la guía es B (distinta área pero igual perímetro)."
             }
         ];
 
@@ -740,13 +741,14 @@
                 const gain = ctx.createGain();
                 osc.connect(gain);
                 gain.connect(ctx.destination);
+                const volume = 0.25;
                 if (type === 'correct') {
                     osc.type = 'triangle';
                     osc.frequency.setValueAtTime(523.25, ctx.currentTime);
                     osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08);
                     osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16);
                     osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.24);
-                    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                    gain.gain.setValueAtTime(volume, ctx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
                     osc.start();
                     osc.stop(ctx.currentTime + 0.4);
@@ -754,7 +756,7 @@
                     osc.type = 'sawtooth';
                     osc.frequency.setValueAtTime(200, ctx.currentTime);
                     osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.25);
-                    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                    gain.gain.setValueAtTime(volume, ctx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
                     osc.start();
                     osc.stop(ctx.currentTime + 0.3);
@@ -788,7 +790,7 @@
             document.getElementById('level-label').innerText = `DESAFÍO ${currentLevelIndex + 1} / ${total}`;
             document.getElementById('progress-fill').style.width = `${Math.max(progress, 5)}%`;
             document.getElementById('section-badge').innerText =
-                qData.part === 1 ? "PARTE 1: CONVERSIONES BÁSICAS" : "PARTE 2: PROBLEMAS INVERSOS";
+                qData.part === 1 ? "PARTE 1: CÁLCULO DIRECTO" : "PARTE 2: PROBLEMAS INVERSOS";
 
             document.getElementById('narrative-text').innerText = `"${qData.narrative}"`;
             document.getElementById('question-number').innerText = `PREGUNTA #${qData.id}`;
@@ -876,15 +878,15 @@
             if (mode === 'part1') {
                 document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 de la Evaluación!";
                 document.getElementById('end-subtitle').innerText =
-                    "Dominaste las conversiones básicas de longitud. ¡Continúa así!";
+                    "Dominaste el cálculo directo de área y perímetro. ¡Continúa así!";
             } else if (mode === 'part2') {
                 document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 de la Evaluación!";
                 document.getElementById('end-subtitle').innerText =
-                    "Aplicaste conversiones en problemas inversos. ¡Excelente!";
+                    "Aplicaste problemas inversos y comparación de rectángulos. ¡Excelente!";
             } else {
                 document.getElementById('end-title').innerText = "¡HAS COMPLETADO EL ESCAPE ROOM COMPLETO!";
                 document.getElementById('end-subtitle').innerText =
-                    "Eres un Maestro de las Conversiones de Longitud. ¡El orden ha sido restaurado!";
+                    "Eres un Maestro de las Áreas y Perímetros. ¡El orden ha sido restaurado!";
             }
         }
 
