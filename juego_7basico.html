@@ -169,19 +169,19 @@
                 <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-black pb-2 mb-3 text-xs md:text-sm font-bold text-gray-700">
                     <span>📚 NIVEL: 7° BÁSICO</span>
                     <span>⏱️ TIEMPO MÁXIMO: 90 MIN</span>
-                    <span>🧩 UNIDAD: PROPORCIONALIDAD DIRECTA E INVERSA (OA 08)</span>
+                    <span>🧩 UNIDAD: EL CÍRCULO (OA 11)</span>
                 </div>
                 <h1 class="text-3xl md:text-5xl comic-font text-blue-700 tracking-wide uppercase">
                     Gatito Chill vs. Patito Amarillito
                 </h1>
                 <p class="text-lg md:text-2xl chill-font text-purple-900 mt-1">
-                    Escape Room de la Proporcionalidad
+                    Escape Room del Círculo: Radio, Diámetro y Área
                 </p>
             </div>
             <!-- OA -->
             <div class="mt-4 bg-yellow-100 border-2 border-black p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
                 <p class="font-bold text-xs md:text-sm text-indigo-950">
-                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 08)</span>: Mostrar que comprenden las proporciones directas e inversas resolviendo problemas de la vida diaria y de otras asignaturas.
+                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 11)</span>: Mostrar que comprenden el círculo, describiendo las relaciones entre el radio, el diámetro y el perímetro; estimando de manera intuitiva el perímetro y el área; aplicando las aproximaciones en la resolución de problemas geométricos y de la vida diaria; e identificándolo como lugar geométrico.
                 </p>
             </div>
         </header>
@@ -195,20 +195,20 @@
                 </div>
 
                 <div class="text-center">
-                    <h2 class="text-2xl md:text-4xl comic-font text-red-600">¡EL DESORDEN PROPORCIONAL HA LLEGADO!</h2>
-                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">Patito Amarillito ha desbalanceado todas las proporciones de la ciudad...</p>
+                    <h2 class="text-2xl md:text-4xl comic-font text-red-600">¡EL DESORDEN CIRCULAR HA LLEGADO!</h2>
+                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">Patito Amarillito ha desordenado todos los círculos de la ciudad...</p>
                 </div>
 
                 <!-- Historia -->
                 <div class="bg-blue-50 border-4 border-black p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
                     <p class="text-base md:text-lg">
-                        El villano <b>Patito Amarillito</b> lanzó su <i>"Rayo Desproporcionado"</i> sobre la Ciudad de las Proporciones, haciendo que las recetas de cocina, los tiempos de construcción y hasta las velocidades de los vehículos se volvieran caóticos. Las relaciones directas se volvieron inversas y viceversa.
+                        El villano <b>Patito Amarillito</b> lanzó su <i>"Rayo Circular Desordenado"</i> sobre la Ciudad de los Círculos, confundiendo los radios con los diámetros, mezclando las áreas con los perímetros y desorientando a los aspersores, las plazas y las antenas de radio. Nada circular funciona correctamente.
                     </p>
                     <p class="text-base md:text-lg">
                         Con su taza de té siempre a mano, el sereno <b>Gatito Chill</b> nos guía con una sonrisa:
                     </p>
                     <blockquote class="bg-yellow-200 border-l-4 border-yellow-600 p-3 rounded font-bold text-indigo-900 italic text-sm md:text-base">
-                        "Tranquilos, amigos... si al aumentar una cantidad la otra también aumenta, es directa. Si al aumentar una la otra disminuye, es inversa. ¡Chill, que el equilibrio volverá!"
+                        "Tranquilos, amigos... el radio es la mitad del diámetro. El perímetro es 2 × π × radio, y el área es π × radio². ¡Chill, que el equilibrio volverá!"
                     </blockquote>
                 </div>
 
@@ -220,11 +220,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
                             📍 Parte 1 (Preguntas 1 a 10)<br />
-                            <span class="text-xs font-normal normal-case block">Proporcionalidad directa e inversa (básico)</span>
+                            <span class="text-xs font-normal normal-case block">Propiedades y relaciones del círculo</span>
                         </button>
                         <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
                             📍 Parte 2 (Preguntas 11 a 20)<br />
-                            <span class="text-xs font-normal normal-case block">Problemas con tablas y conceptos</span>
+                            <span class="text-xs font-normal normal-case block">Aplicaciones y problemas inversos</span>
                         </button>
                         <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
                             🔥 Modo Completo (20 Retos)<br />
@@ -247,7 +247,7 @@
 
                 <div class="pt-2">
                     <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-black text-2xl md:text-3xl py-4 w-full rounded-xl">
-                        ¡RESTAURAR EL EQUILIBRIO PROPORCIONAL! 🚀
+                        ¡RESTAURAR EL ORDEN CIRCULAR! 🚀
                     </button>
                 </div>
 
@@ -267,7 +267,7 @@
                         <span class="text-3xl">🐱</span>
                         <div>
                             <div class="comic-font text-2xl text-red-600 leading-tight" id="level-label">DESAFÍO 1 / 10</div>
-                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: PROPORCIONALIDAD BÁSICA</div>
+                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: PROPIEDADES DEL CÍRCULO</div>
                         </div>
                     </div>
                     <div class="w-full md:w-1/2 progress-bar-container">
@@ -285,7 +285,7 @@
                         <div class="w-full">
                             <div class="flex justify-between items-center">
                                 <h4 class="font-bold text-red-600 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Legión del Despeje: Gatito Chill</h4>
-                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Proporcionalidad</span>
+                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Radio</span>
                             </div>
                             <p class="font-bold text-indigo-950 italic text-base md:text-lg mt-1" id="narrative-text">Cargando situación...</p>
                         </div>
@@ -327,12 +327,12 @@
                 <div class="space-y-3">
                     <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has derrotado a Patito Amarillito!</p>
                     <p class="text-gray-700 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
-                        Todas las proporciones han vuelto a su equilibrio. Las recetas, construcciones y viajes están en orden.
+                        Todos los círculos han recuperado sus medidas. Los radios, diámetros, perímetros y áreas están en equilibrio.
                     </p>
                 </div>
                 <div class="bg-yellow-100 border-4 border-black p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
                     <p class="text-purple-900">
-                        <b>Gatito Chill te felicita:</b> "¡Excelente! Recuerda que en una proporción directa, al multiplicar una cantidad, la otra se multiplica. En la inversa, al multiplicar una, la otra se divide. ¡Mantén la calma y el orden siempre regresa!"
+                        <b>Gatito Chill te felicita:</b> "¡Excelente! Recuerda que el radio es la mitad del diámetro, el perímetro es 2πr y el área es πr². ¡Mantén la calma y el orden siempre regresa!"
                     </p>
                 </div>
                 <div class="flex flex-col md:flex-row justify-center gap-4 pt-4">
@@ -368,56 +368,68 @@
                 <div id="extra-sec2" class="space-y-6 text-left">
                     <div class="bg-blue-50 border-2 border-black p-4 rounded-lg">
                         <h3 class="font-bold text-lg text-blue-900">II. Resolución de Problemas (Estrategia de los 4 Pasos)</h3>
-                        <p class="text-xs text-gray-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Revisar.</p>
+                        <p class="text-xs text-gray-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Hacer | 4) Comprobar.</p>
                     </div>
 
-                    <!-- Problema 1: Receta -->
+                    <!-- Problema 1: Plaza circular -->
                     <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (La receta)</span>
+                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Plaza circular)</span>
                         <p class="font-bold text-gray-800">
-                            Una receta para preparar un pastel de chocolate para 6 personas requiere 300 gramos de harina. ¿Cuántos gramos de harina se necesitan para preparar el mismo pastel para 15 personas?
+                            Una municipalidad desea remodelar una plaza pública de forma circular cuyo diámetro es de 24 metros. Se instalará una reja de protección alrededor de todo su contorno (con 2 corridas de alambre) y se sembrará pasto en toda su superficie interior.
+                            <br /><br />
+                            • Calcula los metros totales de alambre que se deben comprar para cercar la plaza.
+                            <br />
+                            • Calcula el área de terreno que será cubierta con pasto. (Utiliza π ≈ 3,14).
                         </p>
                         <details class="bg-gray-50 p-3 rounded border border-gray-300">
                             <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
                             <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> 6 personas → 300g harina. 15 personas → x gramos. Es una proporción directa.</p>
-                                <p><b>2. Planificar:</b> Usar regla de tres directa: x = (300 × 15) / 6.</p>
-                                <p><b>3. Resolver:</b> 300 × 15 = 4500. 4500 / 6 = 750 gramos.</p>
-                                <p><b>4. Revisar:</b> 750 / 15 = 50g por persona. 300 / 6 = 50g por persona. Correcto.</p>
+                                <p><b>1. Comprender:</b> Plaza circular de diámetro 24 m (radio = 12 m). Se requiere perímetro (2 corridas) y área.</p>
+                                <p><b>2. Planificar:</b> Perímetro = d × π = 24 × 3,14. Alambre = Perímetro × 2. Área = r² × π = 12² × 3,14.</p>
+                                <p><b>3. Hacer:</b> Perímetro = 75,36 m. Alambre = 75,36 × 2 = 150,72 m. Área = 144 × 3,14 = 452,16 m².</p>
+                                <p><b>4. Comprobar:</b> Revisar multiplicaciones y potencias. 12 × 12 = 144. 144 × 3,14 = 452,16. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <!-- Problema 2: Construcción -->
+                    <!-- Problema 2: Aspersores -->
                     <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (La construcción)</span>
+                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Aspersores)</span>
                         <p class="font-bold text-gray-800">
-                            Un grupo de 12 obreros construye una pared en 15 días. Si la empresa necesita terminar la pared en 9 días, ¿cuántos obreros adicionales deben contratar?
+                            Un ingeniero agrónomo diseña un sistema de riego subterráneo automatizado mediante aspersores circulares. Cada aspersor cubre un área circular de 200,96 metros cuadrados.
+                            <br /><br />
+                            • ¿Cuál es la longitud del radio de alcance de cada aspersor? (Utiliza π ≈ 3,14).
+                            <br />
+                            • Si se alinean 4 aspersores consecutivamente sin que se superpongan sus zonas de riego en exceso (tocándose exactamente en los bordes de sus diámetros), ¿cuál es la longitud total de línea recta que cubren en conjunto?
                         </p>
                         <details class="bg-gray-50 p-3 rounded border border-gray-300">
                             <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
                             <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> 12 obreros → 15 días. x obreros → 9 días. Es inversa.</p>
-                                <p><b>2. Planificar:</b> Usar regla de tres inversa: 12 × 15 = x × 9.</p>
-                                <p><b>3. Resolver:</b> x = (12 × 15) / 9 = 180 / 9 = 20 obreros. Adicionales = 20 - 12 = 8.</p>
-                                <p><b>4. Revisar:</b> 12 × 15 = 180. 20 × 9 = 180. Correcto.</p>
+                                <p><b>1. Comprender:</b> Área del círculo = 200,96 m². Se busca el radio y la longitud de 4 diámetros juntos.</p>
+                                <p><b>2. Planificar:</b> Despejar radio desde Área = π × r². Calcular diámetro = 2r. Multiplicar por 4.</p>
+                                <p><b>3. Hacer:</b> r² = 200,96 ÷ 3,14 = 64 → r = 8 m. Diámetro = 16 m. 4 aspersores = 16 × 4 = 64 m.</p>
+                                <p><b>4. Comprobar:</b> 8² × 3,14 = 64 × 3,14 = 200,96. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <!-- Problema 3: Viaje -->
+                    <!-- Problema 3: Estaciones de radio -->
                     <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (El viaje)</span>
+                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Estaciones de radio)</span>
                         <p class="font-bold text-gray-800">
-                            Un automóvil viaja a una velocidad constante de 80 km/h y recorre una distancia en 5 horas. ¿Cuánto tiempo tardará en recorrer la misma distancia si aumenta su velocidad a 100 km/h?
+                            Dos estaciones de radio locales, la Estación Alfa y la Estación Beta, emiten señales circulares de cobertura radial. La Estación Alfa tiene un radio de cobertura de 15 km, mientras que la Estación Beta tiene un radio de 25 km. Ambas estaciones se encuentran separadas por una distancia en línea recta de 30 km entre sus antenas transmisoras.
+                            <br /><br />
+                            • Determina si las áreas de cobertura de ambas estaciones se cruzan o solapan. Justifica matemáticamente tu respuesta calculando las distancias límites desde las antenas.
+                            <br />
+                            • Calcula el área aproximada de la región donde las señales de ambas estaciones se superponen (zona de interferencia o cobertura compartida), modelando la situación geométrica. (Utiliza π ≈ 3,14).
                         </p>
                         <details class="bg-gray-50 p-3 rounded border border-gray-300">
                             <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
                             <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> 80 km/h → 5 horas. 100 km/h → x horas. Es inversa.</p>
-                                <p><b>2. Planificar:</b> Distancia = 80 × 5 = 400 km. x = 400 / 100.</p>
-                                <p><b>3. Resolver:</b> 400 / 100 = 4 horas.</p>
-                                <p><b>4. Revisar:</b> 80 × 5 = 400. 100 × 4 = 400. Correcto.</p>
+                                <p><b>1. Comprender:</b> Antenas a 30 km. Radios de 15 km y 25 km.</p>
+                                <p><b>2. Planificar:</b> Comparar la distancia entre centros (30 km) con la suma (15+25=40 km) y la diferencia (25-15=10 km) de los radios.</p>
+                                <p><b>3. Hacer:</b> Como 10 < 30 < 40, las circunferencias se intersectan en dos puntos → las áreas se solapan. (El cálculo exacto del área de intersección requiere geometría avanzada de círculos secantes, se evalúa el planteamiento).</p>
+                                <p><b>4. Comprobar:</b> Verificar con la desigualdad triangular: |r₁ - r₂| < d < r₁ + r₂ → 10 < 30 < 40. Correcto.</p>
                             </div>
                         </details>
                     </div>
@@ -426,18 +438,18 @@
                 <!-- SECCIÓN III: METACOGNICIÓN -->
                 <div id="extra-sec3" class="hidden space-y-4 text-left">
                     <div class="bg-purple-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-purple-900">III. Metacognición (Análisis de los problemas anteriores)</h3>
-                        <p class="text-xs text-gray-700">Responde con honestidad sobre tu trabajo:</p>
+                        <h3 class="font-bold text-lg text-purple-900">III. Metacognición (Reflexión del Estudiante)</h3>
+                        <p class="text-xs text-gray-700">Reflexiona sobre tu propio proceso de aprendizaje y responde brevemente basándote en los 3 problemas de desarrollo anteriores:</p>
                     </div>
                     <div class="space-y-3">
                         <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">1. ¿Qué información fue la más difícil de identificar al comenzar los problemas? ¿Por qué?</p>
+                            <p class="font-bold text-sm text-gray-800">1. ¿Cuál de los 4 pasos de la estrategia (Comprender, Planificar, Hacer, Comprobar) te presentó mayor dificultad al resolver el Problema 3 y qué estrategia superaste ese obstáculo?</p>
                         </div>
                         <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">2. Al planificar la resolución (paso 2), ¿qué estrategia elegiste (regla de tres, constante de proporcionalidad, etc.) y por qué funcionó?</p>
+                            <p class="font-bold text-sm text-gray-800">2. Al calcular el área o el perímetro en contextos cotidianos (como en los problemas 1 y 2), ¿qué error común estuviste a punto de cometer con el uso del radio y el diámetro, y cómo lograste evitarlo?</p>
                         </div>
                         <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">3. En el problema de los obreros (N°2), ¿qué error común podrías haber cometido si no hubieras revisado tu resultado al final?</p>
+                            <p class="font-bold text-sm text-gray-800">3. Explica con tus propias palabras qué significa que el círculo sea considerado un "lugar geométrico" y cómo esta definición te ayudó a comprender el comportamiento de las señales de radio en el Problema 3.</p>
                         </div>
                     </div>
                 </div>
@@ -445,9 +457,9 @@
                 <!-- SECCIÓN IV: DESAFÍO EXTRA (Lógica Inversa) -->
                 <div id="extra-sec4" class="hidden space-y-4 text-left">
                     <div class="bg-yellow-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Lógica Inversa - 3 puntos)</h3>
+                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Puntaje Extra: +3 puntos)</h3>
                         <p class="text-sm text-gray-800">
-                            Un reloj atrasa 2 minutos cada 3 horas. Si el reloj se puso en hora exactamente a las 12:00 del mediodía del lunes, ¿qué hora marcará el reloj cuando sean las 12:00 del mediodía del martes siguiente?
+                            Un carpintero tiene un trozo de madera cuadrado y necesita cortar de él el círculo de mayor área posible. Si el área del círculo obtenido es de exactamente 113,04 cm² (considerando π ≈ 3,14), ¿cuál era el área exacta del trozo de madera cuadrado original antes de ser cortado? Explica tu razonamiento paso a paso.
                         </p>
                     </div>
                     <div class="p-4 bg-white border-2 border-black rounded-xl space-y-3">
@@ -455,11 +467,10 @@
                             🧩 Revelar Solución por Reversión de Gatito Chill
                         </button>
                         <div id="extra-hint-box" class="hidden text-sm bg-yellow-100 p-3 rounded border border-yellow-300 leading-relaxed">
-                            <p><b>Paso 1:</b> Del lunes 12:00 al martes siguiente 12:00 hay exactamente 7 días = 168 horas.</p>
-                            <p><b>Paso 2:</b> El reloj atrasa 2 minutos cada 3 horas. ¿Cuántos intervalos de 3 horas hay en 168 horas? 168 ÷ 3 = 56 intervalos.</p>
-                            <p><b>Paso 3:</b> Atraso total = 56 × 2 = 112 minutos = 1 hora y 52 minutos.</p>
-                            <p><b>Paso 4:</b> A las 12:00 del martes siguiente, el reloj marcará 12:00 - 1:52 = <b>10:08 AM</b>.</p>
-                            <p><b>Nota:</b> La guía original indicaba 16 minutos (solo 1 día), pero el problema pide de lunes a martes siguiente (7 días). La respuesta correcta es 10:08 AM.</p>
+                            <p><b>Paso 1:</b> El círculo inscrito de mayor área en un cuadrado tiene un diámetro igual al lado del cuadrado.</p>
+                            <p><b>Paso 2:</b> Área del círculo = π × r² = 113,04. Entonces r² = 113,04 ÷ 3,14 = 36. r = 6 cm.</p>
+                            <p><b>Paso 3:</b> Diámetro = 2 × 6 = 12 cm. Como el diámetro es igual al lado del cuadrado, el lado mide 12 cm.</p>
+                            <p><b>Paso 4:</b> Área del cuadrado = lado² = 12² = <b>144 cm²</b>.</p>
                         </div>
                     </div>
                 </div>
@@ -467,37 +478,37 @@
                 <!-- SECCIÓN V: AUTOEVALUACIÓN -->
                 <div id="extra-sec5" class="hidden space-y-4 text-left">
                     <div class="bg-green-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-green-900">V. Autoevaluación del Estudiante</h3>
-                        <p class="text-xs text-gray-700">Marca con una X según corresponda a tu desempeño en esta unidad.</p>
+                        <h3 class="font-bold text-lg text-green-900">V. Autoevaluación Formativa (Decreto 67)</h3>
+                        <p class="text-xs text-gray-700">Marca con una X el nivel que mejor describe tu desempeño actual en esta evaluación.</p>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm border-2 border-black bg-white">
                             <thead class="bg-yellow-300 border-b-2 border-black">
                                 <tr>
-                                    <th class="p-2 text-left border-r border-black">Ítem</th>
-                                    <th class="p-2 text-center border-r border-black">3 pts (Logrado)</th>
-                                    <th class="p-2 text-center border-r border-black">2 pts (En proceso)</th>
-                                    <th class="p-2 text-center">1 pt (Inicio)</th>
+                                    <th class="p-2 text-left border-r border-black">Ítem de Autoevaluación</th>
+                                    <th class="p-2 text-center border-r border-black">Logrado (3 pts)</th>
+                                    <th class="p-2 text-center border-r border-black">Medianamente Logrado (2 pts)</th>
+                                    <th class="p-2 text-center">Por Mejorar (1 pt)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">Identifico si una situación es directa o inversamente proporcional.</td>
-                                    <td class="p-2 text-center border-r border-black">Siempre lo identifico.<br /><input type="radio" name="auto1" /></td>
-                                    <td class="p-2 text-center border-r border-black">A veces me confundo.<br /><input type="radio" name="auto1" /></td>
-                                    <td class="p-2 text-center">Me cuesta identificarlo.<br /><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 border-r border-black font-medium">1. Comprendo y aplico con precisión las fórmulas de perímetro y área del círculo utilizando el radio y el diámetro.</td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto1" /></td>
                                 </tr>
                                 <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">Aplico la estrategia de los 4 pasos en problemas.</td>
-                                    <td class="p-2 text-center border-r border-black">Siempre los aplico.<br /><input type="radio" name="auto2" /></td>
-                                    <td class="p-2 text-center border-r border-black">A veces olvido pasos.<br /><input type="radio" name="auto2" /></td>
-                                    <td class="p-2 text-center">No aplico el método.<br /><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 border-r border-black font-medium">2. Utilizo la estrategia de los 4 pasos para resolver problemas narrativos complejos de geometría de forma estructurada.</td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto2" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2 border-r border-black font-medium">Compruebo mis resultados y detecto errores.</td>
-                                    <td class="p-2 text-center border-r border-black">Siempre reviso mis cálculos.<br /><input type="radio" name="auto3" /></td>
-                                    <td class="p-2 text-center border-r border-black">A veces reviso.<br /><input type="radio" name="auto3" /></td>
-                                    <td class="p-2 text-center">No suelo revisar.<br /><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 border-r border-black font-medium">3. Verifico y compruebo mis resultados de manera autónoma utilizando el razonamiento inverso y estimaciones lógicas.</td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto3" /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -511,193 +522,204 @@
 
     <script>
         // ================================================================
-        //  BASE DE DATOS – 20 PREGUNTAS (OA 08, 7° BÁSICO)
+        //  BASE DE DATOS – 20 PREGUNTAS (OA 11, 7° BÁSICO)
+        //  Nota: Los "type" NO indican si es directo o inverso.
         // ================================================================
         const allQuestions = [
-            // ---- PARTE 1: Proporcionalidad básica (Preguntas 1 a 10) ----
+            // ---- PARTE 1: Propiedades y relaciones del círculo (Preguntas 1 a 10) ----
             {
                 id: 1,
                 part: 1,
-                type: "Directa",
-                narrative: "Patito Amarillito confundió la cantidad de pintura. ¡Ayuda a Gatito Chill!",
-                q: "Si para pintar 3 paredes se necesitan 6 litros de pintura, ¿cuántos litros se necesitan para 5 paredes? (Directo)",
-                a: "10 litros",
-                options: ["8 litros", "9 litros", "10 litros", "12 litros"],
-                hint: "Es directa. 6 ÷ 3 = 2 litros por pared. 5 × 2 = 10 litros."
+                type: "Lugar geométrico",
+                narrative: "Patito Amarillito olvidó la definición formal del círculo. ¡Recuérdala con Gatito Chill!",
+                q: "¿Cuál es la definición geométrica formal del círculo como lugar geométrico en el plano?",
+                a: "El conjunto de todos los puntos del plano cuya distancia a un punto fijo llamado centro es menor o igual al radio.",
+                options: [
+                    "El conjunto de puntos que forman la línea curva cerrada que rodea una superficie.",
+                    "El segmento rectilíneo que une dos puntos de la circunferencia pasando por el centro.",
+                    "El conjunto de todos los puntos del plano cuya distancia a un punto fijo llamado centro es menor o igual al radio.",
+                    "La longitud de la línea curva que delimita una región plana cerrada."
+                ],
+                hint: "El círculo incluye el interior (distancia ≤ radio), mientras que la circunferencia es solo el borde."
             }, {
                 id: 2,
                 part: 1,
-                type: "Inversa",
-                narrative: "Gatito Chill necesita calcular el tiempo de viaje.",
-                q: "Un tren recorre una distancia a 120 km/h y demora 3 horas. ¿Cuánto tardaría si fuera a 90 km/h? (Inverso)",
-                a: "4 horas",
-                options: ["2 horas", "3 horas", "4 horas", "5 horas"],
-                hint: "Es inversa. 120 × 3 = 360 km. 360 ÷ 90 = 4 horas."
+                type: "Radio",
+                narrative: "Gatito Chill conoce el diámetro y necesita el radio.",
+                q: "Si en una circunferencia la medida de su diámetro es de 18,4 cm, ¿cuánto mide exactamente su radio?",
+                a: "9,2 cm",
+                options: ["36,8 cm", "9,2 cm", "4,6 cm", "18,4 cm"],
+                hint: "El radio es la mitad del diámetro. 18,4 ÷ 2 = 9,2 cm."
             }, {
                 id: 3,
                 part: 1,
-                type: "Directa",
-                narrative: "Patito Amarillito mezcló los precios de las galletas.",
-                q: "Si 4 cajas de galletas cuestan $6.000, ¿cuánto cuestan 7 cajas? (Directo)",
-                a: "$10.500",
-                options: ["$10.000", "$10.500", "$11.000", "$12.000"],
-                hint: "6.000 ÷ 4 = 1.500 por caja. 7 × 1.500 = 10.500."
+                type: "Perímetro",
+                narrative: "Un disco decorativo circular necesita conocer su perímetro.",
+                q: "Un disco decorativo circular tiene un radio de 9 cm. ¿Cuál es la longitud aproximada de su perímetro (circunferencia)? (Utiliza π = 3,14)",
+                a: "56,52 cm",
+                options: ["28,26 cm", "56,52 cm", "254,34 cm", "14,13 cm"],
+                hint: "Perímetro = 2 × π × radio = 2 × 3,14 × 9 = 56,52 cm."
             }, {
                 id: 4,
                 part: 1,
-                type: "Inversa",
-                narrative: "Gatito Chill necesita saber cuántas personas se necesitan.",
-                q: "Un grupo de 5 personas puede limpiar un jardín en 8 horas. ¿Cuántas personas se necesitan para limpiarlo en 4 horas? (Inverso)",
-                a: "10 personas",
-                options: ["8 personas", "10 personas", "12 personas", "20 personas"],
-                hint: "Inversa: 5 × 8 = 40. 40 ÷ 4 = 10 personas."
+                type: "Perímetro",
+                narrative: "Una pista de atletismo circular. ¿Cuánto recorre un atleta en una vuelta?",
+                q: "Una pista de atletismo circular tiene un diámetro de 100 metros. Si un atleta da una vuelta completa por el borde exterior, ¿qué distancia recorre aproximadamente? (Utiliza π ≈ 3,14)",
+                a: "314 metros",
+                options: ["157 metros", "314 metros", "78,5 metros", "628 metros"],
+                hint: "Perímetro = diámetro × π = 100 × 3,14 = 314 m."
             }, {
                 id: 5,
                 part: 1,
-                type: "Directa",
-                narrative: "Patito Amarillito confundió el consumo de combustible.",
-                q: "Un automóvil recorre 150 km con 10 litros de combustible. ¿Cuántos km recorrerá con 25 litros? (Directo)",
-                a: "375 km",
-                options: ["300 km", "350 km", "375 km", "400 km"],
-                hint: "150 ÷ 10 = 15 km/litro. 25 × 15 = 375 km."
+                type: "Radio",
+                narrative: "Gatito Chill conoce el perímetro de una mesa circular y busca su radio.",
+                q: "El perímetro de una mesa circular es de exactamente 188,4 centímetros. Si se considera π ≈ 3,14, ¿cuál es la medida del radio de esta mesa?",
+                a: "30 cm",
+                options: ["30 cm", "60 cm", "94,2 cm", "15 cm"],
+                hint: "Perímetro = 2 × π × radio. Despeja: radio = 188,4 ÷ (2 × 3,14) = 30 cm."
             }, {
                 id: 6,
                 part: 1,
-                type: "Directa (constante)",
-                narrative: "Gatito Chill necesita calcular el precio de las piezas.",
-                q: "La constante de proporcionalidad entre el número de piezas y el precio de un mueble desarmado es 1.500. Si compras 6 piezas, ¿cuál es el precio? (Directo)",
-                a: "$9.000",
-                options: ["$7.500", "$8.000", "$9.000", "$10.000"],
-                hint: "Precio = 1.500 × 6 = 9.000."
+                type: "Relación radio-perímetro",
+                narrative: "Si el radio se triplica, ¿qué pasa con el perímetro?",
+                q: "Si el radio de una rueda metálica se triplica, ¿qué ocurre exactamente con la medida de su perímetro?",
+                a: "Se triplica",
+                options: ["Se triplica", "Aumenta seis veces", "Se eleva al cuadrado", "Permanece inalterable"],
+                hint: "El perímetro es directamente proporcional al radio (P = 2πr). Si r se triplica, P también."
             }, {
                 id: 7,
                 part: 1,
-                type: "Inversa",
-                narrative: "Patito Amarillito cambió la cantidad de pintores.",
-                q: "2 pintores tardan 6 días en pintar una casa. ¿Cuántos días tardarían 3 pintores? (Inverso)",
-                a: "4 días",
-                options: ["3 días", "4 días", "5 días", "9 días"],
-                hint: "2 × 6 = 12. 12 ÷ 3 = 4 días."
+                type: "Concepto de área",
+                narrative: "Patito Amarillito afirma algo falso sobre las unidades de área. ¡Detéctalo!",
+                q: "¿Cuál de las siguientes afirmaciones es siempre FALSA respecto a los elementos fundamentales del círculo y la circunferencia?",
+                a: "El área del círculo se mide en unidades lineales (como cm o m).",
+                options: [
+                    "El diámetro es la cuerda de mayor longitud posible en una circunferencia.",
+                    "El radio es la mitad de la longitud del diámetro.",
+                    "El área del círculo se mide en unidades lineales (como cm o m).",
+                    "La circunferencia corresponde exclusivamente al contorno o borde del círculo."
+                ],
+                hint: "El área se mide en unidades cuadradas (cm², m²), no lineales."
             }, {
                 id: 8,
                 part: 1,
-                type: "Directa",
-                narrative: "Gatito Chill necesita ajustar la receta para más personas.",
-                q: "Una receta para 4 personas usa 200g de harina. ¿Cuánta harina se necesita para 10 personas? (Directo)",
-                a: "500g",
-                options: ["400g", "450g", "500g", "550g"],
-                hint: "200 ÷ 4 = 50g/persona. 10 × 50 = 500g."
+                type: "Radio",
+                narrative: "Gatito Chill conoce el área de una superficie circular y busca su radio.",
+                q: "Si el área de una superficie circular es de 28,26 cm² (utilizando π ≈ 3,14), ¿cuál es la longitud de su radio?",
+                a: "3 cm",
+                options: ["3 cm", "6 cm", "9 cm", "1,5 cm"],
+                hint: "Área = π × r². 28,26 = 3,14 × r². r² = 9. r = 3 cm."
             }, {
                 id: 9,
                 part: 1,
-                type: "Concepto (inversa)",
-                narrative: "Patito Amarillito olvidó cómo funciona la proporción inversa.",
-                q: "En una proporción inversa, si el valor de x se triplica, ¿qué le ocurre al valor de y? (Concepto)",
-                a: "Se divide por 3",
-                options: ["Se triplica", "Se divide por 3", "Se mantiene igual", "Aumenta en 3"],
-                hint: "En proporción inversa, al multiplicar una, la otra se divide."
+                type: "Perímetro",
+                narrative: "Un jardín circular necesita una malla de alambre a su alrededor.",
+                q: "Se desea cercar un jardín circular cuyo radio mide 3,5 metros con una malla de alambre. ¿Cuántos metros de malla se necesitan como mínimo?",
+                a: "21,98 m",
+                options: ["10,99 m", "21,98 m", "43,96 m", "7 m"],
+                hint: "Perímetro = 2 × π × r = 2 × 3,14 × 3,5 = 21,98 m."
             }, {
                 id: 10,
                 part: 1,
-                type: "Directa",
-                narrative: "Gatito Chill necesita el precio de 1 kg de azúcar.",
-                q: "Si 2 kg de azúcar valen $1.800, ¿cuál es el valor de 1 kg? (Directo)",
-                a: "$900",
-                options: ["$700", "$800", "$900", "$950"],
-                hint: "1.800 ÷ 2 = 900."
+                type: "Área",
+                narrative: "La tapa circular tiene un perímetro conocido. ¿Cuál es su área?",
+                q: "El perímetro de una tapa circular es de 62,8 cm. Si se emplea la aproximación π ≈ 3,14, ¿cuál es el valor aproximado del área de esta tapa?",
+                a: "314 cm²",
+                options: ["157 cm²", "314 cm²", "78,5 cm²", "31,4 cm²"],
+                hint: "Perímetro = 62,8 → radio = 62,8 ÷ 6,28 = 10 cm. Área = 3,14 × 10² = 314 cm²."
             },
 
-            // ---- PARTE 2: Problemas con tablas y conceptos (Preguntas 11 a 20) ----
+            // ---- PARTE 2: Aplicaciones y problemas inversos (Preguntas 11 a 20) ----
             {
                 id: 11,
                 part: 2,
-                type: "Inversa",
-                narrative: "Patito Amarillito cambió la cantidad de vacas.",
-                q: "Un agricultor tiene alimento para 20 vacas durante 30 días. ¿Cuántos días durará el alimento si vende 5 vacas? (Inverso)",
-                a: "40 días",
-                options: ["35 días", "40 días", "45 días", "50 días"],
-                hint: "20 × 30 = 600. 20 - 5 = 15 vacas. 600 ÷ 15 = 40 días."
+                type: "Área",
+                narrative: "Un aspersor de riego circular. ¿Cuál es el área máxima que cubre?",
+                q: "Un aspersor de riego abarca un radio de giro de 6 metros. ¿Cuál es el área máxima de césped que alcanza a regar? (Usa π ≈ 3,14)",
+                a: "113,04 m²",
+                options: ["37,68 m²", "113,04 m²", "18,84 m²", "226,08 m²"],
+                hint: "Área = π × r² = 3,14 × 6² = 3,14 × 36 = 113,04 m²."
             }, {
                 id: 12,
                 part: 2,
-                type: "Concepto (directa)",
-                narrative: "Gatito Chill necesita identificar una tabla de proporción directa.",
-                q: "¿Cuál de las siguientes tablas representa una proporción directa? (Concepto)",
-                a: "(1, 2), (2, 4), (4, 8)",
-                options: ["(1, 2), (2, 4), (4, 8)", "(1, 10), (2, 5), (5, 2)", "(2, 4), (3, 6), (5, 9)", "(1, 2), (2, 3), (3, 4)"],
-                hint: "En proporción directa, la razón y/x es constante. 2/1=2, 4/2=2, 8/4=2."
+                type: "Perímetro",
+                narrative: "Conocemos el área de un círculo. ¿Cuál es la longitud de su circunferencia?",
+                q: "Si el área de un círculo es de 12,56 cm² (con π ≈ 3,14), ¿cuánto mide la longitud de su circunferencia bordeante?",
+                a: "12,56 cm",
+                options: ["3,14 cm", "6,28 cm", "12,56 cm", "25,12 cm"],
+                hint: "Área = 12,56 → r² = 4 → r = 2. Perímetro = 2 × 3,14 × 2 = 12,56 cm."
             }, {
                 id: 13,
                 part: 2,
-                type: "Inversa",
-                narrative: "Patito Amarillito cambió el caudal del grifo.",
-                q: "Un grifo llena un estanque en 12 horas con un caudal de 20 litros/min. ¿Qué caudal se necesita para llenarlo en 8 horas? (Inverso)",
-                a: "30 litros/min",
-                options: ["25 litros/min", "30 litros/min", "35 litros/min", "40 litros/min"],
-                hint: "12 × 20 = 240. 240 ÷ 8 = 30 litros/min."
+                type: "Área",
+                narrative: "Una diana circular con diámetro conocido. ¿Cuál es su superficie?",
+                q: "Una diana circular tiene un diámetro de 40 cm. ¿Cuál es la superficie total de esta diana? (Usa π ≈ 3,14)",
+                a: "1256 cm²",
+                options: ["2512 cm²", "1256 cm²", "628 cm²", "5024 cm²"],
+                hint: "Diámetro = 40 → radio = 20. Área = 3,14 × 20² = 3,14 × 400 = 1256 cm²."
             }, {
                 id: 14,
                 part: 2,
-                type: "Directa",
-                narrative: "Gatito Chill necesita saber cuántos cuadernos puede comprar.",
-                q: "Si el precio de 10 cuadernos es $15.000, ¿cuántos cuadernos compras con $9.000? (Directo)",
-                a: "6",
-                options: ["5", "6", "7", "8"],
-                hint: "15.000 ÷ 10 = 1.500 por cuaderno. 9.000 ÷ 1.500 = 6."
+                type: "Diámetro",
+                narrative: "Una piscina circular con perímetro exterior conocido. ¿Cuál es su diámetro?",
+                q: "Una piscina circular está rodeada por un borde de piedra cuyo perímetro exterior mide 47,1 metros. Utilizando π ≈ 3,14, ¿cuál es el diámetro de esta piscina?",
+                a: "15 metros",
+                options: ["5 metros", "10 metros", "15 metros", "30 metros"],
+                hint: "Perímetro = π × diámetro. Despeja: diámetro = 47,1 ÷ 3,14 = 15 m."
             }, {
                 id: 15,
                 part: 2,
-                type: "Directa (escala)",
-                narrative: "Patito Amarillito confundió la escala del mapa.",
-                q: "En un mapa a escala, 2 cm representan 50 km. ¿Cuántos km representan 5 cm? (Directo)",
-                a: "125 km",
-                options: ["100 km", "120 km", "125 km", "150 km"],
-                hint: "50 ÷ 2 = 25 km/cm. 5 × 25 = 125 km."
+                type: "Elementos del círculo",
+                narrative: "Patito Amarillito mezcló un término que no pertenece al círculo. ¡Encuéntralo!",
+                q: "¿Cuál de los siguientes términos geométricos NO forma parte de los elementos que componen un círculo o una circunferencia?",
+                a: "Apotema",
+                options: ["Sector circular", "Radio", "Apotema", "Diámetro"],
+                hint: "El apotema es un elemento de los polígonos regulares, no del círculo."
             }, {
                 id: 16,
                 part: 2,
-                type: "Inversa",
-                narrative: "Gatito Chill necesita calcular la velocidad del ciclista.",
-                q: "Un ciclista viaja a 20 km/h y tarda 4 horas. ¿A qué velocidad debe ir para tardar 2 horas? (Inverso)",
-                a: "40 km/h",
-                options: ["30 km/h", "40 km/h", "50 km/h", "60 km/h"],
-                hint: "20 × 4 = 80 km. 80 ÷ 2 = 40 km/h."
+                type: "Perímetro",
+                narrative: "Se necesita una tapa metálica circular para un pozo. ¿Cuál es su perímetro?",
+                q: "Se quiere construir una tapa metálica circular para un pozo que tiene un radio de 0,8 metros. ¿Cuál es el perímetro de dicha tapa? (Usa π ≈ 3,14)",
+                a: "5,024 metros",
+                options: ["2,512 metros", "5,024 metros", "2,0096 metros", "1,256 metros"],
+                hint: "Perímetro = 2 × π × r = 2 × 3,14 × 0,8 = 5,024 m."
             }, {
                 id: 17,
                 part: 2,
-                type: "Concepto (inversa)",
-                narrative: "Gatito Chill necesita identificar una tabla de proporción inversa.",
-                q: "¿Qué tabla representa una proporción inversa? (Concepto)",
-                a: "(2, 10), (4, 5)",
-                options: ["(2, 10), (4, 20)", "(2, 10), (4, 5)", "(2, 4), (4, 8)", "(2, 6), (4, 10)"],
-                hint: "En proporción inversa, el producto x·y es constante. 2×10=20, 4×5=20."
+                type: "Relación perímetro-diámetro",
+                narrative: "Si el perímetro aumenta por un factor, ¿qué pasa con el diámetro?",
+                q: "Si el perímetro de una circunferencia aumenta por un factor de 4, ¿en qué factor aumenta su diámetro?",
+                a: "Factor 4",
+                options: ["Factor 2", "Factor 4", "Factor 16", "No cambia"],
+                hint: "Perímetro y diámetro son directamente proporcionales (P = π × d). Si P aumenta ×4, d también ×4."
             }, {
                 id: 18,
                 part: 2,
-                type: "Inversa",
-                narrative: "Patito Amarillito cambió la cantidad de personas.",
-                q: "Para hacer un trabajo, 10 personas tardan 6 días. ¿Cuántas personas se necesitan para hacerlo en 3 días? (Inverso)",
-                a: "20",
-                options: ["15", "20", "25", "30"],
-                hint: "10 × 6 = 60. 60 ÷ 3 = 20 personas."
+                type: "Perímetro",
+                narrative: "Una pileta circular con una franja ornamental exterior. ¿Cuál es la longitud de su circunferencia exterior?",
+                q: "Una pileta circular tiene un radio de 5 metros. Si se quiere pintar una franja ornamental alrededor de su borde exterior que mide 2 metros de ancho, ¿cuál es la longitud de la circunferencia exterior de dicha franja? (Usa π ≈ 3,14)",
+                a: "43,96 metros",
+                options: ["31,4 metros", "43,96 metros", "62,8 metros", "94,2 metros"],
+                hint: "Radio total = 5 + 2 = 7 m. Perímetro = 2 × 3,14 × 7 = 43,96 m."
             }, {
                 id: 19,
                 part: 2,
-                type: "Directa",
-                narrative: "Gatito Chill necesita calcular cuántos kilos de papas puede comprar.",
-                q: "Si 3 kilos de papas cuestan $1.200, ¿cuántos kilos compras con $2.800? (Directo)",
-                a: "7 kg",
-                options: ["6 kg", "7 kg", "8 kg", "9 kg"],
-                hint: "1.200 ÷ 3 = 400 por kilo. 2.800 ÷ 400 = 7 kg."
+                type: "Radio",
+                narrative: "La rueda de un camión avanza 314 cm en una vuelta. ¿Cuál es su radio?",
+                q: "La rueda de un camión avanza una distancia lineal de 314 cm en exactamente una vuelta completa. Considerando π ≈ 3,14, ¿cuál es la medida del radio de esta rueda?",
+                a: "50 cm",
+                options: ["50 cm", "100 cm", "25 cm", "10 cm"],
+                hint: "Una vuelta completa = perímetro = 314 cm. diámetro = 314 ÷ 3,14 = 100 cm. radio = 50 cm."
             }, {
                 id: 20,
                 part: 2,
-                type: "Directa",
-                narrative: "Patito Amarillito confundió la producción de máquinas.",
-                q: "En una fábrica, 8 máquinas producen 1.600 piezas al día. ¿Cuántas piezas producirían 12 máquinas? (Directo)",
-                a: "2.400",
-                options: ["2.000", "2.400", "2.800", "3.200"],
-                hint: "1.600 ÷ 8 = 200 por máquina. 12 × 200 = 2.400."
+                type: "Área",
+                narrative: "Un terreno circular será pavimentado. ¿Cuál es el área total?",
+                q: "Un terreno circular posee un radio de 10 metros. Si se pavimenta todo su interior, ¿cuál es el área total pavimentada? (Usa π ≈ 3,14)",
+                a: "314 m²",
+                options: ["62,8 m²", "314 m²", "157 m²", "1256 m²"],
+                hint: "Área = π × r² = 3,14 × 10² = 3,14 × 100 = 314 m²."
             }
         ];
 
@@ -790,7 +812,7 @@
             document.getElementById('level-label').innerText = `DESAFÍO ${currentLevelIndex + 1} / ${total}`;
             document.getElementById('progress-fill').style.width = `${Math.max(progress, 5)}%`;
             document.getElementById('section-badge').innerText =
-                qData.part === 1 ? "PARTE 1: PROPORCIONALIDAD BÁSICA" : "PARTE 2: TABLAS Y CONCEPTOS";
+                qData.part === 1 ? "PARTE 1: PROPIEDADES DEL CÍRCULO" : "PARTE 2: APLICACIONES Y PROBLEMAS";
 
             document.getElementById('narrative-text').innerText = `"${qData.narrative}"`;
             document.getElementById('question-number').innerText = `PREGUNTA #${qData.id}`;
@@ -878,15 +900,15 @@
             if (mode === 'part1') {
                 document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 de la Evaluación!";
                 document.getElementById('end-subtitle').innerText =
-                    "Dominaste la proporcionalidad directa e inversa básica. ¡Continúa así!";
+                    "Dominaste las propiedades y relaciones del círculo. ¡Continúa así!";
             } else if (mode === 'part2') {
                 document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 de la Evaluación!";
                 document.getElementById('end-subtitle').innerText =
-                    "Aplicaste conceptos de tablas y problemas con escalas. ¡Excelente!";
+                    "Aplicaste el círculo en problemas geométricos y de la vida diaria. ¡Excelente!";
             } else {
                 document.getElementById('end-title').innerText = "¡HAS COMPLETADO EL ESCAPE ROOM COMPLETO!";
                 document.getElementById('end-subtitle').innerText =
-                    "Eres un Maestro de la Proporcionalidad Directa e Inversa. ¡El orden ha sido restaurado!";
+                    "Eres un Maestro del Círculo: radio, diámetro, perímetro y área. ¡El orden ha sido restaurado!";
             }
         }
 
@@ -939,4 +961,4 @@
     </script>
 
 </body>
-</html>
+                                </html>
