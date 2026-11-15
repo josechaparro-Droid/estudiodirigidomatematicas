@@ -3,182 +3,123 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Escape Room: Gatito Chill vs Patito Amarillito – Problemas con Dinero (4° Básico)</title>
-    <script src="https://cdn.tailwindcss.com">
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet" />
+    <title>Escape Room: Mercado Lunar – La Feria de las Divisones (4° Básico)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Comic Neue', cursive;
-            background-color: #0f172a;
-            background-image: radial-gradient(rgba(239, 68, 68, 0.25) 15%, transparent 16%),
-                radial-gradient(rgba(37, 99, 235, 0.25) 15%, transparent 16%);
-            background-size: 24px 24px;
-            background-position: 0 0, 12px 12px;
+            background-color: #0b1026;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(147, 197, 253, 0.18) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(251, 191, 36, 0.15) 0%, transparent 45%),
+                radial-gradient(white 1px, transparent 1px),
+                radial-gradient(white 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 80px 80px, 120px 120px;
+            background-position: 0 0, 0 0, 0 0, 40px 40px;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             padding: 0.75rem;
             color: #0f172a;
         }
-        .comic-font {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 1.5px;
-        }
-        .chill-font {
-            font-family: 'Chewy', cursive;
-        }
+        .comic-font { font-family: 'Bangers', cursive; letter-spacing: 1.5px; }
+        .space-font { font-family: 'Orbitron', sans-serif; }
         .comic-panel {
-            background: white;
-            border: 5px solid black;
-            box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
+            background: #fefce8;
+            border: 5px solid #0b1026;
+            box-shadow: 8px 8px 0px #f59e0b, 0 0 40px rgba(147, 197, 253, 0.25);
             position: relative;
         }
         .comic-panel::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px);
-            background-size: 6px 6px;
-            pointer-events: none;
-            z-index: 1;
+            content: ""; position: absolute; inset: 0;
+            background-image: radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 6px 6px; pointer-events: none;
         }
         .btn-comic {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 1px;
-            border: 4px solid black;
-            box-shadow: 5px 5px 0px black;
+            font-family: 'Bangers', cursive; letter-spacing: 1px;
+            border: 4px solid #0b1026; box-shadow: 5px 5px 0px #0b1026;
             transition: transform 0.1s ease, box-shadow 0.1s ease;
             text-transform: uppercase;
         }
-        .btn-comic:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 8px 8px 0px black;
-        }
-        .btn-comic:active {
-            transform: translate(2px, 2px);
-            box-shadow: 1px 1px 0px black;
-        }
+        .btn-comic:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0px #0b1026; }
+        .btn-comic:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #0b1026; }
         .tab-btn.active {
-            background-color: #facc15;
-            color: black;
-            border-bottom: 4px solid black;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b) !important;
+            color: #0b1026; border-bottom: 4px solid #0b1026;
         }
         .progress-bar-container {
-            background: #e2e8f0;
-            border: 4px solid black;
-            border-radius: 9999px;
-            overflow: hidden;
-            height: 28px;
+            background: #1e293b; border: 4px solid #0b1026; border-radius: 9999px;
+            overflow: hidden; height: 28px;
         }
         .progress-bar-fill {
-            background: linear-gradient(90deg, #ef4444, #8b5cf6, #3b82f6);
-            height: 100%;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(90deg, #22d3ee, #a78bfa, #fbbf24);
+            height: 100%; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .alarm-border {
-            animation: alertPulse 1.8s infinite alternate;
-        }
-        @keyframes alertPulse {
-            from {
-                border-color: #0f172a;
-                box-shadow: 8px 8px 0px black;
-            }
-            to {
-                border-color: #ef4444;
-                box-shadow: 8px 8px 0px #ef4444;
-            }
+        .glow-border { animation: starPulse 2s infinite alternate; }
+        @keyframes starPulse {
+            from { border-color: #0b1026; box-shadow: 8px 8px 0px #f59e0b; }
+            to { border-color: #22d3ee; box-shadow: 8px 8px 0px #22d3ee; }
         }
         .pow-text {
-            position: fixed;
-            top: 50%;
-            left: 50%;
+            position: fixed; top: 50%; left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            z-index: 100;
-            pointer-events: none;
+            z-index: 100; pointer-events: none;
             transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-shadow: 6px 6px 0px black;
-            -webkit-text-stroke: 3px black;
+            text-shadow: 6px 6px 0px #0b1026;
+            -webkit-text-stroke: 3px #0b1026;
         }
-        .pow-text.active {
-            transform: translate(-50%, -50%) scale(1.5);
-        }
+        .pow-text.active { transform: translate(-50%, -50%) scale(1.5); }
         select {
             appearance: none;
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 1.2rem center;
-            background-size: 1.4em;
+            background-repeat: no-repeat; background-position: right 1.2rem center; background-size: 1.4em;
         }
-        .hidden {
-            display: none !important;
-        }
+        .hidden { display: none !important; }
         .extra-tab-btn {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 0.5px;
-            border: 3px solid black;
-            box-shadow: 4px 4px 0px black;
+            font-family: 'Bangers', cursive; letter-spacing: 0.5px;
+            border: 3px solid #0b1026; box-shadow: 4px 4px 0px #0b1026;
             transition: all 0.1s ease;
         }
         .extra-tab-btn.active-tab {
-            background-color: #facc15 !important;
-            color: black;
-            border-bottom: 4px solid black;
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px black;
+            background: #fbbf24 !important; color: #0b1026;
+            border-bottom: 4px solid #0b1026;
+            transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #0b1026;
         }
-        .extra-tab-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px black;
-        }
-        details summary {
-            cursor: pointer;
-            font-weight: bold;
-            color: #7c3aed;
-        }
-        details summary:hover {
-            color: #4c1d95;
-        }
-        table td,
-        table th {
-            border: 1px solid #000;
-            padding: 0.5rem;
-            text-align: center;
+        .extra-tab-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #0b1026; }
+        details summary { cursor: pointer; font-weight: bold; color: #7c3aed; }
+        details summary:hover { color: #4c1d95; }
+        table td, table th { border: 1px solid #000; padding: 0.5rem; text-align: center; }
+        .coin { display: inline-block; animation: float 3s ease-in-out infinite; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
     </style>
 </head>
 <body>
 
-    <div id="visual-fx" class="pow-text comic-font text-8xl md:text-9xl text-yellow-300">¡DESPEJADO!</div>
+    <div id="visual-fx" class="pow-text comic-font text-8xl md:text-9xl text-yellow-300">¡ÓRBITA!</div>
 
     <div class="max-w-4xl w-full">
 
         <header class="text-center mb-6">
-            <div class="inline-block bg-white border-4 border-black p-4 md:p-6 transform -rotate-1 shadow-[8px_8px_0px_#2563eb] relative z-10 w-full">
-                <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-black pb-2 mb-3 text-xs md:text-sm font-bold text-gray-700">
-                    <span>📚 NIVEL: 4° BÁSICO</span>
+            <div class="inline-block bg-[#fefce8] border-4 border-[#0b1026] p-4 md:p-6 transform -rotate-1 shadow-[8px_8px_0px_#22d3ee] relative z-10 w-full">
+                <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-[#0b1026] pb-2 mb-3 text-xs md:text-sm font-bold text-slate-700">
+                    <span>🚀 NIVEL: 4° BÁSICO</span>
                     <span>⏱️ TIEMPO MÁXIMO: 90 MIN</span>
-                    <span>🧩 UNIDAD: PROBLEMAS CON DINERO (OA 07)</span>
+                    <span>🪙 UNIDAD: PROBLEMAS CON DINERO (OA 07)</span>
                 </div>
-                <h1 class="text-3xl md:text-5xl comic-font text-blue-700 tracking-wide uppercase">
-                    Gatito Chill vs. Patito Amarillito
+                <h1 class="text-3xl md:text-5xl comic-font text-indigo-700 tracking-wide uppercase">
+                    Mercado Lunar
                 </h1>
-                <p class="text-lg md:text-2xl chill-font text-purple-900 mt-1">
-                    Escape Room de Problemas con Dinero
+                <p class="text-lg md:text-2xl comic-font text-amber-600 mt-1 tracking-widest">
+                    La Feria de las Divisones
                 </p>
             </div>
-            <div class="mt-4 bg-yellow-100 border-2 border-black p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
+            <div class="mt-4 bg-amber-100 border-2 border-[#0b1026] p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
                 <p class="font-bold text-xs md:text-sm text-indigo-950">
-                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 07)</span>: Resolver problemas rutinarios y no rutinarios en contextos cotidianos que incluyen dinero, seleccionando y utilizando la operación apropiada.
+                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 07)</span>: Resolver problemas rutinarios y no rutinarios en contextos cotidianos que incluyen dinero, seleccionando y utilizando la operación apropiada. <b>Énfasis en divisiones exactas de dos dígitos por un dígito (ej. 36 ÷ 2 = 18).</b>
                 </p>
             </div>
         </header>
@@ -187,65 +128,65 @@
 
             <!-- PANTALLA 1: INICIO -->
             <div id="screen-start" class="comic-panel p-6 md:p-8 space-y-6">
-                <div class="flex justify-center items-center gap-4 text-6xl md:text-7xl animate-bounce">
-                    <span>🐱</span><span class="text-3xl font-black">VS</span><span>🐤</span>
+                <div class="flex justify-center items-center gap-4 text-6xl md:text-7xl">
+                    <span class="coin">👽</span><span class="text-3xl font-black comic-font text-indigo-700">VS</span><span class="coin" style="animation-delay:0.5s">🤖</span>
                 </div>
 
                 <div class="text-center">
-                    <h2 class="text-2xl md:text-4xl comic-font text-red-600">¡EL DESORDEN DEL DINERO HA LLEGADO!</h2>
-                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">Patito Amarillito ha desordenado todas las compras y ventas de la ciudad...</p>
+                    <h2 class="text-2xl md:text-4xl comic-font text-rose-600">¡EL MERCADO LUNAR ESTÁ EN CRISIS!</h2>
+                    <p class="text-sm md:text-base font-bold text-slate-600 mt-1">El robot Glitch-9 ha enredado los precios y las divisiones de la feria...</p>
                 </div>
 
-                <div class="bg-blue-50 border-4 border-black p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
+                <div class="bg-indigo-50 border-4 border-[#0b1026] p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
                     <p class="text-base md:text-lg">
-                        El villano <b>Patito Amarillito</b> lanzó su <i>"Rayo del Desorden Monetario"</i> sobre la Ciudad del Dinero, haciendo que las sumas, restas, multiplicaciones y divisiones en las compras se volvieran un caos. Las tiendas ya no saben cuánto cobrar, los clientes no saben cuánto vuelto recibir y los ahorros han perdido su valor.
+                        En el <b>Mercado Lunar</b>, los vendedores intercambian <i>créditos estelares</i> por mercancías. Pero el travieso <b>Robot Glitch-9</b> activó su <i>"Protocolo de División Caótica"</i>: ahora nadie sabe cuántos créditos le tocan a cada puesto cuando reparten sus ganancias entre 2, 3, 4, 5, 6, 7, 8 o 9 comerciantes.
                     </p>
                     <p class="text-base md:text-lg">
-                        Con su taza de té siempre a mano, el sereno <b>Gatito Chill</b> nos guía con una sonrisa:
+                        La valiente <b>Capitana Nova</b> te necesita para restaurar las cuentas:
                     </p>
-                    <blockquote class="bg-yellow-200 border-l-4 border-yellow-600 p-3 rounded font-bold text-indigo-900 italic text-sm md:text-base">
-                        "Tranquilos, amigos... para resolver problemas con dinero, hay que leer bien, elegir la operación correcta y revisar los cálculos. ¡Chill, que el equilibrio volverá!"
+                    <blockquote class="bg-cyan-100 border-l-4 border-cyan-600 p-3 rounded font-bold text-indigo-900 italic text-sm md:text-base">
+                        "Recluta, en el espacio cada crédito cuenta. Recuerda: para repartir en partes iguales, dividimos. Y si el número es de dos dígitos y el divisor de uno, ¡el resultado debe ser exacto! ¡A calcular se ha dicho!"
                     </blockquote>
                 </div>
 
-                <div class="bg-purple-100 border-4 border-black p-5 rounded-xl text-left space-y-3 shadow-md">
-                    <label class="block font-black text-purple-900 uppercase text-base md:text-lg comic-font tracking-wide">
-                        ⚙️ Configuración Docente – Selección de Tramo (10 o 20 preguntas):
+                <div class="bg-violet-100 border-4 border-[#0b1026] p-5 rounded-xl text-left space-y-3 shadow-md">
+                    <label class="block font-black text-violet-900 uppercase text-base md:text-lg comic-font tracking-wide">
+                        ⚙️ Configuración Docente – Selección de Tramo:
                     </label>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            📍 Parte 1 (Preguntas 1 a 10)<br />
-                            <span class="text-xs font-normal normal-case block">Operaciones básicas con dinero</span>
+                            🪐 Parte 1 (1-10)<br />
+                            <span class="text-xs font-normal normal-case block">Monedas lunares y división 2÷1</span>
                         </button>
                         <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            📍 Parte 2 (Preguntas 11 a 20)<br />
-                            <span class="text-xs font-normal normal-case block">Problemas combinados y vueltos</span>
+                            🌟 Parte 2 (11-20)<br />
+                            <span class="text-xs font-normal normal-case block">Créditos estelares combinados</span>
                         </button>
                         <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            🔥 Modo Completo (20 Retos)<br />
-                            <span class="text-xs font-normal normal-case block">Evaluación continua completa</span>
+                            🚀 Modo Completo (20)<br />
+                            <span class="text-xs font-normal normal-case block">Misión total lunar</span>
                         </button>
                     </div>
                 </div>
 
-                <div class="flex flex-wrap items-center justify-between gap-3 bg-gray-100 p-3 border-2 border-black rounded-lg">
+                <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-100 p-3 border-2 border-[#0b1026] rounded-lg">
                     <div class="flex items-center gap-2">
-                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
-                        <label for="sound-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">🔊 SFX Retro</label>
+                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-violet-600" />
+                        <label for="sound-toggle" class="font-bold text-sm text-slate-800 cursor-pointer select-none">🔊 SFX Espacial</label>
                     </div>
                     <div class="flex items-center gap-2">
-                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
-                        <label for="hints-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">💡 Permitir pistas</label>
+                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-violet-600" />
+                        <label for="hints-toggle" class="font-bold text-sm text-slate-800 cursor-pointer select-none">💡 Permitir pistas</label>
                     </div>
                 </div>
 
                 <div class="pt-2">
-                    <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-black text-2xl md:text-3xl py-4 w-full rounded-xl">
-                        ¡RESTAURAR EL ORDEN DEL DINERO! 🚀
+                    <button onclick="startGame()" class="btn-comic bg-amber-400 hover:bg-amber-300 text-black text-2xl md:text-3xl py-4 w-full rounded-xl">
+                        ¡REPARAR EL MERCADO LUNAR! 🛸
                     </button>
                 </div>
 
-                <div class="text-center pt-2 border-t-2 border-gray-200">
+                <div class="text-center pt-2 border-t-2 border-slate-200">
                     <button onclick="toggleExtraModules()" class="text-sm font-bold text-blue-700 underline hover:text-blue-900">
                         📋 Ver Secciones Complementarias (Problemas de 4 pasos, Metacognición y Autoevaluación)
                     </button>
@@ -254,57 +195,57 @@
 
             <!-- PANTALLA 2: JUEGO -->
             <div id="screen-game" class="hidden space-y-6">
-                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white border-4 border-black p-4 shadow-[6px_6px_0px_black]">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-[#fefce8] border-4 border-[#0b1026] p-4 shadow-[6px_6px_0px_#0b1026]">
                     <div class="flex items-center gap-3">
-                        <span class="text-3xl">🐱</span>
+                        <span class="text-3xl">🛸</span>
                         <div>
-                            <div class="comic-font text-2xl text-red-600 leading-tight" id="level-label">DESAFÍO 1 / 10</div>
-                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: OPERACIONES BÁSICAS</div>
+                            <div class="comic-font text-2xl text-rose-600 leading-tight" id="level-label">DESAFÍO 1 / 10</div>
+                            <div class="text-xs font-bold text-slate-500 uppercase" id="section-badge">PARTE 1: MONEDAS LUNARES</div>
                         </div>
                     </div>
                     <div class="w-full md:w-1/2 progress-bar-container">
                         <div id="progress-fill" class="progress-bar-fill" style="width: 5%"></div>
                     </div>
-                    <button onclick="confirmExit()" class="text-xs font-bold bg-gray-200 hover:bg-gray-300 border-2 border-black px-3 py-1 rounded">
+                    <button onclick="confirmExit()" class="text-xs font-bold bg-slate-200 hover:bg-slate-300 border-2 border-[#0b1026] px-3 py-1 rounded">
                         ⚙️ Menú
                     </button>
                 </div>
 
-                <div class="comic-panel p-5 md:p-8 alarm-border border-4">
-                    <div class="flex items-start gap-4 mb-6 bg-blue-50 border-2 border-black p-4 rounded-xl">
-                        <div class="text-5xl" id="hero-avatar">🐱</div>
+                <div class="comic-panel p-5 md:p-8 glow-border border-4">
+                    <div class="flex items-start gap-4 mb-6 bg-cyan-50 border-2 border-[#0b1026] p-4 rounded-xl">
+                        <div class="text-5xl" id="hero-avatar">👩‍🚀</div>
                         <div class="w-full">
-                            <div class="flex justify-between items-center">
-                                <h4 class="font-bold text-red-600 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Legión del Despeje: Gatito Chill</h4>
-                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Dinero</span>
+                            <div class="flex justify-between items-center flex-wrap gap-2">
+                                <h4 class="font-bold text-rose-600 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Tripulación Nova: Capitana Estelar</h4>
+                                <span class="bg-violet-200 border border-[#0b1026] text-violet-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Dinero</span>
                             </div>
-                            <p class="font-bold text-indigo-950 italic text-base md:text-lg mt-1" id="narrative-text">Cargando situación...</p>
+                            <p class="font-bold text-indigo-950 italic text-base md:text-lg mt-1" id="narrative-text">Cargando transmisión...</p>
                         </div>
                     </div>
 
                     <div class="space-y-6 relative z-10">
-                        <div class="bg-gray-50 border-2 border-black p-5 rounded-xl shadow-inner">
-                            <div id="question-number" class="comic-font text-xl text-purple-700 mb-1">PREGUNTA #</div>
-                            <div id="question-text" class="text-xl md:text-2xl font-bold text-gray-900 leading-relaxed font-mono"></div>
+                        <div class="bg-slate-50 border-2 border-[#0b1026] p-5 rounded-xl shadow-inner">
+                            <div id="question-number" class="comic-font text-xl text-violet-700 mb-1">PREGUNTA #</div>
+                            <div id="question-text" class="text-xl md:text-2xl font-bold text-slate-900 leading-relaxed font-mono"></div>
                         </div>
 
                         <div id="hint-container" class="hidden">
-                            <button onclick="toggleHint()" class="text-sm font-bold text-purple-800 bg-purple-100 border-2 border-purple-400 px-3 py-1.5 rounded-lg flex items-center gap-2 hover:bg-purple-200 transition">
+                            <button onclick="toggleHint()" class="text-sm font-bold text-violet-800 bg-violet-100 border-2 border-violet-400 px-3 py-1.5 rounded-lg flex items-center gap-2 hover:bg-violet-200 transition">
                                 💡 <span>Mostrar pista</span>
                             </button>
-                            <div id="hint-box" class="hidden mt-2 p-3 bg-yellow-50 border-2 border-yellow-400 rounded-lg text-sm text-yellow-950 leading-relaxed font-medium"></div>
+                            <div id="hint-box" class="hidden mt-2 p-3 bg-amber-50 border-2 border-amber-400 rounded-lg text-sm text-amber-950 leading-relaxed font-medium"></div>
                         </div>
 
                         <div class="space-y-2">
                             <label class="block font-black text-indigo-950 uppercase tracking-tight text-sm">
                                 🎯 Selecciona la respuesta correcta:
                             </label>
-                            <select id="answer-select" class="w-full p-4 border-4 border-black text-lg md:text-xl font-bold bg-yellow-50 focus:ring-4 focus:ring-purple-300 outline-none cursor-pointer rounded-xl">
+                            <select id="answer-select" class="w-full p-4 border-4 border-[#0b1026] text-lg md:text-xl font-bold bg-amber-50 focus:ring-4 focus:ring-violet-300 outline-none cursor-pointer rounded-xl">
                                 <option value="" disabled selected>-- Elige con calma --</option>
                             </select>
                         </div>
 
-                        <button onclick="checkAnswer()" class="btn-comic bg-red-600 hover:bg-red-500 text-white text-2xl md:text-3xl py-4 w-full rounded-xl">
+                        <button onclick="checkAnswer()" class="btn-comic bg-rose-600 hover:bg-rose-500 text-white text-2xl md:text-3xl py-4 w-full rounded-xl">
                             ¡ENVIAR RESPUESTA! 💥
                         </button>
                     </div>
@@ -313,24 +254,24 @@
 
             <!-- PANTALLA 3: VICTORIA -->
             <div id="screen-end" class="hidden comic-panel p-8 md:p-12 text-center space-y-8">
-                <h2 class="text-5xl md:text-7xl comic-font text-purple-700">¡SISTEMA REESTABLECIDO!</h2>
-                <div class="text-8xl md:text-9xl animate-bounce my-4">🐱⚖️✨</div>
+                <h2 class="text-5xl md:text-7xl comic-font text-indigo-700">¡MERCADO REPARADO!</h2>
+                <div class="text-8xl md:text-9xl my-4 coin">🛸✨🌙</div>
                 <div class="space-y-3">
-                    <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has derrotado a Patito Amarillito!</p>
-                    <p class="text-gray-700 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
-                        Todas las compras y ventas han vuelto a su equilibrio. El dinero de la ciudad está en orden.
+                    <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has derrotado a Glitch-9!</p>
+                    <p class="text-slate-700 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
+                        Los créditos estelares vuelven a circular en equilibrio. El Mercado Lunar está a salvo.
                     </p>
                 </div>
-                <div class="bg-yellow-100 border-4 border-black p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
-                    <p class="text-purple-900">
-                        <b>Gatito Chill te felicita:</b> "¡Excelente! Recuerda leer bien el problema, elegir la operación correcta y revisar tus cálculos. ¡Mantén la calma y el orden siempre regresa!"
+                <div class="bg-amber-100 border-4 border-[#0b1026] p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
+                    <p class="text-violet-900">
+                        <b>Capitana Nova te felicita:</b> "¡Misión cumplida, recluta! Recordaste que dividir es repartir en partes iguales y que 36÷2, 48÷4 o 96÷8 siempre nos dan resultados exactos. ¡El universo matemático está orgulloso!"
                     </p>
                 </div>
                 <div class="flex flex-col md:flex-row justify-center gap-4 pt-4">
                     <button onclick="returnToStart()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-2xl py-4 px-8 rounded-xl">
                         🔄 VOLVER AL MENÚ
                     </button>
-                    <button onclick="toggleExtraModules()" class="btn-comic bg-purple-600 hover:bg-purple-500 text-white text-2xl py-4 px-8 rounded-xl">
+                    <button onclick="toggleExtraModules()" class="btn-comic bg-violet-600 hover:bg-violet-500 text-white text-2xl py-4 px-8 rounded-xl">
                         📝 VER MÓDULOS DE DESARROLLO
                     </button>
                 </div>
@@ -338,15 +279,13 @@
 
             <!-- EXTRAS -->
             <div id="screen-extras" class="hidden comic-panel p-6 md:p-8 space-y-6 my-6">
-                <div class="flex justify-between items-center border-b-4 border-black pb-4">
-                    <h2 class="text-3xl md:text-4xl comic-font text-indigo-900">SECCIONES DE DESARROLLO Y EVALUACIÓN</h2>
-                    <button onclick="closeExtraModules()" class="btn-comic bg-red-500 text-white px-4 py-1 text-xl rounded">
-                        ✖️ CERRAR
-                    </button>
+                <div class="flex justify-between items-center border-b-4 border-[#0b1026] pb-4">
+                    <h2 class="text-3xl md:text-4xl comic-font text-indigo-900">SECCIONES DE DESARROLLO</h2>
+                    <button onclick="closeExtraModules()" class="btn-comic bg-rose-500 text-white px-4 py-1 text-xl rounded">✖️ CERRAR</button>
                 </div>
 
-                <div class="flex flex-wrap gap-2 border-b-2 border-black pb-2">
-                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="extra-tab-btn active-tab py-2 px-3 text-sm bg-yellow-300">II. Problemas (4 Pasos)</button>
+                <div class="flex flex-wrap gap-2 border-b-2 border-[#0b1026] pb-2">
+                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="extra-tab-btn active-tab py-2 px-3 text-sm bg-amber-300">II. Problemas (4 Pasos)</button>
                     <button onclick="switchExtraTab('sec3')" id="tab-sec3" class="extra-tab-btn py-2 px-3 text-sm bg-white">III. Metacognición</button>
                     <button onclick="switchExtraTab('sec4')" id="tab-sec4" class="extra-tab-btn py-2 px-3 text-sm bg-white">IV. Desafío Extra</button>
                     <button onclick="switchExtraTab('sec5')" id="tab-sec5" class="extra-tab-btn py-2 px-3 text-sm bg-white">V. Autoevaluación</button>
@@ -354,55 +293,55 @@
 
                 <!-- SECCIÓN II -->
                 <div id="extra-sec2" class="space-y-6 text-left">
-                    <div class="bg-blue-50 border-2 border-black p-4 rounded-lg">
+                    <div class="bg-blue-50 border-2 border-[#0b1026] p-4 rounded-lg">
                         <h3 class="font-bold text-lg text-blue-900">II. Resolución de Problemas (Estrategia de los 4 Pasos)</h3>
-                        <p class="text-xs text-gray-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Revisar.</p>
+                        <p class="text-xs text-slate-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Revisar.</p>
                     </div>
 
-                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Compra en la librería)</span>
-                        <p class="font-bold text-gray-800">
-                            Martina compra 3 cuadernos a $245 cada uno y 2 lápices a $120 cada uno. Si paga con un billete de $1.000, ¿cuánto vuelto recibe?
+                    <div class="border-2 border-[#0b1026] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-green-200 border border-[#0b1026] text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Reparto de cristales)</span>
+                        <p class="font-bold text-slate-800">
+                            En el Mercado Lunar, 2 comerciantes juntaron 36 créditos estelares y los reparten en partes iguales. ¿Cuántos créditos recibe cada uno?
                         </p>
-                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
-                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
-                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> 3 cuadernos de $245 y 2 lápices de $120. Paga con $1.000. Se busca el vuelto.</p>
-                                <p><b>2. Planificar:</b> Multiplicar 245 × 3 y 120 × 2. Sumar los totales. Restar de $1.000.</p>
-                                <p><b>3. Resolver:</b> 245 × 3 = 735. 120 × 2 = 240. Total = 975. Vuelto = 1.000 - 975 = $25.</p>
-                                <p><b>4. Revisar:</b> 735 + 240 = 975. 975 + 25 = 1.000. Correcto.</p>
+                        <details class="bg-slate-50 p-3 rounded border border-slate-300">
+                            <summary class="font-bold text-violet-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-slate-800 space-y-1 pl-2 border-l-2 border-violet-500">
+                                <p><b>1. Comprender:</b> 36 créditos entre 2 comerciantes. Se busca la cantidad por cada uno.</p>
+                                <p><b>2. Planificar:</b> Dividir 36 ÷ 2.</p>
+                                <p><b>3. Resolver:</b> 36 ÷ 2 = 18 créditos.</p>
+                                <p><b>4. Revisar:</b> 18 × 2 = 36. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Ahorro para un juguete)</span>
-                        <p class="font-bold text-gray-800">
-                            Tomás quiere comprar un juguete que cuesta $850. Ya tiene ahorrados $320. Si su mamá le da $150 y su abuelo le da $200, ¿cuánto dinero le falta para comprar el juguete?
+                    <div class="border-2 border-[#0b1026] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-orange-200 border border-[#0b1026] text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Pago con créditos)</span>
+                        <p class="font-bold text-slate-800">
+                            Un explorador compra 4 mapas estelares a $150 cada uno y paga con $700. ¿Cuánto vuelto recibe?
                         </p>
-                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
-                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
-                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> Juguete $850. Ahorros $320 + $150 + $200. Se busca cuánto falta.</p>
-                                <p><b>2. Planificar:</b> Sumar los ahorros y restar del precio del juguete.</p>
-                                <p><b>3. Resolver:</b> 320 + 150 + 200 = 670. 850 - 670 = $180.</p>
-                                <p><b>4. Revisar:</b> 670 + 180 = 850. Correcto.</p>
+                        <details class="bg-slate-50 p-3 rounded border border-slate-300">
+                            <summary class="font-bold text-violet-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-slate-800 space-y-1 pl-2 border-l-2 border-violet-500">
+                                <p><b>1. Comprender:</b> 4 mapas de $150. Paga con $700. Se busca el vuelto.</p>
+                                <p><b>2. Planificar:</b> Multiplicar 150 × 4 y restar de 700.</p>
+                                <p><b>3. Resolver:</b> 150 × 4 = 600. 700 − 600 = $100.</p>
+                                <p><b>4. Revisar:</b> 600 + 100 = 700. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Reparto de dinero)</span>
-                        <p class="font-bold text-gray-800">
-                            En una feria, un vendedor recaudó $480 en un día. Si quiere repartir ese dinero en partes iguales entre 4 personas, ¿cuánto recibe cada una?
+                    <div class="border-2 border-[#0b1026] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-violet-200 border border-[#0b1026] text-violet-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (División exacta 2÷1)</span>
+                        <p class="font-bold text-slate-800">
+                            Una nave reparte 84 créditos entre 6 tripulantes en partes iguales. ¿Cuántos créditos recibe cada tripulante?
                         </p>
-                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
-                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
-                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> $480 repartidos entre 4 personas. Se busca la cantidad por persona.</p>
-                                <p><b>2. Planificar:</b> Dividir 480 ÷ 4.</p>
-                                <p><b>3. Resolver:</b> 480 ÷ 4 = $120.</p>
-                                <p><b>4. Revisar:</b> 120 × 4 = 480. Correcto.</p>
+                        <details class="bg-slate-50 p-3 rounded border border-slate-300">
+                            <summary class="font-bold text-violet-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-slate-800 space-y-1 pl-2 border-l-2 border-violet-500">
+                                <p><b>1. Comprender:</b> 84 créditos entre 6 tripulantes. Se busca la cantidad por tripulante.</p>
+                                <p><b>2. Planificar:</b> Dividir 84 ÷ 6.</p>
+                                <p><b>3. Resolver:</b> 84 ÷ 6 = 14 créditos.</p>
+                                <p><b>4. Revisar:</b> 14 × 6 = 84. Correcto.</p>
                             </div>
                         </details>
                     </div>
@@ -410,74 +349,74 @@
 
                 <!-- SECCIÓN III -->
                 <div id="extra-sec3" class="hidden space-y-4 text-left">
-                    <div class="bg-purple-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-purple-900">III. Metacognición (Reflexión del Estudiante)</h3>
+                    <div class="bg-violet-50 border-2 border-[#0b1026] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-violet-900">III. Metacognición (Reflexión del Estudiante)</h3>
                     </div>
                     <div class="space-y-3">
-                        <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">1. En el Problema 1, ¿cómo supiste qué operaciones usar para calcular el total gastado y luego el vuelto?</p>
+                        <div class="p-3 bg-white border border-[#0b1026] rounded-lg">
+                            <p class="font-bold text-sm text-slate-800">1. ¿Cómo reconoces cuándo un problema con dinero requiere una división y no una resta?</p>
                         </div>
-                        <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">2. En el Problema 2, ¿qué pasos seguiste para sumar los ahorros y restar del precio del juguete?</p>
+                        <div class="p-3 bg-white border border-[#0b1026] rounded-lg">
+                            <p class="font-bold text-sm text-slate-800">2. Explica con tus palabras por qué 36 ÷ 2 da un resultado exacto y cómo lo compruebas con la multiplicación.</p>
                         </div>
-                        <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">3. En el Problema 3, ¿cómo verificaste que el reparto del dinero era correcto?</p>
+                        <div class="p-3 bg-white border border-[#0b1026] rounded-lg">
+                            <p class="font-bold text-sm text-slate-800">3. ¿Qué estrategia usas para calcular mentalmente divisiones como 84 ÷ 6 o 96 ÷ 8?</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- SECCIÓN IV -->
                 <div id="extra-sec4" class="hidden space-y-4 text-left">
-                    <div class="bg-yellow-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Lógica Inversa)</h3>
-                        <p class="text-sm text-gray-800">
-                            Sofía compró 4 helados y pagó con un billete de $500. Si recibió $60 de vuelto, ¿cuánto costaba cada helado?
+                    <div class="bg-amber-50 border-2 border-[#0b1026] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-amber-900">IV. Desafío Extra (Lógica Inversa)</h3>
+                        <p class="text-sm text-slate-800">
+                            Un puesto del mercado vendió 7 lámparas solares y juntó 91 créditos. Si todas costaban lo mismo, ¿cuánto costaba cada lámpara?
                         </p>
                     </div>
-                    <div class="p-4 bg-white border-2 border-black rounded-xl space-y-3">
-                        <button onclick="toggleExtraHint()" class="btn-comic bg-yellow-400 text-black text-sm px-4 py-2 rounded">
-                            🧩 Revelar Solución por Reversión de Gatito Chill
+                    <div class="p-4 bg-white border-2 border-[#0b1026] rounded-xl space-y-3">
+                        <button onclick="toggleExtraHint()" class="btn-comic bg-amber-400 text-black text-sm px-4 py-2 rounded">
+                            🧩 Revelar Solución por Reversión de la Capitana Nova
                         </button>
-                        <div id="extra-hint-box" class="hidden text-sm bg-yellow-100 p-3 rounded border border-yellow-300 leading-relaxed">
-                            <p><b>Paso 1:</b> Lo que gastó = $500 - $60 = $440.</p>
-                            <p><b>Paso 2:</b> Cada helado costó $440 ÷ 4 = $110.</p>
-                            <p><b>Resultado:</b> Cada helado costaba <b>$110</b>.</p>
+                        <div id="extra-hint-box" class="hidden text-sm bg-amber-100 p-3 rounded border border-amber-300 leading-relaxed">
+                            <p><b>Paso 1:</b> Como las 7 lámparas costaban lo mismo, dividimos el total entre 7.</p>
+                            <p><b>Paso 2:</b> 91 ÷ 7 = 13.</p>
+                            <p><b>Resultado:</b> Cada lámpara costaba <b>13 créditos estelares</b>.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- SECCIÓN V -->
                 <div id="extra-sec5" class="hidden space-y-4 text-left">
-                    <div class="bg-green-50 border-2 border-black p-4 rounded-lg">
+                    <div class="bg-green-50 border-2 border-[#0b1026] p-4 rounded-lg">
                         <h3 class="font-bold text-lg text-green-900">V. Autoevaluación del Estudiante</h3>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-sm border-2 border-black bg-white">
-                            <thead class="bg-yellow-300 border-b-2 border-black">
+                        <table class="w-full text-sm border-2 border-[#0b1026] bg-white">
+                            <thead class="bg-amber-300 border-b-2 border-[#0b1026]">
                                 <tr>
-                                    <th class="p-2 text-left border-r border-black">Afirmación</th>
-                                    <th class="p-2 text-center border-r border-black">Logrado (3)</th>
-                                    <th class="p-2 text-center border-r border-black">En proceso (2)</th>
+                                    <th class="p-2 text-left border-r border-[#0b1026]">Afirmación</th>
+                                    <th class="p-2 text-center border-r border-[#0b1026]">Logrado (3)</th>
+                                    <th class="p-2 text-center border-r border-[#0b1026]">En proceso (2)</th>
                                     <th class="p-2 text-center">Por lograr (1)</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">1. Identifico qué operación usar en problemas con dinero.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
+                                <tr class="border-b border-[#0b1026]">
+                                    <td class="p-2 border-r border-[#0b1026] font-medium">1. Identifico cuándo debo dividir para repartir dinero en partes iguales.</td>
+                                    <td class="p-2 text-center border-r border-[#0b1026]"><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center border-r border-[#0b1026]"><input type="radio" name="auto1" /></td>
                                     <td class="p-2 text-center"><input type="radio" name="auto1" /></td>
                                 </tr>
-                                <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">2. Realizo correctamente sumas, restas, multiplicaciones y divisiones con dinero.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
+                                <tr class="border-b border-[#0b1026]">
+                                    <td class="p-2 border-r border-[#0b1026] font-medium">2. Resuelvo divisiones exactas de dos dígitos por un dígito (ej. 36÷2, 48÷4, 84÷6).</td>
+                                    <td class="p-2 text-center border-r border-[#0b1026]"><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center border-r border-[#0b1026]"><input type="radio" name="auto2" /></td>
                                     <td class="p-2 text-center"><input type="radio" name="auto2" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2 border-r border-black font-medium">3. Reviso y verifico mis resultados antes de responder.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 border-r border-[#0b1026] font-medium">3. Reviso mis resultados comprobando con la multiplicación inversa.</td>
+                                    <td class="p-2 text-center border-r border-[#0b1026]"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center border-r border-[#0b1026]"><input type="radio" name="auto3" /></td>
                                     <td class="p-2 text-center"><input type="radio" name="auto3" /></td>
                                 </tr>
                             </tbody>
@@ -491,195 +430,135 @@
 
     <script>
         // ================================================================
-        //  NUEVO BANCO DE 20 PREGUNTAS – PROBLEMAS CON DINERO (4° BÁSICO)
-        //  Ámbito: sumas/restas hasta 1000, multiplicación 3 dígitos × 1 dígito,
-        //  división 2 dígitos ÷ 1 dígito.
+        //  BANCO DE 20 PREGUNTAS – MERCADO LUNAR (4° BÁSICO)
+        //  Todas las divisiones son exactas: 2 dígitos ÷ 1 dígito
+        //  (36÷2, 48÷4, 56÷7, 63÷9, 72÷8, 84÷6, 96÷8, 78÷6, 95÷5, 68÷4, 91÷7, 54÷6)
         // ================================================================
         const allQuestions = [
-            // ---- PARTE 1: Operaciones básicas (1-10) ----
+            // ---- PARTE 1: Monedas Lunares (1-10) ----
             {
-                id: 1,
-                part: 1,
-                type: "Suma",
-                narrative: "Patito Amarillito desordenó las compras. ¡Ayuda a Gatito Chill a sumar!",
-                q: "Camila compra un jugo de $350 y un sándwich de $280. ¿Cuánto gasta en total?",
-                a: "$630",
-                options: ["$530", "$630", "$730", "$570"],
-                hint: "Suma: 350 + 280 = 630."
+                id: 1, part: 1, type: "Suma",
+                narrative: "Glitch-9 desordenó los precios de los telescopios. ¡Suma con cuidado!",
+                q: "Un telescopio cuesta $245 y un mapa estelar cuesta $180. ¿Cuánto gasta un explorador en total?",
+                a: "$425", options: ["$325", "$425", "$525", "$415"],
+                hint: "Suma: 245 + 180 = 425."
             }, {
-                id: 2,
-                part: 1,
-                type: "Resta",
-                narrative: "Gatito Chill necesita calcular el vuelto.",
-                q: "Andrés paga con $500 una compra de $320. ¿Cuánto vuelto recibe?",
-                a: "$180",
-                options: ["$180", "$220", "$280", "$120"],
-                hint: "Resta: 500 - 320 = 180."
+                id: 2, part: 1, type: "Resta",
+                narrative: "La Capitana Nova necesita calcular el vuelto de una compra.",
+                q: "Un cliente paga con $500 una compra de $175. ¿Cuánto vuelto recibe?",
+                a: "$325", options: ["$225", "$275", "$325", "$375"],
+                hint: "Resta: 500 - 175 = 325."
             }, {
-                id: 3,
-                part: 1,
-                type: "Multiplicación",
-                narrative: "Patito Amarillito mezcló los precios de las entradas.",
-                q: "Si cada entrada al cine cuesta $250 y se compran 4 entradas, ¿cuánto se paga en total?",
-                a: "$1.000",
-                options: ["$750", "$1.000", "$1.250", "$900"],
-                hint: "Multiplica: 250 × 4 = 1.000."
+                id: 3, part: 1, type: "División (2÷1)",
+                narrative: "Dos comerciantes reparten sus créditos estelares en partes iguales.",
+                q: "Si 2 comerciantes se reparten 36 créditos estelares en partes iguales, ¿cuántos créditos recibe cada uno?",
+                a: "18 créditos", options: ["16 créditos", "18 créditos", "20 créditos", "22 créditos"],
+                hint: "Divide: 36 ÷ 2 = 18."
             }, {
-                id: 4,
-                part: 1,
-                type: "División",
-                narrative: "Gatito Chill reparte el dinero equitativamente.",
-                q: "Se reparten $480 en partes iguales entre 4 amigos. ¿Cuánto recibe cada uno?",
-                a: "$120",
-                options: ["$100", "$120", "$140", "$160"],
-                hint: "Divide: 480 ÷ 4 = 120."
+                id: 4, part: 1, type: "Multiplicación",
+                narrative: "Glitch-9 mezcló los precios de las raciones espaciales.",
+                q: "Cada ración espacial cuesta $125. ¿Cuánto se paga por 4 raciones?",
+                a: "$500", options: ["$400", "$450", "$500", "$550"],
+                hint: "Multiplica: 125 × 4 = 500."
             }, {
-                id: 5,
-                part: 1,
-                type: "Suma y resta",
-                narrative: "Patito Amarillito desordenó el vuelto de una compra doble.",
-                q: "Lucía compra un libro de $450 y un cuaderno de $180. Si paga con $700, ¿cuánto vuelto recibe?",
-                a: "$70",
-                options: ["$70", "$80", "$90", "$100"],
-                hint: "Suma: 450 + 180 = 630. Resta: 700 - 630 = 70."
+                id: 5, part: 1, type: "División (2÷1)",
+                narrative: "Cuatro tripulantes reparten los créditos de una misión.",
+                q: "Si 4 tripulantes se reparten 48 créditos en partes iguales, ¿cuántos créditos recibe cada uno?",
+                a: "12 créditos", options: ["10 créditos", "12 créditos", "14 créditos", "16 créditos"],
+                hint: "Divide: 48 ÷ 4 = 12."
             }, {
-                id: 6,
-                part: 1,
-                type: "Multiplicación",
-                narrative: "Un pasaje de bus cuesta $320. ¿Cuánto pagan 3 pasajes?",
-                q: "Cada pasaje de bus cuesta $320. ¿Cuánto se paga por 3 pasajes?",
-                a: "$960",
-                options: ["$860", "$960", "$1.060", "$1.260"],
-                hint: "Multiplica: 320 × 3 = 960."
+                id: 6, part: 1, type: "Suma",
+                narrative: "Dos puestos del mercado juntan sus ganancias.",
+                q: "Un puesto ganó $320 y otro ganó $240. ¿Cuánto juntaron entre los dos?",
+                a: "$560", options: ["$460", "$520", "$560", "$620"],
+                hint: "Suma: 320 + 240 = 560."
             }, {
-                id: 7,
-                part: 1,
-                type: "División",
-                narrative: "Gatito Chill reparte las ganancias de un negocio.",
-                q: "Un vendedor recaudó $840 en una feria y los reparte en partes iguales entre 4 personas. ¿Cuánto recibe cada una?",
-                a: "$210",
-                options: ["$180", "$210", "$240", "$280"],
-                hint: "Divide: 840 ÷ 4 = 210."
+                id: 7, part: 1, type: "División (2÷1)",
+                narrative: "Siete robots exploradores reparten cristales lunares.",
+                q: "Si 7 robots se reparten 56 cristales lunares en partes iguales, ¿cuántos cristales recibe cada uno?",
+                a: "8 cristales", options: ["7 cristales", "8 cristales", "9 cristales", "10 cristales"],
+                hint: "Divide: 56 ÷ 7 = 8."
             }, {
-                id: 8,
-                part: 1,
-                type: "Resta",
-                narrative: "Patito Amarillito escondió el ahorro de Martín.",
-                q: "Martín tenía ahorrados $750 y gastó $280 en un juguete. ¿Cuánto dinero le queda?",
-                a: "$470",
-                options: ["$430", "$470", "$520", "$570"],
-                hint: "Resta: 750 - 280 = 470."
+                id: 8, part: 1, type: "Resta",
+                narrative: "Un comerciante revisa su saldo después de una compra.",
+                q: "Un comerciante tenía $800 y gastó $350 en mercancía. ¿Cuánto dinero le queda?",
+                a: "$450", options: ["$350", "$400", "$450", "$550"],
+                hint: "Resta: 800 - 350 = 450."
             }, {
-                id: 9,
-                part: 1,
-                type: "Multiplicación",
-                narrative: "Una caja de lápices cuesta $245. ¿Cuánto cuestan 3 cajas?",
-                q: "Si una caja de lápices cuesta $245, ¿cuánto se paga por 3 cajas?",
-                a: "$735",
-                options: ["$635", "$735", "$835", "$935"],
-                hint: "Multiplica: 245 × 3 = 735."
+                id: 9, part: 1, type: "División (2÷1)",
+                narrative: "Nueve puestos reparten los créditos de una feria.",
+                q: "Si 9 puestos se reparten 63 créditos en partes iguales, ¿cuántos créditos recibe cada puesto?",
+                a: "7 créditos", options: ["6 créditos", "7 créditos", "8 créditos", "9 créditos"],
+                hint: "Divide: 63 ÷ 9 = 7."
             }, {
-                id: 10,
-                part: 1,
-                type: "Suma",
-                narrative: "Gatito Chill suma los ahorros de dos hermanos.",
-                q: "Ana tiene $360 ahorrados y su hermano tiene $420. ¿Cuánto dinero tienen entre los dos?",
-                a: "$780",
-                options: ["$680", "$720", "$780", "$820"],
-                hint: "Suma: 360 + 420 = 780."
+                id: 10, part: 1, type: "Multiplicación",
+                narrative: "Glitch-9 enredó el precio de los trajes espaciales.",
+                q: "Cada traje espacial cuesta $215. ¿Cuánto se paga por 3 trajes?",
+                a: "$645", options: ["$545", "$615", "$645", "$745"],
+                hint: "Multiplica: 215 × 3 = 645."
             },
 
-            // ---- PARTE 2: Problemas combinados y vueltos (11-20) ----
+            // ---- PARTE 2: Créditos Estelares (11-20) ----
             {
-                id: 11,
-                part: 2,
-                type: "Multiplicación y suma",
-                narrative: "Patito Amarillito desordenó el total de una compra con varios productos.",
-                q: "Sofía compra 2 cuadernos de $150 cada uno y 1 libro de $320. ¿Cuánto gasta en total?",
-                a: "$620",
-                options: ["$520", "$620", "$720", "$820"],
-                hint: "Multiplica: 150 × 2 = 300. Suma: 300 + 320 = 620."
+                id: 11, part: 2, type: "División y suma",
+                narrative: "Glitch-9 combinó un reparto con una suma de créditos.",
+                q: "Se reparten 72 créditos entre 8 robots. Luego, cada robot recibe 5 créditos extra. ¿Cuántos créditos tiene cada robot al final?",
+                a: "14 créditos", options: ["12 créditos", "13 créditos", "14 créditos", "15 créditos"],
+                hint: "Divide: 72 ÷ 8 = 9. Suma: 9 + 5 = 14."
             }, {
-                id: 12,
-                part: 2,
-                type: "División",
-                narrative: "Gatito Chill necesita repartir una recaudación.",
-                q: "En una tienda se recaudaron $720 en un día. Si se reparten en partes iguales entre 6 empleados, ¿cuánto recibe cada uno?",
-                a: "$120",
-                options: ["$100", "$110", "$120", "$130"],
-                hint: "Divide: 720 ÷ 6 = 120."
+                id: 12, part: 2, type: "División y resta",
+                narrative: "La Capitana Nova calcula cuánto falta después de un reparto.",
+                q: "Se tienen 84 créditos y se reparten entre 6 personas. Si luego se gastan 10 créditos, ¿cuántos créditos quedan?",
+                a: "4 créditos", options: ["2 créditos", "4 créditos", "6 créditos", "8 créditos"],
+                hint: "Divide: 84 ÷ 6 = 14. Resta: 14 - 10 = 4."
             }, {
-                id: 13,
-                part: 2,
-                type: "Resta y multiplicación",
-                narrative: "Patito Amarillito confundió el vuelto de una compra múltiple.",
-                q: "Pedro compra 3 helados de $180 cada uno y paga con $1.000. ¿Cuánto vuelto recibe?",
-                a: "$460",
-                options: ["$360", "$460", "$540", "$640"],
-                hint: "Multiplica: 180 × 3 = 540. Resta: 1000 - 540 = 460."
+                id: 13, part: 2, type: "División (2÷1)",
+                narrative: "Glitch-9 desordenó el reparto de una nave nodriza.",
+                q: "Si 6 naves pequeñas se reparten 84 créditos en partes iguales, ¿cuántos créditos recibe cada nave?",
+                a: "14 créditos", options: ["12 créditos", "13 créditos", "14 créditos", "16 créditos"],
+                hint: "Divide: 84 ÷ 6 = 14."
             }, {
-                id: 14,
-                part: 2,
-                type: "Suma y resta",
-                narrative: "Gatito Chill calcula el saldo final de una cuenta.",
-                q: "Valentina tenía $850. Pagó una cuenta de $320 y luego recibió $150. ¿Cuánto dinero tiene ahora?",
-                a: "$680",
-                options: ["$580", "$680", "$780", "$880"],
-                hint: "Resta: 850 - 320 = 530. Suma: 530 + 150 = 680."
+                id: 14, part: 2, type: "División y multiplicación",
+                narrative: "Un puesto calcula sus ganancias por unidad.",
+                q: "Un puesto reparte 96 créditos entre 8 cajas. Si cada caja se vende a 5 créditos, ¿cuánto se obtiene por todas las cajas?",
+                a: "60 créditos", options: ["50 créditos", "55 créditos", "60 créditos", "65 créditos"],
+                hint: "Divide: 96 ÷ 8 = 12. Multiplica: 12 × 5 = 60."
             }, {
-                id: 15,
-                part: 2,
-                type: "Multiplicación",
-                narrative: "Patito Amarillito desordenó el precio de las bebidas.",
-                q: "Si cada bebida cuesta $275 y se compran 4 bebidas, ¿cuánto se paga en total?",
-                a: "$1.100",
-                options: ["$900", "$1.000", "$1.100", "$1.200"],
-                hint: "Multiplica: 275 × 4 = 1.100."
+                id: 15, part: 2, type: "División (2÷1)",
+                narrative: "Seis exploradores reparten los créditos de una expedición.",
+                q: "Si 6 exploradores se reparten 78 créditos en partes iguales, ¿cuántos créditos recibe cada uno?",
+                a: "13 créditos", options: ["11 créditos", "12 créditos", "13 créditos", "14 créditos"],
+                hint: "Divide: 78 ÷ 6 = 13."
             }, {
-                id: 16,
-                part: 2,
-                type: "División y resta",
-                narrative: "Gatito Chill reparte ganancias y calcula lo que sobra.",
-                q: "Se tienen $960 para repartir entre 4 personas. Si cada una recibe la misma cantidad, ¿cuánto recibe cada una y cuánto sobra?",
-                a: "$240 cada una y sobran $0",
-                options: ["$220 cada una y sobran $80", "$240 cada una y sobran $0", "$230 cada una y sobran $40", "$250 cada una y sobran $40"],
-                hint: "Divide: 960 ÷ 4 = 240. No sobra nada."
+                id: 16, part: 2, type: "División (2÷1)",
+                narrative: "Ocho satélites reparten los créditos de una señal.",
+                q: "Si 8 satélites se reparten 96 créditos en partes iguales, ¿cuántos créditos recibe cada satélite?",
+                a: "12 créditos", options: ["10 créditos", "11 créditos", "12 créditos", "13 créditos"],
+                hint: "Divide: 96 ÷ 8 = 12."
             }, {
-                id: 17,
-                part: 2,
-                type: "Suma y multiplicación",
-                narrative: "Patito Amarillito mezcló los precios de una fiesta.",
-                q: "Para una fiesta se compran 2 tortas de $450 cada una y 3 bolsas de dulces de $120 cada una. ¿Cuál es el gasto total?",
-                a: "$1.260",
-                options: ["$1.160", "$1.260", "$1.360", "$1.460"],
-                hint: "Multiplica: 450 × 2 = 900. 120 × 3 = 360. Suma: 900 + 360 = 1.260."
+                id: 17, part: 2, type: "División (2÷1)",
+                narrative: "Cinco puestos lunares reparten sus ganancias.",
+                q: "Si 5 puestos se reparten 95 créditos en partes iguales, ¿cuántos créditos recibe cada puesto?",
+                a: "19 créditos", options: ["17 créditos", "18 créditos", "19 créditos", "20 créditos"],
+                hint: "Divide: 95 ÷ 5 = 19."
             }, {
-                id: 18,
-                part: 2,
-                type: "Resta",
-                narrative: "Gatito Chill calcula cuánto falta para un ahorro.",
-                q: "Javiera quiere comprar un libro de $780 y tiene ahorrados $450. ¿Cuánto dinero le falta?",
-                a: "$330",
-                options: ["$230", "$280", "$330", "$380"],
-                hint: "Resta: 780 - 450 = 330."
+                id: 18, part: 2, type: "División y suma",
+                narrative: "Cuatro familias reparten y luego suman sus ahorros.",
+                q: "Se reparten 68 créditos entre 4 familias. Si cada familia ya tenía 6 créditos ahorrados, ¿cuántos créditos tiene ahora cada familia?",
+                a: "23 créditos", options: ["17 créditos", "20 créditos", "23 créditos", "26 créditos"],
+                hint: "Divide: 68 ÷ 4 = 17. Suma: 17 + 6 = 23."
             }, {
-                id: 19,
-                part: 2,
-                type: "Multiplicación y resta",
-                narrative: "Patito Amarillito desordenó el vuelto de una compra grande.",
-                q: "Un cliente compra 5 cuadernos de $160 cada uno y paga con $1.000. ¿Cuánto vuelto recibe?",
-                a: "$200",
-                options: ["$100", "$200", "$300", "$400"],
-                hint: "Multiplica: 160 × 5 = 800. Resta: 1000 - 800 = 200."
+                id: 19, part: 2, type: "División (2÷1)",
+                narrative: "Siete naves reparten los créditos de una misión especial.",
+                q: "Si 7 naves se reparten 91 créditos en partes iguales, ¿cuántos créditos recibe cada nave?",
+                a: "13 créditos", options: ["11 créditos", "12 créditos", "13 créditos", "14 créditos"],
+                hint: "Divide: 91 ÷ 7 = 13."
             }, {
-                id: 20,
-                part: 2,
-                type: "División",
-                narrative: "Gatito Chill reparte el dinero de una colecta.",
-                q: "En una colecta se juntaron $560. Si se reparten en partes iguales entre 8 personas, ¿cuánto recibe cada una?",
-                a: "$70",
-                options: ["$60", "$70", "$80", "$90"],
-                hint: "Divide: 560 ÷ 8 = 70."
+                id: 20, part: 2, type: "División (2÷1)",
+                narrative: "Seis astronautas reparten los créditos de una colecta lunar.",
+                q: "Si 6 astronautas se reparten 54 créditos en partes iguales, ¿cuántos créditos recibe cada uno?",
+                a: "9 créditos", options: ["7 créditos", "8 créditos", "9 créditos", "10 créditos"],
+                hint: "Divide: 54 ÷ 6 = 9."
             }
         ];
 
@@ -709,42 +588,36 @@
             const toggle = document.getElementById('sound-toggle');
             if (!toggle || !toggle.checked) return;
             try {
-                const ctx = new(window.AudioContext || window.webkitAudioContext)();
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
-                osc.connect(gain);
-                gain.connect(ctx.destination);
+                osc.connect(gain); gain.connect(ctx.destination);
                 const volume = 0.25;
                 if (type === 'correct') {
-                    osc.type = 'triangle';
+                    osc.type = 'sine';
                     osc.frequency.setValueAtTime(523.25, ctx.currentTime);
                     osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08);
                     osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16);
                     osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.24);
                     gain.gain.setValueAtTime(volume, ctx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.4);
+                    osc.start(); osc.stop(ctx.currentTime + 0.4);
                 } else {
-                    osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(200, ctx.currentTime);
-                    osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.25);
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(220, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.25);
                     gain.gain.setValueAtTime(volume, ctx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.3);
+                    osc.start(); osc.stop(ctx.currentTime + 0.3);
                 }
             } catch (e) { /* silencio */ }
         }
 
         function startGame() {
-            if (selectedPartMode === 'part1') {
-                currentQuestionsList = allQuestions.filter(q => q.part === 1);
-            } else if (selectedPartMode === 'part2') {
-                currentQuestionsList = allQuestions.filter(q => q.part === 2);
-            } else {
-                currentQuestionsList = [...allQuestions];
-            }
+            if (selectedPartMode === 'part1') currentQuestionsList = allQuestions.filter(q => q.part === 1);
+            else if (selectedPartMode === 'part2') currentQuestionsList = allQuestions.filter(q => q.part === 2);
+            else currentQuestionsList = [...allQuestions];
+
             currentLevelIndex = 0;
             document.getElementById('screen-start').classList.add('hidden');
             document.getElementById('screen-game').classList.remove('hidden');
@@ -755,12 +628,12 @@
         function loadQuestion() {
             const qData = currentQuestionsList[currentLevelIndex];
             const total = currentQuestionsList.length;
-            const progress = ((currentLevelIndex) / total) * 100;
+            const progress = (currentLevelIndex / total) * 100;
 
             document.getElementById('level-label').innerText = `DESAFÍO ${currentLevelIndex + 1} / ${total}`;
             document.getElementById('progress-fill').style.width = `${Math.max(progress, 5)}%`;
             document.getElementById('section-badge').innerText =
-                qData.part === 1 ? "PARTE 1: OPERACIONES BÁSICAS" : "PARTE 2: PROBLEMAS COMBINADOS Y VUELTOS";
+                qData.part === 1 ? "PARTE 1: MONEDAS LUNARES" : "PARTE 2: CRÉDITOS ESTELARES";
 
             document.getElementById('narrative-text').innerText = `"${qData.narrative}"`;
             document.getElementById('question-number').innerText = `PREGUNTA #${qData.id}`;
@@ -787,11 +660,11 @@
                 select.appendChild(el);
             });
 
-            const avatars = ["🐱", "🐢", "🦉", "⚖️", "🐶"];
-            const names = ["Gatito Chill", "Mente Inversa", "Búho del Equilibrio", "Robot Balance", "Rayo Despeje"];
+            const avatars = ["👩‍🚀", "👽", "🤖", "🛰️", "🌙"];
+            const names = ["Capitana Nova", "Comandante Zorg", "Dr. Circuito", "Satélite Beta", "Luna Sabia"];
             const idx = currentLevelIndex % avatars.length;
             document.getElementById('hero-avatar').innerText = avatars[idx];
-            document.getElementById('hero-title').innerText = `Legión del Despeje: ${names[idx]}`;
+            document.getElementById('hero-title').innerText = `Tripulación Nova: ${names[idx]}`;
 
             isProcessing = false;
         }
@@ -812,7 +685,7 @@
 
             if (userAns === currentQ.a) {
                 playSFX('correct');
-                const words = ["¡DESPEJADO!", "¡EQUILIBRIO!", "¡CHILL!", "¡PERFECTO!", "¡POW!"];
+                const words = ["¡ÓRBITA!", "¡EXACTO!", "¡NOVA!", "¡CRÉDITO!", "¡POW!"];
                 fx.innerText = words[Math.floor(Math.random() * words.length)];
                 fx.className = "pow-text comic-font text-8xl md:text-9xl text-yellow-300 active";
                 setTimeout(() => {
@@ -826,8 +699,8 @@
                 }, 850);
             } else {
                 playSFX('wrong');
-                fx.innerText = "¡DESORDEN!";
-                fx.className = "pow-text comic-font text-8xl md:text-9xl text-red-500 active";
+                fx.innerText = "¡GLITCH!";
+                fx.className = "pow-text comic-font text-8xl md:text-9xl text-rose-500 active";
                 setTimeout(() => {
                     fx.classList.remove('active');
                     select.value = "";
@@ -843,24 +716,19 @@
 
             const mode = selectedPartMode;
             if (mode === 'part1') {
-                document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 de la Evaluación!";
-                document.getElementById('end-subtitle').innerText =
-                    "Dominaste las operaciones básicas con dinero. ¡Continúa así!";
+                document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 de la misión!";
+                document.getElementById('end-subtitle').innerText = "Dominaste las monedas lunares y las divisiones exactas de dos dígitos por uno. ¡Sigue así!";
             } else if (mode === 'part2') {
-                document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 de la Evaluación!";
-                document.getElementById('end-subtitle').innerText =
-                    "Resolviste problemas combinados y calculaste vueltos. ¡Excelente!";
+                document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 de la misión!";
+                document.getElementById('end-subtitle').innerText = "Resolviste problemas combinados con créditos estelares. ¡Excelente!";
             } else {
-                document.getElementById('end-title').innerText = "¡HAS COMPLETADO EL ESCAPE ROOM COMPLETO!";
-                document.getElementById('end-subtitle').innerText =
-                    "Eres un Maestro de los Problemas con Dinero. ¡El orden ha sido restaurado!";
+                document.getElementById('end-title').innerText = "¡HAS COMPLETADO LA MISIÓN LUNAR COMPLETA!";
+                document.getElementById('end-subtitle').innerText = "Eres un Maestro de las Divisiones Exactas. El Mercado Lunar está a salvo.";
             }
         }
 
         function confirmExit() {
-            if (confirm("¿Deseas volver al menú de inicio?")) {
-                returnToStart();
-            }
+            if (confirm("¿Deseas volver al menú de inicio?")) returnToStart();
         }
 
         function returnToStart() {
@@ -883,7 +751,6 @@
         function switchExtraTab(tabId) {
             document.querySelectorAll('[id^="extra-"]').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.extra-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
-
             document.getElementById(`extra-${tabId}`).classList.remove('hidden');
             document.getElementById(`tab-${tabId}`).classList.add('active-tab');
         }
