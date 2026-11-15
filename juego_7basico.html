@@ -3,182 +3,132 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Escape Room: Gatito Chill vs Patito Amarillito – Área de Triángulos (7° Básico)</title>
-    <script src="https://cdn.tailwindcss.com">
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet" />
+    <title>Escape Room: Detective Dato – El Misterio de las Pistas Numéricas (7° Básico OA 17)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Courier+Prime:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Comic Neue', cursive;
-            background-color: #0f172a;
-            background-image: radial-gradient(rgba(239, 68, 68, 0.25) 15%, transparent 16%),
-                radial-gradient(rgba(37, 99, 235, 0.25) 15%, transparent 16%);
-            background-size: 24px 24px;
-            background-position: 0 0, 12px 12px;
+            font-family: 'Courier Prime', monospace;
+            background-color: #1c1917;
+            background-image:
+                radial-gradient(circle at 18% 22%, rgba(245, 158, 11, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 82% 78%, rgba(34, 197, 94, 0.12) 0%, transparent 45%),
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             padding: 0.75rem;
-            color: #0f172a;
+            color: #1c1917;
         }
-        .comic-font {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 1.5px;
-        }
-        .chill-font {
-            font-family: 'Chewy', cursive;
-        }
-        .comic-panel {
-            background: white;
-            border: 5px solid black;
-            box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
+        .detective-font { font-family: 'Playfair Display', serif; letter-spacing: 0.5px; }
+        .typewriter-font { font-family: 'Special Elite', cursive; }
+        .panel {
+            background: #fef9e7;
+            border: 4px solid #1c1917;
+            box-shadow: 10px 10px 0px #78350f, 0 0 60px rgba(245, 158, 11, 0.20);
             position: relative;
+            border-radius: 4px;
         }
-        .comic-panel::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px);
-            background-size: 6px 6px;
+        .panel::before {
+            content: ""; position: absolute; inset: 0;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(120, 53, 15, 0.06) 28px, rgba(120, 53, 15, 0.06) 29px);
             pointer-events: none;
-            z-index: 1;
         }
         .btn-comic {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 1px;
-            border: 4px solid black;
-            box-shadow: 5px 5px 0px black;
+            font-family: 'Playfair Display', serif; letter-spacing: 1px;
+            border: 4px solid #1c1917; box-shadow: 5px 5px 0px #1c1917;
             transition: transform 0.1s ease, box-shadow 0.1s ease;
             text-transform: uppercase;
+            border-radius: 4px;
+            font-weight: 900;
         }
-        .btn-comic:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 8px 8px 0px black;
-        }
-        .btn-comic:active {
-            transform: translate(2px, 2px);
-            box-shadow: 1px 1px 0px black;
-        }
+        .btn-comic:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0px #1c1917; }
+        .btn-comic:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #1c1917; }
         .tab-btn.active {
-            background-color: #facc15;
-            color: black;
-            border-bottom: 4px solid black;
+            background: linear-gradient(135deg, #fbbf24, #d97706) !important;
+            color: #1c1917; border-bottom: 4px solid #1c1917;
         }
         .progress-bar-container {
-            background: #e2e8f0;
-            border: 4px solid black;
-            border-radius: 9999px;
-            overflow: hidden;
-            height: 28px;
+            background: #fde68a; border: 4px solid #1c1917; border-radius: 4px;
+            overflow: hidden; height: 26px;
         }
         .progress-bar-fill {
-            background: linear-gradient(90deg, #ef4444, #8b5cf6, #3b82f6);
-            height: 100%;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: repeating-linear-gradient(45deg, #d97706, #d97706 10px, #b45309 10px, #b45309 20px);
+            height: 100%; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .alarm-border {
-            animation: alertPulse 1.8s infinite alternate;
-        }
-        @keyframes alertPulse {
-            from {
-                border-color: #0f172a;
-                box-shadow: 8px 8px 0px black;
-            }
-            to {
-                border-color: #ef4444;
-                box-shadow: 8px 8px 0px #ef4444;
-            }
+        .glow-border { animation: casePulse 2.2s infinite alternate; }
+        @keyframes casePulse {
+            from { border-color: #1c1917; box-shadow: 10px 10px 0px #78350f; }
+            to { border-color: #d97706; box-shadow: 10px 10px 0px #d97706; }
         }
         .pow-text {
-            position: fixed;
-            top: 50%;
-            left: 50%;
+            position: fixed; top: 50%; left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            z-index: 100;
-            pointer-events: none;
+            z-index: 100; pointer-events: none;
             transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-shadow: 6px 6px 0px black;
-            -webkit-text-stroke: 3px black;
+            text-shadow: 6px 6px 0px #1c1917;
+            -webkit-text-stroke: 3px #1c1917;
         }
-        .pow-text.active {
-            transform: translate(-50%, -50%) scale(1.5);
-        }
+        .pow-text.active { transform: translate(-50%, -50%) scale(1.5); }
         select {
             appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 1.2rem center;
-            background-size: 1.4em;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231c1917' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat; background-position: right 1.2rem center; background-size: 1.4em;
         }
-        .hidden {
-            display: none !important;
-        }
+        .hidden { display: none !important; }
         .extra-tab-btn {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 0.5px;
-            border: 3px solid black;
-            box-shadow: 4px 4px 0px black;
+            font-family: 'Playfair Display', serif; letter-spacing: 0.5px;
+            border: 3px solid #1c1917; box-shadow: 4px 4px 0px #1c1917;
             transition: all 0.1s ease;
+            border-radius: 4px; font-weight: 900; font-size: 0.72rem;
         }
         .extra-tab-btn.active-tab {
-            background-color: #facc15 !important;
-            color: black;
-            border-bottom: 4px solid black;
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px black;
+            background: #fbbf24 !important; color: #1c1917;
+            border-bottom: 4px solid #1c1917;
+            transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #1c1917;
         }
-        .extra-tab-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px black;
+        .extra-tab-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #1c1917; }
+        details summary { cursor: pointer; font-weight: bold; color: #92400e; }
+        details summary:hover { color: #78350f; }
+        table td, table th { border: 1px solid #1c1917; padding: 0.5rem; text-align: center; }
+        .float-icon { display: inline-block; animation: floaty 3.4s ease-in-out infinite; }
+        @keyframes floaty {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-8px) rotate(3deg); }
         }
-        details summary {
-            cursor: pointer;
-            font-weight: bold;
-            color: #7c3aed;
-        }
-        details summary:hover {
-            color: #4c1d95;
-        }
-        table td,
-        table th {
-            border: 1px solid #000;
-            padding: 0.5rem;
-            text-align: center;
+        .case-tag {
+            display: inline-block;
+            background: #1c1917; color: #fef9e7;
+            padding: 2px 10px; border-radius: 3px;
+            font-family: 'Special Elite', cursive;
+            font-size: 0.75rem; letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <div id="visual-fx" class="pow-text comic-font text-8xl md:text-9xl text-yellow-300">¡DESPEJADO!</div>
+    <div id="visual-fx" class="pow-text detective-font text-8xl md:text-9xl text-amber-300">¡RESUELTO!</div>
 
     <div class="max-w-4xl w-full">
 
         <header class="text-center mb-6">
-            <div class="inline-block bg-white border-4 border-black p-4 md:p-6 transform -rotate-1 shadow-[8px_8px_0px_#2563eb] relative z-10 w-full">
-                <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-black pb-2 mb-3 text-xs md:text-sm font-bold text-gray-700">
-                    <span>📚 NIVEL: 7° BÁSICO</span>
+            <div class="inline-block bg-[#fef9e7] border-4 border-[#1c1917] p-4 md:p-6 transform -rotate-1 shadow-[10px_10px_0px_#16a34a] relative z-10 w-full">
+                <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-[#1c1917] pb-2 mb-3 text-xs md:text-sm font-bold text-amber-800">
+                    <span>🔍 NIVEL: 7° BÁSICO</span>
                     <span>⏱️ TIEMPO MÁXIMO: 90 MIN</span>
-                    <span>🧩 UNIDAD: ÁREA DE TRIÁNGULOS</span>
+                    <span>📊 UNIDAD: MEDIDAS DE TENDENCIA CENTRAL Y RANGO (OA 17)</span>
                 </div>
-                <h1 class="text-3xl md:text-5xl comic-font text-blue-700 tracking-wide uppercase">
-                    Gatito Chill vs. Patito Amarillito
+                <h1 class="text-3xl md:text-5xl detective-font text-amber-700 tracking-wide uppercase">
+                    Detective Dato
                 </h1>
-                <p class="text-lg md:text-2xl chill-font text-purple-900 mt-1">
-                    Escape Room del Área de Triángulos
+                <p class="text-lg md:text-2xl typewriter-font text-emerald-700 mt-1">
+                    El Misterio de las Pistas Numéricas
                 </p>
             </div>
-            <div class="mt-4 bg-yellow-100 border-2 border-black p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
-                <p class="font-bold text-xs md:text-sm text-indigo-950">
-                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE</span>: Desarrollar y aplicar la fórmula del área de triángulos (A = base × altura / 2) en contextos geométricos y de la vida diaria.
+            <div class="mt-4 bg-amber-100 border-2 border-[#1c1917] p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
+                <p class="font-bold text-xs md:text-sm text-amber-950">
+                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 17)</span>: Mostrar que comprenden las medidas de tendencia central y el rango, determinando la medida adecuada (moda, mediana y media aritmética) para responder un problema planteado.
                 </p>
             </div>
         </header>
@@ -186,67 +136,67 @@
         <main class="relative z-10">
 
             <!-- PANTALLA 1: INICIO -->
-            <div id="screen-start" class="comic-panel p-6 md:p-8 space-y-6">
-                <div class="flex justify-center items-center gap-4 text-6xl md:text-7xl animate-bounce">
-                    <span>🐱</span><span class="text-3xl font-black">VS</span><span>🐤</span>
+            <div id="screen-start" class="panel p-6 md:p-8 space-y-6">
+                <div class="flex justify-center items-center gap-4 text-6xl md:text-7xl">
+                    <span class="float-icon">🕵️</span><span class="text-3xl font-black detective-font text-amber-700">VS</span><span class="float-icon" style="animation-delay:0.6s">🎩</span>
                 </div>
 
                 <div class="text-center">
-                    <h2 class="text-2xl md:text-4xl comic-font text-red-600">¡EL DESORDEN TRIANGULAR HA LLEGADO!</h2>
-                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">Patito Amarillito ha desarmado todos los triángulos de la ciudad...</p>
+                    <h2 class="text-2xl md:text-4xl detective-font text-emerald-700">¡EL SR. PROMEDIO FALSO ATACA DE NUEVO!</h2>
+                    <p class="text-sm md:text-base font-bold text-amber-700 mt-1">Ha manipulado las pistas numéricas de la ciudad...</p>
                 </div>
 
-                <div class="bg-blue-50 border-4 border-black p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
+                <div class="bg-amber-50 border-4 border-[#1c1917] p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
                     <p class="text-base md:text-lg">
-                        El villano <b>Patito Amarillito</b> lanzó su <i>"Rayo Triangular"</i> sobre la Ciudad de la Geometría, mezclando bases y alturas de todos los triángulos. Los techos, las velas de los barcos, los carteles y hasta las porciones de pizza han perdido su área. Sin la fórmula correcta, el caos será total.
+                        En la <b>Agencia de Detectives Numéricos</b>, cada caso se resuelve con datos. Pero el villano <b>Sr. Promedio Falso</b> ha manipulado las pistas: ahora nadie sabe si debe usar la <i>media</i>, la <i>mediana</i> o la <i>moda</i> para resolver un caso. Los comerciantes no saben qué precio poner, las encuestas dan resultados absurdos y los promedios mienten.
                     </p>
                     <p class="text-base md:text-lg">
-                        Con su taza de té siempre a mano, el sereno <b>Gatito Chill</b> nos guía con una sonrisa:
+                        El <b>Detective Dato</b> y su asistente <b>Rango</b> (un perro sabueso con lupa) te necesitan:
                     </p>
-                    <blockquote class="bg-yellow-200 border-l-4 border-yellow-600 p-3 rounded font-bold text-indigo-900 italic text-sm md:text-base">
-                        "Tranquilos, amigos... el área de un triángulo es base por altura dividido entre 2. ¡Chill, que el equilibrio volverá!"
+                    <blockquote class="bg-emerald-100 border-l-4 border-emerald-600 p-3 rounded font-bold text-amber-950 italic text-sm md:text-base">
+                        "Joven aprendiz: la <b>media</b> es el promedio; la <b>mediana</b> es el dato del centro cuando ordenamos; la <b>moda</b> es el que más se repite; y el <b>rango</b> es la diferencia entre el mayor y el menor. Pero cuidado: con valores extremos, ¡la mediana es más confiable que la media!"
                     </blockquote>
                 </div>
 
-                <div class="bg-purple-100 border-4 border-black p-5 rounded-xl text-left space-y-3 shadow-md">
-                    <label class="block font-black text-purple-900 uppercase text-base md:text-lg comic-font tracking-wide">
-                        ⚙️ Configuración Docente – Selección de Tramo (10 o 20 preguntas):
+                <div class="bg-orange-100 border-4 border-[#1c1917] p-5 rounded-xl text-left space-y-3 shadow-md">
+                    <label class="block font-black text-orange-900 uppercase text-base md:text-lg detective-font tracking-wide">
+                        ⚙️ Configuración Docente – Selección de Tramo:
                     </label>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            📍 Parte 1 (Preguntas 1 a 10)<br />
-                            <span class="text-xs font-normal normal-case block">Fórmula básica y cálculo directo</span>
+                        <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-sm text-[#1c1917]">
+                            🔎 Parte 1 (1-10)<br />
+                            <span class="text-xs font-normal normal-case block">Casos simples: calcular medidas</span>
                         </button>
-                        <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            📍 Parte 2 (Preguntas 11 a 20)<br />
-                            <span class="text-xs font-normal normal-case block">Problemas inversos y aplicaciones</span>
+                        <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-sm text-[#1c1917]">
+                            📁 Parte 2 (11-20)<br />
+                            <span class="text-xs font-normal normal-case block">Casos complejos: elegir medida</span>
                         </button>
-                        <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            🔥 Modo Completo (20 Retos)<br />
-                            <span class="text-xs font-normal normal-case block">Evaluación continua completa</span>
+                        <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-sm text-[#1c1917]">
+                            🕵️ Modo Completo (20)<br />
+                            <span class="text-xs font-normal normal-case block">Investigación total</span>
                         </button>
                     </div>
                 </div>
 
-                <div class="flex flex-wrap items-center justify-between gap-3 bg-gray-100 p-3 border-2 border-black rounded-lg">
+                <div class="flex flex-wrap items-center justify-between gap-3 bg-amber-50 p-3 border-2 border-[#1c1917] rounded-lg">
                     <div class="flex items-center gap-2">
-                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
-                        <label for="sound-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">🔊 SFX Retro</label>
+                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-amber-600" />
+                        <label for="sound-toggle" class="font-bold text-sm text-amber-900 cursor-pointer select-none">🔊 SFX Detective</label>
                     </div>
                     <div class="flex items-center gap-2">
-                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
-                        <label for="hints-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">💡 Permitir pistas</label>
+                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-amber-600" />
+                        <label for="hints-toggle" class="font-bold text-sm text-amber-900 cursor-pointer select-none">💡 Permitir pistas</label>
                     </div>
                 </div>
 
                 <div class="pt-2">
-                    <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-black text-2xl md:text-3xl py-4 w-full rounded-xl">
-                        ¡RESTAURAR EL ORDEN TRIANGULAR! 🚀
+                    <button onclick="startGame()" class="btn-comic bg-emerald-700 hover:bg-emerald-600 text-white text-xl md:text-2xl py-4 w-full">
+                        ¡RESOLVER EL CASO! 🕵️
                     </button>
                 </div>
 
-                <div class="text-center pt-2 border-t-2 border-gray-200">
-                    <button onclick="toggleExtraModules()" class="text-sm font-bold text-blue-700 underline hover:text-blue-900">
+                <div class="text-center pt-2 border-t-2 border-amber-200">
+                    <button onclick="toggleExtraModules()" class="text-sm font-bold text-amber-700 underline hover:text-amber-900">
                         📋 Ver Secciones Complementarias (Problemas de 4 pasos, Metacognición y Autoevaluación)
                     </button>
                 </div>
@@ -254,155 +204,153 @@
 
             <!-- PANTALLA 2: JUEGO -->
             <div id="screen-game" class="hidden space-y-6">
-                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white border-4 border-black p-4 shadow-[6px_6px_0px_black]">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-[#fef9e7] border-4 border-[#1c1917] p-4 shadow-[6px_6px_0px_#1c1917] rounded">
                     <div class="flex items-center gap-3">
-                        <span class="text-3xl">🐱</span>
+                        <span class="text-3xl float-icon">🕵️</span>
                         <div>
-                            <div class="comic-font text-2xl text-red-600 leading-tight" id="level-label">DESAFÍO 1 / 10</div>
-                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: FÓRMULA BÁSICA</div>
+                            <div class="detective-font text-xl md:text-2xl text-amber-700 leading-tight" id="level-label">CASO 1 / 10</div>
+                            <div class="text-xs font-bold text-amber-600 uppercase" id="section-badge">PARTE 1: CASOS SIMPLES</div>
                         </div>
                     </div>
                     <div class="w-full md:w-1/2 progress-bar-container">
                         <div id="progress-fill" class="progress-bar-fill" style="width: 5%"></div>
                     </div>
-                    <button onclick="confirmExit()" class="text-xs font-bold bg-gray-200 hover:bg-gray-300 border-2 border-black px-3 py-1 rounded">
+                    <button onclick="confirmExit()" class="text-xs font-bold bg-amber-200 hover:bg-amber-300 border-2 border-[#1c1917] px-3 py-1 rounded">
                         ⚙️ Menú
                     </button>
                 </div>
 
-                <div class="comic-panel p-5 md:p-8 alarm-border border-4">
-                    <div class="flex items-start gap-4 mb-6 bg-blue-50 border-2 border-black p-4 rounded-xl">
-                        <div class="text-5xl" id="hero-avatar">🐱</div>
+                <div class="panel p-5 md:p-8 glow-border border-4">
+                    <div class="flex items-start gap-4 mb-6 bg-amber-50 border-2 border-[#1c1917] p-4 rounded-xl">
+                        <div class="text-5xl" id="hero-avatar">🕵️</div>
                         <div class="w-full">
-                            <div class="flex justify-between items-center">
-                                <h4 class="font-bold text-red-600 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Legión del Despeje: Gatito Chill</h4>
-                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Área</span>
+                            <div class="flex justify-between items-center flex-wrap gap-2">
+                                <h4 class="font-bold text-emerald-700 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Agencia Dato: Detective Principal</h4>
+                                <span class="case-tag" id="question-type-badge">Media</span>
                             </div>
-                            <p class="font-bold text-indigo-950 italic text-base md:text-lg mt-1" id="narrative-text">Cargando situación...</p>
+                            <p class="font-bold text-amber-950 italic text-base md:text-lg mt-1" id="narrative-text">Abriendo el expediente...</p>
                         </div>
                     </div>
 
                     <div class="space-y-6 relative z-10">
-                        <div class="bg-gray-50 border-2 border-black p-5 rounded-xl shadow-inner">
-                            <div id="question-number" class="comic-font text-xl text-purple-700 mb-1">PREGUNTA #</div>
-                            <div id="question-text" class="text-xl md:text-2xl font-bold text-gray-900 leading-relaxed font-mono"></div>
+                        <div class="bg-amber-50 border-2 border-[#1c1917] p-5 rounded-xl shadow-inner">
+                            <div id="question-number" class="detective-font text-lg text-amber-700 mb-1">CASO #</div>
+                            <div id="question-text" class="text-lg md:text-xl font-bold text-stone-900 leading-relaxed"></div>
                         </div>
 
                         <div id="hint-container" class="hidden">
-                            <button onclick="toggleHint()" class="text-sm font-bold text-purple-800 bg-purple-100 border-2 border-purple-400 px-3 py-1.5 rounded-lg flex items-center gap-2 hover:bg-purple-200 transition">
-                                💡 <span>Mostrar pista</span>
+                            <button onclick="toggleHint()" class="text-sm font-bold text-amber-800 bg-amber-100 border-2 border-amber-400 px-3 py-1.5 rounded-lg flex items-center gap-2 hover:bg-amber-200 transition">
+                                💡 <span>Mostrar pista del Detective</span>
                             </button>
                             <div id="hint-box" class="hidden mt-2 p-3 bg-yellow-50 border-2 border-yellow-400 rounded-lg text-sm text-yellow-950 leading-relaxed font-medium"></div>
                         </div>
 
                         <div class="space-y-2">
-                            <label class="block font-black text-indigo-950 uppercase tracking-tight text-sm">
+                            <label class="block font-black text-amber-950 uppercase tracking-tight text-sm">
                                 🎯 Selecciona la respuesta correcta:
                             </label>
-                            <select id="answer-select" class="w-full p-4 border-4 border-black text-lg md:text-xl font-bold bg-yellow-50 focus:ring-4 focus:ring-purple-300 outline-none cursor-pointer rounded-xl">
-                                <option value="" disabled selected>-- Elige con calma --</option>
+                            <select id="answer-select" class="w-full p-4 border-4 border-[#1c1917] text-base md:text-lg font-bold bg-yellow-50 focus:ring-4 focus:ring-amber-300 outline-none cursor-pointer rounded">
+                                <option value="" disabled selected>-- Elige con calma, detective --</option>
                             </select>
                         </div>
 
-                        <button onclick="checkAnswer()" class="btn-comic bg-red-600 hover:bg-red-500 text-white text-2xl md:text-3xl py-4 w-full rounded-xl">
-                            ¡ENVIAR RESPUESTA! 💥
+                        <button onclick="checkAnswer()" class="btn-comic bg-amber-700 hover:bg-amber-600 text-white text-xl md:text-2xl py-4 w-full">
+                            ¡RESOLVER CASO! 🔍
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- PANTALLA 3: VICTORIA -->
-            <div id="screen-end" class="hidden comic-panel p-8 md:p-12 text-center space-y-8">
-                <h2 class="text-5xl md:text-7xl comic-font text-purple-700">¡SISTEMA REESTABLECIDO!</h2>
-                <div class="text-8xl md:text-9xl animate-bounce my-4">🐱⚖️✨</div>
+            <div id="screen-end" class="hidden panel p-8 md:p-12 text-center space-y-8">
+                <h2 class="text-4xl md:text-6xl detective-font text-amber-700">¡CASO CERRADO!</h2>
+                <div class="text-8xl md:text-9xl my-4 float-icon">🕵️🏆📁</div>
                 <div class="space-y-3">
-                    <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has derrotado a Patito Amarillito!</p>
-                    <p class="text-gray-700 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
-                        Todos los triángulos han recuperado su área. Los techos, velas y carteles están en equilibrio.
+                    <p class="text-2xl font-bold text-stone-900" id="end-title">¡Has derrotado al Sr. Promedio Falso!</p>
+                    <p class="text-amber-800 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
+                        Todas las pistas numéricas vuelven a tener sentido. La Agencia Dato está orgullosa.
                     </p>
                 </div>
-                <div class="bg-yellow-100 border-4 border-black p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
-                    <p class="text-purple-900">
-                        <b>Gatito Chill te felicita:</b> "¡Excelente! Recuerda que el área de un triángulo es base × altura ÷ 2. ¡Mantén la calma y el orden siempre regresa!"
+                <div class="bg-amber-100 border-4 border-[#1c1917] p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
+                    <p class="text-amber-900">
+                        <b>Detective Dato y Rango te felicitan:</b> "¡Gran investigación, aprendiz! Aprendiste a distinguir cuándo usar la media, la mediana o la moda, y cómo el rango describe la dispersión. ¡El expediente está cerrado!"
                     </p>
                 </div>
                 <div class="flex flex-col md:flex-row justify-center gap-4 pt-4">
-                    <button onclick="returnToStart()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-2xl py-4 px-8 rounded-xl">
+                    <button onclick="returnToStart()" class="btn-comic bg-blue-700 hover:bg-blue-600 text-white text-lg md:text-xl py-4 px-8">
                         🔄 VOLVER AL MENÚ
                     </button>
-                    <button onclick="toggleExtraModules()" class="btn-comic bg-purple-600 hover:bg-purple-500 text-white text-2xl py-4 px-8 rounded-xl">
+                    <button onclick="toggleExtraModules()" class="btn-comic bg-emerald-700 hover:bg-emerald-600 text-white text-lg md:text-xl py-4 px-8">
                         📝 VER MÓDULOS DE DESARROLLO
                     </button>
                 </div>
             </div>
 
             <!-- EXTRAS -->
-            <div id="screen-extras" class="hidden comic-panel p-6 md:p-8 space-y-6 my-6">
-                <div class="flex justify-between items-center border-b-4 border-black pb-4">
-                    <h2 class="text-3xl md:text-4xl comic-font text-indigo-900">SECCIONES DE DESARROLLO Y EVALUACIÓN</h2>
-                    <button onclick="closeExtraModules()" class="btn-comic bg-red-500 text-white px-4 py-1 text-xl rounded">
-                        ✖️ CERRAR
-                    </button>
+            <div id="screen-extras" class="hidden panel p-6 md:p-8 space-y-6 my-6">
+                <div class="flex justify-between items-center border-b-4 border-[#1c1917] pb-4 flex-wrap gap-2">
+                    <h2 class="text-2xl md:text-3xl detective-font text-amber-700">SECCIONES DE DESARROLLO</h2>
+                    <button onclick="closeExtraModules()" class="btn-comic bg-emerald-600 text-white px-4 py-1 text-lg">✖️ CERRAR</button>
                 </div>
 
-                <div class="flex flex-wrap gap-2 border-b-2 border-black pb-2">
-                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="extra-tab-btn active-tab py-2 px-3 text-sm bg-yellow-300">II. Problemas (4 Pasos)</button>
-                    <button onclick="switchExtraTab('sec3')" id="tab-sec3" class="extra-tab-btn py-2 px-3 text-sm bg-white">III. Metacognición</button>
-                    <button onclick="switchExtraTab('sec4')" id="tab-sec4" class="extra-tab-btn py-2 px-3 text-sm bg-white">IV. Desafío Extra</button>
-                    <button onclick="switchExtraTab('sec5')" id="tab-sec5" class="extra-tab-btn py-2 px-3 text-sm bg-white">V. Autoevaluación</button>
+                <div class="flex flex-wrap gap-2 border-b-2 border-[#1c1917] pb-2">
+                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="extra-tab-btn active-tab py-2 px-3 bg-amber-300">II. Problemas (4 Pasos)</button>
+                    <button onclick="switchExtraTab('sec3')" id="tab-sec3" class="extra-tab-btn py-2 px-3 bg-white">III. Metacognición</button>
+                    <button onclick="switchExtraTab('sec4')" id="tab-sec4" class="extra-tab-btn py-2 px-3 bg-white">IV. Desafío Extra</button>
+                    <button onclick="switchExtraTab('sec5')" id="tab-sec5" class="extra-tab-btn py-2 px-3 bg-white">V. Autoevaluación</button>
                 </div>
 
                 <!-- SECCIÓN II -->
                 <div id="extra-sec2" class="space-y-6 text-left">
-                    <div class="bg-blue-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-blue-900">II. Resolución de Problemas (Estrategia de los 4 Pasos)</h3>
-                        <p class="text-xs text-gray-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Revisar.</p>
+                    <div class="bg-amber-50 border-2 border-[#1c1917] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-amber-900">II. Resolución de Problemas (Estrategia de los 4 Pasos)</h3>
+                        <p class="text-xs text-amber-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Revisar.</p>
                     </div>
 
-                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Velero)</span>
-                        <p class="font-bold text-gray-800">
-                            Un velero tiene una vela triangular con una base de 6 metros y una altura de 9 metros. Si se necesita impermeabilizar toda la vela con un tratamiento especial que cuesta $2.500 por metro cuadrado, ¿cuál será el costo total del tratamiento?
+                    <div class="border-2 border-[#1c1917] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-emerald-200 border border-[#1c1917] text-emerald-900 text-xs font-bold px-2 py-0.5 rounded">Caso 1 (Precios de zapatillas)</span>
+                        <p class="font-bold text-stone-800">
+                            En una tienda, los precios de 5 zapatillas son: $12.000, $13.000, $14.000, $15.000 y $80.000. ¿Qué medida de tendencia central representa mejor el precio típico? Justifica.
                         </p>
-                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
-                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
-                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> Vela triangular base 6 m, altura 9 m. Costo $2.500/m².</p>
-                                <p><b>2. Planificar:</b> Área = (base × altura) / 2 = (6 × 9) / 2. Costo = Área × 2.500.</p>
-                                <p><b>3. Resolver:</b> Área = 54 / 2 = 27 m². Costo = 27 × 2.500 = $67.500.</p>
-                                <p><b>4. Revisar:</b> 27 × 2.500 = 67.500. Correcto.</p>
+                        <details class="bg-amber-50 p-3 rounded border border-amber-300">
+                            <summary class="font-bold text-amber-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-stone-800 space-y-1 pl-2 border-l-2 border-amber-500">
+                                <p><b>1. Comprender:</b> Hay un valor extremo ($80.000) que distorsiona la media.</p>
+                                <p><b>2. Planificar:</b> La mediana es más resistente a valores extremos.</p>
+                                <p><b>3. Resolver:</b> Ordenados: 12.000, 13.000, <b>14.000</b>, 15.000, 80.000. Mediana = $14.000. La media sería $26.800, no representativa.</p>
+                                <p><b>4. Revisar:</b> La mediana representa mejor el precio típico. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Terreno triangular)</span>
-                        <p class="font-bold text-gray-800">
-                            Un terreno triangular tiene un área de 120 m² y una base de 16 metros. El dueño desea saber cuál es la altura del terreno para colocar una cerca en el lado correspondiente. ¿Cuál es la altura?
+                    <div class="border-2 border-[#1c1917] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-orange-200 border border-[#1c1917] text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Caso 2 (Talla más vendida)</span>
+                        <p class="font-bold text-stone-800">
+                            Una tienda de ropa registró las tallas vendidas en un día: S, M, M, L, M, S, XL, M, L. ¿Qué medida usarías para saber qué talla pedir más al proveedor?
                         </p>
-                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
-                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
-                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> Área = 120 m², base = 16 m. Se busca la altura.</p>
-                                <p><b>2. Planificar:</b> Despejar altura de A = (b × h)/2 → h = (2 × A) / b.</p>
-                                <p><b>3. Resolver:</b> h = (2 × 120) / 16 = 240 / 16 = 15 m.</p>
-                                <p><b>4. Revisar:</b> (16 × 15) / 2 = 240 / 2 = 120 m². Correcto.</p>
+                        <details class="bg-amber-50 p-3 rounded border border-amber-300">
+                            <summary class="font-bold text-amber-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-stone-800 space-y-1 pl-2 border-l-2 border-amber-500">
+                                <p><b>1. Comprender:</b> Datos categóricos (tallas). Se busca la más frecuente.</p>
+                                <p><b>2. Planificar:</b> Usar la moda.</p>
+                                <p><b>3. Resolver:</b> Frecuencias: S=2, M=4, L=2, XL=1. Moda = M.</p>
+                                <p><b>4. Revisar:</b> M es la talla más vendida. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Composición de triángulos)</span>
-                        <p class="font-bold text-gray-800">
-                            Un techo está formado por dos triángulos rectángulos iguales que comparten la misma altura. La base total del techo (suma de las bases de ambos triángulos) es de 10 metros y la altura es de 4 metros. ¿Cuál es el área total del techo?
+                    <div class="border-2 border-[#1c1917] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-cyan-200 border border-[#1c1917] text-cyan-900 text-xs font-bold px-2 py-0.5 rounded">Caso 3 (Promedio de notas)</span>
+                        <p class="font-bold text-stone-800">
+                            Las notas de un estudiante son: 5,0; 6,0; 5,5; 4,5 y 6,0. ¿Cuál es su promedio (media aritmética)?
                         </p>
-                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
-                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
-                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> Dos triángulos iguales con altura 4 m. Base total 10 m → cada triángulo tiene base 5 m.</p>
-                                <p><b>2. Planificar:</b> Área de un triángulo = (5 × 4)/2 = 10 m². Área total = 2 × 10 = 20 m². También se puede calcular directamente como un rectángulo de base 10 y altura 4: área = 40/2 = 20 m².</p>
-                                <p><b>3. Resolver:</b> Área total = 20 m².</p>
-                                <p><b>4. Revisar:</b> 2 × 10 = 20 m². Correcto.</p>
+                        <details class="bg-amber-50 p-3 rounded border border-amber-300">
+                            <summary class="font-bold text-amber-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-stone-800 space-y-1 pl-2 border-l-2 border-amber-500">
+                                <p><b>1. Comprender:</b> 5 notas. Se pide la media aritmética.</p>
+                                <p><b>2. Planificar:</b> Sumar todas y dividir entre 5.</p>
+                                <p><b>3. Resolver:</b> (5,0 + 6,0 + 5,5 + 4,5 + 6,0) = 27,0. 27 ÷ 5 = 5,4.</p>
+                                <p><b>4. Revisar:</b> 5,4 × 5 = 27. Correcto.</p>
                             </div>
                         </details>
                     </div>
@@ -410,75 +358,76 @@
 
                 <!-- SECCIÓN III -->
                 <div id="extra-sec3" class="hidden space-y-4 text-left">
-                    <div class="bg-purple-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-purple-900">III. Metacognición (Reflexión del Estudiante)</h3>
+                    <div class="bg-emerald-50 border-2 border-[#1c1917] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-emerald-900">III. Metacognición (Reflexión del Estudiante)</h3>
                     </div>
                     <div class="space-y-3">
-                        <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">1. Al resolver el Problema 1, ¿qué pasos seguiste para asegurarte de multiplicar correctamente el área por el costo por metro cuadrado?</p>
+                        <div class="p-3 bg-white border border-[#1c1917] rounded-lg">
+                            <p class="font-bold text-sm text-stone-800">1. ¿Por qué la mediana es más confiable que la media cuando hay valores extremos?</p>
                         </div>
-                        <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">2. En el Problema 2, ¿cómo despejaste la altura de la fórmula del área y qué dificultad encontraste?</p>
+                        <div class="p-3 bg-white border border-[#1c1917] rounded-lg">
+                            <p class="font-bold text-sm text-stone-800">2. ¿En qué tipo de datos (numéricos o categóricos) se puede usar la moda, y por qué?</p>
                         </div>
-                        <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">3. Para el Problema 3, ¿por qué crees que el área total del techo coincide con la de un rectángulo de base 10 y altura 4?</p>
+                        <div class="p-3 bg-white border border-[#1c1917] rounded-lg">
+                            <p class="font-bold text-sm text-stone-800">3. ¿Qué información adicional nos da el rango sobre un conjunto de datos, además de las medidas de tendencia central?</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- SECCIÓN IV -->
                 <div id="extra-sec4" class="hidden space-y-4 text-left">
-                    <div class="bg-yellow-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Lógica Inversa)</h3>
-                        <p class="text-sm text-gray-800">
-                            Un triángulo tiene un área de 84 cm². Si su base mide el triple de su altura, ¿cuáles son las dimensiones de la base y la altura?
+                    <div class="bg-yellow-50 border-2 border-[#1c1917] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Lógica del Detective)</h3>
+                        <p class="text-sm text-stone-800">
+                            Un conjunto de 5 datos tiene media 10, mediana 9 y moda 8. ¿Puedes proponer un conjunto que cumpla estas condiciones?
                         </p>
                     </div>
-                    <div class="p-4 bg-white border-2 border-black rounded-xl space-y-3">
-                        <button onclick="toggleExtraHint()" class="btn-comic bg-yellow-400 text-black text-sm px-4 py-2 rounded">
-                            🧩 Revelar Solución por Reversión de Gatito Chill
+                    <div class="p-4 bg-white border-2 border-[#1c1917] rounded-xl space-y-3">
+                        <button onclick="toggleExtraHint()" class="btn-comic bg-amber-500 text-white text-sm px-4 py-2">
+                            🧩 Revelar la Solución del Detective
                         </button>
                         <div id="extra-hint-box" class="hidden text-sm bg-yellow-100 p-3 rounded border border-yellow-300 leading-relaxed">
-                            <p><b>Paso 1:</b> Sea h la altura y b = 3h. Área = (b × h)/2 = (3h × h)/2 = (3h²)/2 = 84.</p>
-                            <p><b>Paso 2:</b> 3h² = 168 → h² = 56 → h ≈ 7,48 cm. Para que sea exacta, ajustamos: si el área fuera 54 cm², entonces 3h² = 108 → h² = 36 → h = 6 cm, b = 18 cm.</p>
-                            <p><b>Paso 3:</b> Verificar: (18 × 6)/2 = 108/2 = 54 cm². Correcto. (Usamos este ajuste para que las dimensiones sean enteras).</p>
-                            <p><b>Resultado:</b> Base = <b>18 cm</b>, Altura = <b>6 cm</b>.</p>
+                            <p><b>Paso 1:</b> 5 datos ordenados a1 ≤ a2 ≤ a3 ≤ a4 ≤ a5. Mediana = a3 = 9.</p>
+                            <p><b>Paso 2:</b> Moda = 8, así que 8 debe repetirse (a1 = a2 = 8).</p>
+                            <p><b>Paso 3:</b> Media = 10, entonces suma total = 50. 8 + 8 + 9 + a4 + a5 = 50 → a4 + a5 = 25.</p>
+                            <p><b>Paso 4:</b> Podemos elegir a4 = 12, a5 = 13 (cumplen orden y no repiten moda).</p>
+                            <p><b>Conjunto propuesto:</b> <b>8, 8, 9, 12, 13</b>. Verifica: media = 10, mediana = 9, moda = 8. ✔</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- SECCIÓN V -->
                 <div id="extra-sec5" class="hidden space-y-4 text-left">
-                    <div class="bg-green-50 border-2 border-black p-4 rounded-lg">
+                    <div class="bg-green-50 border-2 border-[#1c1917] p-4 rounded-lg">
                         <h3 class="font-bold text-lg text-green-900">V. Autoevaluación del Estudiante</h3>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-sm border-2 border-black bg-white">
-                            <thead class="bg-yellow-300 border-b-2 border-black">
+                        <table class="w-full text-sm border-2 border-[#1c1917] bg-white">
+                            <thead class="bg-amber-300 border-b-2 border-[#1c1917]">
                                 <tr>
-                                    <th class="p-2 text-left border-r border-black">Afirmación</th>
-                                    <th class="p-2 text-center border-r border-black">Logrado (3)</th>
-                                    <th class="p-2 text-center border-r border-black">En proceso (2)</th>
+                                    <th class="p-2 text-left border-r border-[#1c1917]">Afirmación</th>
+                                    <th class="p-2 text-center border-r border-[#1c1917]">Logrado (3)</th>
+                                    <th class="p-2 text-center border-r border-[#1c1917]">En proceso (2)</th>
                                     <th class="p-2 text-center">Por lograr (1)</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">1. Identifico la base y la altura de un triángulo en diferentes contextos.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
+                                <tr class="border-b border-[#1c1917]">
+                                    <td class="p-2 border-r border-[#1c1917] font-medium">1. Calculo la media, mediana, moda y rango de un conjunto de datos.</td>
+                                    <td class="p-2 text-center border-r border-[#1c1917]"><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center border-r border-[#1c1917]"><input type="radio" name="auto1" /></td>
                                     <td class="p-2 text-center"><input type="radio" name="auto1" /></td>
                                 </tr>
-                                <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">2. Aplico correctamente la fórmula del área del triángulo (A = b × h / 2).</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
+                                <tr class="border-b border-[#1c1917]">
+                                    <td class="p-2 border-r border-[#1c1917] font-medium">2. Elijo la medida de tendencia central adecuada según el problema.</td>
+                                    <td class="p-2 text-center border-r border-[#1c1917]"><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center border-r border-[#1c1917]"><input type="radio" name="auto2" /></td>
                                     <td class="p-2 text-center"><input type="radio" name="auto2" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2 border-r border-black font-medium">3. Resuelvo problemas inversos (hallar base o altura conociendo el área).</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 border-r border-[#1c1917] font-medium">3. Justifico por qué una medida es más representativa que otra en una situación real.</td>
+                                    <td class="p-2 text-center border-r border-[#1c1917]"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center border-r border-[#1c1917]"><input type="radio" name="auto3" /></td>
                                     <td class="p-2 text-center"><input type="radio" name="auto3" /></td>
                                 </tr>
                             </tbody>
@@ -492,203 +441,158 @@
 
     <script>
         // ================================================================
-        //  NUEVO BANCO DE 20 PREGUNTAS – ÁREA DE TRIÁNGULOS (7° BÁSICO)
+        //  BANCO DE 20 PREGUNTAS – OA 17: Medidas de tendencia central y rango
         // ================================================================
         const allQuestions = [
-            // ---- PARTE 1: Fórmula básica y cálculo directo (1-10) ----
+            // ---- PARTE 1: Casos simples – calcular medidas (1-10) ----
             {
-                id: 1,
-                part: 1,
-                type: "Fórmula",
-                narrative: "Patito Amarillito olvidó la fórmula del área del triángulo. ¡Recuérdala con Gatito Chill!",
-                q: "¿Cuál es la fórmula correcta para calcular el área de un triángulo?",
-                a: "Área = (base × altura) / 2",
-                options: [
-                    "Área = base × altura",
-                    "Área = (base × altura) / 2",
-                    "Área = base + altura",
-                    "Área = (base + altura) / 2"
-                ],
-                hint: "El área del triángulo es la mitad del área de un rectángulo con la misma base y altura."
+                id: 1, part: 1, type: "Moda",
+                narrative: "Rango el sabueso encontró un conjunto de números. ¿Cuál es el más frecuente?",
+                q: "¿Cuál es la moda del conjunto {3, 5, 5, 7, 9}?",
+                a: "5",
+                options: ["3", "5", "7", "9"],
+                hint: "La moda es el dato que más se repite. El 5 aparece dos veces."
             }, {
-                id: 2,
-                part: 1,
-                type: "Área",
-                narrative: "Un triángulo con base 8 cm y altura 5 cm. ¡Calcula su área!",
-                q: "Un triángulo tiene una base de 8 cm y una altura de 5 cm. ¿Cuál es su área?",
-                a: "20 cm²",
-                options: ["40 cm²", "20 cm²", "13 cm²", "10 cm²"],
-                hint: "Área = (8 × 5) / 2 = 40 / 2 = 20 cm²."
+                id: 2, part: 1, type: "Mediana",
+                narrative: "El Detective Dato ordena las pistas para hallar el centro.",
+                q: "¿Cuál es la mediana del conjunto {2, 4, 6, 8, 10}?",
+                a: "6",
+                options: ["4", "5", "6", "8"],
+                hint: "Con 5 datos ordenados, la mediana es el del centro: el tercero, 6."
             }, {
-                id: 3,
-                part: 1,
-                type: "Área",
-                narrative: "Gatito Chill calcula el área de un triángulo con base 12 m y altura 7 m.",
-                q: "Calcula el área de un triángulo cuya base mide 12 m y su altura 7 m.",
-                a: "42 m²",
-                options: ["84 m²", "42 m²", "19 m²", "21 m²"],
-                hint: "Área = (12 × 7) / 2 = 84 / 2 = 42 m²."
+                id: 3, part: 1, type: "Media",
+                narrative: "Un caso sencillo: calcular el promedio.",
+                q: "¿Cuál es la media aritmética de {10, 20, 30}?",
+                a: "20",
+                options: ["15", "20", "25", "30"],
+                hint: "Media = (10 + 20 + 30) ÷ 3 = 60 ÷ 3 = 20."
             }, {
-                id: 4,
-                part: 1,
-                type: "Base",
-                narrative: "Conocemos el área y la altura. ¿Cuál es la base?",
-                q: "Un triángulo tiene un área de 30 cm² y una altura de 6 cm. ¿Cuál es la medida de su base?",
-                a: "10 cm",
-                options: ["5 cm", "10 cm", "15 cm", "20 cm"],
-                hint: "Despeja: base = (2 × área) / altura = (2 × 30) / 6 = 10 cm."
+                id: 4, part: 1, type: "Rango",
+                narrative: "El rango mide la dispersión: diferencia entre el mayor y el menor.",
+                q: "¿Cuál es el rango del conjunto {4, 8, 12, 16}?",
+                a: "12",
+                options: ["4", "8", "12", "16"],
+                hint: "Rango = mayor − menor = 16 − 4 = 12."
             }, {
-                id: 5,
-                part: 1,
-                type: "Altura",
-                narrative: "Patito Amarillito escondió la altura. ¡Encuéntrala!",
-                q: "Un triángulo tiene un área de 45 m² y una base de 9 m. ¿Cuál es su altura?",
-                a: "10 m",
-                options: ["5 m", "10 m", "15 m", "20 m"],
-                hint: "Altura = (2 × área) / base = (2 × 45) / 9 = 90 / 9 = 10 m."
+                id: 5, part: 1, type: "Moda",
+                narrative: "Otro caso de frecuencia: ¿cuál se repite más?",
+                q: "¿Cuál es la moda del conjunto {1, 2, 2, 3, 3, 3, 4}?",
+                a: "3",
+                options: ["1", "2", "3", "4"],
+                hint: "El 3 aparece tres veces, más que cualquier otro."
             }, {
-                id: 6,
-                part: 1,
-                type: "Área",
-                narrative: "Un triángulo rectángulo con catetos de 6 cm y 8 cm. ¡Calcula su área!",
-                q: "Un triángulo rectángulo tiene catetos de 6 cm y 8 cm. ¿Cuál es su área?",
-                a: "24 cm²",
-                options: ["48 cm²", "24 cm²", "14 cm²", "28 cm²"],
-                hint: "En un triángulo rectángulo, los catetos son base y altura. Área = (6 × 8) / 2 = 24 cm²."
+                id: 6, part: 1, type: "Mediana",
+                narrative: "El Detective ordena los datos antes de buscar la mediana.",
+                q: "¿Cuál es la mediana del conjunto {7, 1, 9, 5, 3}?",
+                a: "5",
+                options: ["3", "5", "7", "9"],
+                hint: "Ordenado: 1, 3, 5, 7, 9. El del centro es 5."
             }, {
-                id: 7,
-                part: 1,
-                type: "Área",
-                narrative: "Gatito Chill calcula el área de un triángulo equilátero de lado 10 cm y altura 8,66 cm.",
-                q: "Un triángulo equilátero tiene lado 10 cm y altura aproximada de 8,66 cm. ¿Cuál es su área aproximada?",
-                a: "43,3 cm²",
-                options: ["86,6 cm²", "43,3 cm²", "50 cm²", "25 cm²"],
-                hint: "Área = (10 × 8,66) / 2 = 86,6 / 2 = 43,3 cm²."
+                id: 7, part: 1, type: "Media",
+                narrative: "Un conjunto con todos los valores iguales. ¿Cuál es la media?",
+                q: "¿Cuál es la media aritmética de {5, 5, 5, 5}?",
+                a: "5",
+                options: ["4", "5", "10", "20"],
+                hint: "Media = (5+5+5+5) ÷ 4 = 20 ÷ 4 = 5."
             }, {
-                id: 8,
-                part: 1,
-                type: "Comparación",
-                narrative: "Dos triángulos con la misma base pero diferente altura. ¿Cuál tiene mayor área?",
-                q: "El triángulo A tiene base 6 cm y altura 4 cm. El triángulo B tiene base 6 cm y altura 8 cm. ¿Cuál afirmación es correcta?",
-                a: "El triángulo B tiene el doble del área del triángulo A.",
-                options: [
-                    "El triángulo A tiene mayor área.",
-                    "El triángulo B tiene el doble del área del triángulo A.",
-                    "Ambos tienen la misma área.",
-                    "El triángulo B tiene el triple del área del triángulo A."
-                ],
-                hint: "A: (6×4)/2=12 cm². B: (6×8)/2=24 cm². B es el doble de A."
+                id: 8, part: 1, type: "Rango",
+                narrative: "Rango calcula la diferencia entre los extremos.",
+                q: "¿Cuál es el rango del conjunto {15, 25, 35, 45, 55}?",
+                a: "40",
+                options: ["10", "20", "40", "55"],
+                hint: "Rango = 55 − 15 = 40."
             }, {
-                id: 9,
-                part: 1,
-                type: "Unidades",
-                narrative: "¿En qué unidades se mide el área?",
-                q: "Si la base y la altura de un triángulo se miden en centímetros, ¿en qué unidades se expresa su área?",
-                a: "Centímetros cuadrados (cm²)",
-                options: ["Centímetros (cm)", "Centímetros cuadrados (cm²)", "Metros (m)", "Metros cúbicos (m³)"],
-                hint: "El área siempre se mide en unidades cuadradas."
+                id: 9, part: 1, type: "Moda",
+                narrative: "Un caso especial: ¿qué pasa si no hay un valor que se repita más?",
+                q: "¿Cuál es la moda del conjunto {1, 2, 3, 4, 5}?",
+                a: "No tiene moda (todos se repiten igual)",
+                options: ["1", "3", "5", "No tiene moda (todos se repiten igual)"],
+                hint: "Ningún valor se repite más que otro. El conjunto no tiene moda."
             }, {
-                id: 10,
-                part: 1,
-                type: "Área",
-                narrative: "Un triángulo con base 15 cm y altura 10 cm. ¡Calcula!",
-                q: "Calcula el área de un triángulo con base 15 cm y altura 10 cm.",
-                a: "75 cm²",
-                options: ["150 cm²", "75 cm²", "25 cm²", "50 cm²"],
-                hint: "Área = (15 × 10) / 2 = 150 / 2 = 75 cm²."
+                id: 10, part: 1, type: "Mediana",
+                narrative: "Un conjunto con cantidad par de datos. ¿Cómo se calcula la mediana?",
+                q: "¿Cuál es la mediana del conjunto {2, 4, 6, 8}?",
+                a: "5",
+                options: ["4", "5", "6", "7"],
+                hint: "Con 4 datos, la mediana es el promedio de los dos del centro: (4 + 6) ÷ 2 = 5."
             },
 
-            // ---- PARTE 2: Problemas inversos y aplicaciones (11-20) ----
+            // ---- PARTE 2: Casos complejos – elegir medida (11-20) ----
             {
-                id: 11,
-                part: 2,
-                type: "Base",
-                narrative: "Conocemos el área y la altura. ¿Cuál es la base?",
-                q: "Un triángulo tiene un área de 72 cm² y una altura de 9 cm. ¿Cuál es su base?",
-                a: "16 cm",
-                options: ["8 cm", "16 cm", "24 cm", "32 cm"],
-                hint: "Base = (2 × 72) / 9 = 144 / 9 = 16 cm."
+                id: 11, part: 2, type: "Elegir medida",
+                narrative: "En la tienda de zapatillas hay un precio muy alto que distorsiona la media.",
+                q: "Los precios de 5 zapatillas son: $12.000, $13.000, $14.000, $15.000 y $80.000. ¿Qué medida representa mejor el precio típico?",
+                a: "La mediana",
+                options: ["La media", "La mediana", "La moda", "El rango"],
+                hint: "El valor $80.000 es un valor extremo que infla la media. La mediana es más representativa."
             }, {
-                id: 12,
-                part: 2,
-                type: "Altura",
-                narrative: "Patito Amarillito ocultó la altura. ¡Despéjala!",
-                q: "Un triángulo tiene un área de 60 m² y una base de 12 m. ¿Cuál es su altura?",
-                a: "10 m",
-                options: ["5 m", "10 m", "12 m", "20 m"],
-                hint: "Altura = (2 × 60) / 12 = 120 / 12 = 10 m."
+                id: 12, part: 2, type: "Elegir medida",
+                narrative: "Una tienda de ropa quiere saber qué talla pedir más al proveedor.",
+                q: "Se registraron las tallas vendidas en un día: S, M, M, L, M, S, XL, M, L. ¿Qué medida usarías para saber la talla más vendida?",
+                a: "La moda",
+                options: ["La media", "La mediana", "La moda", "El rango"],
+                hint: "La talla es un dato categórico. La moda indica el valor más frecuente."
             }, {
-                id: 13,
-                part: 2,
-                type: "Aplicación (terreno)",
-                narrative: "Un terreno triangular con base 20 m y altura 15 m. ¿Cuál es su área?",
-                q: "Un terreno triangular tiene una base de 20 m y una altura de 15 m. ¿Cuál es su área?",
-                a: "150 m²",
-                options: ["300 m²", "150 m²", "75 m²", "35 m²"],
-                hint: "Área = (20 × 15) / 2 = 300 / 2 = 150 m²."
+                id: 13, part: 2, type: "Elegir medida",
+                narrative: "Un profesor quiere saber el rendimiento promedio de su curso.",
+                q: "Las notas de un estudiante son 5,0; 6,0; 5,5; 4,5 y 6,0. ¿Qué medida usarías para describir su rendimiento general?",
+                a: "La media",
+                options: ["La media", "La mediana", "La moda", "El rango"],
+                hint: "Para describir el rendimiento general, la media es la medida más común."
             }, {
-                id: 14,
-                part: 2,
-                type: "Aplicación (vela)",
-                narrative: "Una vela triangular con base 4 m y altura 6 m. ¿Cuánta tela se necesita?",
-                q: "Una vela triangular tiene una base de 4 m y una altura de 6 m. ¿Cuánta tela se necesita para confeccionarla?",
-                a: "12 m²",
-                options: ["24 m²", "12 m²", "10 m²", "6 m²"],
-                hint: "Área = (4 × 6) / 2 = 24 / 2 = 12 m²."
+                id: 14, part: 2, type: "Elegir medida",
+                narrative: "En una empresa hay un salario muy alto que distorsiona el promedio.",
+                q: "Los salarios de 5 empleados son: $400.000, $420.000, $430.000, $450.000 y $5.000.000. ¿Qué medida representa mejor el salario típico?",
+                a: "La mediana",
+                options: ["La media", "La mediana", "La moda", "El rango"],
+                hint: "El salario de $5.000.000 es un valor extremo. La mediana resiste mejor estos casos."
             }, {
-                id: 15,
-                part: 2,
-                type: "Proporcionalidad",
-                narrative: "Si duplicamos la base y la altura, ¿qué pasa con el área?",
-                q: "Si duplicamos tanto la base como la altura de un triángulo, ¿qué ocurre con su área?",
-                a: "Se cuadruplica",
-                options: ["Se duplica", "Se triplica", "Se cuadruplica", "Permanece igual"],
-                hint: "Área original = (b×h)/2. Nueva área = (2b × 2h)/2 = 4(b×h)/2 = 4 × área original."
+                id: 15, part: 2, type: "Elegir medida",
+                narrative: "Una encuesta pregunta el sabor de helado favorito.",
+                q: "En una encuesta, los sabores favoritos fueron: chocolate, vainilla, chocolate, fresa, chocolate, vainilla. ¿Qué medida usarías para saber el sabor más popular?",
+                a: "La moda",
+                options: ["La media", "La mediana", "La moda", "El rango"],
+                hint: "Los sabores son datos categóricos. Solo la moda se puede usar."
             }, {
-                id: 16,
-                part: 2,
-                type: "Área (triángulo isósceles)",
-                narrative: "Un triángulo isósceles con base 10 cm y altura 12 cm. ¡Calcula su área!",
-                q: "Un triángulo isósceles tiene una base de 10 cm y una altura de 12 cm. ¿Cuál es su área?",
-                a: "60 cm²",
-                options: ["120 cm²", "60 cm²", "30 cm²", "22 cm²"],
-                hint: "Área = (10 × 12) / 2 = 120 / 2 = 60 cm²."
+                id: 16, part: 2, type: "Elegir medida",
+                narrative: "Un meteorólogo quiere describir la temperatura típica del mes.",
+                q: "Las temperaturas diarias de un mes (sin valores extremos) son muy similares. ¿Qué medida usarías para describir la temperatura típica?",
+                a: "La media",
+                options: ["La media", "La mediana", "La moda", "El rango"],
+                hint: "Sin valores extremos, la media es una buena representación del valor típico."
             }, {
-                id: 17,
-                part: 2,
-                type: "Problema inverso",
-                narrative: "Conocemos el área y la base. ¿Cuál es la altura?",
-                q: "Un triángulo tiene un área de 48 cm² y una base de 8 cm. ¿Cuál es su altura?",
-                a: "12 cm",
-                options: ["6 cm", "12 cm", "16 cm", "24 cm"],
-                hint: "Altura = (2 × 48) / 8 = 96 / 8 = 12 cm."
+                id: 17, part: 2, type: "Aplicar medida",
+                narrative: "El Detective Dato investiga un conjunto con un valor extremo.",
+                q: "Un conjunto de datos es {4, 5, 6, 7, 50}. ¿Cuál es la mediana?",
+                a: "6",
+                options: ["5", "6", "7", "14,4"],
+                hint: "Ordenado: 4, 5, 6, 7, 50. El del centro es 6. (La media sería 14,4, distorsionada por el 50)."
             }, {
-                id: 18,
-                part: 2,
-                type: "Composición",
-                narrative: "Un cuadrado dividido por una diagonal forma dos triángulos. ¿Cuál es el área de cada uno?",
-                q: "Un cuadrado de 10 cm de lado se divide por una diagonal en dos triángulos iguales. ¿Cuál es el área de cada triángulo?",
-                a: "50 cm²",
-                options: ["100 cm²", "50 cm²", "25 cm²", "20 cm²"],
-                hint: "Área del cuadrado = 100 cm². Cada triángulo es la mitad: 50 cm²."
+                id: 18, part: 2, type: "Aplicar medida",
+                narrative: "Rango calcula la dispersión de temperaturas.",
+                q: "Las temperaturas de una semana fueron: 12°C, 15°C, 18°C, 14°C, 20°C, 16°C, 13°C. ¿Cuál es el rango?",
+                a: "8°C",
+                options: ["6°C", "7°C", "8°C", "20°C"],
+                hint: "Rango = mayor − menor = 20 − 12 = 8°C."
             }, {
-                id: 19,
-                part: 2,
-                type: "Aplicación (cartel)",
-                narrative: "Un cartel triangular con base 2 m y altura 1,5 m. ¿Cuánta pintura se necesita?",
-                q: "Un cartel triangular tiene una base de 2 m y una altura de 1,5 m. Si se pinta toda su superficie, ¿cuántos metros cuadrados se pintan?",
-                a: "1,5 m²",
-                options: ["3 m²", "1,5 m²", "1 m²", "0,75 m²"],
-                hint: "Área = (2 × 1,5) / 2 = 3 / 2 = 1,5 m²."
+                id: 19, part: 2, type: "Aplicar medida",
+                narrative: "Una tienda calcula el promedio de ventas semanales.",
+                q: "Las ventas de una tienda en 5 días fueron: $10.000, $12.000, $8.000, $14.000 y $16.000. ¿Cuál es la media aritmética?",
+                a: "$12.000",
+                options: ["$10.000", "$11.000", "$12.000", "$14.000"],
+                hint: "Media = (10.000 + 12.000 + 8.000 + 14.000 + 16.000) ÷ 5 = 60.000 ÷ 5 = $12.000."
             }, {
-                id: 20,
-                part: 2,
-                type: "Problema inverso",
-                narrative: "Conocemos el área y la altura. ¿Cuál es la base?",
-                q: "Un triángulo tiene un área de 90 cm² y una altura de 10 cm. ¿Cuál es su base?",
-                a: "18 cm",
-                options: ["9 cm", "18 cm", "27 cm", "36 cm"],
-                hint: "Base = (2 × 90) / 10 = 180 / 10 = 18 cm."
+                id: 20, part: 2, type: "Elegir medida",
+                narrative: "Una encuesta de mascotas favoritas. ¿Cuál es la mascota más popular?",
+                q: "En una encuesta sobre mascotas favoritas: perro, gato, perro, perro, gato, pez, perro, gato. ¿Qué medida usarías para saber la mascota favorita y cuál es el resultado?",
+                a: "La moda, que es 'perro'",
+                options: [
+                    "La media, que es 'perro'",
+                    "La mediana, que es 'perro'",
+                    "La moda, que es 'perro'",
+                    "El rango, que es 'perro'"
+                ],
+                hint: "Datos categóricos → moda. Frecuencias: perro=4, gato=3, pez=1. Moda = perro."
             }
         ];
 
@@ -718,42 +622,36 @@
             const toggle = document.getElementById('sound-toggle');
             if (!toggle || !toggle.checked) return;
             try {
-                const ctx = new(window.AudioContext || window.webkitAudioContext)();
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                const volume = 0.25;
+                osc.connect(gain); gain.connect(ctx.destination);
+                const volume = 0.22;
                 if (type === 'correct') {
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
-                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08);
-                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16);
-                    osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.24);
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(392.00, ctx.currentTime);
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime + 0.08);
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.16);
+                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.24);
                     gain.gain.setValueAtTime(volume, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.4);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+                    osc.start(); osc.stop(ctx.currentTime + 0.45);
                 } else {
                     osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(200, ctx.currentTime);
-                    osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.25);
+                    osc.frequency.setValueAtTime(180, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(60, ctx.currentTime + 0.3);
                     gain.gain.setValueAtTime(volume, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.3);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.32);
+                    osc.start(); osc.stop(ctx.currentTime + 0.32);
                 }
             } catch (e) { /* silencio */ }
         }
 
         function startGame() {
-            if (selectedPartMode === 'part1') {
-                currentQuestionsList = allQuestions.filter(q => q.part === 1);
-            } else if (selectedPartMode === 'part2') {
-                currentQuestionsList = allQuestions.filter(q => q.part === 2);
-            } else {
-                currentQuestionsList = [...allQuestions];
-            }
+            if (selectedPartMode === 'part1') currentQuestionsList = allQuestions.filter(q => q.part === 1);
+            else if (selectedPartMode === 'part2') currentQuestionsList = allQuestions.filter(q => q.part === 2);
+            else currentQuestionsList = [...allQuestions];
+
             currentLevelIndex = 0;
             document.getElementById('screen-start').classList.add('hidden');
             document.getElementById('screen-game').classList.remove('hidden');
@@ -764,17 +662,17 @@
         function loadQuestion() {
             const qData = currentQuestionsList[currentLevelIndex];
             const total = currentQuestionsList.length;
-            const progress = ((currentLevelIndex) / total) * 100;
+            const progress = (currentLevelIndex / total) * 100;
 
-            document.getElementById('level-label').innerText = `DESAFÍO ${currentLevelIndex + 1} / ${total}`;
+            document.getElementById('level-label').innerText = `CASO ${currentLevelIndex + 1} / ${total}`;
             document.getElementById('progress-fill').style.width = `${Math.max(progress, 5)}%`;
             document.getElementById('section-badge').innerText =
-                qData.part === 1 ? "PARTE 1: FÓRMULA BÁSICA" : "PARTE 2: PROBLEMAS INVERSOS";
+                qData.part === 1 ? "PARTE 1: CASOS SIMPLES" : "PARTE 2: CASOS COMPLEJOS";
 
             document.getElementById('narrative-text').innerText = `"${qData.narrative}"`;
-            document.getElementById('question-number').innerText = `PREGUNTA #${qData.id}`;
+            document.getElementById('question-number').innerText = `CASO #${qData.id}`;
             document.getElementById('question-text').innerText = qData.q;
-            document.getElementById('question-type-badge').innerText = `Tipo: ${qData.type}`;
+            document.getElementById('question-type-badge').innerText = qData.type;
 
             const hintsToggle = document.getElementById('hints-toggle').checked;
             const hintContainer = document.getElementById('hint-container');
@@ -787,7 +685,7 @@
             }
 
             const select = document.getElementById('answer-select');
-            select.innerHTML = '<option value="" disabled selected>-- Elige con calma --</option>';
+            select.innerHTML = '<option value="" disabled selected>-- Elige con calma, detective --</option>';
             const shuffled = shuffleArray(qData.options);
             shuffled.forEach(opt => {
                 const el = document.createElement('option');
@@ -796,11 +694,11 @@
                 select.appendChild(el);
             });
 
-            const avatars = ["🐱", "🐢", "🦉", "⚖️", "🐶"];
-            const names = ["Gatito Chill", "Mente Inversa", "Búho del Equilibrio", "Robot Balance", "Rayo Despeje"];
+            const avatars = ["🕵️", "🐕", "🔎", "📁", "🧐"];
+            const names = ["Detective Dato", "Rango el Sabueso", "Lupa Forense", "Archivo Secreto", "Inspector Cifra"];
             const idx = currentLevelIndex % avatars.length;
             document.getElementById('hero-avatar').innerText = avatars[idx];
-            document.getElementById('hero-title').innerText = `Legión del Despeje: ${names[idx]}`;
+            document.getElementById('hero-title').innerText = `Agencia Dato: ${names[idx]}`;
 
             isProcessing = false;
         }
@@ -821,9 +719,9 @@
 
             if (userAns === currentQ.a) {
                 playSFX('correct');
-                const words = ["¡DESPEJADO!", "¡EQUILIBRIO!", "¡CHILL!", "¡PERFECTO!", "¡POW!"];
+                const words = ["¡RESUELTO!", "¡CASO CERRADO!", "¡PISTA!", "¡EVIDENCIA!", "¡BINGO!"];
                 fx.innerText = words[Math.floor(Math.random() * words.length)];
-                fx.className = "pow-text comic-font text-8xl md:text-9xl text-yellow-300 active";
+                fx.className = "pow-text detective-font text-8xl md:text-9xl text-amber-300 active";
                 setTimeout(() => {
                     fx.classList.remove('active');
                     currentLevelIndex++;
@@ -835,8 +733,8 @@
                 }, 850);
             } else {
                 playSFX('wrong');
-                fx.innerText = "¡DESORDEN!";
-                fx.className = "pow-text comic-font text-8xl md:text-9xl text-red-500 active";
+                fx.innerText = "¡PISTA FALSA!";
+                fx.className = "pow-text detective-font text-8xl md:text-9xl text-emerald-500 active";
                 setTimeout(() => {
                     fx.classList.remove('active');
                     select.value = "";
@@ -852,24 +750,19 @@
 
             const mode = selectedPartMode;
             if (mode === 'part1') {
-                document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 de la Evaluación!";
-                document.getElementById('end-subtitle').innerText =
-                    "Dominaste la fórmula básica del área de triángulos. ¡Continúa así!";
+                document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 del caso!";
+                document.getElementById('end-subtitle').innerText = "Calculaste correctamente las medidas de tendencia central y el rango. ¡Sigue investigando!";
             } else if (mode === 'part2') {
-                document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 de la Evaluación!";
-                document.getElementById('end-subtitle').innerText =
-                    "Aplicaste problemas inversos y situaciones reales. ¡Excelente!";
+                document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 del caso!";
+                document.getElementById('end-subtitle').innerText = "Elegiste la medida adecuada en cada situación. ¡Excelente criterio detectivesco!";
             } else {
-                document.getElementById('end-title').innerText = "¡HAS COMPLETADO EL ESCAPE ROOM COMPLETO!";
-                document.getElementById('end-subtitle').innerText =
-                    "Eres un Maestro del Área de Triángulos. ¡El orden ha sido restaurado!";
+                document.getElementById('end-title').innerText = "¡HAS RESUELTO EL CASO COMPLETO!";
+                document.getElementById('end-subtitle').innerText = "Eres un Maestro de las Medidas de Tendencia Central. El Sr. Promedio Falso ha sido capturado.";
             }
         }
 
         function confirmExit() {
-            if (confirm("¿Deseas volver al menú de inicio?")) {
-                returnToStart();
-            }
+            if (confirm("¿Deseas volver al menú de inicio?")) returnToStart();
         }
 
         function returnToStart() {
@@ -892,14 +785,12 @@
         function switchExtraTab(tabId) {
             document.querySelectorAll('[id^="extra-"]').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.extra-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
-
             document.getElementById(`extra-${tabId}`).classList.remove('hidden');
             document.getElementById(`tab-${tabId}`).classList.add('active-tab');
         }
 
         function toggleExtraHint() {
-            const box = document.getElementById('extra-hint-box');
-            box.classList.toggle('hidden');
+            document.getElementById('extra-hint-box').classList.toggle('hidden');
         }
 
         document.addEventListener('DOMContentLoaded', () => {
