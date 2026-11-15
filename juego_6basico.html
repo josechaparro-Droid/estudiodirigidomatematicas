@@ -3,182 +3,135 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Escape Room: Gatito Chill vs Patito Amarillito – Volumen de Cubos y Paralelepípedos (6° Básico)</title>
-    <script src="https://cdn.tailwindcss.com">
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet" />
+    <title>Escape Room: Oráculo de Cristal – El Laboratorio de la Suerte (6° Básico OA 23)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Quicksand:wght@400;600;700&family=Caveat:wght@700&display=swap" rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Comic Neue', cursive;
-            background-color: #0f172a;
-            background-image: radial-gradient(rgba(239, 68, 68, 0.25) 15%, transparent 16%),
-                radial-gradient(rgba(37, 99, 235, 0.25) 15%, transparent 16%);
-            background-size: 24px 24px;
-            background-position: 0 0, 12px 12px;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #0c0a1d;
+            background-image:
+                radial-gradient(circle at 20% 25%, rgba(139, 92, 246, 0.22) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(34, 211, 238, 0.18) 0%, transparent 45%),
+                radial-gradient(rgba(255,255,255,0.10) 1px, transparent 1px),
+                radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 90px 90px, 50px 50px;
+            background-position: 0 0, 0 0, 0 0, 25px 25px;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             padding: 0.75rem;
-            color: #0f172a;
+            color: #1e1b4b;
         }
-        .comic-font {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 1.5px;
-        }
-        .chill-font {
-            font-family: 'Chewy', cursive;
-        }
-        .comic-panel {
-            background: white;
-            border: 5px solid black;
-            box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
+        .oracle-font { font-family: 'Cinzel Decorative', serif; letter-spacing: 1px; }
+        .whisper-font { font-family: 'Caveat', cursive; }
+        .panel {
+            background: #f8f5ff;
+            border: 4px solid #2e1065;
+            box-shadow: 8px 8px 0px #8b5cf6, 0 0 55px rgba(139, 92, 246, 0.35);
             position: relative;
+            border-radius: 14px;
+            overflow: hidden;
         }
-        .comic-panel::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px);
-            background-size: 6px 6px;
-            pointer-events: none;
-            z-index: 1;
+        .panel::before {
+            content: ""; position: absolute; inset: 0;
+            background-image:
+                radial-gradient(rgba(46, 16, 101, 0.04) 1px, transparent 1px);
+            background-size: 8px 8px; pointer-events: none;
         }
         .btn-comic {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 1px;
-            border: 4px solid black;
-            box-shadow: 5px 5px 0px black;
-            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            font-family: 'Cinzel Decorative', serif; letter-spacing: 1px;
+            border: 4px solid #2e1065; box-shadow: 5px 5px 0px #2e1065;
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
             text-transform: uppercase;
+            border-radius: 12px;
+            font-weight: 900;
         }
-        .btn-comic:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 8px 8px 0px black;
-        }
-        .btn-comic:active {
-            transform: translate(2px, 2px);
-            box-shadow: 1px 1px 0px black;
-        }
+        .btn-comic:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0px #2e1065; }
+        .btn-comic:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #2e1065; }
         .tab-btn.active {
-            background-color: #facc15;
-            color: black;
-            border-bottom: 4px solid black;
+            background: linear-gradient(135deg, #a78bfa, #8b5cf6) !important;
+            color: #fff; border-bottom: 4px solid #2e1065;
         }
         .progress-bar-container {
-            background: #e2e8f0;
-            border: 4px solid black;
-            border-radius: 9999px;
-            overflow: hidden;
-            height: 28px;
+            background: #ede9fe; border: 4px solid #2e1065; border-radius: 9999px;
+            overflow: hidden; height: 26px;
         }
         .progress-bar-fill {
-            background: linear-gradient(90deg, #ef4444, #8b5cf6, #3b82f6);
-            height: 100%;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(90deg, #a78bfa, #22d3ee, #f472b6);
+            height: 100%; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .alarm-border {
-            animation: alertPulse 1.8s infinite alternate;
-        }
-        @keyframes alertPulse {
-            from {
-                border-color: #0f172a;
-                box-shadow: 8px 8px 0px black;
-            }
-            to {
-                border-color: #ef4444;
-                box-shadow: 8px 8px 0px #ef4444;
-            }
+        .glow-border { animation: crystalPulse 2.4s infinite alternate; }
+        @keyframes crystalPulse {
+            from { border-color: #2e1065; box-shadow: 8px 8px 0px #8b5cf6; }
+            to { border-color: #22d3ee; box-shadow: 8px 8px 0px #22d3ee; }
         }
         .pow-text {
-            position: fixed;
-            top: 50%;
-            left: 50%;
+            position: fixed; top: 50%; left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            z-index: 100;
-            pointer-events: none;
+            z-index: 100; pointer-events: none;
             transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-shadow: 6px 6px 0px black;
-            -webkit-text-stroke: 3px black;
+            text-shadow: 6px 6px 0px #2e1065;
+            -webkit-text-stroke: 3px #2e1065;
         }
-        .pow-text.active {
-            transform: translate(-50%, -50%) scale(1.5);
-        }
+        .pow-text.active { transform: translate(-50%, -50%) scale(1.5); }
         select {
             appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 1.2rem center;
-            background-size: 1.4em;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232e1065' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat; background-position: right 1.2rem center; background-size: 1.4em;
         }
-        .hidden {
-            display: none !important;
-        }
+        .hidden { display: none !important; }
         .extra-tab-btn {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 0.5px;
-            border: 3px solid black;
-            box-shadow: 4px 4px 0px black;
+            font-family: 'Cinzel Decorative', serif; letter-spacing: 0.5px;
+            border: 3px solid #2e1065; box-shadow: 4px 4px 0px #2e1065;
             transition: all 0.1s ease;
+            border-radius: 8px; font-weight: 900; font-size: 0.75rem;
         }
         .extra-tab-btn.active-tab {
-            background-color: #facc15 !important;
-            color: black;
-            border-bottom: 4px solid black;
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px black;
+            background: #a78bfa !important; color: #fff;
+            border-bottom: 4px solid #2e1065;
+            transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #2e1065;
         }
-        .extra-tab-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px black;
+        .extra-tab-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #2e1065; }
+        details summary { cursor: pointer; font-weight: bold; color: #7c3aed; }
+        details summary:hover { color: #4c1d95; }
+        table td, table th { border: 1px solid #2e1065; padding: 0.5rem; text-align: center; }
+        .float-icon { display: inline-block; animation: floaty 3.2s ease-in-out infinite; }
+        @keyframes floaty {
+            0%, 100% { transform: translateY(0) rotate(-4deg); }
+            50% { transform: translateY(-10px) rotate(4deg); }
         }
-        details summary {
-            cursor: pointer;
-            font-weight: bold;
-            color: #7c3aed;
-        }
-        details summary:hover {
-            color: #4c1d95;
-        }
-        table td,
-        table th {
-            border: 1px solid #000;
-            padding: 0.5rem;
-            text-align: center;
+        .crystal {
+            display: inline-block;
+            background: linear-gradient(135deg, #c4b5fd, #a78bfa, #7c3aed);
+            padding: 2px 8px; border-radius: 6px;
+            color: #fff; font-weight: 900;
         }
     </style>
 </head>
 <body>
 
-    <div id="visual-fx" class="pow-text comic-font text-8xl md:text-9xl text-yellow-300">¡DESPEJADO!</div>
+    <div id="visual-fx" class="pow-text oracle-font text-8xl md:text-9xl text-cyan-300">¡PREVISTO!</div>
 
     <div class="max-w-4xl w-full">
 
         <header class="text-center mb-6">
-            <div class="inline-block bg-white border-4 border-black p-4 md:p-6 transform -rotate-1 shadow-[8px_8px_0px_#2563eb] relative z-10 w-full">
-                <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-black pb-2 mb-3 text-xs md:text-sm font-bold text-gray-700">
-                    <span>📚 NIVEL: 6° BÁSICO</span>
+            <div class="inline-block bg-[#f8f5ff] border-4 border-[#2e1065] p-4 md:p-6 transform -rotate-1 shadow-[8px_8px_0px_#22d3ee] relative z-10 w-full">
+                <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-[#2e1065] pb-2 mb-3 text-xs md:text-sm font-bold text-violet-800">
+                    <span>🔮 NIVEL: 6° BÁSICO</span>
                     <span>⏱️ TIEMPO MÁXIMO: 90 MIN</span>
-                    <span>🧩 UNIDAD: VOLUMEN DE CUBOS Y PARALELEPÍPEDOS (OA 19)</span>
+                    <span>🎲 UNIDAD: CONJETURAS SOBRE TENDENCIAS (OA 23)</span>
                 </div>
-                <h1 class="text-3xl md:text-5xl comic-font text-blue-700 tracking-wide uppercase">
-                    Gatito Chill vs. Patito Amarillito
+                <h1 class="text-3xl md:text-5xl oracle-font text-violet-700 tracking-wide uppercase">
+                    Oráculo de Cristal
                 </h1>
-                <p class="text-lg md:text-2xl chill-font text-purple-900 mt-1">
-                    Escape Room del Volumen
+                <p class="text-lg md:text-2xl whisper-font text-cyan-600 mt-1">
+                    El Laboratorio de la Suerte
                 </p>
             </div>
-            <div class="mt-4 bg-yellow-100 border-2 border-black p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
+            <div class="mt-4 bg-violet-100 border-2 border-[#2e1065] p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
                 <p class="font-bold text-xs md:text-sm text-indigo-950">
-                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 19)</span>: Calcular el volumen de cubos y paralelepípedos, expresando el resultado en cm³, m³ y mm³.
+                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 23)</span>: Conjeturar acerca de la tendencia de resultados obtenidos en repeticiones de un mismo experimento con dados, monedas u otros, de manera manual y/o usando software educativo.
                 </p>
             </div>
         </header>
@@ -186,67 +139,67 @@
         <main class="relative z-10">
 
             <!-- PANTALLA 1: INICIO -->
-            <div id="screen-start" class="comic-panel p-6 md:p-8 space-y-6">
-                <div class="flex justify-center items-center gap-4 text-6xl md:text-7xl animate-bounce">
-                    <span>🐱</span><span class="text-3xl font-black">VS</span><span>🐤</span>
+            <div id="screen-start" class="panel p-6 md:p-8 space-y-6">
+                <div class="flex justify-center items-center gap-4 text-6xl md:text-7xl">
+                    <span class="float-icon">🔮</span><span class="text-3xl font-black oracle-font text-violet-600">VS</span><span class="float-icon" style="animation-delay:0.6s">🎲</span>
                 </div>
 
                 <div class="text-center">
-                    <h2 class="text-2xl md:text-4xl comic-font text-red-600">¡EL DESORDEN DE LOS VOLÚMENES HA LLEGADO!</h2>
-                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">Patito Amarillito ha vaciado todas las cajas y recipientes de la ciudad...</p>
+                    <h2 class="text-2xl md:text-4xl oracle-font text-cyan-600">¡LAS PREDICCIONES ESTÁN ROTAS!</h2>
+                    <p class="text-sm md:text-base font-bold text-violet-700 mt-1">El Doctor Azar ha corrompido el Oráculo de Cristal...</p>
                 </div>
 
-                <div class="bg-blue-50 border-4 border-black p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
+                <div class="bg-violet-50 border-4 border-[#2e1065] p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
                     <p class="text-base md:text-lg">
-                        El villano <b>Patito Amarillito</b> lanzó su <i>"Rayo Vacío"</i> sobre la Ciudad de los Volúmenes, haciendo que las cajas, tanques, cubos y paralelepípedos perdieran su capacidad. Los almacenes no saben cuánto guardar, las piscinas no saben cuánta agua contienen y las empresas de mudanza han perdido la cuenta de sus cajas.
+                        En el <b>Laboratorio de la Suerte</b>, el <b>Oráculo de Cristal</b> predecía tendencias en experimentos aleatorios. Pero el villano <b>Doctor Azar</b> activó su <i>"Nube de Incertidumbre"</i>: ahora nadie sabe qué resultado es más probable al lanzar monedas, tirar dados o girar ruletas muchas veces. Las predicciones están completamente rotas.
                     </p>
                     <p class="text-base md:text-lg">
-                        Con su taza de té siempre a mano, el sereno <b>Gatito Chill</b> nos guía con una sonrisa:
+                        La joven <b>Aprendiz Lyra</b> y su orbe flotante <b>Prisma</b> te necesitan para restaurar las conjeturas:
                     </p>
-                    <blockquote class="bg-yellow-200 border-l-4 border-yellow-600 p-3 rounded font-bold text-indigo-900 italic text-sm md:text-base">
-                        "Tranquilos, amigos... el volumen de un cubo es arista al cubo, y el de un paralelepípedo es largo × ancho × alto. ¡Chill, que el equilibrio volverá!"
+                    <blockquote class="bg-cyan-100 border-l-4 border-cyan-500 p-3 rounded font-bold text-indigo-950 italic text-sm md:text-base">
+                        "Recuerda, joven vidente: si un experimento es justo, todos los resultados tienen igual probabilidad. Y al repetirlo muchas veces, los resultados tienden a estabilizarse alrededor de esa probabilidad teórica. ¡Confía en el equilibrio del azar!"
                     </blockquote>
                 </div>
 
-                <div class="bg-purple-100 border-4 border-black p-5 rounded-xl text-left space-y-3 shadow-md">
-                    <label class="block font-black text-purple-900 uppercase text-base md:text-lg comic-font tracking-wide">
-                        ⚙️ Configuración Docente – Selección de Tramo (10 o 20 preguntas):
+                <div class="bg-fuchsia-100 border-4 border-[#2e1065] p-5 rounded-xl text-left space-y-3 shadow-md">
+                    <label class="block font-black text-fuchsia-900 uppercase text-base md:text-lg oracle-font tracking-wide">
+                        ⚙️ Configuración Docente – Selección de Tramo:
                     </label>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            📍 Parte 1 (Preguntas 1 a 10)<br />
-                            <span class="text-xs font-normal normal-case block">Fórmula y cálculo directo de volumen</span>
+                        <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-sm text-[#2e1065]">
+                            🪙 Parte 1 (1-10)<br />
+                            <span class="text-xs font-normal normal-case block">Experimentos simples</span>
                         </button>
-                        <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            📍 Parte 2 (Preguntas 11 a 20)<br />
-                            <span class="text-xs font-normal normal-case block">Conversiones, inversos y aplicaciones</span>
+                        <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-sm text-[#2e1065]">
+                            🎲 Parte 2 (11-20)<br />
+                            <span class="text-xs font-normal normal-case block">Tendencias y repeticiones</span>
                         </button>
-                        <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            🔥 Modo Completo (20 Retos)<br />
-                            <span class="text-xs font-normal normal-case block">Evaluación continua completa</span>
+                        <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-sm text-[#2e1065]">
+                            🔮 Modo Completo (20)<br />
+                            <span class="text-xs font-normal normal-case block">Oráculo total</span>
                         </button>
                     </div>
                 </div>
 
-                <div class="flex flex-wrap items-center justify-between gap-3 bg-gray-100 p-3 border-2 border-black rounded-lg">
+                <div class="flex flex-wrap items-center justify-between gap-3 bg-violet-50 p-3 border-2 border-[#2e1065] rounded-lg">
                     <div class="flex items-center gap-2">
-                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
-                        <label for="sound-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">🔊 SFX Retro</label>
+                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-violet-600" />
+                        <label for="sound-toggle" class="font-bold text-sm text-violet-900 cursor-pointer select-none">🔊 SFX Místico</label>
                     </div>
                     <div class="flex items-center gap-2">
-                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
-                        <label for="hints-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">💡 Permitir pistas</label>
+                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-violet-600" />
+                        <label for="hints-toggle" class="font-bold text-sm text-violet-900 cursor-pointer select-none">💡 Permitir pistas</label>
                     </div>
                 </div>
 
                 <div class="pt-2">
-                    <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-black text-2xl md:text-3xl py-4 w-full rounded-xl">
-                        ¡RESTAURAR EL ORDEN DE LOS VOLÚMENES! 🚀
+                    <button onclick="startGame()" class="btn-comic bg-violet-600 hover:bg-violet-500 text-white text-xl md:text-2xl py-4 w-full">
+                        ¡RESTAURAR EL ORÁCULO! 🔮
                     </button>
                 </div>
 
-                <div class="text-center pt-2 border-t-2 border-gray-200">
-                    <button onclick="toggleExtraModules()" class="text-sm font-bold text-blue-700 underline hover:text-blue-900">
+                <div class="text-center pt-2 border-t-2 border-violet-200">
+                    <button onclick="toggleExtraModules()" class="text-sm font-bold text-violet-700 underline hover:text-violet-900">
                         📋 Ver Secciones Complementarias (Problemas de 4 pasos, Metacognición y Autoevaluación)
                     </button>
                 </div>
@@ -254,155 +207,153 @@
 
             <!-- PANTALLA 2: JUEGO -->
             <div id="screen-game" class="hidden space-y-6">
-                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white border-4 border-black p-4 shadow-[6px_6px_0px_black]">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-[#f8f5ff] border-4 border-[#2e1065] p-4 shadow-[6px_6px_0px_#2e1065] rounded-xl">
                     <div class="flex items-center gap-3">
-                        <span class="text-3xl">🐱</span>
+                        <span class="text-3xl float-icon">🔮</span>
                         <div>
-                            <div class="comic-font text-2xl text-red-600 leading-tight" id="level-label">DESAFÍO 1 / 10</div>
-                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: FÓRMULA BÁSICA</div>
+                            <div class="oracle-font text-xl md:text-2xl text-violet-700 leading-tight" id="level-label">VISIÓN 1 / 10</div>
+                            <div class="text-xs font-bold text-violet-500 uppercase" id="section-badge">PARTE 1: EXPERIMENTOS SIMPLES</div>
                         </div>
                     </div>
                     <div class="w-full md:w-1/2 progress-bar-container">
                         <div id="progress-fill" class="progress-bar-fill" style="width: 5%"></div>
                     </div>
-                    <button onclick="confirmExit()" class="text-xs font-bold bg-gray-200 hover:bg-gray-300 border-2 border-black px-3 py-1 rounded">
+                    <button onclick="confirmExit()" class="text-xs font-bold bg-violet-200 hover:bg-violet-300 border-2 border-[#2e1065] px-3 py-1 rounded">
                         ⚙️ Menú
                     </button>
                 </div>
 
-                <div class="comic-panel p-5 md:p-8 alarm-border border-4">
-                    <div class="flex items-start gap-4 mb-6 bg-blue-50 border-2 border-black p-4 rounded-xl">
-                        <div class="text-5xl" id="hero-avatar">🐱</div>
+                <div class="panel p-5 md:p-8 glow-border border-4">
+                    <div class="flex items-start gap-4 mb-6 bg-violet-50 border-2 border-[#2e1065] p-4 rounded-xl">
+                        <div class="text-5xl" id="hero-avatar">🔮</div>
                         <div class="w-full">
-                            <div class="flex justify-between items-center">
-                                <h4 class="font-bold text-red-600 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Legión del Despeje: Gatito Chill</h4>
-                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Volumen</span>
+                            <div class="flex justify-between items-center flex-wrap gap-2">
+                                <h4 class="font-bold text-cyan-600 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Círculo de Lyra: Oráculo de Cristal</h4>
+                                <span class="bg-fuchsia-200 border border-[#2e1065] text-fuchsia-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Probabilidad</span>
                             </div>
-                            <p class="font-bold text-indigo-950 italic text-base md:text-lg mt-1" id="narrative-text">Cargando situación...</p>
+                            <p class="font-bold text-indigo-950 italic text-base md:text-lg mt-1" id="narrative-text">Consultando el orbe...</p>
                         </div>
                     </div>
 
                     <div class="space-y-6 relative z-10">
-                        <div class="bg-gray-50 border-2 border-black p-5 rounded-xl shadow-inner">
-                            <div id="question-number" class="comic-font text-xl text-purple-700 mb-1">PREGUNTA #</div>
-                            <div id="question-text" class="text-xl md:text-2xl font-bold text-gray-900 leading-relaxed font-mono"></div>
+                        <div class="bg-violet-50 border-2 border-[#2e1065] p-5 rounded-xl shadow-inner">
+                            <div id="question-number" class="oracle-font text-lg text-violet-700 mb-1">VISIÓN #</div>
+                            <div id="question-text" class="text-lg md:text-xl font-bold text-slate-900 leading-relaxed"></div>
                         </div>
 
                         <div id="hint-container" class="hidden">
-                            <button onclick="toggleHint()" class="text-sm font-bold text-purple-800 bg-purple-100 border-2 border-purple-400 px-3 py-1.5 rounded-lg flex items-center gap-2 hover:bg-purple-200 transition">
-                                💡 <span>Mostrar pista</span>
+                            <button onclick="toggleHint()" class="text-sm font-bold text-violet-800 bg-violet-100 border-2 border-violet-400 px-3 py-1.5 rounded-lg flex items-center gap-2 hover:bg-violet-200 transition">
+                                💡 <span>Mostrar pista del Oráculo</span>
                             </button>
                             <div id="hint-box" class="hidden mt-2 p-3 bg-yellow-50 border-2 border-yellow-400 rounded-lg text-sm text-yellow-950 leading-relaxed font-medium"></div>
                         </div>
 
                         <div class="space-y-2">
                             <label class="block font-black text-indigo-950 uppercase tracking-tight text-sm">
-                                🎯 Selecciona la respuesta correcta:
+                                🎯 Selecciona la conjetura correcta:
                             </label>
-                            <select id="answer-select" class="w-full p-4 border-4 border-black text-lg md:text-xl font-bold bg-yellow-50 focus:ring-4 focus:ring-purple-300 outline-none cursor-pointer rounded-xl">
-                                <option value="" disabled selected>-- Elige con calma --</option>
+                            <select id="answer-select" class="w-full p-4 border-4 border-[#2e1065] text-base md:text-lg font-bold bg-yellow-50 focus:ring-4 focus:ring-violet-300 outline-none cursor-pointer rounded-xl">
+                                <option value="" disabled selected>-- Consulta al Oráculo --</option>
                             </select>
                         </div>
 
-                        <button onclick="checkAnswer()" class="btn-comic bg-red-600 hover:bg-red-500 text-white text-2xl md:text-3xl py-4 w-full rounded-xl">
-                            ¡ENVIAR RESPUESTA! 💥
+                        <button onclick="checkAnswer()" class="btn-comic bg-fuchsia-600 hover:bg-fuchsia-500 text-white text-xl md:text-2xl py-4 w-full">
+                            ¡REVELAR VISIÓN! ✨
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- PANTALLA 3: VICTORIA -->
-            <div id="screen-end" class="hidden comic-panel p-8 md:p-12 text-center space-y-8">
-                <h2 class="text-5xl md:text-7xl comic-font text-purple-700">¡SISTEMA REESTABLECIDO!</h2>
-                <div class="text-8xl md:text-9xl animate-bounce my-4">🐱⚖️✨</div>
+            <div id="screen-end" class="hidden panel p-8 md:p-12 text-center space-y-8">
+                <h2 class="text-4xl md:text-6xl oracle-font text-violet-700">¡ORÁCULO RESTAURADO!</h2>
+                <div class="text-8xl md:text-9xl my-4 float-icon">🔮✨🎲</div>
                 <div class="space-y-3">
-                    <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has derrotado a Patito Amarillito!</p>
-                    <p class="text-gray-700 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
-                        Todos los volúmenes han vuelto a su equilibrio. Las cajas, tanques y recipientes están en orden.
+                    <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has derrotado al Doctor Azar!</p>
+                    <p class="text-violet-800 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
+                        Las predicciones vuelven a fluir. El Laboratorio de la Suerte está en equilibrio.
                     </p>
                 </div>
-                <div class="bg-yellow-100 border-4 border-black p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
-                    <p class="text-purple-900">
-                        <b>Gatito Chill te felicita:</b> "¡Excelente! Recuerda que el volumen del cubo es arista³ y el del paralelepípedo es largo × ancho × alto. ¡Mantén la calma y el orden siempre regresa!"
+                <div class="bg-violet-100 border-4 border-[#2e1065] p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
+                    <p class="text-violet-900">
+                        <b>Lyra y Prisma te felicitan:</b> "¡Gran trabajo, joven vidente! Comprendiste que en experimentos justos todos los resultados tienen igual probabilidad, y que al repetir muchas veces, los resultados tienden a acercarse al valor teórico. ¡El azar tiene equilibrio!"
                     </p>
                 </div>
                 <div class="flex flex-col md:flex-row justify-center gap-4 pt-4">
-                    <button onclick="returnToStart()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-2xl py-4 px-8 rounded-xl">
+                    <button onclick="returnToStart()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-lg md:text-xl py-4 px-8">
                         🔄 VOLVER AL MENÚ
                     </button>
-                    <button onclick="toggleExtraModules()" class="btn-comic bg-purple-600 hover:bg-purple-500 text-white text-2xl py-4 px-8 rounded-xl">
+                    <button onclick="toggleExtraModules()" class="btn-comic bg-purple-600 hover:bg-purple-500 text-white text-lg md:text-xl py-4 px-8">
                         📝 VER MÓDULOS DE DESARROLLO
                     </button>
                 </div>
             </div>
 
             <!-- EXTRAS -->
-            <div id="screen-extras" class="hidden comic-panel p-6 md:p-8 space-y-6 my-6">
-                <div class="flex justify-between items-center border-b-4 border-black pb-4">
-                    <h2 class="text-3xl md:text-4xl comic-font text-indigo-900">SECCIONES DE DESARROLLO Y EVALUACIÓN</h2>
-                    <button onclick="closeExtraModules()" class="btn-comic bg-red-500 text-white px-4 py-1 text-xl rounded">
-                        ✖️ CERRAR
-                    </button>
+            <div id="screen-extras" class="hidden panel p-6 md:p-8 space-y-6 my-6">
+                <div class="flex justify-between items-center border-b-4 border-[#2e1065] pb-4 flex-wrap gap-2">
+                    <h2 class="text-2xl md:text-3xl oracle-font text-violet-700">SECCIONES DE DESARROLLO</h2>
+                    <button onclick="closeExtraModules()" class="btn-comic bg-fuchsia-500 text-white px-4 py-1 text-lg">✖️ CERRAR</button>
                 </div>
 
-                <div class="flex flex-wrap gap-2 border-b-2 border-black pb-2">
-                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="extra-tab-btn active-tab py-2 px-3 text-sm bg-yellow-300">II. Problemas (4 Pasos)</button>
-                    <button onclick="switchExtraTab('sec3')" id="tab-sec3" class="extra-tab-btn py-2 px-3 text-sm bg-white">III. Metacognición</button>
-                    <button onclick="switchExtraTab('sec4')" id="tab-sec4" class="extra-tab-btn py-2 px-3 text-sm bg-white">IV. Desafío Extra</button>
-                    <button onclick="switchExtraTab('sec5')" id="tab-sec5" class="extra-tab-btn py-2 px-3 text-sm bg-white">V. Autoevaluación</button>
+                <div class="flex flex-wrap gap-2 border-b-2 border-[#2e1065] pb-2">
+                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="extra-tab-btn active-tab py-2 px-3 bg-violet-300">II. Problemas (4 Pasos)</button>
+                    <button onclick="switchExtraTab('sec3')" id="tab-sec3" class="extra-tab-btn py-2 px-3 bg-white">III. Metacognición</button>
+                    <button onclick="switchExtraTab('sec4')" id="tab-sec4" class="extra-tab-btn py-2 px-3 bg-white">IV. Desafío Extra</button>
+                    <button onclick="switchExtraTab('sec5')" id="tab-sec5" class="extra-tab-btn py-2 px-3 bg-white">V. Autoevaluación</button>
                 </div>
 
                 <!-- SECCIÓN II -->
                 <div id="extra-sec2" class="space-y-6 text-left">
-                    <div class="bg-blue-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-blue-900">II. Resolución de Problemas (Estrategia de los 4 Pasos)</h3>
-                        <p class="text-xs text-gray-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Revisar.</p>
+                    <div class="bg-violet-50 border-2 border-[#2e1065] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-violet-900">II. Resolución de Problemas (Estrategia de los 4 Pasos)</h3>
+                        <p class="text-xs text-violet-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Revisar.</p>
                     </div>
 
-                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Piscina)</span>
-                        <p class="font-bold text-gray-800">
-                            Una piscina tiene forma de paralelepípedo rectangular. Sus dimensiones son 8 m de largo, 5 m de ancho y 2 m de profundidad. Si se llena completamente, ¿cuántos litros de agua contiene? (Recuerda: 1 m³ = 1000 litros).
+                    <div class="border-2 border-[#2e1065] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-green-200 border border-[#2e1065] text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Moneda justa)</span>
+                        <p class="font-bold text-slate-800">
+                            Se lanza una moneda justa 100 veces. ¿Qué conjetura sobre la tendencia de los resultados es más razonable?
                         </p>
-                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
-                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
-                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> Paralelepípedo 8 m × 5 m × 2 m. Se busca el volumen en litros.</p>
-                                <p><b>2. Planificar:</b> Volumen = largo × ancho × alto = 8 × 5 × 2 = 80 m³. 1 m³ = 1000 L → 80 × 1000.</p>
-                                <p><b>3. Resolver:</b> Volumen = 80 m³ = 80.000 litros.</p>
-                                <p><b>4. Revisar:</b> 8 × 5 = 40; 40 × 2 = 80. 80 × 1000 = 80.000. Correcto.</p>
+                        <details class="bg-violet-50 p-3 rounded border border-violet-300">
+                            <summary class="font-bold text-violet-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-slate-800 space-y-1 pl-2 border-l-2 border-violet-500">
+                                <p><b>1. Comprender:</b> Moneda justa, 100 lanzamientos. Se pide conjeturar tendencia.</p>
+                                <p><b>2. Planificar:</b> Cara y sello tienen igual probabilidad (1/2 cada uno).</p>
+                                <p><b>3. Resolver:</b> La tendencia esperada es aproximadamente 50 caras y 50 sellos, con pequeñas variaciones.</p>
+                                <p><b>4. Revisar:</b> A mayor cantidad de lanzamientos, más cerca de 50-50. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Caja cúbica)</span>
-                        <p class="font-bold text-gray-800">
-                            Una caja tiene forma de cubo y su arista mide 12 cm. ¿Cuál es su volumen en cm³ y en mm³? (Recuerda: 1 cm³ = 1000 mm³).
+                    <div class="border-2 border-[#2e1065] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-cyan-200 border border-[#2e1065] text-cyan-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Dado justo)</span>
+                        <p class="font-bold text-slate-800">
+                            Se lanza un dado justo de 6 caras 600 veces. ¿Qué conjetura sobre el número de veces que sale el 3 es más razonable?
                         </p>
-                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
-                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
-                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> Cubo de arista 12 cm. Se busca volumen en cm³ y mm³.</p>
-                                <p><b>2. Planificar:</b> Volumen = a³ = 12³. Convertir a mm³ multiplicando por 1000.</p>
-                                <p><b>3. Resolver:</b> 12³ = 1.728 cm³. 1.728 × 1000 = 1.728.000 mm³.</p>
-                                <p><b>4. Revisar:</b> 12 × 12 × 12 = 1.728. Correcto.</p>
+                        <details class="bg-violet-50 p-3 rounded border border-violet-300">
+                            <summary class="font-bold text-violet-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-slate-800 space-y-1 pl-2 border-l-2 border-violet-500">
+                                <p><b>1. Comprender:</b> Dado justo de 6 caras, 600 lanzamientos. Se pide conjeturar cuántas veces saldrá el 3.</p>
+                                <p><b>2. Planificar:</b> Probabilidad teórica = 1/6. Tendencia = 600 × 1/6.</p>
+                                <p><b>3. Resolver:</b> 600 ÷ 6 = 100. Se espera que salga aproximadamente 100 veces.</p>
+                                <p><b>4. Revisar:</b> Con 600 lanzamientos, alrededor de 100 veces el 3 es razonable. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Tanque de agua)</span>
-                        <p class="font-bold text-gray-800">
-                            Un tanque de agua tiene forma de paralelepípedo con base cuadrada de 1,5 m de lado y una altura de 2 m. ¿Cuál es su volumen en m³? Si se sabe que 1 m³ = 1000 litros, ¿cuántos litros de agua puede almacenar?
+                    <div class="border-2 border-[#2e1065] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-fuchsia-200 border border-[#2e1065] text-fuchsia-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Canicas desiguales)</span>
+                        <p class="font-bold text-slate-800">
+                            Una bolsa tiene 5 canicas rojas y 1 azul. Si se extrae una canica al azar muchas veces (devolviéndola cada vez), ¿qué color tenderá a salir más?
                         </p>
-                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
-                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
-                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> Paralelepípedo con base cuadrada de 1,5 m y altura 2 m.</p>
-                                <p><b>2. Planificar:</b> Volumen = lado × lado × altura = 1,5 × 1,5 × 2. Convertir a litros.</p>
-                                <p><b>3. Resolver:</b> 1,5 × 1,5 = 2,25; 2,25 × 2 = 4,5 m³. 4,5 × 1000 = 4.500 litros.</p>
-                                <p><b>4. Revisar:</b> 4,5 m³ = 4.500 L. Correcto.</p>
+                        <details class="bg-violet-50 p-3 rounded border border-violet-300">
+                            <summary class="font-bold text-violet-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-slate-800 space-y-1 pl-2 border-l-2 border-violet-500">
+                                <p><b>1. Comprender:</b> 5 rojas + 1 azul = 6 canicas. Repeticiones con devolución.</p>
+                                <p><b>2. Planificar:</b> Probabilidad roja = 5/6; azul = 1/6.</p>
+                                <p><b>3. Resolver:</b> La tendencia es que salga roja muchas más veces que azul (5 de cada 6 en promedio).</p>
+                                <p><b>4. Revisar:</b> Como hay más rojas, es más probable. Correcto.</p>
                             </div>
                         </details>
                     </div>
@@ -410,75 +361,75 @@
 
                 <!-- SECCIÓN III -->
                 <div id="extra-sec3" class="hidden space-y-4 text-left">
-                    <div class="bg-purple-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-purple-900">III. Metacognición (Reflexión del Estudiante)</h3>
+                    <div class="bg-fuchsia-50 border-2 border-[#2e1065] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-fuchsia-900">III. Metacognición (Reflexión del Estudiante)</h3>
                     </div>
                     <div class="space-y-3">
-                        <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">1. En el Problema 1, ¿cómo te aseguraste de convertir correctamente los metros cúbicos a litros? Explica tu razonamiento.</p>
+                        <div class="p-3 bg-white border border-[#2e1065] rounded-lg">
+                            <p class="font-bold text-sm text-slate-800">1. ¿Cómo explicarías a un compañero por qué al lanzar una moneda muchas veces los resultados tienden a estabilizarse en 50% caras y 50% sellos?</p>
                         </div>
-                        <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">2. En el Problema 2, ¿qué estrategia usaste para recordar que 1 cm³ equivale a 1000 mm³?</p>
+                        <div class="p-3 bg-white border border-[#2e1065] rounded-lg">
+                            <p class="font-bold text-sm text-slate-800">2. ¿Qué diferencia hay entre predecir un resultado individual y conjeturar una tendencia al repetir muchas veces?</p>
                         </div>
-                        <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">3. En el Problema 3, ¿por qué es importante identificar que la base es cuadrada antes de calcular el volumen?</p>
+                        <div class="p-3 bg-white border border-[#2e1065] rounded-lg">
+                            <p class="font-bold text-sm text-slate-800">3. ¿En qué situaciones de tu vida cotidiana podrías aplicar la idea de "tendencia" al repetir un experimento?</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- SECCIÓN IV -->
                 <div id="extra-sec4" class="hidden space-y-4 text-left">
-                    <div class="bg-yellow-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Lógica Inversa)</h3>
-                        <p class="text-sm text-gray-800">
-                            Un cubo tiene un volumen de 512 cm³. ¿Cuánto mide su arista? Si se duplica la arista, ¿cuál será el nuevo volumen?
+                    <div class="bg-yellow-50 border-2 border-[#2e1065] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Lógica del Oráculo)</h3>
+                        <p class="text-sm text-slate-800">
+                            Un dado justo se lanza 60 veces. ¿Es razonable conjeturar que saldrá el 6 exactamente 10 veces? Justifica tu respuesta.
                         </p>
                     </div>
-                    <div class="p-4 bg-white border-2 border-black rounded-xl space-y-3">
-                        <button onclick="toggleExtraHint()" class="btn-comic bg-yellow-400 text-black text-sm px-4 py-2 rounded">
-                            🧩 Revelar Solución por Reversión de Gatito Chill
+                    <div class="p-4 bg-white border-2 border-[#2e1065] rounded-xl space-y-3">
+                        <button onclick="toggleExtraHint()" class="btn-comic bg-cyan-400 text-white text-sm px-4 py-2">
+                            🧩 Revelar la Visión del Oráculo
                         </button>
                         <div id="extra-hint-box" class="hidden text-sm bg-yellow-100 p-3 rounded border border-yellow-300 leading-relaxed">
-                            <p><b>Paso 1:</b> Volumen del cubo = arista³ = 512 cm³. Entonces arista = ∛512 = 8 cm.</p>
-                            <p><b>Paso 2:</b> Si se duplica la arista: nueva arista = 16 cm.</p>
-                            <p><b>Paso 3:</b> Nuevo volumen = 16³ = 4.096 cm³.</p>
-                            <p><b>Resultado:</b> Arista original = <b>8 cm</b>. Nuevo volumen = <b>4.096 cm³</b>.</p>
+                            <p><b>Paso 1:</b> La probabilidad teórica de sacar 6 es 1/6.</p>
+                            <p><b>Paso 2:</b> Tendencia esperada = 60 × 1/6 = 10.</p>
+                            <p><b>Paso 3:</b> Pero en 60 lanzamientos puede haber variaciones (9, 11, 12…). Lo razonable es conjeturar "alrededor de 10 veces", no exactamente 10.</p>
+                            <p><b>Conclusión:</b> Sí es razonable como <b>tendencia aproximada</b>, pero no como resultado exacto garantizado.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- SECCIÓN V -->
                 <div id="extra-sec5" class="hidden space-y-4 text-left">
-                    <div class="bg-green-50 border-2 border-black p-4 rounded-lg">
+                    <div class="bg-green-50 border-2 border-[#2e1065] p-4 rounded-lg">
                         <h3 class="font-bold text-lg text-green-900">V. Autoevaluación del Estudiante</h3>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-sm border-2 border-black bg-white">
-                            <thead class="bg-yellow-300 border-b-2 border-black">
+                        <table class="w-full text-sm border-2 border-[#2e1065] bg-white">
+                            <thead class="bg-violet-300 border-b-2 border-[#2e1065]">
                                 <tr>
-                                    <th class="p-2 text-left border-r border-black">Afirmación</th>
-                                    <th class="p-2 text-center border-r border-black">Logrado (3)</th>
-                                    <th class="p-2 text-center border-r border-black">En proceso (2)</th>
+                                    <th class="p-2 text-left border-r border-[#2e1065]">Afirmación</th>
+                                    <th class="p-2 text-center border-r border-[#2e1065]">Logrado (3)</th>
+                                    <th class="p-2 text-center border-r border-[#2e1065]">En proceso (2)</th>
                                     <th class="p-2 text-center">Por lograr (1)</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">1. Identifico las dimensiones necesarias para calcular el volumen de un cubo o paralelepípedo.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
+                                <tr class="border-b border-[#2e1065]">
+                                    <td class="p-2 border-r border-[#2e1065] font-medium">1. Identifico la probabilidad teórica de experimentos simples (moneda, dado, ruleta).</td>
+                                    <td class="p-2 text-center border-r border-[#2e1065]"><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center border-r border-[#2e1065]"><input type="radio" name="auto1" /></td>
                                     <td class="p-2 text-center"><input type="radio" name="auto1" /></td>
                                 </tr>
-                                <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">2. Aplico correctamente las fórmulas de volumen (cubo: a³; paralelepípedo: largo × ancho × alto).</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
+                                <tr class="border-b border-[#2e1065]">
+                                    <td class="p-2 border-r border-[#2e1065] font-medium">2. Conjeturo tendencias al repetir un experimento muchas veces.</td>
+                                    <td class="p-2 text-center border-r border-[#2e1065]"><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center border-r border-[#2e1065]"><input type="radio" name="auto2" /></td>
                                     <td class="p-2 text-center"><input type="radio" name="auto2" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2 border-r border-black font-medium">3. Realizo conversiones entre cm³, m³ y mm³ correctamente.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 border-r border-[#2e1065] font-medium">3. Distingo entre un resultado individual y una tendencia al repetir.</td>
+                                    <td class="p-2 text-center border-r border-[#2e1065]"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center border-r border-[#2e1065]"><input type="radio" name="auto3" /></td>
                                     <td class="p-2 text-center"><input type="radio" name="auto3" /></td>
                                 </tr>
                             </tbody>
@@ -492,198 +443,254 @@
 
     <script>
         // ================================================================
-        //  NUEVO BANCO DE 20 PREGUNTAS – VOLUMEN DE CUBOS Y PARALELEPÍPEDOS (6° BÁSICO)
+        //  BANCO DE 20 PREGUNTAS – OA 23: Conjeturar tendencias en
+        //  experimentos aleatorios (dados, monedas, ruletas, canicas)
         // ================================================================
         const allQuestions = [
-            // ---- PARTE 1: Fórmula y cálculo directo (1-10) ----
+            // ---- PARTE 1: Experimentos simples (1-10) ----
             {
-                id: 1,
-                part: 1,
-                type: "Fórmula",
-                narrative: "Patito Amarillito olvidó la fórmula del volumen del cubo. ¡Recuérdala con Gatito Chill!",
-                q: "¿Cuál es la fórmula correcta para calcular el volumen de un cubo?",
-                a: "Volumen = arista³",
+                id: 1, part: 1, type: "Moneda",
+                narrative: "Lyra consulta al Oráculo sobre una moneda justa.",
+                q: "Se lanza una moneda justa. ¿Cuál es la conjetura más razonable sobre la probabilidad de obtener cara?",
+                a: "Cara y sello tienen igual probabilidad (50% cada uno)",
                 options: [
-                    "Volumen = arista × 2",
-                    "Volumen = arista³",
-                    "Volumen = 6 × arista²",
-                    "Volumen = arista + arista + arista"
+                    "Cara es más probable que sello",
+                    "Sello es más probable que cara",
+                    "Cara y sello tienen igual probabilidad (50% cada uno)",
+                    "Nunca sale cara"
                 ],
-                hint: "El volumen de un cubo se obtiene multiplicando la arista por sí misma tres veces."
+                hint: "En una moneda justa, ambos lados son igualmente probables."
             }, {
-                id: 2,
-                part: 1,
-                type: "Volumen",
-                narrative: "Un cubo con arista de 4 cm. ¡Calcula su volumen!",
-                q: "Un cubo tiene una arista de 4 cm. ¿Cuál es su volumen?",
-                a: "64 cm³",
-                options: ["16 cm³", "64 cm³", "12 cm³", "48 cm³"],
-                hint: "Volumen = 4³ = 4 × 4 × 4 = 64 cm³."
+                id: 2, part: 1, type: "Dado",
+                narrative: "El Oráculo predice el comportamiento de un dado justo.",
+                q: "Se lanza un dado justo de 6 caras. ¿Qué conjetura es correcta?",
+                a: "Cada cara tiene igual probabilidad (1/6)",
+                options: [
+                    "El 6 es más probable que los demás",
+                    "Cada cara tiene igual probabilidad (1/6)",
+                    "Solo salen números pares",
+                    "El 1 es más probable que el 2"
+                ],
+                hint: "Un dado justo tiene 6 caras, todas con igual probabilidad."
             }, {
-                id: 3,
-                part: 1,
-                type: "Volumen",
-                narrative: "Un paralelepípedo con largo 5 cm, ancho 3 cm y alto 2 cm. ¡Calcula su volumen!",
-                q: "Calcula el volumen de un paralelepípedo cuyas dimensiones son 5 cm de largo, 3 cm de ancho y 2 cm de alto.",
-                a: "30 cm³",
-                options: ["10 cm³", "30 cm³", "15 cm³", "60 cm³"],
-                hint: "Volumen = largo × ancho × alto = 5 × 3 × 2 = 30 cm³."
+                id: 3, part: 1, type: "Dado",
+                narrative: "Lyra analiza si es más probable obtener par o impar.",
+                q: "Al lanzar un dado justo de 6 caras, ¿qué conjetura es correcta sobre obtener par o impar?",
+                a: "Par e impar tienen igual probabilidad",
+                options: [
+                    "Par es más probable que impar",
+                    "Impar es más probable que par",
+                    "Par e impar tienen igual probabilidad",
+                    "Ninguno es posible"
+                ],
+                hint: "Hay 3 pares (2, 4, 6) y 3 impares (1, 3, 5). Igual probabilidad."
             }, {
-                id: 4,
-                part: 1,
-                type: "Volumen",
-                narrative: "Una caja cúbica con arista de 10 cm. ¡Cuál es su volumen!",
-                q: "Una caja cúbica tiene una arista de 10 cm. ¿Cuál es su volumen?",
-                a: "1000 cm³",
-                options: ["100 cm³", "1000 cm³", "30 cm³", "10000 cm³"],
-                hint: "Volumen = 10³ = 10 × 10 × 10 = 1000 cm³."
+                id: 4, part: 1, type: "Moneda (repetición)",
+                narrative: "¿Qué pasa si lanzamos una moneda muchas veces?",
+                q: "Si se lanza una moneda justa 100 veces, ¿qué tendencia es más razonable esperar?",
+                a: "Aproximadamente la mitad serán caras y la mitad sellos",
+                options: [
+                    "Siempre saldrán 100 caras",
+                    "Aproximadamente la mitad serán caras y la mitad sellos",
+                    "Solo saldrán sellos",
+                    "Los resultados serán completamente impredecibles sin ninguna tendencia"
+                ],
+                hint: "La tendencia es que los resultados se estabilicen alrededor de 50-50."
             }, {
-                id: 5,
-                part: 1,
-                type: "Volumen",
-                narrative: "Un paralelepípedo con largo 8 m, ancho 4 m y alto 3 m. ¡Calcula su volumen!",
-                q: "Calcula el volumen de un paralelepípedo con largo 8 m, ancho 4 m y alto 3 m.",
-                a: "96 m³",
-                options: ["15 m³", "96 m³", "32 m³", "192 m³"],
-                hint: "Volumen = 8 × 4 × 3 = 96 m³."
+                id: 5, part: 1, type: "Dado (comparación)",
+                narrative: "Lyra compara obtener un número mayor que 4 con obtener 4 o menos.",
+                q: "Al lanzar un dado justo de 6 caras, ¿qué conjetura es correcta sobre obtener un número mayor que 4?",
+                a: "Es menos probable que obtener 4 o menos",
+                options: [
+                    "Es más probable que obtener 4 o menos",
+                    "Es menos probable que obtener 4 o menos",
+                    "Tienen igual probabilidad",
+                    "Es imposible obtener un número mayor que 4"
+                ],
+                hint: "Mayor que 4: solo 5 y 6 (2 casos). 4 o menos: 1, 2, 3, 4 (4 casos)."
             }, {
-                id: 6,
-                part: 1,
-                type: "Unidades",
-                narrative: "¿En qué unidades se mide el volumen?",
-                q: "Si las dimensiones de un cubo se miden en centímetros, ¿en qué unidades se expresa su volumen?",
-                a: "Centímetros cúbicos (cm³)",
-                options: ["Centímetros (cm)", "Centímetros cuadrados (cm²)", "Centímetros cúbicos (cm³)", "Metros (m)"],
-                hint: "El volumen se mide en unidades cúbicas."
+                id: 6, part: 1, type: "Ruleta",
+                narrative: "El Oráculo observa una ruleta de 4 colores iguales.",
+                q: "Una ruleta tiene 4 colores iguales (rojo, azul, verde, amarillo). ¿Qué conjetura es correcta?",
+                a: "Cada color tiene 1/4 de probabilidad",
+                options: [
+                    "El rojo es el más probable",
+                    "Cada color tiene 1/4 de probabilidad",
+                    "Solo salen dos colores",
+                    "El amarillo nunca sale"
+                ],
+                hint: "4 sectores iguales → cada uno tiene 1/4 de probabilidad."
             }, {
-                id: 7,
-                part: 1,
-                type: "Volumen",
-                narrative: "Un cubo con arista de 7 cm. ¡Calcula su volumen!",
-                q: "Un cubo tiene una arista de 7 cm. ¿Cuál es su volumen?",
-                a: "343 cm³",
-                options: ["49 cm³", "343 cm³", "21 cm³", "147 cm³"],
-                hint: "Volumen = 7³ = 7 × 7 × 7 = 343 cm³."
+                id: 7, part: 1, type: "Dado (imposible)",
+                narrative: "El Doctor Azar intenta confundir con un resultado imposible.",
+                q: "Al lanzar un dado justo de 6 caras (numeradas del 1 al 6), ¿qué conjetura es correcta sobre obtener un 7?",
+                a: "Es imposible obtener un 7",
+                options: [
+                    "Es muy probable obtener un 7",
+                    "Es poco probable obtener un 7",
+                    "Es imposible obtener un 7",
+                    "Tiene 1/6 de probabilidad"
+                ],
+                hint: "Un dado de 6 caras solo tiene los números 1 al 6. El 7 no existe en él."
             }, {
-                id: 8,
-                part: 1,
-                type: "Volumen",
-                narrative: "Un paralelepípedo con largo 6 cm, ancho 5 cm y alto 4 cm. ¡Calcula!",
-                q: "Calcula el volumen de un paralelepípedo con largo 6 cm, ancho 5 cm y alto 4 cm.",
-                a: "120 cm³",
-                options: ["60 cm³", "120 cm³", "15 cm³", "240 cm³"],
-                hint: "Volumen = 6 × 5 × 4 = 120 cm³."
+                id: 8, part: 1, type: "Moneda (dos lanzamientos)",
+                narrative: "¿Qué tan probable es obtener dos caras seguidas?",
+                q: "Se lanza una moneda justa dos veces. ¿Qué conjetura es razonable sobre obtener cara en ambos lanzamientos?",
+                a: "Es posible, pero menos frecuente que obtener una cara y un sello",
+                options: [
+                    "Es imposible obtener dos caras seguidas",
+                    "Es posible, pero menos frecuente que obtener una cara y un sello",
+                    "Es tan probable como cualquier otro resultado",
+                    "Siempre salen dos caras seguidas"
+                ],
+                hint: "Hay 4 combinaciones: CC, CS, SC, SS. Solo una es CC."
             }, {
-                id: 9,
-                part: 1,
-                type: "Comparación",
-                narrative: "Dos cubos: uno de arista 2 cm y otro de arista 4 cm. ¿Cuántas veces mayor es el volumen del segundo?",
-                q: "Un cubo tiene arista de 2 cm y otro tiene arista de 4 cm. ¿Cuántas veces mayor es el volumen del cubo de arista 4 cm respecto al de arista 2 cm?",
-                a: "8 veces",
-                options: ["2 veces", "4 veces", "8 veces", "16 veces"],
-                hint: "Volumen 1 = 2³ = 8 cm³. Volumen 2 = 4³ = 64 cm³. 64 ÷ 8 = 8 veces."
+                id: 9, part: 1, type: "Dado (equiprobabilidad)",
+                narrative: "El Oráculo compara obtener 1 o 6 con obtener cualquier otra cara.",
+                q: "Al lanzar un dado justo, ¿qué conjetura es correcta sobre obtener 1 o 6?",
+                a: "Cada uno tiene la misma probabilidad que cualquier otra cara (1/6)",
+                options: [
+                    "El 1 es más probable que el 6",
+                    "El 6 es más probable que el 1",
+                    "Cada uno tiene la misma probabilidad que cualquier otra cara (1/6)",
+                    "Obtener 1 o 6 es imposible"
+                ],
+                hint: "En un dado justo todas las caras son equiprobables."
             }, {
-                id: 10,
-                part: 1,
-                type: "Volumen",
-                narrative: "Un paralelepípedo con largo 10 cm, ancho 2 cm y alto 5 cm. ¡Calcula!",
-                q: "Calcula el volumen de un paralelepípedo con largo 10 cm, ancho 2 cm y alto 5 cm.",
-                a: "100 cm³",
-                options: ["50 cm³", "100 cm³", "20 cm³", "200 cm³"],
-                hint: "Volumen = 10 × 2 × 5 = 100 cm³."
+                id: 10, part: 1, type: "Canicas",
+                narrative: "Una bolsa tiene 3 canicas rojas y 3 azules. ¿Qué color es más probable?",
+                q: "Una bolsa tiene 3 canicas rojas y 3 azules. Si se extrae una al azar, ¿qué conjetura es correcta?",
+                a: "Roja y azul tienen igual probabilidad",
+                options: [
+                    "Roja es más probable que azul",
+                    "Azul es más probable que roja",
+                    "Roja y azul tienen igual probabilidad",
+                    "Solo se puede sacar roja"
+                ],
+                hint: "Hay 3 rojas y 3 azules: la misma cantidad → igual probabilidad."
             },
 
-            // ---- PARTE 2: Conversiones, inversos y aplicaciones (11-20) ----
+            // ---- PARTE 2: Tendencias y repeticiones (11-20) ----
             {
-                id: 11,
-                part: 2,
-                type: "Conversión",
-                narrative: "Gatito Chill convierte el volumen de un cubo a mm³.",
-                q: "Un cubo tiene un volumen de 8 cm³. ¿Cuál es su volumen en mm³? (1 cm³ = 1000 mm³)",
-                a: "8000 mm³",
-                options: ["80 mm³", "800 mm³", "8000 mm³", "80000 mm³"],
-                hint: "8 × 1000 = 8000 mm³."
+                id: 11, part: 2, type: "Tendencia",
+                narrative: "El Oráculo explica qué ocurre al repetir muchas veces.",
+                q: "¿Qué conjetura es correcta sobre la tendencia de los resultados al repetir muchas veces un experimento justo?",
+                a: "Los resultados tienden a acercarse a la probabilidad teórica",
+                options: [
+                    "Siempre se obtiene exactamente la probabilidad teórica",
+                    "Los resultados tienden a acercarse a la probabilidad teórica",
+                    "Los resultados se vuelven completamente aleatorios sin tendencia",
+                    "Solo el primer resultado importa"
+                ],
+                hint: "A mayor cantidad de repeticiones, más cerca de la probabilidad teórica."
             }, {
-                id: 12,
-                part: 2,
-                type: "Conversión",
-                narrative: "Un tanque con volumen de 5 m³. ¿Cuántos cm³ son?",
-                q: "Un tanque tiene un volumen de 5 m³. ¿Cuál es su volumen en cm³? (1 m³ = 1.000.000 cm³)",
-                a: "5.000.000 cm³",
-                options: ["5000 cm³", "500.000 cm³", "5.000.000 cm³", "50.000.000 cm³"],
-                hint: "5 × 1.000.000 = 5.000.000 cm³."
+                id: 12, part: 2, type: "Predicción individual",
+                narrative: "Lyra distingue entre predecir uno y predecir muchos.",
+                q: "Si se lanza un dado justo 10 veces, ¿qué conjetura es más razonable?",
+                a: "No se puede predecir el orden exacto de los resultados",
+                options: [
+                    "Se puede predecir exactamente qué número saldrá en cada lanzamiento",
+                    "No se puede predecir el orden exacto de los resultados",
+                    "Siempre saldrán los 6 números en orden",
+                    "Solo saldrán números pares"
+                ],
+                hint: "Cada lanzamiento es aleatorio; no podemos predecir el orden exacto."
             }, {
-                id: 13,
-                part: 2,
-                type: "Arista (inverso)",
-                narrative: "Conocemos el volumen de un cubo. ¿Cuál es su arista?",
-                q: "Un cubo tiene un volumen de 27 cm³. ¿Cuál es la medida de su arista?",
-                a: "3 cm",
-                options: ["3 cm", "6 cm", "9 cm", "27 cm"],
-                hint: "Arista = ∛27 = 3 cm."
+                id: 13, part: 2, type: "Tendencia moneda",
+                narrative: "¿Cuántas caras esperamos en 100 lanzamientos?",
+                q: "Se lanza una moneda justa 100 veces. ¿Qué tendencia es más razonable conjeturar?",
+                a: "Alrededor de 50 caras",
+                options: [
+                    "Exactamente 100 caras",
+                    "Alrededor de 50 caras",
+                    "Exactamente 25 caras",
+                    "No se puede conjeturar nada"
+                ],
+                hint: "La tendencia es la mitad: 100 × 1/2 = 50 caras aproximadamente."
             }, {
-                id: 14,
-                part: 2,
-                type: "Dimensión (inverso)",
-                narrative: "Conocemos el volumen y dos dimensiones. ¿Cuál es la tercera?",
-                q: "Un paralelepípedo tiene un volumen de 60 cm³. Si su largo es 5 cm y su ancho es 4 cm, ¿cuál es su alto?",
-                a: "3 cm",
-                options: ["2 cm", "3 cm", "4 cm", "5 cm"],
-                hint: "Alto = Volumen ÷ (largo × ancho) = 60 ÷ (5 × 4) = 60 ÷ 20 = 3 cm."
+                id: 14, part: 2, type: "Comparación dado",
+                narrative: "Lyra compara obtener par con obtener 5.",
+                q: "Al lanzar un dado justo, ¿qué conjetura es correcta sobre obtener par versus obtener 5?",
+                a: "Obtener par es más probable que obtener 5",
+                options: [
+                    "Obtener 5 es más probable que obtener par",
+                    "Obtener par es más probable que obtener 5",
+                    "Tienen igual probabilidad",
+                    "Ninguno es posible"
+                ],
+                hint: "Par: 3 casos (2, 4, 6). Obtener 5: 1 caso. Par es más probable."
             }, {
-                id: 15,
-                part: 2,
-                type: "Aplicación (caja)",
-                narrative: "Una caja de zapatos con dimensiones 30 cm × 20 cm × 10 cm. ¿Cuál es su volumen?",
-                q: "Una caja de zapatos tiene 30 cm de largo, 20 cm de ancho y 10 cm de alto. ¿Cuál es su volumen?",
-                a: "6000 cm³",
-                options: ["600 cm³", "6000 cm³", "60000 cm³", "60 cm³"],
-                hint: "Volumen = 30 × 20 × 10 = 6000 cm³."
+                id: 15, part: 2, type: "Canicas desiguales",
+                narrative: "Una bolsa tiene 5 canicas rojas y 1 azul.",
+                q: "Una bolsa tiene 5 canicas rojas y 1 azul. Si se extrae una al azar muchas veces (con devolución), ¿qué tendencia es más razonable?",
+                a: "Salirá roja muchas más veces que azul",
+                options: [
+                    "Salirá azul más veces que roja",
+                    "Salirá roja muchas más veces que azul",
+                    "Saldrán igual número de rojas y azules",
+                    "Solo saldrá azul"
+                ],
+                hint: "Hay 5 rojas y 1 azul: la roja tiene mayor probabilidad (5/6)."
             }, {
-                id: 16,
-                part: 2,
-                type: "Proporcionalidad",
-                narrative: "Si duplicamos la arista de un cubo, ¿qué pasa con su volumen?",
-                q: "Si duplicamos la arista de un cubo, ¿qué ocurre con su volumen?",
-                a: "Se multiplica por 8",
-                options: ["Se duplica", "Se multiplica por 4", "Se multiplica por 8", "Permanece igual"],
-                hint: "Volumen = a³. Si a se duplica: (2a)³ = 8a³. Se multiplica por 8."
+                id: 16, part: 2, type: "Comparación dado",
+                narrative: "El Oráculo compara números ≤ 3 con números ≥ 4.",
+                q: "Al lanzar un dado justo, ¿qué conjetura es correcta sobre obtener un número ≤ 3 versus un número ≥ 4?",
+                a: "Ambos grupos tienen igual probabilidad",
+                options: [
+                    "≤ 3 es más probable que ≥ 4",
+                    "≥ 4 es más probable que ≤ 3",
+                    "Ambos grupos tienen igual probabilidad",
+                    "Ningún grupo es posible"
+                ],
+                hint: "≤ 3: 1, 2, 3 (3 casos). ≥ 4: 4, 5, 6 (3 casos). Igual probabilidad."
             }, {
-                id: 17,
-                part: 2,
-                type: "Aplicación (piscina)",
-                narrative: "Una piscina con volumen de 120 m³. ¿Cuántos litros contiene? (1 m³ = 1000 L)",
-                q: "Una piscina tiene un volumen de 120 m³. ¿Cuántos litros de agua contiene?",
-                a: "120.000 litros",
-                options: ["1.200 litros", "12.000 litros", "120.000 litros", "1.200.000 litros"],
-                hint: "120 × 1000 = 120.000 litros."
+                id: 17, part: 2, type: "Tendencia",
+                narrative: "El Oráculo explica la estabilización de resultados.",
+                q: "¿Qué conjetura describe mejor lo que ocurre al repetir muchas veces un experimento aleatorio justo?",
+                a: "La tendencia se estabiliza alrededor del valor teórico",
+                options: [
+                    "Los resultados se vuelven cada vez más impredecibles",
+                    "La tendencia se estabiliza alrededor del valor teórico",
+                    "Cada vez salen más resultados extremos",
+                    "El experimento deja de ser aleatorio"
+                ],
+                hint: "A mayor cantidad de repeticiones, los resultados se acercan a la probabilidad teórica."
             }, {
-                id: 18,
-                part: 2,
-                type: "Conversión",
-                narrative: "Un cubo con volumen de 2 m³. ¿Cuál es su volumen en mm³?",
-                q: "Un cubo tiene un volumen de 2 m³. ¿Cuál es su volumen en mm³? (1 m³ = 1.000.000.000 mm³)",
-                a: "2.000.000.000 mm³",
-                options: ["2.000.000 mm³", "200.000.000 mm³", "2.000.000.000 mm³", "20.000.000.000 mm³"],
-                hint: "2 × 1.000.000.000 = 2.000.000.000 mm³."
+                id: 18, part: 2, type: "Ruleta",
+                narrative: "Una ruleta con 10 sectores iguales.",
+                q: "Una ruleta tiene 10 sectores iguales numerados del 1 al 10. ¿Qué conjetura es correcta?",
+                a: "Cada sector tiene 1/10 de probabilidad",
+                options: [
+                    "El sector 10 es el más probable",
+                    "Cada sector tiene 1/10 de probabilidad",
+                    "Solo salen sectores pares",
+                    "Los sectores 1 y 2 son imposibles"
+                ],
+                hint: "10 sectores iguales → cada uno tiene 1/10 de probabilidad."
             }, {
-                id: 19,
-                part: 2,
-                type: "Arista (inverso)",
-                narrative: "Conocemos el volumen de un cubo. ¿Cuál es su arista?",
-                q: "Un cubo tiene un volumen de 125 cm³. ¿Cuál es la medida de su arista?",
-                a: "5 cm",
-                options: ["5 cm", "10 cm", "15 cm", "25 cm"],
-                hint: "Arista = ∛125 = 5 cm."
+                id: 19, part: 2, type: "Tendencia moneda",
+                narrative: "¿Qué esperamos al lanzar una moneda 1000 veces?",
+                q: "Se lanza una moneda justa 1000 veces. ¿Qué conjetura es más razonable sobre la tendencia?",
+                a: "El número de caras estará muy cerca de 500",
+                options: [
+                    "Siempre saldrán exactamente 500 caras",
+                    "El número de caras estará muy cerca de 500",
+                    "Solo saldrán caras",
+                    "Saldrán más sellos que caras siempre"
+                ],
+                hint: "Con 1000 lanzamientos, la tendencia es 500 caras, con variaciones muy pequeñas."
             }, {
-                id: 20,
-                part: 2,
-                type: "Dimensión (inverso)",
-                narrative: "Conocemos el volumen y dos dimensiones. ¿Cuál es la tercera?",
-                q: "Un paralelepípedo tiene un volumen de 120 cm³. Si su largo es 8 cm y su alto es 3 cm, ¿cuál es su ancho?",
-                a: "5 cm",
-                options: ["3 cm", "4 cm", "5 cm", "6 cm"],
-                hint: "Ancho = Volumen ÷ (largo × alto) = 120 ÷ (8 × 3) = 120 ÷ 24 = 5 cm."
+                id: 20, part: 2, type: "Conclusión",
+                narrative: "El Oráculo revela su conjetura final.",
+                q: "¿Qué conjetura es correcta sobre la relación entre repeticiones y probabilidad teórica?",
+                a: "A mayor cantidad de repeticiones, los resultados se acercan más a la probabilidad teórica",
+                options: [
+                    "A mayor cantidad de repeticiones, los resultados se alejan de la probabilidad teórica",
+                    "A mayor cantidad de repeticiones, los resultados se acercan más a la probabilidad teórica",
+                    "La cantidad de repeticiones no afecta la tendencia",
+                    "Con pocas repeticiones ya se obtiene exactamente la probabilidad teórica"
+                ],
+                hint: "Es la ley de los grandes números: más repeticiones → más cerca del valor teórico."
             }
         ];
 
@@ -713,42 +720,36 @@
             const toggle = document.getElementById('sound-toggle');
             if (!toggle || !toggle.checked) return;
             try {
-                const ctx = new(window.AudioContext || window.webkitAudioContext)();
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                const volume = 0.25;
+                osc.connect(gain); gain.connect(ctx.destination);
+                const volume = 0.22;
                 if (type === 'correct') {
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
-                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08);
-                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16);
-                    osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.24);
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime);
+                    osc.frequency.setValueAtTime(830.61, ctx.currentTime + 0.09);
+                    osc.frequency.setValueAtTime(987.77, ctx.currentTime + 0.18);
+                    osc.frequency.setValueAtTime(1318.51, ctx.currentTime + 0.27);
                     gain.gain.setValueAtTime(volume, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.4);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+                    osc.start(); osc.stop(ctx.currentTime + 0.5);
                 } else {
                     osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(200, ctx.currentTime);
-                    osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.25);
+                    osc.frequency.setValueAtTime(260, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(65, ctx.currentTime + 0.3);
                     gain.gain.setValueAtTime(volume, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.3);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+                    osc.start(); osc.stop(ctx.currentTime + 0.35);
                 }
             } catch (e) { /* silencio */ }
         }
 
         function startGame() {
-            if (selectedPartMode === 'part1') {
-                currentQuestionsList = allQuestions.filter(q => q.part === 1);
-            } else if (selectedPartMode === 'part2') {
-                currentQuestionsList = allQuestions.filter(q => q.part === 2);
-            } else {
-                currentQuestionsList = [...allQuestions];
-            }
+            if (selectedPartMode === 'part1') currentQuestionsList = allQuestions.filter(q => q.part === 1);
+            else if (selectedPartMode === 'part2') currentQuestionsList = allQuestions.filter(q => q.part === 2);
+            else currentQuestionsList = [...allQuestions];
+
             currentLevelIndex = 0;
             document.getElementById('screen-start').classList.add('hidden');
             document.getElementById('screen-game').classList.remove('hidden');
@@ -759,15 +760,15 @@
         function loadQuestion() {
             const qData = currentQuestionsList[currentLevelIndex];
             const total = currentQuestionsList.length;
-            const progress = ((currentLevelIndex) / total) * 100;
+            const progress = (currentLevelIndex / total) * 100;
 
-            document.getElementById('level-label').innerText = `DESAFÍO ${currentLevelIndex + 1} / ${total}`;
+            document.getElementById('level-label').innerText = `VISIÓN ${currentLevelIndex + 1} / ${total}`;
             document.getElementById('progress-fill').style.width = `${Math.max(progress, 5)}%`;
             document.getElementById('section-badge').innerText =
-                qData.part === 1 ? "PARTE 1: FÓRMULA Y CÁLCULO DIRECTO" : "PARTE 2: CONVERSIONES E INVERSOS";
+                qData.part === 1 ? "PARTE 1: EXPERIMENTOS SIMPLES" : "PARTE 2: TENDENCIAS Y REPETICIONES";
 
             document.getElementById('narrative-text').innerText = `"${qData.narrative}"`;
-            document.getElementById('question-number').innerText = `PREGUNTA #${qData.id}`;
+            document.getElementById('question-number').innerText = `VISIÓN #${qData.id}`;
             document.getElementById('question-text').innerText = qData.q;
             document.getElementById('question-type-badge').innerText = `Tipo: ${qData.type}`;
 
@@ -782,7 +783,7 @@
             }
 
             const select = document.getElementById('answer-select');
-            select.innerHTML = '<option value="" disabled selected>-- Elige con calma --</option>';
+            select.innerHTML = '<option value="" disabled selected>-- Consulta al Oráculo --</option>';
             const shuffled = shuffleArray(qData.options);
             shuffled.forEach(opt => {
                 const el = document.createElement('option');
@@ -791,11 +792,11 @@
                 select.appendChild(el);
             });
 
-            const avatars = ["🐱", "🐢", "🦉", "⚖️", "🐶"];
-            const names = ["Gatito Chill", "Mente Inversa", "Búho del Equilibrio", "Robot Balance", "Rayo Despeje"];
+            const avatars = ["🔮", "✨", "🎲", "🪙", "🌟"];
+            const names = ["Oráculo de Cristal", "Prisma el Orbe", "Dado Sabio", "Moneda Lunar", "Estrella del Azar"];
             const idx = currentLevelIndex % avatars.length;
             document.getElementById('hero-avatar').innerText = avatars[idx];
-            document.getElementById('hero-title').innerText = `Legión del Despeje: ${names[idx]}`;
+            document.getElementById('hero-title').innerText = `Círculo de Lyra: ${names[idx]}`;
 
             isProcessing = false;
         }
@@ -816,9 +817,9 @@
 
             if (userAns === currentQ.a) {
                 playSFX('correct');
-                const words = ["¡DESPEJADO!", "¡EQUILIBRIO!", "¡CHILL!", "¡PERFECTO!", "¡POW!"];
+                const words = ["¡PREVISTO!", "¡VISIÓN!", "¡CLARO!", "¡ORÁCULO!", "¡SABIO!"];
                 fx.innerText = words[Math.floor(Math.random() * words.length)];
-                fx.className = "pow-text comic-font text-8xl md:text-9xl text-yellow-300 active";
+                fx.className = "pow-text oracle-font text-8xl md:text-9xl text-cyan-300 active";
                 setTimeout(() => {
                     fx.classList.remove('active');
                     currentLevelIndex++;
@@ -830,8 +831,8 @@
                 }, 850);
             } else {
                 playSFX('wrong');
-                fx.innerText = "¡DESORDEN!";
-                fx.className = "pow-text comic-font text-8xl md:text-9xl text-red-500 active";
+                fx.innerText = "¡NIEBLA!";
+                fx.className = "pow-text oracle-font text-8xl md:text-9xl text-fuchsia-500 active";
                 setTimeout(() => {
                     fx.classList.remove('active');
                     select.value = "";
@@ -847,24 +848,19 @@
 
             const mode = selectedPartMode;
             if (mode === 'part1') {
-                document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 de la Evaluación!";
-                document.getElementById('end-subtitle').innerText =
-                    "Dominaste la fórmula y el cálculo directo del volumen. ¡Continúa así!";
+                document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 de la visión!";
+                document.getElementById('end-subtitle').innerText = "Comprendiste las probabilidades básicas de experimentos simples. ¡Sigue así!";
             } else if (mode === 'part2') {
-                document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 de la Evaluación!";
-                document.getElementById('end-subtitle').innerText =
-                    "Aplicaste conversiones y problemas inversos de volumen. ¡Excelente!";
+                document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 de la visión!";
+                document.getElementById('end-subtitle').innerText = "Conjeturaste tendencias al repetir experimentos. ¡Excelente intuición!";
             } else {
-                document.getElementById('end-title').innerText = "¡HAS COMPLETADO EL ESCAPE ROOM COMPLETO!";
-                document.getElementById('end-subtitle').innerText =
-                    "Eres un Maestro del Volumen. ¡El orden ha sido restaurado!";
+                document.getElementById('end-title').innerText = "¡HAS RESTAURADO EL ORÁCULO COMPLETO!";
+                document.getElementById('end-subtitle').innerText = "Eres un Maestro de las Conjeturas. El Doctor Azar ha sido derrotado.";
             }
         }
 
         function confirmExit() {
-            if (confirm("¿Deseas volver al menú de inicio?")) {
-                returnToStart();
-            }
+            if (confirm("¿Deseas volver al menú de inicio?")) returnToStart();
         }
 
         function returnToStart() {
@@ -887,14 +883,12 @@
         function switchExtraTab(tabId) {
             document.querySelectorAll('[id^="extra-"]').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.extra-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
-
             document.getElementById(`extra-${tabId}`).classList.remove('hidden');
             document.getElementById(`tab-${tabId}`).classList.add('active-tab');
         }
 
         function toggleExtraHint() {
-            const box = document.getElementById('extra-hint-box');
-            box.classList.toggle('hidden');
+            document.getElementById('extra-hint-box').classList.toggle('hidden');
         }
 
         document.addEventListener('DOMContentLoaded', () => {
