@@ -3,185 +3,138 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Escape Room: Gatito Chill vs Patito Amarillito – 3° Básico</title>
-    <script src="https://cdn.tailwindcss.com">
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet" />
+    <title>Escape Room: Fábrica de Multiplicaciones – Los Engranajes Mágicos (3° Básico OA 08)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Baloo+2:wght@400;600;800&family=Patrick+Hand&display=swap" rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Comic Neue', cursive;
-            background-color: #0f172a;
-            background-image: radial-gradient(rgba(239, 68, 68, 0.25) 15%, transparent 16%),
-                radial-gradient(rgba(37, 99, 235, 0.25) 15%, transparent 16%);
-            background-size: 24px 24px;
-            background-position: 0 0, 12px 12px;
+            font-family: 'Baloo 2', cursive;
+            background-color: #1e1b4b;
+            background-image:
+                radial-gradient(circle at 15% 25%, rgba(251, 191, 36, 0.18) 0%, transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(34, 211, 238, 0.18) 0%, transparent 45%),
+                radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             padding: 0.75rem;
-            color: #0f172a;
+            color: #312e81;
         }
-        .comic-font {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 1.5px;
-        }
-        .chill-font {
-            font-family: 'Chewy', cursive;
-        }
-        .comic-panel {
-            background: white;
-            border: 5px solid black;
-            box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
+        .gear-font { font-family: 'Fredoka One', cursive; letter-spacing: 0.5px; }
+        .hand-font { font-family: 'Patrick Hand', cursive; }
+        .panel {
+            background: #fef3c7;
+            border: 5px solid #312e81;
+            box-shadow: 9px 9px 0px #f59e0b, 0 0 60px rgba(251, 191, 36, 0.25);
             position: relative;
+            border-radius: 16px;
         }
-        .comic-panel::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px);
-            background-size: 6px 6px;
-            pointer-events: none;
-            z-index: 1;
+        .panel::before {
+            content: ""; position: absolute; inset: 0;
+            background-image:
+                radial-gradient(rgba(49, 46, 129, 0.04) 1px, transparent 1px);
+            background-size: 8px 8px; pointer-events: none;
+            border-radius: 12px;
         }
         .btn-comic {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 1px;
-            border: 4px solid black;
-            box-shadow: 5px 5px 0px black;
+            font-family: 'Fredoka One', cursive; letter-spacing: 0.5px;
+            border: 4px solid #312e81; box-shadow: 5px 5px 0px #312e81;
             transition: transform 0.1s ease, box-shadow 0.1s ease;
             text-transform: uppercase;
+            border-radius: 12px;
         }
-        .btn-comic:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 8px 8px 0px black;
-        }
-        .btn-comic:active {
-            transform: translate(2px, 2px);
-            box-shadow: 1px 1px 0px black;
-        }
+        .btn-comic:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0px #312e81; }
+        .btn-comic:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #312e81; }
         .tab-btn.active {
-            background-color: #facc15;
-            color: black;
-            border-bottom: 4px solid black;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b) !important;
+            color: #fff; border-bottom: 4px solid #312e81;
         }
         .progress-bar-container {
-            background: #e2e8f0;
-            border: 4px solid black;
-            border-radius: 9999px;
-            overflow: hidden;
-            height: 28px;
+            background: #fde68a; border: 4px solid #312e81; border-radius: 9999px;
+            overflow: hidden; height: 28px;
         }
         .progress-bar-fill {
-            background: linear-gradient(90deg, #ef4444, #8b5cf6, #3b82f6);
-            height: 100%;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(90deg, #fbbf24, #22d3ee, #a855f7);
+            height: 100%; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .alarm-border {
-            animation: alertPulse 1.8s infinite alternate;
-        }
-        @keyframes alertPulse {
-            from {
-                border-color: #0f172a;
-                box-shadow: 8px 8px 0px black;
-            }
-            to {
-                border-color: #ef4444;
-                box-shadow: 8px 8px 0px #ef4444;
-            }
+        .glow-border { animation: gearPulse 2s infinite alternate; }
+        @keyframes gearPulse {
+            from { border-color: #312e81; box-shadow: 9px 9px 0px #f59e0b; }
+            to { border-color: #22d3ee; box-shadow: 9px 9px 0px #22d3ee; }
         }
         .pow-text {
-            position: fixed;
-            top: 50%;
-            left: 50%;
+            position: fixed; top: 50%; left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            z-index: 100;
-            pointer-events: none;
+            z-index: 100; pointer-events: none;
             transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-shadow: 6px 6px 0px black;
-            -webkit-text-stroke: 3px black;
+            text-shadow: 6px 6px 0px #312e81;
+            -webkit-text-stroke: 3px #312e81;
         }
-        .pow-text.active {
-            transform: translate(-50%, -50%) scale(1.5);
-        }
+        .pow-text.active { transform: translate(-50%, -50%) scale(1.5); }
         select {
             appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 1.2rem center;
-            background-size: 1.4em;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23312e81' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat; background-position: right 1.2rem center; background-size: 1.4em;
         }
-        .hidden {
-            display: none !important;
-        }
+        .hidden { display: none !important; }
         .extra-tab-btn {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 0.5px;
-            border: 3px solid black;
-            box-shadow: 4px 4px 0px black;
+            font-family: 'Fredoka One', cursive; letter-spacing: 0.5px;
+            border: 3px solid #312e81; box-shadow: 4px 4px 0px #312e81;
             transition: all 0.1s ease;
+            border-radius: 10px; font-size: 0.72rem;
         }
         .extra-tab-btn.active-tab {
-            background-color: #facc15 !important;
-            color: black;
-            border-bottom: 4px solid black;
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px black;
+            background: #fbbf24 !important; color: #fff;
+            border-bottom: 4px solid #312e81;
+            transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #312e81;
         }
-        .extra-tab-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px black;
+        .extra-tab-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #312e81; }
+        details summary { cursor: pointer; font-weight: bold; color: #c2410c; }
+        details summary:hover { color: #9a3412; }
+        table td, table th { border: 1px solid #312e81; padding: 0.5rem; text-align: center; }
+        .spin { display: inline-block; animation: spin 6s linear infinite; }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
-        details summary {
-            cursor: pointer;
-            font-weight: bold;
-            color: #7c3aed;
+        .float-icon { display: inline-block; animation: floaty 3.2s ease-in-out infinite; }
+        @keyframes floaty {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-8px) rotate(3deg); }
         }
-        details summary:hover {
-            color: #4c1d95;
-        }
-        table td,
-        table th {
-            border: 1px solid #000;
-            padding: 0.5rem;
-            text-align: center;
+        .gear-badge {
+            display: inline-block;
+            background: #312e81; color: #fef3c7;
+            padding: 2px 10px; border-radius: 6px;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 0.8rem; letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Onomatopeya FX -->
-    <div id="visual-fx" class="pow-text comic-font text-8xl md:text-9xl text-yellow-300">¡DESPEJADO!</div>
+    <div id="visual-fx" class="pow-text gear-font text-8xl md:text-9xl text-amber-300">¡FUNCIONA!</div>
 
     <div class="max-w-4xl w-full">
 
-        <!-- CABECERA -->
         <header class="text-center mb-6">
-            <div class="inline-block bg-white border-4 border-black p-4 md:p-6 transform -rotate-1 shadow-[8px_8px_0px_#2563eb] relative z-10 w-full">
-                <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-black pb-2 mb-3 text-xs md:text-sm font-bold text-gray-700">
-                    <span>📚 NIVEL: 3° BÁSICO</span>
+            <div class="inline-block bg-[#fef3c7] border-4 border-[#312e81] p-4 md:p-6 transform -rotate-1 shadow-[9px_9px_0px_#22d3ee] relative z-10 w-full rounded-xl">
+                <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-[#312e81] pb-2 mb-3 text-xs md:text-sm font-bold text-indigo-800">
+                    <span>⚙️ NIVEL: 3° BÁSICO</span>
                     <span>⏱️ TIEMPO MÁXIMO: 90 MIN</span>
-                    <span>🧩 UNIDAD: LOCALIZACIÓN Y PLANOS (OA 14)</span>
+                    <span>🔧 UNIDAD: TABLAS DE MULTIPLICAR HASTA 10 (OA 08)</span>
                 </div>
-                <h1 class="text-3xl md:text-5xl comic-font text-blue-700 tracking-wide uppercase">
-                    Gatito Chill vs. Patito Amarillito
+                <h1 class="text-3xl md:text-5xl gear-font text-amber-600 tracking-wide uppercase">
+                    Fábrica de Multiplicaciones
                 </h1>
-                <p class="text-lg md:text-2xl chill-font text-purple-900 mt-1">
-                    Escape Room de Coordenadas y Localización
+                <p class="text-lg md:text-2xl hand-font text-cyan-600 mt-1">
+                    Los Engranajes Mágicos
                 </p>
             </div>
-            <!-- OA -->
-            <div class="mt-4 bg-yellow-100 border-2 border-black p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
+            <div class="mt-4 bg-amber-100 border-2 border-[#312e81] p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
                 <p class="font-bold text-xs md:text-sm text-indigo-950">
-                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 14)</span>: Describir la localización absoluta de un objeto en un mapa simple con coordenadas informales (letras y números) y la localización relativa con relación a otros objetos.
+                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 08)</span>: Demostrar que comprenden las tablas de multiplicar hasta 10: representaciones concretas y pictóricas; multiplicación como suma de sumandos iguales; distributividad; aplicación directa de las tablas hasta 10×10; resolución de problemas.
                 </p>
             </div>
         </header>
@@ -189,71 +142,67 @@
         <main class="relative z-10">
 
             <!-- PANTALLA 1: INICIO -->
-            <div id="screen-start" class="comic-panel p-6 md:p-8 space-y-6">
-                <div class="flex justify-center items-center gap-4 text-6xl md:text-7xl animate-bounce">
-                    <span>🐱</span><span class="text-3xl font-black">VS</span><span>🐤</span>
+            <div id="screen-start" class="panel p-6 md:p-8 space-y-6">
+                <div class="flex justify-center items-center gap-4 text-6xl md:text-7xl">
+                    <span class="float-icon">👧</span><span class="text-3xl font-black gear-font text-amber-700">VS</span><span class="float-icon" style="animation-delay:0.6s">⚙️</span>
                 </div>
 
                 <div class="text-center">
-                    <h2 class="text-2xl md:text-4xl comic-font text-red-600">¡EL DESORDEN DE LAS COORDENADAS HA LLEGADO!</h2>
-                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">Patito Amarillito ha revuelto todas las ubicaciones del mapa...</p>
+                    <h2 class="text-2xl md:text-4xl gear-font text-cyan-700">¡LA FÁBRICA SE HA DETENIDO!</h2>
+                    <p class="text-sm md:text-base font-bold text-amber-700 mt-1">Don Cero ha descompuesto todos los engranajes de las tablas...</p>
                 </div>
 
-                <!-- Historia -->
-                <div class="bg-blue-50 border-4 border-black p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
+                <div class="bg-cyan-50 border-4 border-[#312e81] p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
                     <p class="text-base md:text-lg">
-                        El villano <b>Patito Amarillito</b> lanzó su <i>"Rayo Desubicador"</i> sobre la Ciudad de las Coordenadas, mezclando todas las filas y columnas del mapa. Los tesoros están perdidos, los repartidores no saben dónde entregar y hasta los robots se han desorientado por completo.
+                        En la <b>Fábrica de Multiplicaciones</b>, cada engranaje produce una tabla de multiplicar. Pero el villano <b>Don Cero</b> lanzó su <i>"Rayo de la Nada"</i>: ahora los engranajes giran sin producir nada y nadie recuerda las tablas hasta el 10. Los pedidos se acumulan y la fábrica entera está paralizada.
                     </p>
                     <p class="text-base md:text-lg">
-                        Con su taza de té siempre a mano, el sereno <b>Gatito Chill</b> nos guía con una sonrisa:
+                        La joven inventora <b>Tuerca</b> y su amigo <b>Engran</b> (un engranaje parlante) te necesitan:
                     </p>
-                    <blockquote class="bg-yellow-200 border-l-4 border-yellow-600 p-3 rounded font-bold text-indigo-900 italic text-sm md:text-base">
-                        "Tranquilos, amigos... para ubicarnos solo necesitamos dos datos: la fila (letra o número) y la columna. ¡Chill, que el equilibrio volverá!"
+                    <blockquote class="bg-amber-100 border-l-4 border-amber-600 p-3 rounded font-bold text-indigo-950 italic text-sm md:text-base">
+                        "¡Hola, aprendiz! Multiplicar es sumar varias veces el mismo número. Por ejemplo, 4×3 = 3+3+3+3 = 12. Y si te olvidas una tabla, puedes usar la distributividad: 6×8 = 6×(5+3) = 30+18 = 48. ¡Vamos a hacer girar los engranajes!"
                     </blockquote>
                 </div>
 
-                <!-- SELECCIÓN DOCENTE -->
-                <div class="bg-purple-100 border-4 border-black p-5 rounded-xl text-left space-y-3 shadow-md">
-                    <label class="block font-black text-purple-900 uppercase text-base md:text-lg comic-font tracking-wide">
-                        ⚙️ Configuración Docente – Selección de Tramo (10 o 20 preguntas):
+                <div class="bg-violet-100 border-4 border-[#312e81] p-5 rounded-xl text-left space-y-3 shadow-md">
+                    <label class="block font-black text-violet-900 uppercase text-base md:text-lg gear-font tracking-wide">
+                        ⚙️ Configuración Docente – Selección de Tramo:
                     </label>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            📍 Parte 1 (Preguntas 1 a 10)<br />
-                            <span class="text-xs font-normal normal-case block">Coordenadas básicas y movimientos</span>
+                        <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-sm text-[#312e81]">
+                            ⚙️ Parte 1 (1-10)<br />
+                            <span class="text-xs font-normal normal-case block">Engranajes básicos: sumas y tablas</span>
                         </button>
-                        <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            📍 Parte 2 (Preguntas 11 a 20)<br />
-                            <span class="text-xs font-normal normal-case block">Ubicación relativa y problemas</span>
+                        <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-sm text-[#312e81]">
+                            🔧 Parte 2 (11-20)<br />
+                            <span class="text-xs font-normal normal-case block">Distributividad y problemas</span>
                         </button>
-                        <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            🔥 Modo Completo (20 Retos)<br />
-                            <span class="text-xs font-normal normal-case block">Evaluación continua completa</span>
+                        <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-sm text-[#312e81]">
+                            🏭 Modo Completo (20)<br />
+                            <span class="text-xs font-normal normal-case block">Fábrica total</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Opciones -->
-                <div class="flex flex-wrap items-center justify-between gap-3 bg-gray-100 p-3 border-2 border-black rounded-lg">
+                <div class="flex flex-wrap items-center justify-between gap-3 bg-amber-50 p-3 border-2 border-[#312e81] rounded-lg">
                     <div class="flex items-center gap-2">
-                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
-                        <label for="sound-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">🔊 SFX Retro</label>
+                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-amber-600" />
+                        <label for="sound-toggle" class="font-bold text-sm text-amber-900 cursor-pointer select-none">🔊 SFX Mecánico</label>
                     </div>
                     <div class="flex items-center gap-2">
-                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
-                        <label for="hints-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">💡 Permitir pistas</label>
+                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-amber-600" />
+                        <label for="hints-toggle" class="font-bold text-sm text-amber-900 cursor-pointer select-none">💡 Permitir pistas</label>
                     </div>
                 </div>
 
                 <div class="pt-2">
-                    <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-black text-2xl md:text-3xl py-4 w-full rounded-xl">
-                        ¡RESTAURAR EL ORDEN DE LAS COORDENADAS! 🚀
+                    <button onclick="startGame()" class="btn-comic bg-amber-500 hover:bg-amber-400 text-white text-xl md:text-2xl py-4 w-full">
+                        ¡REPARAR LA FÁBRICA! ⚙️
                     </button>
                 </div>
 
-                <!-- BOTÓN PARA SECCIONES COMPLEMENTARIAS -->
-                <div class="text-center pt-2 border-t-2 border-gray-200">
-                    <button onclick="toggleExtraModules()" class="text-sm font-bold text-blue-700 underline hover:text-blue-900">
+                <div class="text-center pt-2 border-t-2 border-amber-200">
+                    <button onclick="toggleExtraModules()" class="text-sm font-bold text-amber-700 underline hover:text-amber-900">
                         📋 Ver Secciones Complementarias (Problemas de 4 pasos, Metacognición y Autoevaluación)
                     </button>
                 </div>
@@ -261,45 +210,43 @@
 
             <!-- PANTALLA 2: JUEGO -->
             <div id="screen-game" class="hidden space-y-6">
-                <!-- Barra superior -->
-                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white border-4 border-black p-4 shadow-[6px_6px_0px_black]">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-[#fef3c7] border-4 border-[#312e81] p-4 shadow-[6px_6px_0px_#312e81] rounded-xl">
                     <div class="flex items-center gap-3">
-                        <span class="text-3xl">🐱</span>
+                        <span class="text-3xl spin">⚙️</span>
                         <div>
-                            <div class="comic-font text-2xl text-red-600 leading-tight" id="level-label">DESAFÍO 1 / 10</div>
-                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: COORDENADAS BÁSICAS</div>
+                            <div class="gear-font text-xl md:text-2xl text-amber-700 leading-tight" id="level-label">ENGRANAJE 1 / 10</div>
+                            <div class="text-xs font-bold text-amber-600 uppercase" id="section-badge">PARTE 1: ENGRANAJES BÁSICOS</div>
                         </div>
                     </div>
                     <div class="w-full md:w-1/2 progress-bar-container">
                         <div id="progress-fill" class="progress-bar-fill" style="width: 5%"></div>
                     </div>
-                    <button onclick="confirmExit()" class="text-xs font-bold bg-gray-200 hover:bg-gray-300 border-2 border-black px-3 py-1 rounded">
+                    <button onclick="confirmExit()" class="text-xs font-bold bg-amber-200 hover:bg-amber-300 border-2 border-[#312e81] px-3 py-1 rounded">
                         ⚙️ Menú
                     </button>
                 </div>
 
-                <!-- Panel del reto -->
-                <div class="comic-panel p-5 md:p-8 alarm-border border-4">
-                    <div class="flex items-start gap-4 mb-6 bg-blue-50 border-2 border-black p-4 rounded-xl">
-                        <div class="text-5xl" id="hero-avatar">🐱</div>
+                <div class="panel p-5 md:p-8 glow-border border-4">
+                    <div class="flex items-start gap-4 mb-6 bg-cyan-50 border-2 border-[#312e81] p-4 rounded-xl">
+                        <div class="text-5xl" id="hero-avatar">👧</div>
                         <div class="w-full">
-                            <div class="flex justify-between items-center">
-                                <h4 class="font-bold text-red-600 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Legión del Despeje: Gatito Chill</h4>
-                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Coordenadas</span>
+                            <div class="flex justify-between items-center flex-wrap gap-2">
+                                <h4 class="font-bold text-cyan-700 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Taller de Tuerca: Aprendiz Inventora</h4>
+                                <span class="gear-badge" id="question-type-badge">Tabla</span>
                             </div>
-                            <p class="font-bold text-indigo-950 italic text-base md:text-lg mt-1" id="narrative-text">Cargando situación...</p>
+                            <p class="font-bold text-indigo-950 italic text-base md:text-lg mt-1" id="narrative-text">Ajustando engranajes...</p>
                         </div>
                     </div>
 
                     <div class="space-y-6 relative z-10">
-                        <div class="bg-gray-50 border-2 border-black p-5 rounded-xl shadow-inner">
-                            <div id="question-number" class="comic-font text-xl text-purple-700 mb-1">PREGUNTA #</div>
-                            <div id="question-text" class="text-xl md:text-2xl font-bold text-gray-900 leading-relaxed font-mono"></div>
+                        <div class="bg-amber-50 border-2 border-[#312e81] p-5 rounded-xl shadow-inner">
+                            <div id="question-number" class="gear-font text-lg text-amber-700 mb-1">ENGRANAJE #</div>
+                            <div id="question-text" class="text-lg md:text-xl font-bold text-slate-900 leading-relaxed"></div>
                         </div>
 
                         <div id="hint-container" class="hidden">
-                            <button onclick="toggleHint()" class="text-sm font-bold text-purple-800 bg-purple-100 border-2 border-purple-400 px-3 py-1.5 rounded-lg flex items-center gap-2 hover:bg-purple-200 transition">
-                                💡 <span>Mostrar pista</span>
+                            <button onclick="toggleHint()" class="text-sm font-bold text-amber-800 bg-amber-100 border-2 border-amber-400 px-3 py-1.5 rounded-lg flex items-center gap-2 hover:bg-amber-200 transition">
+                                💡 <span>Mostrar pista de Engran</span>
                             </button>
                             <div id="hint-box" class="hidden mt-2 p-3 bg-yellow-50 border-2 border-yellow-400 rounded-lg text-sm text-yellow-950 leading-relaxed font-medium"></div>
                         </div>
@@ -308,201 +255,183 @@
                             <label class="block font-black text-indigo-950 uppercase tracking-tight text-sm">
                                 🎯 Selecciona la respuesta correcta:
                             </label>
-                            <select id="answer-select" class="w-full p-4 border-4 border-black text-lg md:text-xl font-bold bg-yellow-50 focus:ring-4 focus:ring-purple-300 outline-none cursor-pointer rounded-xl">
+                            <select id="answer-select" class="w-full p-4 border-4 border-[#312e81] text-base md:text-lg font-bold bg-yellow-50 focus:ring-4 focus:ring-amber-300 outline-none cursor-pointer rounded-xl">
                                 <option value="" disabled selected>-- Elige con calma --</option>
                             </select>
                         </div>
 
-                        <button onclick="checkAnswer()" class="btn-comic bg-red-600 hover:bg-red-500 text-white text-2xl md:text-3xl py-4 w-full rounded-xl">
-                            ¡ENVIAR RESPUESTA! 💥
+                        <button onclick="checkAnswer()" class="btn-comic bg-cyan-600 hover:bg-cyan-500 text-white text-xl md:text-2xl py-4 w-full">
+                            ¡GIRAR ENGRANAJE! ⚙️
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- PANTALLA 3: VICTORIA -->
-            <div id="screen-end" class="hidden comic-panel p-8 md:p-12 text-center space-y-8">
-                <h2 class="text-5xl md:text-7xl comic-font text-purple-700">¡SISTEMA REESTABLECIDO!</h2>
-                <div class="text-8xl md:text-9xl animate-bounce my-4">🐱⚖️✨</div>
+            <div id="screen-end" class="hidden panel p-8 md:p-12 text-center space-y-8">
+                <h2 class="text-4xl md:text-6xl gear-font text-amber-700">¡FÁBRICA REPARADA!</h2>
+                <div class="text-8xl md:text-9xl my-4 float-icon">⚙️🏭🎉</div>
                 <div class="space-y-3">
-                    <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has derrotado a Patito Amarillito!</p>
-                    <p class="text-gray-700 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
-                        Todas las coordenadas han vuelto a su lugar. El mapa de la ciudad está en orden.
+                    <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has derrotado a Don Cero!</p>
+                    <p class="text-amber-800 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
+                        Todos los engranajes giran de nuevo. Las tablas de multiplicar hasta el 10 funcionan perfectamente.
                     </p>
                 </div>
-                <div class="bg-yellow-100 border-4 border-black p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
-                    <p class="text-purple-900">
-                        <b>Gatito Chill te felicita:</b> "¡Excelente! Recuerda que para localizar un objeto siempre necesitas una fila y una columna. ¡Mantén la calma y el orden siempre regresa!"
+                <div class="bg-amber-100 border-4 border-[#312e81] p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
+                    <p class="text-amber-900">
+                        <b>Tuerca y Engran te felicitan:</b> "¡Gran trabajo! Aprendiste que multiplicar es sumar repetidas veces, que puedes usar la distributividad para recordar tablas, y que las tablas hasta 10×10 te ayudan a resolver problemas. ¡La fábrica funciona!"
                     </p>
                 </div>
                 <div class="flex flex-col md:flex-row justify-center gap-4 pt-4">
-                    <button onclick="returnToStart()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-2xl py-4 px-8 rounded-xl">
+                    <button onclick="returnToStart()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-lg md:text-xl py-4 px-8">
                         🔄 VOLVER AL MENÚ
                     </button>
-                    <button onclick="toggleExtraModules()" class="btn-comic bg-purple-600 hover:bg-purple-500 text-white text-2xl py-4 px-8 rounded-xl">
+                    <button onclick="toggleExtraModules()" class="btn-comic bg-purple-600 hover:bg-purple-500 text-white text-lg md:text-xl py-4 px-8">
                         📝 VER MÓDULOS DE DESARROLLO
                     </button>
                 </div>
             </div>
 
-            <!-- ========================================================= -->
-            <!-- PANTALLA EXTRAS: SECCIONES COMPLEMENTARIAS (GUÍA)          -->
-            <!-- ========================================================= -->
-            <div id="screen-extras" class="hidden comic-panel p-6 md:p-8 space-y-6 my-6">
-                <div class="flex justify-between items-center border-b-4 border-black pb-4">
-                    <h2 class="text-3xl md:text-4xl comic-font text-indigo-900">SECCIONES DE DESARROLLO Y EVALUACIÓN</h2>
-                    <button onclick="closeExtraModules()" class="btn-comic bg-red-500 text-white px-4 py-1 text-xl rounded">
-                        ✖️ CERRAR
-                    </button>
+            <!-- EXTRAS -->
+            <div id="screen-extras" class="hidden panel p-6 md:p-8 space-y-6 my-6">
+                <div class="flex justify-between items-center border-b-4 border-[#312e81] pb-4 flex-wrap gap-2">
+                    <h2 class="text-2xl md:text-3xl gear-font text-amber-700">SECCIONES DE DESARROLLO</h2>
+                    <button onclick="closeExtraModules()" class="btn-comic bg-cyan-600 text-white px-4 py-1 text-lg">✖️ CERRAR</button>
                 </div>
 
-                <!-- Pestañas de navegación -->
-                <div class="flex flex-wrap gap-2 border-b-2 border-black pb-2">
-                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="extra-tab-btn active-tab py-2 px-3 text-sm bg-yellow-300">II. Problemas (4 Pasos)</button>
-                    <button onclick="switchExtraTab('sec3')" id="tab-sec3" class="extra-tab-btn py-2 px-3 text-sm bg-white">III. Metacognición</button>
-                    <button onclick="switchExtraTab('sec4')" id="tab-sec4" class="extra-tab-btn py-2 px-3 text-sm bg-white">IV. Desafío Extra</button>
-                    <button onclick="switchExtraTab('sec5')" id="tab-sec5" class="extra-tab-btn py-2 px-3 text-sm bg-white">V. Autoevaluación</button>
+                <div class="flex flex-wrap gap-2 border-b-2 border-[#312e81] pb-2">
+                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="extra-tab-btn active-tab py-2 px-3 bg-amber-300">II. Problemas (4 Pasos)</button>
+                    <button onclick="switchExtraTab('sec3')" id="tab-sec3" class="extra-tab-btn py-2 px-3 bg-white">III. Metacognición</button>
+                    <button onclick="switchExtraTab('sec4')" id="tab-sec4" class="extra-tab-btn py-2 px-3 bg-white">IV. Desafío Extra</button>
+                    <button onclick="switchExtraTab('sec5')" id="tab-sec5" class="extra-tab-btn py-2 px-3 bg-white">V. Autoevaluación</button>
                 </div>
 
-                <!-- SECCIÓN II: RESOLUCIÓN DE PROBLEMAS (4 PASOS) -->
+                <!-- SECCIÓN II -->
                 <div id="extra-sec2" class="space-y-6 text-left">
-                    <div class="bg-blue-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-blue-900">II. Resolución de Problemas (Estrategia de los 4 Pasos)</h3>
-                        <p class="text-xs text-gray-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Revisar.</p>
+                    <div class="bg-cyan-50 border-2 border-[#312e81] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-cyan-900">II. Resolución de Problemas (Estrategia de los 4 Pasos)</h3>
+                        <p class="text-xs text-cyan-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Revisar.</p>
                     </div>
 
-                    <!-- Problema 1: Tesoro escondido -->
-                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Tesoro escondido)</span>
-                        <p class="font-bold text-gray-800">
-                            Un mapa indica que el tesoro está 3 filas arriba y 2 columnas a la derecha de la coordenada (B, 2). ¿Cuál es la ubicación final del tesoro?
+                    <div class="border-2 border-[#312e81] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-green-200 border border-[#312e81] text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Cajas de lápices)</span>
+                        <p class="font-bold text-slate-800">
+                            En la fábrica hay 4 cajas con 6 lápices cada una. ¿Cuántos lápices hay en total?
                         </p>
-                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
-                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
-                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> Coordenada inicial (B, 2). Movimiento: 3 filas arriba (sumar a la fila), 2 columnas a la derecha (sumar a la columna).</p>
-                                <p><b>2. Planificar:</b> Fila: 2 + 3 = 5. Columna: B → C → D (2 pasos a la derecha).</p>
-                                <p><b>3. Resolver:</b> Ubicación final = (D, 5).</p>
-                                <p><b>4. Revisar:</b> Desde (D,5), si retrocedemos 3 filas y 2 columnas a la izquierda, llegamos a (B,2). Correcto.</p>
+                        <details class="bg-amber-50 p-3 rounded border border-amber-300">
+                            <summary class="font-bold text-amber-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-slate-800 space-y-1 pl-2 border-l-2 border-amber-500">
+                                <p><b>1. Comprender:</b> 4 cajas, 6 lápices en cada una.</p>
+                                <p><b>2. Planificar:</b> Multiplicar 4 × 6.</p>
+                                <p><b>3. Resolver:</b> 4 × 6 = 24 lápices.</p>
+                                <p><b>4. Revisar:</b> 6+6+6+6 = 24. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <!-- Problema 2: Entrega de paquetes -->
-                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Entrega de paquetes)</span>
-                        <p class="font-bold text-gray-800">
-                            Un repartidor debe visitar tres casas en un mapa 5x5: Casa 1: (A, 1), Casa 2: (D, 3), Casa 3: (B, 5). Si comienza en (A, 1), ¿cuántas filas y columnas debe recorrer para visitar las otras dos casas (de la 1 a la 2, y de la 2 a la 3)?
+                    <div class="border-2 border-[#312e81] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-orange-200 border border-[#312e81] text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Distributividad)</span>
+                        <p class="font-bold text-slate-800">
+                            Usa la distributividad para calcular 8 × 7 descomponiendo el 7 como 5 + 2.
                         </p>
-                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
-                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
-                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> Casa 1 (A,1) → Casa 2 (D,3) → Casa 3 (B,5).</p>
-                                <p><b>2. Planificar:</b> Calcular diferencias de filas y columnas entre cada par.</p>
-                                <p><b>3. Resolver:</b> 1→2: A→D = 3 columnas a la derecha, 1→3 = 2 filas arriba. 2→3: D→B = 2 columnas a la izquierda, 3→5 = 2 filas arriba.</p>
-                                <p><b>4. Revisar:</b> Desde (A,1), 3 columnas a la derecha y 2 filas arriba = (D,3). Luego, 2 columnas a la izquierda y 2 filas arriba = (B,5). Correcto.</p>
+                        <details class="bg-amber-50 p-3 rounded border border-amber-300">
+                            <summary class="font-bold text-amber-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-slate-800 space-y-1 pl-2 border-l-2 border-amber-500">
+                                <p><b>1. Comprender:</b> 8 × 7, usando 7 = 5 + 2.</p>
+                                <p><b>2. Planificar:</b> 8 × (5 + 2) = (8×5) + (8×2).</p>
+                                <p><b>3. Resolver:</b> 40 + 16 = 56.</p>
+                                <p><b>4. Revisar:</b> 8 × 7 = 56. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <!-- Problema 3: Laberinto -->
-                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Laberinto)</span>
-                        <p class="font-bold text-gray-800">
-                            Un robot debe ir desde (1,1) hasta (5,5) evitando las casillas que tienen un obstáculo en (2,2) y (3,3). Traza un camino posible y escribe las coordenadas de los pasos que da.
+                    <div class="border-2 border-[#312e81] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-purple-200 border border-[#312e81] text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Mesas y sillas)</span>
+                        <p class="font-bold text-slate-800">
+                            En una sala hay 6 mesas y en cada mesa hay 8 sillas. ¿Cuántas sillas hay en total?
                         </p>
-                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
-                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
-                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> Inicio (1,1), fin (5,5), obstáculos en (2,2) y (3,3).</p>
-                                <p><b>2. Planificar:</b> Buscar una ruta que rodee los obstáculos.</p>
-                                <p><b>3. Resolver:</b> Ruta posible: (1,1) → (1,2) → (1,3) → (1,4) → (2,4) → (3,4) → (4,4) → (4,5) → (5,5).</p>
-                                <p><b>4. Revisar:</b> Todos los pasos evitan (2,2) y (3,3). La ruta es válida y llega al destino.</p>
+                        <details class="bg-amber-50 p-3 rounded border border-amber-300">
+                            <summary class="font-bold text-amber-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-slate-800 space-y-1 pl-2 border-l-2 border-amber-500">
+                                <p><b>1. Comprender:</b> 6 mesas, 8 sillas por mesa.</p>
+                                <p><b>2. Planificar:</b> Multiplicar 6 × 8.</p>
+                                <p><b>3. Resolver:</b> 6 × 8 = 48 sillas.</p>
+                                <p><b>4. Revisar:</b> 8+8+8+8+8+8 = 48. Correcto.</p>
                             </div>
                         </details>
                     </div>
                 </div>
 
-                <!-- SECCIÓN III: METACOGNICIÓN -->
+                <!-- SECCIÓN III -->
                 <div id="extra-sec3" class="hidden space-y-4 text-left">
-                    <div class="bg-purple-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-purple-900">III. Metacognición (Reflexión del Estudiante)</h3>
-                        <p class="text-xs text-gray-700">Responde con honestidad sobre tu trabajo:</p>
+                    <div class="bg-amber-50 border-2 border-[#312e81] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-amber-900">III. Metacognición (Reflexión del Estudiante)</h3>
                     </div>
                     <div class="space-y-3">
-                        <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">1. ¿Cuál de los 3 problemas fue más difícil de resolver y por qué?</p>
+                        <div class="p-3 bg-white border border-[#312e81] rounded-lg">
+                            <p class="font-bold text-sm text-slate-800">1. ¿Qué tabla te cuesta más recordar y qué truco usarías para memorizarla?</p>
                         </div>
-                        <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">2. ¿Qué error cometiste al planificar la ruta del robot o del repartidor y cómo lo corregiste?</p>
+                        <div class="p-3 bg-white border border-[#312e81] rounded-lg">
+                            <p class="font-bold text-sm text-slate-800">2. ¿Cómo te ayuda la distributividad cuando olvidas un resultado de una tabla?</p>
                         </div>
-                        <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">3. ¿Cómo te ayudó usar la cuadrícula para visualizar los movimientos?</p>
+                        <div class="p-3 bg-white border border-[#312e81] rounded-lg">
+                            <p class="font-bold text-sm text-slate-800">3. ¿En qué situaciones de tu vida diaria usas las tablas de multiplicar?</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- SECCIÓN IV: DESAFÍO EXTRA (Lógica Inversa) -->
+                <!-- SECCIÓN IV -->
                 <div id="extra-sec4" class="hidden space-y-4 text-left">
-                    <div class="bg-yellow-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Puntos Extra)</h3>
-                        <p class="text-sm text-gray-800">
-                            Un saltamontes está en la casilla (1,1) de un tablero 4x4. Solo puede saltar en forma de "L" (como el caballo de ajedrez). ¿Puede llegar a la casilla (4,4) en exactamente 3 saltos? Explica tu razonamiento.
+                    <div class="bg-yellow-50 border-2 border-[#312e81] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Lógica de Engran)</h3>
+                        <p class="text-sm text-slate-800">
+                            Engran dice: "Si 3 × 4 = 12, entonces 6 × 4 es el doble de 12, porque 6 es el doble de 3". ¿Estás de acuerdo? Explica por qué y calcula 6 × 4.
                         </p>
                     </div>
-                    <div class="p-4 bg-white border-2 border-black rounded-xl space-y-3">
-                        <button onclick="toggleExtraHint()" class="btn-comic bg-yellow-400 text-black text-sm px-4 py-2 rounded">
-                            🧩 Revelar Solución por Reversión de Gatito Chill
+                    <div class="p-4 bg-white border-2 border-[#312e81] rounded-xl space-y-3">
+                        <button onclick="toggleExtraHint()" class="btn-comic bg-cyan-500 text-white text-sm px-4 py-2">
+                            🧩 Revelar la Solución de Engran
                         </button>
                         <div id="extra-hint-box" class="hidden text-sm bg-yellow-100 p-3 rounded border border-yellow-300 leading-relaxed">
-                            <p><b>Paso 1:</b> Los movimientos en "L" son (1,2) o (2,1) en cualquier combinación de direcciones (±).</p>
-                            <p><b>Paso 2:</b> Un camino posible en 3 saltos: (1,1) → (2,3) → (3,1) → (4,3) ... Necesitamos llegar a (4,4).</p>
-                            <p><b>Paso 3:</b> Otro camino: (1,1) → (3,2) → (2,4) → (4,3) ...</p>
-                            <p><b>Paso 4:</b> Encontramos un camino válido: (1,1) → (3,2) → (4,4) → ¡en solo 2 saltos! Pero necesitamos 3 saltos exactos.</p>
-                            <p><b>Paso 5:</b> Un camino en 3 saltos: (1,1) → (2,3) → (4,2) → (3,4) → No llega a (4,4).</p>
-                            <p><b>Paso 6:</b> Probamos: (1,1) → (3,2) → (1,3) → (2,5) (fuera del tablero).</p>
-                            <p><b>Paso 7:</b> Encontramos: (1,1) → (2,3) → (4,4) → (3,2) ... pero necesitamos terminar en (4,4).</p>
-                            <p><b>Paso 8:</b> Un camino válido en 3 saltos es: (1,1) → (3,2) → (1,3) → (3,4) → No.</p>
-                            <p><b>Paso 9:</b> Después de analizar, encontramos: (1,1) → (2,3) → (3,1) → (4,3) → (4,4) no es un salto en L.</p>
-                            <p><b>Paso 10:</b> La respuesta correcta es que <b>NO</b> es posible en exactamente 3 saltos, ya que la paridad del tablero no lo permite. Sin embargo, se valorará el razonamiento lógico del estudiante.</p>
-                            <p><b>Nota:</b> Para efectos de la evaluación, se acepta cualquier intento de trayectoria lógica. Un camino posible en 4 saltos sí existe.</p>
+                            <p><b>Paso 1:</b> 3 × 4 = 12.</p>
+                            <p><b>Paso 2:</b> 6 × 4 = (2 × 3) × 4 = 2 × (3 × 4) = 2 × 12 = 24.</p>
+                            <p><b>Resultado:</b> Sí, es correcto. 6 × 4 = <b>24</b>. La propiedad asociativa y la idea de "doble" ayudan a construir tablas.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- SECCIÓN V: AUTOEVALUACIÓN -->
+                <!-- SECCIÓN V -->
                 <div id="extra-sec5" class="hidden space-y-4 text-left">
-                    <div class="bg-green-50 border-2 border-black p-4 rounded-lg">
+                    <div class="bg-green-50 border-2 border-[#312e81] p-4 rounded-lg">
                         <h3 class="font-bold text-lg text-green-900">V. Autoevaluación del Estudiante</h3>
-                        <p class="text-xs text-gray-700">Marca con una X tu nivel de desempeño:</p>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-sm border-2 border-black bg-white">
-                            <thead class="bg-yellow-300 border-b-2 border-black">
+                        <table class="w-full text-sm border-2 border-[#312e81] bg-white">
+                            <thead class="bg-amber-300 border-b-2 border-[#312e81]">
                                 <tr>
-                                    <th class="p-2 text-left border-r border-black">Ítems</th>
-                                    <th class="p-2 text-center border-r border-black">Siempre lo logro (3)</th>
-                                    <th class="p-2 text-center border-r border-black">A veces lo logro (2)</th>
-                                    <th class="p-2 text-center">Necesito apoyo (1)</th>
+                                    <th class="p-2 text-left border-r border-[#312e81]">Afirmación</th>
+                                    <th class="p-2 text-center border-r border-[#312e81]">Logrado (3)</th>
+                                    <th class="p-2 text-center border-r border-[#312e81]">En proceso (2)</th>
+                                    <th class="p-2 text-center">Por lograr (1)</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">Identifico filas y columnas en un mapa o cuadrícula.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
+                                <tr class="border-b border-[#312e81]">
+                                    <td class="p-2 border-r border-[#312e81] font-medium">1. Expreso una multiplicación como suma de sumandos iguales.</td>
+                                    <td class="p-2 text-center border-r border-[#312e81]"><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center border-r border-[#312e81]"><input type="radio" name="auto1" /></td>
                                     <td class="p-2 text-center"><input type="radio" name="auto1" /></td>
                                 </tr>
-                                <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">Puedo mover objetos usando coordenadas.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
+                                <tr class="border-b border-[#312e81]">
+                                    <td class="p-2 border-r border-[#312e81] font-medium">2. Uso la distributividad para construir o recordar tablas.</td>
+                                    <td class="p-2 text-center border-r border-[#312e81]"><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center border-r border-[#312e81]"><input type="radio" name="auto2" /></td>
                                     <td class="p-2 text-center"><input type="radio" name="auto2" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2 border-r border-black font-medium">Utilizo la estrategia de los 4 pasos para resolver problemas.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 border-r border-[#312e81] font-medium">3. Aplico las tablas hasta 10×10 para resolver problemas cotidianos.</td>
+                                    <td class="p-2 text-center border-r border-[#312e81]"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center border-r border-[#312e81]"><input type="radio" name="auto3" /></td>
                                     <td class="p-2 text-center"><input type="radio" name="auto3" /></td>
                                 </tr>
                             </tbody>
@@ -510,222 +439,167 @@
                     </div>
                 </div>
             </div>
-            <!-- =========== FIN DE EXTRAS =========== -->
 
         </main>
     </div>
 
     <script>
         // ================================================================
-        //  BASE DE DATOS – 20 PREGUNTAS (OA 14, 3° BÁSICO)
+        //  BANCO DE 20 PREGUNTAS – OA 08: Tablas de multiplicar hasta 10
         // ================================================================
         const allQuestions = [
-            // ---- PARTE 1: Coordenadas básicas (Preguntas 1 a 10) ----
+            // ---- PARTE 1: Engranajes básicos (1-10) ----
             {
-                id: 1,
-                part: 1,
-                type: "Coordenadas",
-                narrative: "Patito Amarillito escondió el tesoro. ¡Ayuda a Gatito Chill a encontrarlo!",
-                q: "Si un tesoro está en la fila B y columna 3, ¿cuál es su coordenada?",
-                a: "(B, 3)",
-                options: ["(B, 3)", "(3, B)", "(A, 2)", "(C, 2)"],
-                hint: "Las coordenadas se escriben primero la fila (letra) y luego la columna (número)."
+                id: 1, part: 1, type: "Suma repetida",
+                narrative: "Tuerca encuentra un engranaje con sumas repetidas.",
+                q: "¿Cuál multiplicación corresponde a la suma 3 + 3 + 3 + 3?",
+                a: "4 × 3 = 12",
+                options: ["3 × 3 = 9", "4 × 3 = 12", "4 + 3 = 7", "3 × 4 = 7"],
+                hint: "Hay 4 grupos de 3. Entonces 4 × 3 = 12."
             }, {
-                id: 2,
-                part: 1,
-                type: "Punto de partida",
-                narrative: "Gatito Chill necesita saber dónde comienza el tablero.",
-                q: "¿Cuál es el punto de partida (0,0) en un tablero de ajedrez típico si numeramos las filas del 1 al 8 y columnas A al H?",
-                a: "(A, 1)",
-                options: ["(H, 8)", "(A, 1)", "(A, 8)", "(H, 1)"],
-                hint: "El punto de partida es la esquina inferior izquierda: columna A, fila 1."
+                id: 2, part: 1, type: "Pictórico",
+                narrative: "Engran muestra una imagen con grupos de objetos.",
+                q: "Si hay 4 grupos con 5 estrellas cada uno, ¿cuántas estrellas hay en total?",
+                a: "20 estrellas",
+                options: ["9 estrellas", "15 estrellas", "20 estrellas", "25 estrellas"],
+                hint: "4 grupos × 5 estrellas = 4 × 5 = 20."
             }, {
-                id: 3,
-                part: 1,
-                type: "Movimiento vertical",
-                narrative: "Patito Amarillito movió la ficha. ¿Dónde quedó?",
-                q: "Si estás en la coordenada (C, 2) y avanzas 2 filas hacia arriba, ¿dónde quedas?",
-                a: "(C, 4)",
-                options: ["(C, 0)", "(C, 4)", "(E, 2)", "(A, 2)"],
-                hint: "Suma 2 a la fila (2 + 2 = 4). La columna se mantiene igual."
+                id: 3, part: 1, type: "Tabla directa",
+                narrative: "Un engranaje gira y muestra una multiplicación.",
+                q: "¿Cuánto es 6 × 7?",
+                a: "42",
+                options: ["36", "42", "48", "56"],
+                hint: "6 × 7 = 42. Recuerda: 6 × 7 = 6 × 5 + 6 × 2 = 30 + 12 = 42."
             }, {
-                id: 4,
-                part: 1,
-                type: "Movimiento vertical",
-                narrative: "El conejo saltó. ¿Cuántas filas avanzó?",
-                q: "Un conejo salta de (B, 1) a (B, 4). ¿Cuántas filas avanzó?",
-                a: "3",
-                options: ["1", "2", "3", "5"],
-                hint: "Resta las filas: 4 - 1 = 3."
+                id: 4, part: 1, type: "Suma repetida",
+                narrative: "Tuerca repara un engranaje con sumas.",
+                q: "¿Cuál multiplicación corresponde a 5 + 5 + 5?",
+                a: "3 × 5 = 15",
+                options: ["5 × 5 = 25", "3 × 5 = 15", "3 + 5 = 8", "5 × 3 = 8"],
+                hint: "Hay 3 grupos de 5. Entonces 3 × 5 = 15."
             }, {
-                id: 5,
-                part: 1,
-                type: "Coordenadas",
-                narrative: "Gatito Chill necesita interpretar una coordenada.",
-                q: "¿Qué significa la coordenada (D, 5)?",
-                a: "Columna D, Fila 5",
-                options: ["Fila 5, Columna D", "Columna D, Fila 5", "Fila D, Columna 5", "Columna 5, Fila D"],
-                hint: "El primer valor es la columna (letra) y el segundo es la fila (número)."
+                id: 5, part: 1, type: "Tabla directa",
+                narrative: "Engran necesita ayuda con una tabla grande.",
+                q: "¿Cuánto es 8 × 9?",
+                a: "72",
+                options: ["64", "72", "81", "63"],
+                hint: "8 × 9 = 72. Truco: 8 × 10 − 8 = 80 − 8 = 72."
             }, {
-                id: 6,
-                part: 1,
-                type: "Posición relativa",
-                narrative: "Dos objetos en el mapa. ¿Cuál es su relación?",
-                q: "Si un objeto está en (A, 1) y otro en (C, 1), ¿cuál es su posición relativa?",
-                a: "Están en la misma fila",
-                options: ["El segundo está a la derecha del primero", "El segundo está arriba del primero", "Están en la misma fila",
-                    "Están en la misma columna"
-                ],
-                hint: "Ambos tienen el número 1, así que están en la misma fila."
+                id: 6, part: 1, type: "Pictórico",
+                narrative: "Tuerca cuenta filas de objetos en un engranaje.",
+                q: "Si hay 3 filas con 6 tornillos cada una, ¿cuántos tornillos hay?",
+                a: "18 tornillos",
+                options: ["9 tornillos", "15 tornillos", "18 tornillos", "21 tornillos"],
+                hint: "3 filas × 6 tornillos = 3 × 6 = 18."
             }, {
-                id: 7,
-                part: 1,
-                type: "Distancia",
-                narrative: "Patito Amarillito movió el punto más lejano. ¡Encuéntralo!",
-                q: "Si un mapa tiene filas del 1 al 5 y letras de la A a la E, ¿cuál es el punto más lejano al (A, 1)?",
-                a: "(E, 5)",
-                options: ["(A, 2)", "(B, 1)", "(E, 5)", "(A, 1)"],
-                hint: "El punto más lejano está en la esquina opuesta: columna E, fila 5."
+                id: 7, part: 1, type: "Tabla directa",
+                narrative: "Un engranaje cuadrado gira con fuerza.",
+                q: "¿Cuánto es 7 × 7?",
+                a: "49",
+                options: ["42", "49", "56", "63"],
+                hint: "7 × 7 = 49. Es un cuadrado perfecto."
             }, {
-                id: 8,
-                part: 1,
-                type: "Movimiento horizontal",
-                narrative: "Gatito Chill movió el robot al este. ¿Dónde está ahora?",
-                q: "Un robot en (2, 2) se mueve al este (derecha) 2 espacios. ¿En qué coordenada está ahora?",
-                a: "(4, 2)",
-                options: ["(4, 2)", "(2, 4)", "(0, 2)", "(2, 0)"],
-                hint: "Moverse al este suma a la columna (primer número). 2 + 2 = 4."
+                id: 8, part: 1, type: "Suma repetida",
+                narrative: "Engran repara un engranaje pequeño.",
+                q: "¿Cuál multiplicación corresponde a 2 + 2 + 2 + 2 + 2?",
+                a: "5 × 2 = 10",
+                options: ["2 × 2 = 4", "5 × 2 = 10", "5 + 2 = 7", "2 × 5 = 7"],
+                hint: "Hay 5 grupos de 2. Entonces 5 × 2 = 10."
             }, {
-                id: 9,
-                part: 1,
-                type: "Concepto",
-                narrative: "Gatito Chill necesita saber qué se necesita para localizar un objeto.",
-                q: "¿Qué se necesita para localizar un objeto en un mapa?",
-                a: "Una referencia (fila/columna o letra/número)",
-                options: ["Solo el nombre del objeto", "Una referencia (fila/columna o letra/número)", "Un dibujo del objeto",
-                    "Solo saber el color"
-                ],
-                hint: "Para ubicar algo necesitas dos datos: fila y columna."
+                id: 9, part: 1, type: "Tabla directa",
+                narrative: "Tuerca revisa la tabla del 9.",
+                q: "¿Cuánto es 9 × 4?",
+                a: "36",
+                options: ["27", "32", "36", "45"],
+                hint: "9 × 4 = 36. Truco: 9 × 4 = 10 × 4 − 4 = 40 − 4 = 36."
             }, {
-                id: 10,
-                part: 1,
-                type: "Área",
-                narrative: "Patito Amarillito cambió el tamaño del mapa. ¿Cuántos espacios hay?",
-                q: "Si un mapa es una cuadrícula de 4x4, ¿cuántos espacios totales hay?",
-                a: "16",
-                options: ["8", "12", "16", "20"],
-                hint: "Multiplica 4 × 4 = 16."
+                id: 10, part: 1, type: "Pictórico",
+                narrative: "Engran muestra grupos de tuercas.",
+                q: "Si hay 5 grupos con 8 tuercas cada uno, ¿cuántas tuercas hay en total?",
+                a: "40 tuercas",
+                options: ["13 tuercas", "35 tuercas", "40 tuercas", "45 tuercas"],
+                hint: "5 grupos × 8 tuercas = 5 × 8 = 40."
             },
 
-            // ---- PARTE 2: Ubicación relativa y problemas (Preguntas 11 a 20) ----
+            // ---- PARTE 2: Engranajes maestros (11-20) ----
             {
-                id: 11,
-                part: 2,
-                type: "Distancia entre puntos",
-                narrative: "Gatito Chill y su amigo están en el mapa. ¿Cuántos cuadros los separan?",
-                q: "Estás en (B, 2). Tu amigo está en (B, 5). ¿Cuántos cuadros los separan?",
-                a: "3",
-                options: ["2", "3", "4", "7"],
-                hint: "Resta las filas: 5 - 2 = 3."
+                id: 11, part: 2, type: "Distributividad",
+                narrative: "Tuerca usa la distributividad para reparar un engranaje.",
+                q: "Usando la distributividad, 6 × 8 se puede calcular como 6 × (5 + 3). ¿Cuál es el resultado?",
+                a: "30 + 18 = 48",
+                options: ["30 + 18 = 48", "30 + 3 = 33", "6 + 8 = 14", "30 + 8 = 38"],
+                hint: "6 × (5 + 3) = 6×5 + 6×3 = 30 + 18 = 48."
             }, {
-                id: 12,
-                part: 2,
-                type: "Movimiento horizontal",
-                narrative: "Patito Amarillito movió el barco. ¿Dónde está ahora?",
-                q: "Un barco en (E, 4) se mueve 2 columnas a la izquierda. ¿Cuál es su nueva posición?",
-                a: "(C, 4)",
-                options: ["(E, 2)", "(C, 4)", "(G, 4)", "(E, 6)"],
-                hint: "Moverse a la izquierda resta de la columna: E → D → C."
+                id: 12, part: 2, type: "Distributividad",
+                narrative: "Engran descompone el 9 para calcular.",
+                q: "Usando la distributividad, 7 × 9 se puede calcular como 7 × (10 − 1). ¿Cuál es el resultado?",
+                a: "70 − 7 = 63",
+                options: ["70 − 7 = 63", "70 + 7 = 77", "7 + 9 = 16", "70 − 1 = 69"],
+                hint: "7 × (10 − 1) = 7×10 − 7×1 = 70 − 7 = 63."
             }, {
-                id: 13,
-                part: 2,
-                type: "Concepto",
-                narrative: "Gatito Chill necesita recordar qué es una coordenada.",
-                q: "¿Qué es una coordenada?",
-                a: "Un par de datos que indica ubicación",
-                options: ["Un número secreto", "Un par de datos que indica ubicación", "Un tipo de mapa",
-                    "Una forma de medir el tiempo"
-                ],
-                hint: "Una coordenada te dice dónde está algo usando dos referencias."
+                id: 13, part: 2, type: "Problema",
+                narrative: "Tuerca cuenta cajas de lápices en la fábrica.",
+                q: "Hay 4 cajas con 6 lápices cada una. ¿Cuántos lápices hay en total?",
+                a: "24 lápices",
+                options: ["10 lápices", "18 lápices", "24 lápices", "30 lápices"],
+                hint: "4 × 6 = 24 lápices."
             }, {
-                id: 14,
-                part: 2,
-                type: "Direcciones (Norte/Sur/Este/Oeste)",
-                narrative: "Patito Amarillito confundió las direcciones. ¿Hacia dónde debes moverte?",
-                q: "Si el Norte está hacia arriba en un mapa, y estás en (C, 3), ¿hacia dónde debes moverte para llegar a (C, 4)?",
-                a: "Este",
-                options: ["Sur", "Este", "Oeste", "Norte"],
-                hint: "El número de fila aumenta hacia arriba (Norte). La columna aumenta hacia la derecha (Este)."
+                id: 14, part: 2, type: "Distributividad",
+                narrative: "Engran descompone el 7 como 5 + 2.",
+                q: "Usando la distributividad, 8 × 7 se puede calcular como 8 × (5 + 2). ¿Cuál es el resultado?",
+                a: "40 + 16 = 56",
+                options: ["40 + 16 = 56", "40 + 2 = 42", "8 + 7 = 15", "40 + 7 = 47"],
+                hint: "8 × (5 + 2) = 8×5 + 8×2 = 40 + 16 = 56."
             }, {
-                id: 15,
-                part: 2,
-                type: "Área",
-                narrative: "Gatito Chill necesita saber cuántos puntos hay en el mapa.",
-                q: "En una cuadrícula 5x5, ¿cuántos puntos posibles existen?",
-                a: "25",
-                options: ["5", "10", "25", "50"],
-                hint: "Multiplica 5 × 5 = 25."
+                id: 15, part: 2, type: "Problema",
+                narrative: "Tuerca cuenta niños en autobuses.",
+                q: "Hay 3 autobuses con 9 niños cada uno. ¿Cuántos niños hay en total?",
+                a: "27 niños",
+                options: ["12 niños", "24 niños", "27 niños", "30 niños"],
+                hint: "3 × 9 = 27 niños."
             }, {
-                id: 16,
-                part: 2,
-                type: "Movimiento diagonal",
-                narrative: "Patito Amarillito movió la pieza en diagonal. ¿Qué tipo de movimiento hizo?",
-                q: "Si una pieza se mueve de (A, 1) a (B, 2), ¿qué tipo de movimiento realizó?",
-                a: "Diagonal",
-                options: ["Solo horizontal", "Solo vertical", "Diagonal", "No se movió"],
-                hint: "Cambió tanto columna como fila, así que fue diagonal."
+                id: 16, part: 2, type: "Distributividad",
+                narrative: "Engran descompone el 6 como 5 + 1.",
+                q: "Usando la distributividad, 9 × 6 se puede calcular como 9 × (5 + 1). ¿Cuál es el resultado?",
+                a: "45 + 9 = 54",
+                options: ["45 + 9 = 54", "45 + 1 = 46", "9 + 6 = 15", "45 + 6 = 51"],
+                hint: "9 × (5 + 1) = 9×5 + 9×1 = 45 + 9 = 54."
             }, {
-                id: 17,
-                part: 2,
-                type: "Concepto (fila)",
-                narrative: "Gatito Chill necesita recordar el nombre de la línea horizontal.",
-                q: "¿Cómo se llama comúnmente la línea horizontal en una cuadrícula?",
-                a: "Fila",
-                options: ["Fila", "Columna", "Diagonal", "Punto"],
-                hint: "Las filas van de izquierda a derecha (horizontales)."
+                id: 17, part: 2, type: "Problema",
+                narrative: "Tuerca cuenta bolsas de dulces.",
+                q: "Hay 5 bolsas con 7 dulces cada una. ¿Cuántos dulces hay en total?",
+                a: "35 dulces",
+                options: ["12 dulces", "30 dulces", "35 dulces", "40 dulces"],
+                hint: "5 × 7 = 35 dulces."
             }, {
-                id: 18,
-                part: 2,
-                type: "Concepto (columna)",
-                narrative: "Gatito Chill necesita recordar el nombre de la línea vertical.",
-                q: "¿Cómo se llama comúnmente la línea vertical en una cuadrícula?",
-                a: "Columna",
-                options: ["Fila", "Columna", "Diagonal", "Punto"],
-                hint: "Las columnas van de arriba a abajo (verticales)."
+                id: 18, part: 2, type: "Distributividad",
+                narrative: "Engran descompone el 8 como 4 + 4.",
+                q: "Usando la distributividad, 4 × 8 se puede calcular como 4 × (4 + 4). ¿Cuál es el resultado?",
+                a: "16 + 16 = 32",
+                options: ["16 + 16 = 32", "16 + 4 = 20", "4 + 8 = 12", "16 + 8 = 24"],
+                hint: "4 × (4 + 4) = 4×4 + 4×4 = 16 + 16 = 32."
             }, {
-                id: 19,
-                part: 2,
-                type: "Movimiento combinado",
-                narrative: "Patito Amarillito movió el objeto en dos direcciones. ¿Dónde quedó?",
-                q: "Si un objeto está en (A, 5) y se mueve 1 a la derecha y 1 abajo, queda en:",
-                a: "(B, 4)",
-                options: ["(B, 4)", "(B, 6)", "(A, 4)", "(A, 6)"],
-                hint: "1 a la derecha = B, 1 abajo = 4. Queda en (B, 4)."
+                id: 19, part: 2, type: "Problema",
+                narrative: "Tuerca cuenta mesas y sillas.",
+                q: "En una sala hay 6 mesas y en cada mesa hay 8 sillas. ¿Cuántas sillas hay en total?",
+                a: "48 sillas",
+                options: ["14 sillas", "36 sillas", "48 sillas", "54 sillas"],
+                hint: "6 × 8 = 48 sillas."
             }, {
-                id: 20,
-                part: 2,
-                type: "Distancia total",
-                narrative: "Gatito Chill necesita calcular los pasos para ir de un punto a otro.",
-                q: "Para llegar de (A, 1) a (E, 5) en línea recta, ¿cuántos pasos totales debes dar?",
-                a: "4 a la derecha y 4 arriba",
-                options: ["4 a la derecha y 4 arriba", "5 a la derecha y 5 arriba", "3 a la derecha y 3 arriba",
-                    "1 a la derecha y 1 arriba"
-                ],
-                hint: "De A a E son 4 columnas. De 1 a 5 son 4 filas."
+                id: 20, part: 2, type: "Distributividad",
+                narrative: "Engran descompone el 7 como 5 + 2 en la tabla del 10.",
+                q: "Usando la distributividad, 10 × 7 se puede calcular como 10 × (5 + 2). ¿Cuál es el resultado?",
+                a: "50 + 20 = 70",
+                options: ["50 + 20 = 70", "50 + 2 = 52", "10 + 7 = 17", "50 + 7 = 57"],
+                hint: "10 × (5 + 2) = 10×5 + 10×2 = 50 + 20 = 70."
             }
         ];
 
-        // ================================================================
-        //  ESTADO DE LA APLICACIÓN
-        // ================================================================
         let selectedPartMode = 'part1';
         let currentQuestionsList = [];
         let currentLevelIndex = 0;
         let isProcessing = false;
 
-        // ================================================================
-        //  FUNCIONES DE CONTROL
-        // ================================================================
         function setPart(mode) {
             selectedPartMode = mode;
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -743,52 +617,40 @@
             return copy;
         }
 
-        // ================================================================
-        //  AUDIO SFX (Web Audio)
-        // ================================================================
         function playSFX(type) {
             const toggle = document.getElementById('sound-toggle');
             if (!toggle || !toggle.checked) return;
             try {
-                const ctx = new(window.AudioContext || window.webkitAudioContext)();
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                const volume = 0.25;
+                osc.connect(gain); gain.connect(ctx.destination);
+                const volume = 0.22;
                 if (type === 'correct') {
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
-                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08);
-                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16);
-                    osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.24);
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(392.00, ctx.currentTime);
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime + 0.08);
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.16);
+                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.24);
                     gain.gain.setValueAtTime(volume, ctx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.4);
+                    osc.start(); osc.stop(ctx.currentTime + 0.4);
                 } else {
                     osc.type = 'sawtooth';
                     osc.frequency.setValueAtTime(200, ctx.currentTime);
-                    osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.25);
+                    osc.frequency.exponentialRampToValueAtTime(65, ctx.currentTime + 0.3);
                     gain.gain.setValueAtTime(volume, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.3);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.32);
+                    osc.start(); osc.stop(ctx.currentTime + 0.32);
                 }
             } catch (e) { /* silencio */ }
         }
 
-        // ================================================================
-        //  INICIO DEL JUEGO
-        // ================================================================
         function startGame() {
-            if (selectedPartMode === 'part1') {
-                currentQuestionsList = allQuestions.filter(q => q.part === 1);
-            } else if (selectedPartMode === 'part2') {
-                currentQuestionsList = allQuestions.filter(q => q.part === 2);
-            } else {
-                currentQuestionsList = [...allQuestions];
-            }
+            if (selectedPartMode === 'part1') currentQuestionsList = allQuestions.filter(q => q.part === 1);
+            else if (selectedPartMode === 'part2') currentQuestionsList = allQuestions.filter(q => q.part === 2);
+            else currentQuestionsList = [...allQuestions];
+
             currentLevelIndex = 0;
             document.getElementById('screen-start').classList.add('hidden');
             document.getElementById('screen-game').classList.remove('hidden');
@@ -799,19 +661,18 @@
         function loadQuestion() {
             const qData = currentQuestionsList[currentLevelIndex];
             const total = currentQuestionsList.length;
-            const progress = ((currentLevelIndex) / total) * 100;
+            const progress = (currentLevelIndex / total) * 100;
 
-            document.getElementById('level-label').innerText = `DESAFÍO ${currentLevelIndex + 1} / ${total}`;
+            document.getElementById('level-label').innerText = `ENGRANAJE ${currentLevelIndex + 1} / ${total}`;
             document.getElementById('progress-fill').style.width = `${Math.max(progress, 5)}%`;
             document.getElementById('section-badge').innerText =
-                qData.part === 1 ? "PARTE 1: COORDENADAS BÁSICAS" : "PARTE 2: UBICACIÓN RELATIVA";
+                qData.part === 1 ? "PARTE 1: ENGRANAJES BÁSICOS" : "PARTE 2: ENGRANAJES MAESTROS";
 
             document.getElementById('narrative-text').innerText = `"${qData.narrative}"`;
-            document.getElementById('question-number').innerText = `PREGUNTA #${qData.id}`;
+            document.getElementById('question-number').innerText = `ENGRANAJE #${qData.id}`;
             document.getElementById('question-text').innerText = qData.q;
-            document.getElementById('question-type-badge').innerText = `Tipo: ${qData.type}`;
+            document.getElementById('question-type-badge').innerText = qData.type;
 
-            // Pistas
             const hintsToggle = document.getElementById('hints-toggle').checked;
             const hintContainer = document.getElementById('hint-container');
             if (hintsToggle) {
@@ -822,7 +683,6 @@
                 hintContainer.classList.add('hidden');
             }
 
-            // Opciones aleatorizadas
             const select = document.getElementById('answer-select');
             select.innerHTML = '<option value="" disabled selected>-- Elige con calma --</option>';
             const shuffled = shuffleArray(qData.options);
@@ -833,12 +693,11 @@
                 select.appendChild(el);
             });
 
-            // Avatar rotativo
-            const avatars = ["🐱", "🐢", "🦉", "⚖️", "🐶"];
-            const names = ["Gatito Chill", "Mente Inversa", "Búho del Equilibrio", "Robot Balance", "Rayo Despeje"];
+            const avatars = ["👧", "⚙️", "🔧", "🔩", "🛠️"];
+            const names = ["Tuerca la Inventora", "Engran el Engranaje", "Llave Maestra", "Tornillo Veloz", "Martillo Firme"];
             const idx = currentLevelIndex % avatars.length;
             document.getElementById('hero-avatar').innerText = avatars[idx];
-            document.getElementById('hero-title').innerText = `Legión del Despeje: ${names[idx]}`;
+            document.getElementById('hero-title').innerText = `Taller de Tuerca: ${names[idx]}`;
 
             isProcessing = false;
         }
@@ -859,9 +718,9 @@
 
             if (userAns === currentQ.a) {
                 playSFX('correct');
-                const words = ["¡DESPEJADO!", "¡EQUILIBRIO!", "¡CHILL!", "¡PERFECTO!", "¡POW!"];
+                const words = ["¡FUNCIONA!", "¡ENGRANA!", "¡GIRA!", "¡GENIAL!", "¡CLICK!"];
                 fx.innerText = words[Math.floor(Math.random() * words.length)];
-                fx.className = "pow-text comic-font text-8xl md:text-9xl text-yellow-300 active";
+                fx.className = "pow-text gear-font text-8xl md:text-9xl text-amber-300 active";
                 setTimeout(() => {
                     fx.classList.remove('active');
                     currentLevelIndex++;
@@ -873,8 +732,8 @@
                 }, 850);
             } else {
                 playSFX('wrong');
-                fx.innerText = "¡DESORDEN!";
-                fx.className = "pow-text comic-font text-8xl md:text-9xl text-red-500 active";
+                fx.innerText = "¡ATASCADO!";
+                fx.className = "pow-text gear-font text-8xl md:text-9xl text-cyan-500 active";
                 setTimeout(() => {
                     fx.classList.remove('active');
                     select.value = "";
@@ -890,24 +749,19 @@
 
             const mode = selectedPartMode;
             if (mode === 'part1') {
-                document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 de la Evaluación!";
-                document.getElementById('end-subtitle').innerText =
-                    "Dominaste las coordenadas básicas y los movimientos en el mapa. ¡Continúa así!";
+                document.getElementById('end-title').innerText = "¡Has reparado la PARTE 1 de la fábrica!";
+                document.getElementById('end-subtitle').innerText = "Dominaste las sumas repetidas y las tablas básicas. ¡Sigue girando!";
             } else if (mode === 'part2') {
-                document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 de la Evaluación!";
-                document.getElementById('end-subtitle').innerText =
-                    "Aplicaste la ubicación relativa y resolviste problemas de localización. ¡Excelente!";
+                document.getElementById('end-title').innerText = "¡Has reparado la PARTE 2 de la fábrica!";
+                document.getElementById('end-subtitle').innerText = "Usaste la distributividad y resolviste problemas. ¡Excelente mecánica!";
             } else {
-                document.getElementById('end-title').innerText = "¡HAS COMPLETADO EL ESCAPE ROOM COMPLETO!";
-                document.getElementById('end-subtitle').innerText =
-                    "Eres un Maestro de la Localización y las Coordenadas. ¡El orden ha sido restaurado!";
+                document.getElementById('end-title').innerText = "¡HAS REPARADO TODA LA FÁBRICA!";
+                document.getElementById('end-subtitle').innerText = "Eres un Maestro de las Tablas hasta 10×10. Don Cero ha sido derrotado.";
             }
         }
 
         function confirmExit() {
-            if (confirm("¿Deseas volver al menú de inicio?")) {
-                returnToStart();
-            }
+            if (confirm("¿Deseas volver al menú de inicio?")) returnToStart();
         }
 
         function returnToStart() {
@@ -917,9 +771,6 @@
             document.getElementById('screen-start').classList.remove('hidden');
         }
 
-        // ================================================================
-        //  FUNCIONES PARA SECCIONES COMPLEMENTARIAS (EXTRAS)
-        // ================================================================
         function toggleExtraModules() {
             const extras = document.getElementById('screen-extras');
             extras.classList.remove('hidden');
@@ -933,19 +784,14 @@
         function switchExtraTab(tabId) {
             document.querySelectorAll('[id^="extra-"]').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.extra-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
-
             document.getElementById(`extra-${tabId}`).classList.remove('hidden');
             document.getElementById(`tab-${tabId}`).classList.add('active-tab');
         }
 
         function toggleExtraHint() {
-            const box = document.getElementById('extra-hint-box');
-            box.classList.toggle('hidden');
+            document.getElementById('extra-hint-box').classList.toggle('hidden');
         }
 
-        // ================================================================
-        //  INICIALIZACIÓN
-        // ================================================================
         document.addEventListener('DOMContentLoaded', () => {
             setPart('part1');
             switchExtraTab('sec2');
