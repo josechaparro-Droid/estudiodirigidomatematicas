@@ -3,6 +3,804 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escape Room: Chef Fracción – El Torneo de las Salsas (5° Básico OA 09)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Nunito:wght@400;700;900&family=Pacifico&display=swap" rel="stylesheet" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #1a0b2e;
+            background-image:
+                radial-gradient(circle at 15% 20%, rgba(251, 146, 60, 0.20) 0%, transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(236, 72, 153, 0.18) 0%, transparent 45%),
+                radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 30px 30px;
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            padding: 0.75rem;
+            color: #1f2937;
+        }
+        .chef-font { font-family: 'Luckiest Guy', cursive; letter-spacing: 1px; }
+        .script-font { font-family: 'Pacifico', cursive; }
+        .panel {
+            background: #fffbeb;
+            border: 5px solid #7c2d12;
+            box-shadow: 8px 8px 0px #f97316, 0 0 50px rgba(249, 115, 22, 0.25);
+            position: relative;
+            border-radius: 6px;
+        }
+        .panel::before {
+            content: ""; position: absolute; inset: 0;
+            background-image:
+                radial-gradient(rgba(124, 45, 18, 0.04) 1px, transparent 1px);
+            background-size: 8px 8px; pointer-events: none;
+            border-radius: 2px;
+        }
+        .btn-comic {
+            font-family: 'Luckiest Guy', cursive; letter-spacing: 1px;
+            border: 4px solid #7c2d12; box-shadow: 5px 5px 0px #7c2d12;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            text-transform: uppercase;
+            border-radius: 8px;
+        }
+        .btn-comic:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0px #7c2d12; }
+        .btn-comic:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #7c2d12; }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #fb923c, #f97316) !important;
+            color: #fff; border-bottom: 4px solid #7c2d12;
+        }
+        .progress-bar-container {
+            background: #fde68a; border: 4px solid #7c2d12; border-radius: 9999px;
+            overflow: hidden; height: 28px;
+        }
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #f97316, #ec4899, #a855f7);
+            height: 100%; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glow-border { animation: steamPulse 2s infinite alternate; }
+        @keyframes steamPulse {
+            from { border-color: #7c2d12; box-shadow: 8px 8px 0px #f97316; }
+            to { border-color: #ec4899; box-shadow: 8px 8px 0px #ec4899; }
+        }
+        .pow-text {
+            position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 100; pointer-events: none;
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-shadow: 6px 6px 0px #7c2d12;
+            -webkit-text-stroke: 3px #7c2d12;
+        }
+        .pow-text.active { transform: translate(-50%, -50%) scale(1.5); }
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237c2d12' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat; background-position: right 1.2rem center; background-size: 1.4em;
+        }
+        .hidden { display: none !important; }
+        .extra-tab-btn {
+            font-family: 'Luckiest Guy', cursive; letter-spacing: 0.5px;
+            border: 3px solid #7c2d12; box-shadow: 4px 4px 0px #7c2d12;
+            transition: all 0.1s ease;
+            border-radius: 6px;
+        }
+        .extra-tab-btn.active-tab {
+            background: #fb923c !important; color: #fff;
+            border-bottom: 4px solid #7c2d12;
+            transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #7c2d12;
+        }
+        .extra-tab-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #7c2d12; }
+        details summary { cursor: pointer; font-weight: bold; color: #c2410c; }
+        details summary:hover { color: #9a3412; }
+        table td, table th { border: 1px solid #7c2d12; padding: 0.5rem; text-align: center; }
+        .float-icon { display: inline-block; animation: floaty 3s ease-in-out infinite; }
+        @keyframes floaty {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+        }
+        .fraction {
+            display: inline-flex; flex-direction: column; align-items: center;
+            vertical-align: middle; line-height: 1; margin: 0 0.15em;
+            font-weight: 900; color: #7c2d12;
+        }
+        .fraction .num { border-bottom: 2.5px solid #7c2d12; padding: 0 0.25em 0.05em; }
+        .fraction .den { padding: 0.05em 0.25em 0; }
+    </style>
+</head>
+<body>
+
+    <div id="visual-fx" class="pow-text chef-font text-8xl md:text-9xl text-orange-300">¡SABROSO!</div>
+
+    <div class="max-w-4xl w-full">
+
+        <header class="text-center mb-6">
+            <div class="inline-block bg-[#fffbeb] border-4 border-[#7c2d12] p-4 md:p-6 transform -rotate-1 shadow-[8px_8px_0px_#ec4899] relative z-10 w-full">
+                <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-[#7c2d12] pb-2 mb-3 text-xs md:text-sm font-bold text-amber-800">
+                    <span>🍳 NIVEL: 5° BÁSICO</span>
+                    <span>⏱️ TIEMPO MÁXIMO: 90 MIN</span>
+                    <span>🧂 UNIDAD: ADICIÓN Y SUSTRACCIÓN DE FRACCIONES PROPIAS (OA 09)</span>
+                </div>
+                <h1 class="text-3xl md:text-5xl chef-font text-orange-600 tracking-wide uppercase">
+                    Chef Fracción
+                </h1>
+                <p class="text-lg md:text-2xl script-font text-pink-600 mt-1">
+                    El Torneo de las Salsas
+                </p>
+            </div>
+            <div class="mt-4 bg-amber-100 border-2 border-[#7c2d12] p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
+                <p class="font-bold text-xs md:text-sm text-amber-950">
+                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 09)</span>: Resolver adiciones y sustracciones con fracciones propias con denominadores menores o iguales a 12, amplificando o simplificando.
+                </p>
+            </div>
+        </header>
+
+        <main class="relative z-10">
+
+            <!-- PANTALLA 1: INICIO -->
+            <div id="screen-start" class="panel p-6 md:p-8 space-y-6">
+                <div class="flex justify-center items-center gap-4 text-6xl md:text-7xl">
+                    <span class="float-icon">👩‍🍳</span><span class="text-3xl font-black chef-font text-orange-600">VS</span><span class="float-icon" style="animation-delay:0.6s">🧑‍🍳</span>
+                </div>
+
+                <div class="text-center">
+                    <h2 class="text-2xl md:text-4xl chef-font text-pink-600">¡LAS RECETAS SE HAN DESCONTROLADO!</h2>
+                    <p class="text-sm md:text-base font-bold text-amber-800 mt-1">Don Denominador ha mezclado las medidas de las salsas...</p>
+                </div>
+
+                <div class="bg-orange-50 border-4 border-[#7c2d12] p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
+                    <p class="text-base md:text-lg">
+                        En el <b>Torneo de las Salsas</b>, los chefs de toda la galaxia compiten por la receta perfecta. Pero el villano <b>Don Denominador</b> lanzó su <i>"Salsa del Caos"</i>: ahora las fracciones tienen denominadores distintos y nadie sabe cómo sumarlas ni restarlas. Las recetas saben a desastre.
+                    </p>
+                    <p class="text-base md:text-lg">
+                        La valiente <b>Chef Suma-Resta</b> y su ayudante <b>Pimienta</b> (un pequeño ají parlante) te necesitan:
+                    </p>
+                    <blockquote class="bg-pink-100 border-l-4 border-pink-500 p-3 rounded font-bold text-amber-950 italic text-sm md:text-base">
+                        "¡A cocinar se ha dicho! Para sumar o restar fracciones con distinto denominador, primero busca un denominador común amplificando. Si el resultado se puede simplificar, ¡hazlo! Una salsa perfecta necesita equilibrio."
+                    </blockquote>
+                </div>
+
+                <div class="bg-orange-100 border-4 border-[#7c2d12] p-5 rounded-xl text-left space-y-3 shadow-md">
+                    <label class="block font-black text-orange-900 uppercase text-base md:text-lg chef-font tracking-wide">
+                        ⚙️ Configuración Docente – Selección de Tramo:
+                    </label>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-base text-[#7c2d12]">
+                            🥣 Parte 1 (1-10)<br />
+                            <span class="text-xs font-normal normal-case block">Salsas base: sumas y restas</span>
+                        </button>
+                        <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-base text-[#7c2d12]">
+                            🍲 Parte 2 (11-20)<br />
+                            <span class="text-xs font-normal normal-case block">Recetas maestras y simplificación</span>
+                        </button>
+                        <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-base text-[#7c2d12]">
+                            🔥 Modo Completo (20)<br />
+                            <span class="text-xs font-normal normal-case block">Torneo culinario total</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-3 bg-amber-50 p-3 border-2 border-[#7c2d12] rounded-lg">
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-orange-600" />
+                        <label for="sound-toggle" class="font-bold text-sm text-amber-900 cursor-pointer select-none">🔊 SFX Cocina</label>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-orange-600" />
+                        <label for="hints-toggle" class="font-bold text-sm text-amber-900 cursor-pointer select-none">💡 Permitir pistas</label>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button onclick="startGame()" class="btn-comic bg-orange-500 hover:bg-orange-400 text-white text-2xl md:text-3xl py-4 w-full">
+                        ¡SALVAR EL TORNEO DE SALSAS! 🍳
+                    </button>
+                </div>
+
+                <div class="text-center pt-2 border-t-2 border-amber-200">
+                    <button onclick="toggleExtraModules()" class="text-sm font-bold text-orange-700 underline hover:text-orange-900">
+                        📋 Ver Secciones Complementarias (Problemas de 4 pasos, Metacognición y Autoevaluación)
+                    </button>
+                </div>
+            </div>
+
+            <!-- PANTALLA 2: JUEGO -->
+            <div id="screen-game" class="hidden space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-[#fffbeb] border-4 border-[#7c2d12] p-4 shadow-[6px_6px_0px_#7c2d12]">
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl float-icon">👩‍🍳</span>
+                        <div>
+                            <div class="chef-font text-2xl text-pink-600 leading-tight" id="level-label">RECETA 1 / 10</div>
+                            <div class="text-xs font-bold text-amber-700 uppercase" id="section-badge">PARTE 1: SALSAS BASE</div>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 progress-bar-container">
+                        <div id="progress-fill" class="progress-bar-fill" style="width: 5%"></div>
+                    </div>
+                    <button onclick="confirmExit()" class="text-xs font-bold bg-amber-200 hover:bg-amber-300 border-2 border-[#7c2d12] px-3 py-1 rounded">
+                        ⚙️ Menú
+                    </button>
+                </div>
+
+                <div class="panel p-5 md:p-8 glow-border border-4">
+                    <div class="flex items-start gap-4 mb-6 bg-orange-50 border-2 border-[#7c2d12] p-4 rounded-xl">
+                        <div class="text-5xl" id="hero-avatar">👩‍🍳</div>
+                        <div class="w-full">
+                            <div class="flex justify-between items-center flex-wrap gap-2">
+                                <h4 class="font-bold text-pink-600 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Cocina de Chef Suma-Resta</h4>
+                                <span class="bg-pink-200 border border-[#7c2d12] text-pink-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Fracciones</span>
+                            </div>
+                            <p class="font-bold text-amber-950 italic text-base md:text-lg mt-1" id="narrative-text">Encendiendo los fogones...</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6 relative z-10">
+                        <div class="bg-amber-50 border-2 border-[#7c2d12] p-5 rounded-xl shadow-inner">
+                            <div id="question-number" class="chef-font text-xl text-orange-700 mb-1">RECETA #</div>
+                            <div id="question-text" class="text-xl md:text-2xl font-bold text-stone-900 leading-relaxed"></div>
+                        </div>
+
+                        <div id="hint-container" class="hidden">
+                            <button onclick="toggleHint()" class="text-sm font-bold text-orange-800 bg-orange-100 border-2 border-orange-400 px-3 py-1.5 rounded-lg flex items-center gap-2 hover:bg-orange-200 transition">
+                                💡 <span>Mostrar pista</span>
+                            </button>
+                            <div id="hint-box" class="hidden mt-2 p-3 bg-yellow-50 border-2 border-yellow-400 rounded-lg text-sm text-yellow-950 leading-relaxed font-medium"></div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block font-black text-amber-950 uppercase tracking-tight text-sm">
+                                🎯 Selecciona la respuesta correcta:
+                            </label>
+                            <select id="answer-select" class="w-full p-4 border-4 border-[#7c2d12] text-lg md:text-xl font-bold bg-yellow-50 focus:ring-4 focus:ring-orange-300 outline-none cursor-pointer rounded-xl">
+                                <option value="" disabled selected>-- Elige con calma --</option>
+                            </select>
+                        </div>
+
+                        <button onclick="checkAnswer()" class="btn-comic bg-pink-600 hover:bg-pink-500 text-white text-2xl md:text-3xl py-4 w-full">
+                            ¡SERVIR RESPUESTA! 🍽️
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANTALLA 3: VICTORIA -->
+            <div id="screen-end" class="hidden panel p-8 md:p-12 text-center space-y-8">
+                <h2 class="text-5xl md:text-7xl chef-font text-orange-600">¡RECETAS RESTAURADAS!</h2>
+                <div class="text-8xl md:text-9xl my-4 float-icon">🏆👩‍🍳🍲</div>
+                <div class="space-y-3">
+                    <p class="text-2xl font-bold text-amber-950" id="end-title">¡Has derrotado a Don Denominador!</p>
+                    <p class="text-amber-800 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
+                        Todas las salsas tienen el equilibrio perfecto. El Torneo de las Salsas está a salvo.
+                    </p>
+                </div>
+                <div class="bg-amber-100 border-4 border-[#7c2d12] p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
+                    <p class="text-orange-900">
+                        <b>Chef Suma-Resta te felicita:</b> "¡Excelente trabajo, aprendiz! Recordaste que para sumar o restar fracciones con distinto denominador, primero amplificamos para igualar denominadores, y simplificamos cuando sea posible. ¡El sabor del éxito es inconfundible!"
+                    </p>
+                </div>
+                <div class="flex flex-col md:flex-row justify-center gap-4 pt-4">
+                    <button onclick="returnToStart()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-2xl py-4 px-8">
+                        🔄 VOLVER AL MENÚ
+                    </button>
+                    <button onclick="toggleExtraModules()" class="btn-comic bg-purple-600 hover:bg-purple-500 text-white text-2xl py-4 px-8">
+                        📝 VER MÓDULOS DE DESARROLLO
+                    </button>
+                </div>
+            </div>
+
+            <!-- EXTRAS -->
+            <div id="screen-extras" class="hidden panel p-6 md:p-8 space-y-6 my-6">
+                <div class="flex justify-between items-center border-b-4 border-[#7c2d12] pb-4 flex-wrap gap-2">
+                    <h2 class="text-2xl md:text-4xl chef-font text-orange-700">SECCIONES DE DESARROLLO</h2>
+                    <button onclick="closeExtraModules()" class="btn-comic bg-pink-500 text-white px-4 py-1 text-xl">✖️ CERRAR</button>
+                </div>
+
+                <div class="flex flex-wrap gap-2 border-b-2 border-[#7c2d12] pb-2">
+                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="extra-tab-btn active-tab py-2 px-3 text-sm bg-orange-300">II. Problemas (4 Pasos)</button>
+                    <button onclick="switchExtraTab('sec3')" id="tab-sec3" class="extra-tab-btn py-2 px-3 text-sm bg-white">III. Metacognición</button>
+                    <button onclick="switchExtraTab('sec4')" id="tab-sec4" class="extra-tab-btn py-2 px-3 text-sm bg-white">IV. Desafío Extra</button>
+                    <button onclick="switchExtraTab('sec5')" id="tab-sec5" class="extra-tab-btn py-2 px-3 text-sm bg-white">V. Autoevaluación</button>
+                </div>
+
+                <!-- SECCIÓN II -->
+                <div id="extra-sec2" class="space-y-6 text-left">
+                    <div class="bg-orange-50 border-2 border-[#7c2d12] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-orange-900">II. Resolución de Problemas (Estrategia de los 4 Pasos)</h3>
+                        <p class="text-xs text-amber-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Revisar.</p>
+                    </div>
+
+                    <div class="border-2 border-[#7c2d12] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-green-200 border border-[#7c2d12] text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Mezcla de salsas)</span>
+                        <p class="font-bold text-stone-800">
+                            Un chef mezcla 1/3 de taza de salsa de tomate con 1/6 de taza de salsa de ají. ¿Cuánta salsa obtiene en total?
+                        </p>
+                        <details class="bg-gray-50 p-3 rounded border border-stone-300">
+                            <summary class="font-bold text-orange-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-stone-800 space-y-1 pl-2 border-l-2 border-orange-500">
+                                <p><b>1. Comprender:</b> Sumar 1/3 + 1/6. Distintos denominadores.</p>
+                                <p><b>2. Planificar:</b> Amplificar 1/3 a sextos: 1/3 = 2/6.</p>
+                                <p><b>3. Resolver:</b> 2/6 + 1/6 = 3/6 = 1/2 taza.</p>
+                                <p><b>4. Revisar:</b> 3/6 se simplifica a 1/2. Correcto.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="border-2 border-[#7c2d12] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-orange-200 border border-[#7c2d12] text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Restar ingredientes)</span>
+                        <p class="font-bold text-stone-800">
+                            Una receta necesita 3/4 de taza de harina, pero el chef ya echó 1/6 de taza. ¿Cuánta harina falta?
+                        </p>
+                        <details class="bg-gray-50 p-3 rounded border border-stone-300">
+                            <summary class="font-bold text-orange-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-stone-800 space-y-1 pl-2 border-l-2 border-orange-500">
+                                <p><b>1. Comprender:</b> Restar 3/4 − 1/6.</p>
+                                <p><b>2. Planificar:</b> Denominador común 12: 3/4 = 9/12; 1/6 = 2/12.</p>
+                                <p><b>3. Resolver:</b> 9/12 − 2/12 = 7/12 de taza.</p>
+                                <p><b>4. Revisar:</b> 7/12 no se simplifica. Correcto.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="border-2 border-[#7c2d12] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-pink-200 border border-[#7c2d12] text-pink-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Simplificar el resultado)</span>
+                        <p class="font-bold text-stone-800">
+                            Un chef usa 2/5 de litro de caldo y luego añade 1/10 de litro. ¿Cuánto caldo usa en total? Simplifica el resultado.
+                        </p>
+                        <details class="bg-gray-50 p-3 rounded border border-stone-300">
+                            <summary class="font-bold text-orange-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-stone-800 space-y-1 pl-2 border-l-2 border-orange-500">
+                                <p><b>1. Comprender:</b> Sumar 2/5 + 1/10.</p>
+                                <p><b>2. Planificar:</b> Amplificar 2/5 a décimos: 2/5 = 4/10.</p>
+                                <p><b>3. Resolver:</b> 4/10 + 1/10 = 5/10 = 1/2 litro.</p>
+                                <p><b>4. Revisar:</b> 5/10 simplificado es 1/2. Correcto.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN III -->
+                <div id="extra-sec3" class="hidden space-y-4 text-left">
+                    <div class="bg-pink-50 border-2 border-[#7c2d12] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-pink-900">III. Metacognición (Reflexión del Estudiante)</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-white border border-[#7c2d12] rounded-lg">
+                            <p class="font-bold text-sm text-stone-800">1. ¿Qué estrategia usaste para encontrar un denominador común al sumar 1/3 + 1/6?</p>
+                        </div>
+                        <div class="p-3 bg-white border border-[#7c2d12] rounded-lg">
+                            <p class="font-bold text-sm text-stone-800">2. Explica con tus palabras por qué es importante simplificar el resultado final de una operación con fracciones.</p>
+                        </div>
+                        <div class="p-3 bg-white border border-[#7c2d12] rounded-lg">
+                            <p class="font-bold text-sm text-stone-800">3. ¿Cómo compruebas que tu resta 3/4 − 1/6 = 7/12 es correcta?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN IV -->
+                <div id="extra-sec4" class="hidden space-y-4 text-left">
+                    <div class="bg-yellow-50 border-2 border-[#7c2d12] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Lógica Inversa)</h3>
+                        <p class="text-sm text-stone-800">
+                            Un chef preparó una salsa. Si sumó 1/4 de taza de un ingrediente y obtuvo 5/12 de taza en total, ¿qué fracción de taza añadió?
+                        </p>
+                    </div>
+                    <div class="p-4 bg-white border-2 border-[#7c2d12] rounded-xl space-y-3">
+                        <button onclick="toggleExtraHint()" class="btn-comic bg-orange-400 text-white text-sm px-4 py-2">
+                            🧩 Revelar Solución por Reversión de Chef Suma-Resta
+                        </button>
+                        <div id="extra-hint-box" class="hidden text-sm bg-yellow-100 p-3 rounded border border-yellow-300 leading-relaxed">
+                            <p><b>Paso 1:</b> La incógnita x cumple 1/4 + x = 5/12.</p>
+                            <p><b>Paso 2:</b> Amplificamos 1/4 a doceavos: 1/4 = 3/12.</p>
+                            <p><b>Paso 3:</b> x = 5/12 − 3/12 = 2/12 = 1/6.</p>
+                            <p><b>Resultado:</b> Añadió <b>1/6</b> de taza.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN V -->
+                <div id="extra-sec5" class="hidden space-y-4 text-left">
+                    <div class="bg-green-50 border-2 border-[#7c2d12] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-green-900">V. Autoevaluación del Estudiante</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm border-2 border-[#7c2d12] bg-white">
+                            <thead class="bg-orange-300 border-b-2 border-[#7c2d12]">
+                                <tr>
+                                    <th class="p-2 text-left border-r border-[#7c2d12]">Afirmación</th>
+                                    <th class="p-2 text-center border-r border-[#7c2d12]">Logrado (3)</th>
+                                    <th class="p-2 text-center border-r border-[#7c2d12]">En proceso (2)</th>
+                                    <th class="p-2 text-center">Por lograr (1)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-[#7c2d12]">
+                                    <td class="p-2 border-r border-[#7c2d12] font-medium">1. Identifico cuándo debo amplificar para igualar denominadores.</td>
+                                    <td class="p-2 text-center border-r border-[#7c2d12]"><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center border-r border-[#7c2d12]"><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto1" /></td>
+                                </tr>
+                                <tr class="border-b border-[#7c2d12]">
+                                    <td class="p-2 border-r border-[#7c2d12] font-medium">2. Resuelvo adiciones y sustracciones de fracciones propias con denominadores ≤ 12.</td>
+                                    <td class="p-2 text-center border-r border-[#7c2d12]"><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center border-r border-[#7c2d12]"><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto2" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-r border-[#7c2d12] font-medium">3. Simplifico correctamente el resultado final de una operación.</td>
+                                    <td class="p-2 text-center border-r border-[#7c2d12]"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center border-r border-[#7c2d12]"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center"><input type="radio" name="auto3" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // ================================================================
+        //  BANCO DE 20 PREGUNTAS – OA 09: Adiciones y sustracciones de
+        //  fracciones propias con denominadores ≤ 12 (amplificar/simplificar)
+        // ================================================================
+        const allQuestions = [
+            // ---- PARTE 1: Salsas base (1-10) ----
+            {
+                id: 1, part: 1, type: "Suma (mismo denominador)",
+                narrative: "Pimienta mezcla dos salsas con el mismo denominador.",
+                q: "Un chef mezcla 1/4 de taza de salsa de tomate con 2/4 de taza de salsa verde. ¿Cuánta salsa obtiene?",
+                a: "3/4 de taza",
+                options: ["2/4 de taza", "3/4 de taza", "4/4 de taza", "3/8 de taza"],
+                hint: "Mismo denominador: 1/4 + 2/4 = 3/4."
+            }, {
+                id: 2, part: 1, type: "Resta (mismo denominador)",
+                narrative: "Don Denominador desordenó una resta sencilla.",
+                q: "De 3/5 de litro de caldo se usan 1/5 de litro. ¿Cuánto caldo queda?",
+                a: "2/5 de litro",
+                options: ["1/5 de litro", "2/5 de litro", "3/5 de litro", "4/5 de litro"],
+                hint: "Mismo denominador: 3/5 − 1/5 = 2/5."
+            }, {
+                id: 3, part: 1, type: "Suma (amplificar)",
+                narrative: "Chef Suma-Resta amplifica para igualar denominadores.",
+                q: "Se mezclan 1/3 de taza de azúcar con 1/6 de taza de sal. ¿Cuánto se obtiene en total?",
+                a: "1/2 de taza",
+                options: ["2/6 de taza", "3/6 de taza", "1/2 de taza", "2/3 de taza"],
+                hint: "1/3 = 2/6. Luego 2/6 + 1/6 = 3/6 = 1/2."
+            }, {
+                id: 4, part: 1, type: "Resta (amplificar)",
+                narrative: "Un chef ajusta una receta restando ingredientes.",
+                q: "Se tienen 5/8 de taza de harina y se usan 1/4 de taza. ¿Cuánta harina queda?",
+                a: "3/8 de taza",
+                options: ["1/8 de taza", "2/8 de taza", "3/8 de taza", "4/8 de taza"],
+                hint: "1/4 = 2/8. Luego 5/8 − 2/8 = 3/8."
+            }, {
+                id: 5, part: 1, type: "Suma (amplificar)",
+                narrative: "Pimienta mezcla especias con denominadores distintos.",
+                q: "Se añaden 2/3 de cucharada de orégano y 1/6 de cucharada de comino. ¿Cuánto se obtiene?",
+                a: "5/6 de cucharada",
+                options: ["3/6 de cucharada", "4/6 de cucharada", "5/6 de cucharada", "1 cucharada"],
+                hint: "2/3 = 4/6. Luego 4/6 + 1/6 = 5/6."
+            }, {
+                id: 6, part: 1, type: "Resta (amplificar y simplificar)",
+                narrative: "Don Denominador reta a simplificar el resultado.",
+                q: "De 7/10 de litro de leche se usan 1/5 de litro. ¿Cuánta leche queda?",
+                a: "1/2 de litro",
+                options: ["2/10 de litro", "3/10 de litro", "1/2 de litro", "4/5 de litro"],
+                hint: "1/5 = 2/10. Luego 7/10 − 2/10 = 5/10 = 1/2."
+            }, {
+                id: 7, part: 1, type: "Suma (amplificar)",
+                narrative: "Chef Suma-Resta prepara una salsa básica.",
+                q: "Se mezclan 1/2 de taza de agua con 1/4 de taza de vinagre. ¿Cuánto líquido hay?",
+                a: "3/4 de taza",
+                options: ["2/4 de taza", "3/4 de taza", "4/4 de taza", "3/6 de taza"],
+                hint: "1/2 = 2/4. Luego 2/4 + 1/4 = 3/4."
+            }, {
+                id: 8, part: 1, type: "Resta (amplificar)",
+                narrative: "Un aprendiz ajusta una medida restando.",
+                q: "Se tienen 3/4 de taza de aceite y se gastan 1/8 de taza. ¿Cuánto aceite queda?",
+                a: "5/8 de taza",
+                options: ["2/8 de taza", "4/8 de taza", "5/8 de taza", "6/8 de taza"],
+                hint: "3/4 = 6/8. Luego 6/8 − 1/8 = 5/8."
+            }, {
+                id: 9, part: 1, type: "Suma (denominador 12)",
+                narrative: "Pimienta combina ingredientes con denominadores 3 y 4.",
+                q: "Se mezclan 1/3 de taza de jugo de limón con 1/4 de taza de miel. ¿Cuánto se obtiene?",
+                a: "7/12 de taza",
+                options: ["2/12 de taza", "5/12 de taza", "7/12 de taza", "9/12 de taza"],
+                hint: "Denominador común 12: 1/3 = 4/12; 1/4 = 3/12. Luego 4/12 + 3/12 = 7/12."
+            }, {
+                id: 10, part: 1, type: "Resta (simplificar)",
+                narrative: "Don Denominador esconde una simplificación final.",
+                q: "De 5/6 de taza de crema se usan 1/2 de taza. ¿Cuánta crema queda?",
+                a: "1/3 de taza",
+                options: ["1/6 de taza", "2/6 de taza", "1/3 de taza", "2/3 de taza"],
+                hint: "1/2 = 3/6. Luego 5/6 − 3/6 = 2/6 = 1/3."
+            },
+
+            // ---- PARTE 2: Recetas maestras (11-20) ----
+            {
+                id: 11, part: 2, type: "Suma aplicada",
+                narrative: "Una receta maestra combina dos ingredientes con denominadores 2 y 3.",
+                q: "Una receta lleva 1/2 taza de azúcar y 1/3 taza de cacao. ¿Cuánto suman los dos ingredientes?",
+                a: "5/6 de taza",
+                options: ["2/5 de taza", "3/6 de taza", "5/6 de taza", "2/3 de taza"],
+                hint: "Denominador común 6: 1/2 = 3/6; 1/3 = 2/6. Luego 3/6 + 2/6 = 5/6."
+            }, {
+                id: 12, part: 2, type: "Resta aplicada",
+                narrative: "Un chef corrige una receta restando ingredientes.",
+                q: "Se necesitan 3/4 de taza de leche y ya se echó 1/6 de taza. ¿Cuánta leche falta?",
+                a: "7/12 de taza",
+                options: ["5/12 de taza", "6/12 de taza", "7/12 de taza", "8/12 de taza"],
+                hint: "Denominador común 12: 3/4 = 9/12; 1/6 = 2/12. Luego 9/12 − 2/12 = 7/12."
+            }, {
+                id: 13, part: 2, type: "Suma (simplificar)",
+                narrative: "Pimienta combina dos salsas y simplifica el resultado.",
+                q: "Se mezclan 2/5 de litro de salsa de soya con 1/10 de litro de salsa picante. ¿Cuánto se obtiene?",
+                a: "1/2 de litro",
+                options: ["3/10 de litro", "4/10 de litro", "1/2 de litro", "3/5 de litro"],
+                hint: "2/5 = 4/10. Luego 4/10 + 1/10 = 5/10 = 1/2."
+            }, {
+                id: 14, part: 2, type: "Resta aplicada",
+                narrative: "Don Denominador mezcló una resta con simplificación.",
+                q: "De 7/8 de taza de chocolate se usan 1/2 de taza. ¿Cuánto chocolate queda?",
+                a: "3/8 de taza",
+                options: ["2/8 de taza", "3/8 de taza", "4/8 de taza", "5/8 de taza"],
+                hint: "1/2 = 4/8. Luego 7/8 − 4/8 = 3/8."
+            }, {
+                id: 15, part: 2, type: "Suma (simplificar)",
+                narrative: "Un chef mezcla dos ingredientes con denominadores 6 y 3.",
+                q: "Se añaden 1/6 de cucharada de pimienta y 1/3 de cucharada de sal. ¿Cuánto se obtiene?",
+                a: "1/2 de cucharada",
+                options: ["2/6 de cucharada", "3/6 de cucharada", "1/2 de cucharada", "2/3 de cucharada"],
+                hint: "1/3 = 2/6. Luego 1/6 + 2/6 = 3/6 = 1/2."
+            }, {
+                id: 16, part: 2, type: "Resta (simplificar)",
+                narrative: "Pimienta ajusta una receta restando ingredientes.",
+                q: "De 5/6 de taza de queso se usan 1/3 de taza. ¿Cuánto queso queda?",
+                a: "1/2 de taza",
+                options: ["1/6 de taza", "2/6 de taza", "1/2 de taza", "2/3 de taza"],
+                hint: "1/3 = 2/6. Luego 5/6 − 2/6 = 3/6 = 1/2."
+            }, {
+                id: 17, part: 2, type: "Suma (denominador 12)",
+                narrative: "Una receta maestra combina ingredientes con denominadores 4 y 6.",
+                q: "Se mezclan 1/4 de taza de miel con 1/6 de taza de jengibre. ¿Cuánto se obtiene?",
+                a: "5/12 de taza",
+                options: ["2/12 de taza", "3/12 de taza", "5/12 de taza", "7/12 de taza"],
+                hint: "Denominador común 12: 1/4 = 3/12; 1/6 = 2/12. Luego 3/12 + 2/12 = 5/12."
+            }, {
+                id: 18, part: 2, type: "Resta (denominador 12)",
+                narrative: "Don Denominador lanzó una resta con denominadores 3 y 4.",
+                q: "De 2/3 de taza de salsa se usan 1/4 de taza. ¿Cuánta salsa queda?",
+                a: "5/12 de taza",
+                options: ["3/12 de taza", "4/12 de taza", "5/12 de taza", "7/12 de taza"],
+                hint: "Denominador común 12: 2/3 = 8/12; 1/4 = 3/12. Luego 8/12 − 3/12 = 5/12."
+            }, {
+                id: 19, part: 2, type: "Suma (simplificar)",
+                narrative: "Pimienta combina ingredientes y simplifica el resultado.",
+                q: "Se añaden 3/10 de taza de azúcar glass y 1/5 de taza de azúcar rubia. ¿Cuánto se obtiene?",
+                a: "1/2 de taza",
+                options: ["4/10 de taza", "5/10 de taza", "1/2 de taza", "3/5 de taza"],
+                hint: "1/5 = 2/10. Luego 3/10 + 2/10 = 5/10 = 1/2."
+            }, {
+                id: 20, part: 2, type: "Resta (simplificar)",
+                narrative: "Una receta maestra termina con una resta que se simplifica.",
+                q: "De 7/12 de taza de salsa se usan 1/3 de taza. ¿Cuánta salsa queda?",
+                a: "1/4 de taza",
+                options: ["1/12 de taza", "2/12 de taza", "3/12 de taza", "1/4 de taza"],
+                hint: "1/3 = 4/12. Luego 7/12 − 4/12 = 3/12 = 1/4."
+            }
+        ];
+
+        let selectedPartMode = 'part1';
+        let currentQuestionsList = [];
+        let currentLevelIndex = 0;
+        let isProcessing = false;
+
+        function setPart(mode) {
+            selectedPartMode = mode;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            if (mode === 'part1') document.getElementById('btn-part1').classList.add('active');
+            if (mode === 'part2') document.getElementById('btn-part2').classList.add('active');
+            if (mode === 'full') document.getElementById('btn-full').classList.add('active');
+        }
+
+        function shuffleArray(arr) {
+            const copy = arr.slice();
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        function playSFX(type) {
+            const toggle = document.getElementById('sound-toggle');
+            if (!toggle || !toggle.checked) return;
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain); gain.connect(ctx.destination);
+                const volume = 0.22;
+                if (type === 'correct') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+                    osc.frequency.setValueAtTime(739.99, ctx.currentTime + 0.08);
+                    osc.frequency.setValueAtTime(880.00, ctx.currentTime + 0.16);
+                    osc.frequency.setValueAtTime(1174.66, ctx.currentTime + 0.24);
+                    gain.gain.setValueAtTime(volume, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+                    osc.start(); osc.stop(ctx.currentTime + 0.45);
+                } else {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(240, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(75, ctx.currentTime + 0.28);
+                    gain.gain.setValueAtTime(volume, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.32);
+                    osc.start(); osc.stop(ctx.currentTime + 0.32);
+                }
+            } catch (e) { /* silencio */ }
+        }
+
+        function startGame() {
+            if (selectedPartMode === 'part1') currentQuestionsList = allQuestions.filter(q => q.part === 1);
+            else if (selectedPartMode === 'part2') currentQuestionsList = allQuestions.filter(q => q.part === 2);
+            else currentQuestionsList = [...allQuestions];
+
+            currentLevelIndex = 0;
+            document.getElementById('screen-start').classList.add('hidden');
+            document.getElementById('screen-game').classList.remove('hidden');
+            document.getElementById('screen-end').classList.add('hidden');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const qData = currentQuestionsList[currentLevelIndex];
+            const total = currentQuestionsList.length;
+            const progress = (currentLevelIndex / total) * 100;
+
+            document.getElementById('level-label').innerText = `RECETA ${currentLevelIndex + 1} / ${total}`;
+            document.getElementById('progress-fill').style.width = `${Math.max(progress, 5)}%`;
+            document.getElementById('section-badge').innerText =
+                qData.part === 1 ? "PARTE 1: SALSAS BASE" : "PARTE 2: RECETAS MAESTRAS";
+
+            document.getElementById('narrative-text').innerText = `"${qData.narrative}"`;
+            document.getElementById('question-number').innerText = `RECETA #${qData.id}`;
+            document.getElementById('question-text').innerText = qData.q;
+            document.getElementById('question-type-badge').innerText = `Tipo: ${qData.type}`;
+
+            const hintsToggle = document.getElementById('hints-toggle').checked;
+            const hintContainer = document.getElementById('hint-container');
+            if (hintsToggle) {
+                hintContainer.classList.remove('hidden');
+                document.getElementById('hint-box').innerHTML = qData.hint;
+                document.getElementById('hint-box').classList.add('hidden');
+            } else {
+                hintContainer.classList.add('hidden');
+            }
+
+            const select = document.getElementById('answer-select');
+            select.innerHTML = '<option value="" disabled selected>-- Elige con calma --</option>';
+            const shuffled = shuffleArray(qData.options);
+            shuffled.forEach(opt => {
+                const el = document.createElement('option');
+                el.value = opt;
+                el.innerText = opt;
+                select.appendChild(el);
+            });
+
+            const avatars = ["👩‍🍳", "🧑‍🍳", "🌶️", "🍅", "🧂"];
+            const names = ["Chef Suma-Resta", "Pimienta el Ají", "Salsa Maestra", "Tomate Veloz", "Sal Fina"];
+            const idx = currentLevelIndex % avatars.length;
+            document.getElementById('hero-avatar').innerText = avatars[idx];
+            document.getElementById('hero-title').innerText = `Cocina de ${names[idx]}`;
+
+            isProcessing = false;
+        }
+
+        function toggleHint() {
+            document.getElementById('hint-box').classList.toggle('hidden');
+        }
+
+        function checkAnswer() {
+            if (isProcessing) return;
+            const select = document.getElementById('answer-select');
+            const userAns = select.value;
+            if (!userAns) return;
+
+            isProcessing = true;
+            const currentQ = currentQuestionsList[currentLevelIndex];
+            const fx = document.getElementById('visual-fx');
+
+            if (userAns === currentQ.a) {
+                playSFX('correct');
+                const words = ["¡SABROSO!", "¡PERFECTO!", "¡CHEF!", "¡DELICIOSO!", "¡ÑAM!"];
+                fx.innerText = words[Math.floor(Math.random() * words.length)];
+                fx.className = "pow-text chef-font text-8xl md:text-9xl text-orange-300 active";
+                setTimeout(() => {
+                    fx.classList.remove('active');
+                    currentLevelIndex++;
+                    if (currentLevelIndex < currentQuestionsList.length) {
+                        loadQuestion();
+                    } else {
+                        showVictoryScreen();
+                    }
+                }, 850);
+            } else {
+                playSFX('wrong');
+                fx.innerText = "¡AMARGO!";
+                fx.className = "pow-text chef-font text-8xl md:text-9xl text-pink-500 active";
+                setTimeout(() => {
+                    fx.classList.remove('active');
+                    select.value = "";
+                    isProcessing = false;
+                }, 850);
+            }
+        }
+
+        function showVictoryScreen() {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-end').classList.remove('hidden');
+            document.getElementById('progress-fill').style.width = "100%";
+
+            const mode = selectedPartMode;
+            if (mode === 'part1') {
+                document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 del torneo!";
+                document.getElementById('end-subtitle').innerText = "Dominaste las sumas y restas básicas con fracciones propias. ¡Sigue cocinando!";
+            } else if (mode === 'part2') {
+                document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 del torneo!";
+                document.getElementById('end-subtitle').innerText = "Resolviste recetas maestras con amplificación y simplificación. ¡Excelente sazón!";
+            } else {
+                document.getElementById('end-title').innerText = "¡HAS GANADO EL TORNEO DE LAS SALSAS!";
+                document.getElementById('end-subtitle').innerText = "Eres un Maestro de las Fracciones Propias. Don Denominador ha sido derrotado.";
+            }
+        }
+
+        function confirmExit() {
+            if (confirm("¿Deseas volver al menú de inicio?")) returnToStart();
+        }
+
+        function returnToStart() {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-end').classList.add('hidden');
+            document.getElementById('screen-extras').classList.add('hidden');
+            document.getElementById('screen-start').classList.remove('hidden');
+        }
+
+        function toggleExtraModules() {
+            const extras = document.getElementById('screen-extras');
+            extras.classList.remove('hidden');
+            extras.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeExtraModules() {
+            document.getElementById('screen-extras').classList.add('hidden');
+        }
+
+        function switchExtraTab(tabId) {
+            document.querySelectorAll('[id^="extra-"]').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.extra-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
+            document.getElementById(`extra-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('active-tab');
+        }
+
+        function toggleExtraHint() {
+            document.getElementById('extra-hint-box').classList.toggle('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setPart('part1');
+            switchExtraTab('sec2');
+        });
+    </script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Escape Room: Gatito Chill vs Patito Amarillito – Fracciones Impropias y Números Mixtos (5° Básico)</title>
     <script src="https://cdn.tailwindcss.com">
     </script>
