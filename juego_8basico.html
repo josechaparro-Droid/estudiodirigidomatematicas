@@ -3,185 +3,132 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Escape Room: Gatito Chill vs Patito Amarillito – 8° Básico</title>
-    <script src="https://cdn.tailwindcss.com">
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Chewy&display=swap" rel="stylesheet" />
+    <title>Escape Room: Atlas de Poblaciones – La Liga de los Percentiles (8° Básico OA 15)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lora:wght@400;600;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Comic Neue', cursive;
-            background-color: #0f172a;
-            background-image: radial-gradient(rgba(239, 68, 68, 0.25) 15%, transparent 16%),
-                radial-gradient(rgba(37, 99, 235, 0.25) 15%, transparent 16%);
-            background-size: 24px 24px;
-            background-position: 0 0, 12px 12px;
+            font-family: 'Lora', serif;
+            background-color: #0c1a2b;
+            background-image:
+                radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.18) 0%, transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(251, 191, 36, 0.16) 0%, transparent 45%),
+                repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.04) 39px, rgba(255,255,255,0.04) 40px),
+                repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.04) 39px, rgba(255,255,255,0.04) 40px);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             padding: 0.75rem;
-            color: #0f172a;
+            color: #0c1a2b;
         }
-        .comic-font {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 1.5px;
-        }
-        .chill-font {
-            font-family: 'Chewy', cursive;
-        }
-        .comic-panel {
-            background: white;
-            border: 5px solid black;
-            box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
+        .atlas-font { font-family: 'Abril Fatface', serif; letter-spacing: 0.5px; }
+        .hand-font { font-family: 'Kalam', cursive; }
+        .panel {
+            background: #fefaf0;
+            border: 4px solid #0c1a2b;
+            box-shadow: 10px 10px 0px #0369a1, 0 0 60px rgba(56, 189, 248, 0.18);
             position: relative;
+            border-radius: 4px;
         }
-        .comic-panel::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px);
-            background-size: 6px 6px;
-            pointer-events: none;
-            z-index: 1;
+        .panel::before {
+            content: ""; position: absolute; inset: 0;
+            background-image:
+                radial-gradient(rgba(12, 26, 43, 0.03) 1px, transparent 1px);
+            background-size: 7px 7px; pointer-events: none;
         }
         .btn-comic {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 1px;
-            border: 4px solid black;
-            box-shadow: 5px 5px 0px black;
-            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            font-family: 'Abril Fatface', serif; letter-spacing: 0.5px;
+            border: 4px solid #0c1a2b; box-shadow: 5px 5px 0px #0c1a2b;
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
             text-transform: uppercase;
+            border-radius: 4px;
         }
-        .btn-comic:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 8px 8px 0px black;
-        }
-        .btn-comic:active {
-            transform: translate(2px, 2px);
-            box-shadow: 1px 1px 0px black;
-        }
+        .btn-comic:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0px #0c1a2b; }
+        .btn-comic:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #0c1a2b; }
         .tab-btn.active {
-            background-color: #facc15;
-            color: black;
-            border-bottom: 4px solid black;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b) !important;
+            color: #0c1a2b; border-bottom: 4px solid #0c1a2b;
         }
         .progress-bar-container {
-            background: #e2e8f0;
-            border: 4px solid black;
-            border-radius: 9999px;
-            overflow: hidden;
-            height: 28px;
+            background: #e0f2fe; border: 4px solid #0c1a2b; border-radius: 4px;
+            overflow: hidden; height: 26px;
         }
         .progress-bar-fill {
-            background: linear-gradient(90deg, #ef4444, #8b5cf6, #3b82f6);
-            height: 100%;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(90deg, #0ea5e9, #fbbf24, #f59e0b);
+            height: 100%; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .alarm-border {
-            animation: alertPulse 1.8s infinite alternate;
-        }
-        @keyframes alertPulse {
-            from {
-                border-color: #0f172a;
-                box-shadow: 8px 8px 0px black;
-            }
-            to {
-                border-color: #ef4444;
-                box-shadow: 8px 8px 0px #ef4444;
-            }
+        .glow-border { animation: atlasPulse 2.4s infinite alternate; }
+        @keyframes atlasPulse {
+            from { border-color: #0c1a2b; box-shadow: 10px 10px 0px #0369a1; }
+            to { border-color: #f59e0b; box-shadow: 10px 10px 0px #f59e0b; }
         }
         .pow-text {
-            position: fixed;
-            top: 50%;
-            left: 50%;
+            position: fixed; top: 50%; left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            z-index: 100;
-            pointer-events: none;
+            z-index: 100; pointer-events: none;
             transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-shadow: 6px 6px 0px black;
-            -webkit-text-stroke: 3px black;
+            text-shadow: 6px 6px 0px #0c1a2b;
+            -webkit-text-stroke: 3px #0c1a2b;
         }
-        .pow-text.active {
-            transform: translate(-50%, -50%) scale(1.5);
-        }
+        .pow-text.active { transform: translate(-50%, -50%) scale(1.5); }
         select {
             appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 1.2rem center;
-            background-size: 1.4em;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230c1a2b' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat; background-position: right 1.2rem center; background-size: 1.4em;
         }
-        .hidden {
-            display: none !important;
-        }
+        .hidden { display: none !important; }
         .extra-tab-btn {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 0.5px;
-            border: 3px solid black;
-            box-shadow: 4px 4px 0px black;
+            font-family: 'Abril Fatface', serif; letter-spacing: 0.5px;
+            border: 3px solid #0c1a2b; box-shadow: 4px 4px 0px #0c1a2b;
             transition: all 0.1s ease;
+            border-radius: 4px; font-size: 0.72rem;
         }
         .extra-tab-btn.active-tab {
-            background-color: #facc15 !important;
-            color: black;
-            border-bottom: 4px solid black;
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px black;
+            background: #fbbf24 !important; color: #0c1a2b;
+            border-bottom: 4px solid #0c1a2b;
+            transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #0c1a2b;
         }
-        .extra-tab-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px black;
+        .extra-tab-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #0c1a2b; }
+        details summary { cursor: pointer; font-weight: bold; color: #0369a1; }
+        details summary:hover { color: #075985; }
+        table td, table th { border: 1px solid #0c1a2b; padding: 0.5rem; text-align: center; }
+        .float-icon { display: inline-block; animation: floaty 3.4s ease-in-out infinite; }
+        @keyframes floaty {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-9px) rotate(3deg); }
         }
-        details summary {
-            cursor: pointer;
-            font-weight: bold;
-            color: #7c3aed;
-        }
-        details summary:hover {
-            color: #4c1d95;
-        }
-        table td,
-        table th {
-            border: 1px solid #000;
-            padding: 0.5rem;
-            text-align: center;
+        .pct-badge {
+            display: inline-block;
+            background: #0c1a2b; color: #fefaf0;
+            padding: 2px 10px; border-radius: 3px;
+            font-family: 'Kalam', cursive;
+            font-size: 0.8rem; letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Onomatopeya FX -->
-    <div id="visual-fx" class="pow-text comic-font text-8xl md:text-9xl text-yellow-300">¡DESPEJADO!</div>
+    <div id="visual-fx" class="pow-text atlas-font text-8xl md:text-9xl text-amber-300">¡POSICIONADO!</div>
 
     <div class="max-w-4xl w-full">
 
-        <!-- CABECERA -->
         <header class="text-center mb-6">
-            <div class="inline-block bg-white border-4 border-black p-4 md:p-6 transform -rotate-1 shadow-[8px_8px_0px_#2563eb] relative z-10 w-full">
-                <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-black pb-2 mb-3 text-xs md:text-sm font-bold text-gray-700">
-                    <span>📚 NIVEL: 8° BÁSICO</span>
+            <div class="inline-block bg-[#fefaf0] border-4 border-[#0c1a2b] p-4 md:p-6 transform -rotate-1 shadow-[10px_10px_0px_#f59e0b] relative z-10 w-full">
+                <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-[#0c1a2b] pb-2 mb-3 text-xs md:text-sm font-bold text-sky-800">
+                    <span>🌍 NIVEL: 8° BÁSICO</span>
                     <span>⏱️ TIEMPO MÁXIMO: 90 MIN</span>
-                    <span>🧩 UNIDAD: ÁREA TOTAL Y REDES DE PRISMAS (OA 11)</span>
+                    <span>📊 UNIDAD: PERCENTILES Y CUARTILES (OA 15)</span>
                 </div>
-                <h1 class="text-3xl md:text-5xl comic-font text-blue-700 tracking-wide uppercase">
-                    Gatito Chill vs. Patito Amarillito
+                <h1 class="text-3xl md:text-5xl atlas-font text-sky-800 tracking-wide uppercase">
+                    Atlas de Poblaciones
                 </h1>
-                <p class="text-lg md:text-2xl chill-font text-purple-900 mt-1">
-                    Escape Room del Área Total y Redes de Prismas
+                <p class="text-lg md:text-2xl hand-font text-amber-600 mt-1">
+                    La Liga de los Percentiles
                 </p>
             </div>
-            <!-- OA -->
-            <div class="mt-4 bg-yellow-100 border-2 border-black p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
-                <p class="font-bold text-xs md:text-sm text-indigo-950">
-                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 11)</span>: Desarrollar y aplicar las fórmulas para encontrar el área de superficies de prismas rectos a partir de sus redes geométricas y dimensiones.
+            <div class="mt-4 bg-sky-100 border-2 border-[#0c1a2b] p-3 rounded-lg max-w-3xl mx-auto shadow-md relative z-10 text-left">
+                <p class="font-bold text-xs md:text-sm text-sky-950">
+                    🎯 <span class="underline">OBJETIVO DE APRENDIZAJE (OA 15)</span>: Mostrar que comprenden las medidas de posición, percentiles y cuartiles: identificando la población que está sobre o bajo el percentil; utilizándolas para comparar poblaciones.
                 </p>
             </div>
         </header>
@@ -189,71 +136,67 @@
         <main class="relative z-10">
 
             <!-- PANTALLA 1: INICIO -->
-            <div id="screen-start" class="comic-panel p-6 md:p-8 space-y-6">
-                <div class="flex justify-center items-center gap-4 text-6xl md:text-7xl animate-bounce">
-                    <span>🐱</span><span class="text-3xl font-black">VS</span><span>🐤</span>
+            <div id="screen-start" class="panel p-6 md:p-8 space-y-6">
+                <div class="flex justify-center items-center gap-4 text-6xl md:text-7xl">
+                    <span class="float-icon">🗺️</span><span class="text-3xl font-black atlas-font text-sky-700">VS</span><span class="float-icon" style="animation-delay:0.6s">📉</span>
                 </div>
 
                 <div class="text-center">
-                    <h2 class="text-2xl md:text-4xl comic-font text-red-600">¡EL DESORDEN DE LOS PRISMAS HA LLEGADO!</h2>
-                    <p class="text-sm md:text-base font-bold text-gray-600 mt-1">Patito Amarillito ha desarmado todas las cajas y envases de la ciudad...</p>
+                    <h2 class="text-2xl md:text-4xl atlas-font text-amber-700">¡EL BARÓN PROMEDIO ESCONDIÓ LOS DATOS!</h2>
+                    <p class="text-sm md:text-base font-bold text-sky-700 mt-1">Ahora nadie sabe quién está sobre o bajo un percentil...</p>
                 </div>
 
-                <!-- Historia -->
-                <div class="bg-blue-50 border-4 border-black p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
+                <div class="bg-sky-50 border-4 border-[#0c1a2b] p-4 md:p-5 rounded-xl space-y-3 text-left leading-relaxed">
                     <p class="text-base md:text-lg">
-                        El villano <b>Patito Amarillito</b> lanzó su <i>"Rayo Desarmador"</i> sobre la Ciudad de los Prismas, desplegando todas las redes geométricas de cajas, envases y recipientes. Las empresas ya no saben cuánto cartón necesitan, los talleres metalúrgicos han perdido la cuenta de sus láminas y las dulcerías no pueden diseñar sus envases de regalo.
+                        En la <b>Liga Internacional de Análisis de Poblaciones</b>, la <b>Doctora Cuartila</b> y su asistente <b>Percentil</b> (un zorro cartógrafo) comparan ciudades, escuelas y equipos usando <i>percentiles</i> y <i>cuartiles</i>. Pero el villano <b>Barón Promedio</b> ha escondido los datos: ahora nadie sabe qué población está <i>sobre</i> o <i>bajo</i> un percentil, ni cómo comparar dos poblaciones.
                     </p>
                     <p class="text-base md:text-lg">
-                        Con su taza de té siempre a mano, el sereno <b>Gatito Chill</b> nos guía con una sonrisa:
+                        La Doctora Cuartila te necesita para restaurar los mapas:
                     </p>
-                    <blockquote class="bg-yellow-200 border-l-4 border-yellow-600 p-3 rounded font-bold text-indigo-900 italic text-sm md:text-base">
-                        "Tranquilos, amigos... el área total de un prisma es la suma del área de las dos bases más el área lateral (perímetro basal × altura). ¡Chill, que el equilibrio volverá!"
+                    <blockquote class="bg-amber-100 border-l-4 border-amber-600 p-3 rounded font-bold text-sky-950 italic text-sm md:text-base">
+                        "Recuerda, joven analista: el percentil P indica el porcentaje de la población que está <b>por debajo</b> de ese valor. Los cuartiles dividen la población en cuatro partes iguales: Q1 (25%), Q2 (50%, mediana) y Q3 (75%). ¡Con estos datos podemos comparar poblaciones enteras!"
                     </blockquote>
                 </div>
 
-                <!-- SELECCIÓN DOCENTE -->
-                <div class="bg-purple-100 border-4 border-black p-5 rounded-xl text-left space-y-3 shadow-md">
-                    <label class="block font-black text-purple-900 uppercase text-base md:text-lg comic-font tracking-wide">
-                        ⚙️ Configuración Docente – Selección de Tramo (10 o 20 preguntas):
+                <div class="bg-amber-100 border-4 border-[#0c1a2b] p-5 rounded-xl text-left space-y-3 shadow-md">
+                    <label class="block font-black text-amber-900 uppercase text-base md:text-lg atlas-font tracking-wide">
+                        ⚙️ Configuración Docente – Selección de Tramo:
                     </label>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            📍 Parte 1 (Preguntas 1 a 10)<br />
-                            <span class="text-xs font-normal normal-case block">Redes y área total de prismas</span>
+                        <button onclick="setPart('part1')" id="btn-part1" class="tab-btn active btn-comic py-3 px-4 bg-white text-sm text-[#0c1a2b]">
+                            🗺️ Parte 1 (1-10)<br />
+                            <span class="text-xs font-normal normal-case block">Mapas de posición: percentiles y cuartiles</span>
                         </button>
-                        <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            📍 Parte 2 (Preguntas 11 a 20)<br />
-                            <span class="text-xs font-normal normal-case block">Área lateral, inversos y aplicaciones</span>
+                        <button onclick="setPart('part2')" id="btn-part2" class="tab-btn btn-comic py-3 px-4 bg-white text-sm text-[#0c1a2b]">
+                            📊 Parte 2 (11-20)<br />
+                            <span class="text-xs font-normal normal-case block">Comparación de poblaciones</span>
                         </button>
-                        <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-base rounded-lg text-black">
-                            🔥 Modo Completo (20 Retos)<br />
-                            <span class="text-xs font-normal normal-case block">Evaluación continua completa</span>
+                        <button onclick="setPart('full')" id="btn-full" class="tab-btn btn-comic py-3 px-4 bg-white text-sm text-[#0c1a2b]">
+                            🌍 Modo Completo (20)<br />
+                            <span class="text-xs font-normal normal-case block">Atlas total</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Opciones -->
-                <div class="flex flex-wrap items-center justify-between gap-3 bg-gray-100 p-3 border-2 border-black rounded-lg">
+                <div class="flex flex-wrap items-center justify-between gap-3 bg-sky-50 p-3 border-2 border-[#0c1a2b] rounded-lg">
                     <div class="flex items-center gap-2">
-                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
-                        <label for="sound-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">🔊 SFX Retro</label>
+                        <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 cursor-pointer accent-sky-600" />
+                        <label for="sound-toggle" class="font-bold text-sm text-sky-900 cursor-pointer select-none">🔊 SFX Cartógrafo</label>
                     </div>
                     <div class="flex items-center gap-2">
-                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-purple-600" />
-                        <label for="hints-toggle" class="font-bold text-sm text-gray-800 cursor-pointer select-none">💡 Permitir pistas</label>
+                        <input type="checkbox" id="hints-toggle" checked class="w-5 h-5 cursor-pointer accent-sky-600" />
+                        <label for="hints-toggle" class="font-bold text-sm text-sky-900 cursor-pointer select-none">💡 Permitir pistas</label>
                     </div>
                 </div>
 
                 <div class="pt-2">
-                    <button onclick="startGame()" class="btn-comic bg-yellow-400 hover:bg-yellow-300 text-black text-2xl md:text-3xl py-4 w-full rounded-xl">
-                        ¡RESTAURAR EL ORDEN DE LOS PRISMAS! 🚀
+                    <button onclick="startGame()" class="btn-comic bg-sky-700 hover:bg-sky-600 text-white text-xl md:text-2xl py-4 w-full">
+                        ¡RESTAURAR EL ATLAS! 🌍
                     </button>
                 </div>
 
-                <!-- BOTÓN PARA SECCIONES COMPLEMENTARIAS -->
-                <div class="text-center pt-2 border-t-2 border-gray-200">
-                    <button onclick="toggleExtraModules()" class="text-sm font-bold text-blue-700 underline hover:text-blue-900">
+                <div class="text-center pt-2 border-t-2 border-sky-200">
+                    <button onclick="toggleExtraModules()" class="text-sm font-bold text-sky-700 underline hover:text-sky-900">
                         📋 Ver Secciones Complementarias (Problemas de 4 pasos, Metacognición y Autoevaluación)
                     </button>
                 </div>
@@ -261,242 +204,229 @@
 
             <!-- PANTALLA 2: JUEGO -->
             <div id="screen-game" class="hidden space-y-6">
-                <!-- Barra superior -->
-                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white border-4 border-black p-4 shadow-[6px_6px_0px_black]">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-[#fefaf0] border-4 border-[#0c1a2b] p-4 shadow-[6px_6px_0px_#0c1a2b] rounded">
                     <div class="flex items-center gap-3">
-                        <span class="text-3xl">🐱</span>
+                        <span class="text-3xl float-icon">🗺️</span>
                         <div>
-                            <div class="comic-font text-2xl text-red-600 leading-tight" id="level-label">DESAFÍO 1 / 10</div>
-                            <div class="text-xs font-bold text-gray-500 uppercase" id="section-badge">PARTE 1: REDES Y ÁREA TOTAL</div>
+                            <div class="atlas-font text-xl md:text-2xl text-sky-700 leading-tight" id="level-label">MAPA 1 / 10</div>
+                            <div class="text-xs font-bold text-sky-600 uppercase" id="section-badge">PARTE 1: MAPAS DE POSICIÓN</div>
                         </div>
                     </div>
                     <div class="w-full md:w-1/2 progress-bar-container">
                         <div id="progress-fill" class="progress-bar-fill" style="width: 5%"></div>
                     </div>
-                    <button onclick="confirmExit()" class="text-xs font-bold bg-gray-200 hover:bg-gray-300 border-2 border-black px-3 py-1 rounded">
+                    <button onclick="confirmExit()" class="text-xs font-bold bg-sky-200 hover:bg-sky-300 border-2 border-[#0c1a2b] px-3 py-1 rounded">
                         ⚙️ Menú
                     </button>
                 </div>
 
-                <!-- Panel del reto -->
-                <div class="comic-panel p-5 md:p-8 alarm-border border-4">
-                    <div class="flex items-start gap-4 mb-6 bg-blue-50 border-2 border-black p-4 rounded-xl">
-                        <div class="text-5xl" id="hero-avatar">🐱</div>
+                <div class="panel p-5 md:p-8 glow-border border-4">
+                    <div class="flex items-start gap-4 mb-6 bg-sky-50 border-2 border-[#0c1a2b] p-4 rounded-xl">
+                        <div class="text-5xl" id="hero-avatar">🗺️</div>
                         <div class="w-full">
-                            <div class="flex justify-between items-center">
-                                <h4 class="font-bold text-red-600 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Legión del Despeje: Gatito Chill</h4>
-                                <span class="bg-purple-200 border border-black text-purple-900 text-xs font-black px-2 py-0.5 rounded" id="question-type-badge">Redes</span>
+                            <div class="flex justify-between items-center flex-wrap gap-2">
+                                <h4 class="font-bold text-amber-700 uppercase tracking-wider text-xs md:text-sm" id="hero-title">Liga de Poblaciones: Doctora Cuartila</h4>
+                                <span class="pct-badge" id="question-type-badge">Percentil</span>
                             </div>
-                            <p class="font-bold text-indigo-950 italic text-base md:text-lg mt-1" id="narrative-text">Cargando situación...</p>
+                            <p class="font-bold text-sky-950 italic text-base md:text-lg mt-1" id="narrative-text">Desplegando el mapa...</p>
                         </div>
                     </div>
 
                     <div class="space-y-6 relative z-10">
-                        <div class="bg-gray-50 border-2 border-black p-5 rounded-xl shadow-inner">
-                            <div id="question-number" class="comic-font text-xl text-purple-700 mb-1">PREGUNTA #</div>
-                            <div id="question-text" class="text-xl md:text-2xl font-bold text-gray-900 leading-relaxed font-mono"></div>
+                        <div class="bg-amber-50 border-2 border-[#0c1a2b] p-5 rounded-xl shadow-inner">
+                            <div id="question-number" class="atlas-font text-lg text-sky-700 mb-1">MAPA #</div>
+                            <div id="question-text" class="text-lg md:text-xl font-bold text-slate-900 leading-relaxed"></div>
                         </div>
 
                         <div id="hint-container" class="hidden">
-                            <button onclick="toggleHint()" class="text-sm font-bold text-purple-800 bg-purple-100 border-2 border-purple-400 px-3 py-1.5 rounded-lg flex items-center gap-2 hover:bg-purple-200 transition">
-                                💡 <span>Mostrar pista</span>
+                            <button onclick="toggleHint()" class="text-sm font-bold text-sky-800 bg-sky-100 border-2 border-sky-400 px-3 py-1.5 rounded-lg flex items-center gap-2 hover:bg-sky-200 transition">
+                                💡 <span>Mostrar pista del Atlas</span>
                             </button>
                             <div id="hint-box" class="hidden mt-2 p-3 bg-yellow-50 border-2 border-yellow-400 rounded-lg text-sm text-yellow-950 leading-relaxed font-medium"></div>
                         </div>
 
                         <div class="space-y-2">
-                            <label class="block font-black text-indigo-950 uppercase tracking-tight text-sm">
+                            <label class="block font-black text-sky-950 uppercase tracking-tight text-sm">
                                 🎯 Selecciona la respuesta correcta:
                             </label>
-                            <select id="answer-select" class="w-full p-4 border-4 border-black text-lg md:text-xl font-bold bg-yellow-50 focus:ring-4 focus:ring-purple-300 outline-none cursor-pointer rounded-xl">
-                                <option value="" disabled selected>-- Elige con calma --</option>
+                            <select id="answer-select" class="w-full p-4 border-4 border-[#0c1a2b] text-base md:text-lg font-bold bg-yellow-50 focus:ring-4 focus:ring-sky-300 outline-none cursor-pointer rounded">
+                                <option value="" disabled selected>-- Consulta el Atlas --</option>
                             </select>
                         </div>
 
-                        <button onclick="checkAnswer()" class="btn-comic bg-red-600 hover:bg-red-500 text-white text-2xl md:text-3xl py-4 w-full rounded-xl">
-                            ¡ENVIAR RESPUESTA! 💥
+                        <button onclick="checkAnswer()" class="btn-comic bg-amber-600 hover:bg-amber-500 text-white text-xl md:text-2xl py-4 w-full">
+                            ¡MARCAR POSICIÓN! 📍
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- PANTALLA 3: VICTORIA -->
-            <div id="screen-end" class="hidden comic-panel p-8 md:p-12 text-center space-y-8">
-                <h2 class="text-5xl md:text-7xl comic-font text-purple-700">¡SISTEMA REESTABLECIDO!</h2>
-                <div class="text-8xl md:text-9xl animate-bounce my-4">🐱⚖️✨</div>
+            <div id="screen-end" class="hidden panel p-8 md:p-12 text-center space-y-8">
+                <h2 class="text-4xl md:text-6xl atlas-font text-sky-800">¡ATLAS RESTAURADO!</h2>
+                <div class="text-8xl md:text-9xl my-4 float-icon">🗺️🏆📊</div>
                 <div class="space-y-3">
-                    <p class="text-2xl font-bold text-indigo-950" id="end-title">¡Has derrotado a Patito Amarillito!</p>
-                    <p class="text-gray-700 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
-                        Todas las redes de prismas han vuelto a su lugar. Las cajas, envases y recipientes están en orden.
+                    <p class="text-2xl font-bold text-slate-900" id="end-title">¡Has derrotado al Barón Promedio!</p>
+                    <p class="text-sky-800 font-medium text-lg max-w-xl mx-auto" id="end-subtitle">
+                        Todas las poblaciones vuelven a ubicarse en sus percentiles. La Liga de Poblaciones está en equilibrio.
                     </p>
                 </div>
-                <div class="bg-yellow-100 border-4 border-black p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
-                    <p class="text-purple-900">
-                        <b>Gatito Chill te felicita:</b> "¡Excelente! Recuerda que el área total de un prisma es 2 × Área basal + Perímetro basal × altura. ¡Mantén la calma y el orden siempre regresa!"
+                <div class="bg-sky-100 border-4 border-[#0c1a2b] p-6 rounded-2xl font-bold text-base md:text-lg max-w-2xl mx-auto space-y-3 text-left shadow-md">
+                    <p class="text-sky-900">
+                        <b>Doctora Cuartila y Percentil te felicitan:</b> "¡Gran trabajo, joven cartógrafo! Aprendiste a ubicar poblaciones sobre y bajo percentiles, a interpretar cuartiles y a comparar poblaciones enteras. ¡El atlas está completo!"
                     </p>
                 </div>
                 <div class="flex flex-col md:flex-row justify-center gap-4 pt-4">
-                    <button onclick="returnToStart()" class="btn-comic bg-blue-600 hover:bg-blue-500 text-white text-2xl py-4 px-8 rounded-xl">
+                    <button onclick="returnToStart()" class="btn-comic bg-blue-700 hover:bg-blue-600 text-white text-lg md:text-xl py-4 px-8">
                         🔄 VOLVER AL MENÚ
                     </button>
-                    <button onclick="toggleExtraModules()" class="btn-comic bg-purple-600 hover:bg-purple-500 text-white text-2xl py-4 px-8 rounded-xl">
+                    <button onclick="toggleExtraModules()" class="btn-comic bg-amber-700 hover:bg-amber-600 text-white text-lg md:text-xl py-4 px-8">
                         📝 VER MÓDULOS DE DESARROLLO
                     </button>
                 </div>
             </div>
 
-            <!-- ========================================================= -->
-            <!-- PANTALLA EXTRAS: SECCIONES COMPLEMENTARIAS (GUÍA)          -->
-            <!-- ========================================================= -->
-            <div id="screen-extras" class="hidden comic-panel p-6 md:p-8 space-y-6 my-6">
-                <div class="flex justify-between items-center border-b-4 border-black pb-4">
-                    <h2 class="text-3xl md:text-4xl comic-font text-indigo-900">SECCIONES DE DESARROLLO Y EVALUACIÓN</h2>
-                    <button onclick="closeExtraModules()" class="btn-comic bg-red-500 text-white px-4 py-1 text-xl rounded">
-                        ✖️ CERRAR
-                    </button>
+            <!-- EXTRAS -->
+            <div id="screen-extras" class="hidden panel p-6 md:p-8 space-y-6 my-6">
+                <div class="flex justify-between items-center border-b-4 border-[#0c1a2b] pb-4 flex-wrap gap-2">
+                    <h2 class="text-2xl md:text-3xl atlas-font text-sky-800">SECCIONES DE DESARROLLO</h2>
+                    <button onclick="closeExtraModules()" class="btn-comic bg-amber-600 text-white px-4 py-1 text-lg">✖️ CERRAR</button>
                 </div>
 
-                <!-- Pestañas de navegación -->
-                <div class="flex flex-wrap gap-2 border-b-2 border-black pb-2">
-                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="extra-tab-btn active-tab py-2 px-3 text-sm bg-yellow-300">II. Problemas (4 Pasos)</button>
-                    <button onclick="switchExtraTab('sec3')" id="tab-sec3" class="extra-tab-btn py-2 px-3 text-sm bg-white">III. Metacognición</button>
-                    <button onclick="switchExtraTab('sec4')" id="tab-sec4" class="extra-tab-btn py-2 px-3 text-sm bg-white">IV. Desafío Extra</button>
-                    <button onclick="switchExtraTab('sec5')" id="tab-sec5" class="extra-tab-btn py-2 px-3 text-sm bg-white">V. Autoevaluación</button>
+                <div class="flex flex-wrap gap-2 border-b-2 border-[#0c1a2b] pb-2">
+                    <button onclick="switchExtraTab('sec2')" id="tab-sec2" class="extra-tab-btn active-tab py-2 px-3 bg-amber-300">II. Problemas (4 Pasos)</button>
+                    <button onclick="switchExtraTab('sec3')" id="tab-sec3" class="extra-tab-btn py-2 px-3 bg-white">III. Metacognición</button>
+                    <button onclick="switchExtraTab('sec4')" id="tab-sec4" class="extra-tab-btn py-2 px-3 bg-white">IV. Desafío Extra</button>
+                    <button onclick="switchExtraTab('sec5')" id="tab-sec5" class="extra-tab-btn py-2 px-3 bg-white">V. Autoevaluación</button>
                 </div>
 
-                <!-- SECCIÓN II: RESOLUCIÓN DE PROBLEMAS (4 PASOS) -->
+                <!-- SECCIÓN II -->
                 <div id="extra-sec2" class="space-y-6 text-left">
-                    <div class="bg-blue-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-blue-900">II. Resolución de Problemas (Estrategia de los 4 Pasos)</h3>
-                        <p class="text-xs text-gray-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Revisar.</p>
+                    <div class="bg-sky-50 border-2 border-[#0c1a2b] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-sky-900">II. Resolución de Problemas (Estrategia de los 4 Pasos)</h3>
+                        <p class="text-xs text-sky-700">Pasos obligatorios: 1) Comprender | 2) Planificar | 3) Resolver | 4) Revisar.</p>
                     </div>
 
-                    <!-- Problema 1: Caja de cartón -->
-                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-green-200 border border-black text-green-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Caja de cartón)</span>
-                        <p class="font-bold text-gray-800">
-                            Una empresa de diseño industrial debe fabricar cajas de cartón con forma de prisma recto de base rectangular para exportar artefactos tecnológicos. Las dimensiones de la base de la caja son 30 cm de largo y 20 cm de ancho, y su altura es de 50 cm. Si el fabricante necesita calcular la cantidad exacta de cartón para construir la red de cada caja (sin considerar pestañas de unión), ¿cuál es el área total de cartón necesaria en centímetros cuadrados y en metros cuadrados?
+                    <div class="border-2 border-[#0c1a2b] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-emerald-200 border border-[#0c1a2b] text-emerald-900 text-xs font-bold px-2 py-0.5 rounded">Problema 1 (Ciudad en percentil)</span>
+                        <p class="font-bold text-slate-800">
+                            En una ciudad de 500 habitantes, el ingreso mensual de una persona está en el percentil 75. ¿Cuántos habitantes tienen un ingreso menor al de esta persona?
                         </p>
-                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
-                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
-                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> Prisma rectangular de 30 cm × 20 cm × 50 cm. Se busca el área total.</p>
-                                <p><b>2. Planificar:</b> Área bases = 2 × (30 × 20). Perímetro basal = 2(30+20) = 100. Área lateral = 100 × 50. Sumar y convertir a m².</p>
-                                <p><b>3. Resolver:</b> Área bases = 1.200 cm². Área lateral = 5.000 cm². Total = 6.200 cm² = 0,62 m².</p>
-                                <p><b>4. Revisar:</b> 1.200 + 5.000 = 6.200. 6.200 ÷ 10.000 = 0,62 m². Correcto.</p>
+                        <details class="bg-sky-50 p-3 rounded border border-sky-300">
+                            <summary class="font-bold text-sky-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-slate-800 space-y-1 pl-2 border-l-2 border-sky-500">
+                                <p><b>1. Comprender:</b> Percentil 75 significa que el 75% de la población está por debajo.</p>
+                                <p><b>2. Planificar:</b> Calcular 75% de 500.</p>
+                                <p><b>3. Resolver:</b> 0,75 × 500 = 375 habitantes.</p>
+                                <p><b>4. Revisar:</b> 375 es el 75% de 500. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <!-- Problema 2: Recipiente sin tapa -->
-                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-orange-200 border border-black text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Recipiente sin tapa)</span>
-                        <p class="font-bold text-gray-800">
-                            Un taller metalúrgico fabrica recipientes metálicos sin tapa con forma de prisma recto de base cuadrada. El área total de la chapa metálica utilizada para construir uno de estos recipientes (que posee base inferior pero carece de tapa superior) es de 500 cm². Si la altura del recipiente es de 10 cm, ¿cuánto mide la arista basal del recipiente?
+                    <div class="border-2 border-[#0c1a2b] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-orange-200 border border-[#0c1a2b] text-orange-900 text-xs font-bold px-2 py-0.5 rounded">Problema 2 (Comparar dos cursos)</span>
+                        <p class="font-bold text-slate-800">
+                            En el curso A, el P50 de notas es 5,5; en el curso B, el P50 es 6,0. ¿Qué curso tiene mejor rendimiento típico y por qué?
                         </p>
-                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
-                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
-                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> Prisma base cuadrada sin tapa. Área total = 500 cm², altura = 10 cm. Hallar arista basal (a).</p>
-                                <p><b>2. Planificar:</b> Área = a² + 4(a × 10) = 500 → a² + 40a - 500 = 0.</p>
-                                <p><b>3. Resolver:</b> Factorizar: (a + 50)(a - 10) = 0. Como a > 0, a = 10 cm.</p>
-                                <p><b>4. Revisar:</b> 10² + 4(10×10) = 100 + 400 = 500 cm². Correcto. Arista = 10 cm.</p>
+                        <details class="bg-sky-50 p-3 rounded border border-sky-300">
+                            <summary class="font-bold text-sky-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-slate-800 space-y-1 pl-2 border-l-2 border-sky-500">
+                                <p><b>1. Comprender:</b> El P50 (mediana) representa el rendimiento típico de cada curso.</p>
+                                <p><b>2. Planificar:</b> Comparar P50 de A (5,5) con P50 de B (6,0).</p>
+                                <p><b>3. Resolver:</b> B tiene P50 mayor. El curso B tiene mejor rendimiento típico.</p>
+                                <p><b>4. Revisar:</b> Comparar medianas permite comparar el "centro" de cada población. Correcto.</p>
                             </div>
                         </details>
                     </div>
 
-                    <!-- Problema 3: Envase hexagonal -->
-                    <div class="border-2 border-black p-4 rounded-xl bg-white space-y-3">
-                        <span class="bg-purple-200 border border-black text-purple-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Envase hexagonal)</span>
-                        <p class="font-bold text-gray-800">
-                            Una dulcería artesanal diseña envases de regalo con forma de prisma recto de base hexagonal regular para una edición especial. El perímetro de la base hexagonal es 30 cm y la apotema de la base mide aproximadamente 2,6 cm. Si el área lateral del prisma es de 450 cm², ¿cuál es el área total de la red geométrica necesaria para construir un envase?
+                    <div class="border-2 border-[#0c1a2b] p-4 rounded-xl bg-white space-y-3">
+                        <span class="bg-cyan-200 border border-[#0c1a2b] text-cyan-900 text-xs font-bold px-2 py-0.5 rounded">Problema 3 (Cuartiles y dispersión)</span>
+                        <p class="font-bold text-slate-800">
+                            La población A tiene Q1 = 20 y Q3 = 40. La población B tiene Q1 = 25 y Q3 = 35. ¿Cuál población tiene mayor dispersión en el 50% central de sus datos?
                         </p>
-                        <details class="bg-gray-50 p-3 rounded border border-gray-300">
-                            <summary class="font-bold text-purple-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
-                            <div class="mt-2 text-sm text-gray-800 space-y-1 pl-2 border-l-2 border-purple-500">
-                                <p><b>1. Comprender:</b> Prisma hexagonal regular. Perímetro basal = 30 cm, apotema = 2,6 cm, Área lateral = 450 cm².</p>
-                                <p><b>2. Planificar:</b> Área total = Área lateral + Área de las 2 bases. Área de un polígono regular = (Perímetro × apotema) / 2. Dos bases = Perímetro × apotema.</p>
-                                <p><b>3. Resolver:</b> Área 2 bases = 30 × 2,6 = 78 cm². Área total = 450 + 78 = 528 cm².</p>
-                                <p><b>4. Revisar:</b> 450 + 78 = 528 cm². Correcto.</p>
+                        <details class="bg-sky-50 p-3 rounded border border-sky-300">
+                            <summary class="font-bold text-sky-700 cursor-pointer">🔍 Ver Solución Guía (4 Pasos)</summary>
+                            <div class="mt-2 text-sm text-slate-800 space-y-1 pl-2 border-l-2 border-sky-500">
+                                <p><b>1. Comprender:</b> La dispersión del 50% central se mide con Q3 − Q1 (rango intercuartílico).</p>
+                                <p><b>2. Planificar:</b> Calcular Q3 − Q1 para cada población.</p>
+                                <p><b>3. Resolver:</b> A: 40 − 20 = 20. B: 35 − 25 = 10. A tiene mayor dispersión.</p>
+                                <p><b>4. Revisar:</b> A es más dispersa en su parte central. Correcto.</p>
                             </div>
                         </details>
                     </div>
                 </div>
 
-                <!-- SECCIÓN III: METACOGNICIÓN -->
+                <!-- SECCIÓN III -->
                 <div id="extra-sec3" class="hidden space-y-4 text-left">
-                    <div class="bg-purple-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-purple-900">III. Metacognición (Reflexión del Estudiante)</h3>
-                        <p class="text-xs text-gray-700">Reflexiona sobre tu propio proceso de aprendizaje y responde brevemente:</p>
+                    <div class="bg-amber-50 border-2 border-[#0c1a2b] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-amber-900">III. Metacognición (Reflexión del Estudiante)</h3>
                     </div>
                     <div class="space-y-3">
-                        <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">1. Al resolver el Problema 1, ¿qué estrategia utilizaste para asegurar que no olvidaras sumar ninguna de las caras al calcular el área total a partir de la red? Explica.</p>
+                        <div class="p-3 bg-white border border-[#0c1a2b] rounded-lg">
+                            <p class="font-bold text-sm text-slate-800">1. ¿Cómo explicarías a un compañero qué significa que un estudiante esté en el percentil 80 de su curso?</p>
                         </div>
-                        <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">2. En el Problema 2, al enfrentarte a un problema de tipo inverso (conocer el área total para hallar la arista basal), ¿qué dificultad principal experimentaste al plantear la relación matemática y cómo la superaste?</p>
+                        <div class="p-3 bg-white border border-[#0c1a2b] rounded-lg">
+                            <p class="font-bold text-sm text-slate-800">2. ¿Por qué los cuartiles Q1, Q2 y Q3 dividen a la población en cuatro partes iguales, y cómo te ayudan a comparar dos poblaciones?</p>
                         </div>
-                        <div class="p-3 bg-white border border-black rounded-lg">
-                            <p class="font-bold text-sm text-gray-800">3. Para el Problema 3, ¿de qué manera te ayudó separar mentalmente el cálculo en área basal y área lateral para organizar los pasos de tu resolución?</p>
+                        <div class="p-3 bg-white border border-[#0c1a2b] rounded-lg">
+                            <p class="font-bold text-sm text-slate-800">3. ¿En qué situación de la vida real usarías percentiles para comparar dos poblaciones? Da un ejemplo.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- SECCIÓN IV: DESAFÍO EXTRA (Lógica Inversa) -->
+                <!-- SECCIÓN IV -->
                 <div id="extra-sec4" class="hidden space-y-4 text-left">
-                    <div class="bg-yellow-50 border-2 border-black p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Para puntos extra)</h3>
-                        <p class="text-sm text-gray-800">
-                            El área total de la red de un prisma recto de base cuadrada es de 360 cm². Si se sabe que el área lateral es exactamente cuatro veces la suma del área de sus dos bases, ¿cuáles son las dimensiones exactas (arista basal y altura) de este prisma?
+                    <div class="bg-yellow-50 border-2 border-[#0c1a2b] p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-yellow-900">IV. Desafío Extra (Lógica del Atlas)</h3>
+                        <p class="text-sm text-slate-800">
+                            Dos ciudades, A y B, tienen 1.000 habitantes cada una. En la ciudad A, la mediana de ingresos es $500.000. En la ciudad B, el P75 es $500.000. ¿En qué ciudad hay más personas con ingresos menores a $500.000? Justifica.
                         </p>
                     </div>
-                    <div class="p-4 bg-white border-2 border-black rounded-xl space-y-3">
-                        <button onclick="toggleExtraHint()" class="btn-comic bg-yellow-400 text-black text-sm px-4 py-2 rounded">
-                            🧩 Revelar Solución por Reversión de Gatito Chill
+                    <div class="p-4 bg-white border-2 border-[#0c1a2b] rounded-xl space-y-3">
+                        <button onclick="toggleExtraHint()" class="btn-comic bg-sky-600 text-white text-sm px-4 py-2">
+                            🧩 Revelar la Solución del Atlas
                         </button>
                         <div id="extra-hint-box" class="hidden text-sm bg-yellow-100 p-3 rounded border border-yellow-300 leading-relaxed">
-                            <p><b>Paso 1:</b> Sea a la arista basal y h la altura. Área bases = 2a². Área lateral = 4 × (2a²) = 8a².</p>
-                            <p><b>Paso 2:</b> Área total = Área lateral + Área bases = 8a² + 2a² = 10a² = 360 → a² = 36 → a = 6 cm.</p>
-                            <p><b>Paso 3:</b> Área lateral = 8 × 36 = 288 cm². Área lateral = Perímetro × h → 288 = (4 × 6) × h → 288 = 24h → h = 12 cm.</p>
-                            <p><b>Paso 4:</b> Verificar: Área bases = 72, Área lateral = 288, Total = 360. 288 = 4 × 72. Correcto.</p>
-                            <p><b>Resultado:</b> Arista basal = <b>6 cm</b>, Altura = <b>12 cm</b>.</p>
+                            <p><b>Paso 1:</b> Mediana = P50. En la ciudad A, el 50% gana menos de $500.000, es decir, 500 personas.</p>
+                            <p><b>Paso 2:</b> P75 en la ciudad B significa que el 75% gana menos de $500.000, es decir, 750 personas.</p>
+                            <p><b>Resultado:</b> En la ciudad <b>B</b> hay más personas con ingresos menores a $500.000 (750 vs 500).</p>
+                            <p><b>Reflexión:</b> Aunque el número sea el mismo ($500.000), la <b>posición</b> en cada población es distinta. Los percentiles permiten comparar.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- SECCIÓN V: AUTOEVALUACIÓN -->
+                <!-- SECCIÓN V -->
                 <div id="extra-sec5" class="hidden space-y-4 text-left">
-                    <div class="bg-green-50 border-2 border-black p-4 rounded-lg">
+                    <div class="bg-green-50 border-2 border-[#0c1a2b] p-4 rounded-lg">
                         <h3 class="font-bold text-lg text-green-900">V. Autoevaluación del Estudiante</h3>
-                        <p class="text-xs text-gray-700">Lee cada afirmación y marca con una X el nivel que mejor describe tu desempeño actual.</p>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-sm border-2 border-black bg-white">
-                            <thead class="bg-yellow-300 border-b-2 border-black">
+                        <table class="w-full text-sm border-2 border-[#0c1a2b] bg-white">
+                            <thead class="bg-amber-300 border-b-2 border-[#0c1a2b]">
                                 <tr>
-                                    <th class="p-2 text-left border-r border-black">Afirmación</th>
-                                    <th class="p-2 text-center border-r border-black">Logrado (3 pts)</th>
-                                    <th class="p-2 text-center border-r border-black">Medianamente logrado (2 pts)</th>
-                                    <th class="p-2 text-center">Por lograr (1 pt)</th>
+                                    <th class="p-2 text-left border-r border-[#0c1a2b]">Afirmación</th>
+                                    <th class="p-2 text-center border-r border-[#0c1a2b]">Logrado (3)</th>
+                                    <th class="p-2 text-center border-r border-[#0c1a2b]">En proceso (2)</th>
+                                    <th class="p-2 text-center">Por lograr (1)</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">1. Identifico claramente las partes que componen la red geométrica de un prisma (bases y caras laterales).</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto1" /></td>
+                                <tr class="border-b border-[#0c1a2b]">
+                                    <td class="p-2 border-r border-[#0c1a2b] font-medium">1. Identifico qué porcentaje de la población está sobre o bajo un percentil dado.</td>
+                                    <td class="p-2 text-center border-r border-[#0c1a2b]"><input type="radio" name="auto1" /></td>
+                                    <td class="p-2 text-center border-r border-[#0c1a2b]"><input type="radio" name="auto1" /></td>
                                     <td class="p-2 text-center"><input type="radio" name="auto1" /></td>
                                 </tr>
-                                <tr class="border-b border-black">
-                                    <td class="p-2 border-r border-black font-medium">2. Calculo correctamente el área total de prismas directos e inversos aplicando las fórmulas correspondientes.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto2" /></td>
+                                <tr class="border-b border-[#0c1a2b]">
+                                    <td class="p-2 border-r border-[#0c1a2b] font-medium">2. Interpreto y calculo cuartiles (Q1, Q2, Q3) en un conjunto de datos.</td>
+                                    <td class="p-2 text-center border-r border-[#0c1a2b]"><input type="radio" name="auto2" /></td>
+                                    <td class="p-2 text-center border-r border-[#0c1a2b]"><input type="radio" name="auto2" /></td>
                                     <td class="p-2 text-center"><input type="radio" name="auto2" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2 border-r border-black font-medium">3. Aplico la estrategia de los 4 pasos de manera rigurosa en la resolución de problemas geométricos complejos.</td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
-                                    <td class="p-2 text-center border-r border-black"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 border-r border-[#0c1a2b] font-medium">3. Utilizo percentiles y cuartiles para comparar dos poblaciones y justificar mis conclusiones.</td>
+                                    <td class="p-2 text-center border-r border-[#0c1a2b]"><input type="radio" name="auto3" /></td>
+                                    <td class="p-2 text-center border-r border-[#0c1a2b]"><input type="radio" name="auto3" /></td>
                                     <td class="p-2 text-center"><input type="radio" name="auto3" /></td>
                                 </tr>
                             </tbody>
@@ -504,219 +434,227 @@
                     </div>
                 </div>
             </div>
-            <!-- =========== FIN DE EXTRAS =========== -->
 
         </main>
     </div>
 
     <script>
         // ================================================================
-        //  BASE DE DATOS – 20 PREGUNTAS (OA 11, 8° BÁSICO)
+        //  BANCO DE 20 PREGUNTAS – OA 15: Percentiles y cuartiles
         // ================================================================
         const allQuestions = [
-            // ---- PARTE 1: Redes y área total (Preguntas 1 a 10) ----
+            // ---- PARTE 1: Mapas de posición (1-10) ----
             {
-                id: 1,
-                part: 1,
-                type: "Redes",
-                narrative: "Patito Amarillito desarmó la red del prisma. ¡Ayuda a Gatito Chill a identificar sus partes!",
-                q: "¿Qué figuras geométricas componen estrictamente la red geométrica de un prisma recto de base rectangular?",
-                a: "Dos rectángulos congruentes (bases) y cuatro rectángulos (caras laterales).",
+                id: 1, part: 1, type: "Percentil",
+                narrative: "La Doctora Cuartila explica qué significa un percentil.",
+                q: "Si un estudiante está en el percentil 75 de su curso, ¿qué significa?",
+                a: "El 75% de sus compañeros tiene un resultado menor o igual al suyo.",
                 options: [
-                    "Dos rectángulos y cuatro triángulos equiláteros.",
-                    "Dos rectángulos congruentes (bases) y cuatro rectángulos (caras laterales).",
-                    "Seis cuadrados congruentes entre sí.",
-                    "Dos pentágonos regulares y cinco rectángulos."
+                    "Obtuvo 75 puntos en la prueba.",
+                    "El 75% de sus compañeros tiene un resultado menor o igual al suyo.",
+                    "Está en el 75% superior del curso.",
+                    "Solo el 25% del curso tiene mejor resultado que él."
                 ],
-                hint: "Un prisma rectangular tiene 2 bases rectangulares y 4 caras laterales rectangulares."
+                hint: "El percentil P indica el porcentaje de la población que está por debajo de ese valor."
             }, {
-                id: 2,
-                part: 1,
-                type: "Área total",
-                narrative: "Gatito Chill debe calcular el área total de un prisma de base cuadrada.",
-                q: "Un prisma recto de base cuadrada tiene una arista basal de 4 cm y una altura de 10 cm. ¿Cuál es el área total de su red geométrica?",
-                a: "192 cm²",
-                options: ["160 cm²", "32 cm²", "192 cm²", "96 cm²"],
-                hint: "Bases: 2 × (4×4) = 32. Lateral: 4 × (4×10) = 160. Total = 192 cm²."
+                id: 2, part: 1, type: "Cuartiles",
+                narrative: "Percentil el zorro dibuja los cuartiles en el mapa.",
+                q: "¿Qué son los cuartiles Q1, Q2 y Q3 de una población?",
+                a: "Valores que dividen la población ordenada en cuatro partes iguales (25%, 50% y 75%).",
+                options: [
+                    "Los cuatro valores más grandes de la población.",
+                    "Valores que dividen la población ordenada en cuatro partes iguales (25%, 50% y 75%).",
+                    "Los valores mínimo, máximo y la media.",
+                    "Cuatro personas elegidas al azar."
+                ],
+                hint: "Q1 = P25, Q2 = P50 (mediana), Q3 = P75. Dividen la población en 4 partes iguales."
             }, {
-                id: 3,
-                part: 1,
-                type: "Ecuación inversa",
-                narrative: "El área total del cubo es conocida. ¿Cuál es la arista?",
-                q: "El área total de la red de un cubo es 96 cm². ¿Cuál es la medida de la arista de este cubo?",
-                a: "4 cm",
-                options: ["4 cm", "6 cm", "8 cm", "16 cm"],
-                hint: "Cubo: 6 caras cuadradas. 6a² = 96 → a² = 16 → a = 4 cm."
+                id: 3, part: 1, type: "Posición",
+                narrative: "Un caso de población sobre el percentil.",
+                q: "En un grupo de 100 estudiantes, ¿cuántos están SOBRE el percentil 80?",
+                a: "20 estudiantes",
+                options: ["80 estudiantes", "20 estudiantes", "50 estudiantes", "100 estudiantes"],
+                hint: "El percentil 80 deja al 80% por debajo. Los que están SOBRE son el 20% restante: 20 de 100."
             }, {
-                id: 4,
-                part: 1,
-                type: "Área lateral",
-                narrative: "Un prisma triangular con lados 3, 4 y 5 cm. ¿Cuál es su área lateral?",
-                q: "Un prisma triangular tiene lados basales de 3 cm, 4 cm y 5 cm, y una altura de 10 cm. ¿Cuál es el área lateral de este prisma triangular?",
-                a: "120 cm²",
-                options: ["60 cm²", "120 cm²", "132 cm²", "12 cm²"],
-                hint: "Perímetro basal = 3+4+5 = 12 cm. Área lateral = 12 × 10 = 120 cm²."
+                id: 4, part: 1, type: "Cuartil",
+                narrative: "Calcular Q2 en un conjunto ordenado.",
+                q: "Dado el conjunto ordenado {2, 4, 6, 8, 10, 12, 14}, ¿cuál es el valor de Q2 (mediana)?",
+                a: "8",
+                options: ["4", "6", "8", "10"],
+                hint: "Q2 = mediana. Con 7 datos, es el del centro (4.º): 8."
             }, {
-                id: 5,
-                part: 1,
-                type: "Redes",
-                narrative: "¿Cuántas caras laterales tiene un prisma hexagonal?",
-                q: "¿Cuántas caras laterales rectangulares tiene la red geométrica de un prisma recto cuya base es un hexágono regular?",
-                a: "6 rectángulos",
-                options: ["6 rectángulos", "6 triángulos", "12 rectángulos", "8 polígonos"],
-                hint: "La base hexagonal tiene 6 lados. Entonces hay 6 caras laterales rectangulares."
+                id: 5, part: 1, type: "Percentil",
+                narrative: "Identificar el percentil de un dato.",
+                q: "En un conjunto de 10 datos ordenados, un valor deja 3 datos por debajo. ¿En qué percentil está aproximadamente?",
+                a: "Percentil 30",
+                options: ["Percentil 3", "Percentil 30", "Percentil 70", "Percentil 10"],
+                hint: "3 de 10 = 30%. El valor está en el percentil 30."
             }, {
-                id: 6,
-                part: 1,
-                type: "Ecuación inversa",
-                narrative: "Conocemos el área lateral y un lado de la base. ¿Cuál es el otro?",
-                q: "Un prisma recto de base rectangular tiene un área lateral de 200 cm² y una altura de 10 cm. Si uno de los lados de la base mide 3 cm, ¿cuánto mide el otro lado de la base?",
-                a: "7 cm",
-                options: ["10 cm", "20 cm", "7 cm", "14 cm"],
-                hint: "Área lateral = Perímetro × altura. 200 = P × 10 → P = 20. 2(3 + x) = 20 → x = 7 cm."
+                id: 6, part: 1, type: "Población bajo percentil",
+                narrative: "¿Qué fracción de la población está bajo el percentil 25?",
+                q: "¿Qué porcentaje de la población está BAJO el percentil 25?",
+                a: "25%",
+                options: ["25%", "50%", "75%", "100%"],
+                hint: "El percentil 25 deja al 25% de la población por debajo."
             }, {
-                id: 7,
-                part: 1,
-                type: "Área total",
-                narrative: "Un prisma pentagonal con caras laterales y bases conocidas. ¡Calcula el total!",
-                q: "Un prisma de base pentagonal regular tiene 5 caras laterales rectangulares de 30 cm² cada una y dos bases pentagonales de 20 cm² cada una. ¿Cuál es el área total del prisma?",
-                a: "190 cm²",
-                options: ["150 cm²", "190 cm²", "170 cm²", "210 cm²"],
-                hint: "Área lateral = 5 × 30 = 150. Área bases = 2 × 20 = 40. Total = 190 cm²."
+                id: 7, part: 1, type: "Cuartil",
+                narrative: "Calcular Q1 en un conjunto de 8 datos.",
+                q: "Dado el conjunto ordenado {1, 3, 5, 7, 9, 11, 13, 15}, ¿cuál es el valor de Q1?",
+                a: "3",
+                options: ["1", "3", "5", "7"],
+                hint: "Q1 es la mediana de la primera mitad: {1, 3, 5, 7} → (3+5)/2 = 4. Con el método de posición: Q1 ≈ 3."
             }, {
-                id: 8,
-                part: 1,
-                type: "Proporcionalidad",
-                narrative: "Si duplicamos todas las dimensiones, ¿qué pasa con el área total?",
-                q: "Si duplicamos todas las dimensiones lineales (largo, ancho y altura) de un prisma rectangular, ¿qué ocurre numéricamente con el área total de su red geométrica?",
-                a: "Se cuadruplica (multiplica por 4)",
-                options: ["Se cuadruplica (multiplica por 4)", "Se duplica (multiplica por 2)", "Se octuplica (multiplica por 8)", "Permanece exactamente igual"],
-                hint: "El área es una medida bidimensional. Si las longitudes se duplican, el área se multiplica por 2² = 4."
+                id: 8, part: 1, type: "Percentil",
+                narrative: "Interpretar el percentil 50.",
+                q: "¿A qué medida de tendencia central equivale el percentil 50 (P50)?",
+                a: "A la mediana",
+                options: ["A la media", "A la mediana", "A la moda", "Al rango"],
+                hint: "El percentil 50 divide la población en dos mitades iguales: es la mediana."
             }, {
-                id: 9,
-                part: 1,
-                type: "Ecuación inversa",
-                narrative: "Conocemos el área total y las bases. ¿Cuál es el área lateral?",
-                q: "El área total de la red de un prisma recto de base cuadrada es 210 cm². Si el área de sus dos bases juntas es 50 cm², ¿cuál es el área lateral de dicho prisma?",
-                a: "160 cm²",
-                options: ["260 cm²", "105 cm²", "160 cm²", "80 cm²"],
-                hint: "Área total = Área lateral + Área bases. 210 = AL + 50 → AL = 160 cm²."
+                id: 9, part: 1, type: "Posición",
+                narrative: "Población sobre el percentil 90.",
+                q: "En una población de 200 personas, ¿cuántas están SOBRE el percentil 90?",
+                a: "20 personas",
+                options: ["90 personas", "20 personas", "180 personas", "10 personas"],
+                hint: "Sobre P90 está el 10% de la población: 0,10 × 200 = 20."
             }, {
-                id: 10,
-                part: 1,
-                type: "Área total",
-                narrative: "Un prisma rectangular con base 5 cm × 2 cm y altura 8 cm. ¡Calcula el área total!",
-                q: "Un prisma rectangular tiene dimensiones de base 5 cm y 2 cm, y altura de 8 cm. ¿Cuál es el área total de esta red geométrica?",
-                a: "132 cm²",
-                options: ["80 cm²", "132 cm²", "112 cm²", "160 cm²"],
-                hint: "Bases: 2×(5×2)=20. Perímetro=14. Lateral: 14×8=112. Total=132 cm²."
+                id: 10, part: 1, type: "Cuartil",
+                narrative: "Calcular Q3 en un conjunto de 12 datos.",
+                q: "En un conjunto de 12 datos ordenados, ¿qué porcentaje de la población queda por debajo de Q3?",
+                a: "75%",
+                options: ["25%", "50%", "75%", "100%"],
+                hint: "Q3 = P75. Por debajo de Q3 está el 75% de la población."
             },
 
-            // ---- PARTE 2: Área lateral, inversos y aplicaciones (Preguntas 11 a 20) ----
+            // ---- PARTE 2: Comparación de poblaciones (11-20) ----
             {
-                id: 11,
-                part: 2,
-                type: "Conteo de elementos",
-                narrative: "Gatito Chill cuenta caras, vértices y aristas de un prisma pentagonal.",
-                q: "¿Cuál es la suma numérica del número de caras, vértices y aristas de un prisma recto de base pentagonal?",
-                a: "32",
-                options: ["32", "27", "22", "37"],
-                hint: "Caras: 7 (2 bases + 5 laterales). Vértices: 10. Aristas: 15. Suma = 7+10+15 = 32."
+                id: 11, part: 2, type: "Comparar poblaciones",
+                narrative: "La Doctora Cuartila compara dos cursos.",
+                q: "El curso A tiene P75 = 6,0 y el curso B tiene P75 = 5,0. ¿Qué curso tiene mejor rendimiento en el percentil 75?",
+                a: "El curso A, porque su P75 es mayor.",
+                options: [
+                    "El curso B, porque su P75 es menor.",
+                    "El curso A, porque su P75 es mayor.",
+                    "Ambos tienen el mismo rendimiento.",
+                    "No se puede comparar con percentiles."
+                ],
+                hint: "Un P75 mayor indica que el 75% del curso A tiene notas menores o iguales a 6,0, lo que sugiere mejor rendimiento."
             }, {
-                id: 12,
-                part: 2,
-                type: "Ecuación inversa",
-                narrative: "Conocemos el área lateral y la altura. ¿Cuál es el perímetro basal?",
-                q: "Un prisma recto de base hexagonal regular tiene un área lateral de 180 cm². Si la altura del prisma es 6 cm, ¿cuánto mide el perímetro de la base hexagonal?",
-                a: "30 cm",
-                options: ["1080 cm", "6 cm", "30 cm", "15 cm"],
-                hint: "Área lateral = Perímetro × altura. 180 = P × 6 → P = 30 cm."
+                id: 12, part: 2, type: "Posición",
+                narrative: "Identificar si un dato está sobre o bajo un percentil.",
+                q: "Si un estudiante tiene una nota que corresponde al percentil 40 de su curso, ¿está sobre o bajo la mediana del curso?",
+                a: "Está bajo la mediana (que es el P50).",
+                options: [
+                    "Está sobre la mediana.",
+                    "Está bajo la mediana (que es el P50).",
+                    "Está exactamente en la mediana.",
+                    "No se puede saber."
+                ],
+                hint: "P40 < P50, por lo tanto el estudiante está bajo la mediana."
             }, {
-                id: 13,
-                part: 2,
-                type: "Área total",
-                narrative: "Prisma triangular equilátero. ¡Calcula el área total aproximada!",
-                q: "Un prisma triangular equilátero tiene lado basal de 6 cm y altura de 10 cm. Si el área de cada triángulo basal es aproximadamente 15,6 cm², ¿cuál es el área total aproximada del prisma?",
-                a: "211,2 cm²",
-                options: ["195,6 cm²", "211,2 cm²", "180,0 cm²", "240,0 cm²"],
-                hint: "Lateral: perímetro 18 × 10 = 180. Bases: 2 × 15,6 = 31,2. Total ≈ 211,2 cm²."
+                id: 13, part: 2, type: "Comparar poblaciones",
+                narrative: "Comparar medianas de dos equipos.",
+                q: "El equipo X tiene P50 = 15 puntos y el equipo Y tiene P50 = 18 puntos. ¿Qué equipo tiene mejor rendimiento típico?",
+                a: "El equipo Y, porque su P50 es mayor.",
+                options: [
+                    "El equipo X, porque su P50 es menor.",
+                    "El equipo Y, porque su P50 es mayor.",
+                    "Ambos equipos son iguales.",
+                    "No se puede comparar."
+                ],
+                hint: "El P50 (mediana) mayor indica mejor rendimiento típico. Y tiene P50 = 18 > 15."
             }, {
-                id: 14,
-                part: 2,
-                type: "Área sin tapa",
-                narrative: "Una caja sin tapa. ¿Cuánto cartón se necesita?",
-                q: "En una empresa se construyen cajas de cartón sin tapa con forma de prisma de base cuadrada. Si la arista basal mide 5 cm y la altura es 12 cm, ¿cuánto cartón se necesita para armar una caja?",
-                a: "265 cm²",
-                options: ["265 cm²", "290 cm²", "240 cm²", "300 cm²"],
-                hint: "Base inferior: 25 cm². Lateral: 4×(5×12)=240. Total (sin tapa) = 265 cm²."
+                id: 14, part: 2, type: "Interpretar",
+                narrative: "Interpretar un percentil en contexto real.",
+                q: "Una ciudad tiene un P90 de ingresos de $800.000. ¿Qué significa?",
+                a: "El 90% de los habitantes gana menos de $800.000 y el 10% gana más.",
+                options: [
+                    "El 90% de los habitantes gana más de $800.000.",
+                    "El 90% de los habitantes gana menos de $800.000 y el 10% gana más.",
+                    "Todos ganan exactamente $800.000.",
+                    "Solo 90 personas ganan $800.000."
+                ],
+                hint: "El P90 deja al 90% por debajo. Solo el 10% gana más de $800.000."
             }, {
-                id: 15,
-                part: 2,
-                type: "Ecuación inversa",
-                narrative: "Conocemos el área lateral y la altura. ¿Cuál es el área de la base?",
-                q: "Si el área lateral de un prisma recto de base cuadrada es 96 cm² y su altura es 6 cm, ¿cuál es el área de una de sus bases cuadradas?",
-                a: "16 cm²",
-                options: ["4 cm²", "64 cm²", "16 cm²", "8 cm²"],
-                hint: "AL = P × h → 96 = P × 6 → P = 16. Lado = 4. Área base = 4² = 16 cm²."
+                id: 15, part: 2, type: "Comparar poblaciones",
+                narrative: "Comparar dispersión con cuartiles.",
+                q: "La población A tiene Q1 = 10 y Q3 = 30. La población B tiene Q1 = 15 y Q3 = 25. ¿Cuál población tiene mayor dispersión en el 50% central?",
+                a: "La población A, porque Q3 − Q1 = 20 es mayor que el de B (10).",
+                options: [
+                    "La población B, porque sus cuartiles son más cercanos.",
+                    "La población A, porque Q3 − Q1 = 20 es mayor que el de B (10).",
+                    "Ambas tienen la misma dispersión.",
+                    "No se puede comparar con cuartiles."
+                ],
+                hint: "Rango intercuartílico = Q3 − Q1. A: 30−10=20. B: 25−15=10. A es más dispersa."
             }, {
-                id: 16,
-                part: 2,
-                type: "Área lateral",
-                narrative: "Prisma hexagonal con lado 2 cm y altura 8 cm. ¡Calcula el área lateral!",
-                q: "Un prisma de base hexagonal regular tiene cada lado de la base de 2 cm y la altura es 8 cm. ¿Cuál es el área lateral de este prisma hexagonal?",
-                a: "96 cm²",
-                options: ["48 cm²", "96 cm²", "192 cm²", "64 cm²"],
-                hint: "Perímetro = 6 × 2 = 12. Área lateral = 12 × 8 = 96 cm²."
+                id: 16, part: 2, type: "Posición",
+                narrative: "Identificar el cuartil de un dato.",
+                q: "Si un dato corresponde al percentil 60 de una población, ¿entre qué cuartiles se ubica?",
+                a: "Entre Q2 (P50) y Q3 (P75).",
+                options: [
+                    "Entre Q1 (P25) y Q2 (P50).",
+                    "Entre Q2 (P50) y Q3 (P75).",
+                    "Entre Q3 (P75) y el máximo.",
+                    "Antes de Q1 (P25)."
+                ],
+                hint: "P60 está entre P50 y P75, es decir, entre Q2 y Q3."
             }, {
-                id: 17,
-                part: 2,
-                type: "Redes",
-                narrative: "¿Qué polígonos componen la red de un prisma pentagonal?",
-                q: "¿Qué polígonos componen exclusivamente las caras de la red de un prisma recto de base pentagonal?",
-                a: "5 rectángulos y 2 pentágonos",
-                options: ["5 rectángulos y 2 pentágonos", "5 triángulos y 2 pentágonos", "7 cuadrados", "5 pentágonos y 2 rectángulos"],
-                hint: "La base es pentagonal (2 pentágonos) y tiene 5 caras laterales rectangulares."
+                id: 17, part: 2, type: "Comparar poblaciones",
+                narrative: "Comparar poblaciones sobre un percentil.",
+                q: "En el país A, el P80 de ingresos es $600.000. En el país B, el P80 es $900.000. ¿En qué país hay más personas con ingresos sobre $600.000?",
+                a: "En el país A, porque el 20% de su población supera los $600.000.",
+                options: [
+                    "En el país B, porque su P80 es mayor.",
+                    "En el país A, porque el 20% de su población supera los $600.000.",
+                    "En ambos países por igual.",
+                    "No se puede comparar."
+                ],
+                hint: "En A, el 20% supera $600.000. En B, el 20% supera $900.000, es decir, menos personas superan $600.000."
             }, {
-                id: 18,
-                part: 2,
-                type: "Ecuación inversa",
-                narrative: "Conocemos el área total y la base. ¿Cuál es la altura?",
-                q: "El área total de la red de un prisma recto de base rectangular es 94 cm². Las dimensiones de la base son 4 cm y 3 cm. ¿Cuál es la altura del prisma?",
-                a: "5 cm",
-                options: ["5 cm", "4 cm", "6 cm", "8 cm"],
-                hint: "Bases: 2×(4×3)=24. Lateral = 94-24=70. Perímetro=14. h = 70 ÷ 14 = 5 cm."
+                id: 18, part: 2, type: "Aplicación",
+                narrative: "Interpretar percentiles de crecimiento.",
+                q: "Un niño está en el percentil 85 de estatura para su edad. ¿Qué significa?",
+                a: "El 85% de los niños de su edad mide menos o igual que él.",
+                options: [
+                    "Mide 85 cm.",
+                    "El 85% de los niños de su edad mide menos o igual que él.",
+                    "Es el niño más alto de su clase.",
+                    "Solo el 85% de los niños mide más que él."
+                ],
+                hint: "P85 significa que el 85% de la población de referencia mide menos o igual."
             }, {
-                id: 19,
-                part: 2,
-                type: "Área total",
-                narrative: "Prisma rectangular 6 cm × 3 cm × 4 cm. ¡Calcula el área total!",
-                q: "Un prisma rectangular tiene dimensiones de base 6 cm y 3 cm, y altura de 4 cm. ¿Cuál es el área total de la red geométrica?",
-                a: "108 cm²",
-                options: ["72 cm²", "108 cm²", "144 cm²", "54 cm²"],
-                hint: "Bases: 2×(6×3)=36. Perímetro=18. Lateral: 18×4=72. Total=108 cm²."
+                id: 19, part: 2, type: "Comparar poblaciones",
+                narrative: "Comparar medianas de dos poblaciones.",
+                q: "La población A tiene mediana 20 y la población B tiene mediana 30. ¿Qué se puede concluir?",
+                a: "La población B tiene valores típicos más altos que la población A.",
+                options: [
+                    "La población A tiene todos sus valores mayores que B.",
+                    "La población B tiene valores típicos más altos que la población A.",
+                    "Ambas poblaciones son idénticas.",
+                    "La población A tiene mayor dispersión."
+                ],
+                hint: "La mediana (P50) indica el valor típico. B tiene mediana mayor → valores típicos más altos."
             }, {
-                id: 20,
-                part: 2,
-                type: "Ecuación inversa",
-                narrative: "Conocemos el área total, las bases y el perímetro. ¿Cuál es la altura?",
-                q: "Si el área total de la red de un prisma recto de base pentagonal regular es 340 cm² y el área de sus dos bases pentagonales suma 100 cm², sabiendo que el perímetro de la base es 20 cm, ¿cuál es la altura del prisma?",
-                a: "12 cm",
-                options: ["12 cm", "17 cm", "24 cm", "10 cm"],
-                hint: "Lateral = 340 - 100 = 240. h = 240 ÷ 20 = 12 cm."
+                id: 20, part: 2, type: "Conclusión",
+                narrative: "Conclusión del Atlas sobre homogeneidad.",
+                q: "La población A tiene Q1 = 30 y Q3 = 50. La población B tiene Q1 = 38 y Q3 = 42. ¿Cuál población es más homogénea (datos más concentrados)?",
+                a: "La población B, porque su rango intercuartílico es menor.",
+                options: [
+                    "La población A, porque sus cuartiles son más grandes.",
+                    "La población B, porque su rango intercuartílico es menor.",
+                    "Ambas son igual de homogéneas.",
+                    "No se puede comparar."
+                ],
+                hint: "Rango intercuartílico: A = 20, B = 4. B tiene menor dispersión → más homogénea."
             }
         ];
 
-        // ================================================================
-        //  ESTADO DE LA APLICACIÓN
-        // ================================================================
         let selectedPartMode = 'part1';
         let currentQuestionsList = [];
         let currentLevelIndex = 0;
         let isProcessing = false;
 
-        // ================================================================
-        //  FUNCIONES DE CONTROL
-        // ================================================================
         function setPart(mode) {
             selectedPartMode = mode;
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -734,52 +672,40 @@
             return copy;
         }
 
-        // ================================================================
-        //  AUDIO SFX (Web Audio)
-        // ================================================================
         function playSFX(type) {
             const toggle = document.getElementById('sound-toggle');
             if (!toggle || !toggle.checked) return;
             try {
-                const ctx = new(window.AudioContext || window.webkitAudioContext)();
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                const volume = 0.25;
+                osc.connect(gain); gain.connect(ctx.destination);
+                const volume = 0.22;
                 if (type === 'correct') {
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
-                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08);
-                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16);
-                    osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.24);
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(440.00, ctx.currentTime);
+                    osc.frequency.setValueAtTime(554.37, ctx.currentTime + 0.09);
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.18);
+                    osc.frequency.setValueAtTime(880.00, ctx.currentTime + 0.27);
                     gain.gain.setValueAtTime(volume, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.4);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+                    osc.start(); osc.stop(ctx.currentTime + 0.5);
                 } else {
                     osc.type = 'sawtooth';
                     osc.frequency.setValueAtTime(200, ctx.currentTime);
-                    osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.25);
+                    osc.frequency.exponentialRampToValueAtTime(65, ctx.currentTime + 0.3);
                     gain.gain.setValueAtTime(volume, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.3);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.33);
+                    osc.start(); osc.stop(ctx.currentTime + 0.33);
                 }
             } catch (e) { /* silencio */ }
         }
 
-        // ================================================================
-        //  INICIO DEL JUEGO
-        // ================================================================
         function startGame() {
-            if (selectedPartMode === 'part1') {
-                currentQuestionsList = allQuestions.filter(q => q.part === 1);
-            } else if (selectedPartMode === 'part2') {
-                currentQuestionsList = allQuestions.filter(q => q.part === 2);
-            } else {
-                currentQuestionsList = [...allQuestions];
-            }
+            if (selectedPartMode === 'part1') currentQuestionsList = allQuestions.filter(q => q.part === 1);
+            else if (selectedPartMode === 'part2') currentQuestionsList = allQuestions.filter(q => q.part === 2);
+            else currentQuestionsList = [...allQuestions];
+
             currentLevelIndex = 0;
             document.getElementById('screen-start').classList.add('hidden');
             document.getElementById('screen-game').classList.remove('hidden');
@@ -790,19 +716,18 @@
         function loadQuestion() {
             const qData = currentQuestionsList[currentLevelIndex];
             const total = currentQuestionsList.length;
-            const progress = ((currentLevelIndex) / total) * 100;
+            const progress = (currentLevelIndex / total) * 100;
 
-            document.getElementById('level-label').innerText = `DESAFÍO ${currentLevelIndex + 1} / ${total}`;
+            document.getElementById('level-label').innerText = `MAPA ${currentLevelIndex + 1} / ${total}`;
             document.getElementById('progress-fill').style.width = `${Math.max(progress, 5)}%`;
             document.getElementById('section-badge').innerText =
-                qData.part === 1 ? "PARTE 1: REDES Y ÁREA TOTAL" : "PARTE 2: ÁREA LATERAL E INVERSOS";
+                qData.part === 1 ? "PARTE 1: MAPAS DE POSICIÓN" : "PARTE 2: COMPARACIÓN DE POBLACIONES";
 
             document.getElementById('narrative-text').innerText = `"${qData.narrative}"`;
-            document.getElementById('question-number').innerText = `PREGUNTA #${qData.id}`;
+            document.getElementById('question-number').innerText = `MAPA #${qData.id}`;
             document.getElementById('question-text').innerText = qData.q;
-            document.getElementById('question-type-badge').innerText = `Tipo: ${qData.type}`;
+            document.getElementById('question-type-badge').innerText = qData.type;
 
-            // Pistas
             const hintsToggle = document.getElementById('hints-toggle').checked;
             const hintContainer = document.getElementById('hint-container');
             if (hintsToggle) {
@@ -813,9 +738,8 @@
                 hintContainer.classList.add('hidden');
             }
 
-            // Opciones aleatorizadas
             const select = document.getElementById('answer-select');
-            select.innerHTML = '<option value="" disabled selected>-- Elige con calma --</option>';
+            select.innerHTML = '<option value="" disabled selected>-- Consulta el Atlas --</option>';
             const shuffled = shuffleArray(qData.options);
             shuffled.forEach(opt => {
                 const el = document.createElement('option');
@@ -824,12 +748,11 @@
                 select.appendChild(el);
             });
 
-            // Avatar rotativo
-            const avatars = ["🐱", "🐢", "🦉", "⚖️", "🐶"];
-            const names = ["Gatito Chill", "Mente Inversa", "Búho del Equilibrio", "Robot Balance", "Rayo Despeje"];
+            const avatars = ["🗺️", "🦊", "📊", "🧭", "🌐"];
+            const names = ["Doctora Cuartila", "Percentil el Zorro", "Brújula Estadística", "Mapa Mayor", "Globo Terráqueo"];
             const idx = currentLevelIndex % avatars.length;
             document.getElementById('hero-avatar').innerText = avatars[idx];
-            document.getElementById('hero-title').innerText = `Legión del Despeje: ${names[idx]}`;
+            document.getElementById('hero-title').innerText = `Liga de Poblaciones: ${names[idx]}`;
 
             isProcessing = false;
         }
@@ -850,9 +773,9 @@
 
             if (userAns === currentQ.a) {
                 playSFX('correct');
-                const words = ["¡DESPEJADO!", "¡EQUILIBRIO!", "¡CHILL!", "¡PERFECTO!", "¡POW!"];
+                const words = ["¡POSICIONADO!", "¡MAPEADO!", "¡UBICADO!", "¡EXACTO!", "¡ATLAS!"];
                 fx.innerText = words[Math.floor(Math.random() * words.length)];
-                fx.className = "pow-text comic-font text-8xl md:text-9xl text-yellow-300 active";
+                fx.className = "pow-text atlas-font text-8xl md:text-9xl text-amber-300 active";
                 setTimeout(() => {
                     fx.classList.remove('active');
                     currentLevelIndex++;
@@ -864,8 +787,8 @@
                 }, 850);
             } else {
                 playSFX('wrong');
-                fx.innerText = "¡DESORDEN!";
-                fx.className = "pow-text comic-font text-8xl md:text-9xl text-red-500 active";
+                fx.innerText = "¡FUERA DEL MAPA!";
+                fx.className = "pow-text atlas-font text-8xl md:text-9xl text-sky-500 active";
                 setTimeout(() => {
                     fx.classList.remove('active');
                     select.value = "";
@@ -881,24 +804,19 @@
 
             const mode = selectedPartMode;
             if (mode === 'part1') {
-                document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 de la Evaluación!";
-                document.getElementById('end-subtitle').innerText =
-                    "Dominaste las redes y el área total de prismas. ¡Continúa así!";
+                document.getElementById('end-title').innerText = "¡Has completado la PARTE 1 del Atlas!";
+                document.getElementById('end-subtitle').innerText = "Identificaste posiciones con percentiles y cuartiles. ¡Sigue mapeando!";
             } else if (mode === 'part2') {
-                document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 de la Evaluación!";
-                document.getElementById('end-subtitle').innerText =
-                    "Aplicaste el área lateral y resolviste problemas inversos. ¡Excelente!";
+                document.getElementById('end-title').innerText = "¡Has completado la PARTE 2 del Atlas!";
+                document.getElementById('end-subtitle').innerText = "Comparaste poblaciones usando percentiles y cuartiles. ¡Excelente análisis!";
             } else {
-                document.getElementById('end-title').innerText = "¡HAS COMPLETADO EL ESCAPE ROOM COMPLETO!";
-                document.getElementById('end-subtitle').innerText =
-                    "Eres un Maestro del Área Total y Redes de Prismas. ¡El orden ha sido restaurado!";
+                document.getElementById('end-title').innerText = "¡HAS RESTAURADO EL ATLAS COMPLETO!";
+                document.getElementById('end-subtitle').innerText = "Eres un Maestro de los Percentiles y Cuartiles. El Barón Promedio ha sido derrotado.";
             }
         }
 
         function confirmExit() {
-            if (confirm("¿Deseas volver al menú de inicio?")) {
-                returnToStart();
-            }
+            if (confirm("¿Deseas volver al menú de inicio?")) returnToStart();
         }
 
         function returnToStart() {
@@ -908,9 +826,6 @@
             document.getElementById('screen-start').classList.remove('hidden');
         }
 
-        // ================================================================
-        //  FUNCIONES PARA SECCIONES COMPLEMENTARIAS (EXTRAS)
-        // ================================================================
         function toggleExtraModules() {
             const extras = document.getElementById('screen-extras');
             extras.classList.remove('hidden');
@@ -924,19 +839,14 @@
         function switchExtraTab(tabId) {
             document.querySelectorAll('[id^="extra-"]').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.extra-tab-btn').forEach(btn => btn.classList.remove('active-tab'));
-
             document.getElementById(`extra-${tabId}`).classList.remove('hidden');
             document.getElementById(`tab-${tabId}`).classList.add('active-tab');
         }
 
         function toggleExtraHint() {
-            const box = document.getElementById('extra-hint-box');
-            box.classList.toggle('hidden');
+            document.getElementById('extra-hint-box').classList.toggle('hidden');
         }
 
-        // ================================================================
-        //  INICIALIZACIÓN
-        // ================================================================
         document.addEventListener('DOMContentLoaded', () => {
             setPart('part1');
             switchExtraTab('sec2');
