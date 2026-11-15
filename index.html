@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hub de Aprendizaje · Estudio Dirigido Matemática 3° a 8° Básico</title>
+    <title>Hub de Aprendizaje · Estudio Dirigido Matemática 1° a 8° Básico</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -220,12 +220,15 @@
             height: 8px;
         }
 
-        .card:nth-child(1) { animation-delay: 0.15s; }
-        .card:nth-child(2) { animation-delay: 0.25s; }
-        .card:nth-child(3) { animation-delay: 0.35s; }
-        .card:nth-child(4) { animation-delay: 0.45s; }
-        .card:nth-child(5) { animation-delay: 0.55s; }
-        .card:nth-child(6) { animation-delay: 0.65s; }
+        /* Animaciones escalonadas para 8 tarjetas */
+        .card:nth-child(1) { animation-delay: 0.10s; }
+        .card:nth-child(2) { animation-delay: 0.18s; }
+        .card:nth-child(3) { animation-delay: 0.26s; }
+        .card:nth-child(4) { animation-delay: 0.34s; }
+        .card:nth-child(5) { animation-delay: 0.42s; }
+        .card:nth-child(6) { animation-delay: 0.50s; }
+        .card:nth-child(7) { animation-delay: 0.58s; }
+        .card:nth-child(8) { animation-delay: 0.66s; }
 
         .card-icon {
             width: 72px;
@@ -307,6 +310,19 @@
             transform: translateX(4px);
         }
 
+        /* Colores por nivel */
+        .card[data-level="1"] {
+            --card-accent: linear-gradient(90deg, #f472b6, #db2777);
+            --card-accent-color: #db2777;
+            --card-accent-hover: #be185d;
+            --card-icon-bg: linear-gradient(135deg, #fce7f3, #fbcfe8);
+        }
+        .card[data-level="2"] {
+            --card-accent: linear-gradient(90deg, #14b8a6, #0d9488);
+            --card-accent-color: #0d9488;
+            --card-accent-hover: #0f766e;
+            --card-icon-bg: linear-gradient(135deg, #ccfbf1, #99f6e4);
+        }
         .card[data-level="3"] {
             --card-accent: linear-gradient(90deg, #fbbf24, #f59e0b);
             --card-accent-color: #f59e0b;
@@ -428,6 +444,40 @@
         <!-- CARDS GRID -->
         <div class="cards-grid">
 
+            <!-- 1° Básico -->
+            <article class="card" data-level="1" onclick="abrirJuego('juego_1basico.html')">
+                <div class="card-icon">🏙️</div>
+                <div class="card-level">1° Básico</div>
+                <h2 class="card-title">Decenas y Unidades</h2>
+                <p class="card-description">
+                    Agrupa de a 10 y descubre las decenas y unidades en números hasta el 20.
+                </p>
+                <button class="card-button">
+                    Comenzar
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </article>
+
+            <!-- 2° Básico -->
+            <article class="card" data-level="2" onclick="abrirJuego('juego_2basico.html')">
+                <div class="card-icon">💰</div>
+                <div class="card-level">2° Básico</div>
+                <h2 class="card-title">Cálculo Mental</h2>
+                <p class="card-description">
+                    Suma y resta hasta 20 con completar 10, dobles, mitades y reversibilidad.
+                </p>
+                <button class="card-button">
+                    Comenzar
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </article>
+
             <!-- 3° Básico -->
             <article class="card" data-level="3" onclick="abrirJuego('juego_3basico.html')">
                 <div class="card-icon">⚡</div>
@@ -447,7 +497,7 @@
 
             <!-- 4° Básico -->
             <article class="card" data-level="4" onclick="abrirJuego('juego_4basico.html')">
-                <div class="card-icon">💰</div>
+                <div class="card-icon">💵</div>
                 <div class="card-level">4° Básico</div>
                 <h2 class="card-title">Problemas con Dinero</h2>
                 <p class="card-description">
